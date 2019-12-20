@@ -1,0 +1,6 @@
+- name: Articles
+  href: articles/
+- name: API Documentation
+  href: api/
+- name: Download Innoactive Creator
+  href: http://developers.innoactive.de/components/#training-module

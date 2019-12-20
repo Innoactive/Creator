@@ -1,0 +1,156 @@
+def InitialSetup()
+{
+    powershell """
+    subst z: /D
+    subst z: ${WORKSPACE}
+
+    gem install u3d
+    choco install --allow-downgrade --confirm --limit-output --no-progress --version 2.36.1 docfx
+    choco install --confirm --limit-output --no-progress --force vcredist-all
+
+    mkdir ${BUILD_TAG} | Out-Null
+    """
+
+    script { unity.install "${params.UNITY_VERSION}" }
+}
+
+def CheckoutHubSdk()
+{
+    checkout([$class: 'GitSCM', branches: [[name: "${env.HUB_SDK_BRANCH_NAME}"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: true, recursiveSubmodules: true, reference: '', trackingSubmodules: false], [$class: 'RelativeTargetDirectory', relativeTargetDir: 'Hub-SDK'], [$class: 'GitLFSPull']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'jenkins-github-ssh', url: 'git@github.com:Innoactive/Hub-SDK.git']]])
+}
+
+
+def InitialTrainingSetup()
+{
+    powershell """
+    Write-Output \"Copying u3d rules\"
+    Copy-Item -Path \".CI\\u3d_log_rules.json\" -Destination \"${U3D_RULES_PATH}\"
+    Write-Output \"Copying logging config\"
+    Copy-Item -Path \"Editor\\Resources\\hub-logging-config.txt\" -Destination \"${env.PROJECT_PATH}\\hub-logging-config.json\"
+    Write-Output \"Copying CI helper\"
+    Copy-Item -Path \".CI\\Editor\" -Destination \"${env.PROJECT_PATH}\\Assets\\Editor\" -Recurse -Force
+    """
+}
+
+def SetupUnity()
+{
+    dir("${PROJECT_PATH}")
+    {
+        // Make sure the project's settings are apt for the training-sdk.
+        powershell """
+        u3d run -u ${params.UNITY_VERSION} -- -nographics -quit -batchmode -logFile editor.log -createProject ${PROJECT_PATH}
+        Write-Output \"Preparing Unity Project with Hub-compatible settings\"
+        u3d run -u ${params.UNITY_VERSION} -- -logFile editor_set_api.log -nographics -quit -batchmode -executeMethod Innoactive.Hub.CI.ContinuousIntegrationHelper.SetApiCompatibilityLevel        
+        u3d run -u ${params.UNITY_VERSION} -- -logFile editor_enable_tests.log -nographics -quit -batchmode -executeMethod Innoactive.Hub.CI.ContinuousIntegrationHelper.EnablePlayModeTests
+        """
+    }
+}
+
+def CopyTrainingModule(repositoryDirectory)
+{
+    powershell """
+    Remove-Item ${repositoryDirectory} -Force -Recurse -ErrorAction SilentlyContinue
+
+    mkdir ${repositoryDirectory}
+
+    Move-Item -Path .\\training-module-root.txt -Destination ${repositoryDirectory}
+    Move-Item -Path .\\version.txt -Destination ${repositoryDirectory}
+    Move-Item -Path .\\.Documentation -Destination ${repositoryDirectory}
+    Move-Item -Path .\\Innoactive-Creator.asmdef -Destination ${repositoryDirectory}
+    Move-Item -Path Editor -Destination ${repositoryDirectory}
+    Move-Item -Path Extensions -Destination ${repositoryDirectory}
+    Move-Item -Path Source -Destination ${repositoryDirectory}
+    Move-Item -Path Tests -Destination ${repositoryDirectory}
+    """
+}
+
+def Build()
+{
+    dir("${PROJECT_PATH}")
+    {
+        // Perform a build of the previously created (and imported) project
+        powershell """
+        Write-Output \"Building Unity Project ...\"
+        u3d run -u ${params.UNITY_VERSION} -- -logFile editor_create_project.log -nographics -quit -batchmode -executeMethod Innoactive.Hub.CI.ContinuousIntegrationHelper.CreateDummyHubScene -buildWindows64Player z:\\${BUILD_TAG}-build\\TestBuild.exe
+        """
+    }
+}
+
+def Test()
+{
+    dir("${PROJECT_PATH}")
+    {
+        powershell """
+        # Disable Imgui tests because they can run only on a setup with a graphical shell.
+        u3d run -u ${params.UNITY_VERSION} -- -logFile editor_disable_ui.log -quit -batchmode -executeMethod Innoactive.Hub.Training.Editors.Utils.EditorUtils.DisableImguiTests       
+        # Import the Unity Project and run the edit mode tests
+        u3d run -u ${params.UNITY_VERSION} -- -logFile editor_editmode_test.log -batchmode -runTests -testPlatform editmode -testResults ${PROJECT_PATH}\\TestResults.PlayMode.xml
+        # Run tests
+        u3d run -u ${params.UNITY_VERSION} -- -logFile editor_playmode_test.log -batchmode -runTests -testPlatform playmode -testResults ${PROJECT_PATH}\\TestResults.PlayMode.xml
+        """
+    }
+}
+
+def Documentation()
+{
+    withCredentials([
+        string(credentialsId: 'ga-tracking-id-hub-training-docs', variable: 'GA_TRACKING_ID')
+    ])
+    {
+        dir("${PROJECT_PATH}")
+        {
+            // Build the documentation
+            powershell """
+            Write-Output \"Building Documentation\"
+            \$sdkVersion = (git describe --all --match \"v*\").Split(\"-\")[0].Replace(\"tags/\", \"\").Replace(\"v\", \"\")
+            docfx --globalMetadata \"{\\`\"_gaTrackingId\\`\":\\`\"${GA_TRACKING_ID}\\`\",\\`\"_hubSdkVersion\\`\":\\`\"\$sdkVersion\\`\"}\\\" ${env.EXTENSION_PATH}\\Hub-Training-Module\\.Documentation\\docfx.json
+            """
+            // Archive the documentation so it can be deployed (manually)
+            zip zipFile: "docs-${BUILD_NUMBER}.zip", archive: true, dir: "Assets\\Extensions\\Hub-Training-Module\\.Documentation\\_site"
+        }
+    }
+}
+
+def DeployDocumentation()
+{
+    echo 'Upload documentation to ftp server'
+    dir("${PROJECT_PATH}")
+    {
+        // upload documentation to ftp server
+        ftpPublisher paramPublish: null, masterNodeName:'', alwaysPublishFromMaster: false, continueOnError: false, failOnError: false, publishers: [
+            [
+                configName: 'Hub Unity SDK Training Module Documentation',
+                transfers: [
+                    [
+                        asciiMode: false,
+                        cleanRemote: false,
+                        excludes: '',
+                        flatten: false,
+                        makeEmptyDirs: false,
+                        noDefaultExcludes: false,
+                        patternSeparator: '[, ]+',
+                        remoteDirectory: "${TAG_NAME}",
+                        remoteDirectorySDF: false,
+                        removePrefix: 'Assets/Extensions/Hub-Training-Module/.Documentation/_site/',
+                        sourceFiles: 'Assets/Extensions/Hub-Training-Module/.Documentation/_site/**/*'
+                    ]
+                ],
+                usePromotionTimestamp: false,
+                useWorkspaceInPromotion: false,
+                verbose: false
+            ]
+        ]
+    }
+}
+
+def CreateUnityPackage(configPath)
+{
+    echo 'Creating and Archiving unitypackage'
+    dir("${PROJECT_PATH}")
+    {
+        powershell "u3d run -u ${params.UNITY_VERSION} -- -logFile editor_package_export.log -batchmode -quit -executeMethod Innoactive.Hub.Training.Editors.Utils.PackageExporter.Export --export-config ${configPath}"
+        archiveArtifacts allowEmptyArchive: false, artifacts: "Builds/*"
+    }
+}
+
+return this

@@ -1,0 +1,9 @@
+[submodule ".Documentation/theme"]
+	path = .Documentation/theme
+	url = git@github.com:Innoactive/Hub-Documentation-DocFx-Theme.git
+[submodule "Extensions/VRTK-Interactions"]
+	path = Extensions/VRTK-Interactions
+	url = git@github.com:Innoactive/VRTK-Interaction-Component.git
+[submodule "Extensions/TextToSpeech"]
+	path = Extensions/TextToSpeech
+	url = git@github.com:Innoactive/TextToSpeech-Component.git

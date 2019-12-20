@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Innoactive.Hub.Logging</name>
+    </assembly>
+    <members>
+        <member name="T:Innoactive.Hub.Logging.BaseLoggerProperties">
+            <summary>
+            Basic logger arguments for Common.Logging.
+            </summary>
+        </member>
+        <member name="F:Innoactive.Hub.Logging.BaseLoggerProperties.LogLevel">
+            <summary>
+            Defines the log level of the logger. 
+            If the LogLevel of a received message is below the LogLevel of the logger it will not be logged.
+            </summary>
+        </member>
+        <member name="F:Innoactive.Hub.Logging.BaseLoggerProperties.ShowLogName">
+            <summary>
+            Defines if the logger name should be added to the log string.
+            </summary>
+        </member>
+        <member name="F:Innoactive.Hub.Logging.BaseLoggerProperties.RemoveNamespace">
+            <summary>
+            Defines if the logger name is shortend by removing the namespace.
+            </summary>
+        </member>
+        <member name="F:Innoactive.Hub.Logging.BaseLoggerProperties.ShowLogLevel">
+            <summary>
+            Defines if the logger LogLevel should be added to the log string.
+            </summary>
+        </member>
+        <member name="F:Innoactive.Hub.Logging.BaseLoggerProperties.ShowDateTime">
+            <summary>
+            Defines if the logged DateTime should be added to the log string.
+            </summary>
+        </member>
+        <member name="F:Innoactive.Hub.Logging.BaseLoggerProperties.UseUnityLogLevel">
+            <summary>
+            Defines if unity log levels should be used.
+            </summary>
+        </member>
+        <member name="F:Innoactive.Hub.Logging.BaseLoggerProperties.DateTimeFormat">
+            <summary>
+            Defines how the DateTime should be formated.
+            </summary>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.ClassFilter">
+            <inheritdoc />
+        </member>
+        <member name="M:Innoactive.Hub.Logging.ClassFilter.#ctor(System.String,Common.Logging.LogLevel)">
+            <inheritdoc />
+        </member>
+        <member name="M:Innoactive.Hub.Logging.ClassFilter.IsFitting(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Innoactive.Hub.Logging.BaseFilter">
+            <summary>
+            Base class for any filter used by the LoggingLevelFilter.
+            </summary>
+        </member>
+        <member name="P:Innoactive.Hub.Logging.BaseFilter.LogLevel">
+            <inheritdoc />
+        </member>
+        <member name="P:Innoactive.Hub.Logging.BaseFilter.Pattern">
+            <summary>
+            Pattern which is used for comparings.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.BaseFilter.IsFitting(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="P:Innoactive.Hub.Logging.IFilter.LogLevel">
+            <summary>
+            LogLevel which will be used if the filter is fitting.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.IFilter.IsFitting(System.String)">
+            <summary>
+            Compares the given class name with namespace to the filter and determs if it's fitting.
+            </summary>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.HubLoggingConfig">
+            <summary>
+            Standard configuration. Provides implicit multi logger support <see cref="T:Innoactive.Hub.Logging.MultiLogger"/>.
+            </summary>
+        </member>
+        <member name="F:Innoactive.Hub.Logging.FactoryAdapter.Type">
+            <summary>
+            Type of the factory adapter to instantiate (needs to be fully qualified assembly name)
+            </summary>
+        </member>
+        <member name="F:Innoactive.Hub.Logging.FactoryAdapterArg.Key">
+            <summary>
+            Key of the argument to be passed to the factory adapter
+            </summary>
+        </member>
+        <member name="F:Innoactive.Hub.Logging.FactoryAdapterArg.Value">
+            <summary>
+            value of the argument to be passed to the factory adapter
+            </summary>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.HubLoggingJsonConverter">
+            <summary>
+            Provides functionality to convert old into new logging config files.
+            </summary>
+        </member>
+        <member name="P:Innoactive.Hub.Logging.HubLoggingJsonConverter.CanWrite">
+            <summary>
+            This converter should not be used to write config files.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.HubLoggingJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Not used, required to override by JsonConverter.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.JsonConfigurationReader.LoadConfig">
+            <summary>
+            Returns a valid HubLoggingConfig based on the provided config file. Can return null in case there are no loggers or no config file is present.
+            </summary>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.DefaultGelfDataProvider">
+            <summary>
+            Provides the most basic log message to be sent to graylog via a GELF conform json.
+            </summary>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.FilteredConsoleLoggerFactoryAdapter">
+            <summary>
+            Simple console output logger which can be filtered via <see cref="T:Innoactive.Hub.Logging.LoggingLevelFilter"/>
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.FilteredConsoleLoggerFactoryAdapter.#ctor(Common.Logging.Configuration.NameValueCollection)">
+            <summary>
+            Creates a new instance of the class using <see cref="T:Innoactive.Hub.Logging.LoggingLevelFilter"/> to filter
+            create log level specific <see cref="T:Common.Logging.Simple.ConsoleOutLogger"/>.
+            </summary>
+            <param name="properties">Properties set by the config</param>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.GELFLogger">
+            <summary>
+            Logs data to a graylog server specified in 'hub-logging-config.json'.
+            Uses a C# GELF client implementation reliant on Newtonsoft.Json.
+            <para>For more information about GELF see: <see href="http://docs.graylog.org/en/2.4/pages/gelf.html"/></para>
+            <para>The C# GELF client repo can be found here: <see href="https://github.com/geniussportsgroup/Gelf.NET"/></para>
+            <para>For more information about Newtonsoft.JSON checkout: <see href="https://www.newtonsoft.com/json"/></para>
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.GELFLogger.#ctor(Innoactive.Hub.Logging.ILogDataProvider{Gelf.GelfMessage},System.String,System.Int32,Innoactive.Hub.Logging.BaseLoggerProperties)">
+            <summary>
+            Returns a setup and ready HubHTTPLogger
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.GELFLogger.SendGELFviaUDP(Gelf.GelfMessage)">
+            <summary>
+            Sends the GelfMessage via the prior initiated GelfPublisher
+            </summary>
+            <param name="newMessage">The GelfMessage to send</param>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.BaseLogDataProvider`1">
+            <summary>
+            Base class for all data providers. Used to gather log data based on the received level, message and exception.
+            </summary>
+            <typeparam name="T">Specifies the type the log data provider returns.</typeparam>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.GELFLoggerFactoryAdapter">
+            <summary>
+            Factory used to create a hub remote logger
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.GELFLoggerFactoryAdapter.CreateLogger(System.String)">
+            <summary>
+            Is called if a new logger should be created by this factory adapter, can be overwritten to provide different loggers.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.LoggingLevelFilter">
+             <summary>
+             Loads a json file to configure different log level to namespaces or specific files.
+             To parse the loglevel the common.logging.LogLevel enum is used.
+            
+             Json example:
+             {
+                 "namespace.one.two.*" : "Warn",
+             }
+             </summary>
+        </member>
+        <member name="P:Innoactive.Hub.Logging.LoggingLevelFilter.DefaultLogLevel">
+            <summary>
+            If no filter is found this log level will be used.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.LoggingLevelFilter.#ctor(System.String,Common.Logging.LogLevel)">
+            <summary>
+            Loads and parses the given filter-config file, if there is any problem with that file
+            the parsing gets stopped and it fails silently.
+            </summary>
+            <param name="path">Path to the filter config file</param>
+            <param name="defaultLogLevel">Will be applied to any logger without fitting filter.</param>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.LoggingLevelFilter.GetLogLevel(System.String)">
+            <summary>
+            Given name will be run through all filters if a fitting one is found the loglevel given is used.
+            If non filter is fitting the default log level is used.
+            </summary>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.LogHelper">
+            <summary>
+            Provides helper methods for the log setup.
+            </summary>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.LogManager">
+             <summary>
+             Facade wrapping Common.Logging's LogManager to allow for loading configuration from a different
+             location that app.config which doesn't work for Unity3D applications.
+            
+             Instead, a json configuration file is used to fuel the logging configuration, whereas
+             for normal libraries, the app.config can still be used.
+             </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.LogManager.#cctor">
+            <summary>
+            Performs static 1-time init of LogManager by calling <see cref="M:Common.Logging.LogManager.Reset" />
+            </summary>
+        </member>
+        <member name="P:Innoactive.Hub.Logging.LogManager.HasValidConfiguration">
+             <summary>
+             This method checks if the logging configuration was loaded without error. If
+             the method returns false one or more adapter couldn't be loaded.
+             The check goes against a new interface named IHasValidationStatus, which is
+             a part of Innoactive.Hub.Logging and not Common.Logging
+            
+             If the interface is not implemented in the ConfigurationReader, this method
+             always returns true.
+             </summary>
+        </member>
+        <member name="P:Innoactive.Hub.Logging.LogManager.Adapter">
+            <summary>Gets or sets the adapter.</summary>
+            <value>The adapter.</value>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.LogManager.GetLogger(System.String)">
+            <summary>
+            Gets the logger by calling <see cref="M:Common.Logging.ILoggerFactoryAdapter.GetLogger(System.String)" />
+            on the currently configured <see cref="P:Common.Logging.LogManager.Adapter" /> using the specified key.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>the logger instance obtained from the current <see cref="P:Common.Logging.LogManager.Adapter" /></returns>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.LogManager.GetLogger``1">
+            <summary>
+            Gets the logger by calling <see cref="M:Common.Logging.ILoggerFactoryAdapter.GetLogger(System.Type)" />
+            on the currently configured <see cref="P:Common.Logging.LogManager.Adapter" /> using the specified type.
+            </summary>
+            <returns>the logger instance obtained from the current <see cref="P:Common.Logging.LogManager.Adapter" /></returns>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.LogManager.GetLogger(System.Type)">
+            <summary>
+            Gets the logger by calling <see cref="M:Common.Logging.ILoggerFactoryAdapter.GetLogger(System.Type)" />
+            on the currently configured <see cref="P:Common.Logging.LogManager.Adapter" /> using the specified type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>the logger instance obtained from the current <see cref="P:Common.Logging.LogManager.Adapter" /></returns>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.LogManager.GetCurrentClassLogger">
+            <summary>
+            Gets the logger by calling <see cref="M:Common.Logging.ILoggerFactoryAdapter.GetLogger(System.Type)" />
+            on the currently configured <see cref="P:Common.Logging.LogManager.Adapter" /> using the type of the calling class.
+            </summary>
+            <remarks>
+            This method needs to inspect the <see cref="T:System.Diagnostics.StackTrace" /> in order to determine the calling
+            class. This of course comes with a performance penalty, thus you shouldn't call it too
+            often in your application.
+            </remarks>
+            <seealso cref="M:Common.Logging.LogManager.GetLogger(System.Type)" />
+            <returns>the logger instance obtained from the current <see cref="P:Common.Logging.LogManager.Adapter" /></returns>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.LogManager.Reset">
+            <summary>
+            Reset the <see cref="N:Common.Logging" /> infrastructure to its default settings. This means, that configuration settings
+            will be re-read from section <c>&lt;common/logging&gt;</c> of your <c>app.config</c>.
+            </summary>
+            <remarks>
+            This is mainly used for unit testing, you wouldn't normally use this in your applications.<br />
+            <b>Note:</b><see cref="T:Common.Logging.ILog" /> instances already handed out from this LogManager are not(!) affected.
+            Resetting LogManager only affects new instances being handed out.
+            </remarks>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.MultiLogger">
+            <summary>
+            Handles log calls from Common.Logging, by providing the logging information to all registered logger. 
+            Also supports a back channel from sub loggers to inject external logging sources into the registered loggers.
+            IMPORTANT: Recursive loops can happen very quickly! A logger that writes back to the multi logger needs to handle the recursive call by the multi logger itself!
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.MultiLogger.WriteInternal(Common.Logging.LogLevel,System.Object,System.Exception)">
+            <summary>
+            Provides essential logging functionality, is called by Common.Logging.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.MultiLogger.WriteInternal(Common.Logging.LogLevel,System.Object,System.Exception,System.Boolean)">
+            <summary>
+            Actual log message write method, if silent is true no exceptions will be logged.
+            This is used internal if a logger throws an exception it is forwarded to all other loggers.
+            </summary>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.MultiLoggerFactoryAdapter">
+            <summary>
+            The MultiLoggerFactoryAdapter provides the possibility to use multiple loggers in one Common.Logging config file
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.MultiLoggerFactoryAdapter.CreateLogger(System.String)">
+            <summary>
+            Returns a newly instantiated MultiLogger object which has the appropriate child loggers registered
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.MultiLoggerFactoryAdapter.GetLoggers(System.String)">
+            <summary>
+            Returns loggers from all registered logger factory adapters.
+            </summary>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.NamespaceFilter">
+            <inheritdoc />
+        </member>
+        <member name="M:Innoactive.Hub.Logging.NamespaceFilter.#ctor(System.String,Common.Logging.LogLevel)">
+            <inheritdoc />
+        </member>
+        <member name="M:Innoactive.Hub.Logging.NamespaceFilter.IsFitting(System.String)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

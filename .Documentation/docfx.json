@@ -1,0 +1,54 @@
+{
+    "metadata": [
+        {
+            "src": [
+                {
+                    "src": "../",
+                    "files": ["**/*.cs"],
+                    "exclude": [
+                        "**.meta",
+                        "**/obj/**",
+                        "**/bin/**",
+                        "**/Tests/**"
+                    ]
+                }
+            ],
+            "dest": "api",
+            "disableGitFeatures": false
+        }
+    ],
+    "build": {
+        "content": [
+            {
+                "files": ["api/**.yml", "api/index.md"]
+            },
+            {
+                "src": ".",
+                "files": ["**.md", "**.yml"],
+                "exclude": ["theme/"]
+            }
+        ],
+        "resource": [
+            {
+                "src": ".",
+                "files": ["articles/images/**"]
+            }
+        ],
+        "dest": "_site",
+        "globalMetadata": {
+            "_appTitle": "Innoactive Creator Documentation",
+            "_enableNewTab": true,
+            "_enableSearch": true,
+            "_disableBreadcrumb": true
+        },
+        "globalMetadataFiles": [],
+        "fileMetadataFiles": [],
+        "template": ["default", "theme/dist"],
+        "postProcessors": [],
+        "markdownEngineName": "markdig",
+        "noLangKeyword": false,
+        "keepFileLink": false,
+        "cleanupCacheHistory": false,
+        "disableGitFeatures": true
+    }
+}

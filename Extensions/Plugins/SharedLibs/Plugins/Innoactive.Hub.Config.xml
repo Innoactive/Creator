@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Innoactive.Hub.Config</name>
+    </assembly>
+    <members>
+        <member name="T:Innoactive.Hub.Config.ConfigBase">
+            <summary>
+            Base class for implementing new config files. 
+            </summary>
+        </member>
+        <member name="P:Innoactive.Hub.Config.ConfigBase.DirectoryPath">
+            <inheritdoc />
+            <summary>
+            Standard directory path is on the project's root level.
+            </summary>
+        </member>
+        <member name="P:Innoactive.Hub.Config.ConfigBase.ConfigFileName">
+            <inheritdoc />
+            <summary>
+            By default, the filename is the class name in kebab case.
+            </summary>
+        </member>
+        <member name="P:Innoactive.Hub.Config.ConfigBase.Encryption">
+            <inheritdoc />
+        </member>
+        <member name="M:Innoactive.Hub.Config.ConfigBase.Validate">
+            <inheritdoc />
+        </member>
+        <member name="T:Innoactive.Hub.Config.ConfigExtensionMethods">
+            <summary>
+            This class is used to attach static methods for saving and loading config files. It 
+            allows to call .Save() and .Load() on every instance that implements the interface IJsonConfig.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.ConfigExtensionMethods.Save``1(``0,System.Boolean)">
+            <summary>
+            Saves the config file
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.ConfigExtensionMethods.Save``1(``0)">
+            <summary>
+            Saves the config file
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.ConfigExtensionMethods.Delete``1(``0,System.Boolean)">
+            <summary>
+            Sets the config file to null, and deletes the stored file if it exists
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.ConfigExtensionMethods.Delete``1(``0)">
+            <summary>
+            Sets the config file to null, and deletes the stored file if it exists
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.ConfigExtensionMethods.Exists``1(``0,System.Boolean)">
+            <summary>
+            Whether or not the config file exists
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.ConfigExtensionMethods.Exists``1(``0)">
+            <summary>
+            Whether or not the config file exists
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.ConfigExtensionMethods.Load``1(``0,System.Boolean,Newtonsoft.Json.JsonConverter[])">
+            <summary>
+            Loads the config file easiest way would be: T config = new T().Load();
+            </summary>
+            <typeparam name="T">Your custom config class</typeparam>
+            <param name="decrypt">Decides if the config is decrypted or not, to be towards compatible the EncryptionType is adjusted.</param>
+            <param name="jsonConverters">Converters used by Newtonsoft.JSON to provide a custom deserialization.</param>
+            <returns>Returns Config Object</returns>
+        </member>
+        <member name="M:Innoactive.Hub.Config.ConfigExtensionMethods.Load``1(``0,Newtonsoft.Json.JsonConverter[])">
+            <summary>
+            Loads the config file easiest way would be: T config = new T().Load();
+            </summary>
+            <typeparam name="T">Your custom config class</typeparam>
+            <param name="jsonConverters">Converters used by Newtonsoft.JSON to provide a custom deserialization.</param>
+            <returns>Returns Config Object</returns>
+        </member>
+        <member name="M:Innoactive.Hub.Config.ConfigExtensionMethods.LoadAdditive``1(``0,System.Boolean)">
+            <summary>
+            Loads the config file contents into the config object, only writing those entries that are
+            actually found in the config file. Will also prevent any automatic saving.
+            If config file is not found, a FileNotFound exception is thrown. If the config file
+            could not be parsed, a SerializationException will be thrown.
+            </summary>
+            <typeparam name="T">Your custom config class</typeparam>
+        </member>
+        <member name="M:Innoactive.Hub.Config.ConfigExtensionMethods.LoadAdditive``1(``0)">
+            <summary>
+            Loads the config file contents into the config object, only writing those entries that are
+            actually found in the config file. Will also prevent any automatic saving.
+            If config file is not found, a FileNotFound exception is thrown. If the config file
+            could not be parsed, a SerializationException will be thrown.
+            </summary>
+            <typeparam name="T">Your custom config class</typeparam>
+        </member>
+        <member name="T:Innoactive.Hub.Config.IJsonConfig">
+            <summary>
+            Interface for json configs
+            </summary>
+        </member>
+        <member name="P:Innoactive.Hub.Config.IJsonConfig.DirectoryPath">
+            <summary>
+            Path to the directory (relative to project/build root folder) where the config file should be saved.
+            </summary>
+        </member>
+        <member name="P:Innoactive.Hub.Config.IJsonConfig.ConfigFileName">
+            <summary>
+            Filename to be used by the config file (excluding file extension).
+            </summary>
+        </member>
+        <member name="P:Innoactive.Hub.Config.IJsonConfig.Encryption">
+            <summary>
+            Decides which encryption is used, the default is NoEncrpytion.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.IJsonConfig.Validate">
+            <summary>
+            Validates the given configuration.
+            This method will be called while loading and saving the config.
+            Should be overriden in implementations of the ConfigBase class.
+            To indicate an invalid configuration, throw a <see cref="T:Innoactive.Hub.Config.ConfigurationValidationException"/>.
+            </summary>
+        </member>
+        <member name="T:Innoactive.Hub.Config.JsonConfigFileManager">
+            <summary>
+            Internally handles saving, loading and exporting of config files, do not use this Class when you are just
+            implementing a config for your application. Use the Load/Save methods from your IJsonConfig implementations.
+            </summary>
+        </member>
+        <member name="P:Innoactive.Hub.Config.JsonConfigFileManager.ConfigFileStoragePath">
+            <summary>
+            base path where new config files are saved, and where the reader looks first when looking for a file to read from.
+            A config-file-specific directory will be appended
+            </summary>
+        </member>
+        <member name="P:Innoactive.Hub.Config.JsonConfigFileManager.ConfigFileDefaultPath">
+            <summary>
+            Path where to find the default config files - will be used when first encountering a non-existent config file,
+            to create a copy in ConfigFileStoragePath
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.Save(Innoactive.Hub.Config.IJsonConfig,System.Boolean)">
+            <summary>
+            Saves the given config to related file, will also call validate in that process.
+            Can optionally encrypt the stored file. <see href="https://stackoverflow.com/a/15342230/1142028"/>
+            and <see href="https://msdn.microsoft.com/en-us/library/system.security.cryptography.protecteddata.aspx"/>
+            </summary>
+            <param name="config">Config which is saved.</param>
+            <param name="encrypt">Whether or not to store the config encrypted.</param>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.Save(Innoactive.Hub.Config.IJsonConfig)">
+            <summary>
+            Saves the given config to related file, will also call validate in that process.
+            Can optionally encrypt the stored file. <see href="https://stackoverflow.com/a/15342230/1142028"/>
+            and <see href="https://msdn.microsoft.com/en-us/library/system.security.cryptography.protecteddata.aspx"/>
+            </summary>
+            <param name="config">Config which is saved.</param>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.Save(Innoactive.Hub.Config.IJsonConfig,System.String)">
+            <summary>
+            Saves the given config to related file, will also call validate in that process.
+            Can optionally encrypt the stored file. <see href="https://stackoverflow.com/a/15342230/1142028"/>
+            and <see href="https://msdn.microsoft.com/en-us/library/system.security.cryptography.protecteddata.aspx"/>
+            </summary>
+            <param name="config">Config which is saved.</param>
+            <param name="filePath">Path where the config is saved</param>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.Load``1(``0,Newtonsoft.Json.JsonConverter[])">
+            <summary>
+            Load the specified config file, first trying the config directory, and then the default directory.
+            If no config file is found, a new one is saved. If only the default file is found, a copy is
+            saved to actual config storage folder.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.Load``1(``0,System.String,System.Boolean,Newtonsoft.Json.JsonConverter[])">
+            <summary>
+            Load the specified config file, first trying the config directory, and then the default directory.
+            If no config file is found, a new one is saved. If only the default file is found, a copy is
+            saved to actual config storage folder.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.CopyToBuildFolder(Innoactive.Hub.Config.IJsonConfig,System.String,System.Boolean)">
+            <summary>
+            copies the specific configuration file to the build folder
+            </summary>
+            <param name="config">Config which is copied.</param>
+            <param name="pathToBuiltProject">Path to the build project.</param>
+            <param name="encrypted">Decides if the config file will be encrypted or not.</param>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.CopyToBuildFolder(Innoactive.Hub.Config.IJsonConfig,System.String)">
+            <summary>
+            Copies the specific configuration file to the build folder
+            </summary>
+            <param name="config">Config which is copied.</param>
+            <param name="pathToBuiltProject">Path to the build project.</param>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.Copy(System.String,System.String)">
+            <summary>
+            Copies given source to destination
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.IsConfigEncrypted(Innoactive.Hub.Config.IJsonConfig)">
+            <summary>
+            Determs if given config is encrypted or not.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.GetConfigFilePath(Innoactive.Hub.Config.IJsonConfig)">
+            <summary>
+            Returns the path where the config file should be stored
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.GetDefaultConfigFilePath(Innoactive.Hub.Config.IJsonConfig,System.Boolean)">
+            <summary>
+            Returns the path where the default config file should be stored.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.GetDefaultConfigFilePath(Innoactive.Hub.Config.IJsonConfig)">
+            <summary>
+            Returns the path where the default config file should be stored.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.FindActualConfigFilePath(Innoactive.Hub.Config.IJsonConfig,System.Boolean)">
+            <summary>
+            Checks if the config file exists either at the config file path or the default config file path,
+            and returns the corresponding matched path. If no config exists yet, a FileNotFound exception is thrown.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.FindActualConfigFilePath(Innoactive.Hub.Config.IJsonConfig)">
+            <summary>
+            Checks if the config file exists either at the config file path or the default config file path,
+            and returns the corresponding matched path. If no config exists yet, a FileNotFound exception is thrown.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.GetConfigFileName(Innoactive.Hub.Config.IJsonConfig,System.Boolean)">
+            <summary>
+            Creates the file name for given config.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.GetConfigFileName(Innoactive.Hub.Config.IJsonConfig)">
+            <summary>
+            Creates the file name for given config.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.JsonConfigFileManager.LoadAdditive``1(``0)">
+            <summary>
+            Loads the config file contents into the config object, only writing those entries that are
+            actually found in the config file. Will also prevent any automatic saving.
+            If config file is not found, a FileNotFound exception is thrown. If the config file
+            could not be parsed, a SerializationException will be thrown.
+            </summary>
+            <typeparam name="T">Your custom config class</typeparam>
+        </member>
+        <member name="T:Innoactive.Hub.Config.Security.EncryptionProvider">
+            <summary>
+            Provides encryption strategies for usage.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.Security.EncryptionProvider.#ctor">
+            <summary>
+            Sets the dictionary up which decides about the encryption used.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.Security.EncryptionProvider.GetEncryptionStrategy(Innoactive.Hub.Config.IJsonConfig)">
+            <summary>
+            Looks up and returns the correct encryption strategy for the given config.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.Security.EncryptionProvider.IsEncrypted(Innoactive.Hub.Config.IJsonConfig)">
+            <summary>
+            Checks if the given config is encrypted.
+            </summary>
+        </member>
+        <member name="T:Innoactive.Hub.Config.Security.IDataEncryptionStrategy">
+            <summary>
+            Allows the encoding and decoding of byte arrays (data).
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.Security.IDataEncryptionStrategy.Encode(System.Byte[])">
+            <summary>
+            Encodes given data.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.Security.IDataEncryptionStrategy.Decode(System.Byte[])">
+            <summary>
+            Decodes given data.
+            </summary>        
+        </member>
+        <member name="T:Innoactive.Hub.Config.Security.EncryptionType">
+            <summary>
+            Describes which type of encryption is used.
+            </summary>
+        </member>
+        <member name="F:Innoactive.Hub.Config.Security.EncryptionType.NoEncryption">
+            <summary>
+            No encryption at all is used.
+            </summary>
+        </member>
+        <member name="F:Innoactive.Hub.Config.Security.EncryptionType.ClientBasedEncryption">
+            <summary>
+            Client based encryption is used, which should only be decryptable within the users own operating system.
+            </summary>
+        </member>
+        <member name="T:Innoactive.Hub.Config.Security.NoEncryptionStrategy">
+            <summary>
+            Does not change the given data.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.Security.NoEncryptionStrategy.Decode(System.Byte[])">
+            <inheritdocs />
+        </member>
+        <member name="M:Innoactive.Hub.Config.Security.NoEncryptionStrategy.Encode(System.Byte[])">
+            <inheritdocs />
+        </member>
+        <member name="T:Innoactive.Hub.Config.Security.WindowsUserEncryptionStrategy">
+            <summary>
+            This encryption strategy uses the build in windows data protection.
+            Which allows only the current active windows user profile to decode the data.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Config.Security.WindowsUserEncryptionStrategy.Decode(System.Byte[])">
+            <inheritdocs />
+        </member>
+        <member name="M:Innoactive.Hub.Config.Security.WindowsUserEncryptionStrategy.Encode(System.Byte[])">
+            <inheritdocs />
+        </member>
+    </members>
+</doc>

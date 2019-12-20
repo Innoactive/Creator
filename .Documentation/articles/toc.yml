@@ -1,0 +1,77 @@
+- name: Introduction
+  href: index.md
+- name: Getting started
+  href: getting-started
+  items:
+    - name: Overview
+      href: getting-started/index.md
+    - name: As an Evaluator
+      href: getting-started/evaluator.md
+    - name: As a Designer
+      href: getting-started/designer.md
+    - name: As a Developer
+      href: getting-started/developer.md
+- name: Innoactive Creator Components
+  href: innoactive-creator/index.md
+  items:
+    - name: Overview
+      href: innoactive-creator/index.md
+    - name: Training Course Creation Wizard
+      href: innoactive-creator/course-creation-wizard.md
+    - name: Training Configuration
+      href: innoactive-creator/training-configuration.md
+    - name: Workflow Editor
+      href: innoactive-creator/workflow-editor.md
+    - name: Step Inspector
+      href: innoactive-creator/step-inspector.md
+    - name: Training Scene Objects
+      href: innoactive-creator/training-scene-object.md
+    - name: Default Behaviors
+      href: innoactive-creator/default-behaviors.md
+    - name: Default Conditions
+      href: innoactive-creator/default-conditions.md
+- name: Transition to v1.0 for Developers
+  href: transition-to-v1.0/index.md
+  items:
+    - name: Overview
+      href: transition-to-v1.0/index.md
+    - name: General Concepts
+      href: transition-to-v1.0/general-concepts.md
+    - name: Behaviors
+      href: transition-to-v1.0/behaviors.md
+    - name: Conditions
+      href: transition-to-v1.0/conditions.md
+    - name: Managing Training Courses
+      href: transition-to-v1.0/managing-courses.md
+    - name: Editor Customization
+      href: transition-to-v1.0/editor-customization.md
+- name: Miscellaneous
+  href: miscellaneous/index.md
+  items:
+    - name: Overview
+      href: miscellaneous/index.md
+    - name: Roles
+      href: miscellaneous/roles.md
+    - name: Unity Setup Guide
+      href: miscellaneous/unity-setup.md
+    - name: Prerequisites
+      href: miscellaneous/prerequisites.md
+    - name: Advanced Examples
+      href: miscellaneous/example-descriptions.md
+    - name: Menu Items (Developer)
+      href: miscellaneous/menu-items.md
+    - name: Snap Zones (Training Designer)
+      href: miscellaneous/snapzones.md
+    - name: Text To Speech Engine (TTS) (Developer)
+      href: miscellaneous/setup-text-to-speech.md
+- name: Legacy Documentation
+  href: legacy/index.md
+  items:
+    - name: Overview
+      href: legacy/index.md
+    - name: Training Designer's Guide
+      href: legacy/training-designer-v0.9.md
+    - name: Template Developer's Guide
+      href: legacy/template-developer-v0.9.md
+    - name: Inspection Template
+      href: legacy/inspection-module-template.md

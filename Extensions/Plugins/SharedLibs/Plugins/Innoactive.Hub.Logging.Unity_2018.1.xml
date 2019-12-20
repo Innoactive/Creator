@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Innoactive.Hub.Logging.Unity</name>
+    </assembly>
+    <members>
+        <member name="T:Innoactive.Hub.Logging.ForwardingLogHandler">
+            <summary>
+            A LogHandler forwarding received messages to Common.Logging. 
+            This LogHandler automatically overwrites the default unity LogHandler after storing a local reference to it.
+            </summary>
+        </member>
+        <member name="F:Innoactive.Hub.Logging.ForwardingLogHandler.CommonLoggingLogActions">
+            <summary>
+            Used to provide the corresponding log action for a LogLevel (<see cref="T:Common.Logging.LogLevel"/>)
+            </summary>
+        </member>
+        <member name="P:Innoactive.Hub.Logging.ForwardingLogHandler.DefaultLogHandler">
+            <summary>
+            The default unity log handler.
+            </summary>
+        </member>
+        <member name="F:Innoactive.Hub.Logging.ForwardingLogHandler.targetLogger">
+            <summary>
+            The Common.Logging connection.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.ForwardingLogHandler.#ctor(Common.Logging.ILog)">
+            <summary>
+            The constructor for this LogHandler is set to protected as it should neither be necessary, nor
+            possible to create a ForwardingLogHandler from outside, as the setup is crucial and easily messed up.
+            All setup should be handled by the corresponding method. <see cref="M:Innoactive.Hub.Logging.ForwardingLogHandler.Setup(Common.Logging.ILog)"/>
+            </summary>
+        </member>
+        <member name="P:Innoactive.Hub.Logging.ForwardingLogHandler.IsSetup">
+            <summary>
+            Checks if the unity logger is already replaced by a ForwardingLogHandler
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.ForwardingLogHandler.Setup(Common.Logging.ILog)">
+            <summary>
+            Main setup method. Potentially overwrites the default unity log handler if it has not been overwritten previously.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.ForwardingLogHandler.ForwardLogToCommonLogging(UnityEngine.LogType,System.String,System.Exception,System.Object[])">
+            <summary>
+            Forwards messages to common logging based on their LogType. 
+            Throws a ConfigurationException if Common.Logging is not setup to process logs.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.ForwardingLogHandler.Dispose">
+            <summary>
+            Enables a cleanup of the different objects used by this log handler. Mostly for testing purposes.
+            </summary>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.IForwardingLogHandler">
+            <summary>
+            Used to encapsulate the <see cref="T:Innoactive.Hub.Logging.ForwardingLogHandler"/>, responsible to forward unity logs into common logging.
+            </summary>
+        </member>
+        <member name="P:Innoactive.Hub.Logging.IForwardingLogHandler.DefaultLogHandler">
+            <summary>
+            Returns the unity default log handler.
+            </summary>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.Unity.LogInitializer">
+            <summary>
+            This class initializes the log forwarder for unity logging
+            </summary>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.Unity.UnityDebugLogger">
+            <summary>
+            Implementation of Common.Logging's AbstractLogger class wrapping 
+            UnityEngine's Debug.Logger. Graciously taken from:
+            https://github.com/SaladLab/Common.Logging.Unity3D/blob/master/src/Common.Logging.Unity3D/Logging/Simple/UnityDebugLogger.cs
+            
+            Added support for including datetime with the logged message, though
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.Unity.UnityDebugLogger.#ctor(UnityEngine.ILogHandler,System.String,Innoactive.Hub.Logging.BaseLoggerProperties)">
+            <summary>
+            Constructor. Provides a configured UnityDebugLogger, also registers on Unity log events and logs back to a potential MultiLogger instance.
+            </summary>
+        </member>
+        <member name="M:Innoactive.Hub.Logging.Unity.UnityDebugLogger.GetLogLevelString(Common.Logging.LogLevel)">
+            <summary>
+            Returns the LogLevel as a html
+            </summary>
+            <param name="level">LogLevel to convert</param>
+            <returns></returns>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.Unity.UnityDebugLoggerFactoryAdapter">
+            <summary>
+            Implemtation of Common.Logging's LoggerFactoryAdapter to create a 
+            UnityDebugLogger. Graciously taken from:
+            https://github.com/SaladLab/Common.Logging.Unity3D/blob/master/src/Common.Logging.Unity3D/Logging/Simple/UnityDebugLoggerFactoryAdapter.cs
+            </summary>
+        </member>
+        <member name="T:Innoactive.Hub.Logging.Unity.UnityLogHelper">
+            <summary>
+            Provides useful conversion methods for UnityEngine.LogType and Common.Logging.LogLevel.
+            </summary>
+        </member>
+    </members>
+</doc>
