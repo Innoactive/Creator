@@ -1,4 +1,4 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 
 using System.Collections;
 using UnityEngine.TestTools;
@@ -301,7 +301,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
 
             float conditionDuration = Time.time - startTime;
 
-            Assert.AreEqual(targetDuration, conditionDuration, Time.deltaTime);
+            Assert.AreEqual(targetDuration, conditionDuration, 2 * Time.deltaTime);
             Assert.IsTrue(condition.IsCompleted);
         }
 

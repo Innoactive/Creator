@@ -14,11 +14,10 @@ def InitialSetup()
     script { unity.install "${params.UNITY_VERSION}" }
 }
 
-def CheckoutHubSdk()
+def CheckoutComponent(repository, tag, path)
 {
-    checkout([$class: 'GitSCM', branches: [[name: "${env.HUB_SDK_BRANCH_NAME}"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: true, recursiveSubmodules: true, reference: '', trackingSubmodules: false], [$class: 'RelativeTargetDirectory', relativeTargetDir: 'Hub-SDK'], [$class: 'GitLFSPull']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'jenkins-github-ssh', url: 'git@github.com:Innoactive/Hub-SDK.git']]])
+    checkout([$class: 'GitSCM', branches: [[name: "${tag}"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: true, recursiveSubmodules: true, reference: '', trackingSubmodules: false], [$class: 'RelativeTargetDirectory', relativeTargetDir: "${path}"], [$class: 'GitLFSPull']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'jenkins-github-ssh', url: "${repository}"]]])
 }
-
 
 def InitialTrainingSetup()
 {
@@ -56,7 +55,8 @@ def CopyTrainingModule(repositoryDirectory)
     Move-Item -Path .\\training-module-root.txt -Destination ${repositoryDirectory}
     Move-Item -Path .\\version.txt -Destination ${repositoryDirectory}
     Move-Item -Path .\\.Documentation -Destination ${repositoryDirectory}
-    Move-Item -Path .\\Innoactive-Creator.asmdef -Destination ${repositoryDirectory}
+    Move-Item -Path .\\NOTICE -Destination ${repositoryDirectory}
+    Move-Item -Path .\\LICENSE -Destination ${repositoryDirectory}
     Move-Item -Path Editor -Destination ${repositoryDirectory}
     Move-Item -Path Extensions -Destination ${repositoryDirectory}
     Move-Item -Path Source -Destination ${repositoryDirectory}
@@ -84,7 +84,7 @@ def Test()
         # Disable Imgui tests because they can run only on a setup with a graphical shell.
         u3d run -u ${params.UNITY_VERSION} -- -logFile editor_disable_ui.log -quit -batchmode -executeMethod Innoactive.Hub.Training.Editors.Utils.EditorUtils.DisableImguiTests       
         # Import the Unity Project and run the edit mode tests
-        u3d run -u ${params.UNITY_VERSION} -- -logFile editor_editmode_test.log -batchmode -runTests -testPlatform editmode -testResults ${PROJECT_PATH}\\TestResults.PlayMode.xml
+        u3d run -u ${params.UNITY_VERSION} -- -logFile editor_editmode_test.log -batchmode -runTests -testPlatform editmode -testResults ${PROJECT_PATH}\\TestResults.EditMode.xml
         # Run tests
         u3d run -u ${params.UNITY_VERSION} -- -logFile editor_playmode_test.log -batchmode -runTests -testPlatform playmode -testResults ${PROJECT_PATH}\\TestResults.PlayMode.xml
         """
@@ -103,10 +103,10 @@ def Documentation()
             powershell """
             Write-Output \"Building Documentation\"
             \$sdkVersion = (git describe --all --match \"v*\").Split(\"-\")[0].Replace(\"tags/\", \"\").Replace(\"v\", \"\")
-            docfx --globalMetadata \"{\\`\"_gaTrackingId\\`\":\\`\"${GA_TRACKING_ID}\\`\",\\`\"_hubSdkVersion\\`\":\\`\"\$sdkVersion\\`\"}\\\" ${env.EXTENSION_PATH}\\Hub-Training-Module\\.Documentation\\docfx.json
+            docfx --globalMetadata \"{\\`\"_gaTrackingId\\`\":\\`\"${GA_TRACKING_ID}\\`\",\\`\"_hubSdkVersion\\`\":\\`\"\$sdkVersion\\`\"}\\\" ${env.INNOACTIVE_PATH}\\Creator\\Core\\.Documentation\\docfx.json
             """
             // Archive the documentation so it can be deployed (manually)
-            zip zipFile: "docs-${BUILD_NUMBER}.zip", archive: true, dir: "Assets\\Extensions\\Hub-Training-Module\\.Documentation\\_site"
+            zip zipFile: "docs-${BUILD_NUMBER}.zip", archive: true, dir: "Assets\\Innoactive\\Creator\\Core\\.Documentation\\_site"
         }
     }
 }
@@ -131,8 +131,8 @@ def DeployDocumentation()
                         patternSeparator: '[, ]+',
                         remoteDirectory: "${TAG_NAME}",
                         remoteDirectorySDF: false,
-                        removePrefix: 'Assets/Extensions/Hub-Training-Module/.Documentation/_site/',
-                        sourceFiles: 'Assets/Extensions/Hub-Training-Module/.Documentation/_site/**/*'
+                        removePrefix: 'Assets/Innoactive/Creator/Core/.Documentation/_site/',
+                        sourceFiles: 'Assets/Innoactive/Creator/Core/.Documentation/_site/**/*'
                     ]
                 ],
                 usePromotionTimestamp: false,
