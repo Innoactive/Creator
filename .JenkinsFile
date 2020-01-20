@@ -25,18 +25,18 @@ pipeline
 
     environment
     {
+        // Unity project base path
+        PROJECT_PATH = "z:\\${BUILD_TAG}"
+        // Path where the SDK should be checked out to
+        INNOACTIVE_PATH = "${PROJECT_PATH}\\Assets\\Innoactive"
         // Path to the module within the Unity project.
-        MODULE_DIRECTORY_IN_ASSETS = "${EXTENSION_PATH}\\Hub-Training-Module"
+        MODULE_DIRECTORY_IN_ASSETS = "${INNOACTIVE_PATH}\\Creator\\Core"
         // Path to the file with shared methods.
         SHARED = "${WORKSPACE}\\.JenkinsFile-Shared"
         // Path to U3D rules
         // U3D commands need to use a dedicated set of rules for logging to get more verbose output from e.g. Common.Logging,
         // see more at https://github.com/DragonBox/u3d/blob/master/LOG_RULES.md
         U3D_RULES_PATH = "z:\\u3d_log_rules.json"
-        // Unity project base path
-        PROJECT_PATH = "z:\\${BUILD_TAG}"
-        // Path where the SDK should be checked out to
-        EXTENSION_PATH = "${PROJECT_PATH}\\Assets\\Extensions"
         // Path to export config file.
         EXPORT_CONFIG = "z:\\.export-config"
     }
@@ -47,12 +47,14 @@ pipeline
         {
             steps
             {
+                // Initial clean up
+                powershell "Remove-Item .\\* -Force -Recurse -ErrorAction SilentlyContinue"    
                 powershell "git config --system core.longpaths true"
                 checkout scm
 
                 script
                 {
-                    load(SHARED).InitialSetup()
+                    load(SHARED).InitialSetup()                
                 }
             }
         }
@@ -65,7 +67,16 @@ pipeline
                 {
                     load(SHARED).InitialTrainingSetup()
                     load(SHARED).SetupUnity()
+
+                    def file = readJSON file: '.dependencies.json'
+
                     load(SHARED).CopyTrainingModule(MODULE_DIRECTORY_IN_ASSETS)
+                    
+                    for (int i = 0; i < file.dependencies.size(); ++i) 
+                    {
+                        def dependency = file.dependencies[i]
+                        load(SHARED).CheckoutComponent(dependency.repository, dependency.branch, "z:\\${BUILD_TAG}\\Assets\\Innoactive\\Creator\\${dependency.name}")
+                    }
                 }
             }
         }
@@ -110,7 +121,7 @@ pipeline
                 {
                     steps
                     {
-                        dir("${env.EXTENSION_PATH}\\Hub-Training-Module\\.Documentation\\theme")
+                        dir("${env.INNOACTIVE_PATH}\\Creator\\Core\\.Documentation\\theme")
                         {
                             stash name: 'docfx-theme-raw', includes: "**"
                         }
@@ -139,7 +150,7 @@ pipeline
                 {
                     steps
                     {
-                        dir("${env.EXTENSION_PATH}\\Hub-Training-Module\\.Documentation\\theme")
+                        dir("${env.INNOACTIVE_PATH}\\Creator\\Core\\.Documentation\\theme")
                         {
                             // Pop the built documentation theme
                             unstash name: 'docfx-theme'
@@ -183,19 +194,18 @@ pipeline
                 {
                     writeFile file: "${EXPORT_CONFIG}", text: $/
                     {
-                        "AssetDirectory" : "Assets/Extensions/Hub-Training-Module",
+                        "AssetDirectory" : "Assets/Innoactive/",
                         "Version" : "${env.TAG_NAME}",
                         "OutputPath" : "./Builds/innoactive-creator-${env.TAG_NAME}.unitypackage",
                         "Excludes" : [
                             "*/Tests/*",
                             "*/VRTK/Examples/*",
-                            "*/LegacyExampleFiles/*"
+                            "*/LegacyExampleFiles/*",
+                            "*.sh",
                         ]
                     }
                     /$
-                }
-                script
-                {
+
                     load(SHARED).CreateUnityPackage(EXPORT_CONFIG)
                 }
             }
@@ -218,10 +228,6 @@ pipeline
             }
 
             powershell """
-
-            Remove-Item .\\Hub-Training-Module -Force -Recurse -ErrorAction SilentlyContinue
-            Remove-Item .\\${BUILD_TAG} -Force -Recurse -ErrorAction SilentlyContinue
-
             subst z: /D
             exit(0)
             """
