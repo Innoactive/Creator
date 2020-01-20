@@ -61,7 +61,6 @@ namespace Innoactive.Hub.Unity.Tests.Training.Utils
             }
 
             TrainingSceneObject trainingSceneObject = gameObject.AddComponent<TrainingSceneObject>();
-            trainingSceneObject.ChangeUniqueName(name);
 
             return trainingSceneObject;
         }

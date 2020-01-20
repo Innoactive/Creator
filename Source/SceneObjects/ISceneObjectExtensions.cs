@@ -89,11 +89,11 @@ namespace Innoactive.Hub.Training.SceneObjects.Properties
         /// </summary>
         /// <param name="sceneObject"><see cref="ISceneObject"/> from whom the type <typeparamref name="T"/> will be removed.</param>
         /// <param name="removeDependencies">If true, this method also removes other components that are marked as `RequiredComponent` by <paramref name="trainingProperty"/>.</param>
-        /// <param name="excludedFromBeingRemoved">The components in this list will not be removed if any is a dependency of <paramref name="trainingProperty"/>. Only relevant if <paramref name="removeDependencies"/> is true.</param>
+        /// <param name="componentsToIgnore">The training properties in this list will not be removed if any is a dependency of <paramref name="trainingProperty"/>. Only relevant if <paramref name="removeDependencies"/> is true.</param>
         /// <typeparam name="T">The type of <see cref="ISceneObjectProperty"/> to be removed from <paramref name="sceneObject"/>.</typeparam>
-        public static void RemoveTrainingProperty<T>(this ISceneObject sceneObject, bool removeDependencies = false, Component[] excludedFromBeingRemoved = null)
+        public static void RemoveTrainingProperty<T>(this ISceneObject sceneObject, bool removeDependencies = false, IEnumerable<Component> componentsToIgnore = null)
         {
-            RemoveTrainingProperty(sceneObject, typeof(T), removeDependencies, excludedFromBeingRemoved);
+            RemoveTrainingProperty(sceneObject, typeof(T), removeDependencies, componentsToIgnore);
         }
 
         /// <summary>
@@ -102,11 +102,11 @@ namespace Innoactive.Hub.Training.SceneObjects.Properties
         /// <param name="sceneObject"><see cref="ISceneObject"/> from whom the <paramref name="trainingProperty"/> will be removed.</param>
         /// <param name="trainingProperty"><see cref="ISceneObjectProperty"/> to be removed from <paramref name="sceneObject"/>.</param>
         /// <param name="removeDependencies">If true, this method also removes other components that are marked as `RequiredComponent` by <paramref name="trainingProperty"/>.</param>
-        /// <param name="excludedFromBeingRemoved">The components in this list will not be removed if any is a dependency of <paramref name="trainingProperty"/>. Only relevant if <paramref name="removeDependencies"/> is true.</param>
-        public static void RemoveTrainingProperty(this ISceneObject sceneObject, TrainingSceneObjectProperty trainingProperty, bool removeDependencies = false, Component[] excludedFromBeingRemoved = null)
+        /// <param name="componentsToIgnore">The training properties in this list will not be removed if any is a dependency of <paramref name="trainingProperty"/>. Only relevant if <paramref name="removeDependencies"/> is true.</param>
+        public static void RemoveTrainingProperty(this ISceneObject sceneObject, TrainingSceneObjectProperty trainingProperty, bool removeDependencies = false, IEnumerable<Component> componentsToIgnore = null)
         {
             Type trainingPropertyType = trainingProperty.GetType();
-            RemoveTrainingProperty(sceneObject, trainingPropertyType, removeDependencies, excludedFromBeingRemoved);
+            RemoveTrainingProperty(sceneObject, trainingPropertyType, removeDependencies, componentsToIgnore);
         }
 
         /// <summary>
@@ -115,11 +115,11 @@ namespace Innoactive.Hub.Training.SceneObjects.Properties
         /// <param name="sceneObject"><see cref="ISceneObject"/> from whom the <paramref name="trainingProperty"/> will be removed.</param>
         /// <param name="trainingProperty"><see cref="ISceneObjectProperty"/> to be removed from <paramref name="sceneObject"/>.</param>
         /// <param name="removeDependencies">If true, this method also removes other components that are marked as `RequiredComponent` by <paramref name="trainingProperty"/>.</param>
-        /// <param name="excludedFromBeingRemoved">The components in this list will not be removed if any is a dependency of <paramref name="trainingProperty"/>. Only relevant if <paramref name="removeDependencies"/> is true.</param>
-        public static void RemoveTrainingProperty(this ISceneObject sceneObject, Component trainingProperty, bool removeDependencies = false, Component[] excludedFromBeingRemoved = null)
+        /// <param name="componentsToIgnore">The training properties in this list will not be removed if any is a dependency of <paramref name="trainingProperty"/>. Only relevant if <paramref name="removeDependencies"/> is true.</param>
+        public static void RemoveTrainingProperty(this ISceneObject sceneObject, Component trainingProperty, bool removeDependencies = false, IEnumerable<Component> componentsToIgnore = null)
         {
             Type trainingPropertyType = trainingProperty.GetType();
-            RemoveTrainingProperty(sceneObject, trainingPropertyType, removeDependencies, excludedFromBeingRemoved);
+            RemoveTrainingProperty(sceneObject, trainingPropertyType, removeDependencies, componentsToIgnore);
         }
 
         /// <summary>
@@ -128,8 +128,8 @@ namespace Innoactive.Hub.Training.SceneObjects.Properties
         /// <param name="sceneObject"><see cref="ISceneObject"/> from whom the <paramref name="trainingProperty"/> will be removed.</param>
         /// <param name="trainingProperty">Typo of <see cref="ISceneObjectProperty"/> to be removed from <paramref name="sceneObject"/>.</param>
         /// <param name="removeDependencies">If true, this method also removes other components that are marked as `RequiredComponent` by <paramref name="trainingProperty"/>.</param>
-        /// <param name="excludedFromBeingRemoved">The components in this list will not be removed if any is a dependency of <paramref name="trainingProperty"/>. Only relevant if <paramref name="removeDependencies"/> is true.</param>
-        public static void RemoveTrainingProperty(this ISceneObject sceneObject, Type trainingProperty, bool removeDependencies = false, Component[] excludedFromBeingRemoved = null)
+        /// <param name="componentsToIgnore">The training properties in this list will not be removed if any is a dependency of <paramref name="trainingProperty"/>. Only relevant if <paramref name="removeDependencies"/> is true.</param>
+        public static void RemoveTrainingProperty(this ISceneObject sceneObject, Type trainingProperty, bool removeDependencies = false, IEnumerable<Component> componentsToIgnore = null)
         {
             Component trainingComponent = sceneObject.GameObject.GetComponent(trainingProperty);
 
@@ -138,15 +138,42 @@ namespace Innoactive.Hub.Training.SceneObjects.Properties
                 return;
             }
 
-            IEnumerable<Component> trainingProperties = sceneObject.GameObject.GetComponents(typeof(Component)).Where(component => component.GetType() != trainingProperty);
+            IEnumerable<Type> typesToIgnore = GetTypesFromComponents(componentsToIgnore);
+            RemoveProperty(sceneObject, trainingProperty, removeDependencies, typesToIgnore);
+        }
+
+        /// <summary>
+        /// Removes type of <paramref name="trainingProperty"/> from this <see cref="ISceneObject"/>.
+        /// </summary>
+        /// <param name="sceneObject"><see cref="ISceneObject"/> from whom the <paramref name="trainingProperty"/> will be removed.</param>
+        /// <param name="trainingProperty">Typo of <see cref="ISceneObjectProperty"/> to be removed from <paramref name="sceneObject"/>.</param>
+        /// <param name="removeDependencies">If true, this method also removes other components that are marked as `RequiredComponent` by <paramref name="trainingProperty"/>.</param>
+        /// <param name="componentsToIgnore">The training properties in this list will not be removed if any is a dependency of <paramref name="trainingProperty"/>. Only relevant if <paramref name="removeDependencies"/> is true.</param>
+        public static void RemoveTrainingProperty(this ISceneObject sceneObject, Type trainingProperty, bool removeDependencies, IEnumerable<Type> typesToIgnore)
+        {
+            Component trainingComponent = sceneObject.GameObject.GetComponent(trainingProperty);
+
+            if (AreParametersNullOrInvalid(sceneObject, trainingProperty) || trainingComponent == null)
+            {
+                return;
+            }
+
+            RemoveProperty(sceneObject, trainingProperty, removeDependencies, typesToIgnore);
+        }
+
+        private static void RemoveProperty(ISceneObject sceneObject, Type typeToRemove, bool removeDependencies, IEnumerable<Type> typesToIgnore)
+        {
+            IEnumerable<Component> trainingProperties = sceneObject.GameObject.GetComponents(typeof(Component)).Where(component => component.GetType() != typeToRemove);
 
             foreach (Component component in trainingProperties)
             {
-                if (IsTypeDependencyOfComponent(trainingProperty, component))
+                if (IsTypeDependencyOfComponent(typeToRemove, component))
                 {
-                    RemoveTrainingProperty(sceneObject, component);
+                    RemoveProperty(sceneObject, component.GetType(), removeDependencies, typesToIgnore);
                 }
             }
+
+            Component trainingComponent = sceneObject.GameObject.GetComponent(typeToRemove);
 
 #if UNITY_EDITOR
             Object.DestroyImmediate(trainingComponent);
@@ -156,21 +183,19 @@ namespace Innoactive.Hub.Training.SceneObjects.Properties
 
             if (removeDependencies)
             {
-                List<Type> dependencies = GetAllDependenciesFrom(trainingProperty);
+                HashSet<Type> dependencies = GetAllDependenciesFrom(typeToRemove);
 
                 if (dependencies == null)
                 {
                     return;
                 }
 
-                foreach (Type dependency in dependencies)
-                {
-                    if (excludedFromBeingRemoved != null && excludedFromBeingRemoved.Any(d => d.GetType() == dependency))
-                    {
-                        continue;
-                    }
+                // Some Unity native components like Rigidbody require Transform but Transform can't be removed.
+                dependencies.Remove(typeof(Transform));
 
-                    RemoveTrainingProperty(sceneObject, dependency, removeDependencies);
+                foreach (Type dependency in dependencies.Except(typesToIgnore))
+                {
+                    RemoveProperty(sceneObject, dependency, removeDependencies, typesToIgnore);
                 }
             }
         }
@@ -193,7 +218,7 @@ namespace Innoactive.Hub.Training.SceneObjects.Properties
             return requireComponents.Any(requireComponent => requireComponent.m_Type0 == type || requireComponent.m_Type1 == type || requireComponent.m_Type2 == type);
         }
 
-        private static List<Type> GetAllDependenciesFrom(Type trainingProperty)
+        private static HashSet<Type> GetAllDependenciesFrom(Type trainingProperty)
         {
             RequireComponent[] requireComponents = trainingProperty.GetCustomAttributes(typeof(RequireComponent), false) as RequireComponent[];
 
@@ -202,27 +227,29 @@ namespace Innoactive.Hub.Training.SceneObjects.Properties
                 return null;
             }
 
-            List<Type> listOfDependencies = new List<Type>();
+            HashSet<Type> dependencies = new HashSet<Type>();
 
             foreach (RequireComponent requireComponent in requireComponents)
             {
-                if (requireComponent.m_Type0 != null)
-                {
-                    listOfDependencies.Add(requireComponent.m_Type0);
-                }
-
-                if (requireComponent.m_Type1 != null)
-                {
-                    listOfDependencies.Add(requireComponent.m_Type1);
-                }
-
-                if (requireComponent.m_Type2 != null)
-                {
-                    listOfDependencies.Add(requireComponent.m_Type2);
-                }
+                AddTypeToList(requireComponent.m_Type0, ref dependencies);
+                AddTypeToList(requireComponent.m_Type1, ref dependencies);
+                AddTypeToList(requireComponent.m_Type2, ref dependencies);
             }
 
-            return listOfDependencies;
+            return dependencies;
+        }
+
+        private static void AddTypeToList(Type type, ref HashSet<Type> dependencies)
+        {
+            if (type != null)
+            {
+                dependencies.Add(type);
+            }
+        }
+
+        private static IEnumerable<Type> GetTypesFromComponents(IEnumerable<Component> components)
+        {
+            return components == null ? new Type[0] : components.Select(component => component.GetType());
         }
     }
 }
