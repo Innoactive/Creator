@@ -2,9 +2,9 @@
 
 The `Training Scene Object` is the basic unit of a training course. If an object in the scene has this component, then the training course is aware of it and can interact with it, for example by checking its position. Only game objects with this component can be used in behaviors and conditions. 
 
-The `Unique Name` property of the `Training Scene Object` helps to identify and reference specific game objects. When adding the `Training Scene Object` component to a game object, the `Unique Name` property is by default identical to the game object's current name if no other `Training Scene Object` has the same `Unique Name`.
+The `Unique Name` property of the `Training Scene Object` helps to identify and reference specific GameObjects. When adding the `Training Scene Object` component to a game object, the `Unique Name` property is by default identical to the game object's current name if no other `Training Scene Object` has the same `Unique Name`.
 
-## Setup a Training Scene Object
+## Setup a Training Scene Object manually
 
 1. Pick, add, or create a game object and select it in the scene.
 2. In the Unity Inspector, click on the button `Add Component` at the bottom.
@@ -12,19 +12,19 @@ The `Unique Name` property of the `Training Scene Object` helps to identify and 
 4. The component has been added.
 5. *(Optional)* Change the `Unique Name` field and enter another unique name.
 
-[<img src="../images/scene-objects/add-component.png" alt="Add Component" width="330">](../images/scene-objects/add-component.png) [<img src="../images/scene-objects/change-unique-name.png" alt="Change Unique Name" width="330">](../images/scene-objects/change-unique-name.png)
+[![Create Training Scene Object manually](../images/scene-objects/create-scene-object-manually.gif "Create Training Scene Object manually.")](../images/scene-objects/create-scene-object-manually.gif)
 
 ## Reference a Training Scene Object
 
 You can reference any game object in your scene by selecting it in the Hierarchy view and dragging it into the field of a behavior or condition.
 
-[<img src="../images/scene-objects/insert-unique-name.png" alt="Insert Unique Name" width="330">](../images/scene-objects/insert-unique-name.png)
+[![Insert Unique Name](../images/scene-objects/drag-and-drop.gif "Insert Unique Name.")](../images/scene-objects/drag-and-drop.gif)
 
 > Learn more about the [Hierarchy view](https://docs.unity3d.com/Manual/Hierarchy.html).
 
 You can click on the small button next to the object field. It will open a new window with every game object in the scene. Select an object from this list to assign it to the object field.
 
-[<img src="../images/scene-objects/selecting-from-list.png" alt="Selecting from list" width="330">](../images/scene-objects/selecting-from-list.png)
+[![Selecting from list](../images/scene-objects/selecting-from-list.png "Selecting from list.")](../images/scene-objects/selecting-from-list.png)
 
 ## Training Scene Object Properties
 
@@ -58,7 +58,7 @@ Behaviors and conditions reference propreties of objects in the scene. For examp
 
 ## Automatic configuration of Scene Objects and Training Properties
 
-If you assign a GameObject without the `Training Scene Object` component to a Scene Object field in the Step Inspector, then the Creator will fail to execute the course. To prevent it, the Step Inspector will display an error message above the Scene Object. If you press the `Fix it` button next to the error, then the Creator will add all necessary components to the target scene object.
+If you assign a GameObject without the `Training Scene Object` component to a Scene Object field in the [Step Inspector](step-inspector.md), then the Creator will fail to execute the course. To prevent it, the [Step Inspector](step-inspector.md) will display an error message above the Scene Object. If you press the `Fix it` button next to the error, then the Creator will add all necessary components to the target scene object.
 
 The same applies to `Training Properties`.
 
