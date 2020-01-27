@@ -10,7 +10,7 @@ You can undo and redo all changes in the Workflow Editor and [Step Inspector](st
 
 ## Training Name
 
-You can change the displayed name of the training course on the top of the chapter menu. Changing this name does not change the filename of the training course.
+You can change the name of the training course by clicking the pen icon next to it on the top of the chapter menu. Changing the name does change the filename and directory name of the training course and saves the current progress.
 
 ## Save button
 

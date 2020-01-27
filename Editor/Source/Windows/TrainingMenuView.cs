@@ -84,6 +84,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
         private Vector2 scrollPosition;
 
         private ChangeNamePopup changeNamePopup;
+        private RenameCoursePopup renameCoursePopup;
 
         /// <summary>
         /// Initialises the windows with the correct training and TrainingWindow (parent).
@@ -154,17 +155,30 @@ namespace Innoactive.Hub.Training.Editors.Windows
         #region Training Menu Draw
         private void DrawHeader()
         {
+            GUILayout.Space(VerticalSpace);
+            GUILayout.Space(VerticalSpace);
+
             GUILayout.BeginHorizontal();
             {
-                string oldName = Course.Data.Name;
-                string newName = EditorGUILayout.TextField("Training Name", Course.Data.Name);
-                if (oldName != newName)
+                GUIStyle labelStyle = new GUIStyle(EditorStyles.boldLabel);
+                GUIContent labelContent = new GUIContent("Course Name:");
+                EditorGUILayout.LabelField(labelContent, labelStyle, GUILayout.Width(labelStyle.CalcSize(labelContent).x));
+
+                GUIStyle nameStyle = new GUIStyle(EditorStyles.label) { wordWrap = true };
+                GUIContent nameContent = new GUIContent(Course.Data.Name, Course.Data.Name);
+                EditorGUILayout.LabelField(Course.Data.Name, nameStyle, GUILayout.Width(180f), GUILayout.Height(nameStyle.CalcHeight(nameContent, 180f)));
+                Rect labelPosition = GUILayoutUtility.GetLastRect();
+
+                if (FlatIconButton(editIcon.Texture))
                 {
-                    RevertableChangesHandler.Do(new TrainingCommand(() => Course.Data.Name = newName, () => Course.Data.Name = oldName));
+                    labelPosition = new Rect(labelPosition.x + ParentWindow.position.x - 2, labelPosition.height + labelPosition.y + ParentWindow.position.y + 4 + ExpandButtonHeight, labelPosition.width, labelPosition.height);
+                    renameCoursePopup = RenameCoursePopup.Open(Course, labelPosition, scrollPosition);
                 }
             }
             GUILayout.EndHorizontal();
+
             GUILayout.Space(VerticalSpace);
+
             GUILayout.BeginHorizontal();
             {
                 GUILayout.FlexibleSpace();
