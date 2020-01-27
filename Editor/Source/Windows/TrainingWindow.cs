@@ -17,7 +17,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
     {
         private static readonly ILog logger = LogManager.GetLogger<TrainingWindow>();
         private static TrainingWindow window;
-        private ICourse course;
+        private ICourse activeCourse;
 
         [SerializeField]
         private Vector2 currentScrollPosition;
@@ -75,7 +75,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
         /// </summary>
         public void SaveTraining()
         {
-            if (SaveManager.SaveTrainingCourseToFile(course))
+            if (SaveManager.SaveTrainingCourseToFile(activeCourse))
             {
                 IsDirty = false;
             }
@@ -83,12 +83,12 @@ namespace Innoactive.Hub.Training.Editors.Windows
 
         public void MakeTemporarySave()
         {
-            if (course == null)
+            if (activeCourse == null)
             {
                 return;
             }
 
-            temporarySerializedTraining = JsonTrainingSerializer.Serialize(course);
+            temporarySerializedTraining = JsonTrainingSerializer.Serialize(activeCourse);
         }
 
         /// <summary>
@@ -98,26 +98,23 @@ namespace Innoactive.Hub.Training.Editors.Windows
         /// <returns>True if the course is set, false if the user cancels the operation.</returns>
         public bool SetTrainingCourseWithUserConfirmation(ICourse course)
         {
-            if (this.course != null && IsDirty)
+            if (activeCourse != null && IsDirty)
             {
-                // 0 is "Save"
-                // 1 is "Cancel"
-                // 2 is "Don't save currently open training"
-                // https://docs.unity3d.com/ScriptReference/EditorUtility.DisplayDialogComplex.html
-                int userConfirmation = 2;
                 if (IsDirty)
                 {
-                    userConfirmation = TestableEditorElements.DisplayDialogComplex("Unsaved changes detected.", "Do you want to save the changes to a current training course?", "Save", "Cancel", "Discard");
-                }
-
-                if (userConfirmation == 0)
-                {
-                    SaveTraining();
-                }
-
-                if (userConfirmation == 1)
-                {
-                    return false;
+                    int userConfirmation = TestableEditorElements.DisplayDialogComplex("Unsaved changes detected.", "Do you want to save the changes to a current training course?", "Save", "Cancel", "Discard");
+                    if (userConfirmation == 0)
+                    {
+                        SaveTraining();
+                        if (activeCourse.Data.Name.Equals(course.Data.Name))
+                        {
+                            return true;
+                        }
+                    }
+                    else if (userConfirmation == 1)
+                    {
+                        return false;
+                    }
                 }
             }
 
@@ -128,7 +125,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
         public void SetTrainingCourse(ICourse course)
         {
             RevertableChangesHandler.FlushStack();
-            this.course = course;
+            activeCourse = course;
 
             chapterMenu.Initialise(course, this);
             chapterMenu.ChapterChanged += (sender, args) =>
@@ -143,12 +140,12 @@ namespace Innoactive.Hub.Training.Editors.Windows
 
         public ICourse GetTrainingCourse()
         {
-            return course;
+            return activeCourse;
         }
 
         public void RefreshChapterRepresentation()
         {
-            if (course != null)
+            if (activeCourse != null)
             {
                 chapterRepresentation.SetChapter(chapterMenu.CurrentChapter);
             }
@@ -156,7 +153,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
 
         public IChapter GetChapter()
         {
-            if (course == null)
+            if (activeCourse == null)
             {
                 return null;
             }
@@ -226,7 +223,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
 
         private void OnGUI()
         {
-            if (course == null)
+            if (activeCourse == null)
             {
                 return;
             }
