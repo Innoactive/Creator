@@ -1,0 +1,14 @@
+{
+    "dependencies": [
+        {
+            "name": "Components\\VRTK-Interaction",
+            "repository": "git@github.com:Innoactive/VRTK-Interaction-Component.git",
+            "branch": "refs/tags/v1.0.0"
+        },
+        {
+            "name": "Components\\Text-To-Speech",
+            "repository": "git@github.com:Innoactive/TextToSpeech-Component.git",
+            "branch": "refs/tags/v1.0.0"
+        }
+    ]
+}
