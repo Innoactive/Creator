@@ -1,9 +1,5 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using System;
-using System.Collections.Generic;
-using Innoactive.Hub.Logging;
-using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.SceneObjects.Properties;
 
@@ -15,38 +11,6 @@ namespace Innoactive.Hub.Training.Editors.SceneObjects
     [CustomEditor(typeof(TrainingSceneObject))]
     public class SceneObjectEditor : Editor
     {
-        private ISceneObject lastObject;
-
-        private ISceneObjectRegistry SceneObjectRegistry
-        {
-            get { return RuntimeConfigurator.Configuration.SceneObjectRegistry; }
-        }
-
-        public void OnEnable()
-        {
-            ISceneObject targetObject = (ISceneObject)target;
-
-            if (SceneObjectRegistry.ContainsGuid(targetObject.Guid))
-            {
-                return;
-            }
-
-            targetObject.SetSuitableName();
-        }
-
-        public void OnDisable()
-        {
-            lastObject = (ISceneObject)target;
-        }
-
-        public void OnDestroy()
-        {
-            if (target == null)
-            {
-                SceneObjectRegistry.Unregister(lastObject);
-            }
-        }
-
         [MenuItem ("CONTEXT/TrainingSceneObject/Remove Training Properties", false)]
         private static void RemoveTrainingProperties()
         {
