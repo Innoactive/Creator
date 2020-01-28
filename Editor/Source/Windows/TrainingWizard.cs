@@ -1,8 +1,6 @@
 ﻿using System.IO;
 using Common.Logging;
 using Innoactive.Hub.Training.Configuration;
-using Innoactive.Hub.Training.Editors.Configuration;
-using Innoactive.Hub.Utils;
 using UnityEditor;
 using UnityEngine;
 
@@ -87,7 +85,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
                 {
                     errorMessage = string.Format("Course name contains invalid character: {0}", trainingName[invalidCharacterIndex]);
                 }
-                else if (Directory.Exists(string.Format("{0}/{1}", trainingCourseFolder, trainingName)))
+                else if (Directory.Exists(trainingCourseFolder))
                 {
                     errorMessage = string.Format("Training course with name \"{0}\" already exists!", trainingName);
                 }

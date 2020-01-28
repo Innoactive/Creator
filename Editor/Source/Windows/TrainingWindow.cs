@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Common.Logging;
 using Innoactive.Hub.Training.Editors.Utils;
 using Innoactive.Hub.Training.Editors.Utils.Undo;
@@ -274,7 +275,31 @@ namespace Innoactive.Hub.Training.Editors.Windows
 
         public void LoadTrainingCourseFromFile(string path)
         {
-            SetTrainingCourseWithUserConfirmation(SaveManager.LoadTrainingCourseFromFile(path));
+            if (string.IsNullOrEmpty(path) || File.Exists(path) == false)
+            {
+                return;
+            }
+
+            ICourse course = SaveManager.LoadTrainingCourseFromFile(path);
+            string filename = Path.GetFileNameWithoutExtension(path);
+
+            if (course.Data.Name.Equals(filename) == false)
+            {
+                bool userConfirmation = TestableEditorElements.DisplayDialog("Course name does not match filename.",
+                    string.Format("The training course name (\"{0}\") does not match the filename (\"{1}\"). To be able to load the training course, it must be renamed to \"{1}\".", course.Data.Name, filename),
+                    "Rename Course",
+                    "Cancel");
+
+                if (userConfirmation == false)
+                {
+                    return;
+                }
+
+                course.Data.Name = filename;
+                SaveManager.SaveTrainingCourseToFile(course);
+            }
+
+            SetTrainingCourseWithUserConfirmation(course);
             IsDirty = false;
         }
     }
