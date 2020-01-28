@@ -166,13 +166,15 @@ namespace Innoactive.Hub.Training.Editors.Windows
 
                 GUIStyle nameStyle = new GUIStyle(EditorStyles.label) { wordWrap = true };
                 GUIContent nameContent = new GUIContent(Course.Data.Name, Course.Data.Name);
-                EditorGUILayout.LabelField(Course.Data.Name, nameStyle, GUILayout.Width(180f), GUILayout.Height(nameStyle.CalcHeight(nameContent, 180f)));
-                Rect labelPosition = GUILayoutUtility.GetLastRect();
 
-                if (FlatIconButton(editIcon.Texture))
+                if (renameCoursePopup == null || renameCoursePopup.IsClosed)
                 {
-                    labelPosition = new Rect(labelPosition.x + ParentWindow.position.x - 2, labelPosition.height + labelPosition.y + ParentWindow.position.y + 4 + ExpandButtonHeight, labelPosition.width, labelPosition.height);
-                    renameCoursePopup = RenameCoursePopup.Open(Course, labelPosition, scrollPosition);
+                    EditorGUILayout.LabelField(Course.Data.Name, nameStyle, GUILayout.Width(180f), GUILayout.Height(nameStyle.CalcHeight(nameContent, 180f)));Rect labelPosition = GUILayoutUtility.GetLastRect();
+                    if (FlatIconButton(editIcon.Texture))
+                    {
+                        labelPosition = new Rect(labelPosition.x + ParentWindow.position.x - 2, labelPosition.height + labelPosition.y + ParentWindow.position.y + 4 + ExpandButtonHeight, labelPosition.width, labelPosition.height);
+                        renameCoursePopup = RenameCoursePopup.Open(Course, labelPosition, scrollPosition);
+                    }
                 }
             }
             GUILayout.EndHorizontal();

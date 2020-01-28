@@ -275,6 +275,11 @@ namespace Innoactive.Hub.Training.Editors.Windows
 
         public void LoadTrainingCourseFromFile(string path)
         {
+            if (string.IsNullOrEmpty(path) || File.Exists(path) == false)
+            {
+                return;
+            }
+
             ICourse course = SaveManager.LoadTrainingCourseFromFile(path);
             string filename = Path.GetFileNameWithoutExtension(path);
 

@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace Innoactive.Hub.Training.Editors.Windows
 {
+    /// <summary>
+    /// Handles changing the course name.
+    /// </summary>
     public class RenameCoursePopup : EditorWindow
     {
         private static RenameCoursePopup instance;
@@ -16,9 +19,8 @@ namespace Innoactive.Hub.Training.Editors.Windows
         private string newName;
 
         private bool isFocusSet;
-        private string errorMessage;
 
-        public bool IsClosed { get; protected set; }
+        public bool IsClosed { get; private set; }
 
         public static RenameCoursePopup Open(ICourse course, Rect labelPosition, Vector2 offset)
         {
@@ -55,6 +57,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
 
             GUI.SetNextControlName(textFieldIdentifier.ToString());
             newName = EditorGUILayout.TextField(newName);
+            newName = newName.Trim();
 
             if (isFocusSet == false)
             {
@@ -62,74 +65,52 @@ namespace Innoactive.Hub.Training.Editors.Windows
                 EditorGUI.FocusTextInControl(textFieldIdentifier.ToString());
             }
 
-            if (focusedWindow != this)
-            {
-                return;
-            }
-
-            if (Event.current.isKey == false)
-            {
-                return;
-            }
-
             if ((Event.current.keyCode == KeyCode.Return || Event.current.keyCode == KeyCode.KeypadEnter))
             {
-                if (string.IsNullOrEmpty(newName))
+                if (string.IsNullOrEmpty(newName) == false && ValidateCourseName(newName))
                 {
-                    return;
-                }
+                    string oldName = course.Data.Name;
+                    string oldPath = SaveManager.GetTrainingPath(oldName);
+                    string oldFolder = Path.GetDirectoryName(oldPath);
+                    string newPath = SaveManager.GetTrainingPath(newName);
+                    string newFolder = Path.GetDirectoryName(newPath);
 
-                string oldName = course.Data.Name;
-                string oldPath = SaveManager.GetTrainingPath(oldName);
-                string oldFolder = Path.GetDirectoryName(oldPath);
-                string newPath = SaveManager.GetTrainingPath(newName);
-                string newFolder = Path.GetDirectoryName(newPath);
+                    RevertableChangesHandler.Do(new TrainingCommand(
+                        // ReSharper disable once ImplicitlyCapturedClosure
+                        () =>
+                        {
+                            if (ValidateCourseName(newName))
+                            {
+                                Directory.Move(oldFolder, newFolder);
+                                File.Move(string.Format("{0}.meta", oldFolder), string.Format("{0}.meta", newFolder));
+                                File.Move(string.Format("{0}/{1}.json", newFolder, oldName), newPath);
+                                File.Move(string.Format("{0}/{1}.json.meta", newFolder, oldName), string.Format("{0}.meta", newPath));
+                                course.Data.Name = newName;
 
-                RevertableChangesHandler.Do(new TrainingCommand(
-                    // ReSharper disable once ImplicitlyCapturedClosure
-                    () =>
-                    {
-                        int invalidCharacterIndex = -1;
+                                SaveManager.SaveTrainingCourseToFile(course);
+                                RuntimeConfigurator.SetSelectedTrainingCourse(newPath.Substring(Application.streamingAssetsPath.Length + 1));
+                                TrainingWindow.GetWindow().IsDirty = false;
+                            }
+                        },
+                        // ReSharper disable once ImplicitlyCapturedClosure
+                        () =>
+                        {
+                            if (Directory.Exists(newFolder) == false)
+                            {
+                                return;
+                            }
 
-                        if ((invalidCharacterIndex = newName.IndexOfAny(Path.GetInvalidFileNameChars())) >= 0)
-                        {
-                            errorMessage = string.Format("Course name contains invalid character: {0}", newName[invalidCharacterIndex]);
-                        }
-                        else if (Directory.Exists(newFolder))
-                        {
-                            errorMessage = string.Format("Training course with name \"{0}\" already exists!", newName);
-                        }
-                        else
-                        {
-                            Directory.Move(oldFolder, newFolder);
-                            File.Move(string.Format("{0}.meta", oldFolder), string.Format("{0}.meta", newFolder));
-                            File.Move(string.Format("{0}/{1}.json", newFolder, oldName), newPath);
-                            File.Move(string.Format("{0}/{1}.json.meta", newFolder, oldName), string.Format("{0}.meta", newPath));
-                            course.Data.Name = newName;
+                            Directory.Move(newFolder, oldFolder);
+                            File.Move(string.Format("{0}.meta", newFolder), string.Format("{0}.meta", oldFolder));
+                            File.Move(string.Format("{0}/{1}.json", oldFolder, newName), oldPath);
+                            File.Move(string.Format("{0}/{1}.json.meta", oldFolder, newName), string.Format("{0}.meta", oldPath));
+                            course.Data.Name = oldName;
 
                             SaveManager.SaveTrainingCourseToFile(course);
-                            RuntimeConfigurator.SetSelectedTrainingCourse(newPath.Substring(Application.streamingAssetsPath.Length + 1));
-                            TrainingWindow.GetWindow().IsDirty = false;
+                            RuntimeConfigurator.SetSelectedTrainingCourse(oldPath.Substring(Application.streamingAssetsPath.Length + 1));
                         }
-                    },
-                    // ReSharper disable once ImplicitlyCapturedClosure
-                    () =>
-                    {
-                        if (Directory.Exists(newFolder) == false)
-                        {
-                            return;
-                        }
-
-                        Directory.Move(newFolder, oldFolder);
-                        File.Move(string.Format("{0}.meta", newFolder), string.Format("{0}.meta", oldFolder));
-                        File.Move(string.Format("{0}/{1}.json", oldFolder, newName), oldPath);
-                        File.Move(string.Format("{0}/{1}.json.meta", oldFolder, newName), string.Format("{0}.meta", oldPath));
-                        course.Data.Name = oldName;
-
-                        SaveManager.SaveTrainingCourseToFile(course);
-                        RuntimeConfigurator.SetSelectedTrainingCourse(oldPath.Substring(Application.streamingAssetsPath.Length + 1));
-                    }
-                ));
+                    ));
+                }
 
                 Close();
                 instance.IsClosed = true;
@@ -141,6 +122,34 @@ namespace Innoactive.Hub.Training.Editors.Windows
                 instance.IsClosed = true;
                 Event.current.Use();
             }
+        }
+
+        private bool ValidateCourseName(string courseName)
+        {
+            if (course.Data.Name.Equals(courseName))
+            {
+                return false;
+            }
+
+
+            int invalidCharacterIndex = -1;
+            if ((invalidCharacterIndex = courseName.IndexOfAny(Path.GetInvalidFileNameChars())) >= 0)
+            {
+                EditorUtility.DisplayDialog("Changing the course name failed",
+                    string.Format("Course name contains invalid character: {0}",
+                        courseName[invalidCharacterIndex]), "ok");
+                return false;
+            }
+
+            string newFolder = Path.GetDirectoryName(SaveManager.GetTrainingPath(courseName));
+            if (Directory.Exists(newFolder))
+            {
+                EditorUtility.DisplayDialog("Changing the course name failed",
+                    string.Format("Training course with name \"{0}\" already exists!", courseName), "ok");
+                return false;
+            }
+
+            return true;
         }
     }
 }
