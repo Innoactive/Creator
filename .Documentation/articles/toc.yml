@@ -1,7 +1,7 @@
 - name: Introduction
   href: index.md
 - name: Getting started
-  href: getting-started
+  href: getting-started/index.md
   items:
     - name: Overview
       href: getting-started/index.md
