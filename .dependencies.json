@@ -3,7 +3,7 @@
         {
             "name": "Components\\VRTK-Interaction",
             "repository": "git@github.com:Innoactive/VRTK-Interaction-Component.git",
-            "branch": "refs/tags/v1.0.0"
+            "branch": "bugfix/put-editor-script-in-editor-folder"
         },
         {
             "name": "Components\\Text-To-Speech",
