@@ -74,8 +74,6 @@ namespace Innoactive.Hub.Training.Editors.Windows
             if (GUILayout.Button("Create", GUILayout.Width(128), GUILayout.Height(32)))
             {
                 int invalidCharacterIndex;
-                string trainingCoursePath = SaveManager.GetTrainingPath(trainingName);
-                string trainingCourseFolder = Path.GetDirectoryName(trainingCoursePath);
 
                 if (string.IsNullOrEmpty(trainingName))
                 {
@@ -85,22 +83,28 @@ namespace Innoactive.Hub.Training.Editors.Windows
                 {
                     errorMessage = string.Format("Course name contains invalid character: {0}", trainingName[invalidCharacterIndex]);
                 }
-                else if (Directory.Exists(trainingCourseFolder))
-                {
-                    errorMessage = string.Format("Training course with name \"{0}\" already exists!", trainingName);
-                }
                 else
                 {
-                    TrainingWindow trainingWindow = TrainingWindow.GetWindow();
-                    trainingWindow.Focus();
+                    string trainingCoursePath = SaveManager.GetTrainingPath(trainingName);
+                    string trainingCourseFolder = Path.GetDirectoryName(trainingCoursePath);
 
-                    ICourse course = CreateCourse();
-                    if (trainingWindow.SetTrainingCourseWithUserConfirmation(course))
+                    if (Directory.Exists(trainingCourseFolder))
                     {
-                        SaveManager.SaveTrainingCourseToFile(course);
-                        RuntimeConfigurator.SetSelectedTrainingCourse(trainingCoursePath);
+                        errorMessage = string.Format("Training course with name \"{0}\" already exists!", trainingName);
+                    }
+                    else
+                    {
+                        TrainingWindow trainingWindow = TrainingWindow.GetWindow();
+                        trainingWindow.Focus();
 
-                        Close();
+                        ICourse course = CreateCourse();
+                        if (trainingWindow.SetTrainingCourseWithUserConfirmation(course))
+                        {
+                            SaveManager.SaveTrainingCourseToFile(course);
+                            RuntimeConfigurator.SetSelectedTrainingCourse(trainingCoursePath.Substring(Application.streamingAssetsPath.Length + 1));
+
+                            Close();
+                        }
                     }
                 }
             }

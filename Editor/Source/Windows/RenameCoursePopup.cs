@@ -131,7 +131,6 @@ namespace Innoactive.Hub.Training.Editors.Windows
                 return false;
             }
 
-
             int invalidCharacterIndex = -1;
             if ((invalidCharacterIndex = courseName.IndexOfAny(Path.GetInvalidFileNameChars())) >= 0)
             {
