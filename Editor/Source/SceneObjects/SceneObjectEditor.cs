@@ -1,16 +1,29 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using System.Reflection;
 using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.SceneObjects.Properties;
 
 namespace Innoactive.Hub.Training.Editors.SceneObjects
 {
     /// <summary>
-    /// This class keeps track of TrainingSceneEntities and adds names to newly added entities.
+    /// This class adds names to newly added entities.
     /// </summary>
     [CustomEditor(typeof(TrainingSceneObject))]
     public class SceneObjectEditor : Editor
     {
+        private void OnEnable()
+        {
+            ISceneObject sceneObject = target as ISceneObject;
+            FieldInfo fieldInfoObj = sceneObject.GetType().GetField("uniqueName", BindingFlags.NonPublic | BindingFlags.Instance);
+            string uniqueName = fieldInfoObj.GetValue(sceneObject) as string;
+
+            if (string.IsNullOrEmpty(uniqueName))
+            {
+                sceneObject.SetSuitableName();
+            }
+        }
+
         [MenuItem ("CONTEXT/TrainingSceneObject/Remove Training Properties", false)]
         private static void RemoveTrainingProperties()
         {
