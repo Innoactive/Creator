@@ -11,7 +11,7 @@ pipeline
     
     parameters 
     {
-        string(name: 'UNITY_VERSION', defaultValue: '2018.4.15f1', description: 'The Unity Version to build for')
+        string(name: 'UNITY_VERSION', defaultValue: '2018.4.16f1', description: 'The Unity Version to build for')
         booleanParam(name: 'SKIP_TESTS', defaultValue: false, description: 'If set to true, the test will be skipped')
         booleanParam(name: 'BUILD_UNITYPACKAGE', defaultValue: true, description: 'If set to true, a unity package containing the SDK will be created and attached as artifact.')
         booleanParam(name: 'BUILD_DOCUMENTATION', defaultValue: false, description: 'If set to true, the Hub documentation will be built and attached as artifact.')        
@@ -81,9 +81,8 @@ pipeline
             }
         }
 
-        stage('Build Unity 2018+') 
+        stage('Build Unity') 
         {
-            when { expression { params.UNITY_VERSION !=~ /2017.*/ } }
             steps
             {
                 script
