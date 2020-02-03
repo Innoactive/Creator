@@ -20,6 +20,10 @@ namespace Innoactive.Hub.Training.Behaviors
             [DisplayName("Object to unlock")]
             public SceneObjectReference Target { get; set; }
 
+            [DataMember]
+            [DisplayName("Unlock only during this step")]
+            public bool IsOnlyUnlockedInStep { get; set; }
+
             public bool WasLockedOnActivate { get; set; }
 
             public Metadata Metadata { get; set; }
@@ -30,7 +34,7 @@ namespace Innoactive.Hub.Training.Behaviors
         {
             public override void Start(EntityData data)
             {
-                data.WasLockedOnActivate =data.Target.Value.IsLocked;
+                data.WasLockedOnActivate = data.Target.Value.IsLocked;
                 if (data.WasLockedOnActivate)
                 {
                     data.Target.Value.SetLocked(false);
@@ -42,7 +46,7 @@ namespace Innoactive.Hub.Training.Behaviors
         {
             public override void Start(EntityData data)
             {
-                if (data.WasLockedOnActivate)
+                if (data.WasLockedOnActivate && data.IsOnlyUnlockedInStep)
                 {
                     data.Target.Value.SetLocked(true);
                 }
@@ -55,11 +59,14 @@ namespace Innoactive.Hub.Training.Behaviors
 
         public UnlockObjectBehavior(ISceneObject target) : this(TrainingReferenceUtils.GetNameFrom(target)) { }
 
-        public UnlockObjectBehavior(string targetName, string name = "Unlock Object")
+        public UnlockObjectBehavior(ISceneObject target, bool isOnlyUnlockedInStep) : this(TrainingReferenceUtils.GetNameFrom(target), isOnlyUnlockedInStep: isOnlyUnlockedInStep) { }
+
+        public UnlockObjectBehavior(string targetName, string name = "Unlock Object", bool isOnlyUnlockedInStep = true)
         {
             Data = new EntityData();
             Data.Target = new SceneObjectReference(targetName);
             Data.Name = name;
+            Data.IsOnlyUnlockedInStep = isOnlyUnlockedInStep;
         }
 
         private readonly IProcess<EntityData> process = new Process<EntityData>(new ActivatingProcess(), new EmptyStageProcess<EntityData>(), new DeactivatingProcess());
