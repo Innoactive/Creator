@@ -30,7 +30,7 @@ namespace Innoactive.Hub.Training.Behaviors
         {
             public override void Start(EntityData data)
             {
-                data.WasLockedOnActivate =data.Target.Value.IsLocked;
+                data.WasLockedOnActivate = data.Target.Value.IsLocked;
                 if (data.WasLockedOnActivate)
                 {
                     data.Target.Value.SetLocked(false);
