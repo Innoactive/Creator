@@ -23,7 +23,7 @@ Make sure that your setup satisfies the [prerequisites](../miscellaneous/prerequ
 
 ### Import the training template
 
-A template is a copy of the `Innoactive Creator` adjusted to the needs of your company or project. Normally, you would receive a `.unitypackage` with it from a template developer; in this tutorial we will use `Innoactive Template` instead. Download it from the [Innoactive Developer Portal](http://developers.innoactive.de/components/#training-module): scroll down to the `Innoactive Creator` section, click `Download` button for the latest version and pick the `innoactive-template-vX.Y.Z.unitypackage`.
+A template is a copy of the `Innoactive Creator` adjusted to the needs of your company or project. Normally, you would receive a `.unitypackage` with it from a template developer; in this tutorial we will use `Innoactive Basic Template` instead. Download it from the [Innoactive Developer Portal](http://developers.innoactive.de/components/#training-module): scroll down to the `Innoactive Creator` section, click `Download` button for the latest version and pick the `innoactive-basic-template-vX.Y.Z.unitypackage`.
 
 Locate the downloaded `.unitypackage` with a file explorer and drag and drop it into the `Project` tab in the Unity Editor. The `Import Unity Package` window will pop up; click `All` and then `Import`.
 
@@ -31,7 +31,7 @@ Locate the downloaded `.unitypackage` with a file explorer and drag and drop it 
 
 The training template contains preconfigured scenes which you could copy and reuse.
 
-Copy the `Simplified` scene from the imported template folder (`Extensions/IA-Training-Template/Scenes`) to the `Assets` folder (`Ctrl` + `D` or `Edit` > `Duplicate`, then drag and drop it to the desired directory). If you put it into a subdirectory, it should not be inside the `Assers/Extensions/IA-Training-Template` folder. Make sure to open the copied scene by double clicking it.
+Copy the `Simplified` scene from the imported template folder (`Innoactive/Creator/Basic-Template`) to the `Assets` folder (`Ctrl` + `D` or `Edit` > `Duplicate`, then drag and drop it to the desired directory). If you put it into a subdirectory, it should not be inside the `Innoactive/Creator/Basic-Template` folder. Make sure to open the copied scene by double clicking it.
 
 ## Create a basic training application
 
@@ -147,9 +147,11 @@ You can find our tutorial result alongside the other examples in the `Assets/Exa
 
 ## Advanced localization example
 
-Duplicate and move the `Default` scene from the imported template folder (`Extensions/IA-Training-Template/Scenes`) into any other directory. Repopulate it with same training scene objects as in the first part of this guide.
+Duplicate and move the `Default` scene from the imported template folder (`Innoactive/Creator/Basic-Template/Scenes`) into any other directory. Repopulate it with same training scene objects as in the first part of this guide.
 
-Take a look at the `[HUB-PLAYER-SETUP-MANAGER]` scene object. You will notice that `Spectator Cam Prefab Overload` is overriden with a custom prefab. This prefab provides a trainer with real time controls for the training execution. With it, a trainer is able to see the current training status, start, reset, and mute the training, pick a chapter and skip a step, choose a language and the training mode to use.
+Take a look at the `[CAMERA_CONFIGURATION]` scene object. You will notice that `Spectator Cam Prefab Overload` is overriden with a custom prefab. This prefab provides a trainer with real time controls for the training execution. With it, a trainer is able to see the current training status, start, reset, and mute the training, pick a chapter and skip a step, choose a language and the training mode to use.
+
+> The `[CAMERA_CONFIGURATION]` prefab is located in `Innoactive/Creator/Basic-Template/Resources/CustomCamera/Prefabs`, if you want to use it in your own scene.
 
 Note that there is no `TrainingLoader` game object on the scene. Instead, the training is managed by a controller script attached to the camera's overlay. It automatically loads the active training course. Just make sure that the correct training course is selected on the `[TRAINING_CONFIGURATION]` game object.
 
