@@ -78,7 +78,7 @@ namespace Innoactive.Hub.Training.Editors.Configuration
         {
             get { return AllowedMenuItemsSettings.GetConditionMenuOptions().Cast<Menu.Option<ICondition>>().ToList().AsReadOnly(); }
         }
-        
+
         /// <inheritdoc />
         public virtual void SetupTrainingScene()
         {
@@ -130,6 +130,36 @@ namespace Innoactive.Hub.Training.Editors.Configuration
                 GameObject prefab = (GameObject)GameObject.Instantiate(Resources.Load("[VRTK_Setup]", typeof(GameObject)));
                 prefab.name = prefab.name.Replace("(Clone)", "");
             }
+            else if (ContainsMissingScripts(vrtkSetup))
+            {
+                if (EditorUtility.DisplayDialog("Broken VRTK Setup found", "Your VRTK-Setup requires the hub-sdk, do you want to replace it with a new one which dosen't?", "Replace", "Cancel"))
+                {
+                    GameObject.DestroyImmediate(vrtkSetup);
+                    GameObject prefab = (GameObject)GameObject.Instantiate(Resources.Load("[VRTK_Setup]", typeof(GameObject)));
+                    prefab.name = prefab.name.Replace("(Clone)", "");
+                }
+            }
+        }
+
+        private bool ContainsMissingScripts(GameObject obj)
+        {
+            foreach (Component component in obj.GetComponents<Component>())
+            {
+                if (component == null)
+                {
+                    return true;
+                }
+            }
+
+            for (int i = 0; i < obj.transform.childCount; i++)
+            {
+                if (ContainsMissingScripts(obj.transform.GetChild(i).gameObject))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
