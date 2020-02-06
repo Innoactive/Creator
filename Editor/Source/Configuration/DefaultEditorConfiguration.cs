@@ -132,7 +132,7 @@ namespace Innoactive.Hub.Training.Editors.Configuration
             }
             else if (ContainsMissingScripts(vrtkSetup))
             {
-                if (EditorUtility.DisplayDialog("Broken VRTK Setup found", "Your VRTK-Setup requires the hub-sdk, do you want to replace it with a new one which dosen't?", "Replace", "Cancel"))
+                if (EditorUtility.DisplayDialog("Broken VRTK Setup found", "Your VRTK setup requires the Hub-SDK, do you want to replace it?", "Replace", "Cancel"))
                 {
                     GameObject.DestroyImmediate(vrtkSetup);
                     GameObject prefab = (GameObject)GameObject.Instantiate(Resources.Load("[VRTK_Setup]", typeof(GameObject)));
