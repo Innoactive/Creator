@@ -10,7 +10,7 @@ You can undo and redo all changes in the Workflow Editor and [Step Inspector](st
 
 ## Training Name
 
-You can change the displayed name of the training course on the top of the chapter menu. Changing this name does not change the filename of the training course.
+Click the pen icon on the top of the chapter menu to rename the current training course. When you do so, the Innoactive creator will save the current state of the course to the new file, using the new name as the filename. It will delete the old file.
 
 ## Save button
 

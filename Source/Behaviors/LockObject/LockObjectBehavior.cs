@@ -20,6 +20,10 @@ namespace Innoactive.Hub.Training.Behaviors
             [DisplayName("Object to lock")]
             public SceneObjectReference Target { get; set; }
 
+            [DataMember]
+            [DisplayName("Lock only during this step")]
+            public bool IsOnlyLockedInStep { get; set; }
+
             public bool WasLockedOnActivate { get; set; }
 
             public Metadata Metadata { get; set; }
@@ -30,7 +34,7 @@ namespace Innoactive.Hub.Training.Behaviors
         {
             public override void Start(EntityData data)
             {
-                data.WasLockedOnActivate =data.Target.Value.IsLocked;
+                data.WasLockedOnActivate = data.Target.Value.IsLocked;
                 if (data.WasLockedOnActivate == false)
                 {
                     data.Target.Value.SetLocked(true);
@@ -42,7 +46,7 @@ namespace Innoactive.Hub.Training.Behaviors
         {
             public override void Start(EntityData data)
             {
-                if (data.WasLockedOnActivate == false)
+                if (data.WasLockedOnActivate == false && data.IsOnlyLockedInStep)
                 {
                     data.Target.Value.SetLocked(false);
                 }
@@ -55,11 +59,14 @@ namespace Innoactive.Hub.Training.Behaviors
 
         public LockObjectBehavior(ISceneObject target) : this(TrainingReferenceUtils.GetNameFrom(target)) { }
 
-        public LockObjectBehavior(string targetName, string name = "Lock Object")
+        public LockObjectBehavior(ISceneObject target, bool isOnlyLockedInStep) : this(TrainingReferenceUtils.GetNameFrom(target), isOnlyLockedInStep: isOnlyLockedInStep) { }
+
+        public LockObjectBehavior(string targetName, string name = "Lock Object", bool isOnlyLockedInStep = true)
         {
             Data = new EntityData();
             Data.Target = new SceneObjectReference(targetName);
             Data.Name = name;
+            Data.IsOnlyLockedInStep = isOnlyLockedInStep;
         }
 
         private readonly IProcess<EntityData> process = new Process<EntityData>(new ActivatingProcess(), new EmptyStageProcess<EntityData>(), new DeactivatingProcess());

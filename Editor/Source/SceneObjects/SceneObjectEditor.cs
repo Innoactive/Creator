@@ -1,49 +1,26 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using System;
-using System.Collections.Generic;
-using Innoactive.Hub.Logging;
-using Innoactive.Hub.Training.Configuration;
+using System.Reflection;
 using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.SceneObjects.Properties;
 
 namespace Innoactive.Hub.Training.Editors.SceneObjects
 {
     /// <summary>
-    /// This class keeps track of TrainingSceneEntities and adds names to newly added entities.
+    /// This class adds names to newly added entities.
     /// </summary>
     [CustomEditor(typeof(TrainingSceneObject))]
     public class SceneObjectEditor : Editor
     {
-        private ISceneObject lastObject;
-
-        private ISceneObjectRegistry SceneObjectRegistry
+        private void OnEnable()
         {
-            get { return RuntimeConfigurator.Configuration.SceneObjectRegistry; }
-        }
+            ISceneObject sceneObject = target as ISceneObject;
+            FieldInfo fieldInfoObj = sceneObject.GetType().GetField("uniqueName", BindingFlags.NonPublic | BindingFlags.Instance);
+            string uniqueName = fieldInfoObj.GetValue(sceneObject) as string;
 
-        public void OnEnable()
-        {
-            ISceneObject targetObject = (ISceneObject)target;
-
-            if (SceneObjectRegistry.ContainsGuid(targetObject.Guid))
+            if (string.IsNullOrEmpty(uniqueName))
             {
-                return;
-            }
-
-            targetObject.SetSuitableName();
-        }
-
-        public void OnDisable()
-        {
-            lastObject = (ISceneObject)target;
-        }
-
-        public void OnDestroy()
-        {
-            if (target == null)
-            {
-                SceneObjectRegistry.Unregister(lastObject);
+                sceneObject.SetSuitableName();
             }
         }
 

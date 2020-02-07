@@ -9,6 +9,7 @@ using Innoactive.Hub.Training.SceneObjects.Properties;
 namespace Innoactive.Hub.Training.SceneObjects
 {
     /// <inheritdoc cref="ISceneObject"/>
+    [ExecuteInEditMode]
     public class TrainingSceneObject : MonoBehaviour, ISceneObject
     {
         private static readonly Common.Logging.ILog logger = LogManager.GetLogger<TrainingSceneObject>();
@@ -67,20 +68,15 @@ namespace Innoactive.Hub.Training.SceneObjects
                 return;
             }
 
-            try
-            {
-                RuntimeConfigurator.Configuration.SceneObjectRegistry.Register(this);
-            }
-            catch (NameNotUniqueException)
-            {
-                logger.ErrorFormat("Registration of entity with name '{0}' failed. Name is not unique! Entity will destroy itself. Referenced game object: '{1}'.", UniqueName, GameObject.name);
-                Destroy(this);
-            }
+            this.SetSuitableName();
         }
 
         private void OnDestroy()
         {
-            RuntimeConfigurator.Configuration.SceneObjectRegistry.Unregister(this);
+            if (RuntimeConfigurator.Exists)
+            {
+                RuntimeConfigurator.Configuration.SceneObjectRegistry.Unregister(this);
+            }
         }
 
         public bool CheckHasProperty<T>() where T : ISceneObjectProperty
