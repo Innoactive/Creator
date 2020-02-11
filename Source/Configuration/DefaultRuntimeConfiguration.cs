@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using Common.Logging;
-using Innoactive.Hub.Config;
-using Innoactive.Hub.TextToSpeech;
 using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.Exceptions;
 using Innoactive.Hub.Training.SceneObjects;
@@ -22,7 +20,6 @@ namespace Innoactive.Hub.Training.Configuration
         private static readonly ILog logger = LogManager.GetLogger<DefaultRuntimeConfiguration>();
 
         private AudioSource instructionPlayer;
-        private TextToSpeechConfig textToSpeechConfig;
         private ISceneObjectRegistry sceneObjectRegistry;
         private int currentModeIndex = 0;
         private string selectedCourseStreamingAssetsPath;
@@ -136,19 +133,6 @@ namespace Innoactive.Hub.Training.Configuration
         }
 
         /// <inheritdoc />
-        public virtual TextToSpeechConfig TextToSpeechConfig
-        {
-            get
-            {
-                return textToSpeechConfig;
-            }
-            set
-            {
-                textToSpeechConfig = value;
-            }
-        }
-
-        /// <inheritdoc />
         public virtual ILog EntityStateLogger
         {
             get
@@ -223,15 +207,6 @@ namespace Innoactive.Hub.Training.Configuration
         public virtual int GetCurrentModeIndex()
         {
             return CurrentModeIndex;
-        }
-
-        public DefaultRuntimeConfiguration()
-        {
-            TextToSpeechConfig config = new TextToSpeechConfig();
-            if (config.Exists())
-            {
-                textToSpeechConfig = config.Load();
-            }
         }
     }
 }

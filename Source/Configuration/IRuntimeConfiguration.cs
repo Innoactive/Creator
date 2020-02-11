@@ -1,7 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
 using Common.Logging;
-using Innoactive.Hub.TextToSpeech;
 using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.SceneObjects;
 using UnityEngine;
@@ -37,11 +36,6 @@ namespace Innoactive.Hub.Training.Configuration
         /// Default audio source to play audio from.
         /// </summary>
         AudioSource InstructionPlayer { get; }
-
-        /// <summary>
-        /// Text to speech configuration.
-        /// </summary>
-        TextToSpeechConfig TextToSpeechConfig { get; set; }
 
         /// <summary>
         /// Returns the training entity state logger.
