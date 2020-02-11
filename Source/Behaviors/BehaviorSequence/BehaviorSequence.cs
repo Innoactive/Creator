@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 using Innoactive.Hub.Training.EntityOwners;
 using Innoactive.Hub.Training.Attributes;
 using Innoactive.Hub.Training.Configuration.Modes;
-using Newtonsoft.Json;
 
 namespace Innoactive.Hub.Training.Behaviors
 {
@@ -129,7 +128,6 @@ namespace Innoactive.Hub.Training.Behaviors
             }
         }
 
-        [JsonConstructor]
         public BehaviorSequence() : this(default(bool), new List<IBehavior>())
         {
         }

@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using Innoactive.Creator.Core.Editor.Source.Utils;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.Editors.Configuration;
 using Innoactive.Hub.Training.Editors.Windows;
@@ -118,7 +119,7 @@ public class RuntimeConfiguratorEditor : Editor
 
     private string GetSelectedCourseAbsolutePath()
     {
-        return SaveManager.GetTrainingPath(selectedCourseStreamingAssetsPath.stringValue);
+        return EditorCourseUtils.GetTrainingPath(selectedCourseStreamingAssetsPath.stringValue);
     }
 
     private void UpdateSelectedConfigurationName()

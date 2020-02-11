@@ -1,6 +1,5 @@
 using System.Runtime.Serialization;
 using Innoactive.Hub.Training.Attributes;
-using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Innoactive.Hub.Training.Conditions
@@ -40,7 +39,6 @@ namespace Innoactive.Hub.Training.Conditions
             }
         }
 
-        [JsonConstructor]
         public TimeoutCondition() : this(0)
         {
         }
