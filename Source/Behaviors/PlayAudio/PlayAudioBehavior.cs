@@ -99,13 +99,13 @@ namespace Innoactive.Hub.Training.Behaviors
 
         public PlayAudioBehavior(IAudioData audioData, BehaviorExecutionStages executionStages, AudioSource audioPlayer = null, string name = "Play Audio")
         {
-            Data = new EntityData()
+            Data = new EntityData
             {
                 AudioData = audioData,
                 ExecutionStages = executionStages,
                 AudioPlayer = audioPlayer,
                 Name = name,
-                IsBlocking = true,
+                IsBlocking = true
             };
         }
 

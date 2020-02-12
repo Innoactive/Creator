@@ -1,0 +1,47 @@
+﻿using UnityEngine;
+
+namespace Innoactive.Hub
+{
+    [RequireComponent(typeof(UnityEngine.UI.Text))]
+    public class LocalizedUIText : MonoBehaviour
+    {
+        private static readonly Common.Logging.ILog logger = Logging.LogManager.GetLogger<LocalizedUIText>();
+
+        [SerializeField]
+        private LocalizedString localizedString = null;
+
+        private void OnEnable()
+        {
+            UpateText();
+            Localization.OnLocaleChanged += HandleLocalizationChange;
+        }
+
+        private void OnDisable()
+        {
+            Localization.OnLocaleChanged -= HandleLocalizationChange;
+        }
+
+        private void HandleLocalizationChange(string newLocale, string oldLocale)
+        {
+            UpateText();
+        }
+
+        private void UpateText()
+        {
+            if (localizedString == null)
+            {
+                logger.Error("LocalizedUIText failed - no localized string assigned.");
+                return;
+            }
+
+            UnityEngine.UI.Text text = GetComponent<UnityEngine.UI.Text>();
+            if (text == null)
+            {
+                logger.Error("LocalizedUIText failed - no UI.Text component found.");
+                return;
+            }
+
+            text.text = localizedString.Value.Replace("\\n", "\n");
+        }
+    }
+}
