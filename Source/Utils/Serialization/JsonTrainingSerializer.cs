@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Common.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using LogManager = Innoactive.Hub.Logging.LogManager;
 
 namespace Innoactive.Hub.Training.Utils.Serialization
 {
     public static class JsonTrainingSerializer
     {
-        private static readonly ILog logger = LogManager.GetLogger(typeof(JsonTrainingSerializer));
-
         public const int Version = 1;
 
         /// <summary>

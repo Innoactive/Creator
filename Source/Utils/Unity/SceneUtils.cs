@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Common.Logging;
 using Innoactive.Hub.Training.Configuration;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,8 +9,6 @@ namespace Innoactive.Hub.Training.Unity.Utils
 {
     public static class SceneUtils
     {
-        private static readonly ILog logger = LogManager.GetLogger(typeof(SceneUtils));
-
         public const string TrainingConfigurationName = "[TRAINING_CONFIGURATION]";
 
         /// <summary>
@@ -78,7 +75,7 @@ namespace Innoactive.Hub.Training.Unity.Utils
         {
             if (RuntimeConfigurator.Exists)
             {
-                logger.Info("A training runtime configurator is already set up in the scene.");
+                Debug.Log("A training runtime configurator is already set up in the scene.");
                 return;
             }
 

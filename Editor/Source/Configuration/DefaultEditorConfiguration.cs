@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using Common.Logging;
 using Innoactive.Hub.Training.Behaviors;
 using Innoactive.Hub.Training.Conditions;
 using Innoactive.Hub.Training.Unity.Utils;
@@ -17,8 +16,6 @@ namespace Innoactive.Hub.Training.Editors.Configuration
     /// </summary>
     public class DefaultEditorConfiguration : IEditorConfiguration
     {
-        private static readonly ILog logger = LogManager.GetLogger<DefaultEditorConfiguration>();
-
         private AllowedMenuItemsSettings allowedMenuItemsSettings;
 
         public static readonly string[] PrefabsToDestroy = new[]
@@ -101,7 +98,7 @@ namespace Innoactive.Hub.Training.Editors.Configuration
                 if (configFile != null)
                 {
                     File.WriteAllText("hub-logging-config.json", configFile.text);
-                    logger.Info("Copied logging config");
+                    Debug.Log("Copied logging config");
                 }
             }
 
@@ -113,7 +110,7 @@ namespace Innoactive.Hub.Training.Editors.Configuration
             // Initialize training configuration.
             SceneUtils.SetupTrainingConfiguration();
 
-            logger.Info("Scene setup is complete.");
+            Debug.Log("Scene setup is complete.");
         }
 
         private void SetupVRTK()

@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Common.Logging;
 using Innoactive.Hub.Training.Editors.Windows;
 using UnityEngine;
-using LogManager = Innoactive.Hub.Logging.LogManager;
 
 namespace Innoactive.Hub.Training.Editors.Utils.Undo
 {
@@ -20,8 +18,6 @@ namespace Innoactive.Hub.Training.Editors.Utils.Undo
 
             public int CommandIndex { get { return serializedIndex; } set { serializedIndex = value; } }
         }
-
-        private static readonly ILog logger = LogManager.GetLogger(typeof(RevertableChangesHandler));
 
         private static SerializedRevertableChangesHandler serialized;
         private static readonly Dictionary<string, List<IRevertableCommand>> groupedCommands = new Dictionary<string, List<IRevertableCommand>>();
@@ -60,7 +56,7 @@ namespace Innoactive.Hub.Training.Editors.Utils.Undo
         {
             if (revertableCommand == null)
             {
-                logger.Error("Command can't be null, ignoring.");
+                Debug.LogError("Command can't be null, ignoring.");
                 return;
             }
 
@@ -189,7 +185,7 @@ namespace Innoactive.Hub.Training.Editors.Utils.Undo
             }
             catch (Exception e)
             {
-                logger.Error("Can't do the command.", e);
+                Debug.LogErrorFormat("Can't do the command.\n{0}", e.Message);
                 Panic();
                 return false;
             }
@@ -205,7 +201,7 @@ namespace Innoactive.Hub.Training.Editors.Utils.Undo
             }
             catch (Exception e)
             {
-                logger.Error("Can't undo the command.", e);
+                Debug.LogErrorFormat("Can't undo the command.\n{0}", e.Message);
                 Panic();
                 return false;
             }
@@ -215,7 +211,7 @@ namespace Innoactive.Hub.Training.Editors.Utils.Undo
 
         private static void Panic()
         {
-            logger.Error("Flushing the Undo/Redo stack to prevent data corruption...");
+            Debug.LogError("Flushing the Undo/Redo stack to prevent data corruption...");
             FlushStack();
         }
     }

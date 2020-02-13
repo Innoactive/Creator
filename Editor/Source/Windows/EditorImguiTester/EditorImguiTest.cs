@@ -7,7 +7,6 @@ using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;
-using Common.Logging;
 using Innoactive.Hub.Training.Editors.Utils;
 using Innoactive.Hub.Training.Utils;
 using Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester.Windows;
@@ -20,9 +19,6 @@ namespace Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester
     /// </summary>
     public abstract class EditorImguiTest<T> : IEditorImguiTest where T : EditorWindow
     {
-        // See constructor.
-        private readonly ILog logger;
-
         private static JsonSerializerSettings JsonSerializerSettings
         {
             get
@@ -68,11 +64,6 @@ namespace Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester
         protected abstract string AssetFolderForRecordedActions { get; }
 
         private EditorWindow result;
-
-        protected EditorImguiTest()
-        {
-            logger = LogManager.GetLogger(GetType());
-        }
 
         /// Used internally by the Editor IMGUI tester tool.
         /// Override <see cref="Given"/> instead.
@@ -124,14 +115,14 @@ namespace Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester
                     }
                     catch (Exception e)
                     {
-                        logger.ErrorFormat("Test {0} failed:", e, GetType().GetNameWithNesting());
+                        Debug.LogErrorFormat("Test {0} failed: {1}", GetType().GetNameWithNesting(), e.Message);
                         state = TestState.Failed;
                     }
                 });
             }
             catch (Exception e)
             {
-                logger.ErrorFormat("Test {0} failed:", e, GetType().GetNameWithNesting());
+                Debug.LogErrorFormat("Test {0} failed: {1}", GetType().GetNameWithNesting(), e.Message);
                 state = TestState.Failed;
             }
 

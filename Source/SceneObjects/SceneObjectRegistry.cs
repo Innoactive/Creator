@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Common.Logging;
 using Innoactive.Hub.Training.Exceptions;
 using Innoactive.Hub.Training.Unity.Utils;
-using LogManager = Innoactive.Hub.Logging.LogManager;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Innoactive.Hub.Training.SceneObjects
@@ -12,8 +11,6 @@ namespace Innoactive.Hub.Training.SceneObjects
     /// <inheritdoc />
     public class SceneObjectRegistry : ISceneObjectRegistry
     {
-        private static ILog logger = LogManager.GetLogger<SceneObjectRegistry>();
-
         private readonly Dictionary<Guid, ISceneObject> registeredEntities = new Dictionary<Guid, ISceneObject>();
 
         /// <inheritdoc />
@@ -41,7 +38,7 @@ namespace Innoactive.Hub.Training.SceneObjects
                 }
                 catch (NameNotUniqueException)
                 {
-                    logger.ErrorFormat("Registration of training scene object entity with name '{0}' failed. Name is not unique! Entity will destroy itself. Referenced game object: '{1}'.", trainingObject.UniqueName, trainingObject.GameObject.name);
+                    Debug.LogErrorFormat("Registration of training scene object entity with name '{0}' failed. Name is not unique! Entity will destroy itself. Referenced game object: '{1}'.", trainingObject.UniqueName, trainingObject.GameObject.name);
                     Object.DestroyImmediate(trainingObject.gameObject);
                 }
                 catch (AlreadyRegisteredException)

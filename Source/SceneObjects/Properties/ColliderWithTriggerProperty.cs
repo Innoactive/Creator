@@ -5,8 +5,6 @@ namespace Innoactive.Hub.Training.SceneObjects.Properties
 {
     public class ColliderWithTriggerProperty : TrainingSceneObjectProperty
     {
-        private static readonly Common.Logging.ILog logger = Logging.LogManager.GetLogger<ColliderWithTriggerProperty>();
-
         public class ColliderWithTriggerEventArgs : EventArgs
         {
             public readonly GameObject CollidedObject;
@@ -26,13 +24,13 @@ namespace Innoactive.Hub.Training.SceneObjects.Properties
             Collider[] colliders = GetComponents<Collider>();
             if (colliders.Length == 0)
             {
-                logger.ErrorFormat("Object '{0}' with ColliderProperty must have at least one Collider attached.", SceneObject.UniqueName);
+                Debug.LogErrorFormat("Object '{0}' with ColliderProperty must have at least one Collider attached.", SceneObject.UniqueName);
             }
             else
             {
                 if (CheckIfObjectHasTriggerCollider() == false)
                 {
-                    logger.ErrorFormat("Object '{0}' with ColliderProperty must have at least one Collider with isTrigger set to true.", SceneObject.UniqueName);
+                    Debug.LogErrorFormat("Object '{0}' with ColliderProperty must have at least one Collider with isTrigger set to true.", SceneObject.UniqueName);
                 }
             }
         }

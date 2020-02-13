@@ -1,12 +1,10 @@
 ﻿using System.Collections;
 using System.Runtime.Serialization;
-using Common.Logging;
 using Innoactive.Hub.Training.Attributes;
 using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.Utils;
 using Newtonsoft.Json;
 using UnityEngine;
-using LogManager = Innoactive.Hub.Logging.LogManager;
 
 namespace Innoactive.Hub.Training.Behaviors
 {
@@ -69,7 +67,7 @@ namespace Innoactive.Hub.Training.Behaviors
                     {
                         string warningFormat = "The training scene object's game object is null, transition movement is not completed, behavior activation is forcefully finished.";
                         warningFormat += "Target object unique name: {0}, Position provider's unique name: {1}";
-                        logger.WarnFormat(warningFormat, data.Target.UniqueName, data.PositionProvider.UniqueName);
+                        Debug.LogWarningFormat(warningFormat, data.Target.UniqueName, data.PositionProvider.UniqueName);
                         yield break;
                     }
 
@@ -95,8 +93,6 @@ namespace Innoactive.Hub.Training.Behaviors
             {
             }
         }
-
-        private static readonly ILog logger = LogManager.GetLogger<MoveObjectBehavior>();
 
         [JsonConstructor]
         public MoveObjectBehavior() : this("", "", 0f)

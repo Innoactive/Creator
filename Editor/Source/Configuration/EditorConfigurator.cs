@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
-using Common.Logging;
-using Innoactive.Hub.Training.Utils;
+using UnityEngine;
 using UnityEditor.Callbacks;
+using Innoactive.Hub.Training.Utils;
 
 namespace Innoactive.Hub.Training.Editors.Configuration
 {
@@ -11,8 +11,6 @@ namespace Innoactive.Hub.Training.Editors.Configuration
     /// </summary>
     public static class EditorConfigurator
     {
-        private static readonly ILog logger = Logging.LogManager.GetLogger(typeof(EditorConfigurator));
-
         private static readonly IEditorConfiguration editorConfiguration;
 
         public static IEditorConfiguration Instance
@@ -28,7 +26,7 @@ namespace Innoactive.Hub.Training.Editors.Configuration
             if (definitions.Except(lowestPriorityTypes).Count() > 1)
             {
                 string listOfDefinitions = string.Join("', '", definitions.Select(definition => definition.FullName).ToArray());
-                logger.ErrorFormat(
+                Debug.LogErrorFormat(
                     "There is more than one final implementation of training editor configurations in this Unity project: '{0}'."
                     + " Remove all editor configurations except for '{1}' and the one you want to use."
                     + " '{2}' was selected as current editor configuration.",

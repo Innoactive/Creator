@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Common.Logging;
 using Innoactive.Hub.Training.Editors.Configuration;
 using Innoactive.Hub.Training.Exceptions;
 using JetBrains.Annotations;
@@ -19,8 +18,6 @@ namespace Innoactive.Hub.Training.Editors.Utils
     [InitializeOnLoad]
     public static class EditorUtils
     {
-        private static readonly ILog logger = Logging.LogManager.GetLogger(typeof(EditorUtils));
-
         private const string ignoreEditorImguiTestsDefineSymbol = "INNOACTIVE_IGNORE_EDITOR_IMGUI_TESTS";
         private const string rootFileName = "training-module-root.txt";
         private const string openVrPackageName = "com.unity.xr.openvr.standalone@1.0.5";
@@ -138,7 +135,7 @@ namespace Innoactive.Hub.Training.Editors.Utils
             if (listRequestResult.Any(packageInfo => packageInfo.name == packageData[0] && packageInfo.version == packageData[1]) == false)
             {
                 UnityEditor.PackageManager.Client.Add(openVrPackageName);
-                logger.InfoFormat("The 'OpenVR' package was not a dependency of this Unity project. The package 'OpenVR ({0})' has been automatically added.", openVrPackageName);
+                Debug.LogFormat("The 'OpenVR' package was not a dependency of this Unity project. The package 'OpenVR ({0})' has been automatically added.", openVrPackageName);
             }
 
             // UB can't occur in this case.

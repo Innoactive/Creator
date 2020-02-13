@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Runtime.Serialization;
-using Common.Logging;
 using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
@@ -13,8 +12,6 @@ namespace Innoactive.Hub.Training.Editors
     [DataContract]
     public class WorkflowEditorColorPalette
     {
-        private static readonly ILog logger = LogManager.GetLogger<WorkflowEditorColorPalette>();
-
         /// <summary>
         /// Returns background color of the editor based on current editor skin.
         /// </summary>
@@ -77,7 +74,7 @@ namespace Innoactive.Hub.Training.Editors
 
             if (possiblePalettes.Length > 1)
             {
-                logger.Error("More than one possible palette found.");
+                Debug.LogError("More than one possible palette found.");
             }
             else
             {
@@ -95,7 +92,7 @@ namespace Innoactive.Hub.Training.Editors
                 }
                 catch (JsonException e)
                 {
-                    logger.Error(e);
+                    Debug.LogError(e);
                     return null;
                 }
             }
