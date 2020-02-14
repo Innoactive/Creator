@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Innoactive.Hub.Logging;
 using Innoactive.Hub.Training.Utils;
 
 namespace Innoactive.Hub.Training.Configuration

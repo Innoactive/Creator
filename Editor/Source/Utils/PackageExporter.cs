@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using CommandLine;
-using Innoactive.Hub.Config;
 using Innoactive.Hub.Utils;
 using UnityEditor;
 using UnityEngine;
@@ -18,7 +17,7 @@ namespace Innoactive.Hub.Training.Editors.Utils
             public string Config { get; set; }
         }
 
-        internal class ExportConfig : ConfigBase
+        internal class ExportConfig// : ConfigBase
         {
             public string AssetDirectory = "Assets";
             public string Version = "v0.0.0";
@@ -43,7 +42,7 @@ namespace Innoactive.Hub.Training.Editors.Utils
             }
 
             ExportConfig config = new ExportConfig();
-            config = JsonConfigFileManager.Load(config, configPath);
+            //config = JsonConfigFileManager.Load(config, configPath);
 
             if (string.IsNullOrEmpty(config.VersionFilename) == false)
             {

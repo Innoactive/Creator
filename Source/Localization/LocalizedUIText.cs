@@ -5,8 +5,6 @@ namespace Innoactive.Hub
     [RequireComponent(typeof(UnityEngine.UI.Text))]
     public class LocalizedUIText : MonoBehaviour
     {
-        private static readonly Common.Logging.ILog logger = Logging.LogManager.GetLogger<LocalizedUIText>();
-
         [SerializeField]
         private LocalizedString localizedString = null;
 
@@ -30,14 +28,14 @@ namespace Innoactive.Hub
         {
             if (localizedString == null)
             {
-                logger.Error("LocalizedUIText failed - no localized string assigned.");
+                Debug.LogError("LocalizedUIText failed - no localized string assigned.");
                 return;
             }
 
             UnityEngine.UI.Text text = GetComponent<UnityEngine.UI.Text>();
             if (text == null)
             {
-                logger.Error("LocalizedUIText failed - no UI.Text component found.");
+                Debug.LogError("LocalizedUIText failed - no UI.Text component found.");
                 return;
             }
 

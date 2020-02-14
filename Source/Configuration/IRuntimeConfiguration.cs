@@ -1,7 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
-using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.SceneObjects;
+using Innoactive.Hub.Training.Configuration.Modes;
 using UnityEngine;
 
 namespace Innoactive.Hub.Training.Configuration

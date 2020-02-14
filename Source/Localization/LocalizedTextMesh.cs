@@ -5,8 +5,6 @@ namespace Innoactive.Hub
     [RequireComponent(typeof(TextMesh))]
     public class LocalizedTextMesh : MonoBehaviour
     {
-        private static readonly Common.Logging.ILog logger = Logging.LogManager.GetLogger<LocalizedTextMesh>();
-
         [SerializeField]
         private LocalizedString localizedString = null;
 
@@ -30,14 +28,14 @@ namespace Innoactive.Hub
         {
             if (localizedString == null)
             {
-                logger.Error("LocalizedUIText failed - no localized string assigned.");
+                Debug.LogError("LocalizedUIText failed - no localized string assigned.");
                 return;
             }
 
             TextMesh text = GetComponent<TextMesh>();
             if (text == null)
             {
-                logger.Error("LocalizedUIText failed - no TextMesh component found.");
+                Debug.LogError("LocalizedUIText failed - no TextMesh component found.");
                 return;
             }
 

@@ -6,8 +6,6 @@ namespace Innoactive.Hub
 {
     public class LocalizedComponentField : MonoBehaviour
     {
-        private static readonly Common.Logging.ILog logger = Logging.LogManager.GetLogger<LocalizedComponentField>();
-
         [SerializeField]
         private LocalizedString localizedString = null;
 
@@ -37,17 +35,17 @@ namespace Innoactive.Hub
         {
             if (localizedString == null)
             {
-                logger.Error("ApplyLocalizedStringToComponent failed - no localized string assigned.");
+                Debug.LogError("ApplyLocalizedStringToComponent failed - no localized string assigned.");
                 return false;
             }
             else if (componentToChange == null)
             {
-                logger.Error("ApplyLocalizedStringToComponent failed - no target component assigned.");
+                Debug.LogError("ApplyLocalizedStringToComponent failed - no target component assigned.");
                 return false;
             }
             else if (string.IsNullOrEmpty(fieldToChange))
             {
-                logger.Error("ApplyLocalizedStringToComponent failed - no target field assigned.");
+                Debug.LogError("ApplyLocalizedStringToComponent failed - no target field assigned.");
                 return false;
             }
 
@@ -58,7 +56,7 @@ namespace Innoactive.Hub
 
                 if (!field.FieldType.IsAssignableFrom(typeof(string)))
                 {
-                    logger.ErrorFormat("ApplyLocalizedStringToComponent failed - field \"{0}\" of type \"{1}\" is not assignable from a string", field.Name, field.FieldType.Name);
+                    Debug.LogErrorFormat("ApplyLocalizedStringToComponent failed - field \"{0}\" of type \"{1}\" is not assignable from a string", field.Name, field.FieldType.Name);
                 }
                 else
                 {
@@ -72,7 +70,7 @@ namespace Innoactive.Hub
             {
                 if (!prop.PropertyType.IsAssignableFrom(typeof(string)))
                 {
-                    logger.ErrorFormat("ApplyLocalizedStringToComponent failed - property \"{0}\" of type \"{1}\" is not assignable from a string", prop.Name, prop.PropertyType.Name);
+                    Debug.LogErrorFormat("ApplyLocalizedStringToComponent failed - property \"{0}\" of type \"{1}\" is not assignable from a string", prop.Name, prop.PropertyType.Name);
                 }
                 else
                 {
@@ -81,7 +79,7 @@ namespace Innoactive.Hub
                 }
             }
 
-            logger.ErrorFormat("ApplyLocalizedStringToComponent failed - component of type \"{0}\" has no field or property \"{1}\"", componentType.Name, fieldToChange);
+            Debug.LogErrorFormat("ApplyLocalizedStringToComponent failed - component of type \"{0}\" has no field or property \"{1}\"", componentType.Name, fieldToChange);
             return false;
         }
     }

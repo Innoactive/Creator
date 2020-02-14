@@ -1,21 +1,10 @@
-using Innoactive.Hub.Config;
-
 namespace Innoactive.Hub.Training.Configuration
 {
     /// <summary>
     /// Configuration that determines which entity can log messages in the entity state logger.
     /// </summary>
-    public class EntityStateLoggerConfig : ConfigBase
+    public class EntityStateLoggerConfig
     {
-        /// <inheritdoc />
-        public override string DirectoryPath
-        {
-            get
-            {
-                return "./Config";
-            }
-        }
-
         /// <summary>
         /// True, if behaviors are allowed to be logged.
         /// </summary>

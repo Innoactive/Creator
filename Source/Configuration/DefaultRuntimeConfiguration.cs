@@ -1,10 +1,10 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.Exceptions;
 using Innoactive.Hub.Training.SceneObjects;
+using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.Utils.Serialization;
 using UnityEngine;
 
@@ -21,7 +21,7 @@ namespace Innoactive.Hub.Training.Configuration
         private string selectedCourseStreamingAssetsPath;
         private static ILogger entityStateLogger = Debug.unityLogger;
 
-        private EntityStateLoggerConfig entityStateLoggerConfig = new EntityStateLoggerConfig()
+        private EntityStateLoggerConfig entityStateLoggerConfig = new EntityStateLoggerConfig
         {
             LogSteps = true,
             LogChapters = true,

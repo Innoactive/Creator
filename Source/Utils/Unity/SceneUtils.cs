@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Hub.Training.Configuration;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using LogManager = Innoactive.Hub.Logging.LogManager;
+using Innoactive.Hub.Training.Configuration;
 
 namespace Innoactive.Hub.Training.Unity.Utils
 {

@@ -8,8 +8,6 @@ namespace Innoactive.Hub
 {
     public static class Localization
     {
-        private static readonly Common.Logging.ILog logger = Logging.LogManager.GetLogger("Localization");
-
         public delegate void LocaleChanged(string newLocale, string oldLocale);
         public static LocaleChanged OnLocaleChanged;
 
@@ -27,7 +25,7 @@ namespace Innoactive.Hub
                 }
                 catch (Exception ex)
                 {
-                    logger.Warn(ex);
+                    Debug.LogWarning(ex);
                 }
             }
 
@@ -52,7 +50,7 @@ namespace Innoactive.Hub
 
             if (defaultString == missingTranslationText)
             {
-                logger.WarnFormat("Missing Translation for Key \"{0}\"", nameWithScope);
+                Debug.LogWarningFormat("Missing Translation for Key \"{0}\"", nameWithScope);
             }
             return defaultString;
         }

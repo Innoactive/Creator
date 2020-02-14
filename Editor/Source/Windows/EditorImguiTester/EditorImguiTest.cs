@@ -10,7 +10,6 @@ using UnityEngine.TestTools;
 using Innoactive.Hub.Training.Editors.Utils;
 using Innoactive.Hub.Training.Utils;
 using Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester.Windows;
-using LogManager = Innoactive.Hub.Logging.LogManager;
 
 namespace Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester
 {
