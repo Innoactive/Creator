@@ -1,6 +1,5 @@
 using System;
 using System.Collections.ObjectModel;
-using Common.Logging;
 using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.SceneObjects;
 using UnityEngine;
@@ -41,7 +40,7 @@ namespace Innoactive.Hub.Training.Configuration
         /// Returns the training entity state logger.
         /// It logs the activity of all activated entities in the console.
         /// </summary>
-        ILog EntityStateLogger { get; set; }
+        ILogger EntityStateLogger { get; set; }
 
         /// <summary>
         /// Configuration of the training entity state logger.

@@ -8,6 +8,7 @@ using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.Exceptions;
 using Innoactive.Hub.Training.Utils;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Innoactive.Hub.Training
 {
@@ -186,7 +187,7 @@ namespace Innoactive.Hub.Training
             {
                 LifeCycle.StageChanged += (sender, args) =>
                 {
-                    RuntimeConfigurator.Configuration.EntityStateLogger.InfoFormat("<b>Chapter</b> <i>'{0}'</i> is <b>{1}</b>.\n", Data.Name, LifeCycle.Stage.ToString());
+                    RuntimeConfigurator.Configuration.EntityStateLogger.LogFormat(LogType.Log, "<b>Chapter</b> <i>'{0}'</i> is <b>{1}</b>.\n", Data.Name, LifeCycle.Stage.ToString());
                 };
             }
         }

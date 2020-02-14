@@ -15,8 +15,6 @@ namespace Innoactive.Hub.Training.Configuration
     /// </summary>
     public sealed class RuntimeConfigurator : MonoBehaviour
     {
-        private static readonly Common.Logging.ILog logger = LogManager.GetLogger<RuntimeConfigurator>();
-
         [SerializeField]
         private string runtimeConfigurationName = typeof(DefaultRuntimeConfiguration).AssemblyQualifiedName;
 
@@ -33,7 +31,7 @@ namespace Innoactive.Hub.Training.Configuration
 
             if (instances.Length > 1)
             {
-                logger.Error("More than one training runtime configurator is found in the scene. Taking the first one. This may lead to unexpected behaviour.");
+                Debug.LogError("More than one training runtime configurator is found in the scene. Taking the first one. This may lead to unexpected behaviour.");
             }
 
             if (instances.Length == 0)
@@ -132,7 +130,7 @@ namespace Innoactive.Hub.Training.Configuration
 
                 if (type == null)
                 {
-                    logger.ErrorFormat("IRuntimeConfiguration type '{0}' cannot be found. Using '{1}' instead.", Instance.runtimeConfigurationName, typeof(DefaultRuntimeConfiguration).AssemblyQualifiedName);
+                    Debug.LogErrorFormat("IRuntimeConfiguration type '{0}' cannot be found. Using '{1}' instead.", Instance.runtimeConfigurationName, typeof(DefaultRuntimeConfiguration).AssemblyQualifiedName);
                     type = typeof(DefaultRuntimeConfiguration);
                 }
 
@@ -143,7 +141,7 @@ namespace Innoactive.Hub.Training.Configuration
             {
                 if (value == null)
                 {
-                    logger.Error("Training runtime configuration cannot be null.");
+                    Debug.LogError("Training runtime configuration cannot be null.");
                     return;
                 }
 

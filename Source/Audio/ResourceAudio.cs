@@ -11,8 +11,6 @@ namespace Innoactive.Hub.Training.Audio
     [DataContract(IsReference = true)]
     public class ResourceAudio : IAudioData
     {
-        private static readonly Common.Logging.ILog logger = Logging.LogManager.GetLogger<ResourceAudio>();
-
         private LocalizedString path;
 
         [DataMember]
@@ -58,16 +56,17 @@ namespace Innoactive.Hub.Training.Audio
                 return;
             }
 
-            if (path == null || path.Value == null)
+            if (path?.Value == null)
             {
-                logger.WarnFormat("Path to audiofile is not defined.");
+                Debug.LogWarningFormat("Path to audiofile is not defined.");
                 return;
             }
 
             AudioClip = Resources.Load<AudioClip>(path.Value);
+
             if (HasAudioClip == false)
             {
-                logger.WarnFormat("Given path '{0}' to resource has returned no audio clip", path);
+                Debug.LogWarningFormat("Given path '{0}' to resource has returned no audio clip", path);
             }
         }
     }

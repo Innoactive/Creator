@@ -1,5 +1,4 @@
 using System;
-using Common.Logging;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,8 +13,6 @@ namespace Innoactive.Hub.Training.Editors
     /// </summary>
     public class EditorIcon
     {
-        private static readonly ILog logger = LogManager.GetLogger<EditorIcon>();
-
         public const string LightTextureFileEnding = "_light";
         public const string DarkTextureFileEnding = "_dark";
 
@@ -38,18 +35,18 @@ namespace Innoactive.Hub.Training.Editors
             if (iconLight == null && iconDark == null)
             {
                 string msg = string.Format("Texture with path: '{0}' couldn't be loaded. No {1} nor {2} version found!", path, LightTextureFileEnding, DarkTextureFileEnding);
-                logger.Error(msg);
+                Debug.LogError(msg);
                 throw new NullReferenceException(msg);
             }
 
             if (iconLight == null)
             {
-                logger.WarnFormat("No texture found for path: {0}", path + LightTextureFileEnding);
+                Debug.LogWarningFormat("No texture found for path: {0}", path + LightTextureFileEnding);
                 iconLight = iconDark;
             }
             else if (iconDark == null)
             {
-                logger.WarnFormat("No texture found for path: {0}", path + DarkTextureFileEnding);
+                Debug.LogWarningFormat("No texture found for path: {0}", path + DarkTextureFileEnding);
                 iconDark = iconLight;
             }
         }

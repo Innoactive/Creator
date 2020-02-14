@@ -7,8 +7,6 @@ namespace Innoactive.Hub.Unity
     /// </summary>
     public class UnitySingleton<T> : MonoBehaviour where T : UnitySingleton<T>
     {
-        private static readonly Common.Logging.ILog logger = Logging.LogManager.GetLogger<UnitySingleton<T>>();
-
         /// <summary>
         /// Semaphore to avoid instantiating the singleton twice.
         /// </summary>
@@ -65,7 +63,7 @@ namespace Innoactive.Hub.Unity
                 if (Instance != this)
                 {
                     Destroy(this);
-                    logger.WarnFormat("An instance of the singleton {0} already exists.", typeof(T).Name);
+                    Debug.LogWarningFormat("An instance of the singleton {0} already exists.", typeof(T).Name);
                 } else
                 {
                     DontDestroyOnLoad(instance);

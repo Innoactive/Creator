@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Text;
+using UnityEngine;
 
 namespace Innoactive.Hub.Utils
 {
@@ -8,8 +9,6 @@ namespace Innoactive.Hub.Utils
     /// </summary>
     public class UnityDebugLogErrorWriter : TextWriter
     {
-        private static readonly Common.Logging.ILog logger = Logging.LogManager.GetLogger<UnityDebugLogErrorWriter>();
-
         /// <inheritdoc />
         public override Encoding Encoding
         {
@@ -21,7 +20,7 @@ namespace Innoactive.Hub.Utils
         /// <inheritdoc />
         public override void Flush()
         {
-            logger.Error(buffer.ToString());
+            Debug.LogError(buffer.ToString());
             buffer.Length = 0;
         }
 
