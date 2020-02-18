@@ -49,23 +49,23 @@ namespace Innoactive.Hub.Training.Editors.Utils
                 string jsonFile = File.ReadAllText(configPath);
                 config = JsonConvert.DeserializeObject<ExportConfig>(jsonFile);
 
-                Console.WriteLine("[Test] {0} - {1}", config.AssetDirectory, config.OutputPath);
+                Debug.LogFormat("[Test] {0} - {1}", config.AssetDirectory, config.OutputPath);
 
                 if (config.Excludes == null)
                 {
-                    Console.WriteLine("[Test] excludes is null!");
+                    Debug.LogFormat("[Test] excludes is null!");
                 }
                 else
                 {
                     foreach (string excluded in config.Excludes)
                     {
-                        Console.WriteLine("[Test] excluded: {0}", excluded);
+                        Debug.LogFormat("[Test] excluded: {0}", excluded);
                     }
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine("Config file at {0} found, but could not be read. Using default configuration. Exception occuring: '{1}'", configPath, e.GetType().Name);
+                Debug.LogWarningFormat("Config file at {0} found, but could not be read. Using default configuration. Exception occuring: '{1}'", configPath, e.GetType().Name);
             }
 
             if (string.IsNullOrEmpty(config.VersionFilename) == false)
