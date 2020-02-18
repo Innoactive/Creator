@@ -49,19 +49,7 @@ namespace Innoactive.Hub.Training.Editors.Utils
                 string jsonFile = File.ReadAllText(configPath);
                 config = JsonConvert.DeserializeObject<ExportConfig>(jsonFile);
 
-                Debug.LogFormat("[Test] {0} - {1}", config.AssetDirectory, config.OutputPath);
-
-                if (config.Excludes == null)
-                {
-                    Debug.LogFormat("[Test] excludes is null!");
-                }
-                else
-                {
-                    foreach (string excluded in config.Excludes)
-                    {
-                        Debug.LogFormat("[Test] excluded: {0}", excluded);
-                    }
-                }
+                Debug.Log("Config file successfully loaded");
             }
             catch (Exception e)
             {
