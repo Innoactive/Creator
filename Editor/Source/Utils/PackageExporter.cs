@@ -48,6 +48,20 @@ namespace Innoactive.Hub.Training.Editors.Utils
             {
                 string jsonFile = File.ReadAllText(configPath);
                 config = JsonConvert.DeserializeObject<ExportConfig>(jsonFile);
+
+                Console.WriteLine("[Test] {0} - {1}", config.AssetDirectory, config.OutputPath);
+
+                if (config.Excludes == null)
+                {
+                    Console.WriteLine("[Test] excludes is null!");
+                }
+                else
+                {
+                    foreach (string excluded in config.Excludes)
+                    {
+                        Console.WriteLine("[Test] excluded: {0}", excluded);
+                    }
+                }
             }
             catch (Exception e)
             {
