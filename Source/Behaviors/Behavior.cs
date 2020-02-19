@@ -1,7 +1,6 @@
 ﻿using System.Runtime.Serialization;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.Unity.Utils;
-using Newtonsoft.Json;
 
 namespace Innoactive.Hub.Training.Behaviors
 {
@@ -16,7 +15,6 @@ namespace Innoactive.Hub.Training.Behaviors
             }
         }
 
-        [JsonConstructor]
         protected Behavior()
         {
             if (RuntimeConfigurator.Configuration.EntityStateLoggerConfig.LogBehaviors)

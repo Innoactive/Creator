@@ -4,7 +4,6 @@ using Common.Logging;
 using Innoactive.Hub.Training.Attributes;
 using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.Utils;
-using Newtonsoft.Json;
 using UnityEngine;
 using LogManager = Innoactive.Hub.Logging.LogManager;
 
@@ -98,7 +97,6 @@ namespace Innoactive.Hub.Training.Behaviors
 
         private static readonly ILog logger = LogManager.GetLogger<MoveObjectBehavior>();
 
-        [JsonConstructor]
         public MoveObjectBehavior() : this("", "", 0f)
         {
         }

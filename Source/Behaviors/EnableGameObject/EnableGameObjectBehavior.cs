@@ -2,7 +2,6 @@ using System.Runtime.Serialization;
 using Innoactive.Hub.Training.Attributes;
 using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.Utils;
-using Newtonsoft.Json;
 
 namespace Innoactive.Hub.Training.Behaviors
 {
@@ -32,7 +31,6 @@ namespace Innoactive.Hub.Training.Behaviors
             }
         }
 
-        [JsonConstructor]
         public EnableGameObjectBehavior() : this("")
         {
         }

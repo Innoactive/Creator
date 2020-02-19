@@ -8,6 +8,7 @@ namespace Innoactive.Hub.Training.Editors.Utils.Serialization
     public static class JsonEditorConfigurationSerializer
     {
         private const int version = 0;
+
         /// <summary>
         /// Returns the json serializer settings used by the training editor configuration deserialization.
         /// </summary>

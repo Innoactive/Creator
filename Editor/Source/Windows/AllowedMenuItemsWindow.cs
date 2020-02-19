@@ -33,7 +33,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
             public bool IsTypeValid;
         }
 
-        [MenuItem(menuPath, false, 31)]
+        [MenuItem(menuPath, false, 80)]
         private static void ShowWindow()
         {
             if (Utils.EditorUtils.IsWindowOpened<AllowedMenuItemsWindow>())

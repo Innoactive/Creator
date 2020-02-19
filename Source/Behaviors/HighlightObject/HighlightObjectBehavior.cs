@@ -6,7 +6,6 @@ using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.SceneObjects.Properties;
 using Innoactive.Hub.Training.Utils;
 using Innoactive.Hub.Unity;
-using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Innoactive.Hub.Training.Behaviors
@@ -97,7 +96,6 @@ namespace Innoactive.Hub.Training.Behaviors
             }
         }
 
-        [JsonConstructor]
         public HighlightObjectBehavior() : this("", Color.magenta)
         {
         }
