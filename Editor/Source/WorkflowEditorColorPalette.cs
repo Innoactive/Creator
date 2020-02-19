@@ -62,7 +62,6 @@ namespace Innoactive.Hub.Training.Editors
         /// Load palette from a json file.
         /// </summary>
         /// <param name="paletteSubpath">Subpath to file. If file is not found, use default palette. If more than one possible candidate is found, use default palette. If there was a serialization error, use default palette.</param>
-        /// <returns></returns>
         public static WorkflowEditorColorPalette LoadPaletteFrom(string paletteSubpath)
         {
             string[] possiblePalettes = AssetDatabase.GetAllAssetPaths().Where(s => s.EndsWith(paletteSubpath)).ToArray();

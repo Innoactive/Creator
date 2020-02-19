@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
 
 namespace Innoactive.Hub.Training.SceneObjects
 {
@@ -42,7 +41,6 @@ namespace Innoactive.Hub.Training.SceneObjects
             return reference.Value;
         }
 
-        [JsonConstructor]
         protected ObjectReference()
         {
         }

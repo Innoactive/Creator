@@ -9,7 +9,7 @@ namespace Innoactive.Hub.Training.Utils.Serialization
     ///
     /// Removes obsolete NonblockingWrapperBehavior.
     /// </summary>
-    [TrainingConverter]
+    [NewtonsoftTrainingConverter]
     internal class NonblockingWrapperBehaviorConverter : JsonConverter
     {
 #pragma warning disable 618

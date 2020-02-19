@@ -5,6 +5,7 @@ using System.Linq;
 using Innoactive.Hub.Training.Behaviors;
 using Innoactive.Hub.Training.Conditions;
 using Innoactive.Hub.Training.Unity.Utils;
+using Innoactive.Hub.Training.Utils.Serialization;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -43,6 +44,12 @@ namespace Innoactive.Hub.Training.Editors.Configuration
         public virtual string AllowedMenuItemsSettingsAssetPath
         {
             get { return null; }
+        }
+
+        /// <inheritdoc />
+        public virtual ITrainingSerializer Serializer
+        {
+            get { return new NewtonsoftJsonSerializer(); }
         }
 
         /// <inheritdoc />

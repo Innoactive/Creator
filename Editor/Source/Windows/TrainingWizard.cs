@@ -1,7 +1,8 @@
 ﻿using System.IO;
-using Innoactive.Hub.Training.Configuration;
 using UnityEditor;
 using UnityEngine;
+using Innoactive.Creator.Core.Editor.Source.Utils;
+using Innoactive.Hub.Training.Configuration;
 
 namespace Innoactive.Hub.Training.Editors.Windows
 {
@@ -83,7 +84,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
                 }
                 else
                 {
-                    string trainingCoursePath = SaveManager.GetTrainingPath(trainingName);
+                    string trainingCoursePath = EditorCourseUtils.GetTrainingPath(trainingName);
                     string trainingCourseFolder = Path.GetDirectoryName(trainingCoursePath);
 
                     if (Directory.Exists(trainingCourseFolder))
@@ -92,15 +93,9 @@ namespace Innoactive.Hub.Training.Editors.Windows
                     }
                     else
                     {
-                        TrainingWindow trainingWindow = TrainingWindow.GetWindow();
-                        trainingWindow.Focus();
-
-                        ICourse course = CreateCourse();
-                        if (trainingWindow.SetTrainingCourseWithUserConfirmation(course))
+                        ICourse course = EditorCourseUtils.CreateCourse(trainingName);
+                        if (EditorCourseUtils.SetTrainingCourseActive(course))
                         {
-                            SaveManager.SaveTrainingCourseToFile(course);
-                            RuntimeConfigurator.SetSelectedTrainingCourse(trainingCoursePath.Substring(Application.streamingAssetsPath.Length + 1));
-
                             Close();
                         }
                     }
@@ -115,11 +110,6 @@ namespace Innoactive.Hub.Training.Editors.Windows
             {
                 EditorGUILayout.HelpBox(errorMessage, MessageType.Error);
             }
-        }
-
-        private ICourse CreateCourse()
-        {
-            return new Course(trainingName, new Chapter("Chapter 1", null));
         }
     }
 }

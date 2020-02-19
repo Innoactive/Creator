@@ -3,7 +3,6 @@ using Innoactive.Hub.Training.Attributes;
 using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.SceneObjects.Properties;
 using Innoactive.Hub.Training.Utils;
-using Newtonsoft.Json;
 
 namespace Innoactive.Hub.Training.Conditions
 {
@@ -46,7 +45,6 @@ namespace Innoactive.Hub.Training.Conditions
             }
         }
 
-        [JsonConstructor]
         public UsedCondition() : this("")
         {
         }

@@ -1,10 +1,9 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Runtime.Serialization;
+using Innoactive.Hub.Training.Utils;
 using Innoactive.Hub.Training.Attributes;
 using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.Utils;
-using Newtonsoft.Json;
-using UnityEngine;
 
 namespace Innoactive.Hub.Training.Behaviors
 {
@@ -94,7 +93,6 @@ namespace Innoactive.Hub.Training.Behaviors
             }
         }
 
-        [JsonConstructor]
         public MoveObjectBehavior() : this("", "", 0f)
         {
         }

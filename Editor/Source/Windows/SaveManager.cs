@@ -1,10 +1,10 @@
 using System;
 using System.IO;
-using Innoactive.Hub.Training.Editors.Configuration;
-using Innoactive.Hub.Training.Utils.Serialization;
-using Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester;
 using UnityEditor;
 using UnityEngine;
+using Innoactive.Creator.Core.Editor.Source.Utils;
+using Innoactive.Hub.Training.Editors.Configuration;
+using Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester;
 
 namespace Innoactive.Hub.Training.Editors.Windows
 {
@@ -22,7 +22,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
                     throw new NullReferenceException("The training course is not saved because it doesn't exist.");
                 }
 
-                string path = GetTrainingPath(course);
+                string path = EditorCourseUtils.GetTrainingPath(course);
 
                 string directory = Path.GetDirectoryName(path);
                 if (string.IsNullOrEmpty(directory) == false && Directory.Exists(directory) == false)
@@ -30,8 +30,8 @@ namespace Innoactive.Hub.Training.Editors.Windows
                     Directory.CreateDirectory(directory);
                 }
 
-                string serialized = JsonTrainingSerializer.Serialize(course);
-                File.WriteAllText(path, serialized);
+                byte[] serialized = EditorConfigurator.Instance.Serializer.ToByte(course);
+                File.WriteAllBytes(path, serialized);
                 // Check if saved as asset. If true, import it.
                 TryReloadAssetByFullPath(path);
                 return true;
@@ -44,27 +44,10 @@ namespace Innoactive.Hub.Training.Editors.Windows
             }
         }
 
-        [Obsolete("Path is now generated from ICourse, which removes the need of path.")]
-        public static bool SaveTrainingCourseToFile(ICourse course, string path)
-        {
-            return SaveTrainingCourseToFile(course);
-        }
-
         public static ICourse LoadTrainingCourseFromFile(string path)
         {
-            string trainingData = File.ReadAllText(path);
-            return JsonTrainingSerializer.Deserialize(trainingData);
-        }
-
-        public static string GetTrainingPath(string name)
-        {
-            name = Path.GetFileNameWithoutExtension(name);
-            return string.Format("{0}/{1}/{2}/{2}.json", Application.streamingAssetsPath, EditorConfigurator.Instance.DefaultCourseStreamingAssetsFolder, name).Replace('/', Path.DirectorySeparatorChar);
-        }
-
-        private static string GetTrainingPath(ICourse course)
-        {
-            return GetTrainingPath(course.Data.Name);
+            byte[] trainingData = File.ReadAllBytes(path);
+            return EditorConfigurator.Instance.Serializer.ToCourse(trainingData);
         }
 
         private static void TryReloadAssetByFullPath(string path)

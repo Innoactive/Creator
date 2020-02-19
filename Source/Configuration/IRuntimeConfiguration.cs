@@ -1,8 +1,9 @@
+using UnityEngine;
 using System;
 using System.Collections.ObjectModel;
 using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.Configuration.Modes;
-using UnityEngine;
+using Innoactive.Hub.Training.Utils.Serialization;
 
 namespace Innoactive.Hub.Training.Configuration
 {
@@ -25,6 +26,11 @@ namespace Innoactive.Hub.Training.Configuration
         /// SceneObjectRegistry gathers all created TrainingSceneEntities.
         /// </summary>
         ISceneObjectRegistry SceneObjectRegistry { get; }
+
+        /// <summary>
+        /// Defines the serializer which should be used to serialize training courses.
+        /// </summary>
+        ITrainingSerializer Serializer { get; set; }
 
         /// <summary>
         /// Trainee scene object.

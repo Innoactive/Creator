@@ -1,8 +1,7 @@
+using UnityEngine;
 using System.Collections;
 using System.Runtime.Serialization;
 using Innoactive.Hub.Training.Attributes;
-using Newtonsoft.Json;
-using UnityEngine;
 
 namespace Innoactive.Hub.Training.Behaviors
 {
@@ -25,7 +24,6 @@ namespace Innoactive.Hub.Training.Behaviors
             public string Name { get; set; }
         }
 
-        [JsonConstructor]
         public DelayBehavior() : this(0)
         {
         }

@@ -8,7 +8,7 @@ namespace Innoactive.Hub.Training.Utils.Serialization
     /// <summary>
     /// Converts Unity color into json and back.
     /// </summary>
-    [TrainingConverter]
+    [NewtonsoftTrainingConverter]
     public class UnityColorConverter : JsonConverter
     {
         /// <inheritDoc/>

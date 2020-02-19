@@ -1,8 +1,7 @@
-﻿using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Configuration;
+﻿using UnityEngine;
+using System.Runtime.Serialization;
 using Innoactive.Hub.Training.Unity.Utils;
-using Newtonsoft.Json;
-using UnityEngine;
+using Innoactive.Hub.Training.Configuration;
 
 namespace Innoactive.Hub.Training.Conditions
 {
@@ -16,7 +15,6 @@ namespace Innoactive.Hub.Training.Conditions
     [DataContract(IsReference = true)]
     public abstract class Condition<TData> : CompletableEntity<TData>, ICondition where TData : IConditionData
     {
-        [JsonConstructor]
         protected Condition()
         {
             if (RuntimeConfigurator.Configuration.EntityStateLoggerConfig.LogConditions)

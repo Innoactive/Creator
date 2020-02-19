@@ -97,6 +97,10 @@ namespace Innoactive.Hub.Training.Configuration
             }
         }
 
+
+        /// <inheritdoc />
+        public ITrainingSerializer Serializer { get; set; } = new NewtonsoftJsonSerializer();
+
         /// <inheritdoc />
         public virtual TrainingSceneObject Trainee
         {
@@ -178,8 +182,8 @@ namespace Innoactive.Hub.Training.Configuration
                 throw new ArgumentException("The file or the path to the file could not be found.", pathToFile);
             }
 
-            string serialized = File.ReadAllText(pathToFile);
-            return JsonTrainingSerializer.Deserialize(serialized);
+            byte[] serialized = File.ReadAllBytes(pathToFile);
+            return Serializer.ToCourse(serialized);
         }
 
         /// <inheritdoc />

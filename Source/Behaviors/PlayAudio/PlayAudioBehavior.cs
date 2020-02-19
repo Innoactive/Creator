@@ -1,11 +1,10 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Runtime.Serialization;
 using Innoactive.Hub.Training.Audio;
 using Innoactive.Hub.Training.Attributes;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.Configuration.Modes;
-using Newtonsoft.Json;
-using UnityEngine;
 
 namespace Innoactive.Hub.Training.Behaviors
 {
@@ -92,7 +91,6 @@ namespace Innoactive.Hub.Training.Behaviors
             }
         }
 
-        [JsonConstructor]
         protected PlayAudioBehavior() : this(null, BehaviorExecutionStages.None)
         {
         }

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Innoactive.Creator.Core.Editor.Source.Utils;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.Editors.Utils.Undo;
 using UnityEditor;
@@ -70,9 +71,9 @@ namespace Innoactive.Hub.Training.Editors.Windows
                 if (string.IsNullOrEmpty(newName) == false && ValidateCourseName(newName))
                 {
                     string oldName = course.Data.Name;
-                    string oldPath = SaveManager.GetTrainingPath(oldName);
+                    string oldPath = EditorCourseUtils.GetTrainingPath(oldName);
                     string oldFolder = Path.GetDirectoryName(oldPath);
-                    string newPath = SaveManager.GetTrainingPath(newName);
+                    string newPath = EditorCourseUtils.GetTrainingPath(newName);
                     string newFolder = Path.GetDirectoryName(newPath);
 
                     RevertableChangesHandler.Do(new TrainingCommand(
@@ -140,7 +141,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
                 return false;
             }
 
-            string newFolder = Path.GetDirectoryName(SaveManager.GetTrainingPath(courseName));
+            string newFolder = Path.GetDirectoryName(EditorCourseUtils.GetTrainingPath(courseName));
             if (Directory.Exists(newFolder))
             {
                 EditorUtility.DisplayDialog("Changing the course name failed",

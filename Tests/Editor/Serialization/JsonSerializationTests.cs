@@ -9,12 +9,20 @@ namespace Innoactive.Hub.Tests.Serialization
 {
     public class JsonSerializationTests
     {
+        private JsonSerializerSettings settings;
+
+        [SetUp]
+        protected void Setup()
+        {
+            settings = new NewtonsoftJsonSerializer().SerializerSettings;
+        }
+
         [Test]
         public void CanSerializeVector2()
         {
             // Given the JsonTrainingSerializer.SerializerSettings are used to serialize.
             // When a Vector2 is serialized
-            string data = JsonConvert.SerializeObject(Vector2.up, JsonTrainingSerializer.SerializerSettings);
+            string data = JsonConvert.SerializeObject(Vector2.up, settings);
             // Then the output is not null
             Assert.IsFalse(string.IsNullOrEmpty(data));
         }
@@ -26,8 +34,8 @@ namespace Innoactive.Hub.Tests.Serialization
             Vector2 input = Vector2.up;
 
             // When parsed into json and back
-            string data = JsonConvert.SerializeObject(input, JsonTrainingSerializer.SerializerSettings);
-            Vector2 output = JsonConvert.DeserializeObject<Vector2>(data, JsonTrainingSerializer.SerializerSettings);
+            string data = JsonConvert.SerializeObject(input, settings);
+            Vector2 output = JsonConvert.DeserializeObject<Vector2>(data, settings);
 
             // Then the input and output are equal
             Assert.AreEqual(input, output);
@@ -38,7 +46,7 @@ namespace Innoactive.Hub.Tests.Serialization
         {
             // Given the JsonTrainingSerializer.SerializerSettings are used to serialize.
             // When a Vector3 is serialized
-            string data = JsonConvert.SerializeObject(Vector3.up, JsonTrainingSerializer.SerializerSettings);
+            string data = JsonConvert.SerializeObject(Vector3.up, settings);
             // Then the output is not null
             Assert.IsFalse(string.IsNullOrEmpty(data));
         }
@@ -50,8 +58,8 @@ namespace Innoactive.Hub.Tests.Serialization
             Vector3 input = Vector3.up;
 
             // When parsed into json and back
-            string data = JsonConvert.SerializeObject(input, JsonTrainingSerializer.SerializerSettings);
-            Vector3 output = JsonConvert.DeserializeObject<Vector3>(data, JsonTrainingSerializer.SerializerSettings);
+            string data = JsonConvert.SerializeObject(input, settings);
+            Vector3 output = JsonConvert.DeserializeObject<Vector3>(data,settings);
 
             // Then the input and output are equal
             Assert.AreEqual(input, output);
@@ -62,7 +70,7 @@ namespace Innoactive.Hub.Tests.Serialization
         {
             // Given the JsonTrainingSerializer.SerializerSettings are used to serialize.
             // When a Vector4 is serialized
-            string data = JsonConvert.SerializeObject(Vector4.one, JsonTrainingSerializer.SerializerSettings);
+            string data = JsonConvert.SerializeObject(Vector4.one, settings);
             // Then the output is not null
             Assert.IsFalse(string.IsNullOrEmpty(data));
         }
@@ -74,8 +82,8 @@ namespace Innoactive.Hub.Tests.Serialization
             Vector4 input = Vector4.one;
 
             // When parsed into json and back
-            string data = JsonConvert.SerializeObject(input, JsonTrainingSerializer.SerializerSettings);
-            Vector4 output = JsonConvert.DeserializeObject<Vector4>(data, JsonTrainingSerializer.SerializerSettings);
+            string data = JsonConvert.SerializeObject(input, settings);
+            Vector4 output = JsonConvert.DeserializeObject<Vector4>(data, settings);
 
             // Then the input and output are equal
             Assert.AreEqual(input, output);
@@ -87,7 +95,7 @@ namespace Innoactive.Hub.Tests.Serialization
         {
             // Given the JsonTrainingSerializer.SerializerSettings are used to serialize.
             // When a unity color is serialized
-            string data = JsonConvert.SerializeObject(Color.blue, JsonTrainingSerializer.SerializerSettings);
+            string data = JsonConvert.SerializeObject(Color.blue, settings);
             // Then the output is not null
             Assert.IsFalse(string.IsNullOrEmpty(data));
         }
@@ -99,8 +107,8 @@ namespace Innoactive.Hub.Tests.Serialization
             Color input = Color.blue;
 
             // When parsed into json and back
-            string data = JsonConvert.SerializeObject(input, JsonTrainingSerializer.SerializerSettings);
-            Color output = JsonConvert.DeserializeObject<Color>(data, JsonTrainingSerializer.SerializerSettings);
+            string data = JsonConvert.SerializeObject(input, settings);
+            Color output = JsonConvert.DeserializeObject<Color>(data, settings);
 
             // Then the input and output are equal
             Assert.AreEqual(input, output);

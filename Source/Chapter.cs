@@ -1,14 +1,13 @@
-using System.Collections.Generic;
+using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Innoactive.Hub.Training.EntityOwners;
+using Innoactive.Hub.Training.Utils;
 using Innoactive.Hub.Training.Attributes;
+using Innoactive.Hub.Training.Exceptions;
+using Innoactive.Hub.Training.EntityOwners;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.Configuration.Modes;
-using Innoactive.Hub.Training.Exceptions;
-using Innoactive.Hub.Training.Utils;
-using Newtonsoft.Json;
-using UnityEngine;
 
 namespace Innoactive.Hub.Training
 {
@@ -162,7 +161,6 @@ namespace Innoactive.Hub.Training
             }
         }
 
-        [JsonConstructor]
         protected Chapter() : this(null, null)
         {
         }

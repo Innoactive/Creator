@@ -1,6 +1,5 @@
 using System.Runtime.Serialization;
 using Innoactive.Hub.Training.Attributes;
-using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Innoactive.Hub.Training.Audio
@@ -33,7 +32,6 @@ namespace Innoactive.Hub.Training.Audio
             Path = path;
         }
 
-        [JsonConstructor]
         protected ResourceAudio()
         {
             path = new LocalizedString();
