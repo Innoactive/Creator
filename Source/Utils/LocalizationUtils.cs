@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using UnityEngine;
+using Innoactive.Creator.Localization;
 
 namespace Innoactive.Hub.Training.Utils
 {

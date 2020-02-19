@@ -1,3 +1,4 @@
+using Innoactive.Creator.Localization;
 using System.Runtime.Serialization;
 using Innoactive.Hub.Training.Attributes;
 using UnityEngine;

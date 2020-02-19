@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-namespace Innoactive.Hub
+namespace Innoactive.Creator.Localization
 {
     public static class Localization
     {

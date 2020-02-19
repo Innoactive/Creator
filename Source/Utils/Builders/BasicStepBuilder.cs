@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Innoactive.Creator.Localization;
 using Innoactive.Hub.Training.Audio;
 using Innoactive.Hub.Training.Behaviors;
 using Innoactive.Hub.Training.Conditions;

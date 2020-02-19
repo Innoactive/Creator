@@ -1,7 +1,8 @@
 using System;
-using Innoactive.Hub.Training.Editors.Utils;
 using UnityEditor;
 using UnityEngine;
+using Innoactive.Creator.Localization;
+using Innoactive.Hub.Training.Editors.Utils;
 
 namespace Innoactive.Hub.Training.Editors.Drawers
 {

@@ -1,5 +1,6 @@
-﻿using Innoactive.Hub.Training.Editors.Configuration;
-using UnityEngine;
+﻿using UnityEngine;
+using Innoactive.Creator.Localization;
+using Innoactive.Hub.Training.Editors.Configuration;
 
 namespace Innoactive.Hub.Training.Behaviors.Editors
 {

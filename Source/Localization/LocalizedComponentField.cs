@@ -2,7 +2,7 @@
 using System.Reflection;
 using UnityEngine;
 
-namespace Innoactive.Hub
+namespace Innoactive.Creator.Localization
 {
     public class LocalizedComponentField : MonoBehaviour
     {

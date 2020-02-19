@@ -10,6 +10,7 @@ using Innoactive.Hub.Training.Conditions;
 using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.SceneObjects.Properties;
 using Innoactive.Hub.Training.Utils.Builders;
+using Innoactive.Creator.Localization;
 using UnityEngine;
 using UnityEngine.TestTools;
 using Object = UnityEngine.Object;

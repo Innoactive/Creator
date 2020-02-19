@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace Innoactive.Hub
+namespace Innoactive.Creator.Localization
 {
     [Serializable, DataContract]
     public class LocalizedString
@@ -78,8 +78,8 @@ namespace Innoactive.Hub
         }
 
         /// <summary>
-        /// Tries to parse the input string. If parsing succeeded, the result can be found in the output parameter. 
-        /// 
+        /// Tries to parse the input string. If parsing succeeded, the result can be found in the output parameter.
+        ///
         /// Expected syntax for input string is "%1|%2" where %1 can be a i18-key and %2 a arbitrary fallback text, both separated by a pipe char '|'.
         /// </summary>
         /// <param name="str"></param>

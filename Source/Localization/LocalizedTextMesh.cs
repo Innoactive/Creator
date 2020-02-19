@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Innoactive.Hub
+namespace Innoactive.Creator.Localization
 {
     [RequireComponent(typeof(TextMesh))]
     public class LocalizedTextMesh : MonoBehaviour
