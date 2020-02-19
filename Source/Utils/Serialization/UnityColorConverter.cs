@@ -9,7 +9,7 @@ namespace Innoactive.Hub.Training.Utils.Serialization
     /// <summary>
     /// Converts Unity color into json and back.
     /// </summary>
-    [TrainingConverter]
+    [NewtonsoftTrainingConverter]
     public class UnityColorConverter : JsonConverter
     {
         private static readonly ILog logger = LogManager.GetLogger<UnityColorConverter>();

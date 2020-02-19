@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Innoactive.Hub.Training.EntityOwners;
 using Innoactive.Hub.Training.Configuration.Modes;
-using Newtonsoft.Json;
 
 namespace Innoactive.Hub.Training.Behaviors
 {
@@ -173,7 +172,6 @@ namespace Innoactive.Hub.Training.Behaviors
             }
         }
 
-        [JsonConstructor]
         protected NonblockingWrapperBehavior() : this(null, false)
         {
         }

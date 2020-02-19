@@ -1,5 +1,4 @@
 ﻿﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
 
 namespace Innoactive.Hub.Training.SceneObjects
 {
@@ -15,7 +14,6 @@ namespace Innoactive.Hub.Training.SceneObjects
         [DataMember]
         public virtual string UniqueName { get; set; }
 
-        [JsonConstructor]
         protected UniqueNameReference() { }
 
         protected UniqueNameReference(string uniqueName)
