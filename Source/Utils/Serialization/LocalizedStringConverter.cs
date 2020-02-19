@@ -10,7 +10,7 @@ namespace Innoactive.Hub.Training.Utils.Serialization
     ///
     /// Handles the proper conversion to and from LocalizedString.
     /// </summary>
-    [TrainingConverter]
+    [NewtonsoftTrainingConverter]
     internal class LocalizedStringConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

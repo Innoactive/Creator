@@ -8,7 +8,6 @@ using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.EntityOwners;
 using Innoactive.Hub.Training.Unity.Utils;
-using Newtonsoft.Json;
 
 namespace Innoactive.Hub.Training
 {
@@ -105,7 +104,6 @@ namespace Innoactive.Hub.Training
             }
         }
 
-        [JsonConstructor]
         protected Step() : this(null)
         {
         }

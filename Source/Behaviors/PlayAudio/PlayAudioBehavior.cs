@@ -5,7 +5,6 @@ using Innoactive.Hub.Training.Audio;
 using Innoactive.Hub.Training.Attributes;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.Configuration.Modes;
-using Newtonsoft.Json;
 using UnityEngine;
 using LogManager = Innoactive.Hub.Logging.LogManager;
 
@@ -96,7 +95,6 @@ namespace Innoactive.Hub.Training.Behaviors
 
         private static readonly ILog logger = LogManager.GetLogger<PlayAudioBehavior>();
 
-        [JsonConstructor]
         protected PlayAudioBehavior() : this(null, BehaviorExecutionStages.None)
         {
         }

@@ -1,5 +1,4 @@
 #if UNITY_EDITOR
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +9,7 @@ using Innoactive.Hub.Training.Conditions;
 using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.SceneObjects.Properties;
 using Innoactive.Hub.Training.Utils.Builders;
-using Innoactive.Hub.Training.Utils.Serialization;
 using Innoactive.Hub.Unity.Tests.Training.Utils;
-using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.TestTools;
 
@@ -34,7 +31,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize a training with it
-            ICourse testCourse = JsonTrainingSerializer.Deserialize(JsonTrainingSerializer.Serialize(course));
+            ICourse testCourse = Serializer.ToCourse(Serializer.ToByte(course));
 
             // Then the path to audio resource should be the same.
             string audioPath1 = TestingUtils.GetField<LocalizedString>(((PlayAudioBehavior)course.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First()).Data.AudioData, "path").Key;
@@ -59,7 +56,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize a training with it,
-            ICourse testCourse = JsonTrainingSerializer.Deserialize(JsonTrainingSerializer.Serialize(course));
+            ICourse testCourse = Serializer.ToCourse(Serializer.ToByte(course));
 
             // Then the text to generate sound from should be the same.
             IAudioData data1 = ((PlayAudioBehavior)course.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First()).Data.AudioData;
@@ -85,10 +82,10 @@ namespace Innoactive.Hub.Unity.Tests.Training
                     .AddStep(new BasicStepBuilder("Step")))
                 .Build();
 
-            JsonTrainingSerializer.Serialize(training1);
+            Serializer.ToByte(training1);
 
             // When we serialize and deserialize it
-            ICourse training2 = JsonTrainingSerializer.Deserialize(JsonTrainingSerializer.Serialize(training1));
+            ICourse training2 = Serializer.ToCourse(Serializer.ToByte(training1));
 
             // Then it should still be base training, have the same name and the first chapter with the same name.
             Assert.AreEqual(typeof(Course), training1.GetType());
@@ -115,8 +112,8 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize it,
-            string serialized = JsonTrainingSerializer.Serialize(training1);
-            ICourse training2 = JsonTrainingSerializer.Deserialize(serialized);
+            byte[] serialized = Serializer.ToByte(training1);
+            ICourse training2 = Serializer.ToCourse(serialized);
 
             // Then that delayed behaviors should have the same target behaviors and delay time.
             DelayBehavior behavior1 = training1.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as DelayBehavior;
@@ -141,9 +138,9 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize a training with it
-            string serialized = JsonTrainingSerializer.Serialize(training1);
+            byte[] serialized = Serializer.ToByte(training1);
 
-            ICourse training2 = JsonTrainingSerializer.Deserialize(serialized);
+            ICourse training2 = Serializer.ToCourse(serialized);
 
             DisableGameObjectBehavior behavior1 = training1.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as DisableGameObjectBehavior;
             DisableGameObjectBehavior behavior2 = training2.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as DisableGameObjectBehavior;
@@ -172,7 +169,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize a training course with it
-            ICourse training2 = JsonTrainingSerializer.Deserialize(JsonTrainingSerializer.Serialize(training1));
+            ICourse training2 = Serializer.ToCourse(Serializer.ToByte(training1));
 
             EnableGameObjectBehavior behavior1 = training1.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as EnableGameObjectBehavior;
             EnableGameObjectBehavior behavior2 = training2.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as EnableGameObjectBehavior;
@@ -201,7 +198,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize it
-            ICourse training2 = JsonTrainingSerializer.Deserialize(JsonTrainingSerializer.Serialize(training1));
+            ICourse training2 = Serializer.ToCourse(Serializer.ToByte(training1));
 
             // Then that's behavior target is still the same.
             LockObjectBehavior behavior1 = training1.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as LockObjectBehavior;
@@ -229,7 +226,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize it,
-            ICourse training2 = JsonTrainingSerializer.Deserialize(JsonTrainingSerializer.Serialize(training1));
+            ICourse training2 = Serializer.ToCourse(Serializer.ToByte(training1));
 
             // Then path to the audiofile should not change.
             PlayAudioBehavior behavior1 = training1.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as PlayAudioBehavior;
@@ -254,7 +251,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize it,
-            ICourse training2 = JsonTrainingSerializer.Deserialize(JsonTrainingSerializer.Serialize(training1));
+            ICourse training2 = Serializer.ToCourse(Serializer.ToByte(training1));
 
             PlayAudioBehavior behavior1 = training1.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as PlayAudioBehavior;
             PlayAudioBehavior behavior2 = training2.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as PlayAudioBehavior;
@@ -281,7 +278,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize it
-            ICourse training2 = JsonTrainingSerializer.Deserialize(JsonTrainingSerializer.Serialize(training1));
+            ICourse training2 = Serializer.ToCourse(Serializer.ToByte(training1));
 
             UnlockObjectBehavior behavior1 = training1.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as UnlockObjectBehavior;
             UnlockObjectBehavior behavior2 = training2.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as UnlockObjectBehavior;
@@ -307,7 +304,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize it
-            ICourse training2 = JsonTrainingSerializer.Deserialize((JsonTrainingSerializer.Serialize(training1)));
+            ICourse training2 = Serializer.ToCourse((Serializer.ToByte(training1)));
 
             // Then chapter's type, name, first step and next chapter should not change.
             IChapter chapter1 = training1.Data.FirstChapter;
@@ -332,7 +329,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize it
-            ICourse training2 = JsonTrainingSerializer.Deserialize((JsonTrainingSerializer.Serialize(training1)));
+            ICourse training2 = Serializer.ToCourse((Serializer.ToByte(training1)));
 
             // Then that condition's name should not change.
             ICondition condition1 = training1.Data.FirstChapter.Data.FirstStep.Data.Transitions.Data.Transitions.First().Data.Conditions.First();
@@ -358,7 +355,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize it
-            ICourse training2 = JsonTrainingSerializer.Deserialize(JsonTrainingSerializer.Serialize(training1));
+            ICourse training2 = Serializer.ToCourse(Serializer.ToByte(training1));
 
             // Then that condition's target, detector and range should stay unchanged.
             ObjectInRangeCondition condition1 = training1.Data.FirstChapter.Data.FirstStep.Data.Transitions.Data.Transitions.First().Data.Conditions.First() as ObjectInRangeCondition;
@@ -388,7 +385,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize it
-            ICourse training2 = JsonTrainingSerializer.Deserialize((JsonTrainingSerializer.Serialize(training1)));
+            ICourse training2 = Serializer.ToCourse((Serializer.ToByte(training1)));
 
             // Then that condition's timeout value should stay unchanged.
             TimeoutCondition condition1 = training1.Data.FirstChapter.Data.FirstStep.Data.Transitions.Data.Transitions.First().Data.Conditions.First() as TimeoutCondition;
@@ -414,8 +411,8 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize it
-            string serialized = JsonTrainingSerializer.Serialize(training1);
-            ICourse training2 = JsonTrainingSerializer.Deserialize(serialized);
+            byte[] serialized = Serializer.ToByte(training1);
+            ICourse training2 = Serializer.ToCourse(serialized);
 
             // Then transition from the first step should lead to the same step as before.
             Assert.AreEqual(training1.Data.FirstChapter.Data.FirstStep.Data.Transitions.Data.Transitions.First().Data.TargetStep.Data.Name,
@@ -435,7 +432,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize it
-            ICourse training2 = JsonTrainingSerializer.Deserialize((JsonTrainingSerializer.Serialize(training1)));
+            ICourse training2 = Serializer.ToCourse((Serializer.ToByte(training1)));
 
             // Then that step's name should still be the same.
             Assert.AreEqual(training1.Data.FirstChapter.Data.FirstStep.Data.Name, training2.Data.FirstChapter.Data.FirstStep.Data.Name);
@@ -457,7 +454,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When that training is serialized and deserialzied
-            ICourse training2 = JsonTrainingSerializer.Deserialize(JsonTrainingSerializer.Serialize(training1));
+            ICourse training2 = Serializer.ToCourse(Serializer.ToByte(training1));
 
             // Then we should have two identical move object behaviors
             MoveObjectBehavior behavior1 = training1.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as MoveObjectBehavior;
@@ -488,7 +485,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
             ICourse course = new Course("", new Chapter("", step));
 
             // When we serialize and deserialize a training with it
-            ICourse deserializedCourse = JsonTrainingSerializer.Deserialize(JsonTrainingSerializer.Serialize(course));
+            ICourse deserializedCourse = Serializer.ToCourse(Serializer.ToByte(course));
             PlayAudioBehavior deserializedBehavior = deserializedCourse.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as PlayAudioBehavior;
             // ReSharper disable once PossibleNullReferenceException
             LocalizedString deserialized = ((ResourceAudio)deserializedBehavior.Data.AudioData).Path;
@@ -519,7 +516,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize it
-            ICourse deserializedCourse = JsonTrainingSerializer.Deserialize(JsonTrainingSerializer.Serialize(course));
+            ICourse deserializedCourse = Serializer.ToCourse(Serializer.ToByte(course));
 
             BehaviorSequence deserializedSequence = deserializedCourse.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as BehaviorSequence;
 
@@ -551,7 +548,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 .Build();
 
             // When we serialize and deserialize it,
-            ICourse deserializedCourse = JsonTrainingSerializer.Deserialize(JsonTrainingSerializer.Serialize(course));
+            ICourse deserializedCourse = Serializer.ToCourse(Serializer.ToByte(course));
 
             EndlessBehavior deserializedBehavior = deserializedCourse.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as EndlessBehavior;
 

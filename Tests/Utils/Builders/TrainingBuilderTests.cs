@@ -351,7 +351,6 @@ namespace Innoactive.Hub.Unity.Tests.Training
             Assert.True(step.Data.Name == "TestHighlightStep");
             Assert.True(step.Data.Behaviors.Data.Behaviors.First() is VRTKObjectHighlight);
             Assert.True(ReferenceEquals((step.Data.Behaviors.Data.Behaviors.First() as VRTKObjectHighlight).Data.Target.Value, highlightable));
-
             // Cleanup
             Object.DestroyImmediate(go);
 

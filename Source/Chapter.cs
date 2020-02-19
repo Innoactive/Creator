@@ -7,7 +7,6 @@ using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.Exceptions;
 using Innoactive.Hub.Training.Utils;
-using Newtonsoft.Json;
 
 namespace Innoactive.Hub.Training
 {
@@ -161,7 +160,6 @@ namespace Innoactive.Hub.Training
             }
         }
 
-        [JsonConstructor]
         protected Chapter() : this(null, null)
         {
         }

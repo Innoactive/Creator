@@ -4,6 +4,7 @@ using Common.Logging;
 using Innoactive.Hub.TextToSpeech;
 using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.SceneObjects;
+using Innoactive.Hub.Training.Utils.Serialization;
 using UnityEngine;
 
 namespace Innoactive.Hub.Training.Configuration
@@ -27,6 +28,11 @@ namespace Innoactive.Hub.Training.Configuration
         /// SceneObjectRegistry gathers all created TrainingSceneEntities.
         /// </summary>
         ISceneObjectRegistry SceneObjectRegistry { get; }
+
+        /// <summary>
+        /// Defines the serializer which should be used to serialize training courses.
+        /// </summary>
+        ITrainingSerializer Serializer { get; set; }
 
         /// <summary>
         /// Trainee scene object.

@@ -1,7 +1,6 @@
 ﻿using System.Runtime.Serialization;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.SceneObjects.Properties;
-using Newtonsoft.Json;
 
 namespace Innoactive.Hub.Training.SceneObjects
 {
@@ -16,7 +15,6 @@ namespace Innoactive.Hub.Training.SceneObjects
             return reference.Value;
         }
 
-        [JsonConstructor]
         public ScenePropertyReference()
         {
         }

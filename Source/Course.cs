@@ -4,7 +4,6 @@ using System.Runtime.Serialization;
 using Innoactive.Hub.Training.EntityOwners;
 using Innoactive.Hub.Training.Attributes;
 using Innoactive.Hub.Training.Configuration.Modes;
-using Newtonsoft.Json;
 
 namespace Innoactive.Hub.Training
 {
@@ -101,7 +100,6 @@ namespace Innoactive.Hub.Training
             }
         }
 
-        [JsonConstructor]
         protected Course() : this(null, new IChapter[0])
         {
         }
