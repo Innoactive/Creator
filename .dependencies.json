@@ -3,7 +3,7 @@
         {
             "name": "Components\\VRTK-Interaction",
             "repository": "git@github.com:Innoactive/VRTK-Interaction-Component.git",
-            "branch": "feature/fixed-serializer-problems-in-tests"
+            "branch": "develop-unity-2019"
         },
         {
             "name": "Components\\Text-To-Speech",
