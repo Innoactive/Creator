@@ -35,12 +35,6 @@ namespace Innoactive.Hub.Training.Editors.Utils
             EditorApplication.playModeStateChanged += ResolveModuleFolder;
         }
 
-        [MenuItem("Innoactive/Creator/Setup Current Scene as Training Scene", false, 11)]
-        public static void SetupScene()
-        {
-            EditorConfigurator.Instance.SetupTrainingScene();
-        }
-
         [PublicAPI]
         private static void EnableEditorImguiTests()
         {

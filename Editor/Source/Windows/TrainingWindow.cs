@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using Common.Logging;
+using Innoactive.Hub.Training.Editors.Configuration;
 using Innoactive.Hub.Training.Editors.Utils;
 using Innoactive.Hub.Training.Editors.Utils.Undo;
-using Innoactive.Hub.Training.Utils.Serialization;
 using Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester;
 using UnityEditor;
 using UnityEngine;
@@ -24,7 +24,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
         private Vector2 currentScrollPosition;
 
         [SerializeField]
-        private string temporarySerializedTraining;
+        private byte[] temporarySerializedTraining;
 
         [SerializeField]
         private bool isDirty;
@@ -89,7 +89,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
                 return;
             }
 
-            temporarySerializedTraining = JsonTrainingSerializer.Serialize(activeCourse);
+            temporarySerializedTraining = EditorConfigurator.Instance.Serializer.ToByte(activeCourse);
         }
 
         /// <summary>
@@ -193,14 +193,14 @@ namespace Innoactive.Hub.Training.Editors.Windows
 
             window = this;
 
-            if (string.IsNullOrEmpty(temporarySerializedTraining) == false)
+            if (temporarySerializedTraining != null && temporarySerializedTraining.Length > 0)
             {
                 try
                 {
                     bool wasDirty = IsDirty;
 
                     chapterMenu = CreateInstance<TrainingMenuView>();
-                    SetTrainingCourse(JsonTrainingSerializer.Deserialize(temporarySerializedTraining));
+                    SetTrainingCourse(EditorConfigurator.Instance.Serializer.ToCourse(temporarySerializedTraining));
                     IsDirty = wasDirty;
                     temporarySerializedTraining = null;
                 }

@@ -90,7 +90,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester.Windows
             };
         }
 
-        [MenuItem("Innoactive/Creator/Developer/Editor IMGUI Tests Explorer", false, 32)]
+        [MenuItem("Innoactive/Creator/Developer/Editor IMGUI Tests Explorer", false, 81)]
         private static void ShowFromMenu()
         {
             GetWindow<EditorImguiTestsExplorer>();

@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using Innoactive.Hub.Training.Behaviors;
 using Innoactive.Hub.Training.Conditions;
+using Innoactive.Hub.Training.Utils.Serialization;
 
 namespace Innoactive.Hub.Training.Editors.Configuration
 {
@@ -13,6 +14,11 @@ namespace Innoactive.Hub.Training.Editors.Configuration
         /// Absolute path where training courses are stored.
         /// </summary>
         string DefaultCourseStreamingAssetsFolder { get; }
+
+        /// <summary>
+        /// Serializer used to serialize training courses.
+        /// </summary>
+        ITrainingSerializer Serializer { get; }
 
         /// <summary>
         /// Assets path where to save the serialized <see cref="AllowedMenuItemsSettings"/> file.

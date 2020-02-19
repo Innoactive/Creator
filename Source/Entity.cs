@@ -3,7 +3,6 @@ using System.Linq;
 using System.Runtime.Serialization;
 using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.EntityOwners;
-using Newtonsoft.Json;
 
 namespace Innoactive.Hub.Training
 {
@@ -81,7 +80,6 @@ namespace Innoactive.Hub.Training
             }
         }
 
-        [JsonConstructor]
         protected Entity()
         {
             LifeCycle = new LifeCycle(this);

@@ -1,5 +1,4 @@
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Innoactive.Hub.Training
@@ -13,7 +12,6 @@ namespace Innoactive.Hub.Training
         [DataMember]
         public Vector2 EntryNodePosition { get; set; }
 
-        [JsonConstructor]
         public ChapterMetadata()
         {
         }

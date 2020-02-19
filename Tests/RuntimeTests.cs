@@ -3,6 +3,7 @@ using Innoactive.Hub.Threading;
 using System.Linq;
 using Innoactive.Hub.Training.Unity.Utils;
 using Innoactive.Hub.Training.Utils;
+using Innoactive.Hub.Training.Utils.Serialization;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ namespace Innoactive.Hub.Unity.Tests.Training
 {
     public abstract class RuntimeTests
     {
+        protected ITrainingSerializer Serializer { get; } = new NewtonsoftJsonSerializer();
+
         [SetUp]
         public virtual void SetUp()
         {
