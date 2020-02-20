@@ -1,11 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
+using Innoactive.Creator.Internationalization;
 using Innoactive.Hub.Training.Audio;
 using Innoactive.Hub.Training.Behaviors;
 using Innoactive.Hub.Training.Conditions;
-using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.SceneObjects;
+using Innoactive.Hub.Training.Configuration;
 
 namespace Innoactive.Hub.Training.Utils.Builders
 {
@@ -76,7 +77,7 @@ namespace Innoactive.Hub.Training.Utils.Builders
         /// <summary>
         /// Play audio at the beginning of the step.
         /// </summary>
-        /// <param name="path">Path to audioclip.</param>
+        /// <param name="path">Path to audio clip.</param>
         /// <returns>This.</returns>
         public BasicStepBuilder AddAudioDescription(LocalizedString path)
         {
@@ -87,7 +88,7 @@ namespace Innoactive.Hub.Training.Utils.Builders
         /// <summary>
         /// Play audio at the end of the step.
         /// </summary>
-        /// <param name="path">Path to audioclip.</param>
+        /// <param name="path">Path to audio clip.</param>
         /// <returns>This.</returns>
         public BasicStepBuilder AddAudioSuccess(LocalizedString path)
         {
@@ -99,7 +100,7 @@ namespace Innoactive.Hub.Training.Utils.Builders
         /// Play audio with a delay.
         /// </summary>
         /// <param name="path">Path to audioclip.</param>
-        /// <param name="delayInSeconds">The delay between entering the step and playing the audioclip.</param>
+        /// <param name="delayInSeconds">The delay between entering the step and playing the audio clip.</param>
         /// <returns>This.</returns>
         public BasicStepBuilder AddAudioHint(LocalizedString path, float delayInSeconds = defaultAudioDelay)
         {
@@ -242,7 +243,6 @@ namespace Innoactive.Hub.Training.Utils.Builders
             IsAudioDescriptionAdded = true;
 
             Result.Data.Behaviors.Data.Behaviors.Add(new PlayAudioBehavior(new ResourceAudio(path.Clone()), BehaviorExecutionStages.Activation));
-            Result.Data.Behaviors.Data.Behaviors.Add(new PlayAudioBehavior(new TextToSpeechAudio(path.Clone()), BehaviorExecutionStages.Activation));
         }
 
         protected virtual void AudioSuccessAction(LocalizedString path)
@@ -255,14 +255,13 @@ namespace Innoactive.Hub.Training.Utils.Builders
             IsAudioSuccessAdded = true;
 
             Result.Data.Behaviors.Data.Behaviors.Add(new PlayAudioBehavior(new ResourceAudio(path.Clone()), BehaviorExecutionStages.Deactivation));
-            Result.Data.Behaviors.Data.Behaviors.Add(new PlayAudioBehavior(new TextToSpeechAudio(path.Clone()), BehaviorExecutionStages.Deactivation));
         }
 
         protected virtual void AudioHintAction(LocalizedString path, float delayInSeconds = defaultAudioDelay)
         {
             if (IsAudioHintAdded)
             {
-                throw new InvalidOperationException("AddAudioHintAction can be called only only once per step builder.");
+                throw new InvalidOperationException("AddAudioHintAction can be called only once per step builder.");
             }
 
             IsAudioHintAdded = true;
@@ -274,16 +273,6 @@ namespace Innoactive.Hub.Training.Utils.Builders
                     {
                         new DelayBehavior(delayInSeconds),
                         new PlayAudioBehavior(new ResourceAudio(path.Clone()), BehaviorExecutionStages.Activation)
-                    },
-                    false));
-
-            Result.Data.Behaviors.Data.Behaviors.Add(
-                new BehaviorSequence(
-                    false,
-                    new List<IBehavior>
-                    {
-                        new DelayBehavior(delayInSeconds),
-                        new PlayAudioBehavior(new TextToSpeechAudio(path.Clone()), BehaviorExecutionStages.Activation)
                     },
                     false));
         }

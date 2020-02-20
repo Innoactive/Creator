@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine;
 using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Innoactive.Hub.Training.Attributes;
 using Innoactive.Hub.Training.Conditions;
+using Innoactive.Hub.Training.Unity.Utils;
+using Innoactive.Hub.Training.EntityOwners;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.Configuration.Modes;
-using Innoactive.Hub.Training.EntityOwners;
-using Innoactive.Hub.Training.Unity.Utils;
 
 namespace Innoactive.Hub.Training
 {
@@ -122,7 +123,7 @@ namespace Innoactive.Hub.Training
             {
                 LifeCycle.StageChanged += (sender, args) =>
                 {
-                    RuntimeConfigurator.Configuration.EntityStateLogger.InfoFormat("{0}<b>Step</b> <i>'{1}'</i> is <b>{2}</b>.\n", ConsoleUtils.GetTabs(), Data.Name, LifeCycle.Stage);
+                    RuntimeConfigurator.Configuration.EntityStateLogger.LogFormat(LogType.Log, "{0}<b>Step</b> <i>'{1}'</i> is <b>{2}</b>.\n", ConsoleUtils.GetTabs(), Data.Name, LifeCycle.Stage);
                 };
             }
         }

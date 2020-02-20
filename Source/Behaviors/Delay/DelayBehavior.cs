@@ -1,9 +1,7 @@
+using UnityEngine;
 using System.Collections;
 using System.Runtime.Serialization;
-using Common.Logging;
 using Innoactive.Hub.Training.Attributes;
-using UnityEngine;
-using LogManager = Innoactive.Hub.Logging.LogManager;
 
 namespace Innoactive.Hub.Training.Behaviors
 {
@@ -26,8 +24,6 @@ namespace Innoactive.Hub.Training.Behaviors
             public string Name { get; set; }
         }
 
-        private static readonly ILog logger = LogManager.GetLogger<DelayBehavior>();
-
         public DelayBehavior() : this(0)
         {
         }
@@ -36,7 +32,7 @@ namespace Innoactive.Hub.Training.Behaviors
         {
             if (delayTime < 0f)
             {
-                logger.WarnFormat("DelayTime has to be zero or positive, but it was {0}. Setting to 0 instead.", delayTime);
+                Debug.LogWarningFormat("DelayTime has to be zero or positive, but it was {0}. Setting to 0 instead.", delayTime);
                 delayTime = 0f;
             }
 

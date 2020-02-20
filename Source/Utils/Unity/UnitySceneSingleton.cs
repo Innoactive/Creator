@@ -1,5 +1,4 @@
-﻿﻿using Innoactive.Hub.Logging;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Innoactive.Hub.Training.Unity.Utils
 {
@@ -9,8 +8,6 @@ namespace Innoactive.Hub.Training.Unity.Utils
     /// <typeparam name="T"></typeparam>
     public abstract class UnitySceneSingleton<T> : MonoBehaviour where T : UnitySceneSingleton<T>
     {
-        private static readonly Common.Logging.ILog logger = LogManager.GetLogger("UnitySceneSingleton");
-
         /// <summary>
         /// Semaphore to avoid instantiating the singleton twice.
         /// </summary>
@@ -64,7 +61,7 @@ namespace Innoactive.Hub.Training.Unity.Utils
                     return;
                 }
                 Destroy(gameObject);
-                logger.Warn("An instance of the UnitySceneSingleton " + typeof(T).Name + " already exists.");
+                Debug.LogWarningFormat("An instance of the UnitySceneSingleton {0} already exists.", typeof(T).Name);
             }
         }
 

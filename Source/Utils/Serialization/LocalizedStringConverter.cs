@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Innoactive.Creator.Internationalization;
 
 namespace Innoactive.Hub.Training.Utils.Serialization
 {

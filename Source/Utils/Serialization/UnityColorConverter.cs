@@ -1,5 +1,4 @@
 using System;
-using Common.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -12,8 +11,6 @@ namespace Innoactive.Hub.Training.Utils.Serialization
     [NewtonsoftTrainingConverter]
     public class UnityColorConverter : JsonConverter
     {
-        private static readonly ILog logger = LogManager.GetLogger<UnityColorConverter>();
-
         /// <inheritDoc/>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
@@ -50,11 +47,11 @@ namespace Innoactive.Hub.Training.Utils.Serialization
                 }
                 catch (Exception ex)
                 {
-                    logger.Error("Exception occured while trying to parse a color.", ex);
+                    Debug.LogErrorFormat("Exception occured while trying to parse a color.\n{0}", ex.Message);
                     return Color.magenta;
                 }
             }
-            logger.Warn("Can't read/parse color from JSON.");
+            Debug.LogWarning("Can't read/parse color from JSON.");
             return Color.magenta;
         }
 
