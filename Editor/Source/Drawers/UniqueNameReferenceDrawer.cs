@@ -2,7 +2,6 @@ using System;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using Common.Logging;
 using Innoactive.Hub.Training.Utils;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.Editors.Utils;
@@ -21,8 +20,6 @@ namespace Innoactive.Hub.Training.Editors.Drawers
     [DefaultTrainingDrawer(typeof(UniqueNameReference))]
     public class UniqueNameReferenceDrawer : AbstractDrawer
     {
-        private static readonly ILog logger = LogManager.GetLogger<UniqueNameReferenceDrawer>();
-
         private bool isUndoOperation;
         private const string undoGroupName = "brotcat";
 
@@ -88,7 +85,7 @@ namespace Innoactive.Hub.Training.Editors.Drawers
 
                 if (gameObject == null)
                 {
-                    logger.WarnFormat("{0} with Unique Name \"{1}\" could not be found.", valueType.Name, objectUniqueName);
+                    Debug.LogWarningFormat("{0} with Unique Name \"{1}\" could not be found.", valueType.Name, objectUniqueName);
                 }
 
                 return gameObject;
@@ -146,7 +143,7 @@ namespace Innoactive.Hub.Training.Editors.Drawers
                 return sceneObject.UniqueName;
             }
 
-            logger.WarnFormat("Game Object \"{0}\" does not have a Training Scene Object component.", selectedSceneObject.name);
+            Debug.LogWarningFormat("Game Object \"{0}\" does not have a Training Scene Object component.", selectedSceneObject.name);
             return string.Empty;
         }
 
@@ -159,7 +156,7 @@ namespace Innoactive.Hub.Training.Editors.Drawers
                 return trainingProperty.SceneObject.UniqueName;
             }
 
-            logger.WarnFormat("Scene Object \"{0}\" with Unique Name \"{1}\" does not have a {2} component.", selectedTrainingPropertyObject.name, oldUniqueName, valueType.Name);
+            Debug.LogWarningFormat("Scene Object \"{0}\" with Unique Name \"{1}\" does not have a {2} component.", selectedTrainingPropertyObject.name, oldUniqueName, valueType.Name);
             return string.Empty;
         }
 

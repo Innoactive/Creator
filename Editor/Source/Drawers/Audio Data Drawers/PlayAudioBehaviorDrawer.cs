@@ -1,12 +1,12 @@
 using System;
+using UnityEngine;
 using Innoactive.Hub.Training.Audio;
 using Innoactive.Hub.Training.Behaviors;
-using UnityEngine;
 
 namespace Innoactive.Hub.Training.Editors.Drawers
 {
     /// <summary>
-    /// Default drawer for <see cref="PlayAudioBehavior"/>. It changes displayed name to "Play TTS Audio" or "Play Audio File", depending on which AudioData is used.
+    /// Default drawer for <see cref="PlayAudioBehavior"/>. It sets displayed name to "Play Audio File".
     /// </summary>
     [DefaultTrainingDrawer(typeof(PlayAudioBehavior.EntityData))]
     public class PlayAudioBehaviorDrawer : NameableDrawer
@@ -19,11 +19,6 @@ namespace Innoactive.Hub.Training.Editors.Drawers
             if (behavior == null)
             {
                 return base.GetTypeNameLabel(value, declaredType);
-            }
-
-            if (behavior.AudioData is TextToSpeechAudio)
-            {
-                return new GUIContent("Play TTS Audio");
             }
 
             if (behavior.AudioData is ResourceAudio)

@@ -1,12 +1,10 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Runtime.Serialization;
-using Common.Logging;
 using Innoactive.Hub.Training.Audio;
 using Innoactive.Hub.Training.Attributes;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.Configuration.Modes;
-using UnityEngine;
-using LogManager = Innoactive.Hub.Logging.LogManager;
 
 namespace Innoactive.Hub.Training.Behaviors
 {
@@ -63,7 +61,7 @@ namespace Innoactive.Hub.Training.Behaviors
                     }
                     else
                     {
-                        logger.Warn("AudioData has no audio clip.");
+                        Debug.LogWarning("AudioData has no audio clip.");
                     }
                 }
             }
@@ -93,21 +91,19 @@ namespace Innoactive.Hub.Training.Behaviors
             }
         }
 
-        private static readonly ILog logger = LogManager.GetLogger<PlayAudioBehavior>();
-
         protected PlayAudioBehavior() : this(null, BehaviorExecutionStages.None)
         {
         }
 
         public PlayAudioBehavior(IAudioData audioData, BehaviorExecutionStages executionStages, AudioSource audioPlayer = null, string name = "Play Audio")
         {
-            Data = new EntityData()
+            Data = new EntityData
             {
                 AudioData = audioData,
                 ExecutionStages = executionStages,
                 AudioPlayer = audioPlayer,
                 Name = name,
-                IsBlocking = true,
+                IsBlocking = true
             };
         }
 

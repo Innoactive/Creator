@@ -2,9 +2,9 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using CommandLine;
-using Innoactive.Hub.Config;
 using Innoactive.Hub.Utils;
+using CommandLine;
+using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ namespace Innoactive.Hub.Training.Editors.Utils
             public string Config { get; set; }
         }
 
-        internal class ExportConfig : ConfigBase
+        private class ExportConfig
         {
             public string AssetDirectory = "Assets";
             public string Version = "v0.0.0";
@@ -43,7 +43,18 @@ namespace Innoactive.Hub.Training.Editors.Utils
             }
 
             ExportConfig config = new ExportConfig();
-            config = JsonConfigFileManager.Load(config, configPath);
+
+            try
+            {
+                string jsonFile = File.ReadAllText(configPath);
+                config = JsonConvert.DeserializeObject<ExportConfig>(jsonFile);
+
+                Debug.Log("Config file successfully loaded");
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarningFormat("Config file at {0} found, but could not be read. Using default configuration. Exception occuring: '{1}'", configPath, e.GetType().Name);
+            }
 
             if (string.IsNullOrEmpty(config.VersionFilename) == false)
             {
@@ -52,22 +63,23 @@ namespace Innoactive.Hub.Training.Editors.Utils
 
             // Create the output directory if it doesn't exist yet.
             string outputDirectory = Path.GetDirectoryName(config.OutputPath.Replace('/', '\\'));
+
             if (string.IsNullOrEmpty(outputDirectory) == false && Directory.Exists(outputDirectory) == false)
             {
                 Directory.CreateDirectory(outputDirectory);
             }
 
             string[] exportedPaths = GetAssetPathsToExport(config);
-
             AssetDatabase.ExportPackage(exportedPaths, config.OutputPath.Replace('/', '\\'), ExportPackageOptions.Default);
         }
 
         private static string[] GetAssetPathsToExport(ExportConfig config)
         {
             string root = config.AssetDirectory;
+
             if (root.Last() != '/')
             {
-                root = root + '/';
+                root += '/';
             }
 
             string[] assetPathsInRootDirectory = AssetDatabase.GetAllAssetPaths().Where(assetPath => assetPath.StartsWith(root)).ToArray();
@@ -81,6 +93,7 @@ namespace Innoactive.Hub.Training.Editors.Utils
             File.WriteAllText(UnityAssetPathToAbsoluteWindowsPath(path), content);
             AssetDatabase.ImportAsset(path);
             TextAsset versionFile = AssetDatabase.LoadAssetAtPath<TextAsset>(path);
+
             if (versionFile != null)
             {
                 EditorUtility.SetDirty(versionFile);
@@ -94,6 +107,7 @@ namespace Innoactive.Hub.Training.Editors.Utils
             {
                 throw new Exception("The specified Unity path is not relative to the Project root directory");
             }
+
             // prepend the path to the unity assets folder
             // replace forward by backward slashes
             return Path.Combine(Application.dataPath.Replace("/", @"\"), unityPath.Substring("Assets/".Length).Replace("/", @"\"));

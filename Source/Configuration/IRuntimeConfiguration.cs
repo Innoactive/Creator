@@ -1,11 +1,9 @@
+using UnityEngine;
 using System;
 using System.Collections.ObjectModel;
-using Common.Logging;
-using Innoactive.Hub.TextToSpeech;
-using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.SceneObjects;
+using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.Utils.Serialization;
-using UnityEngine;
 
 namespace Innoactive.Hub.Training.Configuration
 {
@@ -45,15 +43,10 @@ namespace Innoactive.Hub.Training.Configuration
         AudioSource InstructionPlayer { get; }
 
         /// <summary>
-        /// Text to speech configuration.
-        /// </summary>
-        TextToSpeechConfig TextToSpeechConfig { get; set; }
-
-        /// <summary>
         /// Returns the training entity state logger.
         /// It logs the activity of all activated entities in the console.
         /// </summary>
-        ILog EntityStateLogger { get; set; }
+        ILogger EntityStateLogger { get; set; }
 
         /// <summary>
         /// Configuration of the training entity state logger.

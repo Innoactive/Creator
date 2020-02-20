@@ -1,15 +1,13 @@
 using System;
-using Common.Logging;
-using Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester;
 using UnityEditor;
+using UnityEngine;
+using Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester;
 
 namespace Innoactive.Hub.Training.Editors.Windows
 {
     [InitializeOnLoad]
     public static class AssemblyUnloadDetector
     {
-        private static readonly ILog logger = Logging.LogManager.GetLogger(typeof(AssemblyUnloadDetector));
-
         static AssemblyUnloadDetector()
         {
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
@@ -58,7 +56,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
             }
             catch (Exception e)
             {
-                logger.Error(e);
+                Debug.LogError(e);
 
                 if (EditorApplication.isPlaying == false && EditorApplication.isPlayingOrWillChangePlaymode)
                 {

@@ -1,17 +1,15 @@
 using System;
 using System.IO;
-using Common.Logging;
+using UnityEditor;
+using UnityEngine;
 using Innoactive.Creator.Core.Editor.Source.Utils;
 using Innoactive.Hub.Training.Editors.Configuration;
 using Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester;
-using UnityEditor;
 
 namespace Innoactive.Hub.Training.Editors.Windows
 {
     public static class SaveManager
     {
-        private static readonly ILog logger = Logging.LogManager.GetLogger(typeof(SaveManager));
-
         /// <summary>
         /// Save the training to given path.
         /// </summary>
@@ -41,7 +39,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
             catch (Exception e)
             {
                 TestableEditorElements.DisplayDialog("Error while saving the training course!", e.ToString(), "Close");
-                logger.Error(e);
+                Debug.LogError(e);
                 return false;
             }
         }

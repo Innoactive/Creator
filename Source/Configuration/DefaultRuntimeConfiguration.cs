@@ -1,16 +1,12 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using Common.Logging;
-using Innoactive.Hub.Config;
-using Innoactive.Hub.TextToSpeech;
-using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.Exceptions;
 using Innoactive.Hub.Training.SceneObjects;
+using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.Utils.Serialization;
 using UnityEngine;
-using LogManager = Innoactive.Hub.Logging.LogManager;
 
 namespace Innoactive.Hub.Training.Configuration
 {
@@ -19,16 +15,13 @@ namespace Innoactive.Hub.Training.Configuration
     /// </summary>
     public class DefaultRuntimeConfiguration : IRuntimeConfiguration
     {
-        private static readonly ILog logger = LogManager.GetLogger<DefaultRuntimeConfiguration>();
-
         private AudioSource instructionPlayer;
-        private TextToSpeechConfig textToSpeechConfig;
         private ISceneObjectRegistry sceneObjectRegistry;
         private int currentModeIndex = 0;
         private string selectedCourseStreamingAssetsPath;
-        private static ILog entityStateLogger = LogManager.GetLogger("TrainingCourseTracker");
+        private static ILogger entityStateLogger = Debug.unityLogger;
 
-        private EntityStateLoggerConfig entityStateLoggerConfig = new EntityStateLoggerConfig()
+        private EntityStateLoggerConfig entityStateLoggerConfig = new EntityStateLoggerConfig
         {
             LogSteps = true,
             LogChapters = true,
@@ -72,7 +65,7 @@ namespace Innoactive.Hub.Training.Configuration
                 else
                 {
                     currentModeIndex = Mathf.Clamp(value, 0, modeCount);
-                    logger.WarnFormat("You tried to set the current training mode index to {0}. Use a valid non-negative index counting from 0. There are currently {1} modes available. The index was clamped to {2}.", value, modeCount, currentModeIndex);
+                    Debug.LogWarningFormat("You tried to set the current training mode index to {0}. Use a valid non-negative index counting from 0. There are currently {1} modes available. The index was clamped to {2}.", value, modeCount, currentModeIndex);
                 }
             }
         }
@@ -140,20 +133,7 @@ namespace Innoactive.Hub.Training.Configuration
         }
 
         /// <inheritdoc />
-        public virtual TextToSpeechConfig TextToSpeechConfig
-        {
-            get
-            {
-                return textToSpeechConfig;
-            }
-            set
-            {
-                textToSpeechConfig = value;
-            }
-        }
-
-        /// <inheritdoc />
-        public virtual ILog EntityStateLogger
+        public virtual ILogger EntityStateLogger
         {
             get
             {
@@ -227,15 +207,6 @@ namespace Innoactive.Hub.Training.Configuration
         public virtual int GetCurrentModeIndex()
         {
             return CurrentModeIndex;
-        }
-
-        public DefaultRuntimeConfiguration()
-        {
-            TextToSpeechConfig config = new TextToSpeechConfig();
-            if (config.Exists())
-            {
-                textToSpeechConfig = config.Load();
-            }
         }
     }
 }

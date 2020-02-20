@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Common.Logging;
 using NUnit.Framework;
 using UnityEngine.TestTools;
 using Innoactive.Hub.Training.Utils;
@@ -16,8 +15,6 @@ namespace Innoactive.Hub.Unity.Tests.Training
 {
     public class TrainingPropertyTests : RuntimeTests
     {
-        private static readonly ILog logger = LogManager.GetLogger<TrainingPropertyTests>();
-
         public static IEnumerable<Type> TrainingProperties
         {
             get { return ReflectionUtils.GetConcreteImplementationsOf(typeof(TrainingSceneObjectProperty)).Where(type => type.IsPublic); }
@@ -107,7 +104,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
 
             if (trainingProperty == null)
             {
-                logger.WarnFormat("AddPropertyWithItsDependencies from {0} was ignored because no TrainingProperties with dependencies could be found.", GetType().Name);
+                Debug.LogWarningFormat("AddPropertyWithItsDependencies from {0} was ignored because no TrainingProperties with dependencies could be found.", GetType().Name);
                 Assert.Ignore();
             }
 
@@ -125,7 +122,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
 
             if (trainingProperty == null)
             {
-                logger.WarnFormat("RemovePropertyAndDependencies from {0} was ignored because no TrainingProperties with dependencies could be found.", GetType().Name);
+                Debug.LogWarningFormat("RemovePropertyAndDependencies from {0} was ignored because no TrainingProperties with dependencies could be found.", GetType().Name);
                 Assert.Ignore();
             }
 
@@ -156,7 +153,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
 
             if (trainingProperty == null || dependantType == null)
             {
-                logger.WarnFormat("AddPropertyAndRemoveDependency from {0} was ignored because no TrainingProperties with dependencies as ISceneObjectProperty could be found.", GetType().Name);
+                Debug.LogWarningFormat("AddPropertyAndRemoveDependency from {0} was ignored because no TrainingProperties with dependencies as ISceneObjectProperty could be found.", GetType().Name);
                 Assert.Ignore();
             }
 
@@ -186,7 +183,7 @@ namespace Innoactive.Hub.Unity.Tests.Training
 
             if (trainingProperty == null)
             {
-                logger.WarnFormat("RemovePropertyAndDependencies from {0} was ignored because no TrainingProperties with dependencies could be found.", GetType().Name);
+                Debug.LogWarningFormat("RemovePropertyAndDependencies from {0} was ignored because no TrainingProperties with dependencies could be found.", GetType().Name);
                 Assert.Ignore();
             }
 
