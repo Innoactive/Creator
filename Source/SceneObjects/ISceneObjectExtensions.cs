@@ -83,17 +83,19 @@ namespace Innoactive.Hub.Training.SceneObjects.Properties
 
             ISceneObjectProperty sceneObjectProperty = sceneObject.GameObject.GetComponent(trainingProperty) as ISceneObjectProperty;
 
-            if (sceneObjectProperty == null)
+            if (sceneObjectProperty != null)
             {
-                if (trainingProperty.IsInterface)
-                {
-                    // If it is an interface just take the first found concrete implementation.
-                    sceneObjectProperty = sceneObject.GameObject.AddComponent(ReflectionUtils.GetConcreteImplementationsOf(trainingProperty).First()) as ISceneObjectProperty;
-                }
-                else
-                {
-                    sceneObjectProperty = sceneObject.GameObject.AddComponent(trainingProperty) as ISceneObjectProperty;
-                }
+                return sceneObjectProperty;
+            }
+
+            if (trainingProperty.IsInterface)
+            {
+                // If it is an interface just take the first found concrete implementation.
+                sceneObjectProperty = sceneObject.GameObject.AddComponent(ReflectionUtils.GetConcreteImplementationsOf(trainingProperty).First()) as ISceneObjectProperty;
+            }
+            else
+            {
+                sceneObjectProperty = sceneObject.GameObject.AddComponent(trainingProperty) as ISceneObjectProperty;
             }
 
             return sceneObjectProperty;
