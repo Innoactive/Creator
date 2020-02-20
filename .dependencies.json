@@ -8,7 +8,7 @@
         {
             "name": "Components\\Text-To-Speech",
             "repository": "git@github.com:Innoactive/TextToSpeech-Component.git",
-            "branch": "feature/decouple-text-to-speech-from-core-TRNG-643"
+            "branch": "develop-2019"
         }
     ]
 }
