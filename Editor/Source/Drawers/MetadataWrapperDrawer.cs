@@ -3,13 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Common.Logging;
 using Innoactive.Hub.Training.Attributes;
 using Innoactive.Hub.Training.Editors.Utils;
 using Innoactive.Hub.Training.Utils;
 using UnityEditor;
 using UnityEngine;
-using LogManager = Innoactive.Hub.Logging.LogManager;
 
 namespace Innoactive.Hub.Training.Editors.Drawers
 {
@@ -21,8 +19,6 @@ namespace Innoactive.Hub.Training.Editors.Drawers
     [DefaultTrainingDrawer(typeof(MetadataWrapper))]
     public class MetadataWrapperDrawer : AbstractDrawer
     {
-        private static readonly ILog logger = LogManager.GetLogger<MetadataWrapperDrawer>();
-
         private readonly string separatedName = typeof(SeparatedAttribute).FullName;
         private readonly string deletableName = typeof(DeletableAttribute).FullName;
         private readonly string foldableName = typeof(FoldableAttribute).FullName;
@@ -193,7 +189,7 @@ namespace Innoactive.Hub.Training.Editors.Drawers
 
             if (dataOwner == null)
             {
-                logger.Error("The target property of the DrawIsBlockingToggleAttribute has to implement IDataOwner.");
+                Debug.LogError("The target property of the DrawIsBlockingToggleAttribute has to implement IDataOwner.");
                 return rect;
             }
 
@@ -220,7 +216,7 @@ namespace Innoactive.Hub.Training.Editors.Drawers
             {
                 if (wrapper.Value != null)
                 {
-                    logger.Warn("ExtendableListAttribute can be used only with IList members.");
+                    Debug.LogWarning("ExtendableListAttribute can be used only with IList members.");
                 }
 
                 return rect;
@@ -271,7 +267,7 @@ namespace Innoactive.Hub.Training.Editors.Drawers
             {
                 if (wrapper.Value != null)
                 {
-                    logger.Warn("ListOfAttribute can be used only with IList members.");
+                    Debug.LogWarning("ListOfAttribute can be used only with IList members.");
                 }
 
                 return rect;

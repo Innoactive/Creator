@@ -5,11 +5,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEditor;
 using UnityEngine;
-using Common.Logging;
 using Innoactive.Hub.Training.Editors.Utils;
-using Innoactive.Hub.Training.Unity.Utils;
 using Innoactive.Hub.Training.Utils;
-using LogManager = Innoactive.Hub.Logging.LogManager;
 
 namespace Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester.Windows
 {
@@ -18,8 +15,6 @@ namespace Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester.Windows
     /// </summary>
     public sealed class EditorImguiTestsExplorer : EditorWindow
     {
-        private static readonly ILog logger = LogManager.GetLogger<EditorImguiTestsExplorer>();
-
         private class TestMetadata
         {
             public TestState State { get; set; }
@@ -106,7 +101,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester.Windows
             }
             catch (Exception e)
             {
-                logger.ErrorFormat("Test {0} failed:", e, executedTest.GetType().GetNameWithNesting());
+                Debug.LogErrorFormat("Test {0} failed: {1}", executedTest.GetType().GetNameWithNesting(), e.Message);
                 testMetadatas[executedTest].State = TestState.Failed;
                 isTestRunning = false;
             }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
-using Common.Logging;
 using Innoactive.Hub.Training.Behaviors;
 using Innoactive.Hub.Training.Conditions;
 using Innoactive.Hub.Training.Editors.Utils.Serialization;
@@ -22,8 +21,6 @@ namespace Innoactive.Hub.Training.Editors.Configuration
     [DataContract(IsReference = true)]
     public class AllowedMenuItemsSettings
     {
-        private static readonly ILog logger = Logging.LogManager.GetLogger<AllowedMenuItemsSettings>();
-
         private IList<Menu.Item<IBehavior>> behaviorMenuItems;
         private IList<Menu.Item<ICondition>> conditionMenuItems;
 
@@ -86,7 +83,7 @@ namespace Innoactive.Hub.Training.Editors.Configuration
         {
             if (string.IsNullOrEmpty(EditorConfigurator.Instance.AllowedMenuItemsSettingsAssetPath))
             {
-                logger.InfoFormat("The property \"AllowedMenuItemsSettingsAssetPath\" of the " +
+                Debug.LogFormat("The property \"AllowedMenuItemsSettingsAssetPath\" of the " +
                     "current editor configuration is not set. Thus, the AllowedMenuItemsSettings cannot be saved.");
                 return false;
             }
@@ -96,7 +93,7 @@ namespace Innoactive.Hub.Training.Editors.Configuration
 
             if (path.StartsWith(assets) == false)
             {
-                logger.ErrorFormat("The property \"AllowedMenuItemsSettingsAssetPath\" of the current editor configuration" +
+                Debug.LogErrorFormat("The property \"AllowedMenuItemsSettingsAssetPath\" of the current editor configuration" +
                     " is invalid. It has to start with \"{0}\". Current value: \"{1}\"", assets, path);
                 return false;
             }
@@ -116,7 +113,7 @@ namespace Innoactive.Hub.Training.Editors.Configuration
 
                 if (string.IsNullOrEmpty(directoryPath))
                 {
-                    logger.ErrorFormat("No valid directory path found in path \"{0}\". The property \"AllowedMenuItemSettingsAssetPath\"" +
+                    Debug.LogErrorFormat("No valid directory path found in path \"{0}\". The property \"AllowedMenuItemSettingsAssetPath\"" +
                         " of the current editor configuration is invalid. Current value: \"{1}\"", fullPath, path);
                     return false;
                 }
@@ -136,7 +133,7 @@ namespace Innoactive.Hub.Training.Editors.Configuration
             }
             catch (Exception e)
             {
-                logger.Error(e);
+                Debug.LogError(e);
                 return false;
             }
         }
@@ -151,7 +148,7 @@ namespace Innoactive.Hub.Training.Editors.Configuration
             string path = EditorConfigurator.Instance.AllowedMenuItemsSettingsAssetPath;
             if (string.IsNullOrEmpty(path))
             {
-                logger.Info("The property \"AllowedMenuItemsSettingsAssetPath\" of the current editor " +
+                Debug.Log("The property \"AllowedMenuItemsSettingsAssetPath\" of the current editor " +
                     "configuration is not set. Therefore, it cannot be loaded. A new \"AllowedMenuItemsSettings\" " +
                     "object with all found conditions and behaviors was returned.");
                 return new AllowedMenuItemsSettings();
@@ -164,7 +161,7 @@ namespace Innoactive.Hub.Training.Editors.Configuration
                 return JsonEditorConfigurationSerializer.Deserialize(settings.text);
             }
 
-            logger.InfoFormat("There is no serialized \"AllowedMenuItemsSettings\" object saved at \"{0}\". A new " +
+            Debug.LogFormat("There is no serialized \"AllowedMenuItemsSettings\" object saved at \"{0}\". A new " +
                 "\"AllowedMenuItemsSettings\" object with all found conditions and behaviors was returned.", path);
             return new AllowedMenuItemsSettings();
         }

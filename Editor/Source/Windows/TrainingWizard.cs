@@ -1,9 +1,8 @@
 ﻿using System.IO;
-using Common.Logging;
-using Innoactive.Creator.Core.Editor.Source.Utils;
-using Innoactive.Hub.Training.Configuration;
 using UnityEditor;
 using UnityEngine;
+using Innoactive.Creator.Core.Editor.Source.Utils;
+using Innoactive.Hub.Training.Configuration;
 
 namespace Innoactive.Hub.Training.Editors.Windows
 {
@@ -12,7 +11,6 @@ namespace Innoactive.Hub.Training.Editors.Windows
     /// </summary>
     public class TrainingWizard : EditorWindow
     {
-        private static readonly ILog logger = Logging.LogManager.GetLogger<TrainingWizard>();
         private static TrainingWizard window;
         private const string menuPath = "Innoactive/Creator/Create New Course...";
 
@@ -29,7 +27,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
                     {
                         openedTrainingWizards[i].Close();
                     }
-                    logger.Warn("There were more than one create course windows open. This should not happen. The redundant windows were closed.");
+                    Debug.LogWarning("There were more than one create course windows open. This should not happen. The redundant windows were closed.");
                 }
 
                 window = openedTrainingWizards.Length > 0 ? openedTrainingWizards[0] : GetWindow<TrainingWizard>();

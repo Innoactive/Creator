@@ -1,7 +1,6 @@
 ﻿#if UNITY_EDITOR
 
 using System.Collections;
-using Innoactive.Hub.SDK.Models;
 using Innoactive.Hub.Training;
 using Innoactive.Hub.Training.Configuration;
 using UnityEngine.Assertions;

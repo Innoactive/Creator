@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-using Innoactive.Hub.Logging;
 using Innoactive.Hub.Training.Exceptions;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.SceneObjects.Properties;
@@ -12,8 +11,6 @@ namespace Innoactive.Hub.Training.SceneObjects
     [ExecuteInEditMode]
     public class TrainingSceneObject : MonoBehaviour, ISceneObject
     {
-        private static readonly Common.Logging.ILog logger = LogManager.GetLogger<TrainingSceneObject>();
-
         public event EventHandler<LockStateChangedEventArgs> Locked;
         public event EventHandler<LockStateChangedEventArgs> Unlocked;
         public event EventHandler<SceneObjectNameChanged> UniqueNameChanged;
@@ -108,7 +105,7 @@ namespace Innoactive.Hub.Training.SceneObjects
                 // ReSharper disable once InvertIf
                 if (CheckHasProperty(propertyType) == false)
                 {
-                    logger.ErrorFormat("Property of type '{0}' is not attached to SceneObject '{1}'", propertyType.Name, UniqueName);
+                    Debug.LogErrorFormat("Property of type '{0}' is not attached to SceneObject '{1}'", propertyType.Name, UniqueName);
                     hasFailed = true;
                 }
             }
@@ -162,7 +159,7 @@ namespace Innoactive.Hub.Training.SceneObjects
 
             if (RuntimeConfigurator.Configuration.SceneObjectRegistry.ContainsName(newName))
             {
-                logger.ErrorFormat("An object with a name '{0}' is already registered. The new name is ignored. The name is still '{1}'.", newName, UniqueName);
+                Debug.LogErrorFormat("An object with a name '{0}' is already registered. The new name is ignored. The name is still '{1}'.", newName, UniqueName);
                 return;
             }
 

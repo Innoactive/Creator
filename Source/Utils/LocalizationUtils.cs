@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using UnityEngine;
+using Innoactive.Creator.Internationalization;
 
 namespace Innoactive.Hub.Training.Utils
 {
+    /// <summary>
+    /// Collection of localization utilities.
+    /// </summary>
     public static class LocalizationUtils
     {
         private const string defaultIsoCode = "en";
@@ -15,12 +19,7 @@ namespace Innoactive.Hub.Training.Utils
         /// </summary>
         public static LocalizedString Clone(this LocalizedString original)
         {
-            if (original == null)
-            {
-                return null;
-            }
-
-            return new LocalizedString(original.Key, original.DefaultText, original.FormatParams == null ? null : original.FormatParams.ToArray());
+            return original == null ? null : new LocalizedString(original.Key, original.DefaultText, original.FormatParams?.ToArray());
         }
 
         /// <summary>
