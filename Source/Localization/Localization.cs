@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
+using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
 
 namespace Innoactive.Creator.Internationalization
 {
@@ -11,41 +11,48 @@ namespace Innoactive.Creator.Internationalization
     /// </summary>
     public static class Localization
     {
-        public delegate void LocaleChanged(string newLocale, string oldLocale);
-        public static LocaleChanged OnLocaleChanged;
-
+        /// <summary>
+        /// Dictionary with all registered localizations.
+        /// </summary>
         public static Dictionary<string, string> entries = new Dictionary<string, string>();
 
         private const string missingTranslationText = "[Missing Translation]";
 
         /// <summary>
-        /// Loads
+        /// Loads a localization file from given <paramref name="path"/>.
         /// </summary>
-        public static void LoadLocalization(string path)
+        /// <returns>True if the localization file was loaded successfully.</returns>
+        public static bool LoadLocalization(string path)
         {
-            if (File.Exists(path))
+            if (File.Exists(path) == false)
             {
-                try
-                {
-                    entries = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(path));
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogWarning(ex);
-                }
+                return false;
             }
 
-            if (entries == null)
+            try
             {
-                entries = new Dictionary<string, string>();
+                entries = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(path));
+                return true;
             }
+            catch (Exception ex)
+            {
+                Debug.LogWarning(ex);
+            }
+
+            return false;
         }
 
+        /// <summary>
+        /// Retrieves a localized string from loaded <see cref="entries"/>.
+        /// </summary>
         public static string Get(LocalizedString query)
         {
             return GetFormat(query.Key, query.DefaultText, query.FormatParams);
         }
 
+        /// <summary>
+        /// Retrieves a localized string from loaded <see cref="entries"/>.
+        /// </summary>
         public static string Get(string nameWithScope, string defaultString = missingTranslationText)
         {
             if (entries.TryGetValue(nameWithScope, out string res))
@@ -60,21 +67,33 @@ namespace Innoactive.Creator.Internationalization
             return defaultString;
         }
 
+        /// <summary>
+        /// Retrieves a localized string from loaded <see cref="entries"/>.
+        /// </summary>
         public static string GetFormat(string nameWithScope, params object[] args)
         {
             return string.Format(Get(nameWithScope), args);
         }
 
+        /// <summary>
+        /// Retrieves a formatted localized string from loaded <see cref="entries"/>.
+        /// </summary>
         public static string GetFormat(string nameWithScope, string defaultString, params object[] args)
         {
             return string.Format(Get(nameWithScope, defaultString), args);
         }
 
+        /// <summary>
+        /// Retrieves a formatted localized string from loaded <see cref="entries"/>.
+        /// </summary>
         public static string GetFormat(string nameWithScope, string[] args)
         {
             return string.Format(Get(nameWithScope), args);
         }
 
+        /// <summary>
+        /// Retrieves a formatted localized string from loaded <see cref="entries"/>.
+        /// </summary>
         public static string GetFormat(string nameWithScope, string defaultString, string[] args)
         {
             return string.Format(Get(nameWithScope, defaultString), args);
