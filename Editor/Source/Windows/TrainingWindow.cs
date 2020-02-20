@@ -1,13 +1,11 @@
 ﻿using System;
 using System.IO;
-using Common.Logging;
-using Innoactive.Hub.Training.Editors.Configuration;
-using Innoactive.Hub.Training.Editors.Utils;
-using Innoactive.Hub.Training.Editors.Utils.Undo;
-using Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester;
 using UnityEditor;
 using UnityEngine;
-using LogManager = Innoactive.Hub.Logging.LogManager;
+using Innoactive.Hub.Training.Editors.Utils;
+using Innoactive.Hub.Training.Editors.Utils.Undo;
+using Innoactive.Hub.Training.Editors.Configuration;
+using Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester;
 
 namespace Innoactive.Hub.Training.Editors.Windows
 {
@@ -16,7 +14,6 @@ namespace Innoactive.Hub.Training.Editors.Windows
     /// </summary>
     public class TrainingWindow : EditorWindow
     {
-        private static readonly ILog logger = LogManager.GetLogger<TrainingWindow>();
         private static TrainingWindow window;
         private ICourse activeCourse;
 
@@ -206,7 +203,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
                 }
                 catch (Exception e)
                 {
-                    logger.Error("Couldn't restore the training course state.", e);
+                    Debug.LogErrorFormat("Couldn't restore the training course state.\n{0}", e.Message);
                 }
             }
         }

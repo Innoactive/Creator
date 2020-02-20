@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using Common.Logging;
+using UnityEngine;
 
 namespace Innoactive.Hub.Training.Attributes
 {
@@ -21,9 +21,7 @@ namespace Innoactive.Hub.Training.Attributes
 
             [DataMember]
             public List<Dictionary<string, object>> ChildMetadata { get; set; }
-        }
-
-        private static readonly ILog logger = LogManager.GetLogger<ListOfAttribute>();
+        };
 
         private readonly List<MetadataAttribute> childAttributes;
 
@@ -34,7 +32,7 @@ namespace Innoactive.Hub.Training.Attributes
 
             if (uniqueTypes.Length != childAttributes.Length)
             {
-                logger.Error("Child attributes of ListOf attribute have to be unique. Duplicates are omitted.");
+                Debug.LogError("Child attributes of ListOf attribute have to be unique. Duplicates are omitted.");
             }
 
             this.childAttributes = new List<MetadataAttribute>(uniqueTypes.Where(attribute => (typeof(MetadataAttribute).IsAssignableFrom(attribute)))
