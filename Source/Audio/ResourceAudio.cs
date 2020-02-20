@@ -55,9 +55,9 @@ namespace Innoactive.Hub.Training.Audio
                 return;
             }
 
-            if (path?.Value == null)
+            if (path == null || path.Value == null)
             {
-                Debug.LogWarningFormat("Path to audiofile is not defined.");
+                Debug.LogWarningFormat("Path to audio file is not defined.");
                 return;
             }
 
