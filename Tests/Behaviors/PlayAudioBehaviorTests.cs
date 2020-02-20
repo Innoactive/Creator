@@ -5,7 +5,7 @@ using Innoactive.Hub.Training.Audio;
 using Innoactive.Hub.Training;
 using Innoactive.Hub.Training.Behaviors;
 using Innoactive.Hub.Training.Configuration;
-using Innoactive.Creator.Localization;
+using Innoactive.Creator.Internationalization;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;

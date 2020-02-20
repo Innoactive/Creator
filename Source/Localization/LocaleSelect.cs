@@ -3,7 +3,7 @@ using System.Threading;
 using UnityEngine;
 
 
-namespace Innoactive.Creator.Localization
+namespace Innoactive.Creator.Internationalization
 {
     public class LocaleSelect : MonoBehaviour
     {

@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace Innoactive.Creator.Localization
+namespace Innoactive.Creator.Internationalization
 {
     [Serializable, DataContract]
     public class LocalizedString

@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-namespace Innoactive.Creator.Localization
+namespace Innoactive.Creator.Internationalization
 {
+    /// <summary>
+    /// This class handles retrieving and managing localization files.
+    /// </summary>
     public static class Localization
     {
         public delegate void LocaleChanged(string newLocale, string oldLocale);
@@ -15,6 +18,9 @@ namespace Innoactive.Creator.Localization
 
         private const string missingTranslationText = "[Missing Translation]";
 
+        /// <summary>
+        /// Loads
+        /// </summary>
         public static void LoadLocalization(string path)
         {
             if (File.Exists(path))
@@ -42,8 +48,7 @@ namespace Innoactive.Creator.Localization
 
         public static string Get(string nameWithScope, string defaultString = missingTranslationText)
         {
-            string res;
-            if (entries.TryGetValue(nameWithScope, out res))
+            if (entries.TryGetValue(nameWithScope, out string res))
             {
                 return res;
             }

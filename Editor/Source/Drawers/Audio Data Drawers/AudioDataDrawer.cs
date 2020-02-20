@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using UnityEngine;
 using Innoactive.Hub.Training.Audio;
-using Innoactive.Creator.Localization;
+using Innoactive.Creator.Internationalization;
 
 namespace Innoactive.Hub.Training.Editors.Drawers
 {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Innoactive.Creator.Localization
+namespace Innoactive.Creator.Internationalization
 {
     [RequireComponent(typeof(UnityEngine.UI.Text))]
     public class LocalizedUIText : MonoBehaviour
