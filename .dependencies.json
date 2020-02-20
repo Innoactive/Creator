@@ -9,6 +9,11 @@
             "name": "Components\\Text-To-Speech",
             "repository": "git@github.com:Innoactive/TextToSpeech-Component.git",
             "branch": "develop-2019"
+        },
+        {
+            "name" : "Components\\Basic-Interaction",
+            "repository" : "git@github.com:Innoactive/Basic-Interaction-Component.git",
+            "branch" : "feature/add-logic-layer"
         }
     ]
 }
