@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.Configuration.Modes;
@@ -59,9 +60,9 @@ namespace Innoactive.Hub.Training.Configuration
         ReadOnlyCollection<IMode> AvailableModes { get; }
 
         /// <summary>
-        /// Returns the deserialized training course from <see cref="SelectedCourseStreamingAssetsPath"/>.
+        /// Asynchronously returns the deserialized training course from <see cref="SelectedCourseStreamingAssetsPath"/>.
         /// </summary>
-        ICourse LoadCourse();
+        Task<ICourse> LoadCourse();
 
         /// <summary>
         /// Set the current training mode.
