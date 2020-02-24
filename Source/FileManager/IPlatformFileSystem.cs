@@ -30,7 +30,7 @@ namespace Innoactive.Creator.IO
         bool StreamingAssetsFileExists(string filePath);
 
         /// <summary>
-        /// If exits, this method returns a file from given <paramref name="filePath"/>.
+        /// If exists, this method returns a file from given <paramref name="filePath"/>.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to <see cref="PersistentDataPath"/>.</remarks>
         byte[] GetFileFromPersistentData(string filePath);
