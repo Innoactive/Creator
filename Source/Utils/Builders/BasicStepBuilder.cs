@@ -7,6 +7,7 @@ using Innoactive.Hub.Training.Behaviors;
 using Innoactive.Hub.Training.Conditions;
 using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.Configuration;
+using Innoactive.Hub.Training.SceneObjects.Properties;
 
 namespace Innoactive.Hub.Training.Utils.Builders
 {
@@ -198,7 +199,10 @@ namespace Innoactive.Hub.Training.Utils.Builders
             {
                 foreach (ISceneObject trainingObject in toHighlight)
                 {
-                    Result.Data.Behaviors.Data.Behaviors.Add(new VRTKObjectHighlight(trainingObject));
+                    if (trainingObject.CheckHasProperty<IHighlightProperty>())
+                    {
+                        Result.Data.Behaviors.Data.Behaviors.Add(new HighlightObjectBehavior(trainingObject.GetProperty<IHighlightProperty>()));
+                    }
                 }
             });
 
