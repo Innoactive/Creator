@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Innoactive.Hub.Training.Configuration;
+using Innoactive.Hub.Training.Utils;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -80,7 +81,23 @@ namespace Innoactive.Hub.Training.SceneObjects.Properties
                 return null;
             }
 
-            ISceneObjectProperty sceneObjectProperty = sceneObject.GameObject.GetComponent(trainingProperty) as ISceneObjectProperty ?? sceneObject.GameObject.AddComponent(trainingProperty) as ISceneObjectProperty;
+            ISceneObjectProperty sceneObjectProperty = sceneObject.GameObject.GetComponent(trainingProperty) as ISceneObjectProperty;
+
+            if (sceneObjectProperty != null)
+            {
+                return sceneObjectProperty;
+            }
+
+            if (trainingProperty.IsInterface)
+            {
+                // If it is an interface just take the first found concrete implementation.
+                sceneObjectProperty = sceneObject.GameObject.AddComponent(ReflectionUtils.GetConcreteImplementationsOf(trainingProperty).First()) as ISceneObjectProperty;
+            }
+            else
+            {
+                sceneObjectProperty = sceneObject.GameObject.AddComponent(trainingProperty) as ISceneObjectProperty;
+            }
+
             return sceneObjectProperty;
         }
 
