@@ -18,7 +18,7 @@ namespace Innoactive.Creator.IO
         string PersistentDataPath { get; }
 
         /// <summary>
-        /// If exits, this method returns a file from given <paramref name="filePath"/>.
+        /// If exists, this method returns a file from given <paramref name="filePath"/>.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets folder.</remarks>
         Task<byte[]> GetFileFromStreamingAssets(string filePath);
