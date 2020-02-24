@@ -11,9 +11,9 @@
             "branch": "develop-2019"
         },
         {
-            "name" : "Components\\Basic-Interaction",
-            "repository" : "git@github.com:Innoactive/Basic-Interaction-Component.git",
-            "branch" : "feature/add-logic-layer"
+            "name": "Components\\Basic-Interaction",
+            "repository": "git@github.com:Innoactive/Basic-Interaction-Component.git",
+            "branch": "develop"
         }
     ]
 }
