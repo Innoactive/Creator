@@ -2,9 +2,10 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.Exceptions;
 using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.Configuration.Modes;
+using Innoactive.Hub.Training.SceneObjects.Properties;
 using Innoactive.Hub.Training.Utils.Serialization;
 using UnityEngine;
 
@@ -106,15 +107,14 @@ namespace Innoactive.Hub.Training.Configuration
         {
             get
             {
-                TrainingSceneObject headset = VRTK.VRTK_DeviceFinder.HeadsetTransform().GetComponent<TrainingSceneObject>();
+                TrainingSceneObject trainee = GameObject.FindObjectOfType<TraineeSceneObject>();
 
-                if (headset == null)
+                if (trainee == null)
                 {
-                    headset = VRTK.VRTK_DeviceFinder.HeadsetTransform().gameObject.AddComponent<TrainingSceneObject>();
-                    headset.ChangeUniqueName("Trainee");
+                    throw new Exception("Could not find a TraineeSceneObject in the scene.");
                 }
 
-                return headset;
+                return trainee;
             }
         }
 

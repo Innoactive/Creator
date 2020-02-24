@@ -172,37 +172,6 @@ namespace Innoactive.Hub.Unity.Tests.Training
         }
 
         [UnityTest]
-        public IEnumerator BuildingGrabTest()
-        {
-            // Given a `GrabbableProperty` and a builder for a training with a Grab default step
-            GameObject go = new GameObject("TestGrabbable");
-            TrainingSceneObject to = go.AddComponent<TrainingSceneObject>();
-            go.AddComponent<GrabbableProperty>();
-            to.ChangeUniqueName("Grabbable");
-
-
-            LinearTrainingBuilder builder = new LinearTrainingBuilder("TestTraining")
-                .AddChapter(new LinearChapterBuilder("TestChapter")
-                    .AddStep(DefaultSteps.Grab("TestGrabStep", "Grabbable")));
-
-            // When we build a training from it
-            IStep step = builder.Build().Data.FirstChapter.Data.FirstStep;
-
-            //Then it should has a stap with a GrabbedCondition which refers to the `GrabbableProperty`.
-            Assert.True(step != null);
-            Assert.True(step.Data.Name == "TestGrabStep");
-            Assert.True(step.Data.Transitions.Data.Transitions.First().Data.Conditions.Count == 1);
-            GrabbedCondition condition = step.Data.Transitions.Data.Transitions.First().Data.Conditions.First() as GrabbedCondition;
-
-            Assert.True(ReferenceEquals(to, condition.Data.GrabbableProperty.Value.SceneObject));
-
-            // Cleanup
-            Object.DestroyImmediate(go);
-
-            yield return null;
-        }
-
-        [UnityTest]
         public IEnumerator BuildingColliderPutTest()
         {
             // Given two training scene objects with `ColliderWithTriggerProperty` and a builder for at raining with a PutIntoCollider default step
@@ -239,105 +208,12 @@ namespace Innoactive.Hub.Unity.Tests.Training
         }
 
         [UnityTest]
-        public IEnumerator BuildingSnapZonePutTest()
-        {
-            // Given a snap zone and snappable property and a builder for a training with a PutIntoSnapZone default step
-            GameObject snapZoneGo = new GameObject("SnapZone");
-            TrainingSceneObject snapZone = snapZoneGo.AddComponent<TrainingSceneObject>();
-            snapZoneGo.AddComponent<SnapZoneProperty>();
-            snapZone.ChangeUniqueName("SnapZone");
-
-            GameObject putGo = new GameObject("Puttable");
-            TrainingSceneObject objectToPut = putGo.AddComponent<TrainingSceneObject>();
-            putGo.AddComponent<SnappableProperty>();
-            objectToPut.ChangeUniqueName("ToPut");
-
-            LinearTrainingBuilder builder = new LinearTrainingBuilder("TestTraining")
-                .AddChapter(new LinearChapterBuilder("TestChapter")
-                    .AddStep(DefaultSteps.PutIntoSnapZone("TestSnapZonePutStep", "SnapZone", "ToPut")));
-
-            // When you build a training with it
-            IStep step = builder.Build().Data.FirstChapter.Data.FirstStep;
-
-            // Then it has a step with a SnappedCondition
-            Assert.True(step != null);
-            Assert.True(step.Data.Name == "TestSnapZonePutStep");
-            Assert.True(step.Data.Transitions.Data.Transitions.First().Data.Conditions.Count == 1);
-            Assert.True(step.Data.Transitions.Data.Transitions.First().Data.Conditions.First() is SnappedCondition);
-            Assert.True(ReferenceEquals((step.Data.Transitions.Data.Transitions.First().Data.Conditions.First() as SnappedCondition).Data.Target.Value.SceneObject, objectToPut));
-
-            // Cleanup
-            Object.DestroyImmediate(snapZoneGo);
-            Object.DestroyImmediate(putGo);
-
-            return null;
-        }
-
-        [UnityTest]
-        public IEnumerator BuildingUseTest()
-        {
-            // Given a usable property and a builder for a training with Use default step
-            GameObject usableGo = new GameObject("Usable");
-            TrainingSceneObject usable = usableGo.AddComponent<TrainingSceneObject>();
-            usableGo.AddComponent<UsableProperty>();
-            usable.ChangeUniqueName("Usable");
-
-            LinearTrainingBuilder builder = new LinearTrainingBuilder("TestTraining")
-                .AddChapter(new LinearChapterBuilder("TestChapter")
-                    .AddStep(DefaultSteps.Use("TestUseStep", "Usable")));
-
-            // When you build a training with it
-            IStep step = builder.Build().Data.FirstChapter.Data.FirstStep;
-
-            // Then it has a step with an UsedCondition
-            Assert.True(step != null);
-            Assert.True(step.Data.Name == "TestUseStep");
-            Assert.True(step.Data.Transitions.Data.Transitions.First().Data.Conditions.Count == 1);
-            Assert.True(step.Data.Transitions.Data.Transitions.First().Data.Conditions.First() is UsedCondition);
-            Assert.True(ReferenceEquals((step.Data.Transitions.Data.Transitions.First().Data.Conditions.First() as UsedCondition).Data.UsableProperty.Value.SceneObject, usable));
-
-            // Cleanup
-            Object.DestroyImmediate(usableGo);
-
-            return null;
-        }
-
-        [UnityTest]
-        public IEnumerator BuildingTouchTest()
-        {
-            // Given you have a touchable property and a builder for a training with Touch default step
-            GameObject touchableGo = new GameObject("Touchable");
-            TrainingSceneObject touchable = touchableGo.AddComponent<TrainingSceneObject>();
-            touchableGo.AddComponent<TouchableProperty>();
-            touchable.ChangeUniqueName("Touchable");
-
-            LinearTrainingBuilder builder = new LinearTrainingBuilder("TestTraining")
-                .AddChapter(new LinearChapterBuilder("TestChapter")
-                    .AddStep(DefaultSteps.Touch("TestTouchStep", "Touchable")));
-
-            // When you build a training with it
-            IStep step = builder.Build().Data.FirstChapter.Data.FirstStep;
-
-            // Then it has a step with a TouchCOndition
-            Assert.True(step != null);
-            Assert.True(step.Data.Name == "TestTouchStep");
-            Assert.True(step.Data.Transitions.Data.Transitions.First().Data.Conditions.Count == 1);
-            Assert.True(step.Data.Transitions.Data.Transitions.First().Data.Conditions.First() is TouchedCondition);
-            Assert.True(ReferenceEquals((step.Data.Transitions.Data.Transitions.First().Data.Conditions.First() as TouchedCondition).Data.TouchableProperty.Value.SceneObject, touchable));
-
-            // Cleanup
-            Object.DestroyImmediate(touchableGo);
-
-            return null;
-        }
-
-        [UnityTest]
         public IEnumerator HighlightTest()
         {
             // Given we have a training scene object and a builder for a training with a step with highlight that object
             GameObject go = new GameObject("Highlightable");
-            TrainingSceneObject highlightable = go.AddComponent<TrainingSceneObject>();
-            highlightable.ChangeUniqueName("Highlightable");
+            EnableHighlightProperty highlightable = go.AddComponent<EnableHighlightProperty>();
+            highlightable.SceneObject.ChangeUniqueName("Highlightable");
 
             LinearTrainingBuilder builder = new LinearTrainingBuilder("TestTraining")
                 .AddChapter(new LinearChapterBuilder("TestChapter")
@@ -350,8 +226,9 @@ namespace Innoactive.Hub.Unity.Tests.Training
             // Then we have a step with VRTKObjectHighlight behavior.
             Assert.True(step != null);
             Assert.True(step.Data.Name == "TestHighlightStep");
-            Assert.True(step.Data.Behaviors.Data.Behaviors.First() is VRTKObjectHighlight);
-            Assert.True(ReferenceEquals((step.Data.Behaviors.Data.Behaviors.First() as VRTKObjectHighlight).Data.Target.Value, highlightable));
+            Assert.True(step.Data.Behaviors.Data.Behaviors.First() is HighlightObjectBehavior);
+            Assert.True(ReferenceEquals((step.Data.Behaviors.Data.Behaviors.First() as HighlightObjectBehavior).Data.ObjectToHighlight.Value, highlightable));
+
             // Cleanup
             Object.DestroyImmediate(go);
 

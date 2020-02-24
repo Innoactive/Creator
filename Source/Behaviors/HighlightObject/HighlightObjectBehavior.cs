@@ -49,12 +49,7 @@ namespace Innoactive.Hub.Training.Behaviors
             /// </summary>
             [DataMember]
             [DisplayName("Object to highlight")]
-            public SceneObjectReference Target { get; set; }
-
-            /// <summary>
-            /// <see cref="Innoactive.Hub.Training.SceneObjects.Properties.HighlightProperty"/> of the object to be highlighted.
-            /// </summary>
-            public HighlightProperty HighlightProperty { get; set; }
+            public ScenePropertyReference<IHighlightProperty> ObjectToHighlight { get; set; }
 
             /// <summary>
             /// Metadata used for undo and redo feature.
@@ -70,8 +65,10 @@ namespace Innoactive.Hub.Training.Behaviors
             /// <inheritdoc />
             public override void Start(EntityData data)
             {
-                data.HighlightProperty = data.Target.Value.GameObject.GetComponent<HighlightProperty>(true);
-                data.HighlightProperty.Highlight(data.HighlightColor);
+                if (data.ObjectToHighlight.Value != null)
+                {
+                    data.ObjectToHighlight.Value.Highlight(data.HighlightColor);
+                }
             }
         }
 
@@ -80,9 +77,9 @@ namespace Innoactive.Hub.Training.Behaviors
             /// <inheritdoc />
             public override void Start(EntityData data)
             {
-                if (data.HighlightProperty != null)
+                if (data.ObjectToHighlight.Value != null)
                 {
-                    data.HighlightProperty.Unhighlight();
+                    data.ObjectToHighlight.Value.Unhighlight();
                 }
             }
         }
@@ -104,17 +101,17 @@ namespace Innoactive.Hub.Training.Behaviors
         {
             Data = new EntityData()
             {
-                Target = new SceneObjectReference(sceneObjectName),
+                ObjectToHighlight = new ScenePropertyReference<IHighlightProperty>(sceneObjectName),
                 HighlightColor = highlightColor,
                 Name = name
             };
         }
 
-        public HighlightObjectBehavior(ISceneObject target) : this(target, Color.magenta)
+        public HighlightObjectBehavior(IHighlightProperty target) : this(target, Color.magenta)
         {
         }
 
-        public HighlightObjectBehavior(ISceneObject target, Color highlightColor, string name = "Highlight Object") : this(TrainingReferenceUtils.GetNameFrom(target), highlightColor, name)
+        public HighlightObjectBehavior(IHighlightProperty target, Color highlightColor, string name = "Highlight Object") : this(TrainingReferenceUtils.GetNameFrom(target), highlightColor, name)
         {
         }
 
