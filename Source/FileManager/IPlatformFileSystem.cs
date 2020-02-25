@@ -3,8 +3,9 @@ using System.Threading.Tasks;
 namespace Innoactive.Creator.IO
 {
     /// <summary>
-    /// 
+    /// Interface with basic platform operations for reading and saving files in Unity.
     /// </summary>
+    /// <remarks>Operations are done for the StreamingAssets and platform persistent data folders.</remarks>
     public interface IPlatformFileSystem
     {
         /// <summary>
@@ -18,9 +19,11 @@ namespace Innoactive.Creator.IO
         string PersistentDataPath { get; }
 
         /// <summary>
-        /// If exists, this method returns a file from given <paramref name="filePath"/>.
+        /// Loads a file stored at <paramref name="filePath"/>.
+        /// Returns a `FileNotFoundException` if file does not exist.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets folder.</remarks>
+        /// <returns>An asynchronous operation that returns a byte array containing the contents of the file.</returns>
         Task<byte[]> GetFileFromStreamingAssets(string filePath);
 
         /// <summary>
@@ -30,7 +33,8 @@ namespace Innoactive.Creator.IO
         bool StreamingAssetsFileExists(string filePath);
 
         /// <summary>
-        /// If exists, this method returns a file from given <paramref name="filePath"/>.
+        /// Loads a file stored at <paramref name="filePath"/>.
+        /// Returns a `FileNotFoundException` if file does not exist.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to <see cref="PersistentDataPath"/>.</remarks>
         byte[] GetFileFromPersistentData(string filePath);

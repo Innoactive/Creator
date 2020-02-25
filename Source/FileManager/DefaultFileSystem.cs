@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 namespace Innoactive.Creator.IO
 {
     /// <summary>
-    /// Desktop implementation of <see cref="IPlatformFileSystem"/>.
+    /// Default implementation of <see cref="IPlatformFileSystem"/>.
     /// </summary>
-    public class DesktopFileSystem : IPlatformFileSystem
+    /// <remarks>It works out of the box for most of the Unity's supported platforms.</remarks>
+    public class DefaultFileSystem : IPlatformFileSystem
     {
         private readonly string streamingAssetsPath;
         private readonly string persistentDataPath;
@@ -19,7 +20,7 @@ namespace Innoactive.Creator.IO
         /// <inheritdoc />
         public string PersistentDataPath { get; }
 
-        public DesktopFileSystem(string streamingAssetsPath, string persistentDataPath)
+        public DefaultFileSystem(string streamingAssetsPath, string persistentDataPath)
         {
             this.streamingAssetsPath = streamingAssetsPath;
             this.persistentDataPath = persistentDataPath;

@@ -15,13 +15,14 @@ namespace Innoactive.Creator.IO
         [RuntimeInitializeOnLoadMethod]
         private static void Initialize()
         {
-            platformFileSystem = new DesktopFileSystem(Application.streamingAssetsPath, Application.persistentDataPath);
+            platformFileSystem = new DefaultFileSystem(Application.streamingAssetsPath, Application.persistentDataPath);
         }
 
         /// <summary>
-        /// If exits, this method returns a file from given <paramref name="filePath"/>.
+        /// Loads a file stored at <paramref name="filePath"/>.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets folder.</remarks>
+        /// <returns>An asynchronous operation that returns a byte array containing the contents of the file.</returns>
         public static async Task<byte[]> RetrieveFileFromStreamingAssets(string filePath)
         {
             SystemException exception = ValidatePath(filePath);
@@ -51,7 +52,7 @@ namespace Innoactive.Creator.IO
         }
 
         /// <summary>
-        /// If exits, this method returns a file from given <paramref name="filePath"/>.
+        /// Loads a file stored at <paramref name="filePath"/>.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to <see cref="PersistentDataPath"/>.</remarks>
         public static byte[] RetrieveFileFromPersistentData(string filePath)
