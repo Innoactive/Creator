@@ -177,7 +177,7 @@ namespace Innoactive.Hub.Training.Configuration
             }
 
             string selectedTrainingCourse = RuntimeConfigurator.GetSelectedTrainingCourse();
-            byte[] serialized = await FileManager.RetrieveFileFromStreamingAssets(selectedTrainingCourse);
+            byte[] serialized = await FileManager.Read(selectedTrainingCourse);
 
             ICourse course = Serializer.ToCourse(serialized);
             return course;

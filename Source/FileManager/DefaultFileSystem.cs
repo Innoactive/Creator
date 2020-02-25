@@ -11,25 +11,26 @@ namespace Innoactive.Creator.IO
     /// <remarks>It works out of the box for most of the Unity's supported platforms.</remarks>
     public class DefaultFileSystem : IPlatformFileSystem
     {
-        private readonly string streamingAssetsPath;
-        private readonly string persistentDataPath;
+        /// <summary>
+        /// The path to the platform's StreamingAssets folder (Read Only).
+        /// </summary>
+        protected readonly string StreamingAssetsPath;
 
-        /// <inheritdoc />
-        public string StreamingAssetsPath { get { return streamingAssetsPath; } }
-
-        /// <inheritdoc />
-        public string PersistentDataPath { get { return persistentDataPath; } }
+        /// <summary>
+        /// The path to the platform's persistent data directory (Read Only).
+        /// </summary>
+        protected readonly string PersistentDataPath;
 
         public DefaultFileSystem(string streamingAssetsPath, string persistentDataPath)
         {
-            this.streamingAssetsPath = streamingAssetsPath;
-            this.persistentDataPath = persistentDataPath;
+            StreamingAssetsPath = streamingAssetsPath;
+            PersistentDataPath = persistentDataPath;
         }
 
         /// <inheritdoc />
-        public async Task<byte[]> GetFileFromStreamingAssets(string filePath)
+        public virtual async Task<byte[]> ReadFromStreamingAssets(string filePath)
         {
-            string absolutePath = Path.Combine(streamingAssetsPath, filePath);
+            string absolutePath = Path.Combine(StreamingAssetsPath, filePath);
 
             if (File.Exists(absolutePath) == false)
             {
@@ -43,16 +44,9 @@ namespace Innoactive.Creator.IO
         }
 
         /// <inheritdoc />
-        public bool FileExistsInStreamingAssets(string filePath)
+        public virtual async Task<byte[]> ReadFromPersistentData(string filePath)
         {
-            string absolutePath = Path.Combine(streamingAssetsPath, filePath);
-            return File.Exists(absolutePath);
-        }
-
-        /// <inheritdoc />
-        public byte[] GetFileFromPersistentData(string filePath)
-        {
-            string absolutePath = Path.Combine(persistentDataPath, filePath);
+            string absolutePath = Path.Combine(PersistentDataPath, filePath);
 
             if (FileExistsInPersistentData(filePath))
             {
@@ -66,14 +60,14 @@ namespace Innoactive.Creator.IO
         }
 
         /// <inheritdoc />
-        public bool SaveFileInPersistentData(string filePath, byte[] file)
+        public bool Write(string filePath, byte[] fileData)
         {
             bool savedSuccessfully = false;
 
             try
             {
                 string absoluteFilePath = BuildPersistentDataPath(filePath);
-                File.WriteAllBytes(absoluteFilePath, file);
+                File.WriteAllBytes(absoluteFilePath, fileData);
                 savedSuccessfully = true;
             }
             catch (Exception e)
@@ -85,19 +79,42 @@ namespace Innoactive.Creator.IO
         }
 
         /// <inheritdoc />
-        public bool FileExistsInPersistentData(string filePath)
+        public bool Exists(string filePath)
         {
-            string absolutePath = Path.Combine(persistentDataPath, filePath);
+            return FileExistsInStreamingAssets(filePath) || FileExistsInPersistentData(filePath);
+        }
+
+        /// <summary>
+        /// Returns true if given <paramref name="filePath"/> contains the name of an existing file under the StreamingAssets folder; otherwise, false.
+        /// </summary>
+        /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets folder.</remarks>
+        protected virtual bool FileExistsInStreamingAssets(string filePath)
+        {
+            string absolutePath = Path.Combine(StreamingAssetsPath, filePath);
             return File.Exists(absolutePath);
         }
 
-        /// <inheritdoc />
-        public string BuildPersistentDataPath(string filePath)
+        /// <summary>
+        /// Returns true if given <paramref name="filePath"/> contains the name of an existing file under the StreamingAssets folder; otherwise, false.
+        /// </summary>
+        /// <remarks><paramref name="filePath"/> must be relative to <see cref="PersistentDataPath"/>.</remarks>
+        protected virtual bool FileExistsInPersistentData(string filePath)
+        {
+            string absolutePath = Path.Combine(PersistentDataPath, filePath);
+            return File.Exists(absolutePath);
+        }
+
+        /// <summary>
+        /// Builds a directory from given <paramref name="filePath"/>.
+        /// </summary>
+        /// <remarks><paramref name="filePath"/> must be relative to <see cref="PersistentDataPath"/>.</remarks>
+        /// <returns>The created directory absolute path.</returns>
+        protected virtual string BuildPersistentDataPath(string filePath)
         {
             string fileName = Path.GetFileName(filePath);
             string relativePath = Path.GetDirectoryName(filePath);
 
-            string absolutePath = Path.Combine(persistentDataPath, relativePath);
+            string absolutePath = Path.Combine(PersistentDataPath, relativePath);
 
             if (Directory.Exists(absolutePath) == false)
             {
@@ -110,7 +127,7 @@ namespace Innoactive.Creator.IO
                 return absolutePath;
             }
 
-            string absoluteFilePath = Path.Combine(persistentDataPath, filePath);
+            string absoluteFilePath = Path.Combine(PersistentDataPath, filePath);
             return absoluteFilePath;
         }
     }

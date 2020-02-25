@@ -9,54 +9,32 @@ namespace Innoactive.Creator.IO
     public interface IPlatformFileSystem
     {
         /// <summary>
-        /// The path to the platform's StreamingAssets folder (Read Only).
-        /// </summary>
-        string StreamingAssetsPath { get; }
-
-        /// <summary>
-        /// The path to the platform's persistent data directory (Read Only).
-        /// </summary>
-        string PersistentDataPath { get; }
-
-        /// <summary>
         /// Loads a file stored at <paramref name="filePath"/>.
         /// Returns a `FileNotFoundException` if file does not exist.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets folder.</remarks>
         /// <returns>An asynchronous operation that returns a byte array containing the contents of the file.</returns>
-        Task<byte[]> GetFileFromStreamingAssets(string filePath);
-
-        /// <summary>
-        /// Returns true if given <paramref name="filePath"/> contains the name of an existing file under the StreamingAssets folder; otherwise, false.
-        /// </summary>
-        /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets folder.</remarks>
-        bool FileExistsInStreamingAssets(string filePath);
+        Task<byte[]> ReadFromStreamingAssets(string filePath);
 
         /// <summary>
         /// Loads a file stored at <paramref name="filePath"/>.
         /// Returns a `FileNotFoundException` if file does not exist.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to <see cref="PersistentDataPath"/>.</remarks>
-        byte[] GetFileFromPersistentData(string filePath);
+        /// /// <returns>An asynchronous operation that returns a byte array containing the contents of the file.</returns>
+        Task<byte[]> ReadFromPersistentData(string filePath);
 
         /// <summary>
-        /// Saves given <paramref name="file"/> in provided <paramref name="filePath"/>.
+        /// Saves given <paramref name="fileData"/> in provided <paramref name="filePath"/>.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to <see cref="PersistentDataPath"/>.</remarks>
-        /// <returns>Returns true if <paramref name="file"/> could be saved successfully; otherwise, false.</returns>
-        bool SaveFileInPersistentData(string filePath, byte[] file);
+        /// <returns>Returns true if <paramref name="fileData"/> could be saved successfully; otherwise, false.</returns>
+        bool Write(string filePath, byte[] fileData);
 
         /// <summary>
-        /// Returns true if given <paramref name="filePath"/> contains the name of an existing file under the StreamingAssets folder; otherwise, false.
+        /// Returns true if given <paramref name="filePath"/> contains the name of an existing file under the StreamingAssets or platform persistent data folder; otherwise, false.
         /// </summary>
-        /// <remarks><paramref name="filePath"/> must be relative to <see cref="PersistentDataPath"/>.</remarks>
-        bool FileExistsInPersistentData(string filePath);
-
-        /// <summary>
-        /// Builds a directory from given <paramref name="filePath"/>.
-        /// </summary>
-        /// <remarks><paramref name="filePath"/> must be relative to <see cref="PersistentDataPath"/>.</remarks>
-        /// <returns>The created directory absolute path.</returns>
-        string BuildPersistentDataPath(string filePath);
+        /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets or the platform persistent data folder.</remarks>
+        bool Exists(string filePath);
     }
 }
