@@ -15,10 +15,10 @@ namespace Innoactive.Creator.IO
         private readonly string persistentDataPath;
 
         /// <inheritdoc />
-        public string StreamingAssetsPath { get; }
+        public string StreamingAssetsPath { get { return streamingAssetsPath; } }
 
         /// <inheritdoc />
-        public string PersistentDataPath { get; }
+        public string PersistentDataPath { get { return persistentDataPath; } }
 
         public DefaultFileSystem(string streamingAssetsPath, string persistentDataPath)
         {
@@ -43,7 +43,7 @@ namespace Innoactive.Creator.IO
         }
 
         /// <inheritdoc />
-        public bool StreamingAssetsFileExists(string filePath)
+        public bool FileExistsInStreamingAssets(string filePath)
         {
             string absolutePath = Path.Combine(streamingAssetsPath, filePath);
             return File.Exists(absolutePath);
@@ -54,7 +54,7 @@ namespace Innoactive.Creator.IO
         {
             string absolutePath = Path.Combine(persistentDataPath, filePath);
 
-            if (PersistentDataFileExists(filePath))
+            if (FileExistsInPersistentData(filePath))
             {
                 string errorMessage = string.Format("File at path '{0}' could not be found.", absolutePath);
                 throw new FileNotFoundException(errorMessage);
@@ -85,7 +85,7 @@ namespace Innoactive.Creator.IO
         }
 
         /// <inheritdoc />
-        public bool PersistentDataFileExists(string filePath)
+        public bool FileExistsInPersistentData(string filePath)
         {
             string absolutePath = Path.Combine(persistentDataPath, filePath);
             return File.Exists(absolutePath);

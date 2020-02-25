@@ -9,12 +9,12 @@ namespace Innoactive.Creator.IO
     public interface IPlatformFileSystem
     {
         /// <summary>
-        /// The path to the StreamingAssets folder (Read Only).
+        /// The path to the platform's StreamingAssets folder (Read Only).
         /// </summary>
         string StreamingAssetsPath { get; }
 
         /// <summary>
-        /// The path to a persistent data directory (Read Only).
+        /// The path to the platform's persistent data directory (Read Only).
         /// </summary>
         string PersistentDataPath { get; }
 
@@ -30,7 +30,7 @@ namespace Innoactive.Creator.IO
         /// Returns true if given <paramref name="filePath"/> contains the name of an existing file under the StreamingAssets folder; otherwise, false.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets folder.</remarks>
-        bool StreamingAssetsFileExists(string filePath);
+        bool FileExistsInStreamingAssets(string filePath);
 
         /// <summary>
         /// Loads a file stored at <paramref name="filePath"/>.
@@ -50,7 +50,7 @@ namespace Innoactive.Creator.IO
         /// Returns true if given <paramref name="filePath"/> contains the name of an existing file under the StreamingAssets folder; otherwise, false.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to <see cref="PersistentDataPath"/>.</remarks>
-        bool PersistentDataFileExists(string filePath);
+        bool FileExistsInPersistentData(string filePath);
 
         /// <summary>
         /// Builds a directory from given <paramref name="filePath"/>.

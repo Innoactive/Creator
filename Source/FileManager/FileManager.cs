@@ -12,6 +12,16 @@ namespace Innoactive.Creator.IO
     {
         private static IPlatformFileSystem platformFileSystem;
 
+        /// <summary>
+        /// The path to the platform's StreamingAssets folder (Read Only).
+        /// </summary>
+        public static string StreamingAssetsPath { get { return platformFileSystem.StreamingAssetsPath; } }
+
+        /// <summary>
+        /// The path to the platform's persistent data directory (Read Only).
+        /// </summary>
+        public static string PersistentDataPath { get { return platformFileSystem.PersistentDataPath; } }
+
         [RuntimeInitializeOnLoadMethod]
         private static void Initialize()
         {
@@ -39,7 +49,7 @@ namespace Innoactive.Creator.IO
         /// Returns true if given <paramref name="filePath"/> contains the name of an existing file under the StreamingAssets folder; otherwise, false.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets folder.</remarks>
-        public static bool StreamingAssetsFileExists(string filePath)
+        public static bool FileExistsInStreamingAssets(string filePath)
         {
             SystemException exception = ValidatePath(filePath);
 
@@ -48,7 +58,7 @@ namespace Innoactive.Creator.IO
                 throw exception;
             }
 
-            return platformFileSystem.StreamingAssetsFileExists(filePath);
+            return platformFileSystem.FileExistsInStreamingAssets(filePath);
         }
 
         /// <summary>
@@ -71,7 +81,7 @@ namespace Innoactive.Creator.IO
         /// Returns true if given <paramref name="filePath"/> contains the name of an existing file under the StreamingAssets folder; otherwise, false.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to <see cref="PersistentDataPath"/>.</remarks>
-        public static bool PersistentDataFileExists(string filePath)
+        public static bool FileExistsInPersistentData(string filePath)
         {
             SystemException exception = ValidatePath(filePath);
 
@@ -80,7 +90,7 @@ namespace Innoactive.Creator.IO
                 throw exception;
             }
 
-            return platformFileSystem.PersistentDataFileExists(filePath);
+            return platformFileSystem.FileExistsInPersistentData(filePath);
         }
 
         /// <summary>
