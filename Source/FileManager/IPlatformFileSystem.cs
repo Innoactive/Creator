@@ -12,17 +12,10 @@ namespace Innoactive.Creator.IO
         /// Loads a file stored at <paramref name="filePath"/>.
         /// Returns a `FileNotFoundException` if file does not exist.
         /// </summary>
-        /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets folder.</remarks>
+        /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets or the persistent data folder.</remarks>
         /// <returns>An asynchronous operation that returns a byte array containing the contents of the file.</returns>
-        Task<byte[]> ReadFromStreamingAssets(string filePath);
-
-        /// <summary>
-        /// Loads a file stored at <paramref name="filePath"/>.
-        /// Returns a `FileNotFoundException` if file does not exist.
-        /// </summary>
-        /// <remarks><paramref name="filePath"/> must be relative to <see cref="PersistentDataPath"/>.</remarks>
-        /// /// <returns>An asynchronous operation that returns a byte array containing the contents of the file.</returns>
-        Task<byte[]> ReadFromPersistentData(string filePath);
+        /// /// <exception cref="FileNotFoundException">The file specified in <paramref name="filePath"/> was not found.</exception>
+        Task<byte[]> Read(string filePath);
 
         /// <summary>
         /// Saves given <paramref name="fileData"/> in provided <paramref name="filePath"/>.

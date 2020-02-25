@@ -28,35 +28,20 @@ namespace Innoactive.Creator.IO
         }
 
         /// <inheritdoc />
-        public virtual async Task<byte[]> ReadFromStreamingAssets(string filePath)
+        public Task<byte[]> Read(string filePath)
         {
-            string absolutePath = Path.Combine(StreamingAssetsPath, filePath);
 
-            if (File.Exists(absolutePath) == false)
+            if (FileExistsInStreamingAssets(filePath))
             {
-                string errorMessage = string.Format("File at path '{0}' could not be found.", filePath);
-                throw new FileNotFoundException(errorMessage);
+                return ReadFromStreamingAssets(filePath);
             }
-
-            byte[] bytes = File.ReadAllBytes(absolutePath);
-
-            return bytes;
-        }
-
-        /// <inheritdoc />
-        public virtual async Task<byte[]> ReadFromPersistentData(string filePath)
-        {
-            string absolutePath = Path.Combine(PersistentDataPath, filePath);
 
             if (FileExistsInPersistentData(filePath))
             {
-                string errorMessage = string.Format("File at path '{0}' could not be found.", absolutePath);
-                throw new FileNotFoundException(errorMessage);
+                return ReadFromPersistentData(filePath);
             }
 
-            byte[] bytes = File.ReadAllBytes(absolutePath);
-
-            return bytes;
+            throw new FileNotFoundException(filePath);
         }
 
         /// <inheritdoc />
@@ -82,6 +67,48 @@ namespace Innoactive.Creator.IO
         public bool Exists(string filePath)
         {
             return FileExistsInStreamingAssets(filePath) || FileExistsInPersistentData(filePath);
+        }
+
+        /// <summary>
+        /// Loads a file stored at <paramref name="filePath"/>.
+        /// Returns a `FileNotFoundException` if file does not exist.
+        /// </summary>
+        /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets folder.</remarks>
+        /// <returns>An asynchronous operation that returns a byte array containing the contents of the file.</returns>
+        protected virtual async Task<byte[]> ReadFromStreamingAssets(string filePath)
+        {
+            string absolutePath = Path.Combine(StreamingAssetsPath, filePath);
+
+            if (File.Exists(absolutePath) == false)
+            {
+                string errorMessage = string.Format("File at path '{0}' could not be found.", filePath);
+                throw new FileNotFoundException(errorMessage);
+            }
+
+            byte[] bytes = File.ReadAllBytes(absolutePath);
+
+            return bytes;
+        }
+
+        /// <summary>
+        /// Loads a file stored at <paramref name="filePath"/>.
+        /// Returns a `FileNotFoundException` if file does not exist.
+        /// </summary>
+        /// <remarks><paramref name="filePath"/> must be relative to <see cref="PersistentDataPath"/>.</remarks>
+        /// /// <returns>An asynchronous operation that returns a byte array containing the contents of the file.</returns>
+        protected virtual async Task<byte[]> ReadFromPersistentData(string filePath)
+        {
+            string absolutePath = Path.Combine(PersistentDataPath, filePath);
+
+            if (FileExistsInPersistentData(filePath))
+            {
+                string errorMessage = string.Format("File at path '{0}' could not be found.", absolutePath);
+                throw new FileNotFoundException(errorMessage);
+            }
+
+            byte[] bytes = File.ReadAllBytes(absolutePath);
+
+            return bytes;
         }
 
         /// <summary>

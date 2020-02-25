@@ -22,6 +22,8 @@ namespace Innoactive.Creator.IO
         /// Loads a file stored at <paramref name="filePath"/>.
         /// Returns a `FileNotFoundException` if file does not exist.
         /// </summary>
+        /// <param name="filePath">Path where the file is located.</param>
+        /// <param name="cacheLocation">Cache directory where to lok</param>
         /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets or the persistent data folder.</remarks>
         /// <returns>An asynchronous operation that returns a byte array containing the contents of the file.</returns>
         public static async Task<byte[]> Read(string filePath)
@@ -37,12 +39,12 @@ namespace Innoactive.Creator.IO
                 throw new ArgumentException(errorMessage);
             }
 
-            if (Exists(filePath))
+            if (Exists(filePath) == false)
             {
-                return await platformFileSystem.ReadFromStreamingAssets(filePath);
+                return null;
             }
 
-            return null;
+            return await platformFileSystem.Read(filePath);
         }
 
         /// <summary>
