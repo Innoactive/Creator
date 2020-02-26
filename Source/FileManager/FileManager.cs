@@ -30,17 +30,12 @@ namespace Innoactive.Creator.IO
         {
             if (string.IsNullOrEmpty(filePath))
             {
-                throw new ArgumentException("Invalid filePath");
+                throw new ArgumentException("Invalid 'filePath'");
             }
 
             if (Path.IsPathRooted(filePath))
             {
-                throw new ArgumentException($"Method only accepts relative paths.\nfilePath: {filePath}");
-            }
-
-            if (Exists(filePath) == false)
-            {
-                return null;
+                throw new ArgumentException($"Method only accepts relative paths.\n'filePath': {filePath}");
             }
 
             return await platformFileSystem.Read(filePath);
@@ -55,17 +50,17 @@ namespace Innoactive.Creator.IO
         {
             if (string.IsNullOrEmpty(filePath))
             {
-                throw new ArgumentException("Invalid filePath");
+                throw new ArgumentException("Invalid 'filePath'");
             }
 
             if (Path.IsPathRooted(filePath))
             {
-                throw new ArgumentException($"Method only accepts relative paths.\nfilePath: {filePath}");
+                throw new ArgumentException($"Method only accepts relative paths.\n'filePath': {filePath}");
             }
 
             if (fileData == null || fileData.Length == 0)
             {
-                throw new ArgumentException("Invalid file");
+                throw new ArgumentException("Invalid 'fileData'");
             }
 
             return platformFileSystem.Write(filePath, fileData);
@@ -79,12 +74,12 @@ namespace Innoactive.Creator.IO
         {
             if (string.IsNullOrEmpty(filePath))
             {
-                throw new ArgumentException("Invalid filePath");
+                throw new ArgumentException("Invalid 'filePath'");
             }
 
             if (Path.IsPathRooted(filePath))
             {
-                throw new ArgumentException($"Method only accepts relative paths.\nfilePath: {filePath}");
+                throw new ArgumentException($"Method only accepts relative paths.\n'filePath': {filePath}");
             }
 
             return platformFileSystem.Exists(filePath);

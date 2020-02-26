@@ -30,6 +30,7 @@ namespace Innoactive.Creator.IO
         /// <inheritdoc />
         public virtual Task<byte[]> Read(string filePath)
         {
+            filePath = NormalizePath(filePath);
 
             if (FileExistsInStreamingAssets(filePath))
             {
@@ -47,6 +48,8 @@ namespace Innoactive.Creator.IO
         /// <inheritdoc />
         public virtual bool Write(string filePath, byte[] fileData)
         {
+            filePath = NormalizePath(filePath);
+
             try
             {
                 string absoluteFilePath = BuildPersistentDataPath(filePath);
@@ -63,6 +66,7 @@ namespace Innoactive.Creator.IO
         /// <inheritdoc />
         public virtual bool Exists(string filePath)
         {
+            filePath = NormalizePath(filePath);
             return FileExistsInStreamingAssets(filePath) || FileExistsInPersistentData(filePath);
         }
 
@@ -146,6 +150,11 @@ namespace Innoactive.Creator.IO
             }
 
             return Path.Combine(PersistentDataPath, filePath);
+        }
+
+        protected virtual string NormalizePath(string filePath)
+        {
+            return filePath.Replace('\\', Path.DirectorySeparatorChar);
         }
     }
 }
