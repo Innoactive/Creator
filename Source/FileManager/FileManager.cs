@@ -15,7 +15,7 @@ namespace Innoactive.Creator.IO
         [RuntimeInitializeOnLoadMethod]
         private static void Initialize()
         {
-            platformFileSystem = new DefaultFileSystem(Application.streamingAssetsPath, Application.persistentDataPath);
+            platformFileSystem = CreatePlatformFileSystem();
         }
 
         /// <summary>
@@ -83,6 +83,16 @@ namespace Innoactive.Creator.IO
             }
 
             return platformFileSystem.Exists(filePath);
+        }
+
+        private static IPlatformFileSystem CreatePlatformFileSystem()
+        {
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                return new AndroidFileSystem(Application.streamingAssetsPath, Application.persistentDataPath);
+            }
+
+            return new DefaultFileSystem(Application.streamingAssetsPath, Application.persistentDataPath);
         }
     }
 }
