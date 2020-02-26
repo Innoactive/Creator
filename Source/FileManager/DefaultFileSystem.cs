@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Innoactive.Creator.IO
 {
     /// <summary>
-    /// Default implementation of <see cref="IPlatformFileSystem"/>.
+    /// Default implementation of <see cref="IPlatformFileSystem"/> based in 'System.IO'.
     /// </summary>
     /// <remarks>It works out of the box for most of the Unity's supported platforms.</remarks>
     public class DefaultFileSystem : IPlatformFileSystem
