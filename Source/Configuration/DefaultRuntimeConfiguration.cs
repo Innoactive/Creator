@@ -1,13 +1,14 @@
+using UnityEngine;
 using System;
-using System.IO;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Innoactive.Hub.Training.Configuration.Modes;
+using Innoactive.Creator.IO;
 using Innoactive.Hub.Training.Exceptions;
 using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.SceneObjects.Properties;
 using Innoactive.Hub.Training.Utils.Serialization;
-using UnityEngine;
+using Innoactive.Hub.Training.Configuration.Modes;
+using Innoactive.Hub.Training.SceneObjects.Properties;
 
 namespace Innoactive.Hub.Training.Configuration
 {
@@ -168,21 +169,16 @@ namespace Innoactive.Hub.Training.Configuration
         }
 
         /// <inheritdoc />
-        public virtual ICourse LoadCourse()
+        public virtual async Task<ICourse> LoadCourse()
         {
             if (string.IsNullOrEmpty(RuntimeConfigurator.GetSelectedTrainingCourse()))
             {
                 throw new ArgumentException("A training course is not selected in the [TRAINING_CONFIGURATION] game object.");
             }
 
-            string pathToFile = Path.Combine(Application.streamingAssetsPath, RuntimeConfigurator.GetSelectedTrainingCourse()).Replace('/', Path.DirectorySeparatorChar);
+            string selectedTrainingCourse = RuntimeConfigurator.GetSelectedTrainingCourse();
+            byte[] serialized = await FileManager.Read(selectedTrainingCourse);
 
-            if (File.Exists(pathToFile) == false)
-            {
-                throw new ArgumentException("The file or the path to the file could not be found.", pathToFile);
-            }
-
-            byte[] serialized = File.ReadAllBytes(pathToFile);
             return Serializer.ToCourse(serialized);
         }
 
