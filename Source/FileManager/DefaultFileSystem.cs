@@ -28,7 +28,7 @@ namespace Innoactive.Creator.IO
         }
 
         /// <inheritdoc />
-        public Task<byte[]> Read(string filePath)
+        public virtual Task<byte[]> Read(string filePath)
         {
 
             if (FileExistsInStreamingAssets(filePath))
@@ -45,26 +45,23 @@ namespace Innoactive.Creator.IO
         }
 
         /// <inheritdoc />
-        public bool Write(string filePath, byte[] fileData)
+        public virtual bool Write(string filePath, byte[] fileData)
         {
-            bool savedSuccessfully = false;
-
             try
             {
                 string absoluteFilePath = BuildPersistentDataPath(filePath);
                 File.WriteAllBytes(absoluteFilePath, fileData);
-                savedSuccessfully = true;
+                return true;
             }
             catch (Exception e)
             {
                 Debug.LogException(e);
+                return false;
             }
-
-            return savedSuccessfully;
         }
 
         /// <inheritdoc />
-        public bool Exists(string filePath)
+        public virtual bool Exists(string filePath)
         {
             return FileExistsInStreamingAssets(filePath) || FileExistsInPersistentData(filePath);
         }
@@ -81,13 +78,10 @@ namespace Innoactive.Creator.IO
 
             if (File.Exists(absolutePath) == false)
             {
-                string errorMessage = string.Format("File at path '{0}' could not be found.", filePath);
-                throw new FileNotFoundException(errorMessage);
+                throw new FileNotFoundException($"File at path '{filePath}' could not be found.");
             }
 
-            byte[] bytes = File.ReadAllBytes(absolutePath);
-
-            return bytes;
+            return File.ReadAllBytes(absolutePath);
         }
 
         /// <summary>
@@ -102,13 +96,10 @@ namespace Innoactive.Creator.IO
 
             if (FileExistsInPersistentData(filePath))
             {
-                string errorMessage = string.Format("File at path '{0}' could not be found.", absolutePath);
-                throw new FileNotFoundException(errorMessage);
+                throw new FileNotFoundException($"File at path '{absolutePath}' could not be found.");
             }
 
-            byte[] bytes = File.ReadAllBytes(absolutePath);
-
-            return bytes;
+            return File.ReadAllBytes(absolutePath);
         }
 
         /// <summary>
@@ -154,8 +145,7 @@ namespace Innoactive.Creator.IO
                 return absolutePath;
             }
 
-            string absoluteFilePath = Path.Combine(PersistentDataPath, filePath);
-            return absoluteFilePath;
+            return Path.Combine(PersistentDataPath, filePath);
         }
     }
 }

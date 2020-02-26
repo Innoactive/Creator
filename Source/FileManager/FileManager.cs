@@ -35,8 +35,7 @@ namespace Innoactive.Creator.IO
 
             if (Path.IsPathRooted(filePath))
             {
-                string errorMessage = string.Format("Method only accepts relative paths.\nfilePath: {0}", filePath);
-                throw new ArgumentException(errorMessage);
+                throw new ArgumentException($"Method only accepts relative paths.\nfilePath: {filePath}");
             }
 
             if (Exists(filePath) == false)
@@ -61,8 +60,7 @@ namespace Innoactive.Creator.IO
 
             if (Path.IsPathRooted(filePath))
             {
-                string errorMessage = string.Format("Method only accepts relative paths.\nfilePath: {0}", filePath);
-                throw new ArgumentException(errorMessage);
+                throw new ArgumentException($"Method only accepts relative paths.\nfilePath: {filePath}");
             }
 
             if (fileData == null || fileData.Length == 0)
@@ -86,8 +84,7 @@ namespace Innoactive.Creator.IO
 
             if (Path.IsPathRooted(filePath))
             {
-                string errorMessage = string.Format("Method only accepts relative paths.\nfilePath: {0}", filePath);
-                throw new ArgumentException(errorMessage);
+                throw new ArgumentException($"Method only accepts relative paths.\nfilePath: {filePath}");
             }
 
             return platformFileSystem.Exists(filePath);
