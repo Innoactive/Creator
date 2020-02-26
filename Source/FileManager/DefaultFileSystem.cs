@@ -141,7 +141,7 @@ namespace Innoactive.Creator.IO
             if (Directory.Exists(absolutePath) == false)
             {
                 Directory.CreateDirectory(absolutePath);
-                Debug.LogWarningFormat("Directory '{0}' was created.\n{1}", absolutePath);
+                Debug.LogWarningFormat("Directory '{0}' was created.", absolutePath);
             }
 
             if (string.IsNullOrEmpty(fileName))
