@@ -1,78 +1,69 @@
-﻿using UnityEngine;
+﻿#if !UNITY_EDITOR && UNITY_ANDROID
+using UnityEngine;
 using System.IO;
-using System.Collections;
-using System.Threading.Tasks;
-using Innoactive.Hub.Threading;
-using UnityEngine.Networking;
+using System.Linq;
+using System.IO.Compression;
 
 namespace Innoactive.Creator.IO
 {
     /// <summary>
     /// Android implementation of <see cref="IPlatformFileSystem"/>.
     /// </summary>
-    /// <remarks>Due to the Android architecture, <see cref="Read"/> is the only possible operation over the Streaming Assets folder.
-    /// The rest of the <see cref="IPlatformFileSystem"/> implementations still apply for persistent data.</remarks>
     public class AndroidFileSystem : DefaultFileSystem, IPlatformFileSystem
     {
-        public AndroidFileSystem(string streamingAssetsPath, string persistentDataPath) : base(streamingAssetsPath, persistentDataPath) {}
+        private readonly string rootFolder;
+        private readonly string[] streamingAssetsFilesPaths;
 
-        /// <inheritdoc />
-        public override async Task<byte[]> Read(string filePath)
+        private const string StreamingAssetsArchivePath = "assets/";
+        private const string ExcludedArchivePath = "assets/bin/";
+
+        public AndroidFileSystem(string streamingAssetsPath, string persistentDataPath) : base(streamingAssetsPath, persistentDataPath)
         {
-            filePath = NormalizePath(filePath);
-            byte[] fileData = await ReadFromStreamingAssets(filePath);
+            rootFolder = Application.dataPath;
 
-            if (fileData != null)
+            using (ZipArchive archive = ZipFile.OpenRead(rootFolder))
             {
-                return fileData;
+                streamingAssetsFilesPaths = (from entry in archive.Entries where entry.FullName.StartsWith(StreamingAssetsArchivePath) && entry.FullName.StartsWith(ExcludedArchivePath) == false select entry.FullName).ToArray();
             }
-
-            if (FileExistsInPersistentData(filePath))
-            {
-                return await ReadFromPersistentData(filePath);
-            }
-
-            throw new FileNotFoundException(filePath);
-        }
-
-        /// <summary>
-        /// Returns true if given <paramref name="filePath"/> contains the name of an existing file under the persistent data folder; otherwise, false.
-        /// </summary>
-        /// <remarks>Due to the Android architecture, it it not possible to validate if files exits in Streaming Assets.</remarks>
-        public override bool Exists(string filePath)
-        {
-            return FileExistsInPersistentData(filePath);
         }
 
         /// <inheritdoc />
-        protected override async Task<byte[]> ReadFromStreamingAssets(string filePath)
+        /// <remarks>This method uses additional functionality of 'System.IO.Compression' that are not bundled with Unity.
+        /// The MSBuild response file 'Assets/csc.rsp' is required for this.
+        /// See more: https://docs.unity3d.com/Manual/dotnetProfileAssemblies.html</remarks>
+        protected override byte[] ReadFromStreamingAssets(string filePath)
         {
-            string absolutePath = Path.Combine(StreamingAssetsPath, filePath);
-
-            TaskCompletionSource<byte[]> completionSource = new TaskCompletionSource<byte[]>();
-            CoroutineDispatcher.Instance.StartCoroutine(LoadFile(absolutePath, completionSource));
-
-            return await completionSource.Task;
-        }
-
-        private IEnumerator LoadFile(string absolutePath, TaskCompletionSource<byte[]> completionSource)
-        {
-            using (UnityWebRequest webRequest = UnityWebRequest.Get(absolutePath))
+            using (ZipArchive archive = ZipFile.OpenRead(rootFolder))
             {
-                yield return webRequest.SendWebRequest();
+                ZipArchiveEntry file = archive.Entries.First(entry => entry.FullName == filePath);
 
-                if (webRequest.isNetworkError == false && webRequest.isHttpError == false)
+                if (file == null)
                 {
-                    DownloadHandler downloadHandler = webRequest.downloadHandler;
-                    yield return new WaitUntil(() => downloadHandler.isDone);
-
-                    completionSource.SetResult(downloadHandler.data);
+                    throw new FileNotFoundException(filePath);
                 }
-                else
+
+                using (MemoryStream memoryStream = new MemoryStream())
                 {
-                    completionSource.SetResult(null);
+                    Stream fileStream = file.Open();
+                    fileStream.CopyTo(memoryStream);
+
+                    return memoryStream.ToArray();
                 }
             }
+        }
+
+        /// <inheritdoc />
+        protected override bool FileExistsInStreamingAssets(string filePath)
+        {
+            return streamingAssetsFilesPaths.Any(path => path == filePath);
+        }
+
+        /// <inheritdoc />
+        protected override string NormalizePath(string filePath)
+        {
+            filePath = Path.Combine(StreamingAssetsArchivePath, filePath);
+            return base.NormalizePath(filePath);
         }
     }
 }
+#endif

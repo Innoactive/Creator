@@ -53,10 +53,10 @@ namespace Innoactive.Creator.Tests
             DeleteDirectory(Application.persistentDataPath);
         }
 
-        protected virtual async void ReadAsync(TaskCompletionSource<byte[]> completionSource)
+        protected virtual void ReadAsync(TaskCompletionSource<byte[]> completionSource)
         {
             Assert.IsTrue(FileManager.Exists(RelativeFilePath));
-            byte[] fileData = await FileManager.Read(RelativeFilePath);
+            byte[] fileData = FileManager.Read(RelativeFilePath);
             completionSource.SetResult(fileData);
         }
 

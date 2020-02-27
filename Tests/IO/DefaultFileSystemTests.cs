@@ -71,7 +71,7 @@ namespace Innoactive.Creator.Tests
         protected override async void ReadAsync(TaskCompletionSource<byte[]> completionSource)
         {
             Assert.IsTrue(defaultFileSystem.Exists(RelativeFilePath));
-            byte[] fileData = await defaultFileSystem.Read(RelativeFilePath);
+            byte[] fileData = defaultFileSystem.Read(RelativeFilePath);
             completionSource.SetResult(fileData);
         }
     }
