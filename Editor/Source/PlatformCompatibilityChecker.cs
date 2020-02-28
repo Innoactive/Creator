@@ -34,7 +34,7 @@ namespace Innoactive.Creator.Editors.Utils
 
             foreach (string dependency in Dependencies)
             {
-                if (dependencyList.Any(d => d == dependency) == false)
+                if (dependencyList.All(d => d != dependency))
                 {
                     dependencyList.Add(dependency);
                 }
