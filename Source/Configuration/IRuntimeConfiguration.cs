@@ -62,7 +62,7 @@ namespace Innoactive.Hub.Training.Configuration
         /// <summary>
         /// Asynchronously returns the deserialized training course from <see cref="SelectedCourseStreamingAssetsPath"/>.
         /// </summary>
-        Task<ICourse> LoadCourse();
+        ICourse LoadCourse();
 
         /// <summary>
         /// Set the current training mode.

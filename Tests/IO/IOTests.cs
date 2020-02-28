@@ -2,10 +2,8 @@
 
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using NUnit.Framework;
-using Innoactive.Creator.IO;
 
 namespace Innoactive.Creator.Tests
 {
@@ -14,6 +12,7 @@ namespace Innoactive.Creator.Tests
         protected const string FolderName = "TestFolder";
         protected const string FileName = "TestFile.txt";
         protected const string FileContent = "Hello Test!";
+        protected const string NonExistingFilePath = "I do not exist.sad";
 
         protected string RelativeFilePath;
         protected string AbsoluteStreamingAssetsFilePath;
@@ -51,13 +50,6 @@ namespace Innoactive.Creator.Tests
         {
             DeleteDirectory(Application.streamingAssetsPath);
             DeleteDirectory(Application.persistentDataPath);
-        }
-
-        protected virtual async void ReadAsync(TaskCompletionSource<byte[]> completionSource)
-        {
-            Assert.IsTrue(FileManager.Exists(RelativeFilePath));
-            byte[] fileData = await FileManager.Read(RelativeFilePath);
-            completionSource.SetResult(fileData);
         }
 
         private void CreateFile(string cacheLocation)

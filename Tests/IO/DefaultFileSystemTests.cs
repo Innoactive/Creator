@@ -3,7 +3,6 @@
 using System.IO;
 using System.Text;
 using System.Collections;
-using System.Threading.Tasks;
 using UnityEngine;
 using NUnit.Framework;
 using UnityEngine.TestTools;
@@ -25,27 +24,25 @@ namespace Innoactive.Creator.Tests
         [UnityTest]
         public IEnumerator Read()
         {
-            // Given
+            // Given an existing file in a relative path.
+            Assert.IsTrue(defaultFileSystem.Exists(RelativeFilePath));
 
-            // When
-            TaskCompletionSource<byte[]> completionSource = new TaskCompletionSource<byte[]>();
-            ReadAsync(completionSource);
-            yield return new WaitUntil(()=> completionSource.Task.IsCompleted);
-
-            // Then
-            byte[] fileData = completionSource.Task.Result;
+            // When reading the file from the relative path.
+            byte[] fileData = defaultFileSystem.Read(RelativeFilePath);
             string message = Encoding.Default.GetString(fileData);
 
+            // Then assert that the file content was retrieved.
             Assert.That(fileData != null && fileData.Length > 0);
             Assert.IsFalse(string.IsNullOrEmpty(message));
+            yield break;
         }
 
         [UnityTest]
         public IEnumerator Exists()
         {
-            // Given
-            // When
-            // Then
+            // Given a file in a relative path.
+            // When checking if the file exits.
+            // Then assert that the file exits.
             Assert.IsFalse(string.IsNullOrEmpty(RelativeFilePath));
             Assert.IsFalse(Path.IsPathRooted(RelativeFilePath));
             Assert.IsTrue(defaultFileSystem.Exists(RelativeFilePath));
@@ -57,22 +54,25 @@ namespace Innoactive.Creator.Tests
         {
             Assert.IsFalse(FileManager.Exists(RelativeFilePath));
 
-            // Given
+            // Given invalid paths and files data.
             byte[] fileData = new UTF8Encoding(true).GetBytes(FileContent);
 
-            // When
+            // When trying to read, write or check if the file exits using invalid arguments.
             defaultFileSystem.Write(RelativeFilePath, fileData);
 
-            // Then
+            // Then assert that a proper exception is thrown.
             Assert.IsTrue(defaultFileSystem.Exists(RelativeFilePath));
             yield break;
         }
 
-        protected override async void ReadAsync(TaskCompletionSource<byte[]> completionSource)
+        [UnityTest]
+        public IEnumerator NotExistingFile()
         {
-            Assert.IsTrue(defaultFileSystem.Exists(RelativeFilePath));
-            byte[] fileData = await defaultFileSystem.Read(RelativeFilePath);
-            completionSource.SetResult(fileData);
+            // Given a relative path to a file that does not exit.
+            // When checking if the file exits.
+            // Then assert that the file does not exit.
+            Assert.IsFalse(defaultFileSystem.Exists(NonExistingFilePath));
+            yield break;
         }
     }
 }
