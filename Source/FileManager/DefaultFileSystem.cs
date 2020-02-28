@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.IO;
-using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Innoactive.Creator.IO
 {
@@ -28,7 +27,7 @@ namespace Innoactive.Creator.IO
         }
 
         /// <inheritdoc />
-        public virtual Task<byte[]> Read(string filePath)
+        public virtual byte[] Read(string filePath)
         {
             filePath = NormalizePath(filePath);
 
@@ -75,8 +74,8 @@ namespace Innoactive.Creator.IO
         /// Returns a `FileNotFoundException` if file does not exist.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets folder.</remarks>
-        /// <returns>An asynchronous operation that returns a byte array containing the contents of the file.</returns>
-        protected virtual async Task<byte[]> ReadFromStreamingAssets(string filePath)
+        /// <returns>The contents of the file into a byte array.</returns>
+        protected virtual byte[] ReadFromStreamingAssets(string filePath)
         {
             string absolutePath = Path.Combine(StreamingAssetsPath, filePath);
 
@@ -92,9 +91,9 @@ namespace Innoactive.Creator.IO
         /// Loads a file stored at <paramref name="filePath"/>.
         /// Returns a `FileNotFoundException` if file does not exist.
         /// </summary>
-        /// <remarks><paramref name="filePath"/> must be relative to <see cref="PersistentDataPath"/>.</remarks>
-        /// /// <returns>An asynchronous operation that returns a byte array containing the contents of the file.</returns>
-        protected virtual async Task<byte[]> ReadFromPersistentData(string filePath)
+        /// <remarks><paramref name="filePath"/> must be relative to the platform persistent data folder.</remarks>
+        /// <returns>The contents of the file into a byte array.</returns>
+        protected virtual byte[] ReadFromPersistentData(string filePath)
         {
             string absolutePath = Path.Combine(PersistentDataPath, filePath);
 
@@ -117,9 +116,9 @@ namespace Innoactive.Creator.IO
         }
 
         /// <summary>
-        /// Returns true if given <paramref name="filePath"/> contains the name of an existing file under the StreamingAssets folder; otherwise, false.
+        /// Returns true if given <paramref name="filePath"/> contains the name of an existing file under the platform persistent data folder; otherwise, false.
         /// </summary>
-        /// <remarks><paramref name="filePath"/> must be relative to <see cref="PersistentDataPath"/>.</remarks>
+        /// <remarks><paramref name="filePath"/> must be relative to the platform persistent data folder.</remarks>
         protected virtual bool FileExistsInPersistentData(string filePath)
         {
             string absolutePath = Path.Combine(PersistentDataPath, filePath);
@@ -129,7 +128,7 @@ namespace Innoactive.Creator.IO
         /// <summary>
         /// Builds a directory from given <paramref name="filePath"/>.
         /// </summary>
-        /// <remarks><paramref name="filePath"/> must be relative to <see cref="PersistentDataPath"/>.</remarks>
+        /// <remarks><paramref name="filePath"/> must be relative to the platform persistent data folder.</remarks>
         /// <returns>The created directory absolute path.</returns>
         protected virtual string BuildPersistentDataPath(string filePath)
         {
@@ -141,7 +140,7 @@ namespace Innoactive.Creator.IO
             if (Directory.Exists(absolutePath) == false)
             {
                 Directory.CreateDirectory(absolutePath);
-                Debug.LogWarningFormat("Directory '{0}' was created.\n{1}", absolutePath);
+                Debug.LogWarningFormat("Directory '{0}' was created.", absolutePath);
             }
 
             if (string.IsNullOrEmpty(fileName))
@@ -152,6 +151,9 @@ namespace Innoactive.Creator.IO
             return Path.Combine(PersistentDataPath, filePath);
         }
 
+        /// <summary>
+        /// Normalizes path to platform specific.
+        /// </summary>
         protected virtual string NormalizePath(string filePath)
         {
             return filePath.Replace('\\', Path.DirectorySeparatorChar);
