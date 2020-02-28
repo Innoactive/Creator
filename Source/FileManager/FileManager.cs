@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.IO;
-using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Innoactive.Creator.IO
 {
@@ -12,21 +11,19 @@ namespace Innoactive.Creator.IO
     {
         private static IPlatformFileSystem platformFileSystem;
 
-        [RuntimeInitializeOnLoadMethod]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
         private static void Initialize()
         {
-            platformFileSystem = new DefaultFileSystem(Application.streamingAssetsPath, Application.persistentDataPath);
+            platformFileSystem = CreatePlatformFileSystem();
         }
 
         /// <summary>
         /// Loads a file stored at <paramref name="filePath"/>.
         /// Returns a `FileNotFoundException` if file does not exist.
         /// </summary>
-        /// <param name="filePath">Path where the file is located.</param>
-        /// <param name="cacheLocation">Cache directory where to lok</param>
         /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets or the persistent data folder.</remarks>
-        /// <returns>An asynchronous operation that returns a byte array containing the contents of the file.</returns>
-        public static async Task<byte[]> Read(string filePath)
+        /// <returns>The contents of the file into a byte array.</returns>
+        public static byte[] Read(string filePath)
         {
             if (string.IsNullOrEmpty(filePath))
             {
@@ -38,7 +35,7 @@ namespace Innoactive.Creator.IO
                 throw new ArgumentException($"Method only accepts relative paths.\n'filePath': {filePath}");
             }
 
-            return await platformFileSystem.Read(filePath);
+            return platformFileSystem.Read(filePath);
         }
 
         /// <summary>
@@ -83,6 +80,15 @@ namespace Innoactive.Creator.IO
             }
 
             return platformFileSystem.Exists(filePath);
+        }
+
+        private static IPlatformFileSystem CreatePlatformFileSystem()
+        {
+#if !UNITY_EDITOR && UNITY_ANDROID
+            return new AndroidFileSystem(Application.streamingAssetsPath, Application.persistentDataPath);
+#else
+            return new DefaultFileSystem(Application.streamingAssetsPath, Application.persistentDataPath);
+#endif
         }
     }
 }
