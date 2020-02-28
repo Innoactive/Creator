@@ -11,7 +11,7 @@
       href: getting-started/designer.md
     - name: As a Developer
       href: getting-started/developer.md
-- name: Innoactive Creator Components
+- name: Innoactive Creator for designers
   href: innoactive-creator/index.md
   items:
     - name: Overview
@@ -30,28 +30,34 @@
       href: innoactive-creator/default-behaviors.md
     - name: Default Conditions
       href: innoactive-creator/default-conditions.md
-- name: Transition to v1.0 for Developers
-  href: transition-to-v1.0/index.md
+- name: Innoacitve Creator for developers
+  href: developer/index.md
   items:
     - name: Overview
-      href: transition-to-v1.0/index.md
-    - name: General Concepts
-      href: transition-to-v1.0/general-concepts.md
+      href: developer/index.md
+    - name: Introduction
+      href: developer/01-introduction.md
+    - name: Using Innoactive Creator
+      href: developer/02-using-innoactive-creator.md
+    - name: Set up a project
+      href: developer/03-set-up-a-project.md
+    - name: General concepts
+      href: developer/04-general-concepts.md
     - name: Behaviors
-      href: transition-to-v1.0/behaviors.md
+      href: developer/05-behaviors.md
+    - name: Menu items
+      href: developer/06-menu-items.md
+    - name: Run a training course
+      href: developer/07-run-a-course.md
     - name: Conditions
-      href: transition-to-v1.0/conditions.md
-    - name: Managing Training Courses
-      href: transition-to-v1.0/managing-courses.md
-    - name: Editor Customization
-      href: transition-to-v1.0/editor-customization.md
+      href: developer/08-conditions.md
+    - name: Properties
+      href: developer/09-properties.md
 - name: Miscellaneous
   href: miscellaneous/index.md
   items:
     - name: Overview
       href: miscellaneous/index.md
-    - name: Roles
-      href: miscellaneous/roles.md
     - name: Unity Setup Guide
       href: miscellaneous/unity-setup.md
     - name: Prerequisites
@@ -64,14 +70,3 @@
       href: miscellaneous/snapzones.md
     - name: Text To Speech Engine (TTS) (Developer)
       href: miscellaneous/setup-text-to-speech.md
-- name: Legacy Documentation
-  href: legacy/index.md
-  items:
-    - name: Overview
-      href: legacy/index.md
-    - name: Training Designer's Guide
-      href: legacy/training-designer-v0.9.md
-    - name: Template Developer's Guide
-      href: legacy/template-developer-v0.9.md
-    - name: Inspection Template
-      href: legacy/inspection-module-template.md
