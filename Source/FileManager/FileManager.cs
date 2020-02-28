@@ -11,7 +11,7 @@ namespace Innoactive.Creator.IO
     {
         private static IPlatformFileSystem platformFileSystem;
 
-        [RuntimeInitializeOnLoadMethod]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
         private static void Initialize()
         {
             platformFileSystem = CreatePlatformFileSystem();
