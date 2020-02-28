@@ -28,7 +28,7 @@ namespace Innoactive.Creator.Editors.Utils
 
             if (File.Exists(filePath))
             {
-                AreDependenciesUpdated(filePath);
+                CheckThatDependenciesAreUpdated(filePath);
             }
             else
             {
@@ -36,7 +36,7 @@ namespace Innoactive.Creator.Editors.Utils
             }
         }
 
-        private static void AreDependenciesUpdated(string filePath)
+        private static void CheckThatDependenciesAreUpdated(string filePath)
         {
             List<string> dependencyList = File.ReadAllLines(filePath).ToList();
             int numberOfCurrentDependencies = dependencyList.Count;
