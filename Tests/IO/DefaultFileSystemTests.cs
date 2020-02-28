@@ -3,7 +3,6 @@
 using System.IO;
 using System.Text;
 using System.Collections;
-using System.Threading.Tasks;
 using UnityEngine;
 using NUnit.Framework;
 using UnityEngine.TestTools;
@@ -26,18 +25,15 @@ namespace Innoactive.Creator.Tests
         public IEnumerator Read()
         {
             // Given
+            Assert.IsTrue(defaultFileSystem.Exists(RelativeFilePath));
 
             // When
-            TaskCompletionSource<byte[]> completionSource = new TaskCompletionSource<byte[]>();
-            ReadAsync(completionSource);
-            yield return new WaitUntil(()=> completionSource.Task.IsCompleted);
-
-            // Then
-            byte[] fileData = completionSource.Task.Result;
+            byte[] fileData = defaultFileSystem.Read(RelativeFilePath);
             string message = Encoding.Default.GetString(fileData);
 
             Assert.That(fileData != null && fileData.Length > 0);
             Assert.IsFalse(string.IsNullOrEmpty(message));
+            yield break;
         }
 
         [UnityTest]
@@ -68,11 +64,14 @@ namespace Innoactive.Creator.Tests
             yield break;
         }
 
-        protected override async void ReadAsync(TaskCompletionSource<byte[]> completionSource)
+        [UnityTest]
+        public IEnumerator NotExistingFile()
         {
-            Assert.IsTrue(defaultFileSystem.Exists(RelativeFilePath));
-            byte[] fileData = defaultFileSystem.Read(RelativeFilePath);
-            completionSource.SetResult(fileData);
+            // Given
+            // When
+            // Then
+            Assert.IsFalse(defaultFileSystem.Exists(NonExistingFilePath));
+            yield break;
         }
     }
 }

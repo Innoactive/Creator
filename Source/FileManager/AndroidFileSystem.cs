@@ -1,4 +1,5 @@
 ﻿#if !UNITY_EDITOR && UNITY_ANDROID
+using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Innoactive.Creator.IO
     public class AndroidFileSystem : DefaultFileSystem, IPlatformFileSystem
     {
         private readonly string rootFolder;
-        private readonly string[] streamingAssetsFilesPaths;
+        private readonly string[] streamingAssetsFilesPath;
 
         private const string StreamingAssetsArchivePath = "assets/";
         private const string ExcludedArchivePath = "assets/bin/";
@@ -23,7 +24,17 @@ namespace Innoactive.Creator.IO
 
             using (ZipArchive archive = ZipFile.OpenRead(rootFolder))
             {
-                streamingAssetsFilesPaths = (from entry in archive.Entries where entry.FullName.StartsWith(StreamingAssetsArchivePath) && entry.FullName.StartsWith(ExcludedArchivePath) == false select entry.FullName).ToArray();
+                List<string> filesPath = new List<string>();
+
+                foreach (ZipArchiveEntry entry in archive.Entries)
+                {
+                    if (entry.FullName.StartsWith(StreamingAssetsArchivePath) && entry.FullName.StartsWith(ExcludedArchivePath) == false)
+                    {
+                        filesPath.Add(entry.FullName);
+                    }
+                }
+
+                streamingAssetsFilesPath = filesPath.ToArray();
             }
         }
 
@@ -55,7 +66,7 @@ namespace Innoactive.Creator.IO
         /// <inheritdoc />
         protected override bool FileExistsInStreamingAssets(string filePath)
         {
-            return streamingAssetsFilesPaths.Any(path => path == filePath);
+            return streamingAssetsFilesPath.Any(path => path == filePath);
         }
 
         /// <inheritdoc />
