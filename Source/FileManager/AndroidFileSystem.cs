@@ -24,7 +24,8 @@ namespace Innoactive.Creator.IO
             using (ZipArchive archive = ZipFile.OpenRead(rootFolder))
             {
                 streamingAssetsFilesPath = archive.Entries.Select(entry => entry.FullName)
-                    .Where(name => name.StartsWith(StreamingAssetsArchivePath) && name.StartsWith(ExcludedArchivePath) == false)
+                    .Where(name => name.StartsWith(StreamingAssetsArchivePath))
+                    .Where(name => name.StartsWith(ExcludedArchivePath) == false)
                     .ToArray();
             }
         }

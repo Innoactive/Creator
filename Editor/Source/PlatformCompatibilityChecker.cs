@@ -7,6 +7,10 @@ using UnityEngine;
 
 namespace Innoactive.Creator.Editors.Utils
 {
+    /// <summary>
+    /// Validates that full .Net dependencies are referenced by Unity.
+    /// </summary>
+    /// <remarks>See more: https://docs.unity3d.com/Manual/dotnetProfileAssemblies.html</remarks>
     [InitializeOnLoad]
     public static class PlatformCompatibilityChecker
     {
@@ -15,22 +19,20 @@ namespace Innoactive.Creator.Editors.Utils
 
         static PlatformCompatibilityChecker()
         {
+            CheckDependencies();
+        }
+
+        private static void CheckDependencies()
+        {
             string filePath = Path.Combine(Application.dataPath, ReferenceFileName);
 
-            if (File.Exists(filePath) )
-            {
-                CheckDependencies(filePath);
-            }
-            else
+            if (File.Exists(filePath) == false )
             {
                 CreateReferenceFile(filePath);
             }
-        }
 
-        private static void CheckDependencies(string filePath)
-        {
             List<string> dependencyList = File.ReadAllLines(filePath).ToList();
-            int numberOfCurrentDependences = dependencyList.Count;
+            int numberOfCurrentDependencies = dependencyList.Count;
 
             foreach (string dependency in Dependencies)
             {
@@ -40,7 +42,7 @@ namespace Innoactive.Creator.Editors.Utils
                 }
             }
 
-            if (numberOfCurrentDependences < dependencyList.Count)
+            if (numberOfCurrentDependencies < dependencyList.Count)
             {
                 CreateReferenceFile(filePath);
             }
@@ -49,6 +51,7 @@ namespace Innoactive.Creator.Editors.Utils
         private static void CreateReferenceFile(string filePath)
         {
             File.WriteAllLines(filePath, Dependencies);
+            Debug.LogWarningFormat("Required compatibility file was created at path {0}", filePath);
         }
     }
 }
