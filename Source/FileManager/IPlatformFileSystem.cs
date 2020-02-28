@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-
 namespace Innoactive.Creator.IO
 {
     /// <summary>
@@ -13,9 +11,8 @@ namespace Innoactive.Creator.IO
         /// Returns a `FileNotFoundException` if file does not exist.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets or the persistent data folder.</remarks>
-        /// <returns>An asynchronous operation that returns a byte array containing the contents of the file.</returns>
-        /// /// <exception cref="FileNotFoundException">The file specified in <paramref name="filePath"/> was not found.</exception>
-        Task<byte[]> Read(string filePath);
+        /// <returns>The contents of the file into a byte array.</returns>
+        byte[] Read(string filePath);
 
         /// <summary>
         /// Saves given <paramref name="fileData"/> in provided <paramref name="filePath"/>.

@@ -169,7 +169,7 @@ namespace Innoactive.Hub.Training.Configuration
         }
 
         /// <inheritdoc />
-        public virtual async Task<ICourse> LoadCourse()
+        public virtual ICourse LoadCourse()
         {
             if (string.IsNullOrEmpty(RuntimeConfigurator.GetSelectedTrainingCourse()))
             {
@@ -177,7 +177,7 @@ namespace Innoactive.Hub.Training.Configuration
             }
 
             string selectedTrainingCourse = RuntimeConfigurator.GetSelectedTrainingCourse();
-            byte[] serialized = await FileManager.Read(selectedTrainingCourse);
+            byte[] serialized = FileManager.Read(selectedTrainingCourse);
 
             return Serializer.ToCourse(serialized);
         }
