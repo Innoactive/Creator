@@ -114,6 +114,9 @@ def Documentation()
 def DeployDocumentation()
 {
     echo 'Upload documentation to ftp server'
+
+    def tagNameNoPostfix = env.TAG_NAME.split('-')[0];
+
     dir("${PROJECT_PATH}")
     {
         // upload documentation to ftp server
@@ -129,7 +132,7 @@ def DeployDocumentation()
                         makeEmptyDirs: false,
                         noDefaultExcludes: false,
                         patternSeparator: '[, ]+',
-                        remoteDirectory: "${TAG_NAME}",
+                        remoteDirectory: tagNameNoPostfix,
                         remoteDirectorySDF: false,
                         removePrefix: 'Assets/Innoactive/Creator/Core/.Documentation/_site/',
                         sourceFiles: 'Assets/Innoactive/Creator/Core/.Documentation/_site/**/*'
