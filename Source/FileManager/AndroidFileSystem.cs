@@ -1,5 +1,4 @@
 ﻿#if !UNITY_EDITOR && UNITY_ANDROID
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Linq;
@@ -24,17 +23,9 @@ namespace Innoactive.Creator.IO
 
             using (ZipArchive archive = ZipFile.OpenRead(rootFolder))
             {
-                List<string> filesPath = new List<string>();
-
-                foreach (ZipArchiveEntry entry in archive.Entries)
-                {
-                    if (entry.FullName.StartsWith(StreamingAssetsArchivePath) && entry.FullName.StartsWith(ExcludedArchivePath) == false)
-                    {
-                        filesPath.Add(entry.FullName);
-                    }
-                }
-
-                streamingAssetsFilesPath = filesPath.ToArray();
+                streamingAssetsFilesPath = archive.Entries.Select(entry => entry.FullName)
+                    .Where(name => name.StartsWith(StreamingAssetsArchivePath) && name.StartsWith(ExcludedArchivePath) == false)
+                    .ToArray();
             }
         }
 
