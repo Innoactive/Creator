@@ -24,13 +24,14 @@ namespace Innoactive.Creator.Tests
         [UnityTest]
         public IEnumerator Read()
         {
-            // Given
+            // Given an existing file in a relative path.
             Assert.IsTrue(defaultFileSystem.Exists(RelativeFilePath));
 
-            // When
+            // When reading the file from the relative path.
             byte[] fileData = defaultFileSystem.Read(RelativeFilePath);
             string message = Encoding.Default.GetString(fileData);
 
+            // Then assert that the file content was retrieved.
             Assert.That(fileData != null && fileData.Length > 0);
             Assert.IsFalse(string.IsNullOrEmpty(message));
             yield break;
@@ -39,9 +40,9 @@ namespace Innoactive.Creator.Tests
         [UnityTest]
         public IEnumerator Exists()
         {
-            // Given
-            // When
-            // Then
+            // Given a file in a relative path.
+            // When checking if the file exits.
+            // Then assert that the file exits.
             Assert.IsFalse(string.IsNullOrEmpty(RelativeFilePath));
             Assert.IsFalse(Path.IsPathRooted(RelativeFilePath));
             Assert.IsTrue(defaultFileSystem.Exists(RelativeFilePath));
@@ -53,13 +54,13 @@ namespace Innoactive.Creator.Tests
         {
             Assert.IsFalse(FileManager.Exists(RelativeFilePath));
 
-            // Given
+            // Given invalid paths and files data.
             byte[] fileData = new UTF8Encoding(true).GetBytes(FileContent);
 
-            // When
+            // When trying to read, write or check if the file exits using invalid arguments.
             defaultFileSystem.Write(RelativeFilePath, fileData);
 
-            // Then
+            // Then assert that a proper exception is thrown.
             Assert.IsTrue(defaultFileSystem.Exists(RelativeFilePath));
             yield break;
         }
@@ -67,9 +68,9 @@ namespace Innoactive.Creator.Tests
         [UnityTest]
         public IEnumerator NotExistingFile()
         {
-            // Given
-            // When
-            // Then
+            // Given a relative path to a file that does not exit.
+            // When checking if the file exits.
+            // Then assert that the file does not exit.
             Assert.IsFalse(defaultFileSystem.Exists(NonExistingFilePath));
             yield break;
         }

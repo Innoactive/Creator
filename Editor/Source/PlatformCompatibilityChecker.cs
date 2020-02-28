@@ -26,11 +26,18 @@ namespace Innoactive.Creator.Editors.Utils
         {
             string filePath = Path.Combine(Application.dataPath, ReferenceFileName);
 
-            if (File.Exists(filePath) == false )
+            if (File.Exists(filePath))
             {
-                CreateReferenceFile(filePath);
+                AreDependenciesUpdated(filePath);
             }
+            else
+            {
+                CreateReferenceFile(filePath, Dependencies);
+            }
+        }
 
+        private static void AreDependenciesUpdated(string filePath)
+        {
             List<string> dependencyList = File.ReadAllLines(filePath).ToList();
             int numberOfCurrentDependencies = dependencyList.Count;
 
@@ -44,13 +51,14 @@ namespace Innoactive.Creator.Editors.Utils
 
             if (numberOfCurrentDependencies < dependencyList.Count)
             {
-                CreateReferenceFile(filePath);
+                CreateReferenceFile(filePath, dependencyList);
             }
         }
 
-        private static void CreateReferenceFile(string filePath)
+        private static void CreateReferenceFile(string filePath, IEnumerable<string> dependencyList)
         {
-            File.WriteAllLines(filePath, Dependencies);
+
+            File.WriteAllLines(filePath, dependencyList);
             Debug.LogWarningFormat("Required compatibility file was created at path {0}", filePath);
         }
     }
