@@ -4,7 +4,7 @@ You can view and modify your training course in the Workflow Editor window. On t
 
 [![Empty Workflow Editor](../images/workflow-editor/empty-editor.png "")](../images/workflow-editor/empty-editor.png)
 
-## Undo and redo
+## Undo and Redo
 
 You can undo and redo all changes in the Workflow Editor and [Step Inspector](step-inspector.md) by pressing `CTRL` + `Z` and `CTRL` + `Y` on the keyboard.
 
@@ -12,15 +12,15 @@ You can undo and redo all changes in the Workflow Editor and [Step Inspector](st
 
 Click the pen icon on the top of the chapter menu to rename the current training course. When you do so, the Innoactive creator will save the current state of the course to the new file, using the new name as the filename. It will delete the old file.
 
-## Save button
+## Save Button
 
 You can save any changes you made in the Workflow Editor by clicking the save button in the upper left corner. They will be saved in the file of the currently opened training course.
 
-## Unsaved changes
+## Unsaved Changes
 
 If you have unsaved changes, then the red text in the upper right corner appears. It disappears as soon as you save your changes. Make sure you have saved your changes before testing them in Unity's `Play Mode`.
 
-## Hide and show the chapter menu
+## Hide and Show the Chapter Menu
 
 To hide the left part of the Workflow Editor click on the `<<` icon above the name field. To show it again click on the `>>` icon on the left.
 
@@ -32,11 +32,11 @@ You can separate your training course into multiple chapters. Each chapter has i
 
 [![Change chapter](../images/workflow-editor/change-chapter.gif "")](../images/workflow-editor/change-chapter.gif)
 
-### Add a chapter
+### Add a Chapter
 
 You can add a chapter by clicking on the `+Add Chapter` button under the list of chapters.
 
-### Modify a chapter
+### Modify a Chapter
 
 Next to each chapter are four different icons. These are buttons that can be used to modify the chapters.
 
@@ -53,25 +53,25 @@ They offer the following functionality (from left to right):
 
 The workflow of a chapter at least consists of a small starting point. It can be extended by steps and transitions.
 
-### Add steps
+### Add Steps
 
 The workflow of a new chapter has only a starting point. To add a step, click with the right mouse button anywhere on the empty area and choose the `Add Step` option.  
 
 [![Add a step](../images/workflow-editor/create-step.gif "")](../images/workflow-editor/create-step.gif)
 
-### Remove steps
+### Remove Steps
 
 To remove a step, click on the step with the right mouse button and choose the `Delete Step` option.
 
 [![Remove a step](../images/workflow-editor/remove-step.gif "")](../images/workflow-editor/remove-step.gif)
 
-### Move steps around
+### Move Steps Around
 
 You can drag a step around the canvas with the left mouse button.
 
 [![Move a step around](../images/workflow-editor/move-step.gif "")](../images/workflow-editor/move-step.gif)
 
-### Add transitions
+### Add Transitions
 
 To add a transition to a step, click on the white circle with the `+` sign right of the step. To connect a step to another or to the starting point, drag the transition origin (a white circle next to the origin object) to the transition target (the white circle with a `>` sign on the left of the target object).
 

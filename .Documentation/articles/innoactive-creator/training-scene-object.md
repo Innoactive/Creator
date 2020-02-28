@@ -4,7 +4,7 @@ The `Training Scene Object` is the basic unit of a training course. If an object
 
 The `Unique Name` property of the `Training Scene Object` helps to identify and reference specific GameObjects. When adding the `Training Scene Object` component to a game object, the `Unique Name` property is by default identical to the game object's current name if no other `Training Scene Object` has the same `Unique Name`.
 
-## Setup a Training Scene Object manually
+## Setup a Training Scene Object Manually
 
 1. Pick, add, or create a game object and select it in the scene.
 2. In the Unity Inspector, click on the button `Add Component` at the bottom.
@@ -56,7 +56,7 @@ Find more information on how [behaviors](default-behaviors.md) and [conditions](
 
 Behaviors and conditions reference propreties of objects in the scene. For example, a `Touch Condition` checks if an object was touched, and that object must have a `Touchable Property`.
 
-## Automatic configuration of Scene Objects and Training Properties
+## Automatic Configuration of Scene Objects and Training Properties
 
 If you assign a GameObject without the `Training Scene Object` component to a Scene Object field in the [Step Inspector](step-inspector.md), then the Creator will fail to execute the course. To prevent it, the [Step Inspector](step-inspector.md) will display an error message above the Scene Object. If you press the `Fix it` button next to the error, then the Creator will add all necessary components to the target scene object.
 
