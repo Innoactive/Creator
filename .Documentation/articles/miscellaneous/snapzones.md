@@ -6,23 +6,23 @@ You can create a snap zone either [automatically](#a-automatically-setup-a-simpl
 
 ------
 
-## A) Automatically setup a simple snap zone
+## A) Automatically Setup a Simple Snap Zone
 
-### I. Snappable game object
+### I. Snappable Game Object
 
 We need a game object that we want to snap into the snap zone. It needs to have at least one collider component. To make it snappable, we need to add the `Snappable Property` component.
 
 [![Add Snappable Property](../images/snapzones/box-snappable.png "Add Snappable Property")](../images/snapzones/box-snappable.png)
 
 
-### II. Create snap zone automatically
+### II. Create Snap Zone Automatically
 
 To automatically create a matching snap zone, click the `Create Snap Zone` button of the `Snappable Property` in the `Inspector` window of the corresponding snappable game object.
 
 [![Create Snap Zone](../images/snapzones/automatically-create.gif "Create Snap Zone")](../images/snapzones/automatically-create.gif)
 
 
-### III. Adjust snap zone (optional)
+### III. Adjust Snap Zone (Optional)
 
 You can either change the settings directly in the new snap zone object or change the default settings in the `Snap Zone Settings` window. In order to open the default snap zone settings, go to the Unity's toolbar and select: `Innoactive` > `Creator` > `Utilities` > `Snap Zone Settings...`. If you click `Save Settings`, every snap zone that will be created via the `Create Snap Zone` button afterwards will get the new settings by default. `Save and Apply` additionally applies these settings to all snap zones in the current scene.
 
@@ -31,12 +31,12 @@ You can either change the settings directly in the new snap zone object or chang
 
 ------
 
-## B) Manually setup a simple snap zone
+## B) Manually Setup a Simple Snap Zone
 
 We need three game objects to setup a snap zone:
 
 
-### I. Snap zone game object
+### I. Snap Zone Game Object
 
 1. We need to create an empty game object. To do this, right click into the *Unity Scene Hierarchy* and select `Create Empty`.
 2. This empty game object requires a collider component the size that the snap zone should ultimately have. The `Is Trigger` property must be **enabled**. 
@@ -47,7 +47,7 @@ We can now change the `Unique Name` in the `Training Scene Object` component and
 [![Create Snap Zone Manually](../images/snapzones/manually-create-snapzone.gif "Create Snap Zone Manually")](../images/snapzones/manually-create-snapzone.gif)
 
 
-### II. Snappable game object
+### II. Snappable Game Object
 
 1. We need a game object that we want to snap into the snap zone. In this example, we create a cube by right clicking into the *Unity Scene Hierarchy* and select `3D Object > Cube`.
 2. Make sure that the game object has a collider component.
@@ -58,7 +58,7 @@ We can now change the `Unique Name` in the `Training Scene Object` component.
 [![Create Snappable Cube](../images/snapzones/create-snappable-cube.gif "Create Snappable Cube")](../images/snapzones/create-snappable-cube.gif)
 
 
-### III. Highlight prefab of the snappable game object
+### III. Highlight Prefab of the Snappable Game Object
 
 For our Highlight prefab we probably want to use a model of our snappable object as a prefab. If we don't have a model prefab, we can simply create one by following these steps:
 
