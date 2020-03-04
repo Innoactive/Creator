@@ -1,16 +1,15 @@
-#if UNITY_EDITOR
-
 using System.Collections;
 using Innoactive.Hub.Training.Audio;
 using Innoactive.Hub.Training;
 using Innoactive.Hub.Training.Behaviors;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Creator.Internationalization;
+using Innoactive.Creator.Core.Tests.Utils;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
+namespace Innoactive.Creator.Core.Tests.Behaviors
 {
     public class PlayAudioBehaviorTests : RuntimeTests
     {
@@ -314,5 +313,3 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         }
     }
 }
-
-#endif

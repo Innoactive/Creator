@@ -1,14 +1,15 @@
-#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using Innoactive.Hub.Training;
 using Innoactive.Hub.Training.Behaviors;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.Configuration.Modes;
+using Innoactive.Creator.Core.Tests.Utils;
+using Innoactive.Creator.Core.Tests.Utils.Mocks;
 using UnityEngine.Assertions;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
+namespace Innoactive.Creator.Core.Tests.Behaviors
 {
     public class BehaviorSequenceTests : RuntimeTests
     {
@@ -90,8 +91,8 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator ActivateOnlyAfterOnePass()
         {
             // Given a behaviors sequence,
-            EndlessBehavior endlessBehavior = new EndlessBehavior();
-            BehaviorSequence sequence = new BehaviorSequence(true, new List<IBehavior> { endlessBehavior });
+            EndlessBehaviorMock endlessBehaviorMock = new EndlessBehaviorMock();
+            BehaviorSequence sequence = new BehaviorSequence(true, new List<IBehavior> { endlessBehaviorMock });
 
             // When we activate it,
             sequence.LifeCycle.Activate();
@@ -100,7 +101,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
             sequence.Update();
 
             // Then it is activated only after one pass.
-            endlessBehavior.LifeCycle.MarkToFastForward();
+            endlessBehaviorMock.LifeCycle.MarkToFastForward();
 
             yield return null;
             sequence.Update();
@@ -231,8 +232,8 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator SkipChildNotWhenItIsExecuted()
         {
             // Given an activating behavior sequence of one not optional and one optional behavior,
-            OptionalEndlessBehavior optional = new OptionalEndlessBehavior();
-            EndlessBehavior notOptional = new EndlessBehavior();
+            OptionalEndlessBehaviorMock optional = new OptionalEndlessBehaviorMock();
+            EndlessBehaviorMock notOptional = new EndlessBehaviorMock();
             BehaviorSequence sequence = new BehaviorSequence(false, new List<IBehavior>
             {
                 notOptional,
@@ -246,7 +247,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
             sequence.Update();
 
             // When the optional behavior is marked to be skipped before it was its turn,
-            sequence.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehavior>()));
+            sequence.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehaviorMock>()));
 
             notOptional.LifeCycle.MarkToFastForwardStage(Stage.Activating);
             notOptional.LifeCycle.MarkToFastForwardStage(Stage.Deactivating);
@@ -274,8 +275,8 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator SkipChildWhenItIsExecuted()
         {
             // Given an activating behavior sequence of one not optional and one optional behavior,
-            OptionalEndlessBehavior optional = new OptionalEndlessBehavior();
-            EndlessBehavior notOptional = new EndlessBehavior();
+            OptionalEndlessBehaviorMock optional = new OptionalEndlessBehaviorMock();
+            EndlessBehaviorMock notOptional = new EndlessBehaviorMock();
             BehaviorSequence sequence = new BehaviorSequence(false, new List<IBehavior>
             {
                 notOptional,
@@ -293,7 +294,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
             notOptional.LifeCycle.MarkToFastForwardStage(Stage.Deactivating);
 
             // When the optional behavior is marked to be skipped when it is activating,
-            sequence.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehavior>()));
+            sequence.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehaviorMock>()));
 
             while (sequence.LifeCycle.Stage != Stage.Active)
             {
@@ -312,8 +313,8 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator UnskipChild()
         {
             // Given an activating repeating behavior sequence of one not optional and one skipped optional behavior,
-            OptionalEndlessBehavior optional = new OptionalEndlessBehavior();
-            EndlessBehavior notOptional = new EndlessBehavior();
+            OptionalEndlessBehaviorMock optional = new OptionalEndlessBehaviorMock();
+            EndlessBehaviorMock notOptional = new EndlessBehaviorMock();
             BehaviorSequence sequence = new BehaviorSequence(true, new List<IBehavior>
             {
                 notOptional,
@@ -330,7 +331,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
             notOptional.LifeCycle.MarkToFastForwardStage(Stage.Activating);
             notOptional.LifeCycle.MarkToFastForwardStage(Stage.Deactivating);
 
-            sequence.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehavior>()));
+            sequence.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehaviorMock>()));
 
             yield return null;
             sequence.Update();
@@ -352,4 +353,3 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         }
     }
 }
-#endif

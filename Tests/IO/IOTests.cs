@@ -1,11 +1,9 @@
-﻿#if UNITY_EDITOR
-
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using UnityEngine;
 using NUnit.Framework;
 
-namespace Innoactive.Creator.Tests
+namespace Innoactive.Creator.Core.Tests.IO
 {
     public class IOTests
     {
@@ -92,6 +90,3 @@ namespace Innoactive.Creator.Tests
         }
     }
 }
-
-#endif
-
