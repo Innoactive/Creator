@@ -76,6 +76,7 @@ namespace Innoactive.Hub.Training.Editors.Configuration
 
             // Find and setup all OnSceneSetup classes in the project.
             IEnumerable<Type> types = ReflectionUtils.GetConcreteImplementationsOf<OnSceneSetup>();
+            HashSet<string> initializedKeys = new HashSet<string>();
 
             foreach (Type onSceneSetup in types)
             {
@@ -86,6 +87,11 @@ namespace Innoactive.Hub.Training.Editors.Configuration
                     if (setup != null)
                     {
                         setup.Setup();
+                        Debug.LogFormat("Scene Setup done for {0}", onSceneSetup);
+                        if (setup.Key != null && initializedKeys.Add(setup.Key) == false)
+                        {
+                            Debug.LogWarningFormat("Multiple scene setups with key {0} found during Scene setup. This might cause problems and you might consider using only one.", setup.Key);
+                        }
                     }
                 }
                 catch (Exception exception)
