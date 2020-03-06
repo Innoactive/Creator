@@ -68,6 +68,32 @@ namespace Innoactive.Hub.Training.Unity.Utils
         }
 
         /// <summary>
+        /// Checks whether a <paramref name="gameObject"/> contains missing scripts.
+        /// </summary>
+        /// <param name="gameObject">GameObject to check.</param>
+        /// <returns>True, if scripts are missing.</returns>
+        public static bool ContainsMissingScripts(GameObject gameObject)
+        {
+            foreach (Component component in gameObject.GetComponents<Component>())
+            {
+                if (component == null)
+                {
+                    return true;
+                }
+            }
+
+            for (int i = 0; i < gameObject.transform.childCount; i++)
+            {
+                if (ContainsMissingScripts(gameObject.transform.GetChild(i).gameObject))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Setup training configuration in the scene, if it is not already present.
         /// </summary>
         public static void SetupTrainingConfiguration()
