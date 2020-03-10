@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using Innoactive.Creator.Core.Editor.Source.Utils;
@@ -96,6 +97,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
                         ICourse course = EditorCourseUtils.CreateCourse(trainingName);
                         if (EditorCourseUtils.SetTrainingCourseActive(course))
                         {
+                            Debug.Log("Newly created course saved.");
                             Close();
                         }
                     }

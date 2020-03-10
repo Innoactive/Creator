@@ -30,17 +30,20 @@ namespace Innoactive.Creator.Core.Editor.Source.Utils
             TrainingWindow trainingWindow = TrainingWindow.GetWindow();
             trainingWindow.Focus();
 
-            if (trainingWindow.SetTrainingCourseWithUserConfirmation(course))
+            if (trainingWindow.SetTrainingCourseWithUserConfirmation(course) == false)
             {
+                Debug.LogError("Could not set course.");
                 return false;
             }
 
             if (SaveManager.SaveTrainingCourseToFile(course))
             {
+                trainingWindow.IsDirty = false;
                 string path = GetTrainingPath(course).Substring(Application.streamingAssetsPath.Length + 1);
                 RuntimeConfigurator.SetSelectedTrainingCourse(path);
                 return true;
             }
+            Debug.LogError("Could not save the training course");
             return false;
         }
 

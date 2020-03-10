@@ -71,12 +71,15 @@ namespace Innoactive.Hub.Training.Editors.Windows
         /// Saves the training. Will open the save as dialog only, if no path exists.
         /// Otherwise, this will silently overwrite the existing version of the training.
         /// </summary>
-        public void SaveTraining()
+        public bool SaveTraining()
         {
             if (SaveManager.SaveTrainingCourseToFile(activeCourse))
             {
                 IsDirty = false;
+                return true;
             }
+
+            return false;
         }
 
         public void MakeTemporarySave()
@@ -98,21 +101,18 @@ namespace Innoactive.Hub.Training.Editors.Windows
         {
             if (activeCourse != null && IsDirty)
             {
-                if (IsDirty)
+                int userConfirmation = TestableEditorElements.DisplayDialogComplex("Unsaved changes detected.", "Do you want to save the changes to a current training course?", "Save", "Cancel", "Discard");
+                if (userConfirmation == 0)
                 {
-                    int userConfirmation = TestableEditorElements.DisplayDialogComplex("Unsaved changes detected.", "Do you want to save the changes to a current training course?", "Save", "Cancel", "Discard");
-                    if (userConfirmation == 0)
-                    {
-                        SaveTraining();
-                        if (activeCourse.Data.Name.Equals(course.Data.Name))
-                        {
-                            return true;
-                        }
-                    }
-                    else if (userConfirmation == 1)
+                    if (SaveTraining() == false)
                     {
                         return false;
                     }
+                }
+
+                if (userConfirmation == 1)
+                {
+                    return false;
                 }
             }
 
@@ -132,7 +132,6 @@ namespace Innoactive.Hub.Training.Editors.Windows
             };
 
             chapterRepresentation.SetChapter(course.Data.FirstChapter);
-
             IsDirty = true;
         }
 
