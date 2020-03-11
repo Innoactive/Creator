@@ -61,7 +61,7 @@ def CopyTrainingModule(repositoryDirectory)
     Move-Item -Path .\\Innoactive.Creator.Core.asmdef.meta -Destination ${repositoryDirectory}    
     Move-Item -Path Editor -Destination ${repositoryDirectory}
     Move-Item -Path Extensions -Destination ${repositoryDirectory}
-    Move-Item -Path Source -Destination ${repositoryDirectory}
+    Move-Item -Path Runtime -Destination ${repositoryDirectory}
     Move-Item -Path Tests -Destination ${repositoryDirectory}
     """
 }
