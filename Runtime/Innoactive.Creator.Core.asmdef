@@ -1,12 +1,7 @@
 {
     "name": "Innoactive.Creator.Core",
     "references": [],
-    "includePlatforms": [
-        "Android",
-        "Editor",
-        "WindowsStandalone32",
-        "WindowsStandalone64"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
