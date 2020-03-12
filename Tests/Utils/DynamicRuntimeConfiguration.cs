@@ -4,7 +4,7 @@ using System.Linq;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.Configuration.Modes;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Utils
+namespace Innoactive.Creator.Core.Tests.Utils
 {
     /// <summary>
     /// DynamicDefinition allows to dynamically adjust training modes.

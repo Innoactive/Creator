@@ -1,6 +1,4 @@
-﻿#if UNITY_EDITOR
-
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using System.Collections;
 using UnityEngine;
@@ -8,7 +6,7 @@ using NUnit.Framework;
 using UnityEngine.TestTools;
 using Innoactive.Creator.IO;
 
-namespace Innoactive.Creator.Tests
+namespace Innoactive.Creator.Core.Tests.IO
 {
     public class DefaultFileSystemTests : IOTests
     {
@@ -76,5 +74,3 @@ namespace Innoactive.Creator.Tests
         }
     }
 }
-
-#endif
