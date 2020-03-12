@@ -1,17 +1,16 @@
-#if UNITY_EDITOR
-
 using System.Collections;
 using Innoactive.Hub.Training;
 using Innoactive.Hub.Training.Behaviors;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.Utils.Builders;
-using Innoactive.Hub.Unity.Tests.Training.Utils;
+using Innoactive.Creator.Core.Tests.Utils;
+using Innoactive.Creator.Core.Tests.Utils.Mocks;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
+namespace Innoactive.Creator.Core.Tests.Behaviors
 {
     public class DisableGameObjectBehaviorTests : RuntimeTests
     {
@@ -20,7 +19,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         {
             // Given an active training scene object and a training course with disable game object behavior,
             TrainingSceneObject toDisable = TestingUtils.CreateSceneObject("ToDisable");
-            EndlessCondition trigger = new EndlessCondition();
+            EndlessConditionMock trigger = new EndlessConditionMock();
 
             ICourse course = new LinearTrainingBuilder("Course")
                 .AddChapter(new LinearChapterBuilder("Chapter")
@@ -56,7 +55,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         {
             // Given an active training scene object and a training course with disable game object behavior,
             TrainingSceneObject toDisable = TestingUtils.CreateSceneObject("ToDisable");
-            EndlessCondition trigger = new EndlessCondition();
+            EndlessConditionMock trigger = new EndlessConditionMock();
 
             ICourse course = new LinearTrainingBuilder("Course")
                 .AddChapter(new LinearChapterBuilder("Chapter")
@@ -155,5 +154,3 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         }
     }
 }
-
-#endif

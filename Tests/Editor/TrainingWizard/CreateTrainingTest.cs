@@ -4,7 +4,7 @@ using Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Editor.Windows.TrainingWizardTests
+namespace Innoactive.Creator.Core.Tests.TrainingWizardTests
 {
     public class CreateTrainingTest : EditorImguiTest<TrainingWizard>
     {

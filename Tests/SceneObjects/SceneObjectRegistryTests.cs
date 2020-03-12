@@ -1,14 +1,13 @@
-﻿#if UNITY_EDITOR
-
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System.Collections;
+using Innoactive.Creator.Core.Tests.Utils;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.Exceptions;
 using Innoactive.Hub.Training.SceneObjects;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Hub.Unity.Tests.Training
+namespace Innoactive.Creator.Core.Tests
 {
     public class SceneObjectRegistryTests : RuntimeTests
     {
@@ -208,4 +207,3 @@ namespace Innoactive.Hub.Unity.Tests.Training
         }
     }
 }
-#endif
