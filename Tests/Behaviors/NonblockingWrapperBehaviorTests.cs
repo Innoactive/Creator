@@ -1,15 +1,15 @@
-#if UNITY_EDITOR
-
 using System;
 using System.Collections;
 using Innoactive.Hub.Training;
 using Innoactive.Hub.Training.Behaviors;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.Configuration.Modes;
+using Innoactive.Creator.Core.Tests.Utils;
+using Innoactive.Creator.Core.Tests.Utils.Mocks;
 using UnityEngine.Assertions;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
+namespace Innoactive.Creator.Core.Tests.Behaviors
 {
     [Obsolete("NonblockingWrapperBehavior is obsolete.")]
     public class NonblockingWrapperBehaviorTests : RuntimeTests
@@ -18,7 +18,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator WrappedBehaviorActivating()
         {
             // Given non-blocking behavior which wraps a behavior that is not activated immediately,
-            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(new EndlessBehavior(), false);
+            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(new EndlessBehaviorMock(), false);
             behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
             // When we activate it,
@@ -34,14 +34,14 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator BehaviorActivated()
         {
             // Given non-blocking behavior which wraps a behavior that is not activated immediately,
-            EndlessBehavior endlessBehavior = new EndlessBehavior();
-            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(endlessBehavior, false);
+            EndlessBehaviorMock endlessBehaviorMock = new EndlessBehaviorMock();
+            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(endlessBehaviorMock, false);
             behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
             // When we activate it,
             behavior.LifeCycle.Activate();
 
-            endlessBehavior.LifeCycle.MarkToFastForward();
+            endlessBehaviorMock.LifeCycle.MarkToFastForward();
 
             yield return null;
             behavior.Update();
@@ -57,7 +57,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator BlockingBehaviorActivating()
         {
             // Given blocking behavior which wraps a behavior that is not activated immediately,
-            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(new EndlessBehavior(), true);
+            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(new EndlessBehaviorMock(), true);
             behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
             // When we activate it,
@@ -73,7 +73,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator FastForwardInactiveBehavior()
         {
             // Given non-blocking behavior which wraps a behavior that is not activated immediately,
-            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(new EndlessBehavior(), false);
+            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(new EndlessBehaviorMock(), false);
             behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
             // When we mark it to fast-forward,
@@ -90,7 +90,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator FastForwardInactiveBehaviorAndActivateIt()
         {
             // Given non-blocking behavior which wraps a behavior that is not activated immediately,
-            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(new EndlessBehavior(), false);
+            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(new EndlessBehaviorMock(), false);
             behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
             // When we mark it to fast-forward and activate it,
@@ -108,7 +108,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator FastForwardInactiveBlockingBehaviorAndActivateIt()
         {
             // Given non-blocking behavior which wraps a behavior that is not activated immediately,
-            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(new EndlessBehavior(), true);
+            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(new EndlessBehaviorMock(), true);
             behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
             // When we mark it to fast-forward and activate it,
@@ -126,7 +126,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator FastForwardActivatingBehavior()
         {
             // Given an activating non-blocking behavior which wraps a behavior that is not activated immediately,
-            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(new EndlessBehavior(), false);
+            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(new EndlessBehaviorMock(), false);
             behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
             behavior.LifeCycle.Activate();
@@ -145,7 +145,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator FastForwardActivatingBlockingBehavior()
         {
             // Given an activating non-blocking behavior which wraps a behavior that is not activated immediately,
-            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(new EndlessBehavior(), true);
+            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(new EndlessBehaviorMock(), true);
             behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
             behavior.LifeCycle.Activate();
@@ -164,12 +164,12 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator SkipChildBlockingActivating()
         {
             // Given an activating blocking behavior with an optional child,
-            OptionalEndlessBehavior optional = new OptionalEndlessBehavior();
+            OptionalEndlessBehaviorMock optional = new OptionalEndlessBehaviorMock();
             NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(optional, true);
 
             // When a new mode is set and the optional child has to be skipped,
             //RuntimeConfigurator.Configuration = new DynamicRuntimeConfiguration(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehavior>()));
-            behavior.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehavior>()));
+            behavior.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehaviorMock>()));
 
             behavior.LifeCycle.Activate();
 
@@ -189,7 +189,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator SkipChildBlockingActive()
         {
             // Given an active blocking behavior with an optional child,
-            OptionalEndlessBehavior optional = new OptionalEndlessBehavior();
+            OptionalEndlessBehaviorMock optional = new OptionalEndlessBehaviorMock();
             NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(optional, true);
             behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
@@ -203,7 +203,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
             }
 
             // When a new mode is set and the optional child has to be skipped,
-            behavior.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehavior>()));
+            behavior.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehaviorMock>()));
 
             while (behavior.LifeCycle.Stage != Stage.Active)
             {
@@ -222,7 +222,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator SkipChildBlockingDeactivating()
         {
             // Given a deactivating blocking behavior with an optional child,
-            OptionalEndlessBehavior optional = new OptionalEndlessBehavior();
+            OptionalEndlessBehaviorMock optional = new OptionalEndlessBehaviorMock();
             NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(optional, true);
             behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
@@ -245,7 +245,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
             }
 
             // When a new mode is set and the optional child has to be skipped,
-            behavior.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehavior>()));
+            behavior.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehaviorMock>()));
 
             // Wait a frame because configure doesn't even change anything about the stages.
             yield return null;
@@ -261,9 +261,9 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator UnskipChildBlockingActive()
         {
             // Given an active blocking behavior with an optional child,
-            OptionalEndlessBehavior optional = new OptionalEndlessBehavior();
+            OptionalEndlessBehaviorMock optional = new OptionalEndlessBehaviorMock();
             NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(optional, true);
-            behavior.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehavior>()));
+            behavior.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehaviorMock>()));
 
             behavior.LifeCycle.Activate();
             while (behavior.LifeCycle.Stage != Stage.Active)
@@ -287,7 +287,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator SkipChildNonBlockingActive()
         {
             // Given an active non-blocking behavior with an optional child,
-            OptionalEndlessBehavior optional = new OptionalEndlessBehavior();
+            OptionalEndlessBehaviorMock optional = new OptionalEndlessBehaviorMock();
             NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(optional, false);
             behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
@@ -301,7 +301,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
             }
 
             // When a new mode is set and the optional child has to be skipped,
-            behavior.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehavior>()));
+            behavior.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehaviorMock>()));
 
             while (behavior.LifeCycle.Stage != Stage.Active)
             {
@@ -320,9 +320,9 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator UnskipChildNotBlockingActive()
         {
             // Given an active nonblocking behavior with an optional child,
-            OptionalEndlessBehavior optional = new OptionalEndlessBehavior();
+            OptionalEndlessBehaviorMock optional = new OptionalEndlessBehaviorMock();
             NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(optional, false);
-            behavior.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehavior>()));
+            behavior.Configure(new Mode("Test", new WhitelistTypeRule<IOptional>().Add<OptionalEndlessBehaviorMock>()));
 
             behavior.LifeCycle.Activate();
             while (behavior.LifeCycle.Stage != Stage.Active)
@@ -343,5 +343,3 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         }
     }
 }
-
-#endif

@@ -1,17 +1,16 @@
-﻿#if UNITY_EDITOR
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Innoactive.Creator.Core.Tests.Utils.Mocks;
 using Innoactive.Hub.Training;
 
-namespace Innoactive.Hub.Unity.Tests.Training
+namespace Innoactive.Creator.Core.Tests.Utils
 {
     public class TestLinearChapterBuilder
     {
         public readonly string Name;
 
         public readonly List<Step> Steps = new List<Step>();
-        public readonly List<EndlessCondition> StepTriggerConditions = new List<EndlessCondition>();
+        public readonly List<EndlessConditionMock> StepTriggerConditions = new List<EndlessConditionMock>();
 
         public TestLinearChapterBuilder(string name)
         {
@@ -48,13 +47,12 @@ namespace Innoactive.Hub.Unity.Tests.Training
                 builder.AddStep("Step" + (i + 1));
                 if (addTriggerConditions)
                 {
-                    EndlessCondition condition = new EndlessCondition();
-                    builder.Steps[i].Data.Transitions.Data.Transitions.First().Data.Conditions.Add(condition);
-                    builder.StepTriggerConditions.Add(condition);
+                    EndlessConditionMock conditionMock = new EndlessConditionMock();
+                    builder.Steps[i].Data.Transitions.Data.Transitions.First().Data.Conditions.Add(conditionMock);
+                    builder.StepTriggerConditions.Add(conditionMock);
                 }
             }
             return builder;
         }
     }
 }
-#endif
