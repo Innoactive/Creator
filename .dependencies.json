@@ -3,17 +3,17 @@
         {
             "name": "Components\\VRTK-Interaction",
             "repository": "git@github.com:Innoactive/VRTK-Interaction-Component.git",
-            "branch": "feature/assembly-definition-#TRNG-526"
+            "branch": "feature/develop-2019"
         },
         {
             "name": "Components\\Text-To-Speech",
             "repository": "git@github.com:Innoactive/TextToSpeech-Component.git",
-            "branch": "feature/added-assemblies-#TRNG-526"
+            "branch": "feature/develop-2019"
         },
         {
             "name": "Components\\Basic-Interaction",
             "repository": "git@github.com:Innoactive/Basic-Interaction-Component.git",
-            "branch": "feature/assembly-definition-#TRNG-526"
+            "branch": "feature/develop-2019"
         }
     ]
 }
