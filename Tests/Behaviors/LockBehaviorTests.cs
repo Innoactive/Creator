@@ -1,15 +1,14 @@
-#if UNITY_EDITOR
-
 using System.Collections;
 using Innoactive.Hub.Training;
 using Innoactive.Hub.Training.Behaviors;
 using Innoactive.Hub.Training.Configuration;
 using Innoactive.Hub.Training.SceneObjects;
+using Innoactive.Creator.Core.Tests.Utils;
 using UnityEngine.TestTools;
 using UnityEngine;
 using NUnit.Framework;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
+namespace Innoactive.Creator.Core.Tests.Behaviors
 {
     public class LockBehaviorTests : RuntimeTests
     {
@@ -244,4 +243,3 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         }
     }
 }
-#endif

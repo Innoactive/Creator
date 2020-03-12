@@ -1,5 +1,3 @@
-#if UNITY_EDITOR
-
 using NUnit.Framework;
 using System.Collections;
 using Innoactive.Hub.Training;
@@ -9,7 +7,7 @@ using Innoactive.Hub.Training.SceneObjects.Properties;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Conditions
+namespace Innoactive.Creator.Core.Tests.Conditions
 {
     [TestFixture]
     public class ObjectInRangeConditionTests : ObjectInTargetTestBase
@@ -327,5 +325,3 @@ namespace Innoactive.Hub.Unity.Tests.Training.Conditions
         }
     }
 }
-
-#endif

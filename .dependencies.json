@@ -3,7 +3,7 @@
         {
             "name": "Components\\VRTK-Interaction",
             "repository": "git@github.com:Innoactive/VRTK-Interaction-Component.git",
-            "branch": "develop-unity-2019"
+            "branch": "develop-2019"
         },
         {
             "name": "Components\\Text-To-Speech",

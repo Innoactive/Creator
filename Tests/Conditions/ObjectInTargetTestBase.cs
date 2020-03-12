@@ -1,10 +1,9 @@
-#if UNITY_EDITOR
-
 using Innoactive.Hub.Training.SceneObjects;
+using Innoactive.Creator.Core.Tests.Utils;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Conditions
+namespace Innoactive.Creator.Core.Tests.Conditions
 {
     public class ObjectInTargetTestBase : RuntimeTests
     {
@@ -42,5 +41,3 @@ namespace Innoactive.Hub.Unity.Tests.Training.Conditions
         }
     }
 }
-
-#endif

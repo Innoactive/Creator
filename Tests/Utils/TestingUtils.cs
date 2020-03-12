@@ -4,7 +4,7 @@ using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.SceneObjects.Properties;
 using UnityEngine;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Utils
+namespace Innoactive.Creator.Core.Tests.Utils
 {
     public static class TestingUtils
     {

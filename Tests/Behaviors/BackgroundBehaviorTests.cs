@@ -1,12 +1,12 @@
-﻿#if UNITY_EDITOR
-
-using System.Collections;
+﻿using System.Collections;
 using Innoactive.Hub.Training;
 using Innoactive.Hub.Training.Configuration;
+using Innoactive.Creator.Core.Tests.Utils;
+using Innoactive.Creator.Core.Tests.Utils.Mocks;
 using UnityEngine.Assertions;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
+namespace Innoactive.Creator.Core.Tests.Behaviors
 {
     public class BackgroundBehaviorTests : RuntimeTests
     {
@@ -14,14 +14,14 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator NonBlockingBehaviorActivating()
         {
             // Given a non-blocking behavior,
-            EndlessBehavior behavior = new EndlessBehavior(false);
-            behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            EndlessBehaviorMock behaviorMock = new EndlessBehaviorMock(false);
+            behaviorMock.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
             // When we activate it,
-            behavior.LifeCycle.Activate();
+            behaviorMock.LifeCycle.Activate();
 
             // Then behavior starts its activation.
-            Assert.AreEqual(Stage.Activating, behavior.LifeCycle.Stage);
+            Assert.AreEqual(Stage.Activating, behaviorMock.LifeCycle.Stage);
 
             yield break;
         }
@@ -30,36 +30,36 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator NonBlockingBehaviorActivated()
         {
             // Given a non-blocking behavior,
-            EndlessBehavior behavior = new EndlessBehavior(false);
-            behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            EndlessBehaviorMock behaviorMock = new EndlessBehaviorMock(false);
+            behaviorMock.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
             // When we activate and finish activation,
-            behavior.LifeCycle.Activate();
+            behaviorMock.LifeCycle.Activate();
 
-            behavior.LifeCycle.MarkToFastForward();
-
-            yield return null;
-            behavior.Update();
+            behaviorMock.LifeCycle.MarkToFastForward();
 
             yield return null;
-            behavior.Update();
+            behaviorMock.Update();
+
+            yield return null;
+            behaviorMock.Update();
 
             // Then it is activated.
-            Assert.AreEqual(Stage.Active, behavior.LifeCycle.Stage);
+            Assert.AreEqual(Stage.Active, behaviorMock.LifeCycle.Stage);
         }
 
         [UnityTest]
         public IEnumerator BlockingBehaviorActivating()
         {
             // Given a blocking behavior,
-            EndlessBehavior behavior = new EndlessBehavior(true);
-            behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            EndlessBehaviorMock behaviorMock = new EndlessBehaviorMock(true);
+            behaviorMock.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
             // When we activate it,
-            behavior.LifeCycle.Activate();
+            behaviorMock.LifeCycle.Activate();
 
             // Then it is immediately activating.
-            Assert.AreEqual(Stage.Activating, behavior.LifeCycle.Stage);
+            Assert.AreEqual(Stage.Activating, behaviorMock.LifeCycle.Stage);
 
             yield break;
         }
@@ -68,14 +68,14 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator FastForwardInactiveNonBlockingBehavior()
         {
             // Given a non-blocking behavior,
-            EndlessBehavior behavior = new EndlessBehavior(false);
-            behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            EndlessBehaviorMock behaviorMock = new EndlessBehaviorMock(false);
+            behaviorMock.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
             // When we mark it to fast-forward,
-            behavior.LifeCycle.MarkToFastForward();
+            behaviorMock.LifeCycle.MarkToFastForward();
 
             // Then it doesn't autocomplete because it hasn't been activated yet.
-            Assert.AreEqual(Stage.Inactive, behavior.LifeCycle.Stage);
+            Assert.AreEqual(Stage.Inactive, behaviorMock.LifeCycle.Stage);
 
             yield break;
         }
@@ -84,15 +84,15 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator FastForwardInactiveNonBlockingBehaviorAndActivateIt()
         {
             // Given a non-blocking behavior,
-            EndlessBehavior behavior = new EndlessBehavior(false);
-            behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            EndlessBehaviorMock behaviorMock = new EndlessBehaviorMock(false);
+            behaviorMock.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
             // When we mark it to fast-forward and activate it,
-            behavior.LifeCycle.MarkToFastForward();
-            behavior.LifeCycle.Activate();
+            behaviorMock.LifeCycle.MarkToFastForward();
+            behaviorMock.LifeCycle.Activate();
 
             // Then the behavior should be activated immediately.
-            Assert.AreEqual(Stage.Active, behavior.LifeCycle.Stage);
+            Assert.AreEqual(Stage.Active, behaviorMock.LifeCycle.Stage);
 
             yield break;
         }
@@ -101,15 +101,15 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator FastForwardInactiveBlockingBehaviorAndActivateIt()
         {
             // Given a blocking behavior,
-            EndlessBehavior behavior = new EndlessBehavior(true);
-            behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            EndlessBehaviorMock behaviorMock = new EndlessBehaviorMock(true);
+            behaviorMock.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
             // When we mark it to fast-forward and activate it,
-            behavior.LifeCycle.MarkToFastForward();
-            behavior.LifeCycle.Activate();
+            behaviorMock.LifeCycle.MarkToFastForward();
+            behaviorMock.LifeCycle.Activate();
 
             // Then the behavior should be activated immediately.
-            Assert.AreEqual(Stage.Active, behavior.LifeCycle.Stage);
+            Assert.AreEqual(Stage.Active, behaviorMock.LifeCycle.Stage);
 
             yield break;
         }
@@ -118,16 +118,16 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator FastForwardActivatingNonBlockingBehavior()
         {
             // Given an activating non-blocking behavior,
-            EndlessBehavior behavior = new EndlessBehavior(false);
-            behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            EndlessBehaviorMock behaviorMock = new EndlessBehaviorMock(false);
+            behaviorMock.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
-            behavior.LifeCycle.Activate();
+            behaviorMock.LifeCycle.Activate();
 
             // When we mark it to fast-forward,
-            behavior.LifeCycle.MarkToFastForward();
+            behaviorMock.LifeCycle.MarkToFastForward();
 
             // Then the behavior should be activated immediately.
-            Assert.AreEqual(Stage.Active, behavior.LifeCycle.Stage);
+            Assert.AreEqual(Stage.Active, behaviorMock.LifeCycle.Stage);
 
             yield break;
         }
@@ -136,16 +136,16 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator FastForwardActivatingBlockingBehavior()
         {
             // Given an activating blocking behavior,
-            EndlessBehavior behavior = new EndlessBehavior(true);
-            behavior.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            EndlessBehaviorMock behaviorMock = new EndlessBehaviorMock(true);
+            behaviorMock.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
 
-            behavior.LifeCycle.Activate();
+            behaviorMock.LifeCycle.Activate();
 
             // When we mark it to fast-forward,
-            behavior.LifeCycle.MarkToFastForward();
+            behaviorMock.LifeCycle.MarkToFastForward();
 
             // Then the behavior should be activated immediately.
-            Assert.AreEqual(Stage.Active, behavior.LifeCycle.Stage);
+            Assert.AreEqual(Stage.Active, behaviorMock.LifeCycle.Stage);
 
             yield break;
         }
@@ -154,12 +154,12 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator NonBlockingBehaviorDoesNotBlock()
         {
             // Given a chapter with a step with no conditions but a transition to the end, and a non-blocking endless behavior,
-            EndlessBehavior nonBlockingBehavior = new EndlessBehavior(false);
+            EndlessBehaviorMock nonBlockingBehaviorMock = new EndlessBehaviorMock(false);
             ITransition transition = new Transition();
             transition.Data.TargetStep = null;
             IStep step = new Step("NonBlockingStep");
             step.Data.Transitions.Data.Transitions.Add(transition);
-            step.Data.Behaviors.Data.Behaviors.Add(nonBlockingBehavior);
+            step.Data.Behaviors.Data.Behaviors.Add(nonBlockingBehaviorMock);
             IChapter chapter = new Chapter("NonBlockingChapter", step);
 
             chapter.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
@@ -181,12 +181,12 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator BlockingBehaviorDoesBlock()
         {
             // Given a chapter with a step with no conditions but a transition to the end, and a blocking endless behavior,
-            EndlessBehavior blockingBehavior = new EndlessBehavior(true);
+            EndlessBehaviorMock blockingBehaviorMock = new EndlessBehaviorMock(true);
             ITransition transition = new Transition();
             transition.Data.TargetStep = null;
             IStep step = new Step("BlockingStep");
             step.Data.Transitions.Data.Transitions.Add(transition);
-            step.Data.Behaviors.Data.Behaviors.Add(blockingBehavior);
+            step.Data.Behaviors.Data.Behaviors.Add(blockingBehaviorMock);
             IChapter chapter = new Chapter("BlockingChapter", step);
 
             chapter.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
@@ -194,7 +194,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
             // When we activate the chapter,
             chapter.LifeCycle.Activate();
 
-            while (blockingBehavior.LifeCycle.Stage != Stage.Activating)
+            while (blockingBehaviorMock.LifeCycle.Stage != Stage.Activating)
             {
                 yield return null;
                 chapter.Update();
@@ -206,13 +206,13 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
             {
                 yield return null;
                 chapter.Update();
-                Assert.AreEqual(Stage.Activating, blockingBehavior.LifeCycle.Stage);
+                Assert.AreEqual(Stage.Activating, blockingBehaviorMock.LifeCycle.Stage);
                 Assert.AreEqual(Stage.Activating, chapter.LifeCycle.Stage);
                 waitingFrames--;
             }
 
             // Then the chapter will not be activated until the behavior finishes.
-            blockingBehavior.LifeCycle.MarkToFastForward();
+            blockingBehaviorMock.LifeCycle.MarkToFastForward();
 
             Assert.AreEqual(Stage.Activating, chapter.LifeCycle.Stage);
 
@@ -229,12 +229,12 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         public IEnumerator NonBlockingBehaviorLoop()
         {
             // Given a chapter with a step with a loop transition, and a non-blocking endless behavior,
-            EndlessBehavior nonBlockingBehavior = new EndlessBehavior(false);
+            EndlessBehaviorMock nonBlockingBehaviorMock = new EndlessBehaviorMock(false);
             ITransition transition = new Transition();
             IStep step = new Step("NonBlockingStep");
             transition.Data.TargetStep = step;
             step.Data.Transitions.Data.Transitions.Add(transition);
-            step.Data.Behaviors.Data.Behaviors.Add(nonBlockingBehavior);
+            step.Data.Behaviors.Data.Behaviors.Add(nonBlockingBehaviorMock);
             IChapter chapter = new Chapter("NonBlockingChapter", step);
 
             chapter.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
@@ -278,5 +278,3 @@ namespace Innoactive.Hub.Unity.Tests.Training.Behaviors
         }
     }
 }
-
-#endif
