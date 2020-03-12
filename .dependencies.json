@@ -3,7 +3,7 @@
         {
             "name": "Components\\VRTK-Interaction",
             "repository": "git@github.com:Innoactive/VRTK-Interaction-Component.git",
-            "branch": "develop-2019"
+            "branch": "bugfix/moved-vrtk-setup-stuff-into-editor"
         },
         {
             "name": "Components\\Text-To-Speech",
@@ -13,7 +13,7 @@
         {
             "name": "Components\\Basic-Interaction",
             "repository": "git@github.com:Innoactive/Basic-Interaction-Component.git",
-            "branch": "develop"
+            "branch": "bugfix/moved-interaction-framwork-setup"
         }
     ]
 }
