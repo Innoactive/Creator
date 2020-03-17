@@ -18,17 +18,11 @@ namespace Innoactive.Hub.CI
         /// </summary>
         public static void SetApiCompatibilityLevel()
         {
-#if UNITY_2018_1_OR_NEWER
             // Force ProjectSettings to be saved as text and visible (required for tests later on!)
             EditorSettings.serializationMode = UnityEditor.SerializationMode.ForceText;
             // set supported API Compatibility Level for Hub SDK
             PlayerSettings.scriptingRuntimeVersion = ScriptingRuntimeVersion.Latest;
             PlayerSettings.SetApiCompatibilityLevel(BuildTargetGroup.Standalone, ApiCompatibilityLevel.NET_4_6);
-#else
-            // For Unity Versions prior to 2018:
-            // make sure the API-Scripting Compatibility is set to full .NET (not subset)
-            PlayerSettings.SetApiCompatibilityLevel(BuildTargetGroup.Standalone, ApiCompatibilityLevel.NET_2_0);
-#endif
         }
 
         /// <summary>
@@ -36,7 +30,6 @@ namespace Innoactive.Hub.CI
         /// </summary>
         public static void EnablePlayModeTests()
         {
-#if UNITY_2018_1_OR_NEWER
             const string ProjectSettingsAssetPath = "ProjectSettings/ProjectSettings.asset";
             SerializedObject projectSettingsManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath(ProjectSettingsAssetPath)[0]);
             SerializedProperty loadTestAssembly = projectSettingsManager.FindProperty ("playModeTestRunnerEnabled");
@@ -44,7 +37,6 @@ namespace Innoactive.Hub.CI
             loadTestAssembly.boolValue = true;
 
             projectSettingsManager.ApplyModifiedProperties();
-#endif
         }
 
         /// <summary>
