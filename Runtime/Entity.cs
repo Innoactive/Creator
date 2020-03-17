@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Linq;
 using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Configuration.Modes;
-using Innoactive.Hub.Training.EntityOwners;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.Configuration.Modes;
+using Innoactive.Creator.Core.EntityOwners;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     /// <summary>
     /// Abstract helper class that can be used for instances that implement <see cref="IEntity"/>. Provides implementation of the events and properties, and also

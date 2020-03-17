@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     public class StepMetadata : IMetadata
     {

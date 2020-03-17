@@ -1,6 +1,6 @@
 ﻿﻿using System.Runtime.Serialization;
 
-namespace Innoactive.Hub.Training.SceneObjects
+namespace Innoactive.Creator.Core.SceneObjects
 {
     /// <summary>
     /// Simple container for UniqueName.

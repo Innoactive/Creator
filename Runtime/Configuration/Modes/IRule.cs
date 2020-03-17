@@ -1,4 +1,4 @@
-namespace Innoactive.Hub.Training.Configuration.Modes
+namespace Innoactive.Creator.Core.Configuration.Modes
 {
     /// <summary>
     /// Very generic interface which allows to implement a rule similar to Linq.Where or SQL Filter.

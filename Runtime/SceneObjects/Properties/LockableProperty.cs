@@ -1,7 +1,7 @@
 ﻿﻿using System;
 using UnityEngine;
 
-namespace Innoactive.Hub.Training.SceneObjects.Properties
+namespace Innoactive.Creator.Core.SceneObjects.Properties
 {
     public abstract class LockableProperty : TrainingSceneObjectProperty, ILockable
     {

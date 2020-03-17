@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     public abstract class InstantStageProcess<TData> : IStageProcess<TData> where TData : IData
     {

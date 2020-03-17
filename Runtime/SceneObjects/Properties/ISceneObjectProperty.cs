@@ -1,4 +1,4 @@
-﻿namespace Innoactive.Hub.Training.SceneObjects.Properties
+﻿namespace Innoactive.Creator.Core.SceneObjects.Properties
 {
     public interface ISceneObjectProperty
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Innoactive.Hub.Training.SceneObjects.Properties
+namespace Innoactive.Creator.Core.SceneObjects.Properties
 {
     /// <summary>
     /// Abstract base property for highlight properties.

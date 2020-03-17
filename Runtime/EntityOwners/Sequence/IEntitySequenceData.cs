@@ -1,4 +1,4 @@
-namespace Innoactive.Hub.Training.EntityOwners
+namespace Innoactive.Creator.Core.EntityOwners
 {
     public interface IEntitySequenceData<TEntity> : IEntityCollectionData<TEntity> where TEntity : IEntity
     {

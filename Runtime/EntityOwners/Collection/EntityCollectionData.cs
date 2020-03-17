@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Hub.Training.EntityOwners;
+using Innoactive.Creator.Core.EntityOwners;
 
-namespace Innoactive.Hub.Training.EntityOwners
+namespace Innoactive.Creator.Core.EntityOwners
 {
     public abstract class EntityCollectionData<TEntity> : IEntityCollectionData<TEntity> where TEntity : IEntity
     {

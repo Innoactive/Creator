@@ -1,12 +1,12 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Innoactive.Hub.Training.Configuration;
-using Innoactive.Hub.Training.Utils;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.Utils;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Innoactive.Hub.Training.SceneObjects.Properties
+namespace Innoactive.Creator.Core.SceneObjects.Properties
 {
     /// <summary>
     /// Helper class that adds functionality to any <see cref="ISceneObject"/>.

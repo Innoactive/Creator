@@ -1,4 +1,4 @@
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     /// <summary>
     /// All possible states of an <see cref="IEntity"/>.

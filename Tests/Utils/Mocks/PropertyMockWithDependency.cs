@@ -1,7 +1,7 @@
-﻿using Innoactive.Hub.Training.SceneObjects.Properties;
+﻿using Innoactive.Creator.Core.SceneObjects.Properties;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Tests.Mocks
+namespace Innoactive.Creator.Tests.Mocks
 {
     [RequireComponent(typeof(PropertyMock))]
     public class PropertyMockWithDependency : TrainingSceneObjectProperty

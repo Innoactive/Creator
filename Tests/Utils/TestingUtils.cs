@@ -1,10 +1,10 @@
 using System.Linq;
 using System.Reflection;
-using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.SceneObjects.Properties;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Core.SceneObjects.Properties;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Tests.Utils
+namespace Innoactive.Creator.Tests.Utils
 {
     public static class TestingUtils
     {

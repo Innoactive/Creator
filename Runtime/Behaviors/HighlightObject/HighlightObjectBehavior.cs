@@ -1,14 +1,13 @@
 ﻿using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Attributes;
-using Innoactive.Hub.Training.Configuration;
-using Innoactive.Hub.Training.Configuration.Modes;
-using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.SceneObjects.Properties;
-using Innoactive.Hub.Training.Utils;
-using Innoactive.Hub.Unity;
+using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.Configuration.Modes;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Core.SceneObjects.Properties;
+using Innoactive.Creator.Core.Utils;
 using UnityEngine;
 
-namespace Innoactive.Hub.Training.Behaviors
+namespace Innoactive.Creator.Core.Behaviors
 {
     /// <summary>
     /// Behavior that highlights the target <see cref="ISceneObject"/> with the specified color until the behavior is being deactivated.
@@ -21,7 +20,7 @@ namespace Innoactive.Hub.Training.Behaviors
         public class EntityData : IBehaviorData
         {
             /// <summary>
-            /// <see cref="ModeParameter"/> of the highlight color.
+            /// <see cref="ModeParameter{T}"/> of the highlight color.
             /// Training modes can change the highlight color.
             /// </summary>
             public ModeParameter<Color> CustomHighlightColor { get; set; }

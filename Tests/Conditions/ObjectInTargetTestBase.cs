@@ -1,9 +1,9 @@
-using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Creator.Core.Tests.Utils;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Tests.Utils;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Tests.Conditions
+namespace Innoactive.Creator.Tests.Conditions
 {
     public class ObjectInTargetTestBase : RuntimeTests
     {

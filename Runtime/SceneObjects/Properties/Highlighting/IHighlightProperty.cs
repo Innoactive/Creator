@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Innoactive.Hub.Training.SceneObjects.Properties
+namespace Innoactive.Creator.Core.SceneObjects.Properties
 {
     /// <summary>
     /// Interface for scene objects that can be highlighted.

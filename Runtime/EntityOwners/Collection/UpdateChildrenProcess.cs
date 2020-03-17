@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Innoactive.Hub.Training.EntityOwners
+namespace Innoactive.Creator.Core.EntityOwners
 {
     [Obsolete("This is a part of the responsibility of the Entity class now.")]
     public class UpdateChildrenProcess<TData> : IProcess<TData> where TData : IEntityCollectionData

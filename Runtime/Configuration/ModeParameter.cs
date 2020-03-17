@@ -1,10 +1,10 @@
 using System;
-using Innoactive.Hub.Training.Configuration.Modes;
+using Innoactive.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Hub.Training.Configuration
+namespace Innoactive.Creator.Core.Configuration
 {
     /// <summary>
-    /// ModeParameter is responsible for fetching its parameter value from a <see cref="Innoactive.Hub.Training.Configuration.Modes.IMode"/>.
+    /// ModeParameter is responsible for fetching its parameter value from a <see cref="IMode"/>.
     /// If the value changes while being configured, an event will be triggered.
     /// </summary>
     public class ModeParameter<T>

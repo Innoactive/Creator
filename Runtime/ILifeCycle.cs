@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     public interface ILifeCycle
     {

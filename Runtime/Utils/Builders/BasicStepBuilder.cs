@@ -1,15 +1,15 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Innoactive.Creator.Internationalization;
-using Innoactive.Hub.Training.Audio;
-using Innoactive.Hub.Training.Behaviors;
-using Innoactive.Hub.Training.Conditions;
-using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.Configuration;
-using Innoactive.Hub.Training.SceneObjects.Properties;
+using Innoactive.Creator.Core.Audio;
+using Innoactive.Creator.Core.Behaviors;
+using Innoactive.Creator.Core.Conditions;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.Internationalization;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Core.SceneObjects.Properties;
 
-namespace Innoactive.Hub.Training.Utils.Builders
+namespace Innoactive.Creator.Core.Utils.Builders
 {
     /// <summary>
     /// Basic step builder that creates step of type <typeparamref name="Step" />.

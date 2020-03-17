@@ -2,15 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.Core.Tests.Utils;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Core.SceneObjects.Properties;
+using Innoactive.Creator.Core.Utils;
+using Innoactive.Creator.Tests.Utils;
 using UnityEngine;
 using NUnit.Framework;
 using UnityEngine.TestTools;
-using Innoactive.Hub.Training.Utils;
-using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.SceneObjects.Properties;
 
-namespace Innoactive.Creator.Core.Tests.Properties
+namespace Innoactive.Creator.Tests.Properties
 {
     public class TrainingPropertyTests : RuntimeTests
     {

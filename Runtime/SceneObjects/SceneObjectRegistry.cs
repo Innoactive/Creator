@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Hub.Training.Exceptions;
-using Innoactive.Hub.Training.Unity.Utils;
+using Innoactive.Creator.Core.Exceptions;
+using Innoactive.Creator.Unity;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Innoactive.Hub.Training.SceneObjects
+namespace Innoactive.Creator.Core.SceneObjects
 {
     /// <inheritdoc />
     public class SceneObjectRegistry : ISceneObjectRegistry

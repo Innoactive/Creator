@@ -1,10 +1,9 @@
 using System.Linq;
-using Innoactive.Hub.Training.Conditions;
-using Innoactive.Hub.Training.Configuration;
-using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.SceneObjects.Properties;
+using Innoactive.Creator.Core.Conditions;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.SceneObjects;
 
-namespace Innoactive.Hub.Training.Utils.Builders
+namespace Innoactive.Creator.Core.Utils.Builders
 {
     /// <summary>
     /// Static class to provide fast access to predefined builders.

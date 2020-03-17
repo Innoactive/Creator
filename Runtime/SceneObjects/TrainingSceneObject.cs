@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-using Innoactive.Hub.Training.Exceptions;
-using Innoactive.Hub.Training.Configuration;
-using Innoactive.Hub.Training.SceneObjects.Properties;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.Exceptions;
+using Innoactive.Creator.Core.SceneObjects.Properties;
 
-namespace Innoactive.Hub.Training.SceneObjects
+namespace Innoactive.Creator.Core.SceneObjects
 {
     /// <inheritdoc cref="ISceneObject"/>
     [ExecuteInEditMode]

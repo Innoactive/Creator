@@ -1,9 +1,9 @@
 ﻿﻿using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Attributes;
-using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.Utils;
+ using Innoactive.Creator.Core.Attributes;
+ using Innoactive.Creator.Core.SceneObjects;
+ using Innoactive.Creator.Core.Utils;
 
-namespace Innoactive.Hub.Training.Behaviors
+ namespace Innoactive.Creator.Core.Behaviors
 {
     /// <summary>
     /// Behavior that locks the target SceneObject while active, and unlocks it again on deactivation (unless it was locked initially)

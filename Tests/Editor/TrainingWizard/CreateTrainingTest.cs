@@ -1,10 +1,10 @@
-using Innoactive.Hub.Training.Editors.Utils;
-using Innoactive.Hub.Training.Editors.Windows;
-using Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester;
+using Innoactive.CreatorEditor;
+using Innoactive.CreatorEditor.UI.Windows;
+using Innoactive.CreatorEditor.ImguiTester;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Tests.TrainingWizardTests
+namespace Innoactive.Creator.Tests.TrainingWizardTests
 {
     public class CreateTrainingTest : EditorImguiTest<TrainingWizard>
     {

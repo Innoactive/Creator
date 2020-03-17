@@ -1,8 +1,8 @@
 ﻿using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Attributes;
-using Innoactive.Hub.Training.Behaviors;
+using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.Behaviors;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     /// <summary>
     /// Interface that enables non-blocking background behaviors.

@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Hub.Training.Attributes
+namespace Innoactive.Creator.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
     public class DrawingPriorityAttribute : Attribute

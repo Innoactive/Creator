@@ -1,7 +1,7 @@
-﻿using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.SceneObjects.Properties;
+﻿using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Core.SceneObjects.Properties;
 
-namespace Innoactive.Hub.Training.Utils
+namespace Innoactive.Creator.Core.Utils
 {
     public static class TrainingReferenceUtils
     {

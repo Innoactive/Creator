@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Innoactive.Hub.Training.Exceptions;
+using Innoactive.Creator.Core.Exceptions;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     public sealed class LifeCycle : ILifeCycle
     {

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Innoactive.Hub.Training.SceneObjects
+namespace Innoactive.Creator.Core.SceneObjects
 {
     /// <summary>
     /// Base class for references to training scene objects and their properties.
