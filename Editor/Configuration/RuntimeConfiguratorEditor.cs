@@ -163,7 +163,7 @@ namespace Innoactive.CreatorEditor.Configuration
         private void UpdateAvailableCourses()
         {
             trainingCourseStreamingAssetsPaths = Directory.GetFiles(Path.Combine(Application.streamingAssetsPath, defaultCoursePath).Replace('/', Path.DirectorySeparatorChar), "*.json", SearchOption.AllDirectories)
-                .Where(FileUtils.IsTrainingCourseFile)
+                .Where(FileUtils.IsCourseFile)
                 .Select(path => path.Substring(Application.streamingAssetsPath.Length + 1))
                 .ToArray();
 

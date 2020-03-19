@@ -1,11 +1,8 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.Core.IO;
-using Innoactive.CreatorEditor.Configuration;
 using Innoactive.CreatorEditor.Utils;
 using UnityEditor;
-using UnityEngine;
 
 namespace Innoactive.CreatorEditor
 {
@@ -31,9 +28,9 @@ namespace Innoactive.CreatorEditor
             }
         }
 
-        private static string[] GetTrainingCourseAssets(string[] assets)
+        private static IEnumerable<string> GetTrainingCourseAssets(IEnumerable<string> assets)
         {
-            return assets.Where(File.Exists).Where(FileUtils.IsTrainingCourseFile).ToArray();
+            return assets.Where(FileUtils.IsCourseFile).ToArray();
         }
     }
 
