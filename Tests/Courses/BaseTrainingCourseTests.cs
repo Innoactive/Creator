@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Configuration;
-using Innoactive.CreatorEditor.Configuration;
 using Innoactive.Creator.Tests.Utils;
 using Innoactive.Creator.Tests.Utils.Mocks;
 using Innoactive.Creator.Core.Utils.Builders;
@@ -10,7 +9,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Creator.Core.Core.Courses
+namespace Innoactive.Creator.Tests.Courses
 {
     public class BaseTrainingCourseTests : RuntimeTests
     {
