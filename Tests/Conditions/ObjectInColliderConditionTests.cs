@@ -3,7 +3,7 @@ using System.Collections;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.SceneObjects;
-using Innoactive.Creator.Core.SceneObjects.Properties;
+using Innoactive.Creator.Core.Properties;
 using UnityEngine;
 using UnityEngine.TestTools;
 

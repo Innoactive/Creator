@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Reflection;
 using Innoactive.Creator.Core.SceneObjects;
-using Innoactive.Creator.Core.SceneObjects.Properties;
+using Innoactive.Creator.Core.Properties;
 
 namespace Innoactive.CreatorEditor.UI
 {

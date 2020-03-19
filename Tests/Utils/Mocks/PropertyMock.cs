@@ -1,4 +1,4 @@
-﻿using Innoactive.Creator.Core.SceneObjects.Properties;
+﻿using Innoactive.Creator.Core.Properties;
 
 namespace Innoactive.Creator.Tests.Mocks
 {

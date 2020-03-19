@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Innoactive.Creator.Core.SceneObjects.Properties
+namespace Innoactive.Creator.Core.Properties
 {
     /// <summary>
     /// Highlight property which enables a referenced <see cref="highlightObject"/>,

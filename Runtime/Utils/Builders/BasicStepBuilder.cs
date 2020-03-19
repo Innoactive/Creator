@@ -7,7 +7,7 @@ using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Internationalization;
 using Innoactive.Creator.Core.SceneObjects;
-using Innoactive.Creator.Core.SceneObjects.Properties;
+using Innoactive.Creator.Core.Properties;
 
 namespace Innoactive.Creator.Core.Utils.Builders
 {

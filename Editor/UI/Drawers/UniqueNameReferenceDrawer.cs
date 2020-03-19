@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.SceneObjects;
-using Innoactive.Creator.Core.SceneObjects.Properties;
+using Innoactive.Creator.Core.Properties;
 using Innoactive.Creator.Core.Utils;
 using Innoactive.CreatorEditor.UndoRedo;
 using UnityEditor;

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Exceptions;
-using Innoactive.Creator.Core.SceneObjects.Properties;
+using Innoactive.Creator.Core.Properties;
 
 namespace Innoactive.Creator.Core.SceneObjects
 {

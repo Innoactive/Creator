@@ -6,7 +6,7 @@ using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.Exceptions;
 using Innoactive.Creator.Core.IO;
 using Innoactive.Creator.Core.SceneObjects;
-using Innoactive.Creator.Core.SceneObjects.Properties;
+using Innoactive.Creator.Core.Properties;
 using Innoactive.Creator.Core.Serialization;
 
 namespace Innoactive.Creator.Core.Configuration
