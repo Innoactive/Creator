@@ -51,12 +51,12 @@ namespace Innoactive.CreatorEditor
         /// Imports a training course by file from given path using the given serializer.
         /// </summary>
         /// <returns>Return true if the course creation was successfully finished.</returns>
-        public static bool ImportTrainingCourse(string path, ITrainingSerializer serializer)
+        public static bool ImportTrainingCourse(string path, ICourseSerializer serializer)
         {
             try
             {
                 byte[] file = File.ReadAllBytes(path);
-                ICourse course = serializer.ToCourse(file);
+                ICourse course = serializer.CourseFromByteArray(file);
 
                 int counter = 0;
                 while (IsTrainingExisting(course.Data.Name))

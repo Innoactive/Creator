@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using Innoactive.Creator.Core.Exceptions;
-using Innoactive.CreatorEditor.Configuration;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEditor.Callbacks;

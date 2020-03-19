@@ -1,4 +1,4 @@
-using Innoactive.Creator.Core.Serialization;
+using Innoactive.Creator.Core.Serialization.NewtonsoftJson;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using UnityEngine;
@@ -12,7 +12,7 @@ namespace Innoactive.Creator.Tests.Serialization
         [SetUp]
         protected void Setup()
         {
-            settings = new NewtonsoftJsonSerializer().SerializerSettings;
+            settings = NewtonsoftJsonCourseSerializer.CourseSerializerSettings;
         }
 
         [Test]

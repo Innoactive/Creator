@@ -30,7 +30,7 @@ namespace Innoactive.Creator.Core.Configuration
         /// <summary>
         /// Defines the serializer which should be used to serialize training courses.
         /// </summary>
-        ITrainingSerializer Serializer { get; set; }
+        ICourseSerializer Serializer { get; set; }
 
         /// <summary>
         /// Trainee scene object.

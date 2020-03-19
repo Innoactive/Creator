@@ -2,6 +2,7 @@ using System.Linq;
 using Innoactive.Creator.Core.Serialization;
 using Innoactive.Creator.Core.Utils;
 using Innoactive.Creator.Unity;
+using Innoactive.Creator.Core.Serialization.NewtonsoftJson;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace Innoactive.Creator.Tests.Utils
 {
     public abstract class RuntimeTests
     {
-        protected ITrainingSerializer Serializer { get; } = new NewtonsoftJsonSerializer();
+        protected ICourseSerializer Serializer { get; } = new NewtonsoftJsonCourseSerializer();
 
         [SetUp]
         public virtual void SetUp()
