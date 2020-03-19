@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using Innoactive.Hub.Training.EntityOwners;
-using Innoactive.Hub.Training.Attributes;
-using Innoactive.Hub.Training.Configuration.Modes;
+using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.Configuration.Modes;
+using Innoactive.Creator.Core.EntityOwners;
 
-namespace Innoactive.Hub.Training.Behaviors
+namespace Innoactive.Creator.Core.Behaviors
 {
     /// <summary>
     /// A collection of behaviors that are activated and deactivated after each other.

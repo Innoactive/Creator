@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Innoactive.Hub.Training.EntityOwners;
-using Innoactive.Hub.Training.Configuration.Modes;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.Configuration.Modes;
+using Innoactive.Creator.Core.EntityOwners;
 
-namespace Innoactive.Hub.Training.Behaviors
+namespace Innoactive.Creator.Core.Behaviors
 {
     /// <summary>
-    /// Utility behavior to indicate that wrapped <see cref="Behavior"/> prevents its step from finishing the activation or deactivation until complete.
+    /// Utility behavior to indicate that wrapped <see cref="Behavior{TData}"/> prevents its step from finishing the activation or deactivation until complete.
     /// </summary>
     [DataContract(IsReference = true)]
     [Obsolete("This class has multiple issues. It does not work with loops. Implement `IBackgroundBehaviorData` in the `EntityData` class of your behavior instead.")]

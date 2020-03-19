@@ -1,16 +1,15 @@
 using UnityEngine;
 using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Innoactive.Creator.IO;
-using Innoactive.Hub.Training.Exceptions;
-using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.Utils.Serialization;
-using Innoactive.Hub.Training.Configuration.Modes;
-using Innoactive.Hub.Training.SceneObjects.Properties;
+using Innoactive.Creator.Core.Configuration.Modes;
+using Innoactive.Creator.Core.Exceptions;
+using Innoactive.Creator.Core.IO;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Core.Properties;
+using Innoactive.Creator.Core.Serialization;
 
-namespace Innoactive.Hub.Training.Configuration
+namespace Innoactive.Creator.Core.Configuration
 {
     /// <summary>
     /// Training runtime configuration which is used if no other was implemented.
@@ -35,7 +34,7 @@ namespace Innoactive.Hub.Training.Configuration
         /// <summary>
         /// The index of the current training mode.
         /// </summary>
-        /// <exception cref="Innoactive.Hub.Training.Exceptions.MissingModeException">Thrown when trying to access the current training mode index while there are no training modes available.</exception>
+        /// <exception cref="MissingModeException">Thrown when trying to access the current training mode index while there are no training modes available.</exception>
         /// <exception cref="IndexOutOfRangeException">Thrown when the current training mode index is out of range when being accessed.</exception>
         protected virtual int CurrentModeIndex
         {

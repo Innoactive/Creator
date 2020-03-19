@@ -1,7 +1,7 @@
-using Innoactive.Hub.Training.Configuration;
+using Innoactive.Creator.Core.Configuration;
 using NUnit.Framework;
 
-namespace Innoactive.Creator.Core.Tests.Utils
+namespace Innoactive.Creator.Tests.Utils
 {
     public class ModeParameterTests
     {

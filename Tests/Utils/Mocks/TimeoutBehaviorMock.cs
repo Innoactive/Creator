@@ -1,9 +1,9 @@
 ﻿using System.Collections;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Behaviors;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Behaviors;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Tests.Utils.Mocks
+namespace Innoactive.Creator.Tests.Utils.Mocks
 {
     /// <summary>
     /// Helper Behavior for testing that provides a behavior with fixed durations for activate and deactivate

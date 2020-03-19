@@ -1,10 +1,10 @@
 using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Attributes;
-using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.SceneObjects.Properties;
-using Innoactive.Hub.Training.Utils;
+using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Core.Properties;
+using Innoactive.Creator.Core.Utils;
 
-namespace Innoactive.Hub.Training.Conditions
+namespace Innoactive.Creator.Core.Conditions
 {
     /// <summary>
     /// Condition that is completed when distance between `Target` and `TransformInRangeDetector` is closer than `range` units.
@@ -16,7 +16,7 @@ namespace Innoactive.Hub.Training.Conditions
         public class EntityData : IObjectInTargetData
         {
             [DataMember]
-            [DisplayNameAttribute("First object")]
+            [DisplayName("First object")]
             public SceneObjectReference DistanceDetector { get; set; }
 
             [DataMember]

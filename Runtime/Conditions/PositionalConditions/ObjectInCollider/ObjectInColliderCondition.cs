@@ -1,10 +1,10 @@
 using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Attributes;
-using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.SceneObjects.Properties;
-using Innoactive.Hub.Training.Utils;
+using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Core.Properties;
+using Innoactive.Creator.Core.Utils;
 
-namespace Innoactive.Hub.Training.Conditions
+namespace Innoactive.Creator.Core.Conditions
 {
     /// <summary>
     /// Condition which is completed when `TargetObject` gets inside `TriggerProperty`'s collider.

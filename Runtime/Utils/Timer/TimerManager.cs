@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Innoactive.Hub.Training.Unity.Utils;
+using Innoactive.Creator.Unity;
 using UnityEngine;
 
-namespace Innoactive.Hub.Training.Utils.Timer
+namespace Innoactive.Creator.Core.Utils.Timer
 {
     /// <summary>
     /// Manages the operation of timers implementing <see cref="ITimer"/> so they can be all controlled centrally. Also allows timers to access Unity coroutines.

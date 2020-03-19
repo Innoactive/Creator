@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Unity.Utils;
-using Innoactive.Hub.Training.Configuration;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Unity;
 
-namespace Innoactive.Hub.Training.Behaviors
+namespace Innoactive.Creator.Core.Behaviors
 {
     [DataContract(IsReference = true)]
     public abstract class Behavior<TData> : Entity<TData>, IBehavior where TData : IBehaviorData

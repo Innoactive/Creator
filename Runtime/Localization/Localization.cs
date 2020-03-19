@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 
-namespace Innoactive.Creator.Internationalization
+namespace Innoactive.Creator.Core.Internationalization
 {
     /// <summary>
     /// This class handles retrieving and managing localization files.

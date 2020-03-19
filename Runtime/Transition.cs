@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using Innoactive.Hub.Training.EntityOwners;
-using Innoactive.Hub.Training.Attributes;
-using Innoactive.Hub.Training.Conditions;
-using Innoactive.Hub.Training.Configuration;
-using Innoactive.Hub.Training.Configuration.Modes;
-using Innoactive.Hub.Training.Unity.Utils;
+using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.Conditions;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.Configuration.Modes;
+using Innoactive.Creator.Core.EntityOwners;
+using Innoactive.Creator.Unity;
 using UnityEngine;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     [DataContract(IsReference = true)]
     public class Transition : CompletableEntity<Transition.EntityData>, ITransition

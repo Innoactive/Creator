@@ -1,6 +1,6 @@
-using Innoactive.Hub.Training.Configuration.Modes;
+using Innoactive.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Creator.Core.Tests.Utils.Mocks
+namespace Innoactive.Creator.Tests.Utils.Mocks
 {
     public class OptionalEndlessBehaviorMock : EndlessBehaviorMock, IOptional
     {
