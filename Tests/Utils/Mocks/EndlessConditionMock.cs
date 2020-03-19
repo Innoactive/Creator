@@ -1,4 +1,5 @@
-﻿using Innoactive.Hub.Training;
+﻿using System.Runtime.Serialization;
+using Innoactive.Hub.Training;
 using Innoactive.Hub.Training.Conditions;
 
 namespace Innoactive.Creator.Core.Tests.Utils.Mocks
@@ -6,14 +7,19 @@ namespace Innoactive.Creator.Core.Tests.Utils.Mocks
     /// <summary>
     /// Helper condition for testing that allows explicitly marking a condition as completed
     /// </summary>
+    [DataContract(IsReference = true)]
     public class EndlessConditionMock : Condition<EndlessConditionMock.EntityData>
     {
+        [DataContract(IsReference = true)]
         public class EntityData : IConditionData
         {
+            [DataMember]
             public bool IsCompleted { get; set; }
 
+            [DataMember]
             public string Name { get; set; }
 
+            [DataMember]
             public Metadata Metadata { get; set; }
         }
 

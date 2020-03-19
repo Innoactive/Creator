@@ -8,6 +8,7 @@ using Innoactive.Hub.Training.Behaviors;
 using Innoactive.Hub.Training.Conditions;
 using Innoactive.Hub.Training.Utils;
 using Innoactive.Hub.Training.Utils.Serialization;
+using Innoactive.Hub.Training.Utils.Serialization.NewtonsoftJson;
 using UnityEngine;
 
 namespace Innoactive.Hub.Training.Editors.Configuration
@@ -32,9 +33,9 @@ namespace Innoactive.Hub.Training.Editors.Configuration
         }
 
         /// <inheritdoc />
-        public virtual ITrainingSerializer Serializer
+        public virtual ICourseSerializer Serializer
         {
-            get { return new NewtonsoftJsonSerializer(); }
+            get { return new NewtonsoftJsonCourseSerializer(); }
         }
 
         /// <inheritdoc />

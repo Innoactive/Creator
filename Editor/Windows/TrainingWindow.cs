@@ -38,22 +38,13 @@ namespace Innoactive.Hub.Training.Editors.Windows
         /// </summary>
         public bool IsDirty
         {
-            get
-            {
-                return isDirty;
-            }
-            set
-            {
-                isDirty = value;
-            }
+            get { return isDirty; }
+            set { isDirty = value; }
         }
 
         public static bool IsOpen
         {
-            get
-            {
-                return EditorUtils.IsWindowOpened<TrainingWindow>();
-            }
+            get { return EditorUtils.IsWindowOpened<TrainingWindow>(); }
         }
 
         public static TrainingWindow GetWindow()
@@ -89,7 +80,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
                 return;
             }
 
-            temporarySerializedTraining = EditorConfigurator.Instance.Serializer.ToByte(activeCourse);
+            temporarySerializedTraining = EditorConfigurator.Instance.Serializer.CourseToByteArray(activeCourse);
         }
 
         /// <summary>
@@ -196,7 +187,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
                     bool wasDirty = IsDirty;
 
                     chapterMenu = CreateInstance<TrainingMenuView>();
-                    SetTrainingCourse(EditorConfigurator.Instance.Serializer.ToCourse(temporarySerializedTraining));
+                    SetTrainingCourse(EditorConfigurator.Instance.Serializer.CourseFromByteArray(temporarySerializedTraining));
                     IsDirty = wasDirty;
                     temporarySerializedTraining = null;
                 }
@@ -232,10 +223,58 @@ namespace Innoactive.Hub.Training.Editors.Windows
             float width = chapterMenu.IsExtended ? TrainingMenuView.ExtendedMenuWidth : TrainingMenuView.MinimizedMenuWidth;
             Rect scrollRect = EditorDrawingHelper.GetNextLineRect(new Rect(width, 0f, position.size.x - width, position.size.y));
 
+            Vector2 centerViewpointOnCanvas = currentScrollPosition + scrollRect.size / 2f;
+
+            HandleEditorCommands(centerViewpointOnCanvas);
             chapterMenu.Draw();
             DrawChapterWorkflow(scrollRect);
 
             Repaint();
+        }
+
+        private void HandleEditorCommands(Vector2 centerViewpointOnCanvas)
+        {
+            if (Event.current.type != EventType.ValidateCommand)
+            {
+                return;
+            }
+
+            bool used = false;
+            switch (Event.current.commandName)
+            {
+                case "Copy":
+                    used = chapterRepresentation.CopySelected();
+                    break;
+                case "Cut":
+                    used = chapterRepresentation.CutSelected();
+                    break;
+                case "Paste":
+                    used = chapterRepresentation.Paste(centerViewpointOnCanvas);
+                    break;
+                case "Delete":
+                case "SoftDelete":
+                    used = chapterRepresentation.DeleteSelected();
+                    break;
+                case "Duplicate":
+                    break;
+                case "FrameSelected":
+                    break;
+                case "FrameSelectedWithLock":
+                    break;
+                case "SelectAll":
+                    break;
+                case "Find":
+                    break;
+                case "FocusProjectWindow":
+                    break;
+                default:
+                    break;
+            }
+
+            if (used)
+            {
+                Event.current.Use();
+            }
         }
 
         private void DrawChapterWorkflow(Rect scrollRect)
@@ -266,7 +305,6 @@ namespace Innoactive.Hub.Training.Editors.Windows
         private void OnDestroy()
         {
             MakeTemporarySave();
-            StepWindow.HideInspector();
         }
 
         public void LoadTrainingCourseFromFile(string path)

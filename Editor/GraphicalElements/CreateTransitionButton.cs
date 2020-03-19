@@ -36,7 +36,7 @@ namespace Innoactive.Hub.Training.Editors.GraphicalElements
         {
             get
             {
-                return 90;
+                return 0;
             }
         }
     }

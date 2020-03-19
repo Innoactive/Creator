@@ -13,17 +13,14 @@ namespace Innoactive.Hub.Training.Editors.Windows
     {
         public EditorGraphics Graphics { get; private set; }
 
-        private IChapter chapter;
+        private IChapter currentChapter;
         private StepNode lastSelectedStepNode;
 
         private bool isUpdated = false;
 
         public Rect BoundingBox
         {
-            get
-            {
-                return Graphics.BoundingBox;
-            }
+            get { return Graphics.BoundingBox; }
         }
 
         public ChapterRepresentation()
@@ -67,6 +64,46 @@ namespace Innoactive.Hub.Training.Editors.Windows
             };
         }
 
+        private void DeleteStepWithUndo(IStep step, StepNode ownerNode)
+        {
+            IList<ITransition> incomingTransitions = currentChapter.Data.Steps.SelectMany(s => s.Data.Transitions.Data.Transitions).Where(transition => transition.Data.TargetStep == step).ToList();
+
+            bool wasFirstStep = step == currentChapter.Data.FirstStep;
+
+            RevertableChangesHandler.Do(new TrainingCommand(
+                () =>
+                {
+                    foreach (ITransition transition in incomingTransitions)
+                    {
+                        transition.Data.TargetStep = null;
+                    }
+
+                    DeleteStep(step);
+
+                    if (wasFirstStep)
+                    {
+                        currentChapter.Data.FirstStep = null;
+                    }
+                },
+                () =>
+                {
+                    AddStep(step);
+
+                    if (wasFirstStep)
+                    {
+                        currentChapter.Data.FirstStep = step;
+                    }
+
+                    foreach (ITransition transition in incomingTransitions)
+                    {
+                        transition.Data.TargetStep = step;
+                    }
+
+                    UserSelectStepNode(ownerNode);
+                }
+            ));
+        }
+
         private StepNode CreateNewStepNode(IStep step)
         {
             StepNode node = new StepNode(Graphics, step);
@@ -75,44 +112,17 @@ namespace Innoactive.Hub.Training.Editors.Windows
             {
                 TestableEditorElements.DisplayContextMenu(new List<TestableEditorElements.MenuOption>
                 {
-                    new TestableEditorElements.MenuItem(new GUIContent("Delete step"), false, () =>
+                    new TestableEditorElements.MenuItem(new GUIContent("Copy"), false, () =>
                     {
-                        IList<ITransition> incomingTransitions = chapter.Data.Steps.SelectMany(s => s.Data.Transitions.Data.Transitions).Where(transition => transition.Data.TargetStep == step).ToList();
-
-                        bool wasFirstStep = step == chapter.Data.FirstStep;
-
-                        RevertableChangesHandler.Do(new TrainingCommand(
-                            () =>
-                            {
-                                foreach (ITransition transition in incomingTransitions)
-                                {
-                                    transition.Data.TargetStep = null;
-                                }
-
-                                DeleteStep(step);
-
-                                if (wasFirstStep)
-                                {
-                                    chapter.Data.FirstStep = null;
-                                }
-                            },
-                            () =>
-                            {
-                                AddStep(step);
-
-                                if (wasFirstStep)
-                                {
-                                    chapter.Data.FirstStep = step;
-                                }
-
-                                foreach (ITransition transition in incomingTransitions)
-                                {
-                                    transition.Data.TargetStep = step;
-                                }
-
-                                UserSelectStepNode(node);
-                            }
-                        ));
+                        CopyStep(step);
+                    }),
+                    new TestableEditorElements.MenuItem(new GUIContent("Cut"), false, () =>
+                    {
+                        CutStep(step, node);
+                    }),
+                    new TestableEditorElements.MenuItem(new GUIContent("Delete"), false, () =>
+                    {
+                        DeleteStepWithUndo(step, node);
                     })
                 });
             };
@@ -153,7 +163,7 @@ namespace Innoactive.Hub.Training.Editors.Windows
                 ));
             };
 
-            if (chapter.ChapterMetadata.LastSelectedStep == step)
+            if (currentChapter.ChapterMetadata.LastSelectedStep == step)
             {
                 SelectStepNode(node);
             }
@@ -173,11 +183,12 @@ namespace Innoactive.Hub.Training.Editors.Windows
             }
 
             lastSelectedStepNode = stepNode;
-            chapter.ChapterMetadata.LastSelectedStep = step;
+            currentChapter.ChapterMetadata.LastSelectedStep = step;
 
             if (stepNode != null)
             {
                 stepNode.IsLastSelectedStep = true;
+                Graphics.BringToTop(stepNode);
             }
         }
 
@@ -388,22 +399,23 @@ namespace Innoactive.Hub.Training.Editors.Windows
 
         private IDictionary<IStep, StepNode> SetupSteps(IChapter chapter)
         {
-            return chapter.Data.Steps.ToDictionary(step => step, CreateNewStepNode);
+            return chapter.Data.Steps.OrderBy(step => step == chapter.ChapterMetadata.LastSelectedStep).ToDictionary(step => step, CreateNewStepNode);
         }
 
         private void DeleteStep(IStep step)
         {
-            if (chapter.ChapterMetadata.LastSelectedStep == step)
+            if (currentChapter.ChapterMetadata.LastSelectedStep == step)
             {
-                chapter.ChapterMetadata.LastSelectedStep = null;
+                currentChapter.ChapterMetadata.LastSelectedStep = null;
             }
-            chapter.Data.Steps.Remove(step);
+
+            currentChapter.Data.Steps.Remove(step);
             MarkToRefresh();
         }
 
         private void AddStep(IStep step)
         {
-            chapter.Data.Steps.Add(step);
+            currentChapter.Data.Steps.Add(step);
 
             MarkToRefresh();
         }
@@ -414,32 +426,50 @@ namespace Innoactive.Hub.Training.Editors.Windows
             transitionElement.RelativePosition = Vector2.zero;
         }
 
+        private void AddStepWithUndo(IStep step)
+        {
+            RevertableChangesHandler.Do(new TrainingCommand(() =>
+                {
+                    AddStep(step);
+                    currentChapter.ChapterMetadata.LastSelectedStep = step;
+                },
+                () =>
+                {
+                    DeleteStep(step);
+                }
+            ));
+        }
+
         private void HandleCanvasContextClick(object sender, PointerGraphicalElementEventArgs e)
         {
-            TestableEditorElements.DisplayContextMenu(new List<TestableEditorElements.MenuOption>
-            {
-                new TestableEditorElements.MenuItem(new GUIContent("Add step"), false, () =>
-                {
-                    IStep step = new Step("New Step");
-                    step.StepMetadata.Position = e.PointerPosition;
+            IList<TestableEditorElements.MenuOption> options = new List<TestableEditorElements.MenuOption>();
 
-                    RevertableChangesHandler.Do(new TrainingCommand(() =>
-                        {
-                            AddStep(step);
-                            chapter.ChapterMetadata.LastSelectedStep = step;
-                        },
-                        () =>
-                        {
-                            DeleteStep(step);
-                        }
-                    ));
-                })
-            });
+            options.Add(new TestableEditorElements.MenuItem(new GUIContent("Add step"), false, () =>
+            {
+                IStep step = new Step("New Step");
+                step.StepMetadata.Position = e.PointerPosition;
+
+                AddStepWithUndo(step);
+            }));
+
+            if (SystemClipboard.IsStepInClipboard())
+            {
+                options.Add(new TestableEditorElements.MenuItem(new GUIContent("Paste step"), false, () =>
+                {
+                    Paste(e.PointerPosition);
+                }));
+            }
+            else
+            {
+                options.Add(new TestableEditorElements.DisabledMenuItem(new GUIContent("Paste step")));
+            }
+
+            TestableEditorElements.DisplayContextMenu(options);
         }
 
         public void SetChapter(IChapter chapter)
         {
-            this.chapter = chapter;
+            currentChapter = chapter;
 
             Graphics.Reset();
 
@@ -456,11 +486,106 @@ namespace Innoactive.Hub.Training.Editors.Windows
         {
             if (isUpdated == false)
             {
-                SetChapter(chapter);
+                SetChapter(currentChapter);
                 isUpdated = true;
             }
 
             Graphics.HandleEvent(current, controlRect);
+        }
+
+        private bool CopyStep(IStep step)
+        {
+            if (step == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                SystemClipboard.CopyStep(step);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Copies the selected step into the system's copy buffer.
+        /// </summary>
+        /// <returns>True if successful.</returns>
+        public bool CopySelected()
+        {
+            IStep step = currentChapter.ChapterMetadata.LastSelectedStep;
+            return CopyStep(step);
+        }
+
+        private bool CutStep(IStep step, StepNode owner)
+        {
+            if (CopyStep(step))
+            {
+                DeleteStepWithUndo(step, owner);
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Cuts the selected step into the system's copy buffer from the chapter.
+        /// </summary>
+        /// <returns>True if successful.</returns>
+        public bool CutSelected()
+        {
+            IStep step = currentChapter.ChapterMetadata.LastSelectedStep;
+            return CutStep(step, lastSelectedStepNode);
+        }
+
+        /// <summary>
+        /// Pastes the step from the system's copy buffer into the chapter at given <paramref name="position"/>.
+        /// </summary>
+        /// <returns>True if successful.</returns>
+        public bool Paste(Vector2 position)
+        {
+            IStep step;
+            try
+            {
+                step = SystemClipboard.PasteStep();
+
+                if (step == null)
+                {
+                    return false;
+                }
+
+                step.Data.Name = "Copy of " + step.Data.Name;
+
+                step.StepMetadata.Position = position - new Vector2(0f, step.Data.Transitions.Data.Transitions.Count * 20f / 2f);
+            }
+            catch
+            {
+                return false;
+            }
+
+            AddStepWithUndo(step);
+
+            return true;
+        }
+
+        /// <summary>
+        /// Deletes the selected step from the chapter.
+        /// </summary>
+        /// <returns>True if successful.</returns>
+        public bool DeleteSelected()
+        {
+            IStep step = currentChapter.ChapterMetadata.LastSelectedStep;
+            if (step == null)
+            {
+                return false;
+            }
+
+            DeleteStepWithUndo(step, lastSelectedStepNode);
+            return true;
         }
     }
 }

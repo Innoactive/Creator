@@ -8,7 +8,7 @@ namespace Innoactive.Hub.Training.Utils.Serialization
     /// <summary>
     /// Converts Vector2 into json and back.
     /// </summary>
-    [NewtonsoftTrainingConverter]
+    [NewtonsoftConverter]
     public class Vector2Converter : JsonConverter
     {
         /// <inheritDoc/>

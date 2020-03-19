@@ -16,7 +16,7 @@ namespace Innoactive.Hub.Training.Editors
         private const float contentBorderThickness = 200f;
         #endregion
 
-        private readonly List<GraphicalElement> elements = new List<GraphicalElement>();
+        private readonly IList<GraphicalElement> rootElements = new List<GraphicalElement>();
 
         private GraphicalEventHandler initiallyPressedHandler;
         private GraphicalEventHandler initiallyContextPressedHandler;
@@ -61,27 +61,10 @@ namespace Innoactive.Hub.Training.Editors
         /// </summary>
         public void Register(GraphicalElement element)
         {
-            if (elements.Contains(element))
+            if (element.Parent == null)
             {
-                return;
+                rootElements.Add(element);
             }
-
-            elements.Add(element);
-
-            elements.Sort((e1, e2) =>
-            {
-                if (e2.Layer > e1.Layer)
-                {
-                    return 1;
-                }
-
-                if (e2.Layer < e1.Layer)
-                {
-                    return -1;
-                }
-
-                return 0;
-            });
 
             element.HandleRegistration();
 
@@ -96,11 +79,9 @@ namespace Innoactive.Hub.Training.Editors
         /// </summary>
         public void Deregister(GraphicalElement element)
         {
-            // Don't execute callback if element wasn't registered in a first place (or if Remove(element) was called twice).
-            if (elements.Remove(element))
-            {
-                element.HandleDeregistration();
-            }
+            rootElements.Remove(element);
+
+            element.HandleDeregistration();
 
             foreach (GraphicalElement child in element.Children.ToList())
             {
@@ -113,7 +94,7 @@ namespace Innoactive.Hub.Training.Editors
         /// </summary>
         public void Reset()
         {
-            foreach (GraphicalElement element in elements.ToList())
+            foreach (GraphicalElement element in rootElements.ToList())
             {
                 Deregister(element);
 
@@ -129,11 +110,56 @@ namespace Innoactive.Hub.Training.Editors
             Selected = null;
         }
 
+        private IEnumerable<GraphicalElement> GetOrderedElements()
+        {
+            IList<IList<GraphicalElement>> ordered = new List<IList<GraphicalElement>>();
+
+            foreach (GraphicalElement element in rootElements)
+            {
+                CollectElementsRecursively(element, ref ordered);
+            }
+
+            return ordered.SelectMany(layer => layer);
+        }
+
         private void Draw(Rect window)
         {
-            foreach (GraphicalElement element in (elements as IEnumerable<GraphicalElement>).Reverse().Where(e => e.CanBeDrawn && e.IsVisibleInRect(window)))
+            foreach (GraphicalElement element in GetOrderedElements())
             {
-                element.Renderer.Draw();
+                if (element.CanBeDrawn && element.IsVisibleInRect(window))
+                {
+                    element.Renderer.Draw();
+                }
+            }
+        }
+
+        private void InsertElement(GraphicalElement element, ref IList<IList<GraphicalElement>> collection)
+        {
+            for (int i = 0; i < collection.Count; i++)
+            {
+                if (collection[i][0].Layer < element.Layer)
+                {
+                    collection.Insert(i, new List<GraphicalElement> { element });
+                    return;
+                }
+
+                if (collection[i][0].Layer == element.Layer)
+                {
+                    collection[i].Add(element);
+                    return;
+                }
+            }
+
+            collection.Add(new List<GraphicalElement> { element });
+        }
+
+        private void CollectElementsRecursively(GraphicalElement element, ref IList<IList<GraphicalElement>> collection)
+        {
+            InsertElement(element, ref collection);
+
+            foreach (GraphicalElement child in element.Children)
+            {
+                CollectElementsRecursively(child, ref collection);
             }
         }
 
@@ -352,9 +378,10 @@ namespace Innoactive.Hub.Training.Editors
 
         public IEnumerable<GraphicalElement> GetGraphicalElementWithHandlerAtPoint(Vector2 position)
         {
-            IEnumerator<GraphicalElement> enumerator = elements
+            IEnumerator<GraphicalElement> enumerator = GetOrderedElements()
                 .Where(e => e.IsReceivingEvents)
                 .Where(e => e.IsPointInsideGeometry(position))
+                .Reverse()
                 .GetEnumerator();
 
             while (enumerator.MoveNext())
@@ -367,26 +394,19 @@ namespace Innoactive.Hub.Training.Editors
 
         private void Layout()
         {
-            HashSet<GraphicalElement> updated = new HashSet<GraphicalElement>();
-
-            foreach (GraphicalElement element in elements.Where(element => element.Parent == null))
+            foreach (GraphicalElement element in rootElements)
             {
-                LayoutRecursive(element, ref updated);
+                LayoutRecursive(element);
             }
         }
 
-        private void LayoutRecursive(GraphicalElement element, ref HashSet<GraphicalElement> updated)
+        private void LayoutRecursive(GraphicalElement element)
         {
-            if (updated.Contains(element) == false)
+            element.Layout();
+
+            foreach (GraphicalElement child in element.Children)
             {
-                element.Layout();
-
-                updated.Add(element);
-
-                foreach (GraphicalElement child in element.Children)
-                {
-                    LayoutRecursive(child, ref updated);
-                }
+                LayoutRecursive(child);
             }
         }
 
@@ -398,12 +418,11 @@ namespace Innoactive.Hub.Training.Editors
         {
             Dictionary<Edge, Rect> mostOutlyingRects = Enum.GetValues(typeof(Edge))
                 .Cast<Edge>()
-                .ToDictionary(edge => edge, edge => elements.Aggregate((first, second) => CompareElementsByOutlyingness(first, second, edge)).BoundingBox);
+                .ToDictionary(edge => edge, edge => GetOrderedElements().Aggregate((first, second) => CompareElementsByOutlyingness(first, second, edge)).BoundingBox);
 
             float x = -contentBorderThickness + mostOutlyingRects[Edge.Left].xMin;
             float y = -contentBorderThickness + mostOutlyingRects[Edge.Top].yMin;
             float width = contentBorderThickness * 2f + (mostOutlyingRects[Edge.Right].xMax - mostOutlyingRects[Edge.Left].xMin);
-
             float height = contentBorderThickness * 2f + (mostOutlyingRects[Edge.Bottom].yMax - mostOutlyingRects[Edge.Top].yMin);
             BoundingBox = new Rect(x, y, width, height);
         }
@@ -411,8 +430,8 @@ namespace Innoactive.Hub.Training.Editors
         private static GraphicalElement CompareElementsByOutlyingness(GraphicalElement firstElement, GraphicalElement secondElement, Edge edge)
         {
             Rect first = firstElement.BoundingBox;
-            Rect second = secondElement.BoundingBox;
 
+            Rect second = secondElement.BoundingBox;
             switch (edge)
             {
                 case Edge.Left:
@@ -446,6 +465,13 @@ namespace Innoactive.Hub.Training.Editors
             }
 
             return secondElement;
+        }
+
+        public void BringToTop(GraphicalElement rootElement)
+        {
+            int elementIndex = rootElements.IndexOf(rootElement);
+            rootElements.Insert(rootElements.Count, rootElement);
+            rootElements.RemoveAt(elementIndex);
         }
     }
 }

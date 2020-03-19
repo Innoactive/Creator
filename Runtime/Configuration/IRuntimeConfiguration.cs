@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.Configuration.Modes;
@@ -31,7 +30,7 @@ namespace Innoactive.Hub.Training.Configuration
         /// <summary>
         /// Defines the serializer which should be used to serialize training courses.
         /// </summary>
-        ITrainingSerializer Serializer { get; set; }
+        ICourseSerializer Serializer { get; set; }
 
         /// <summary>
         /// Trainee scene object.

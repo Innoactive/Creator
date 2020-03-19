@@ -27,7 +27,7 @@ namespace Innoactive.Hub.Training.Editors.InnoactiveMenu
             }
 
             string format = Path.GetExtension(path).Replace(".", "");
-            List<ITrainingSerializer> result = GetFittingSerializer(format);
+            List<ICourseSerializer> result = GetFittingSerializer(format);
 
             if (result.Count == 0)
             {
@@ -45,7 +45,7 @@ namespace Innoactive.Hub.Training.Editors.InnoactiveMenu
             }
         }
 
-        private static void StartImport(string path, ITrainingSerializer serializer)
+        private static void StartImport(string path, ICourseSerializer serializer)
         {
             if (EditorCourseUtils.ImportTrainingCourse(path, serializer))
             {
@@ -53,12 +53,11 @@ namespace Innoactive.Hub.Training.Editors.InnoactiveMenu
             }
         }
 
-        private static List<ITrainingSerializer> GetFittingSerializer(string format)
+        private static List<ICourseSerializer> GetFittingSerializer(string format)
         {
-            return ReflectionUtils.GetConcreteImplementationsOf<ITrainingSerializer>()
+            return ReflectionUtils.GetConcreteImplementationsOf<ICourseSerializer>()
                 .Where(t => t.GetConstructor(Type.EmptyTypes) != null)
-                .Select<Type, ITrainingSerializer>(type => (ITrainingSerializer)ReflectionUtils.CreateInstanceOfType(type))
-                .Where(s => s.CanDeserialize)
+                .Select(type => (ICourseSerializer)ReflectionUtils.CreateInstanceOfType(type))
                 .Where(s => s.FileFormat.Equals(format))
                 .ToList();
         }

@@ -33,10 +33,12 @@ namespace Innoactive.Hub.Training.Editors.Windows
         /// </summary>
         public static void ShowInspector()
         {
-            StepWindow instance = GetWindow<StepWindow>();
+            if (EditorUtils.IsWindowOpened<StepWindow>())
+            {
+                return;
+            }
 
-            instance.Show();
-            instance.Focus();
+            StepWindow instance = GetWindow<StepWindow>("Step", false);
             instance.Repaint();
         }
 

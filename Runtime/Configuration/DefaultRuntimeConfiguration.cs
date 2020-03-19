@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Innoactive.Creator.IO;
@@ -9,6 +8,7 @@ using Innoactive.Hub.Training.SceneObjects;
 using Innoactive.Hub.Training.Utils.Serialization;
 using Innoactive.Hub.Training.Configuration.Modes;
 using Innoactive.Hub.Training.SceneObjects.Properties;
+using Innoactive.Hub.Training.Utils.Serialization.NewtonsoftJson;
 
 namespace Innoactive.Hub.Training.Configuration
 {
@@ -101,7 +101,7 @@ namespace Innoactive.Hub.Training.Configuration
 
 
         /// <inheritdoc />
-        public ITrainingSerializer Serializer { get; set; } = new NewtonsoftJsonSerializer();
+        public ICourseSerializer Serializer { get; set; } = new NewtonsoftJsonCourseSerializer();
 
         /// <inheritdoc />
         public virtual TrainingSceneObject Trainee
@@ -179,7 +179,7 @@ namespace Innoactive.Hub.Training.Configuration
             string selectedTrainingCourse = RuntimeConfigurator.GetSelectedTrainingCourse();
             byte[] serialized = FileManager.Read(selectedTrainingCourse);
 
-            return Serializer.ToCourse(serialized);
+            return Serializer.CourseFromByteArray(serialized);
         }
 
         /// <inheritdoc />
