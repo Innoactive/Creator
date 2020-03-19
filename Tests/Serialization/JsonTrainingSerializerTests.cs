@@ -32,7 +32,7 @@ namespace Innoactive.Creator.Tests.Serialization
                 .Build();
 
             // When we serialize and deserialize a training with it
-            ICourse testCourse = Serializer.ToCourse(Serializer.ToByte(course));
+            ICourse testCourse = Serializer.CourseFromByteArray(Serializer.CourseToByteArray(course));
 
             // Then the path to audio resource should be the same.
             string audioPath1 = TestingUtils.GetField<LocalizedString>(((PlayAudioBehavior)course.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First()).Data.AudioData, "path").Key;
@@ -52,10 +52,10 @@ namespace Innoactive.Creator.Tests.Serialization
                     .AddStep(new BasicStepBuilder("Step")))
                 .Build();
 
-            Serializer.ToByte(training1);
+            Serializer.CourseToByteArray(training1);
 
             // When we serialize and deserialize it
-            ICourse training2 = Serializer.ToCourse(Serializer.ToByte(training1));
+            ICourse training2 = Serializer.CourseFromByteArray(Serializer.CourseToByteArray(training1));
 
             // Then it should still be base training, have the same name and the first chapter with the same name.
             Assert.AreEqual(typeof(Course), training1.GetType());
@@ -82,8 +82,8 @@ namespace Innoactive.Creator.Tests.Serialization
                 .Build();
 
             // When we serialize and deserialize it,
-            byte[] serialized = Serializer.ToByte(training1);
-            ICourse training2 = Serializer.ToCourse(serialized);
+            byte[] serialized = Serializer.CourseToByteArray(training1);
+            ICourse training2 = Serializer.CourseFromByteArray(serialized);
 
             // Then that delayed behaviors should have the same target behaviors and delay time.
             DelayBehavior behavior1 = training1.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as DelayBehavior;
@@ -108,9 +108,9 @@ namespace Innoactive.Creator.Tests.Serialization
                 .Build();
 
             // When we serialize and deserialize a training with it
-            byte[] serialized = Serializer.ToByte(training1);
+            byte[] serialized = Serializer.CourseToByteArray(training1);
 
-            ICourse training2 = Serializer.ToCourse(serialized);
+            ICourse training2 = Serializer.CourseFromByteArray(serialized);
 
             DisableGameObjectBehavior behavior1 = training1.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as DisableGameObjectBehavior;
             DisableGameObjectBehavior behavior2 = training2.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as DisableGameObjectBehavior;
@@ -139,7 +139,7 @@ namespace Innoactive.Creator.Tests.Serialization
                 .Build();
 
             // When we serialize and deserialize a training course with it
-            ICourse training2 = Serializer.ToCourse(Serializer.ToByte(training1));
+            ICourse training2 = Serializer.CourseFromByteArray(Serializer.CourseToByteArray(training1));
 
             EnableGameObjectBehavior behavior1 = training1.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as EnableGameObjectBehavior;
             EnableGameObjectBehavior behavior2 = training2.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as EnableGameObjectBehavior;
@@ -168,7 +168,7 @@ namespace Innoactive.Creator.Tests.Serialization
                 .Build();
 
             // When we serialize and deserialize it
-            ICourse training2 = Serializer.ToCourse(Serializer.ToByte(training1));
+            ICourse training2 = Serializer.CourseFromByteArray(Serializer.CourseToByteArray(training1));
 
             // Then that's behavior target is still the same.
             LockObjectBehavior behavior1 = training1.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as LockObjectBehavior;
@@ -196,7 +196,7 @@ namespace Innoactive.Creator.Tests.Serialization
                 .Build();
 
             // When we serialize and deserialize it,
-            ICourse training2 = Serializer.ToCourse(Serializer.ToByte(training1));
+            ICourse training2 = Serializer.CourseFromByteArray(Serializer.CourseToByteArray(training1));
 
             // Then path to the audiofile should not change.
             PlayAudioBehavior behavior1 = training1.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as PlayAudioBehavior;
@@ -221,7 +221,7 @@ namespace Innoactive.Creator.Tests.Serialization
                 .Build();
 
             // When we serialize and deserialize it,
-            ICourse training2 = Serializer.ToCourse(Serializer.ToByte(training1));
+            ICourse training2 = Serializer.CourseFromByteArray(Serializer.CourseToByteArray(training1));
 
             PlayAudioBehavior behavior1 = training1.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as PlayAudioBehavior;
             PlayAudioBehavior behavior2 = training2.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as PlayAudioBehavior;
@@ -248,7 +248,7 @@ namespace Innoactive.Creator.Tests.Serialization
                 .Build();
 
             // When we serialize and deserialize it
-            ICourse training2 = Serializer.ToCourse(Serializer.ToByte(training1));
+            ICourse training2 = Serializer.CourseFromByteArray(Serializer.CourseToByteArray(training1));
 
             UnlockObjectBehavior behavior1 = training1.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as UnlockObjectBehavior;
             UnlockObjectBehavior behavior2 = training2.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as UnlockObjectBehavior;
@@ -274,7 +274,7 @@ namespace Innoactive.Creator.Tests.Serialization
                 .Build();
 
             // When we serialize and deserialize it
-            ICourse training2 = Serializer.ToCourse((Serializer.ToByte(training1)));
+            ICourse training2 = Serializer.CourseFromByteArray((Serializer.CourseToByteArray(training1)));
 
             // Then chapter's type, name, first step and next chapter should not change.
             IChapter chapter1 = training1.Data.FirstChapter;
@@ -299,7 +299,7 @@ namespace Innoactive.Creator.Tests.Serialization
                 .Build();
 
             // When we serialize and deserialize it
-            ICourse training2 = Serializer.ToCourse((Serializer.ToByte(training1)));
+            ICourse training2 = Serializer.CourseFromByteArray((Serializer.CourseToByteArray(training1)));
 
             // Then that condition's name should not change.
             ICondition condition1 = training1.Data.FirstChapter.Data.FirstStep.Data.Transitions.Data.Transitions.First().Data.Conditions.First();
@@ -325,7 +325,7 @@ namespace Innoactive.Creator.Tests.Serialization
                 .Build();
 
             // When we serialize and deserialize it
-            ICourse training2 = Serializer.ToCourse(Serializer.ToByte(training1));
+            ICourse training2 = Serializer.CourseFromByteArray(Serializer.CourseToByteArray(training1));
 
             // Then that condition's target, detector and range should stay unchanged.
             ObjectInRangeCondition condition1 = training1.Data.FirstChapter.Data.FirstStep.Data.Transitions.Data.Transitions.First().Data.Conditions.First() as ObjectInRangeCondition;
@@ -355,7 +355,7 @@ namespace Innoactive.Creator.Tests.Serialization
                 .Build();
 
             // When we serialize and deserialize it
-            ICourse training2 = Serializer.ToCourse((Serializer.ToByte(training1)));
+            ICourse training2 = Serializer.CourseFromByteArray((Serializer.CourseToByteArray(training1)));
 
             // Then that condition's timeout value should stay unchanged.
             TimeoutCondition condition1 = training1.Data.FirstChapter.Data.FirstStep.Data.Transitions.Data.Transitions.First().Data.Conditions.First() as TimeoutCondition;
@@ -381,8 +381,8 @@ namespace Innoactive.Creator.Tests.Serialization
                 .Build();
 
             // When we serialize and deserialize it
-            byte[] serialized = Serializer.ToByte(training1);
-            ICourse training2 = Serializer.ToCourse(serialized);
+            byte[] serialized = Serializer.CourseToByteArray(training1);
+            ICourse training2 = Serializer.CourseFromByteArray(serialized);
 
             // Then transition from the first step should lead to the same step as before.
             Assert.AreEqual(training1.Data.FirstChapter.Data.FirstStep.Data.Transitions.Data.Transitions.First().Data.TargetStep.Data.Name,
@@ -402,7 +402,7 @@ namespace Innoactive.Creator.Tests.Serialization
                 .Build();
 
             // When we serialize and deserialize it
-            ICourse training2 = Serializer.ToCourse((Serializer.ToByte(training1)));
+            ICourse training2 = Serializer.CourseFromByteArray((Serializer.CourseToByteArray(training1)));
 
             // Then that step's name should still be the same.
             Assert.AreEqual(training1.Data.FirstChapter.Data.FirstStep.Data.Name, training2.Data.FirstChapter.Data.FirstStep.Data.Name);
@@ -424,7 +424,7 @@ namespace Innoactive.Creator.Tests.Serialization
                 .Build();
 
             // When that training is serialized and deserialzied
-            ICourse training2 = Serializer.ToCourse(Serializer.ToByte(training1));
+            ICourse training2 = Serializer.CourseFromByteArray(Serializer.CourseToByteArray(training1));
 
             // Then we should have two identical move object behaviors
             MoveObjectBehavior behavior1 = training1.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as MoveObjectBehavior;
@@ -455,7 +455,7 @@ namespace Innoactive.Creator.Tests.Serialization
             ICourse course = new Course("", new Chapter("", step));
 
             // When we serialize and deserialize a training with it
-            ICourse deserializedCourse = Serializer.ToCourse(Serializer.ToByte(course));
+            ICourse deserializedCourse = Serializer.CourseFromByteArray(Serializer.CourseToByteArray(course));
             PlayAudioBehavior deserializedBehavior = deserializedCourse.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as PlayAudioBehavior;
             // ReSharper disable once PossibleNullReferenceException
             LocalizedString deserialized = ((ResourceAudio)deserializedBehavior.Data.AudioData).Path;
@@ -486,7 +486,7 @@ namespace Innoactive.Creator.Tests.Serialization
                 .Build();
 
             // When we serialize and deserialize it
-            ICourse deserializedCourse = Serializer.ToCourse(Serializer.ToByte(course));
+            ICourse deserializedCourse = Serializer.CourseFromByteArray(Serializer.CourseToByteArray(course));
 
             BehaviorSequence deserializedSequence = deserializedCourse.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as BehaviorSequence;
 
@@ -499,32 +499,6 @@ namespace Innoactive.Creator.Tests.Serialization
             Assert.AreEqual(behaviors.First().GetType(), deserializedBehaviors.First().GetType());
             Assert.AreEqual(behaviors.Last().GetType(), deserializedBehaviors.Last().GetType());
             Assert.AreEqual(behaviors.Count, deserializedBehaviors.Count);
-            yield break;
-        }
-
-        [UnityTest]
-        public IEnumerator NonblockingWrapperBehaviorIsConverted()
-        {
-            // Given a training with the obsolete NonblockingWapperBehavior where isBlocking is true, which wraps a non-blocking behavior,
-#pragma warning disable 618
-            NonblockingWrapperBehavior behavior = new NonblockingWrapperBehavior(new EndlessBehaviorMock(false), true);
-#pragma warning restore 618
-
-            ICourse course = new LinearTrainingBuilder("Training")
-                .AddChapter(new LinearChapterBuilder("Chapter")
-                    .AddStep(new BasicStepBuilder("Step")
-                        .DisableAutomaticAudioHandling()
-                        .AddBehavior(behavior)))
-                .Build();
-
-            // When we serialize and deserialize it,
-            ICourse deserializedCourse = Serializer.ToCourse(Serializer.ToByte(course));
-
-            EndlessBehaviorMock deserializedBehaviorMock = deserializedCourse.Data.FirstChapter.Data.FirstStep.Data.Behaviors.Data.Behaviors.First() as EndlessBehaviorMock;
-
-            // Then the NonblockingWrapperBehavior is converted to the actual wrapped behavior and the "IsBlocking" property returns true.
-            Assert.IsNotNull(deserializedBehaviorMock);
-            Assert.IsTrue(deserializedBehaviorMock.Data.IsBlocking);
             yield break;
         }
     }

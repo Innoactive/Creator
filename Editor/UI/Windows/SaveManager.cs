@@ -31,7 +31,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                     Directory.CreateDirectory(directory);
                 }
 
-                byte[] serialized = EditorConfigurator.Instance.Serializer.ToByte(course);
+                byte[] serialized = EditorConfigurator.Instance.Serializer.CourseToByteArray(course);
                 File.WriteAllBytes(path, serialized);
                 // Check if saved as asset. If true, import it.
                 TryReloadAssetByFullPath(path);
@@ -48,7 +48,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
         public static ICourse LoadTrainingCourseFromFile(string path)
         {
             byte[] trainingData = File.ReadAllBytes(path);
-            return EditorConfigurator.Instance.Serializer.ToCourse(trainingData);
+            return EditorConfigurator.Instance.Serializer.CourseFromByteArray(trainingData);
         }
 
         private static void TryReloadAssetByFullPath(string path)
