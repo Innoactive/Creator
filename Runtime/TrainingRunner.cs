@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Hub.Training.Configuration;
+using Innoactive.Creator.Core.Configuration;
 using UnityEngine;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     public static class TrainingRunner
     {

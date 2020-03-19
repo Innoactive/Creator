@@ -1,7 +1,7 @@
 ﻿using System.Collections;
-using Innoactive.Hub.Training.Configuration.Modes;
+using Innoactive.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     public interface IEntity
     {

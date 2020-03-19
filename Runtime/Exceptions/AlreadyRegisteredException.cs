@@ -1,7 +1,7 @@
 ﻿using System;
-using Innoactive.Hub.Training.SceneObjects;
+using Innoactive.Creator.Core.SceneObjects;
 
-namespace Innoactive.Hub.Training.Exceptions
+namespace Innoactive.Creator.Core.Exceptions
 {
     public class AlreadyRegisteredException : TrainingException
     {

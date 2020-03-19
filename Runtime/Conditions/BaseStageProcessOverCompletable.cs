@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace Innoactive.Hub.Training.Conditions
+namespace Innoactive.Creator.Core.Conditions
 {
     public abstract class BaseStageProcessOverCompletable<TData> : IStageProcess<TData> where TData : ICompletableData
     {
@@ -25,7 +25,7 @@ namespace Innoactive.Hub.Training.Conditions
 
         public virtual void FastForward(TData data)
         {
-            
+
         }
 
         protected abstract bool CheckIfCompleted(TData data);

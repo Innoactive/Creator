@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Innoactive.Hub.Training.Utils
+namespace Innoactive.Creator.Core.Utils
 {
     public static class MathUtils
     {

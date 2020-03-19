@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Hub.Training.Configuration.Modes;
+using Innoactive.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Hub.Training.EntityOwners
+namespace Innoactive.Creator.Core.EntityOwners
 {
     public class ParallelLifeCycleProcess<TData, TEntity> : Process<TData> where TEntity : IEntity where TData : IEntityCollectionData<TEntity>, IModeData
     {

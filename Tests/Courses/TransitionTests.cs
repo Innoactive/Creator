@@ -1,13 +1,13 @@
 using System.Collections;
-using Innoactive.Creator.Core.Tests.Utils;
-using Innoactive.Creator.Core.Tests.Utils.Mocks;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Configuration;
-using Innoactive.Hub.Training.Configuration.Modes;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.Configuration.Modes;
+using Innoactive.Creator.Tests.Utils;
+using Innoactive.Creator.Tests.Utils.Mocks;
 using UnityEngine.Assertions;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Creator.Core.Tests.Courses
+namespace Innoactive.Creator.Tests.Courses
 {
     public class TransitionTests : RuntimeTests
     {

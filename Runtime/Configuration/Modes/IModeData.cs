@@ -1,4 +1,6 @@
-namespace Innoactive.Hub.Training.Configuration.Modes
+using Innoactive.Creator.Core;
+
+namespace Innoactive.Creator.Core.Configuration.Modes
 {
     public interface IModeData : IData
     {

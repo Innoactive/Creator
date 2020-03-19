@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Configuration;
+using Innoactive.Creator.Core.Configuration;
 
-namespace Innoactive.Hub.Training.SceneObjects
+namespace Innoactive.Creator.Core.SceneObjects
 {
     /// <summary>
     /// Weak reference by a unique name to a training scene object in a scene.

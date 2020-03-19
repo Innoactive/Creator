@@ -1,7 +1,7 @@
-using Innoactive.Hub.Training.Configuration.Modes;
-using Innoactive.Hub.Training.EntityOwners;
+using Innoactive.Creator.Core.Configuration.Modes;
+using Innoactive.Creator.Core.EntityOwners;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     public interface IStepData : INamedData, IDescribedData, IEntitySequenceData<IStepChild>, IModeData
     {

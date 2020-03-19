@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Innoactive.Hub.Training.Utils.Builders
+namespace Innoactive.Creator.Core.Utils.Builders
 {
     /// <summary>
     /// Builder for a linear chapter.

@@ -1,4 +1,4 @@
-﻿namespace Innoactive.Hub.Training.Exceptions
+﻿namespace Innoactive.Creator.Core.Exceptions
 {
     public class InvalidStateException : TrainingException
     {

@@ -1,4 +1,4 @@
-namespace Innoactive.Hub.Training.Conditions
+namespace Innoactive.Creator.Core.Conditions
 {
     public class ActiveOnlyProcess<TData> : Process<TData> where TData : IData
     {

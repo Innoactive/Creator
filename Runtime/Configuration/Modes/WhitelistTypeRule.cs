@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Hub.Training.Configuration.Modes
+namespace Innoactive.Creator.Core.Configuration.Modes
 {
     /// <summary>
     /// All listed types will be valid.

@@ -1,6 +1,6 @@
 ﻿﻿using System;
 
-namespace Innoactive.Hub.Training.SceneObjects
+namespace Innoactive.Creator.Core.SceneObjects
 {
     // TODO consider lockable-by-context, to allow multiple lockers to be active (e.g. both step and snap zone)
     public interface ILockable

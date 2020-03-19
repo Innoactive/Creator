@@ -1,6 +1,6 @@
-﻿using Innoactive.Hub.Training.SceneObjects.Properties;
+﻿using Innoactive.Creator.Core.Properties;
 
-namespace Innoactive.Creator.Core.Tests.Mocks
+namespace Innoactive.Creator.Tests.Mocks
 {
     public class PropertyMock : TrainingSceneObjectProperty
     {

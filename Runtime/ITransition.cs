@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Innoactive.Hub.Training.Conditions;
-using Innoactive.Hub.Training.Configuration.Modes;
-using Innoactive.Hub.Training.EntityOwners;
+using Innoactive.Creator.Core.Conditions;
+using Innoactive.Creator.Core.Configuration.Modes;
+using Innoactive.Creator.Core.EntityOwners;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     public interface ITransitionData : IEntityCollectionData<ICondition>, IModeData, ICompletableData
     {

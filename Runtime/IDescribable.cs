@@ -1,4 +1,4 @@
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     /// <summary>
     /// Interface for all training entities that have a description.

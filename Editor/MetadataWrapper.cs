@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Innoactive.Hub.Training.Editors
+namespace Innoactive.CreatorEditor
 {
     public class MetadataWrapper
     {

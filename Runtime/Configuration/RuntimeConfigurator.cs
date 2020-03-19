@@ -1,8 +1,8 @@
 using System;
+using Innoactive.Creator.Core.Utils;
 using UnityEngine;
-using Innoactive.Hub.Training.Utils;
 
-namespace Innoactive.Hub.Training.Configuration
+namespace Innoactive.Creator.Core.Configuration
 {
     public class RuntimeConfigurationChangedEventArgs : EventArgs
     {

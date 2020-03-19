@@ -39,7 +39,7 @@ def SetupUnity()
         powershell """
         u3d run -u ${params.UNITY_VERSION} -- -nographics -quit -batchmode -logFile editor.log -createProject ${PROJECT_PATH}
         Write-Output \"Preparing Unity Project with Hub-compatible settings\"
-        u3d run -u ${params.UNITY_VERSION} -- -logFile editor_set_api.log -nographics -quit -batchmode -executeMethod Innoactive.Hub.CI.ContinuousIntegrationHelper.SetApiCompatibilityLevel        
+        u3d run -u ${params.UNITY_VERSION} -- -logFile editor_set_api.log -nographics -quit -batchmode -executeMethod Innoactive.Hub.CI.ContinuousIntegrationHelper.SetApiCompatibilityLevel
         u3d run -u ${params.UNITY_VERSION} -- -logFile editor_enable_tests.log -nographics -quit -batchmode -executeMethod Innoactive.Hub.CI.ContinuousIntegrationHelper.EnablePlayModeTests
         """
     }
@@ -82,7 +82,7 @@ def Test()
     {
         powershell """
         # Disable Imgui tests because they can run only on a setup with a graphical shell.
-        u3d run -u ${params.UNITY_VERSION} -- -logFile editor_disable_ui.log -quit -batchmode -executeMethod Innoactive.Hub.Training.Editors.Utils.EditorUtils.DisableImguiTests       
+        u3d run -u ${params.UNITY_VERSION} -- -logFile editor_disable_ui.log -quit -batchmode -executeMethod Innoactive.CreatorEditor.EditorUtils.DisableImguiTests
         # Import the Unity Project and run the edit mode tests
         u3d run -u ${params.UNITY_VERSION} -- -logFile editor_editmode_test.log -batchmode -runTests -testPlatform editmode -testResults ${PROJECT_PATH}\\TestResults.EditMode.xml
         # Run tests
@@ -151,7 +151,7 @@ def CreateUnityPackage(configPath)
     echo 'Creating and Archiving unitypackage'
     dir("${PROJECT_PATH}")
     {
-        powershell "u3d run -u ${params.UNITY_VERSION} -- -logFile editor_package_export.log -batchmode -quit -executeMethod Innoactive.Hub.Training.Editors.Utils.PackageExporter.Export --export-config ${configPath}"
+        powershell "u3d run -u ${params.UNITY_VERSION} -- -logFile editor_package_export.log -batchmode -quit -executeMethod Innoactive.CreatorEditor.PackageExporter.Export --export-config ${configPath}"
         archiveArtifacts allowEmptyArchive: false, artifacts: "Builds/*"
     }
 }
