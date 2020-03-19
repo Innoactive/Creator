@@ -40,7 +40,10 @@ namespace Innoactive.Creator.Core.EntityOwners
                             child.LifeCycle.MarkToFastForwardStage(Stage.Active);
                         }
 
-                        child.LifeCycle.Activate();
+                        if (stage == Stage.Activating || stage == Stage.Active)
+                        {
+                            child.LifeCycle.Activate();
+                        }
                     }
                 }
 
