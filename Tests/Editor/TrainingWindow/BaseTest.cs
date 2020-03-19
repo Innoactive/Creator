@@ -1,13 +1,13 @@
 using UnityEngine;
 using NUnit.Framework;
 using System.Collections.Generic;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Editors.Utils;
-using Innoactive.Hub.Training.Editors.Windows;
-using Innoactive.Hub.Training.Unity.Utils;
-using Innoactive.Hub.Unity.Tests.Training.Editor.EditorImguiTester;
+using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor;
+using Innoactive.CreatorEditor.ImguiTester;
+using Innoactive.CreatorEditor.UI.Windows;
+using Innoactive.Creator.Unity;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Editor.Windows.TrainingWindowTests
+namespace Innoactive.Creator.Tests.TrainingWindowTests
 {
     /// <summary>
     /// Base class for all training window tests.

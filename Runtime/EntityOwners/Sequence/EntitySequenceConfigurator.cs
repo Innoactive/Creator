@@ -1,6 +1,6 @@
-using Innoactive.Hub.Training.Configuration.Modes;
+using Innoactive.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Hub.Training.EntityOwners
+namespace Innoactive.Creator.Core.EntityOwners
 {
     public class EntitySequenceConfigurator<TData, TEntity> : IConfigurator<TData> where TData : IEntitySequenceData<TEntity> where TEntity : IEntity
     {

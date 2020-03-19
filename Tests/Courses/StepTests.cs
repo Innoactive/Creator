@@ -1,17 +1,18 @@
 using System.Collections;
 using UnityEngine.TestTools;
 using System;
-using Innoactive.Creator.Core.Tests.Utils;
-using Innoactive.Creator.Core.Tests.Utils.Mocks;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Behaviors;
-using Innoactive.Hub.Training.Conditions;
-using Innoactive.Hub.Training.Configuration;
-using Innoactive.Hub.Training.Exceptions;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Behaviors;
+using Innoactive.Creator.Core.Conditions;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.CreatorEditor.Configuration;
+using Innoactive.Creator.Core.Exceptions;
+using Innoactive.Creator.Tests.Utils;
+using Innoactive.Creator.Tests.Utils.Mocks;
 using UnityEngine;
 using NUnit.Framework;
 
-namespace Innoactive.Creator.Core.Tests.Courses
+namespace Innoactive.Creator.Tests.Courses
 {
     public class StepTests : RuntimeTests
     {

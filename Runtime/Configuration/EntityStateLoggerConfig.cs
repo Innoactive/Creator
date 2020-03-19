@@ -1,4 +1,4 @@
-namespace Innoactive.Hub.Training.Configuration
+namespace Innoactive.Creator.Core.Configuration
 {
     /// <summary>
     /// Configuration that determines which entity can log messages in the entity state logger.

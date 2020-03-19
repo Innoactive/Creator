@@ -1,12 +1,11 @@
 using UnityEngine;
 using System;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
-using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.Configuration.Modes;
-using Innoactive.Hub.Training.Utils.Serialization;
+using Innoactive.Creator.Core.Configuration.Modes;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Core.Serialization;
 
-namespace Innoactive.Hub.Training.Configuration
+namespace Innoactive.Creator.Core.Configuration
 {
     public class ModeChangedEventArgs : EventArgs
     {

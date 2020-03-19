@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Behaviors;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Behaviors;
 
-namespace Innoactive.Creator.Core.Tests.Utils.Mocks
+namespace Innoactive.Creator.Tests.Utils.Mocks
 {
     /// <summary>
     /// Helper behavior for testing that allows explicitly triggering finishing Activation / Deactivation

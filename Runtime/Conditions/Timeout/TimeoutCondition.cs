@@ -1,8 +1,8 @@
 using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Attributes;
+using Innoactive.Creator.Core.Attributes;
 using UnityEngine;
 
-namespace Innoactive.Hub.Training.Conditions
+namespace Innoactive.Creator.Core.Conditions
 {
     [DataContract(IsReference = true)]
     public class TimeoutCondition : Condition<TimeoutCondition.EntityData>
@@ -11,7 +11,7 @@ namespace Innoactive.Hub.Training.Conditions
         public class EntityData : IConditionData
         {
             [DataMember]
-            [DisplayNameAttribute("Wait for seconds")]
+            [DisplayName("Wait for seconds")]
             public float Timeout { get; set; }
 
             public bool IsCompleted { get; set; }

@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using Innoactive.Creator.Core.Tests.Utils;
-using Innoactive.Creator.Core.Tests.Utils.Mocks;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Configuration;
-using Innoactive.Hub.Training.Utils.Builders;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.CreatorEditor.Configuration;
+using Innoactive.Creator.Tests.Utils;
+using Innoactive.Creator.Tests.Utils.Mocks;
+using Innoactive.Creator.Core.Utils.Builders;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Creator.Core.Courses
+namespace Innoactive.Creator.Core.Core.Courses
 {
     public class BaseTrainingCourseTests : RuntimeTests
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Innoactive.Hub.Training.SceneObjects
+namespace Innoactive.Creator.Core.SceneObjects
 {
     public class LockStateChangedEventArgs : EventArgs
     {

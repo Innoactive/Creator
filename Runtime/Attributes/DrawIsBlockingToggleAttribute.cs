@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Innoactive.Hub.Training.Attributes
+namespace Innoactive.Creator.Core.Attributes
 {
     /// <summary>
     /// Declares that the "Is Blocking" toggle has to be drawn, if the behavior implements <see cref="IBackgroundBehaviorData"/>.

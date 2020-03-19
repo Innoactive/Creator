@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Hub.Training.Exceptions
+namespace Innoactive.Creator.Core.Exceptions
 {
     public class MissingModeException : TrainingException
     {

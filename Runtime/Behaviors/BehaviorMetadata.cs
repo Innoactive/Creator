@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Innoactive.Hub.Training.Behaviors
+namespace Innoactive.Creator.Core.Behaviors
 {
     [DataContract(IsReference = true)]
     public class BehaviorMetadata : IMetadata

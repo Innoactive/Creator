@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace Innoactive.Creator.Internationalization
+namespace Innoactive.Creator.Core.Internationalization
 {
     /// <summary>
     /// References a localized string.

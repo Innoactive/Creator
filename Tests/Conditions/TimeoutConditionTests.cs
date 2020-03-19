@@ -1,12 +1,12 @@
 ﻿using System.Collections;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Conditions;
-using Innoactive.Creator.Core.Tests.Utils;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Conditions;
+using Innoactive.Creator.Tests.Utils;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Creator.Core.Tests.Conditions
+namespace Innoactive.Creator.Tests.Conditions
 {
     public class TimeoutConditionTests : RuntimeTests
     {

@@ -1,9 +1,9 @@
 ﻿﻿using System;
 using System.Collections.Generic;
-using Innoactive.Hub.Training.SceneObjects.Properties;
-using UnityEngine;
+ using Innoactive.Creator.Core.Properties;
+ using UnityEngine;
 
-namespace Innoactive.Hub.Training.SceneObjects
+namespace Innoactive.Creator.Core.SceneObjects
 {
     public class SceneObjectNameChanged : EventArgs
     {

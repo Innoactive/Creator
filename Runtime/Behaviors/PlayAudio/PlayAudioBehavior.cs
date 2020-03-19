@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Audio;
-using Innoactive.Hub.Training.Attributes;
-using Innoactive.Hub.Training.Configuration;
-using Innoactive.Hub.Training.Configuration.Modes;
+using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.Audio;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Hub.Training.Behaviors
+namespace Innoactive.Creator.Core.Behaviors
 {
     [DataContract(IsReference = true)]
     public class PlayAudioBehavior : Behavior<PlayAudioBehavior.EntityData>, IOptional

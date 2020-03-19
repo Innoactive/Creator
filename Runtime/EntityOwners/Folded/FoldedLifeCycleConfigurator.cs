@@ -1,7 +1,7 @@
 using System;
-using Innoactive.Hub.Training.Configuration.Modes;
+using Innoactive.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Hub.Training.EntityOwners
+namespace Innoactive.Creator.Core.EntityOwners
 {
     public class FoldedLifeCycleConfigurator<TData, TEntity> : IConfigurator<TData> where TEntity : IEntity where TData : IEntitySequenceData<TEntity>
     {

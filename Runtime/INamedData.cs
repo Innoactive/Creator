@@ -1,7 +1,7 @@
 using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Attributes;
+using Innoactive.Creator.Core.Attributes;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     public interface INamedData : IData
     {

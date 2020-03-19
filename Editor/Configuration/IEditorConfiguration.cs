@@ -1,9 +1,11 @@
 using System.Collections.ObjectModel;
-using Innoactive.Hub.Training.Behaviors;
-using Innoactive.Hub.Training.Conditions;
-using Innoactive.Hub.Training.Utils.Serialization;
+using Innoactive.Creator.Core.Behaviors;
+using Innoactive.Creator.Core.Conditions;
+using Innoactive.Creator.Core.Serialization;
+using Innoactive.CreatorEditor.UI;
+using UnityEditor;
 
-namespace Innoactive.Hub.Training.Editors.Configuration
+namespace Innoactive.CreatorEditor.Configuration
 {
     /// <summary>
     /// Interface for editor configuration definition. Implement it to create your own.
@@ -35,12 +37,12 @@ namespace Innoactive.Hub.Training.Editors.Configuration
         /// <summary>
         /// List of available options in "Add new behavior" dropdown.
         /// </summary>
-        ReadOnlyCollection<Menu.Option<IBehavior>> BehaviorsMenuContent { get; }
+        ReadOnlyCollection<StepInspectorMenu.Option<IBehavior>> BehaviorsMenuContent { get; }
 
         /// <summary>
         /// List of available options in "Add new condition" dropdown.
         /// </summary>
-        ReadOnlyCollection<Menu.Option<ICondition>> ConditionsMenuContent { get; }
+        ReadOnlyCollection<StepInspectorMenu.Option<ICondition>> ConditionsMenuContent { get; }
 
         /// <summary>
         /// Setup the current unity scene to be a functioning training scene.

@@ -1,9 +1,9 @@
 using System;
 using System.Reflection;
 using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Utils;
+using Innoactive.Creator.Core.Utils;
 
-namespace Innoactive.Hub.Training.Attributes
+namespace Innoactive.Creator.Core.Attributes
 {
     /// <summary>
     /// Declares that new elements can be added to this list.

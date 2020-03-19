@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Attributes;
-using Innoactive.Hub.Training.Behaviors;
-using Innoactive.Hub.Training.Configuration.Modes;
-using Innoactive.Hub.Training.EntityOwners;
+using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.Behaviors;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.Configuration.Modes;
+using Innoactive.Creator.Core.EntityOwners;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     [DataContract(IsReference = true)]
     public class BehaviorCollection : Entity<BehaviorCollection.EntityData>, IBehaviorCollection

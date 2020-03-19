@@ -1,13 +1,13 @@
 using NUnit.Framework;
 using System.Collections;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Conditions;
-using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.SceneObjects.Properties;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Conditions;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Core.Properties;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Creator.Core.Tests.Conditions
+namespace Innoactive.Creator.Tests.Conditions
 {
     [TestFixture]
     public class ObjectInRangeConditionTests : ObjectInTargetTestBase
