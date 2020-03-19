@@ -201,7 +201,7 @@ namespace Innoactive.CreatorEditor.UndoRedo
             }
             catch (Exception e)
             {
-                Debug.LogErrorFormat("Can't undo the command.\n{0}", e.Message);
+                Debug.LogErrorFormat("Can't undo the command.\n{0}", e);
                 Panic();
                 return false;
             }

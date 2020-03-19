@@ -100,7 +100,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                         transition.Data.TargetStep = step;
                     }
 
-                    UserSelectStepNode(ownerNode);
+                    SelectStepNode(ownerNode);
                 }
             ));
         }
@@ -189,13 +189,13 @@ namespace Innoactive.CreatorEditor.UI.Windows
             if (stepNode != null)
             {
                 stepNode.IsLastSelectedStep = true;
-                Graphics.BringToTop(stepNode);
             }
         }
 
         private void UserSelectStepNode(StepNode stepNode)
         {
             SelectStepNode(stepNode);
+            Graphics.BringToTop(stepNode);
 
             if (stepNode != null)
             {
