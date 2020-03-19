@@ -6,21 +6,20 @@ using UnityEngine;
 namespace Innoactive.Creator.Core.Serialization
 {
     /// <summary>
-    /// Converts Vector4 into json and back.
+    /// Converts Vector3 into json and back.
     /// </summary>
-    [NewtonsoftTrainingConverter]
-    public class Vector4Converter : JsonConverter
+    [NewtonsoftConverter]
+    public class Vector3Converter : JsonConverter
     {
         /// <inheritDoc/>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            Vector4 vec = (Vector4) value;
+            Vector3 vec = (Vector3) value;
             JObject data = new JObject();
 
             data.Add("x", vec.x);
             data.Add("y", vec.y);
             data.Add("z", vec.z);
-            data.Add("w", vec.w);
 
             data.WriteTo(writer);
         }
@@ -31,16 +30,16 @@ namespace Innoactive.Creator.Core.Serialization
             if (reader.TokenType == JsonToken.StartObject)
             {
                 JObject data = (JObject)JToken.ReadFrom(reader);
-                return new Vector4(data["x"].Value<float>(), data["y"].Value<float>(), data["z"].Value<float>(), data["w"].Value<float>());
+                return new Vector3(data["x"].Value<float>(), data["y"].Value<float>(), data["z"].Value<float>());
             }
 
-            return Vector4.zero;
+            return Vector3.zero;
         }
 
         /// <inheritDoc/>
         public override bool CanConvert(Type objectType)
         {
-            return typeof(Vector4) == objectType;
+            return typeof(Vector3) == objectType;
         }
     }
 }

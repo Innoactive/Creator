@@ -39,7 +39,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
         {
             get
             {
-                return 90;
+                return 0;
             }
         }
     }
