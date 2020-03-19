@@ -8,6 +8,7 @@ using Innoactive.Creator.Core.IO;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Core.Properties;
 using Innoactive.Creator.Core.Serialization;
+using Innoactive.Creator.Core.Serialization.NewtonsoftJson;
 
 namespace Innoactive.Creator.Core.Configuration
 {
@@ -100,7 +101,7 @@ namespace Innoactive.Creator.Core.Configuration
 
 
         /// <inheritdoc />
-        public ITrainingSerializer Serializer { get; set; } = new NewtonsoftJsonSerializer();
+        public ICourseSerializer Serializer { get; set; } = new NewtonsoftJsonCourseSerializer();
 
         /// <inheritdoc />
         public virtual TrainingSceneObject Trainee
@@ -178,7 +179,7 @@ namespace Innoactive.Creator.Core.Configuration
             string selectedTrainingCourse = RuntimeConfigurator.GetSelectedTrainingCourse();
             byte[] serialized = FileManager.Read(selectedTrainingCourse);
 
-            return Serializer.ToCourse(serialized);
+            return Serializer.CourseFromByteArray(serialized);
         }
 
         /// <inheritdoc />

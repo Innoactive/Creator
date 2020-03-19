@@ -18,9 +18,9 @@ namespace Innoactive.CreatorEditor.Configuration
         string DefaultCourseStreamingAssetsFolder { get; }
 
         /// <summary>
-        /// Serializer used to serialize training courses.
+        /// Serializer used to serialize training courses and steps.
         /// </summary>
-        ITrainingSerializer Serializer { get; }
+        ICourseSerializer Serializer { get; }
 
         /// <summary>
         /// Assets path where to save the serialized <see cref="AllowedMenuItemsSettings"/> file.
