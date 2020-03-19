@@ -1,10 +1,8 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.Core.IO;
-using Innoactive.CreatorEditor.Configuration;
+using Innoactive.CreatorEditor.Utils;
 using UnityEditor;
-using UnityEngine;
 
 namespace Innoactive.CreatorEditor
 {
@@ -30,17 +28,9 @@ namespace Innoactive.CreatorEditor
             }
         }
 
-        private static string[] GetTrainingCourseAssets(string[] assets)
+        private static IEnumerable<string> GetTrainingCourseAssets(IEnumerable<string> assets)
         {
-            return assets.Where(File.Exists).Where(IsInCourseFolder).Where(FileUtils.IsTrainingCourseFile).ToArray();
-        }
-
-        private static bool IsInCourseFolder(string asset)
-        {
-            // Both Application.dataPath and asset path contain the "Assets" folder, we need to remove it from the former.
-            string assetPath = Path.Combine(Application.dataPath.Remove(Application.dataPath.LastIndexOf('/')), asset).Replace('/', Path.DirectorySeparatorChar);
-            string courseFolderPath = Path.Combine(Application.streamingAssetsPath, EditorConfigurator.Instance.DefaultCourseStreamingAssetsFolder).Replace('/', Path.DirectorySeparatorChar);
-            return assetPath.StartsWith(courseFolderPath);
+            return assets.Where(FileUtils.IsCourseFile).ToArray();
         }
     }
 
