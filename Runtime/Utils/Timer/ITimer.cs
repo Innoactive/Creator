@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Hub.Training.Utils.Timer
+namespace Innoactive.Creator.Core.Utils.Timer
 {
     public class TimerEventArgs : EventArgs { }
 

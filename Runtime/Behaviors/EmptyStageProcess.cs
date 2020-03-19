@@ -1,5 +1,5 @@
 using System.Collections;
-using Innoactive.Hub.Training;
+using Innoactive.Creator.Core;
 
 public sealed class EmptyStageProcess<TData> : IStageProcess<TData> where TData : IData
 {

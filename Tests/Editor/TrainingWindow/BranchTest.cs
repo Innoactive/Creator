@@ -2,10 +2,10 @@
 using System.Linq;
 using UnityEngine;
 using NUnit.Framework;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Editors.Windows;
+using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.UI.Windows;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Editor.Windows.TrainingWindowTests
+namespace Innoactive.Creator.Tests.TrainingWindowTests
 {
     public class BranchTest : BaseTest
     {

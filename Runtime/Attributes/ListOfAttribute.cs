@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using UnityEngine;
 
-namespace Innoactive.Hub.Training.Attributes
+namespace Innoactive.Creator.Core.Attributes
 {
     /// <summary>
     /// Declares that children of this list have metadata attributes.

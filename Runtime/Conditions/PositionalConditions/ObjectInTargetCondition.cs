@@ -2,7 +2,7 @@ using System.Collections;
 using System.Runtime.Serialization;
 using UnityEngine;
 
-namespace Innoactive.Hub.Training.Conditions
+namespace Innoactive.Creator.Core.Conditions
 {
     public interface IObjectInTargetData : IConditionData
     {

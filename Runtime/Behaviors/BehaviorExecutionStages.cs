@@ -1,6 +1,6 @@
 ﻿﻿using System;
 
-namespace Innoactive.Hub.Training.Behaviors
+namespace Innoactive.Creator.Core.Behaviors
 {
     [Flags]
     public enum BehaviorExecutionStages

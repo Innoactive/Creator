@@ -1,12 +1,12 @@
 using System.Collections;
-using Innoactive.Creator.Core.Tests.Utils;
-using Innoactive.Creator.Core.Tests.Utils.Mocks;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Conditions;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Conditions;
+using Innoactive.Creator.Tests.Utils;
+using Innoactive.Creator.Tests.Utils.Mocks;
 using UnityEngine.Assertions;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Creator.Core.Tests.Courses
+namespace Innoactive.Creator.Tests.Courses
 {
     public class LifeCycleTests : RuntimeTests
     {

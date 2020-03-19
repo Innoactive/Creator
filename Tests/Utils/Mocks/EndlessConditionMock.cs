@@ -1,7 +1,7 @@
-﻿using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Conditions;
+﻿using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Conditions;
 
-namespace Innoactive.Creator.Core.Tests.Utils.Mocks
+namespace Innoactive.Creator.Tests.Utils.Mocks
 {
     /// <summary>
     /// Helper condition for testing that allows explicitly marking a condition as completed

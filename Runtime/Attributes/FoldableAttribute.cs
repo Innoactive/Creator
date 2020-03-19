@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Innoactive.Hub.Training.Attributes
+namespace Innoactive.Creator.Core.Attributes
 {
     /// <summary>
     /// Declares that this element's view has to be foldable.

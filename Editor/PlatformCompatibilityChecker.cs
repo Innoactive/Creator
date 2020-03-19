@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.Creator.Editors.Utils
+namespace Innoactive.CreatorEditor
 {
     /// <summary>
     /// Validates that full .Net dependencies are referenced by Unity.

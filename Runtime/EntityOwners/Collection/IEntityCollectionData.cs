@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Innoactive.Hub.Training.EntityOwners
+namespace Innoactive.Creator.Core.EntityOwners
 {
     public interface IEntityCollectionData<TEntity> : IEntityCollectionData where TEntity : IEntity
     {

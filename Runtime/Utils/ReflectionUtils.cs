@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Innoactive.Hub.Training.Utils
+namespace Innoactive.Creator.Core.Utils
 {
     public static class ReflectionUtils
     {
@@ -39,7 +39,7 @@ namespace Innoactive.Hub.Training.Utils
 
             return entryDeclaredType;
         }
-        
+
         /// <summary>
         /// If the given <paramref name="listType"/> is IList{T}, return its generic type argument. Otherwise, return typeof(object).
         /// </summary>

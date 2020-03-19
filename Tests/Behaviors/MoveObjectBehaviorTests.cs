@@ -1,14 +1,15 @@
 using System.Collections;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Behaviors;
-using Innoactive.Hub.Training.Configuration;
-using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Creator.Core.Tests.Utils;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Behaviors;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.CreatorEditor.Configuration;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Tests.Utils;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Creator.Core.Tests.Behaviors
+namespace Innoactive.Creator.Tests.Behaviors
 {
     public class MoveObjectBehaviorTests : RuntimeTests
     {

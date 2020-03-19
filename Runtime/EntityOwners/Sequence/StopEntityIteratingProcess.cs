@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace Innoactive.Hub.Training.EntityOwners
+namespace Innoactive.Creator.Core.EntityOwners
 {
     public class StopEntityIteratingProcess<TData, TEntity> : IStageProcess<TData> where TData : IEntitySequenceData<TEntity> where TEntity : IEntity
     {

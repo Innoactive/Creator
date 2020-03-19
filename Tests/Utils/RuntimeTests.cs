@@ -1,13 +1,11 @@
-using Innoactive.Hub.Threading;
 using System.Linq;
-using Innoactive.Hub.Training.Unity.Utils;
-using Innoactive.Hub.Training.Utils;
-using Innoactive.Hub.Training.Utils.Serialization;
-using Innoactive.Hub.Unity;
+using Innoactive.Creator.Core.Serialization;
+using Innoactive.Creator.Core.Utils;
+using Innoactive.Creator.Unity;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Tests.Utils
+namespace Innoactive.Creator.Tests.Utils
 {
     public abstract class RuntimeTests
     {

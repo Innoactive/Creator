@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Hub.Training.Attributes
+namespace Innoactive.Creator.Core.Attributes
 {
     /// <summary>
     /// Displayed name of training entity's property or field.

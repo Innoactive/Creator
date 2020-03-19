@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Innoactive.Hub.Training.Audio
+namespace Innoactive.Creator.Core.Audio
 {
     /// <summary>
     /// This class provides audio data in form of an AudioClip. Which also might not be loaded at the time needed,

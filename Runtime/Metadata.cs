@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Attributes;
+using Innoactive.Creator.Core.Attributes;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     [DataContract(IsReference = true)]
     public class Metadata : IMetadata

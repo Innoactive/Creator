@@ -1,6 +1,6 @@
-using Innoactive.Hub.Training.Conditions;
+using Innoactive.Creator.Core.Conditions;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     public abstract class CompletableEntity<TData> : Entity<TData>, ICompletableEntity where TData : ICompletableData
     {

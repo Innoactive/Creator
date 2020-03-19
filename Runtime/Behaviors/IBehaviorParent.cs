@@ -1,7 +1,7 @@
 ﻿﻿using System;
 using System.Collections.ObjectModel;
 
-namespace Innoactive.Hub.Training.Behaviors
+namespace Innoactive.Creator.Core.Behaviors
 {
     public class BehaviorCollectionChangedEventArgs : EventArgs { }
 

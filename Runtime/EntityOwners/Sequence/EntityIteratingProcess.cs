@@ -1,7 +1,7 @@
 using System.Collections;
-using Innoactive.Hub.Training.Configuration.Modes;
+using Innoactive.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Hub.Training.EntityOwners
+namespace Innoactive.Creator.Core.EntityOwners
 {
     public abstract class EntityIteratingProcess<TData, TEntity> : IStageProcess<TData> where TData : IEntitySequenceData<TEntity>, IModeData where TEntity : IEntity
     {

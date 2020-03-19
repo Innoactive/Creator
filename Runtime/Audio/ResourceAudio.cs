@@ -1,9 +1,9 @@
-using Innoactive.Creator.Internationalization;
 using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Attributes;
+using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.Internationalization;
 using UnityEngine;
 
-namespace Innoactive.Hub.Training.Audio
+namespace Innoactive.Creator.Core.Audio
 {
     /// <summary>
     /// Unity resource based audio data.

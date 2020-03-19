@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     public class Process<TData> : IProcess<TData> where TData : IData
     {

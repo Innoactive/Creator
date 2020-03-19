@@ -1,7 +1,7 @@
 using System.Runtime.Serialization;
 using UnityEngine;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     [DataContract(IsReference = true)]
     public class ChapterMetadata : IMetadata

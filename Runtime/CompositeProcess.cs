@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Innoactive.Hub.Training
+namespace Innoactive.Creator.Core
 {
     public sealed class CompositeProcess<TData> : IProcess<TData> where TData : IData
     {
