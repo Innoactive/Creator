@@ -6,8 +6,9 @@ using System.Linq;
 using Innoactive.Creator.Core.Behaviors;
 using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Utils;
-using Innoactive.Creator.Core.Serialization;
 using Innoactive.CreatorEditor.UI;
+using Innoactive.Creator.Core.Serialization;
+using Innoactive.Creator.Core.Serialization.NewtonsoftJson;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.Configuration
@@ -32,9 +33,9 @@ namespace Innoactive.CreatorEditor.Configuration
         }
 
         /// <inheritdoc />
-        public virtual ITrainingSerializer Serializer
+        public virtual ICourseSerializer Serializer
         {
-            get { return new NewtonsoftJsonSerializer(); }
+            get { return new NewtonsoftJsonCourseSerializer(); }
         }
 
         /// <inheritdoc />
