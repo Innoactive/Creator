@@ -1,0 +1,17 @@
+name: Integration
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Commit Linter
+      uses: wagoid/commitlint-github-action@v1.3.1
+      with:
+        configFile: .commitlintrc.json
