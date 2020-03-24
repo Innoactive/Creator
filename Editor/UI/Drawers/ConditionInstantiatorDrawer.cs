@@ -4,6 +4,7 @@ using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Utils;
 using Innoactive.CreatorEditor.Configuration;
 using Innoactive.CreatorEditor.ImguiTester;
+using UnityEditor;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Drawers
@@ -17,10 +18,20 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
+            EditorGUI.BeginDisabledGroup(EditorConfigurator.Instance.AllowedMenuItemsSettings.GetConditionMenuOptions() == null);
             if (EditorDrawingHelper.DrawAddButton(ref rect, "Add Condition"))
             {
                 IList<TestableEditorElements.MenuOption> options = ConvertFromConfigurationOptionsToGenericMenuOptions(EditorConfigurator.Instance.ConditionsMenuContent, currentValue, changeValueCallback);
                 TestableEditorElements.DisplayContextMenu(options);
+            }
+            EditorGUI.EndDisabledGroup();
+
+            if (EditorConfigurator.Instance.AllowedMenuItemsSettings.GetConditionMenuOptions() == null)
+            {
+                rect.y += rect.height + EditorDrawingHelper.VerticalSpacing;
+                rect.width -= EditorDrawingHelper.IndentationWidth;
+                EditorGUI.HelpBox(rect, "Your project does not contain any Conditions. Either create one or import an Innoactive Creator Component.", MessageType.Error);
+                rect.height += rect.height + EditorDrawingHelper.VerticalSpacing;
             }
 
             return rect;

@@ -1,7 +1,4 @@
 using System;
-using Innoactive.Creator.Core.Audio;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.Conditions;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI

@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Audio;
 using Innoactive.Creator.Core.Behaviors;
 using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.Internationalization;
+using Innoactive.Creator.Tests.Utils.Mocks;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -31,11 +31,10 @@ namespace Innoactive.Creator.Tests.Utils
         [UnityTest]
         public IEnumerator ActivationBehavior()
         {
-            // Given a linear three step course where each step has a PlayAudioBehavior (ExecutionStage: Activation) and an EndlessConditionMock,
-            ResourceAudio audioData = new ResourceAudio(new LocalizedString("Sounds/test-sound", "Sounds/test-sound"));
-            IBehavior behavior1 = new PlayAudioBehavior(audioData, BehaviorExecutionStages.Activation, true, audioSource);
-            IBehavior behavior2 = new PlayAudioBehavior(audioData, BehaviorExecutionStages.Activation, true, audioSource);
-            IBehavior behavior3 = new PlayAudioBehavior(audioData, BehaviorExecutionStages.Activation, true, audioSource);
+            // Given a linear three step course with 3 ActivationStageBehaviorMock set to Activation and an EndlessConditionMock
+            IBehavior behavior1 = new ActivationStageBehaviorMock(BehaviorExecutionStages.Activation);
+            IBehavior behavior2 = new ActivationStageBehaviorMock(BehaviorExecutionStages.Activation);
+            IBehavior behavior3 = new ActivationStageBehaviorMock(BehaviorExecutionStages.Activation);
 
             TestLinearChapterBuilder chapterBuilder = TestLinearChapterBuilder.SetupChapterBuilder(3, true);
             chapterBuilder.Steps[0].Data.Behaviors.Data.Behaviors = new List<IBehavior> { behavior1 };
@@ -45,16 +44,16 @@ namespace Innoactive.Creator.Tests.Utils
 
             ICourse course = new Course("course", chapter);
 
-            // And given a "no audio" and a "with audio" mode.
-            IMode noHints = new Mode("No Audio Hints", new WhitelistTypeRule<IOptional>().Add<PlayAudioBehavior>());
-            IMode withHints = new Mode("With Audio Hints", new WhitelistTypeRule<IOptional>());
+            // And given a "restricted" and an "unrestricted" mode.
+            IMode restricted = new Mode("Restricted", new WhitelistTypeRule<IOptional>().Add<ActivationStageBehaviorMock>());
+            IMode unrestricted = new Mode("Unrestricted", new WhitelistTypeRule<IOptional>());
 
             // When running it and changing the mode during execution several times,
-            // Then the corresponding PlayAudioBehavior of the current step is activated and deactivated accordingly.
-            // The other PlayAudioBehaviors of the other steps stay inactive.
+            // Then the corresponding ActivationStageBehaviorMock of the current step is activated and deactivated accordingly.
+            // The other ActivationStageBehaviorMock of the other steps stay inactive.
             TrainingRunner.Initialize(course);
             TrainingRunner.Run();
-            course.Configure(withHints);
+            course.Configure(unrestricted);
 
             yield return new WaitUntil(() => behavior1.LifeCycle.Stage == Stage.Activating);
 
@@ -62,7 +61,7 @@ namespace Innoactive.Creator.Tests.Utils
             Assert.AreEqual(Stage.Inactive, behavior2.LifeCycle.Stage);
             Assert.AreEqual(Stage.Inactive, behavior3.LifeCycle.Stage);
 
-            course.Configure(noHints);
+            course.Configure(restricted);
 
             Assert.AreEqual(Stage.Inactive, behavior1.LifeCycle.Stage);
             Assert.AreEqual(Stage.Inactive, behavior2.LifeCycle.Stage);
@@ -80,7 +79,7 @@ namespace Innoactive.Creator.Tests.Utils
             Assert.AreEqual(Stage.Inactive, behavior2.LifeCycle.Stage);
             Assert.AreEqual(Stage.Inactive, behavior3.LifeCycle.Stage);
 
-            course.Configure(withHints);
+            course.Configure(unrestricted);
 
             Assert.AreEqual(Stage.Inactive, behavior1.LifeCycle.Stage);
             Assert.AreEqual(Stage.Activating, behavior2.LifeCycle.Stage);
@@ -95,13 +94,13 @@ namespace Innoactive.Creator.Tests.Utils
             Assert.AreEqual(Stage.Inactive, behavior2.LifeCycle.Stage);
             Assert.AreEqual(Stage.Active, behavior3.LifeCycle.Stage);
 
-            course.Configure(noHints);
+            course.Configure(restricted);
 
             Assert.AreEqual(Stage.Inactive, behavior1.LifeCycle.Stage);
             Assert.AreEqual(Stage.Inactive, behavior2.LifeCycle.Stage);
             Assert.AreEqual(Stage.Inactive, behavior3.LifeCycle.Stage);
 
-            course.Configure(withHints);
+            course.Configure(unrestricted);
 
             Assert.AreEqual(Stage.Inactive, behavior1.LifeCycle.Stage);
             Assert.AreEqual(Stage.Inactive, behavior2.LifeCycle.Stage);
@@ -119,11 +118,10 @@ namespace Innoactive.Creator.Tests.Utils
         [UnityTest]
         public IEnumerator DeactivationBehavior()
         {
-            // Given a linear three step course where each step has a PlayAudioBehavior (ExecutionStage: Deactivation) and an EndlessConditionMock,
-            ResourceAudio audioData = new ResourceAudio(new LocalizedString("Sounds/test-sound", "Sounds/test-sound"));
-            IBehavior behavior1 = new PlayAudioBehavior(audioData, BehaviorExecutionStages.Deactivation, true, audioSource);
-            IBehavior behavior2 = new PlayAudioBehavior(audioData, BehaviorExecutionStages.Deactivation, true, audioSource);
-            IBehavior behavior3 = new PlayAudioBehavior(audioData, BehaviorExecutionStages.Deactivation, true, audioSource);
+            // Given a linear three step course with 3 ActivationStageBehaviorMock set to Activation and an EndlessConditionMock
+            IBehavior behavior1 = new ActivationStageBehaviorMock(BehaviorExecutionStages.Deactivation);
+            IBehavior behavior2 = new ActivationStageBehaviorMock(BehaviorExecutionStages.Deactivation);
+            IBehavior behavior3 = new ActivationStageBehaviorMock(BehaviorExecutionStages.Deactivation);
 
             TestLinearChapterBuilder chapterBuilder = TestLinearChapterBuilder.SetupChapterBuilder(3, true);
             chapterBuilder.Steps[0].Data.Behaviors.Data.Behaviors = new List<IBehavior> { behavior1 };
@@ -133,16 +131,16 @@ namespace Innoactive.Creator.Tests.Utils
 
             ICourse course = new Course("course", chapter);
 
-            // And given a "no audio" and a "with audio" mode.
-            IMode noHints = new Mode("No Audio Hints", new WhitelistTypeRule<IOptional>().Add<PlayAudioBehavior>());
-            IMode withHints = new Mode("With Audio Hints", new WhitelistTypeRule<IOptional>());
+            // And given a "restricted" and an "unrestricted" mode.
+            IMode restricted = new Mode("Restricted", new WhitelistTypeRule<IOptional>().Add<ActivationStageBehaviorMock>());
+            IMode unrestricted = new Mode("Unrestricted", new WhitelistTypeRule<IOptional>());
 
             // When running it and changing the mode during execution several times,
-            // Then the corresponding PlayAudioBehavior of the current step is activated and deactivated accordingly.
-            // The other PlayAudioBehaviors of the other steps stay inactive.
+            // Then the corresponding ActivationStageBehaviorMock of the current step is activated and deactivated accordingly.
+            // The other ActivationStageBehaviorMock of the other steps stay inactive.
             TrainingRunner.Initialize(course);
             TrainingRunner.Run();
-            course.Configure(withHints);
+            course.Configure(unrestricted);
 
             ICondition condition1 = course.Data.FirstChapter.Data.FirstStep.Data.Transitions.Data.Transitions[0].Data.Conditions[0];
             yield return new WaitUntil(() => condition1.LifeCycle.Stage == Stage.Active);
@@ -151,7 +149,7 @@ namespace Innoactive.Creator.Tests.Utils
             Assert.AreEqual(Stage.Inactive, behavior2.LifeCycle.Stage);
             Assert.AreEqual(Stage.Inactive, behavior3.LifeCycle.Stage);
 
-            course.Configure(noHints);
+            course.Configure(restricted);
 
             Assert.AreEqual(Stage.Inactive, behavior1.LifeCycle.Stage);
             Assert.AreEqual(Stage.Inactive, behavior2.LifeCycle.Stage);
@@ -171,7 +169,7 @@ namespace Innoactive.Creator.Tests.Utils
             Assert.AreEqual(Stage.Inactive, behavior2.LifeCycle.Stage);
             Assert.AreEqual(Stage.Inactive, behavior3.LifeCycle.Stage);
 
-            course.Configure(withHints);
+            course.Configure(unrestricted);
 
             Assert.AreEqual(Stage.Inactive, behavior1.LifeCycle.Stage);
             Assert.AreEqual(Stage.Activating, behavior2.LifeCycle.Stage);
@@ -191,13 +189,13 @@ namespace Innoactive.Creator.Tests.Utils
             Assert.AreEqual(Stage.Inactive, behavior2.LifeCycle.Stage);
             Assert.AreEqual(Stage.Active, behavior3.LifeCycle.Stage);
 
-            course.Configure(noHints);
+            course.Configure(restricted);
 
             Assert.AreEqual(Stage.Inactive, behavior1.LifeCycle.Stage);
             Assert.AreEqual(Stage.Inactive, behavior2.LifeCycle.Stage);
             Assert.AreEqual(Stage.Inactive, behavior3.LifeCycle.Stage);
 
-            course.Configure(withHints);
+            course.Configure(unrestricted);
 
             Assert.AreEqual(Stage.Inactive, behavior1.LifeCycle.Stage);
             Assert.AreEqual(Stage.Inactive, behavior2.LifeCycle.Stage);
@@ -210,7 +208,7 @@ namespace Innoactive.Creator.Tests.Utils
             Assert.AreEqual(Stage.Inactive, behavior2.LifeCycle.Stage);
             Assert.AreEqual(Stage.Active, behavior3.LifeCycle.Stage);
 
-            course.Configure(noHints);
+            course.Configure(restricted);
 
             Assert.AreEqual(Stage.Inactive, behavior1.LifeCycle.Stage);
             Assert.AreEqual(Stage.Inactive, behavior2.LifeCycle.Stage);
