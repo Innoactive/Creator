@@ -16,6 +16,12 @@
         public virtual string Key { get; } = null;
 
         /// <summary>
+        /// Priority lets you tweak in which order different <see cref="OnSceneSetup"/>s will be performed.
+        /// The priority is considered from lowest to highest.
+        /// </summary>
+        public virtual int Priority { get; } = 0;
+
+        /// <summary>
         /// Setup the scene with necessary objects and/or logic.
         /// </summary>
         public abstract void Setup();
