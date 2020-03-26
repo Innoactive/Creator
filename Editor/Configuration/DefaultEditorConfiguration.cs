@@ -76,23 +76,23 @@ namespace Innoactive.CreatorEditor.Configuration
             Directory.CreateDirectory(DefaultCourseStreamingAssetsFolder);
 
             // Find and setup all OnSceneSetup classes in the project.
-            IEnumerable<Type> types = ReflectionUtils.GetConcreteImplementationsOf<OnSceneSetup>();
-            List<OnSceneSetup> onSceneSetups = new List<OnSceneSetup>();
+            IEnumerable<Type> types = ReflectionUtils.GetConcreteImplementationsOf<SceneSetup>();
+            List<SceneSetup> onSceneSetups = new List<SceneSetup>();
             HashSet<string> initializedKeys = new HashSet<string>();
 
             foreach (Type onSceneSetupType in types)
             {
                 try
                 {
-                    OnSceneSetup onSceneSetup = ReflectionUtils.CreateInstanceOfType(onSceneSetupType) as OnSceneSetup;
+                    SceneSetup sceneSetup = ReflectionUtils.CreateInstanceOfType(onSceneSetupType) as SceneSetup;
 
-                    if (onSceneSetup != null)
+                    if (sceneSetup != null)
                     {
-                        onSceneSetups.Add(onSceneSetup);
+                        onSceneSetups.Add(sceneSetup);
 
-                        if (onSceneSetup.Key != null && initializedKeys.Add(onSceneSetup.Key) == false)
+                        if (sceneSetup.Key != null && initializedKeys.Add(sceneSetup.Key) == false)
                         {
-                            Debug.LogWarningFormat("Multiple scene setups with key {0} found during Scene setup. This might cause problems and you might consider using only one.", onSceneSetup.Key);
+                            Debug.LogWarningFormat("Multiple scene setups with key {0} found during Scene setup. This might cause problems and you might consider using only one.", sceneSetup.Key);
                         }
                     }
                 }
@@ -104,7 +104,7 @@ namespace Innoactive.CreatorEditor.Configuration
 
             onSceneSetups = onSceneSetups.OrderBy(setup => setup.Priority).ToList();
 
-            foreach (OnSceneSetup onSceneSetup in onSceneSetups)
+            foreach (SceneSetup onSceneSetup in onSceneSetups)
             {
                 try
                 {

@@ -7,7 +7,7 @@
     /// <remarks>
     /// See <see cref="TrainingSceneSetup"/> as a reference.
     /// </remarks>
-    public abstract class OnSceneSetup
+    public abstract class SceneSetup
     {
         /// <summary>
         /// Identifier key for specific scene setup types,
@@ -16,7 +16,7 @@
         public virtual string Key { get; } = null;
 
         /// <summary>
-        /// Priority lets you tweak in which order different <see cref="OnSceneSetup"/>s will be performed.
+        /// Priority lets you tweak in which order different <see cref="SceneSetup"/>s will be performed.
         /// The priority is considered from lowest to highest.
         /// </summary>
         public virtual int Priority { get; } = 0;
