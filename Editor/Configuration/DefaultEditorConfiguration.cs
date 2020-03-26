@@ -98,7 +98,7 @@ namespace Innoactive.CreatorEditor.Configuration
                 }
                 catch (Exception exception)
                 {
-                    Debug.LogErrorFormat("{0} while initializing OnSceneSetup object of type {1}. \n {2}", exception.GetType().Name, onSceneSetupType, exception.StackTrace);
+                    Debug.LogErrorFormat("{0} while initializing OnSceneSetup object of type {1}.\n{2}", exception.GetType().Name, onSceneSetupType.Name, exception.StackTrace);
                 }
             }
 
@@ -106,8 +106,15 @@ namespace Innoactive.CreatorEditor.Configuration
 
             foreach (OnSceneSetup onSceneSetup in onSceneSetups)
             {
-                onSceneSetup.Setup();
-                Debug.LogFormat("Scene Setup done for {0}", onSceneSetup);
+                try
+                {
+                    onSceneSetup.Setup();
+                    Debug.LogFormat("Scene Setup done for {0}", onSceneSetup);
+                }
+                catch (Exception exception)
+                {
+                    Debug.LogErrorFormat("{0} while initializing OnSceneSetup object of type {1}.\n{2}", exception.GetType().Name, onSceneSetup.GetType().Name, exception.StackTrace);
+                }
             }
 
             Debug.Log("Scene setup is complete.");

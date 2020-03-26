@@ -91,8 +91,13 @@ namespace Innoactive.Creator.Core.Properties
 
             if (trainingProperty.IsInterface)
             {
-                // If it is an interface just take the first found concrete implementation.
-                sceneObjectProperty = sceneObject.GameObject.AddComponent(ReflectionUtils.GetConcreteImplementationsOf(trainingProperty).First()) as ISceneObjectProperty;
+                // If it is an interface just take the first public found concrete implementation.
+                Type propertyType = ReflectionUtils
+                    .GetAllTypes()
+                    .Where(trainingProperty.IsAssignableFrom)
+                    .First(type => type.IsClass && type.IsPublic && type.IsAbstract == false);
+
+                sceneObjectProperty = sceneObject.GameObject.AddComponent(propertyType) as ISceneObjectProperty;
             }
             else
             {
