@@ -1,8 +1,10 @@
 using System.Linq;
+using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Serialization;
 using Innoactive.Creator.Core.Utils;
 using Innoactive.Creator.Unity;
 using Innoactive.Creator.Core.Serialization.NewtonsoftJson;
+using Innoactive.CreatorEditor;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -15,7 +17,7 @@ namespace Innoactive.Creator.Tests.Utils
         [SetUp]
         public virtual void SetUp()
         {
-            SceneUtils.SetupTrainingConfiguration();
+            RuntimeConfigurator configurator = RuntimeConfigurator.Instance;
         }
 
         [TearDown]

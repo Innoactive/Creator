@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.Utils.Logging;
 using Innoactive.Creator.Unity;
 
 namespace Innoactive.Creator.Core.Conditions
@@ -13,11 +14,11 @@ namespace Innoactive.Creator.Core.Conditions
     {
         protected Condition()
         {
-            if (RuntimeConfigurator.Configuration.EntityStateLoggerConfig.LogConditions)
+            if (LifeCycleLoggingConfig.Instance.LogConditions)
             {
                 LifeCycle.StageChanged += (sender, args) =>
                 {
-                    RuntimeConfigurator.Configuration.EntityStateLogger.LogFormat(LogType.Log, "{0}<b>Condition</b> <i>'{1} ({2})'</i> is <b>{3}</b>.\n", ConsoleUtils.GetTabs(2), Data.Name, GetType().Name, LifeCycle.Stage);
+                    Debug.LogFormat("{0}<b>Condition</b> <i>'{1} ({2})'</i> is <b>{3}</b>.\n", ConsoleUtils.GetTabs(2), Data.Name, GetType().Name, LifeCycle.Stage);
                 };
             }
         }

@@ -66,7 +66,7 @@ namespace Innoactive.Creator.Tests.Courses
         public IEnumerator EmptyStepRaisesEvents()
         {
             Step step = new Step("Step1");
-            step.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            step.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             bool wasActivated = false;
             bool wasDeactivated = false;
@@ -127,7 +127,7 @@ namespace Innoactive.Creator.Tests.Courses
                 }
             };
 
-            step.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            step.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // Activate should work on simple steps.
             step.LifeCycle.Activate();
@@ -150,7 +150,7 @@ namespace Innoactive.Creator.Tests.Courses
             Transition transition = new Transition();
             transition.Data.Conditions.Add(conditionMock);
             step.Data.Transitions.Data.Transitions.Add(transition);
-            step.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            step.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             step.LifeCycle.Activate();
 
@@ -204,7 +204,7 @@ namespace Innoactive.Creator.Tests.Courses
             Transition transition = new Transition();
             transition.Data.Conditions.Add(condition);
             step.Data.Transitions.Data.Transitions.Add(transition);
-            step.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            step.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // When it is activated,
             step.LifeCycle.Activate();
@@ -231,7 +231,7 @@ namespace Innoactive.Creator.Tests.Courses
             transition.Data.Conditions.Add(conditionMock);
             step.Data.Transitions.Data.Transitions.Add(transition);
             step.Data.Behaviors.Data.Behaviors.Add(behaviorMock);
-            step.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            step.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             step.LifeCycle.Activate();
 
@@ -263,7 +263,7 @@ namespace Innoactive.Creator.Tests.Courses
             Transition transition = new Transition();
             transition.Data.Conditions.Add(conditionMock);
             step.Data.Transitions.Data.Transitions.Add(transition);
-            step.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            step.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // Activate should work on simple steps.
             step.LifeCycle.Activate();
@@ -289,7 +289,7 @@ namespace Innoactive.Creator.Tests.Courses
             transition.Data.Conditions.Add(condition);
             step.Data.Behaviors.Data.Behaviors.Add(behavior);
             step.Data.Transitions.Data.Transitions.Add(transition);
-            step.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            step.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // When you fast-forward it,
             step.LifeCycle.MarkToFastForward();
@@ -313,7 +313,7 @@ namespace Innoactive.Creator.Tests.Courses
             transition.Data.Conditions.Add(condition);
             step.Data.Behaviors.Data.Behaviors.Add(behavior);
             step.Data.Transitions.Data.Transitions.Add(transition);
-            step.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            step.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // When you fast-forward and activate it,
             step.LifeCycle.MarkToFastForward();
@@ -338,7 +338,7 @@ namespace Innoactive.Creator.Tests.Courses
             transition.Data.Conditions.Add(condition);
             step.Data.Behaviors.Data.Behaviors.Add(behavior);
             step.Data.Transitions.Data.Transitions.Add(transition);
-            step.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            step.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             step.LifeCycle.Activate();
 

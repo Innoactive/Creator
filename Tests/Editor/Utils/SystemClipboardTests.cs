@@ -23,7 +23,7 @@ namespace Innoactive.CreatorEditor.Tests
                 return;
             }
 
-            EditorConfigurator.Instance.SetupTrainingScene();
+            TrainingSceneSetup.Instance.Run();
         }
 
         [Test]
