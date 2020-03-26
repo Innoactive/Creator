@@ -76,28 +76,44 @@ namespace Innoactive.CreatorEditor.Configuration
             Directory.CreateDirectory(DefaultCourseStreamingAssetsFolder);
 
             // Find and setup all OnSceneSetup classes in the project.
-            IEnumerable<Type> types = ReflectionUtils.GetConcreteImplementationsOf<OnSceneSetup>();
+            IEnumerable<Type> types = ReflectionUtils.GetConcreteImplementationsOf<SceneSetup>();
+            List<SceneSetup> onSceneSetups = new List<SceneSetup>();
             HashSet<string> initializedKeys = new HashSet<string>();
 
-            foreach (Type onSceneSetup in types)
+            foreach (Type onSceneSetupType in types)
             {
                 try
                 {
-                    OnSceneSetup setup = ReflectionUtils.CreateInstanceOfType(onSceneSetup) as OnSceneSetup;
+                    SceneSetup sceneSetup = ReflectionUtils.CreateInstanceOfType(onSceneSetupType) as SceneSetup;
 
-                    if (setup != null)
+                    if (sceneSetup != null)
                     {
-                        setup.Setup();
-                        Debug.LogFormat("Scene Setup done for {0}", onSceneSetup);
-                        if (setup.Key != null && initializedKeys.Add(setup.Key) == false)
+                        onSceneSetups.Add(sceneSetup);
+
+                        if (sceneSetup.Key != null && initializedKeys.Add(sceneSetup.Key) == false)
                         {
-                            Debug.LogWarningFormat("Multiple scene setups with key {0} found during Scene setup. This might cause problems and you might consider using only one.", setup.Key);
+                            Debug.LogWarningFormat("Multiple scene setups with key {0} found during Scene setup. This might cause problems and you might consider using only one.", sceneSetup.Key);
                         }
                     }
                 }
                 catch (Exception exception)
                 {
-                    Debug.LogErrorFormat("{0} while initializing OnSceneSetup object of type {1}. \n {2}", exception.GetType().Name, onSceneSetup, exception.StackTrace);
+                    Debug.LogErrorFormat("{0} while initializing OnSceneSetup object of type {1}.\n{2}", exception.GetType().Name, onSceneSetupType.Name, exception.StackTrace);
+                }
+            }
+
+            onSceneSetups = onSceneSetups.OrderBy(setup => setup.Priority).ToList();
+
+            foreach (SceneSetup onSceneSetup in onSceneSetups)
+            {
+                try
+                {
+                    onSceneSetup.Setup();
+                    Debug.LogFormat("Scene Setup done for {0}", onSceneSetup);
+                }
+                catch (Exception exception)
+                {
+                    Debug.LogErrorFormat("{0} while initializing OnSceneSetup object of type {1}.\n{2}", exception.GetType().Name, onSceneSetup.GetType().Name, exception.StackTrace);
                 }
             }
 
