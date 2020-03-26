@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Reflection;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Core.Utils;
@@ -95,6 +96,7 @@ namespace Innoactive.Creator.Core.Properties
                 Type propertyType = ReflectionUtils
                     .GetAllTypes()
                     .Where(trainingProperty.IsAssignableFrom)
+                    .Where(type => type.Assembly.GetReferencedAssemblies().All(assemblyName =>  assemblyName.Name != "UnityEditor" && assemblyName.Name != "nunit.framework"))
                     .First(type => type.IsClass && type.IsPublic && type.IsAbstract == false);
 
                 sceneObjectProperty = sceneObject.GameObject.AddComponent(propertyType) as ISceneObjectProperty;
