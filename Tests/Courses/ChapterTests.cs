@@ -3,13 +3,11 @@ using System.Collections;
 using System.Linq;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Configuration;
-using Innoactive.CreatorEditor.Configuration;
 using Innoactive.Creator.Core.Exceptions;
 using Innoactive.Creator.Core.Utils.Builders;
 using Innoactive.Creator.Tests.Utils;
 using Innoactive.Creator.Tests.Utils.Mocks;
 using NUnit.Framework;
-using UnityEngine;
 using UnityEngine.TestTools;
 
 namespace Innoactive.Creator.Tests.Courses

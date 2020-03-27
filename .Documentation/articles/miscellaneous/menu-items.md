@@ -52,7 +52,7 @@ There you can exclude some menu items from being displayed:
 
 The settings will persist even if you remove the menu item from the project. Note that they use the full type name of a menu item to store the entry: it means that if you rename it or change its namespace the settings will lose track of it.
 
-## Manually created menu content
+## Manually Created Menu Content
 
 You can achieve any level of control by overriding any of the `DefaultEditorConfiguration` properties: you can create `AllowedMenuItemsSettings` programmatically instead of loading it from a text asset, or you can even set up the `BehaviorsMenuContent` or `ConditionsMenuContent` manually.
 

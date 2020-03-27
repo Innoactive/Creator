@@ -5,15 +5,11 @@ using Innoactive.Creator.Unity;
 
 namespace Innoactive.Creator.Core.Conditions
 {
-    public interface IConditionData : ICompletableData, INamedData
-    {
-    }
-
     /// <summary>
-    /// An implementation of <see cref="ICondition"/>.
+    /// An implementation of <see cref="ICondition"/>. Use it as the base class for your custom conditions.
     /// </summary>
     [DataContract(IsReference = true)]
-    public abstract class Condition<TData> : CompletableEntity<TData>, ICondition where TData : IConditionData
+    public abstract class Condition<TData> : CompletableEntity<TData>, ICondition where TData : class, IConditionData, new()
     {
         protected Condition()
         {
@@ -26,6 +22,7 @@ namespace Innoactive.Creator.Core.Conditions
             }
         }
 
+        /// <inheritdoc />
         IConditionData IDataOwner<IConditionData>.Data
         {
             get

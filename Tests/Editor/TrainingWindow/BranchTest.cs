@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using NUnit.Framework;
 using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UI.Windows;

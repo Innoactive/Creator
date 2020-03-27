@@ -2,41 +2,49 @@ using System.Collections;
 
 namespace Innoactive.Creator.Core.EntityOwners
 {
-    public class StopEntityIteratingProcess<TData, TEntity> : IStageProcess<TData> where TData : IEntitySequenceData<TEntity> where TEntity : IEntity
+    /// <summary>
+    /// A process that stops activation of a current entity in the entity sequence.
+    /// </summary>
+    public class StopEntityIteratingProcess<TEntity> : Process<IEntitySequenceData<TEntity>> where TEntity : IEntity
     {
-        public void Start(TData data)
+        ///<inheritdoc />
+        public override void Start()
         {
         }
 
-        public IEnumerator Update(TData data)
+        ///<inheritdoc />
+        public override IEnumerator Update()
         {
-            if (data.Current == null)
+            if (Data.Current == null)
             {
                 yield break;
             }
 
-            if (data.Current.LifeCycle.Stage == Stage.Activating || data.Current.LifeCycle.Stage == Stage.Active)
+            if (Data.Current.LifeCycle.Stage == Stage.Activating || Data.Current.LifeCycle.Stage == Stage.Active)
             {
-                data.Current.LifeCycle.Deactivate();
+                Data.Current.LifeCycle.Deactivate();
             }
 
-            while (data.Current.LifeCycle.Stage != Stage.Inactive)
+            while (Data.Current.LifeCycle.Stage != Stage.Inactive)
             {
                 yield return null;
             }
         }
 
-        public void End(TData data)
+        ///<inheritdoc />
+        public override void End()
         {
-            data.Current = default(TEntity);
+            Data.Current = default;
         }
 
-        public void FastForward(TData data)
+        ///<inheritdoc />
+        public override void FastForward()
         {
-            if (data.Current != null)
-            {
-                data.Current.LifeCycle.MarkToFastForward();
-            }
+            Data.Current?.LifeCycle.MarkToFastForward();
+        }
+
+        public StopEntityIteratingProcess(IEntitySequenceData<TEntity> data) : base(data)
+        {
         }
     }
 }

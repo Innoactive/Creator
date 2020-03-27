@@ -6,14 +6,14 @@ This guide explains how to design new training applications with the Innoactive 
 
 You can look up examples as described in [the evaluator's guide](evaluator.md).
 
-## Initial setup
+## Initial Setup
 
-1. [Create a new Unity project](#create-a-new-unity-project)
-1. [Check prerequisites](#prerequisites)
-1. [Import the training template](#import-the-training-template)
-1. [Setup the scene](#setup-the-scene)
+1. [Create a new Unity Project](#create-a-new-unity-project)
+1. [Check Prerequisites](#prerequisites)
+1. [Import the Training Template](#import-the-training-template)
+1. [Setup the Scene](#setup-the-scene)
 
-### Create a new Unity project
+### Create a new Unity Project
 
 Create a [new project](../miscellaneous/unity-setup.md) in Unity.
 
@@ -21,19 +21,19 @@ Create a [new project](../miscellaneous/unity-setup.md) in Unity.
 
 Make sure that your setup satisfies the [prerequisites](../miscellaneous/prerequisites.md).
 
-### Import the training template
+### Import the Training Template
 
 A template is a copy of the `Innoactive Creator` adjusted to the needs of your company or project. Normally, you would receive a `.unitypackage` with it from a template developer; in this tutorial we will use `Innoactive Basic Template` instead. Download it from the [Innoactive Developer Portal](http://developers.innoactive.de/components/#training-module): scroll down to the `Innoactive Creator` section, click `Download` button for the latest version and pick the `innoactive-basic-template-vX.Y.Z.unitypackage`.
 
 Locate the downloaded `.unitypackage` with a file explorer and drag and drop it into the `Project` tab in the Unity Editor. The `Import Unity Package` window will pop up; click `All` and then `Import`.
 
-### Setup the scene
+### Setup the Scene
 
 The training template contains preconfigured scenes which you could copy and reuse.
 
 Copy the `Simplified` scene from the imported template folder (`Innoactive/Creator/Basic-Template`) to the `Assets` folder (`Ctrl` + `D` or `Edit` > `Duplicate`, then drag and drop it to the desired directory). If you put it into a subdirectory, it should not be inside the `Innoactive/Creator/Basic-Template` folder. Make sure to open the copied scene by double clicking it.
 
-## Create a basic training application
+## Create a Basic Training Application
 
 In this section we will create an application for the following training course:
 
@@ -41,13 +41,13 @@ In this section we will create an application for the following training course:
 2. Bring it to the cube.
 3. Watch as the cube flies into the sky.
 
-### Populate the scene
+### Populate the Scene
 
 Add some floors and walls to the scene to prevent the trainee and the training scene objects from falling into the void. You need some colliders without rigidbodies: default Unity **planes** are good enough (`GameObject > 3D Object > Plane`). 
 
 Place a **sphere** and a **cube** in trainee's reach, and an **empty object** somewhere in the sky. Use default Unity objects: `GameObject > 3D Object > Sphere`, `GameObject > 3D Object > Cube`, and `Game Object > Create Empty`.
 
-### Add training properties
+### Add Training Properties
 
 A training property specifies what its object can do. For example, a `GrabbableProperty` indicates that the object can be grabbed. A training property configures the object automatically, with no additional actions required.
 
@@ -57,7 +57,7 @@ A training property specifies what its object can do. For example, a `GrabbableP
 * Add a `Transform In Range Detector Property` component to the **cube** game object.
 * Add a `Training Scene Object` component to the **empty** game object. It doesn't require additional properties.
 
-### Assign unique names
+### Assign Unique Names
 
 Every object you want to use in your training is identified by its unique name. To define a unique name you need to change the `Unique Name` property of the `Training Scene Object` component. Do it as follows:
 
@@ -69,13 +69,13 @@ Be aware that unique names are case-sensitive.
 
 > Learn more about [Training Scene Objects and Unique Names](../innoactive-creator/training-scene-object.md).
 
-### Save your progress
+### Save Your Progress
 
 Save the scene (press `CTRL` + `S` on your keyboard) to preserve your progress.
 
-### Create training course
+### Create Training Course
 
-#### Training course anatomy
+#### Training Course Anatomy
 
 The training course is a linear sequence of chapters. Each chapter starts where the previous ends: if a trainee has to drill a hole in a wall in a first chapter, the hole will be there when you load the second chapter. You can start a training course from any chapter.
 
@@ -93,7 +93,7 @@ The created training course will be set as the selected one for the current scen
 
 #### Workflow Editor
 
-Now the Workflow Editor is open and you can view and modify your training course. On the left, the list of chapters is displayed. You can use as many as you want, but let's stick to a single one in this tutorial. You can see the chapter workflow on the right. An empty chapter has only a starting point.
+Now the Workflow Editor is open and you can view and modify your training course. On the left, the list of chapters is displayed. You can use as many as you want, but let us stick to a single one in this tutorial. You can see the chapter workflow on the right. An empty chapter has only a starting point.
 
 To add a step, click with the right mouse button anywhere on the empty area and choose the `Add Step` option. To remove a step, click on the step with the right mouse button and choose the `Delete Step` option. You can drag a step around the canvas with the left mouse button.
 
@@ -123,7 +123,7 @@ The Step Inspector allows you to set a step name and description, as well as to 
 
     > The `Cube` will change its position and rotation over five seconds, until its position and rotation match the ones of `The Sky`.
 
-#### Save and load
+#### Save and Load
 
 You can check if you have unsaved changes to your training course in the top right corner of the workflow editor. The corner will be either empty or display `Unsaved changes` in red letters.
 
@@ -135,17 +135,17 @@ You can open any selected training course by clicking the `Open in Workflow Edit
 
 > Learn more about the [Training Configuration](../innoactive-creator/training-configuration.md).
 
-### Make it run
+### Make It Run
 
 Find the `[TRAINING_CONFIGURATION]` object in the scene. Make sure the `Selected Training Course` field displays the correct training course. Save the scene and press the `Play` button.
 
 Now try out the training course you created. Grab the sphere and move it near the cube to see the latter fly away!
 
-### Complete example
+### Complete Example
 
 You can find our tutorial result alongside the other examples in the `Assets/Examples` directory of the `Innoactive Creator Examples` project ([see the evaluator's guide](evaluator.md)). Load the scene called `SimpleExample` in the `Assets/Examples/Simple` directory.
 
-## Advanced localization example
+## Advanced Localization Example
 
 Duplicate and move the `Default` scene from the imported template folder (`Innoactive/Creator/Basic-Template/Scenes`) into any other directory. Repopulate it with same training scene objects as in the first part of this guide.
 
@@ -155,7 +155,7 @@ Take a look at the `[CAMERA_CONFIGURATION]` scene object. You will notice that `
 
 Note that there is no `TrainingLoader` game object on the scene. Instead, the training is managed by a controller script attached to the camera's overlay. It automatically loads the active training course. Just make sure that the correct training course is selected on the `[TRAINING_CONFIGURATION]` game object.
 
-### Audio hints and localization
+### Audio Hints and Localization
 
 The `Default` template scene accepts `.json` files as a source of localization data. Create two localization files, one for English and one for German:
 
@@ -186,7 +186,7 @@ The localization files must be named by the two-letter ISO code of the respectiv
 > You can add language packs there: `Windows Settings > Time and Language > Language > Add a language`.
 > Learn more about [Text to Speech](../miscellaneous/setup-text-to-speech.md).
 
-### Audio behavior
+### Audio Behavior
 
 In the Step Inspector, you can add either `Play TTS Audio` or `Play Audio File` behavior to a step. It has two parameters:
 
@@ -204,14 +204,14 @@ Both types of audio behaviors use localized strings. With `Play Audio File`, it 
 
 > Don't forget to save the changes!
 
-### Complete example
+### Complete Example
 
 You can find our tutorial result alongside the other examples in the `Assets/Examples` directory of the `Innoactive Creator Examples` project ([see the evaluator's guide](evaluator.md)). Load the scene called `LocalizationExample` in the `Assets/Examples/Advanced` directory.
 
-## Default behaviors
+## Default Behaviors
 
 A more detailed description of default behaviors can be found [here](../innoactive-creator/default-behaviors.md).
 
-## Default conditions
+## Default Conditions
 
 A more detailed description of default conditions can be found [here](../innoactive-creator/default-conditions.md).

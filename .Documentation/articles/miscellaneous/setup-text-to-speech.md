@@ -1,4 +1,4 @@
-# Text to speech engine (TTS)
+# Text to Speech Engine (TTS)
 
 When you create a training, one of the most time consuming steps is managing the audio. Instructions are changed quite often to keep them up to date with a current version of a training. If you use a live actor to record the instructions, you have to do the recordings over and over again every time the instructions are changed. One of the alternative solutions is to use a text to speech synthesizer that will generate voice records automatically. 
 
@@ -12,7 +12,7 @@ Supported text to speech engines:
 
 There is also an option to integrate additional text to speech engines.
 
-## How to setup a text to speech engine (TTS)
+## How to Setup a Text to Speech Engine (TTS)
 
 The TTS engine which is used, is declared in the definition of a current training configuration. The `RuntimeConfiguration` looks up for a TTS engine declared in `TextToSpeechConfig` config which should be placed at the configs directory. You may take a look at the `AdvancedTrainingController` in our Innoactive Template to see an example of how to implementent text to speech generation for multiple languages.
 
@@ -42,7 +42,7 @@ To setup your text to speech engine you have to do following steps:
     }
     ```
 
-### TextToSpeechConfig configuration
+### TextToSpeechConfig Configuration
 
 The text to speech configuration contains following parameter
 

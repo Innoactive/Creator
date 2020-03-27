@@ -20,7 +20,7 @@ namespace Innoactive.CreatorEditor.Configuration
 
         static EditorConfigurator()
         {
-            Type[] lowestPriorityTypes = new Type[] { typeof(DefaultEditorConfiguration) };
+            Type[] lowestPriorityTypes = { typeof(DefaultEditorConfiguration) };
             Type[] definitions = ReflectionUtils.GetFinalImplementationsOf<IEditorConfiguration>(lowestPriorityTypes).ToArray();
 
             if (definitions.Except(lowestPriorityTypes).Count() > 1)

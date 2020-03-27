@@ -5,17 +5,18 @@ using Innoactive.Creator.Core.Exceptions;
 
 namespace Innoactive.Creator.Core
 {
+    /// <summary>
+    /// The implementation of the <seealso cref="ILifeCycle"/> interface.
+    /// </summary>
     public sealed class LifeCycle : ILifeCycle
     {
         private bool deactivateAfterActivation;
         private IEnumerator update;
+        private IProcess process;
 
         private bool IsCurrentStageProcessFinished
         {
-            get
-            {
-                return update == null;
-            }
+            get { return update == null; }
         }
 
         private readonly Dictionary<Stage, bool> fastForwardedStates = new Dictionary<Stage, bool>
@@ -26,7 +27,7 @@ namespace Innoactive.Creator.Core
             { Stage.Deactivating, false }
         };
 
-        public IEntity Owner { get; private set; }
+        private IEntity Owner { get; set; }
 
         public LifeCycle(IEntity owner)
         {
@@ -34,10 +35,13 @@ namespace Innoactive.Creator.Core
             Owner = owner;
         }
 
+        ///<inheritdoc />
         public event EventHandler<ActivationStateChangedEventArgs> StageChanged;
 
+        ///<inheritdoc />
         public Stage Stage { get; private set; }
 
+        ///<inheritdoc />
         public void Activate()
         {
             if (Stage != Stage.Inactive)
@@ -48,6 +52,7 @@ namespace Innoactive.Creator.Core
             StartActivating();
         }
 
+        ///<inheritdoc />
         public void Deactivate()
         {
             if (Stage == Stage.Activating)
@@ -66,6 +71,7 @@ namespace Innoactive.Creator.Core
             }
         }
 
+        ///<inheritdoc />
         public void MarkToFastForward()
         {
             fastForwardedStates[Stage.Deactivating] = true;
@@ -89,6 +95,7 @@ namespace Innoactive.Creator.Core
             FastForward();
         }
 
+        ///<inheritdoc />
         public void MarkToFastForwardStage(Stage stage)
         {
             if (stage == Stage.Inactive)
@@ -104,6 +111,7 @@ namespace Innoactive.Creator.Core
             }
         }
 
+        ///<inheritdoc />
         public void Update()
         {
             if (IsCurrentStageProcessFinished)
@@ -124,7 +132,7 @@ namespace Innoactive.Creator.Core
                 return;
             }
 
-            Owner.InvokeProcessFastForward();
+            process.FastForward();
             FinishCurrentState();
         }
 
@@ -132,7 +140,7 @@ namespace Innoactive.Creator.Core
         {
             update = null;
 
-            Owner.InvokeProcessEnd();
+            process.End();
 
             fastForwardedStates[Stage] = false;
 
@@ -195,10 +203,28 @@ namespace Innoactive.Creator.Core
 
         private bool IsInFastForward
         {
-            get
+            get { return fastForwardedStates[Stage]; }
+        }
+
+        private void SetCurrentStageProcess()
+        {
+            switch (Stage)
             {
-                return fastForwardedStates[Stage];
+                case Stage.Inactive:
+                    process = new EmptyProcess();
+                    break;
+                case Stage.Activating:
+                    process = Owner.GetActivatingProcess();
+                    break;
+                case Stage.Active:
+                    process = Owner.GetActiveProcess();
+                    break;
+                case Stage.Deactivating:
+                    process = Owner.GetDeactivatingProcess();
+                    break;
             }
+
+            update = process.Update();
         }
 
         private void ChangeStage(Stage stage)
@@ -207,13 +233,10 @@ namespace Innoactive.Creator.Core
             FastForward();
 
             Stage = stage;
-            Owner.InvokeProcessStart();
-            update = Owner.InvokeProcessUpdate();
+            SetCurrentStageProcess();
+            process.Start();
 
-            if (StageChanged != null)
-            {
-                StageChanged.Invoke(this, new ActivationStateChangedEventArgs(stage));
-            }
+            StageChanged?.Invoke(this, new ActivationStateChangedEventArgs(stage));
         }
     }
 }

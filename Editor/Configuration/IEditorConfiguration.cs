@@ -2,8 +2,7 @@ using System.Collections.ObjectModel;
 using Innoactive.Creator.Core.Behaviors;
 using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Serialization;
-using Innoactive.CreatorEditor.UI;
-using UnityEditor;
+using Innoactive.CreatorEditor.UI.StepInspector.Menu;
 
 namespace Innoactive.CreatorEditor.Configuration
 {
@@ -37,12 +36,12 @@ namespace Innoactive.CreatorEditor.Configuration
         /// <summary>
         /// List of available options in "Add new behavior" dropdown.
         /// </summary>
-        ReadOnlyCollection<StepInspectorMenu.Option<IBehavior>> BehaviorsMenuContent { get; }
+        ReadOnlyCollection<MenuOption<IBehavior>> BehaviorsMenuContent { get; }
 
         /// <summary>
         /// List of available options in "Add new condition" dropdown.
         /// </summary>
-        ReadOnlyCollection<StepInspectorMenu.Option<ICondition>> ConditionsMenuContent { get; }
+        ReadOnlyCollection<MenuOption<ICondition>> ConditionsMenuContent { get; }
 
         /// <summary>
         /// Setup the current unity scene to be a functioning training scene.

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Innoactive.CreatorEditor.UI.Windows;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UndoRedo
