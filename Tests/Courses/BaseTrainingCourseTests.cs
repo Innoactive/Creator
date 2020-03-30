@@ -119,7 +119,6 @@ namespace Innoactive.Creator.Tests.Courses
             Course course = new LinearTrainingBuilder("Training Course")
                 .AddChapter(new LinearChapterBuilder("Chapter")
                     .AddStep(new BasicStepBuilder("Step")
-                        .DisableAutomaticAudioHandling()
                         .AddCondition(new EndlessConditionMock())))
                 .Build();
 
@@ -140,7 +139,6 @@ namespace Innoactive.Creator.Tests.Courses
             Course course = new LinearTrainingBuilder("Training Course")
                 .AddChapter(new LinearChapterBuilder("Chapter")
                     .AddStep(new BasicStepBuilder("Step")
-                        .DisableAutomaticAudioHandling()
                         .AddCondition(new EndlessConditionMock())))
                 .Build();
 
@@ -164,7 +162,6 @@ namespace Innoactive.Creator.Tests.Courses
             Course course = new LinearTrainingBuilder("Training Course")
                 .AddChapter(new LinearChapterBuilder("Chapter")
                     .AddStep(new BasicStepBuilder("Step")
-                        .DisableAutomaticAudioHandling()
                         .AddCondition(new EndlessConditionMock())))
                 .Build();
 
