@@ -17,6 +17,9 @@ namespace Innoactive.Creator.Core
     [DataContract(IsReference = true)]
     public class Chapter : Entity<Chapter.EntityData>, IChapter
     {
+        /// <summary>
+        /// The chapter's data class.
+        /// </summary>
         [DataContract(IsReference = true)]
         public class EntityData : EntityCollectionData<IStep>, IChapterData
         {
@@ -25,29 +28,45 @@ namespace Innoactive.Creator.Core
             [HideInTrainingInspector]
             public string Name { get; set; }
 
+            /// <summary>
+            /// The first step of the chapter.
+            /// </summary>
             [DataMember]
             public IStep FirstStep { get; set; }
 
+            /// <summary>
+            /// All steps of the chapter.
+            /// </summary>
             [DataMember]
             public IList<IStep> Steps { get; set; }
 
+            /// <inheritdoc />
             public override IEnumerable<IStep> GetChildren()
             {
                 return Steps.ToArray();
             }
 
+            /// <inheritdoc />
             public IMode Mode { get; set; }
 
+            /// <inheritdoc />
             public IStep Current { get; set; }
         }
 
-        private class ActivatingProcess : EntityIteratingProcess<EntityData, IStep>
+        private class ActivatingProcess : EntityIteratingProcess<IStep>
         {
+            private readonly IStep firstStep;
+
+            public ActivatingProcess(IChapterData data) : base(data)
+            {
+                firstStep = data.FirstStep;
+            }
+
             private IEnumerator<IStep> enumerator;
 
-            private IEnumerator<IStep> GetChildren(IChapterData data)
+            private IEnumerator<IStep> GetChildren()
             {
-                IStep current = data.FirstStep;
+                IStep current = firstStep;
 
                 while (current != null)
                 {
@@ -57,28 +76,33 @@ namespace Innoactive.Creator.Core
                 }
             }
 
-            public override void Start(EntityData data)
+            /// <inheritdoc />
+            public override void Start()
             {
-                enumerator = GetChildren(data);
-                base.Start(data);
+                enumerator = GetChildren();
+                base.Start();
             }
 
-            protected override bool ShouldActivateCurrent(EntityData data)
+            /// <inheritdoc />
+            protected override bool ShouldActivateCurrent()
             {
                 return true;
             }
 
-            protected override bool ShouldDeactivateCurrent(EntityData data)
+            /// <inheritdoc />
+            protected override bool ShouldDeactivateCurrent()
             {
-                return data.Current.Data.Transitions.Data.Transitions.Any(transition => transition.IsCompleted);
+                return Data.Current.Data.Transitions.Data.Transitions.Any(transition => transition.IsCompleted);
             }
 
-            public override void End(EntityData data)
+            /// <inheritdoc />
+            public override void End()
             {
                 enumerator = null;
-                base.End(data);
+                base.End();
             }
 
+            /// <inheritdoc />
             protected override bool TryNext(out IStep entity)
             {
                 if (enumerator != null && enumerator.MoveNext())
@@ -93,38 +117,37 @@ namespace Innoactive.Creator.Core
                 }
             }
 
-            public override void FastForward(EntityData data)
+            /// <inheritdoc />
+            public override void FastForward()
             {
-                IList<IStep> happyPath;
-
-                if (data.Current == null)
+                if (Data.Current == null)
                 {
                     return;
                 }
 
-                if (data.Current.FindPathInGraph(step => step.Data.Transitions.Data.Transitions.Select(transition => transition.Data.TargetStep), null, out happyPath) == false)
+                if (Data.Current.FindPathInGraph(step => step.Data.Transitions.Data.Transitions.Select(transition => transition.Data.TargetStep), null, out IList<IStep> pathToChapterEnd) == false)
                 {
-                    throw new InvalidStateException("The end of the chapter is not reachable from current step.");
+                    throw new InvalidStateException("The end of the chapter is not reachable from the current step.");
                 }
 
-                for (int i = 0; i < happyPath.Count; i++)
+                foreach (IStep step in pathToChapterEnd)
                 {
-                    if (data.Current.LifeCycle.Stage == Stage.Inactive)
+                    if (Data.Current.LifeCycle.Stage == Stage.Inactive)
                     {
-                        data.Current.LifeCycle.Activate();
+                        Data.Current.LifeCycle.Activate();
                     }
 
-                    data.Current.LifeCycle.MarkToFastForward();
+                    Data.Current.LifeCycle.MarkToFastForward();
 
-                    ITransition toAutocomplete = data.Current.Data.Transitions.Data.Transitions.First(transition => transition.Data.TargetStep == happyPath[i]);
+                    ITransition toAutocomplete = Data.Current.Data.Transitions.Data.Transitions.First(transition => transition.Data.TargetStep == step);
                     if (toAutocomplete.IsCompleted == false)
                     {
                         toAutocomplete.Autocomplete();
                     }
 
-                    data.Current.LifeCycle.Deactivate();
+                    Data.Current.LifeCycle.Deactivate();
 
-                    data.Current = happyPath[i];
+                    Data.Current = step;
                 }
             }
         }
@@ -133,32 +156,28 @@ namespace Innoactive.Creator.Core
         [DataMember]
         public ChapterMetadata ChapterMetadata { get; set; }
 
-        private readonly IProcess<EntityData> process = new Process<EntityData>(new ActivatingProcess(), new EmptyStageProcess<EntityData>(), new StopEntityIteratingProcess<EntityData, IStep>());
-
-        protected override IProcess<EntityData> Process
+        /// <inheritdoc />
+        public override IProcess GetActivatingProcess()
         {
-            get
-            {
-                return process;
-            }
+            return new ActivatingProcess(Data);
         }
 
-        private readonly IConfigurator<EntityData> configurator = new BaseConfigurator<EntityData>().Add(new EntitySequenceConfigurator<EntityData, IStep>());
-
-        protected override IConfigurator<EntityData> Configurator
+        /// <inheritdoc />
+        public override IProcess GetDeactivatingProcess()
         {
-            get
-            {
-                return configurator;
-            }
+            return new StopEntityIteratingProcess<IStep>(Data);
         }
 
+        /// <inheritdoc />
+        protected override IConfigurator GetConfigurator()
+        {
+            return new SequenceConfigurator<IStep>(Data);
+        }
+
+        /// <inheritdoc />
         IChapterData IDataOwner<IChapterData>.Data
         {
-            get
-            {
-                return Data;
-            }
+            get { return Data; }
         }
 
         protected Chapter() : this(null, null)
@@ -169,12 +188,9 @@ namespace Innoactive.Creator.Core
         {
             ChapterMetadata = new ChapterMetadata();
 
-            Data = new EntityData()
-            {
-                Name = name,
-                FirstStep = firstStep,
-                Steps = new List<IStep>()
-            };
+            Data.Name = name;
+            Data.FirstStep = firstStep;
+            Data.Steps = new List<IStep>();
 
             if (firstStep != null)
             {

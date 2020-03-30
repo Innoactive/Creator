@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Linq;
 using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Core.IO;
 using Innoactive.Creator.Core.Utils;
 using Innoactive.CreatorEditor.UI.Windows;
 using Innoactive.CreatorEditor.Utils;

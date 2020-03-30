@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Innoactive.Creator.Core.Conditions;
-using Innoactive.Creator.Core.Utils;
 using Innoactive.CreatorEditor.Configuration;
 using Innoactive.CreatorEditor.ImguiTester;
 using UnityEditor;
@@ -18,7 +18,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
-            EditorGUI.BeginDisabledGroup(EditorConfigurator.Instance.AllowedMenuItemsSettings.GetConditionMenuOptions() == null);
+            EditorGUI.BeginDisabledGroup(EditorConfigurator.Instance.AllowedMenuItemsSettings.GetConditionMenuOptions().Any() == false);
             if (EditorDrawingHelper.DrawAddButton(ref rect, "Add Condition"))
             {
                 IList<TestableEditorElements.MenuOption> options = ConvertFromConfigurationOptionsToGenericMenuOptions(EditorConfigurator.Instance.ConditionsMenuContent, currentValue, changeValueCallback);
@@ -26,7 +26,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             }
             EditorGUI.EndDisabledGroup();
 
-            if (EditorConfigurator.Instance.AllowedMenuItemsSettings.GetConditionMenuOptions() == null)
+            if (EditorConfigurator.Instance.AllowedMenuItemsSettings.GetConditionMenuOptions().Any() == false)
             {
                 rect.y += rect.height + EditorDrawingHelper.VerticalSpacing;
                 rect.width -= EditorDrawingHelper.IndentationWidth;

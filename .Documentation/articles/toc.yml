@@ -11,7 +11,11 @@
       href: getting-started/designer.md
     - name: As a Developer
       href: getting-started/developer.md
+<<<<<<< HEAD
 - name: Innoactive Creator for designers
+=======
+- name: Innoactive Creator for Designers
+>>>>>>> 40baad7... Refactor entities.
   href: innoactive-creator/index.md
   items:
     - name: Overview
@@ -30,7 +34,11 @@
       href: innoactive-creator/default-behaviors.md
     - name: Default Conditions
       href: innoactive-creator/default-conditions.md
+<<<<<<< HEAD
 - name: Innoacitve Creator for developers
+=======
+- name: Innoactive Creator for Developers
+>>>>>>> 40baad7... Refactor entities.
   href: developer/index.md
   items:
     - name: Overview

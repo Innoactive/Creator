@@ -21,18 +21,7 @@ namespace Innoactive.Creator.Tests.Utils.Mocks
 
         public ValueBehaviorMock(float value)
         {
-            Data = new EntityData
-            {
-                Value = value
-            };
-        }
-
-        private readonly IProcess<EntityData> process = new Process<EntityData>(new EmptyStageProcess<EntityData>(),
-            new EmptyStageProcess<EntityData>(), new EmptyStageProcess<EntityData>());
-
-        protected override IProcess<EntityData> Process
-        {
-            get { return process; }
+            Data.Value = value;
         }
     }
 }

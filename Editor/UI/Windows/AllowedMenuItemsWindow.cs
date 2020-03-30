@@ -5,6 +5,7 @@ using Innoactive.Creator.Core.Behaviors;
 using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Utils;
 using Innoactive.CreatorEditor.Configuration;
+using Innoactive.CreatorEditor.UI.StepInspector.Menu;
 using UnityEditor;
 using UnityEngine;
 
@@ -56,7 +57,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 Type type = ReflectionUtils.GetTypeFromAssemblyQualifiedName(behavior.Key);
                 bool isTypeValid = type != null;
-                string displayedName = (isTypeValid) ? ((StepInspectorMenu.Item<IBehavior>)ReflectionUtils.CreateInstanceOfType(type)).DisplayedName.text : behavior.Key;
+                string displayedName = (isTypeValid) ? ((MenuItem<IBehavior>)ReflectionUtils.CreateInstanceOfType(type)).DisplayedName : behavior.Key;
 
                 behaviorList.Add(new EntityEntry()
                 {
@@ -76,7 +77,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 Type type = ReflectionUtils.GetTypeFromAssemblyQualifiedName(condition.Key);
                 bool isTypeValid = type != null;
-                string displayedName = (isTypeValid) ? ((StepInspectorMenu.Item<ICondition>)ReflectionUtils.CreateInstanceOfType(type)).DisplayedName.text : condition.Key;
+                string displayedName = (isTypeValid) ? ((MenuItem<ICondition>)ReflectionUtils.CreateInstanceOfType(type)).DisplayedName : condition.Key;
 
                 conditionList.Add(new EntityEntry()
                 {

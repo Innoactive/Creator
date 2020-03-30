@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Innoactive.Creator.Core.Exceptions
+﻿namespace Innoactive.Creator.Core.Exceptions
 {
     public class MissingEntityException : TrainingException
     {

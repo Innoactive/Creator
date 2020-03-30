@@ -3,15 +3,21 @@ using System.Linq;
 using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
+using Innoactive.Creator.Core.EntityOwners.ParallelEntityCollection;
 
 namespace Innoactive.Creator.Core
 {
+    /// <summary>
+    /// A collection of behaviors of a step.
+    /// </summary>
     [DataContract(IsReference = true)]
     public class BehaviorCollection : Entity<BehaviorCollection.EntityData>, IBehaviorCollection
     {
+        /// <summary>
+        /// The data class for behavior collections.
+        /// </summary>
         [DataContract(IsReference = true)]
         public class EntityData : EntityCollectionData<IBehavior>, IBehaviorCollectionData
         {
@@ -27,37 +33,39 @@ namespace Innoactive.Creator.Core
             public IMode Mode { get; set; }
         }
 
-        private readonly IProcess<EntityData> process = new ParallelLifeCycleProcess<EntityData, IBehavior>();
-
-        protected override IProcess<EntityData> Process
+        /// <inheritdoc />
+        public override IProcess GetActivatingProcess()
         {
-            get
-            {
-                return process;
-            }
+            return new ParallelActivatingProcess<EntityData>(Data);
         }
 
-        private readonly IConfigurator<EntityData> configurator = new BaseConfigurator<EntityData>().Add(new ParallelLifeCycleConfigurator<EntityData, IBehavior>());
-
-        protected override IConfigurator<EntityData> Configurator
+        /// <inheritdoc />
+        public override IProcess GetActiveProcess()
         {
-            get
-            {
-                return configurator;
-            }
+            return new ParallelActiveProcess<EntityData>(Data);
         }
 
+        /// <inheritdoc />
+        public override IProcess GetDeactivatingProcess()
+        {
+            return new ParallelDeactivatingProcess<EntityData>(Data);
+        }
+
+        /// <inheritdoc />
+        protected override IConfigurator GetConfigurator()
+        {
+            return new ParallelConfigurator<IBehavior>(Data);
+        }
+
+        /// <inheritdoc />
         IBehaviorCollectionData IDataOwner<IBehaviorCollectionData>.Data
         {
-            get
-            {
-                return Data;
-            }
+            get { return Data; }
         }
 
         public BehaviorCollection()
         {
-            Data = new EntityData { Behaviors = new List<IBehavior>() };
+            Data.Behaviors = new List<IBehavior>();
         }
     }
 }

@@ -3,40 +3,45 @@ using Innoactive.Creator.Core.Configuration.Modes;
 
 namespace Innoactive.Creator.Core.EntityOwners
 {
-    public abstract class EntityIteratingProcess<TData, TEntity> : IStageProcess<TData> where TData : IEntitySequenceData<TEntity>, IModeData where TEntity : IEntity
+    /// <summary>
+    /// A process that activates and deactivates entities one after another.
+    /// </summary>
+    public abstract class EntityIteratingProcess<TEntity> : Process<IEntitySequenceDataWithMode<TEntity>> where TEntity : IEntity
     {
-        public virtual void Start(TData data)
+        protected EntityIteratingProcess(IEntitySequenceDataWithMode<TEntity> data) : base(data)
         {
         }
 
-        protected abstract bool ShouldActivateCurrent(TData data);
-
-        protected abstract bool ShouldDeactivateCurrent(TData data);
-
-        public IEnumerator Update(TData data)
+        /// <inheritdoc />
+        public override void Start()
         {
-            TEntity current = default(TEntity);
-            data.Current = current;
+        }
+
+        /// <inheritdoc />
+        public override IEnumerator Update()
+        {
+            TEntity current = default;
+            Data.Current = current;
 
             while (TryNext(out current))
             {
-                data.Current = current;
+                Data.Current = current;
 
-                if (data.Current == null)
+                if (Data.Current == null)
                 {
                     continue;
                 }
 
-                while (ShouldActivateCurrent(data) == false)
+                while (ShouldActivateCurrent() == false)
                 {
                     yield return null;
                 }
 
-                data.Current.LifeCycle.Activate();
+                Data.Current.LifeCycle.Activate();
 
-                if ((data.Current is IOptional && data.Mode.CheckIfSkipped(data.Current.GetType())))
+                if ((Data.Current is IOptional && Data.Mode.CheckIfSkipped(Data.Current.GetType())))
                 {
-                    data.Current.LifeCycle.MarkToFastForward();
+                    Data.Current.LifeCycle.MarkToFastForward();
                 }
 
                 while (current.LifeCycle.Stage == Stage.Activating)
@@ -44,35 +49,37 @@ namespace Innoactive.Creator.Core.EntityOwners
                     yield return null;
                 }
 
-                while (ShouldDeactivateCurrent(data) == false)
+                while (ShouldDeactivateCurrent() == false)
                 {
                     yield return null;
                 }
 
-                if (data.Current.LifeCycle.Stage != Stage.Inactive)
+                if (Data.Current.LifeCycle.Stage != Stage.Inactive)
                 {
-                    data.Current.LifeCycle.Deactivate();
+                    Data.Current.LifeCycle.Deactivate();
                 }
 
-                while (data.Current.LifeCycle.Stage != Stage.Inactive)
+                while (Data.Current.LifeCycle.Stage != Stage.Inactive)
                 {
                     yield return null;
                 }
             }
         }
 
-        public virtual void End(TData data)
+        /// <inheritdoc />
+        public override void End()
         {
-            data.Current = default(TEntity);
+            Data.Current = default;
         }
 
-        public virtual void FastForward(TData data)
+        /// <inheritdoc />
+        public override void FastForward()
         {
-            TEntity current = data.Current;
+            TEntity current = Data.Current;
 
             while (current != null || TryNext(out current))
             {
-                data.Current = current;
+                Data.Current = current;
 
                 if (current.LifeCycle.Stage == Stage.Inactive)
                 {
@@ -90,6 +97,19 @@ namespace Innoactive.Creator.Core.EntityOwners
             }
         }
 
+        /// <summary>
+        /// Returns true if the current entity has to be activated.
+        /// </summary>
+        protected abstract bool ShouldActivateCurrent();
+
+        /// <summary>
+        /// Returns true if the current entity has to be deactivated.
+        /// </summary>
+        protected abstract bool ShouldDeactivateCurrent();
+
+        /// <summary>
+        /// Try to get next child entity.
+        /// </summary>
         protected abstract bool TryNext(out TEntity entity);
     }
 }

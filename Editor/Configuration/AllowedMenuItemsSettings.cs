@@ -7,7 +7,7 @@ using Innoactive.Creator.Core.Behaviors;
 using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Utils;
 using Innoactive.CreatorEditor.Serialization;
-using Innoactive.CreatorEditor.UI;
+using Innoactive.CreatorEditor.UI.StepInspector.Menu;
 using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
@@ -22,8 +22,8 @@ namespace Innoactive.CreatorEditor.Configuration
     [DataContract(IsReference = true)]
     public class AllowedMenuItemsSettings
     {
-        private IList<StepInspectorMenu.Item<IBehavior>> behaviorMenuItems;
-        private IList<StepInspectorMenu.Item<ICondition>> conditionMenuItems;
+        private IList<MenuItem<IBehavior>> behaviorMenuItems;
+        private IList<MenuItem<ICondition>> conditionMenuItems;
 
         [DataMember]
         public IDictionary<string, bool> SerializedBehaviorSelections;
@@ -32,7 +32,7 @@ namespace Innoactive.CreatorEditor.Configuration
         public IDictionary<string, bool> SerializedConditionSelections;
 
         [JsonConstructor]
-        public AllowedMenuItemsSettings() : this (new Dictionary<string, bool>(), new Dictionary<string, bool>())
+        public AllowedMenuItemsSettings() : this(new Dictionary<string, bool>(), new Dictionary<string, bool>())
         {
         }
 
@@ -47,17 +47,13 @@ namespace Innoactive.CreatorEditor.Configuration
         /// <summary>
         /// Returns all active behavior menu items.
         /// </summary>
-        public IEnumerable<StepInspectorMenu.Item<IBehavior>> GetBehaviorMenuOptions()
+        public IEnumerable<MenuItem<IBehavior>> GetBehaviorMenuOptions()
         {
             if (behaviorMenuItems == null)
             {
-                IList<StepInspectorMenu.Item<IBehavior>> itemList = SetupItemList<StepInspectorMenu.Item<IBehavior>>(SerializedBehaviorSelections);
-                if (itemList.Any() == false)
-                {
-                    return null;
-                }
-
-                behaviorMenuItems = itemList.OrderByAlphaNumericNaturalSort(item => item.DisplayedName.text).ToList();
+                behaviorMenuItems = SetupItemList<MenuItem<IBehavior>>(SerializedBehaviorSelections)
+                    .OrderByAlphaNumericNaturalSort(item => item.DisplayedName)
+                    .ToList();
             }
 
             // ReSharper disable once AssignNullToNotNullAttribute
@@ -67,18 +63,13 @@ namespace Innoactive.CreatorEditor.Configuration
         /// <summary>
         /// Returns all active condition menu items.
         /// </summary>
-        public IEnumerable<StepInspectorMenu.Item<ICondition>> GetConditionMenuOptions()
+        public IEnumerable<MenuItem<ICondition>> GetConditionMenuOptions()
         {
             if (conditionMenuItems == null)
             {
-                IList<StepInspectorMenu.Item<ICondition>> itemList = SetupItemList<StepInspectorMenu.Item<ICondition>>(SerializedConditionSelections);
-
-                if (itemList.Any() == false)
-                {
-                    return null;
-                }
-
-                conditionMenuItems = itemList.OrderByAlphaNumericNaturalSort(item => item.DisplayedName.text).ToList();
+                conditionMenuItems = SetupItemList<MenuItem<ICondition>>(SerializedConditionSelections)
+                    .OrderByAlphaNumericNaturalSort(item => item.DisplayedName)
+                    .ToList();
             }
 
             // ReSharper disable once AssignNullToNotNullAttribute
@@ -210,7 +201,7 @@ namespace Innoactive.CreatorEditor.Configuration
 
         private void UpdateWithAllBehaviorsAndConditionsInProject()
         {
-            IEnumerable<Type> implementedBehaviors = ReflectionUtils.GetConcreteImplementationsOf<StepInspectorMenu.Item<IBehavior>>();
+            IEnumerable<Type> implementedBehaviors = ReflectionUtils.GetConcreteImplementationsOf<MenuItem<IBehavior>>();
 
             foreach (Type type in implementedBehaviors)
             {
@@ -222,7 +213,7 @@ namespace Innoactive.CreatorEditor.Configuration
                 SerializedBehaviorSelections.Add(type.AssemblyQualifiedName, true);
             }
 
-            IEnumerable<Type> implementedConditions = ReflectionUtils.GetConcreteImplementationsOf<StepInspectorMenu.Item<ICondition>>();
+            IEnumerable<Type> implementedConditions = ReflectionUtils.GetConcreteImplementationsOf<MenuItem<ICondition>>();
 
             foreach (Type type in implementedConditions)
             {

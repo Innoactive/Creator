@@ -5,15 +5,17 @@ using Innoactive.Creator.Unity;
 
 namespace Innoactive.Creator.Core.Behaviors
 {
+    /// <summary>
+    /// Inherit from this abstract class when creating your own behaviors.
+    /// </summary>
+    /// <typeparam name="TData">The type of the behavior's data.</typeparam>
     [DataContract(IsReference = true)]
-    public abstract class Behavior<TData> : Entity<TData>, IBehavior where TData : IBehaviorData
+    public abstract class Behavior<TData> : Entity<TData>, IBehavior where TData : class, IBehaviorData, new()
     {
+        /// <inheritdoc />
         IBehaviorData IDataOwner<IBehaviorData>.Data
         {
-            get
-            {
-                return Data;
-            }
+            get { return Data; }
         }
 
         protected Behavior()
