@@ -340,7 +340,6 @@ namespace Innoactive.Creator.Tests.Courses
             // Given a chapter,
             Chapter chapter = new LinearChapterBuilder("Chapter")
                 .AddStep(new BasicStepBuilder("Step")
-                    .DisableAutomaticAudioHandling()
                     .AddCondition(new EndlessConditionMock()))
                 .Build();
 
@@ -360,7 +359,6 @@ namespace Innoactive.Creator.Tests.Courses
             // Given a chapter,
             Chapter chapter = new LinearChapterBuilder("Chapter")
                 .AddStep(new BasicStepBuilder("Step")
-                    .DisableAutomaticAudioHandling()
                     .AddCondition(new EndlessConditionMock()))
                 .Build();
 
@@ -382,7 +380,6 @@ namespace Innoactive.Creator.Tests.Courses
             // Given an activated chapter,
             Chapter chapter = new LinearChapterBuilder("Chapter")
                 .AddStep(new BasicStepBuilder("Step")
-                    .DisableAutomaticAudioHandling()
                     .AddCondition(new EndlessConditionMock()))
                 .Build();
 
