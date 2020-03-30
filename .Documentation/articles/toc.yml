@@ -11,7 +11,7 @@
       href: getting-started/designer.md
     - name: As a Developer
       href: getting-started/developer.md
-- name: Innoactive Creator for designers
+- name: Innoactive Creator for Designers
   href: innoactive-creator/index.md
   items:
     - name: Overview
@@ -30,7 +30,7 @@
       href: innoactive-creator/default-behaviors.md
     - name: Default Conditions
       href: innoactive-creator/default-conditions.md
-- name: Innoacitve Creator for developers
+- name: Innoactive Creator for Developers
   href: developer/index.md
   items:
     - name: Overview
