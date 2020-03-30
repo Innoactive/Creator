@@ -1,6 +1,5 @@
 using System.Collections;
 using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Tests.Utils;
 using Innoactive.Creator.Tests.Utils.Mocks;
 using UnityEngine.Assertions;
@@ -19,47 +18,40 @@ namespace Innoactive.Creator.Tests.Courses
                 public bool IsUpdateFinished { get; set; }
                 public bool IsFastForwarded { get; set; }
                 public bool IsEndCalled { get; set; }
-
             }
 
-            private class ActiveProcess : IStageProcess<EntityData>
+            private class ActiveProcess : Process<EntityData>
             {
-                public void Start(EntityData data)
+                public ActiveProcess(EntityData data) : base(data)
                 {
-                    data.IsUpdateFinished = false;
-                    data.IsFastForwarded = false;
                 }
 
-                public IEnumerator Update(EntityData data)
+                public override void Start()
                 {
-                    data.IsUpdateFinished = true;
+                    Data.IsUpdateFinished = false;
+                    Data.IsFastForwarded = false;
+                }
+
+                public override IEnumerator Update()
+                {
+                    Data.IsUpdateFinished = true;
                     yield break;
                 }
 
-                public void End(EntityData data)
+                public override void End()
                 {
-                    data.IsEndCalled = true;
+                    Data.IsEndCalled = true;
                 }
 
-                public void FastForward(EntityData data)
+                public override void FastForward()
                 {
-                    data.IsFastForwarded = true;
-                }
-            }
-
-            private readonly IProcess<EntityData> process = new ActiveOnlyProcess<EntityData>(new ActiveProcess());
-
-            protected override IProcess<EntityData> Process
-            {
-                get
-                {
-                    return process;
+                    Data.IsFastForwarded = true;
                 }
             }
 
-            public TestEntity()
+            public override IProcess GetActiveProcess()
             {
-                Data = new EntityData();
+                return new ActiveProcess(Data);
             }
         }
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.UI.Drawers;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Drawers

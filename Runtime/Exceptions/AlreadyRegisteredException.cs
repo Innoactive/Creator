@@ -1,5 +1,4 @@
-﻿using System;
-using Innoactive.Creator.Core.SceneObjects;
+﻿using Innoactive.Creator.Core.SceneObjects;
 
 namespace Innoactive.Creator.Core.Exceptions
 {

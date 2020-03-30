@@ -1,5 +1,4 @@
 ﻿using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor;
 using Innoactive.CreatorEditor.UI.Drawers;
 using UnityEditor;
 using UnityEngine;

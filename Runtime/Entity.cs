@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Linq;
+﻿using System.Linq;
 using System.Runtime.Serialization;
-using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
 
@@ -12,78 +10,86 @@ namespace Innoactive.Creator.Core
     /// offers member functions to trigger state changes.
     /// </summary>
     [DataContract(IsReference = true)]
-    public abstract class Entity<TData> : IEntity, IDataOwner<TData> where TData : IData
+    public abstract class Entity<TData> : IEntity, IDataOwner<TData> where TData : class, IData, new()
     {
-        private readonly IConfigurator<TData> defaultConfigurator = new BaseConfigurator<TData>();
-
+        /// <inheritdoc />
         [DataMember]
-        public TData Data { get; protected set; }
+        public TData Data { get; private set; }
 
+        /// <inheritdoc />
         IData IDataOwner.Data
         {
-            get
-            {
-                return ((IDataOwner<TData>)this).Data;
-            }
+            get { return ((IDataOwner<TData>)this).Data; }
         }
 
-        protected abstract IProcess<TData> Process { get; }
+        /// <inheritdoc />
+        public ILifeCycle LifeCycle { get; }
 
-        protected virtual IConfigurator<TData> Configurator
-        {
-            get
-            {
-                return defaultConfigurator;
-            }
-        }
-
-        public ILifeCycle LifeCycle { get; private set; }
-
-        public void InvokeProcessStart()
-        {
-            Process.GetStageProcess(LifeCycle.Stage).Start(Data);
-        }
-
-        public IEnumerator InvokeProcessUpdate()
-        {
-            return Process.GetStageProcess(LifeCycle.Stage).Update(Data);
-        }
-
-        public void InvokeProcessEnd()
-        {
-            Process.GetStageProcess(LifeCycle.Stage).End(Data);
-        }
-
-        public void InvokeProcessFastForward()
-        {
-            Process.GetStageProcess(LifeCycle.Stage).FastForward(Data);
-        }
-
-        public void Configure(IMode mode)
-        {
-            Configurator.Configure(Data, mode, LifeCycle.Stage);
-        }
-
-        public void Update()
-        {
-            LifeCycle.Update();
-
-            IEntityCollectionData collectionData = Data as IEntityCollectionData;
-
-            if (collectionData == null)
-            {
-                return;
-            }
-
-            foreach (IEntity child in collectionData.GetChildren().Distinct())
-            {
-                child.Update();
-            }
-        }
 
         protected Entity()
         {
             LifeCycle = new LifeCycle(this);
+            Data = new TData();
+        }
+
+        /// <inheritdoc />
+        public virtual IProcess GetActivatingProcess()
+        {
+            return new EmptyProcess();
+        }
+
+        /// <inheritdoc />
+        public virtual IProcess GetActiveProcess()
+        {
+            return new EmptyProcess();
+        }
+
+        /// <inheritdoc />
+        public virtual IProcess GetDeactivatingProcess()
+        {
+            return new EmptyProcess();
+        }
+
+        /// <summary>
+        /// Override this method if your behavior or condition supports changing between training modes (<see cref="IMode"/>).
+        /// By default returns an empty configurator that does nothing.
+        /// </summary>
+        protected virtual IConfigurator GetConfigurator()
+        {
+            return new EmptyConfigurator();
+        }
+
+        /// <inheritdoc />
+        public void Configure(IMode mode)
+        {
+            if (Data is IEntityCollectionData collectionData)
+            {
+                foreach (IEntity child in collectionData.GetChildren().Distinct())
+                {
+                    child.Configure(mode);
+                }
+            }
+
+            GetConfigurator().Configure(mode, LifeCycle.Stage);
+
+            if (Data is IModeData modeData)
+            {
+                modeData.Mode = mode;
+            }
+        }
+
+        /// <inheritdoc />
+        public void Update()
+        {
+            LifeCycle.Update();
+
+            if (Data is IEntityCollectionData collectionData)
+            {
+                foreach (IEntity child in collectionData.GetChildren().Distinct())
+                {
+                    child.Update();
+                }
+            }
         }
     }
 }

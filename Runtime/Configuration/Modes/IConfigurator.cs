@@ -1,7 +1,12 @@
 namespace Innoactive.Creator.Core.Configuration.Modes
 {
-    public interface IConfigurator<in TData> where TData : IData
+    /// <summary>
+    /// An interface for entities' configurators.
+    /// </summary>
+    public interface IConfigurator
     {
-        void Configure(TData data, IMode mode, Stage stage);
+        /// <paramref name="mode">The current mode.</param>
+        /// <paramref name="stage">The current entity's stage.</param>
+        void Configure(IMode mode, Stage stage);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UI.Graphics.Renderers;
 using UnityEngine;
 

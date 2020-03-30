@@ -11,107 +11,125 @@ using UnityEngine;
 
 namespace Innoactive.Creator.Core
 {
+    /// <summary>
+    /// A class for a transition from one step to another.
+    /// </summary>
     [DataContract(IsReference = true)]
     public class Transition : CompletableEntity<Transition.EntityData>, ITransition
     {
+        /// <summary>
+        /// The transition's data class.
+        /// </summary>
         [DisplayName("Transition")]
         public class EntityData : EntityCollectionData<ICondition>, ITransitionData
         {
+            ///<inheritdoc />
             [DataMember]
             [DisplayName("Conditions"), Foldable, Separated, ListOf(typeof(FoldableAttribute), typeof(DeletableAttribute), typeof(SeparatedAttribute)), ExtendableList]
             public IList<ICondition> Conditions { get; set; }
 
+            ///<inheritdoc />
             public override IEnumerable<ICondition> GetChildren()
             {
                 return Conditions.ToArray();
             }
 
+            ///<inheritdoc />
             [HideInTrainingInspector]
             [DataMember]
             public IStep TargetStep { get; set; }
 
+            ///<inheritdoc />
             public IMode Mode { get; set; }
+
+            ///<inheritdoc />
             public bool IsCompleted { get; set; }
         }
 
-        private class ActivatingProcess : InstantStageProcess<EntityData>
+        private class ActivatingProcess : InstantProcess<EntityData>
         {
-            public override void Start(EntityData data)
+            public ActivatingProcess(EntityData data) : base(data)
             {
-                data.IsCompleted = false;
+            }
+
+            ///<inheritdoc />
+            public override void Start()
+            {
+                Data.IsCompleted = false;
             }
         }
 
-        private class ActiveProcess : BaseStageProcessOverCompletable<EntityData>
+        private class ActiveProcess : BaseActiveProcessOverCompletable<EntityData>
         {
-            protected override bool CheckIfCompleted(EntityData data)
+            public ActiveProcess(EntityData data) : base(data)
             {
-                return data.Conditions
-                    .Where(condition => data.Mode.CheckIfSkipped(condition.GetType()) == false)
+            }
+
+            ///<inheritdoc />
+            protected override bool CheckIfCompleted()
+            {
+                return Data.Conditions
+                    .Where(condition => Data.Mode.CheckIfSkipped(condition.GetType()) == false)
                     .All(condition => condition.IsCompleted);
             }
         }
 
-        private class EntityAutocompleter : BaseAutocompleter<EntityData>
+        private class EntityAutocompleter : Autocompleter<EntityData>
         {
-            public override void Complete(EntityData data)
+            public EntityAutocompleter(EntityData data) : base(data)
             {
-                foreach (ICondition condition in data.Conditions.Where(condition => data.Mode.CheckIfSkipped(condition.GetType()) == false))
+            }
+
+            ///<inheritdoc />
+            public override void Complete()
+            {
+                foreach (ICondition condition in Data.Conditions.Where(condition => Data.Mode.CheckIfSkipped(condition.GetType()) == false))
                 {
                     condition.Autocomplete();
                 }
-
-                base.Complete(data);
             }
         }
 
+        ///<inheritdoc />
         ITransitionData IDataOwner<ITransitionData>.Data
         {
-            get
-            {
-                return Data;
-            }
+            get { return Data; }
         }
 
-        private readonly IProcess<EntityData> process = new CompositeProcess<EntityData>()
-            .Add(new ParallelLifeCycleProcess<EntityData, ICondition>())
-            .Add(new Process<EntityData>(new ActivatingProcess(), new ActiveProcess(), new EmptyStageProcess<EntityData>()));
-
-        protected override IProcess<EntityData> Process
+        ///<inheritdoc />
+        public override IProcess GetActivatingProcess()
         {
-            get
-            {
-                return process;
-            }
+            return new CompositeProcess(new EntityOwners.ParallelEntityCollection.ParallelActivatingProcess<EntityData>(Data), new ActivatingProcess(Data));
         }
 
-        private readonly IConfigurator<EntityData> configurator = new BaseConfigurator<EntityData>().Add(new ParallelLifeCycleConfigurator<EntityData, ICondition>());
-
-        protected override IConfigurator<EntityData> Configurator
+        ///<inheritdoc />
+        public override IProcess GetActiveProcess()
         {
-            get
-            {
-                return configurator;
-            }
+            return new CompositeProcess(new EntityOwners.ParallelEntityCollection.ParallelActiveProcess<EntityData>(Data), new ActiveProcess(Data));
         }
 
-        private readonly IAutocompleter<EntityData> autocompleter = new EntityAutocompleter();
-
-        protected override IAutocompleter<EntityData> Autocompleter
+        ///<inheritdoc />
+        public override IProcess GetDeactivatingProcess()
         {
-            get
-            {
-                return autocompleter;
-            }
+            return new EntityOwners.ParallelEntityCollection.ParallelDeactivatingProcess<EntityData>(Data);
+        }
+
+        ///<inheritdoc />
+        protected override IConfigurator GetConfigurator()
+        {
+            return new ParallelConfigurator<ICondition>(Data);
+        }
+
+        ///<inheritdoc />
+        protected override IAutocompleter GetAutocompleter()
+        {
+            return new EntityAutocompleter(Data);
         }
 
         public Transition()
         {
-            Data = new EntityData()
-            {
-                Conditions = new List<ICondition>(),
-                TargetStep = null,
-            };
+            Data.Conditions = new List<ICondition>();
+            Data.TargetStep = null;
 
             if (RuntimeConfigurator.Configuration.EntityStateLoggerConfig.LogTransitions)
             {

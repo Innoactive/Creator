@@ -18,7 +18,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
-            EditorGUI.BeginDisabledGroup(EditorConfigurator.Instance.AllowedMenuItemsSettings.GetBehaviorMenuOptions() == null);
+            EditorGUI.BeginDisabledGroup(EditorConfigurator.Instance.AllowedMenuItemsSettings.GetBehaviorMenuOptions().Any() == false);
             if (EditorDrawingHelper.DrawAddButton(ref rect, "Add Behavior"))
             {
                 IList<TestableEditorElements.MenuOption> options = ConvertFromConfigurationOptionsToGenericMenuOptions(EditorConfigurator.Instance.BehaviorsMenuContent.ToList(), currentValue, changeValueCallback);
@@ -26,7 +26,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             }
             EditorGUI.EndDisabledGroup();
 
-            if (EditorConfigurator.Instance.AllowedMenuItemsSettings.GetBehaviorMenuOptions() == null)
+            if (EditorConfigurator.Instance.AllowedMenuItemsSettings.GetBehaviorMenuOptions().Any() == false)
             {
                 rect.y += rect.height + EditorDrawingHelper.VerticalSpacing;
                 rect.width -= EditorDrawingHelper.IndentationWidth;

@@ -1,9 +1,13 @@
-using Innoactive.Creator.Core.Conditions;
-
 namespace Innoactive.Creator.Core
 {
-    public interface IAutocompleter<in TData> where TData : ICompletableData
+    /// <summary>
+    /// A base interface for an autocompleter. Autocompleters are used alongside fast-forwarding of the processes. They must fake circumstances under which conditions should complete if fast-forwarding requires it.
+    /// </summary>
+    public interface IAutocompleter
     {
-        void Complete(TData data);
+        /// <summary>
+        /// A custom logic to "fake" natural completion of an entity.
+        /// </summary>
+        void Complete();
     }
 }

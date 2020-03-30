@@ -4,10 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Attributes;
-using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
+using Innoactive.Creator.Core.EntityOwners.FoldedEntityCollection;
 using Innoactive.Creator.Unity;
 
 namespace Innoactive.Creator.Core
@@ -26,16 +26,20 @@ namespace Innoactive.Creator.Core
             [HideInTrainingInspector]
             public string Name { get; set; }
 
+            ///<inheritdoc />
             [DataMember]
             [DrawingPriority(1)]
             public string Description { get; set; }
 
+            ///<inheritdoc />
             [DataMember]
             public IBehaviorCollection Behaviors { get; set; }
 
+            ///<inheritdoc />
             [DataMember]
             public ITransitionCollection Transitions { get; set; }
 
+            ///<inheritdoc />
             public override IEnumerable<IStepChild> GetChildren()
             {
                 return new List<IStepChild>
@@ -45,64 +49,76 @@ namespace Innoactive.Creator.Core
                 };
             }
 
+            ///<inheritdoc />
             public IStepChild Current { get; set; }
+
+            ///<inheritdoc />
             public IMode Mode { get; set; }
         }
 
-        private class ActiveProcess : IStageProcess<EntityData>
+        private class ActiveProcess : Process<EntityData>
         {
-            public void Start(EntityData data)
+            public ActiveProcess(EntityData data) : base(data)
             {
             }
 
-            public IEnumerator Update(EntityData data)
+            ///<inheritdoc />
+            public override void Start()
             {
-                while (data.Transitions.Data.Transitions.Any(transition => transition.IsCompleted) == false)
+            }
+
+            ///<inheritdoc />
+            public override IEnumerator Update()
+            {
+                while (Data.Transitions.Data.Transitions.Any(transition => transition.IsCompleted) == false)
                 {
                     yield return null;
                 }
             }
 
-            public void End(EntityData data)
+            ///<inheritdoc />
+            public override void End()
             {
             }
 
-            public void FastForward(EntityData data)
+            ///<inheritdoc />
+            public override void FastForward()
             {
             }
         }
 
+        ///<inheritdoc />
         [DataMember]
         public StepMetadata StepMetadata { get; set; }
 
-        private readonly IProcess<EntityData> process = new CompositeProcess<EntityData>()
-            .Add(new FoldedLifeCycleProcess<EntityData, IStepChild>())
-            .Add(new ActiveOnlyProcess<EntityData>(new ActiveProcess()));
-
-        protected override IProcess<EntityData> Process
+        ///<inheritdoc />
+        public override IProcess GetActivatingProcess()
         {
-            get
-            {
-                return process;
-            }
+            return new FoldedActivatingProcess<IStepChild>(Data);
         }
 
-        private readonly IConfigurator<EntityData> configurator = new BaseConfigurator<EntityData>().Add(new FoldedLifeCycleConfigurator<EntityData, IStepChild>());
-
-        protected override IConfigurator<EntityData> Configurator
+        ///<inheritdoc />
+        public override IProcess GetActiveProcess()
         {
-            get
-            {
-                return configurator;
-            }
+            return new CompositeProcess(new FoldedActiveProcess<IStepChild>(Data), new ActiveProcess(Data));
         }
 
+        ///<inheritdoc />
+        public override IProcess GetDeactivatingProcess()
+        {
+            return new FoldedDeactivatingProcess<IStepChild>(Data);
+        }
+
+        ///<inheritdoc />
+        protected override IConfigurator GetConfigurator()
+        {
+            return new FoldedLifeCycleConfigurator<IStepChild>(Data);
+        }
+
+        ///<inheritdoc />
         IStepData IDataOwner<IStepData>.Data
         {
-            get
-            {
-                return Data;
-            }
+            get { return Data; }
         }
 
         protected Step() : this(null)
@@ -112,12 +128,9 @@ namespace Innoactive.Creator.Core
         public Step(string name)
         {
             StepMetadata = new StepMetadata();
-            Data = new EntityData()
-            {
-                Transitions = new TransitionCollection(),
-                Behaviors = new BehaviorCollection(),
-                Name = name
-            };
+            Data.Transitions = new TransitionCollection();
+            Data.Behaviors = new BehaviorCollection();
+            Data.Name = name;
 
             if (RuntimeConfigurator.Configuration.EntityStateLoggerConfig.LogSteps)
             {

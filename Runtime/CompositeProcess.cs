@@ -1,47 +1,79 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Innoactive.Creator.Core
 {
-    public sealed class CompositeProcess<TData> : IProcess<TData> where TData : IData
+    /// <summary>
+    /// A process which consists of multiple processes which execute at the same time. It ends when all its child processes end.
+    /// </summary>
+    public class CompositeProcess : IProcess
     {
-        private readonly Dictionary<Stage, CompositeStageProcess<TData>> stageProcesses;
+        private readonly IEnumerable<IProcess> stageProcesses;
 
-        public IStageProcess<TData> GetStageProcess(Stage stage)
+        /// <param name="processes">Child processes which are united into this composite process.</param>
+        public CompositeProcess(params IProcess[] processes)
         {
-            return stageProcesses[stage];
+            stageProcesses = processes;
         }
 
-        private readonly Stage[] stages = Enum.GetValues(typeof(Stage)).Cast<Stage>().ToArray();
-
-        public CompositeProcess<TData> Add(IProcess<TData> process)
+        /// <inheritdoc />
+        public void Start()
         {
-            foreach (Stage stage in stages)
+            foreach (IProcess childProcess in stageProcesses)
             {
-                stageProcesses[stage].Add(process.GetStageProcess(stage));
+                childProcess.Start();
             }
-
-            return this;
         }
 
-        public CompositeProcess<TData> AddOptional(IProcess<TData> process)
+        /// <inheritdoc />
+        public IEnumerator Update()
         {
-            foreach (Stage stage in stages)
+            IEnumerator[] updates = stageProcesses.Select(process => process.Update()).ToArray();
+
+            bool isAnyRequiredUpdateRuns = true;
+
+            while (isAnyRequiredUpdateRuns)
             {
-                stageProcesses[stage].AddOptional(process.GetStageProcess(stage));
-            }
+                isAnyRequiredUpdateRuns = false;
 
-            return this;
+                for (int i = 0; i < updates.Length; i++)
+                {
+                    if (updates[i] == null)
+                    {
+                        continue;
+                    }
+
+                    if (updates[i].MoveNext())
+                    {
+                        isAnyRequiredUpdateRuns = true;
+                    }
+                    else
+                    {
+                        updates[i] = null;
+                    }
+                }
+
+                yield return null;
+            }
         }
 
-        public CompositeProcess()
+        /// <inheritdoc />
+        public void End()
         {
-            stageProcesses = Enum.GetValues(typeof(Stage))
-                .Cast<Stage>()
-                .ToDictionary(
-                    stage => stage,
-                    stage => new CompositeStageProcess<TData>());
+            foreach (IProcess childProcess in stageProcesses)
+            {
+                childProcess.End();
+            }
+        }
+
+        /// <inheritdoc />
+        public void FastForward()
+        {
+            foreach (IProcess childProcess in stageProcesses)
+            {
+                childProcess.FastForward();
+            }
         }
     }
 }
