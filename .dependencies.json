@@ -14,6 +14,11 @@
             "name": "Components\\Basic-Interaction",
             "repository": "git@github.com:Innoactive/Basic-Interaction-Component.git",
             "branch": "develop"
+        },
+        {
+            "name": "Components\\Basic-Behaviors-And-Conditions",
+            "repository": "git@github.com:Innoactive/Basic-Conditions-And-Behaviors.git",
+            "branch": "develop"
         }
     ]
 }

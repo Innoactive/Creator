@@ -51,9 +51,13 @@ namespace Innoactive.CreatorEditor.Configuration
         {
             if (behaviorMenuItems == null)
             {
-                behaviorMenuItems = SetupItemList<StepInspectorMenu.Item<IBehavior>>(SerializedBehaviorSelections)
-                    .OrderByAlphaNumericNaturalSort(item => item.DisplayedName.text)
-                    .ToList();
+                IList<StepInspectorMenu.Item<IBehavior>> itemList = SetupItemList<StepInspectorMenu.Item<IBehavior>>(SerializedBehaviorSelections);
+                if (itemList.Any() == false)
+                {
+                    return null;
+                }
+
+                behaviorMenuItems = itemList.OrderByAlphaNumericNaturalSort(item => item.DisplayedName.text).ToList();
             }
 
             // ReSharper disable once AssignNullToNotNullAttribute
@@ -67,9 +71,14 @@ namespace Innoactive.CreatorEditor.Configuration
         {
             if (conditionMenuItems == null)
             {
-                conditionMenuItems = SetupItemList<StepInspectorMenu.Item<ICondition>>(SerializedConditionSelections)
-                    .OrderByAlphaNumericNaturalSort(item => item.DisplayedName.text)
-                    .ToList();
+                IList<StepInspectorMenu.Item<ICondition>> itemList = SetupItemList<StepInspectorMenu.Item<ICondition>>(SerializedConditionSelections);
+
+                if (itemList.Any() == false)
+                {
+                    return null;
+                }
+
+                conditionMenuItems = itemList.OrderByAlphaNumericNaturalSort(item => item.DisplayedName.text).ToList();
             }
 
             // ReSharper disable once AssignNullToNotNullAttribute
