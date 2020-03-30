@@ -3,9 +3,17 @@ using Innoactive.Creator.Core.Configuration.Modes;
 
 namespace Innoactive.Creator.Core.EntityOwners
 {
-    public class FoldedLifeCycleConfigurator<TData, TEntity> : IConfigurator<TData> where TEntity : IEntity where TData : IEntitySequenceData<TEntity>
+    /// <summary>
+    /// A configurator for a sequence of entities.
+    /// </summary>
+    public class FoldedLifeCycleConfigurator<TEntity> : Configurator<IEntitySequenceData<TEntity>> where TEntity : IEntity
     {
-        public void Configure(TData data, IMode mode, Stage stage)
+        public FoldedLifeCycleConfigurator(IEntitySequenceData<TEntity> data) : base(data)
+        {
+        }
+
+        /// <inheritdoc />
+        public override void Configure(IMode mode, Stage stage)
         {
             if (stage == Stage.Inactive)
             {
@@ -14,7 +22,7 @@ namespace Innoactive.Creator.Core.EntityOwners
 
             try
             {
-                if (data.Current is IOptional == false)
+                if (Data.Current is IOptional == false)
                 {
                     return;
                 }
@@ -24,9 +32,9 @@ namespace Innoactive.Creator.Core.EntityOwners
                 return;
             }
 
-            if (mode.CheckIfSkipped(data.Current.GetType()))
+            if (mode.CheckIfSkipped(Data.Current.GetType()))
             {
-                data.Current.LifeCycle.MarkToFastForwardStage(stage);
+                Data.Current.LifeCycle.MarkToFastForwardStage(stage);
             }
         }
     }

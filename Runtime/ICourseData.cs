@@ -1,13 +1,22 @@
 using System.Collections.Generic;
-using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
 
 namespace Innoactive.Creator.Core
+
 {
-    public interface ICourseData : IEntitySequenceData<IChapter>, INamedData, IModeData
+    /// <summary>
+    /// The data class for a course.
+    /// </summary>
+    public interface ICourseData : IEntitySequenceDataWithMode<IChapter>, INamedData
     {
+        /// <summary>
+        /// The list of the chapters.
+        /// </summary>
         IList<IChapter> Chapters { get; set; }
 
+        /// <summary>
+        /// The chapter to start execution from.
+        /// </summary>
         IChapter FirstChapter { get; }
     }
 }

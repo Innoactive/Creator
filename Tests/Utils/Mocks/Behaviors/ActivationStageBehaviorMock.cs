@@ -21,57 +21,50 @@ namespace Innoactive.Creator.Tests.Utils.Mocks
             public string Name { get; set; }
         }
 
-        private class HasExecutionStageProcess : IStageProcess<EntityData>
+        private class HasExecutionStageProcess : Process<EntityData>
         {
-
             private BehaviorExecutionStages executionStages;
 
-            public HasExecutionStageProcess(BehaviorExecutionStages executionStages)
+            public HasExecutionStageProcess(BehaviorExecutionStages executionStages, EntityData data) : base(data)
             {
                 this.executionStages = executionStages;
             }
 
-            public void Start(EntityData data)
+            public override void Start()
             {
-
             }
 
-            public IEnumerator Update(EntityData data)
+            public override IEnumerator Update()
             {
-                if ((data.ExecutionStages & executionStages) > 0)
+                if ((Data.ExecutionStages & executionStages) > 0)
                 {
                     yield return null;
                 }
             }
 
-            public void End(EntityData data)
+            public override void End()
             {
-
             }
 
-            public void FastForward(EntityData data)
+            public override void FastForward()
             {
-
             }
         }
 
         public ActivationStageBehaviorMock(BehaviorExecutionStages executionStages, string name = "Activation Stage Mock")
         {
-            Data = new EntityData
-            {
-                ExecutionStages = executionStages,
-                Name = name
-            };
+            Data.ExecutionStages = executionStages;
+            Data.Name = name;
         }
 
-        private readonly IProcess<EntityData> process = new Process<EntityData>(new HasExecutionStageProcess(BehaviorExecutionStages.Activation), new EmptyStageProcess<EntityData>(), new HasExecutionStageProcess(BehaviorExecutionStages.Deactivation));
-
-        protected override IProcess<EntityData> Process
+        public override IProcess GetActivatingProcess()
         {
-            get
-            {
-                return process;
-            }
+            return new HasExecutionStageProcess(BehaviorExecutionStages.Activation, Data);
+        }
+
+        public override IProcess GetDeactivatingProcess()
+        {
+            return new HasExecutionStageProcess(BehaviorExecutionStages.Deactivation, Data);
         }
     }
 }

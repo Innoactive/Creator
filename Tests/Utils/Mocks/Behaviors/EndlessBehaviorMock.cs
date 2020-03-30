@@ -16,13 +16,13 @@ namespace Innoactive.Creator.Tests.Utils.Mocks
             public bool IsBlocking { get; set; }
         }
 
-        private class LoopProcess : IStageProcess<EntityData>
+        private class LoopProcess : IProcess
         {
-            public void Start(EntityData data)
+            public void Start()
             {
             }
 
-            public IEnumerator Update(EntityData data)
+            public IEnumerator Update()
             {
                 int endlessLoopProtection = 1000000;
                 while (endlessLoopProtection > 0)
@@ -32,31 +32,28 @@ namespace Innoactive.Creator.Tests.Utils.Mocks
                 }
             }
 
-            public void End(EntityData data)
+            public void End()
             {
             }
 
-            public void FastForward(EntityData data)
+            public void FastForward()
             {
             }
         }
 
-        private readonly IProcess<EntityData> process = new Process<EntityData>(new LoopProcess(), new EmptyStageProcess<EntityData>(), new LoopProcess());
-
-        protected override IProcess<EntityData> Process
+        public override IProcess GetActivatingProcess()
         {
-            get
-            {
-                return process;
-            }
+            return new LoopProcess();
+        }
+
+        public override IProcess GetDeactivatingProcess()
+        {
+            return new LoopProcess();
         }
 
         public EndlessBehaviorMock(bool isBlocking = true)
         {
-            Data = new EntityData()
-            {
-                IsBlocking = isBlocking
-            };
+            Data.IsBlocking = isBlocking;
         }
     }
 }

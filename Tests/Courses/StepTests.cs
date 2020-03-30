@@ -5,7 +5,6 @@ using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Behaviors;
 using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Configuration;
-using Innoactive.CreatorEditor.Configuration;
 using Innoactive.Creator.Core.Exceptions;
 using Innoactive.Creator.Tests.Utils;
 using Innoactive.Creator.Tests.Utils.Mocks;

@@ -23,18 +23,7 @@ namespace Innoactive.Creator.Tests.Utils.Mocks
 
         public ObjectReferenceBehaviorMock(string sceneObjectName)
         {
-            Data = new EntityData
-            {
-                ReferenceObject = new ScenePropertyReference<ISceneObjectProperty>(sceneObjectName)
-            };
-        }
-
-        private readonly IProcess<EntityData> process = new Process<EntityData>(new EmptyStageProcess<EntityData>(),
-            new EmptyStageProcess<EntityData>(), new EmptyStageProcess<EntityData>());
-
-        protected override IProcess<EntityData> Process
-        {
-            get { return process; }
+            Data.ReferenceObject = new ScenePropertyReference<ISceneObjectProperty>(sceneObjectName);
         }
     }
 }

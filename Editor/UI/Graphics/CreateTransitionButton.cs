@@ -1,4 +1,3 @@
-using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UI.Graphics.Renderers;
 using UnityEngine;
 

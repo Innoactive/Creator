@@ -1,6 +1,6 @@
 ﻿using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Conditions;
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
 namespace Innoactive.Creator.Tests.Utils.Mocks
 {
@@ -23,37 +23,21 @@ namespace Innoactive.Creator.Tests.Utils.Mocks
             public Metadata Metadata { get; set; }
         }
 
-        private class ActiveProcess : InstantStageProcess<EntityData>
+        private class ActiveProcess : InstantProcess<EntityData>
         {
-            public override void Start(EntityData data)
+            public override void Start()
             {
-                data.IsCompleted = false;
+                Data.IsCompleted = false;
+            }
+
+            public ActiveProcess(EntityData data) : base(data)
+            {
             }
         }
 
-        private readonly IProcess<EntityData> process = new ActiveOnlyProcess<EntityData>(new ActiveProcess());
-
-        protected override IProcess<EntityData> Process
+        public override IProcess GetActiveProcess()
         {
-            get
-            {
-                return process;
-            }
-        }
-
-        private readonly IAutocompleter<EntityData> autocompleter = new BaseAutocompleter<EntityData>();
-
-        protected override IAutocompleter<EntityData> Autocompleter
-        {
-            get
-            {
-                return autocompleter;
-            }
-        }
-
-        public EndlessConditionMock()
-        {
-            Data = new EntityData();
+            return new ActiveProcess(Data);
         }
     }
 }

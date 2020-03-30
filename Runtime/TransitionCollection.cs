@@ -3,90 +3,103 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Attributes;
-using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
+using Innoactive.Creator.Core.EntityOwners.ParallelEntityCollection;
 
 namespace Innoactive.Creator.Core
 {
+    /// <summary>
+    /// A collection of transitions.
+    /// </summary>
     [DataContract(IsReference = true)]
     public class TransitionCollection : Entity<TransitionCollection.EntityData>, ITransitionCollection
     {
+        /// <summary>
+        /// The data class of the transitions' collection.
+        /// </summary>
         [DataContract(IsReference = true)]
         public class EntityData : EntityCollectionData<ITransition>, ITransitionCollectionData
         {
+            ///<inheritdoc />
             [DataMember]
             [DisplayName("Transitions"), Separated, Foldable, ListOf(typeof(FoldableAttribute), typeof(DeletableAttribute), typeof(SeparatedAttribute)), ExtendableList]
             public virtual IList<ITransition> Transitions { get; set; }
 
+            ///<inheritdoc />
             public override IEnumerable<ITransition> GetChildren()
             {
                 return Transitions.ToArray();
             }
 
+            ///<inheritdoc />
             public IMode Mode { get; set; }
         }
 
-        private class ActiveProcess : IStageProcess<EntityData>
+        private class ActiveProcess : Process<EntityData>
         {
-            public void Start(EntityData data)
+            public ActiveProcess(EntityData data) : base(data)
             {
             }
 
-            public IEnumerator Update(EntityData data)
+            ///<inheritdoc />
+            public override void Start()
             {
-                while (data.Transitions.All(transition => transition.IsCompleted == false))
+            }
+
+            ///<inheritdoc />
+            public override IEnumerator Update()
+            {
+                while (Data.Transitions.All(transition => transition.IsCompleted == false))
                 {
                     yield return null;
                 }
             }
 
-            public void End(EntityData data)
+            ///<inheritdoc />
+            public override void End()
             {
             }
 
-            public void FastForward(EntityData data)
+            ///<inheritdoc />
+            public override void FastForward()
             {
             }
         }
 
-        private readonly IProcess<EntityData> process = new CompositeProcess<EntityData>()
-            .Add(new ParallelLifeCycleProcess<EntityData, ITransition>())
-            .Add(new Process<EntityData>(new EmptyStageProcess<EntityData>(), new ActiveProcess(), new EmptyStageProcess<EntityData>()));
-
-        protected override IProcess<EntityData> Process
+        ///<inheritdoc />
+        protected override IConfigurator GetConfigurator()
         {
-            get
-            {
-                return process;
-            }
+            return new ParallelConfigurator<ITransition>(Data);
         }
 
-        private readonly IConfigurator<EntityData> configurator = new BaseConfigurator<EntityData>().Add(new ParallelLifeCycleConfigurator<EntityData, ITransition>());
-        private ITransitionCollectionData data;
-
-        protected override IConfigurator<EntityData> Configurator
-        {
-            get
-            {
-                return configurator;
-            }
-        }
-
+        ///<inheritdoc />
         ITransitionCollectionData IDataOwner<ITransitionCollectionData>.Data
         {
-            get
-            {
-                return Data;
-            }
+            get { return Data; }
         }
 
         public TransitionCollection()
         {
-            Data = new EntityData()
-            {
-                Transitions = new List<ITransition>(),
-            };
+            Data.Transitions = new List<ITransition>();
+        }
+
+        ///<inheritdoc />
+        public override IProcess GetActivatingProcess()
+        {
+            return new ParallelActivatingProcess<EntityData>(Data);
+        }
+
+        ///<inheritdoc />
+        public override IProcess GetActiveProcess()
+        {
+            return new CompositeProcess(new ParallelActiveProcess<EntityData>(Data), new ActiveProcess(Data));
+        }
+
+        ///<inheritdoc />
+        public override IProcess GetDeactivatingProcess()
+        {
+            return new ParallelDeactivatingProcess<EntityData>(Data);
         }
     }
 }

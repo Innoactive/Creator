@@ -1,13 +1,21 @@
 using System.Collections.Generic;
-using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
 
 namespace Innoactive.Creator.Core
 {
-    public interface IChapterData : IEntitySequenceData<IStep>, INamedData, IModeData
+    /// <summary>
+    /// The chapter's data interface.
+    /// </summary>
+    public interface IChapterData : IEntitySequenceDataWithMode<IStep>, INamedData
     {
+        /// <summary>
+        /// The step from which the chapter starts.
+        /// </summary>
         IStep FirstStep { get; set; }
 
+        /// <summary>
+        /// The list of all steps in the chapter.
+        /// </summary>
         IList<IStep> Steps { get; set; }
     }
 }
