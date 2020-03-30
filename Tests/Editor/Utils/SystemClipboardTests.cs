@@ -93,7 +93,6 @@ namespace Innoactive.CreatorEditor.Tests
         {
             // Given a step with a behavior
             IStep step = new BasicStepBuilder("Step")
-                .DisableAutomaticAudioHandling()
                 .AddBehavior(new EmptyBehaviorMock())
                 .Build();
 
@@ -112,7 +111,6 @@ namespace Innoactive.CreatorEditor.Tests
         {
             // Given a step with a behavior
             IStep step = new BasicStepBuilder("Step")
-                .DisableAutomaticAudioHandling()
                 .AddBehavior(new EmptyBehaviorMock())
                 .Build();
 
@@ -131,8 +129,7 @@ namespace Innoactive.CreatorEditor.Tests
         {
             // Given a step with a behavior with a primitive value
             IStep step = new BasicStepBuilder("Step")
-                .DisableAutomaticAudioHandling()
-                .AddBehavior(new DelayBehavior(5f))
+                .AddBehavior(new ValueBehaviorMock(5f))
                 .Build();
 
             // When I copy and paste it
@@ -141,8 +138,8 @@ namespace Innoactive.CreatorEditor.Tests
 
             // Then the copy stores the same value as the original behavior.
             Assert.AreEqual(
-                ((DelayBehavior)step.Data.Behaviors.Data.Behaviors.First()).Data.DelayTime,
-                ((DelayBehavior)copy.Data.Behaviors.Data.Behaviors.First()).Data.DelayTime);
+                ((ValueBehaviorMock)step.Data.Behaviors.Data.Behaviors.First()).Data.Value,
+                ((ValueBehaviorMock)copy.Data.Behaviors.Data.Behaviors.First()).Data.Value);
         }
 
         [Test]
@@ -150,8 +147,7 @@ namespace Innoactive.CreatorEditor.Tests
         {
             // Given a step with a behavior with a property reference
             IStep step = new BasicStepBuilder("Step")
-                .DisableAutomaticAudioHandling()
-                .AddBehavior(new HighlightObjectBehavior("Quite unique name", Color.clear))
+                .AddBehavior(new ObjectReferenceBehaviorMock("Quite unique name"))
                 .Build();
 
             // When I copy and paste it
@@ -160,8 +156,8 @@ namespace Innoactive.CreatorEditor.Tests
 
             // Then the copy stores the same value as the original behavior.
             Assert.AreEqual(
-                ((HighlightObjectBehavior)step.Data.Behaviors.Data.Behaviors.First()).Data.ObjectToHighlight.UniqueName,
-                ((HighlightObjectBehavior)copy.Data.Behaviors.Data.Behaviors.First()).Data.ObjectToHighlight.UniqueName);
+                ((ObjectReferenceBehaviorMock)step.Data.Behaviors.Data.Behaviors.First()).Data.ReferenceObject.UniqueName,
+                ((ObjectReferenceBehaviorMock)copy.Data.Behaviors.Data.Behaviors.First()).Data.ReferenceObject.UniqueName);
         }
 
         [Test]
@@ -204,7 +200,6 @@ namespace Innoactive.CreatorEditor.Tests
         {
             // Given a step with a transition with a condition,
             IStep step = new BasicStepBuilder("Step")
-                .DisableAutomaticAudioHandling()
                 .AddCondition(new EndlessConditionMock())
                 .Build();
             IStep target = new Step("Step 2");
@@ -254,7 +249,7 @@ namespace Innoactive.CreatorEditor.Tests
             step.Data.Transitions.Data.Transitions.Add(new Transition());
 
             step.Data.Transitions.Data.Transitions[0].Data.Conditions.Add(new EndlessConditionMock());
-            step.Data.Transitions.Data.Transitions[1].Data.Conditions.Add(new TimeoutCondition(12f));
+            step.Data.Transitions.Data.Transitions[1].Data.Conditions.Add(new OptionalEndlessConditionMock());
             step.Data.Transitions.Data.Transitions[2].Data.Conditions.Add(new AutoCompletedCondition());
 
             // When I copy and paste it,
@@ -263,7 +258,7 @@ namespace Innoactive.CreatorEditor.Tests
 
             // Then the copy has three transitions, too
             Assert.AreEqual(typeof(EndlessConditionMock), copy.Data.Transitions.Data.Transitions[0].Data.Conditions[0].GetType());
-            Assert.AreEqual(typeof(TimeoutCondition), copy.Data.Transitions.Data.Transitions[1].Data.Conditions[0].GetType());
+            Assert.AreEqual(typeof(OptionalEndlessConditionMock), copy.Data.Transitions.Data.Transitions[1].Data.Conditions[0].GetType());
             Assert.AreEqual(typeof(AutoCompletedCondition), copy.Data.Transitions.Data.Transitions[2].Data.Conditions[0].GetType());
         }
 
