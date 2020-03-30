@@ -1,0 +1,23 @@
+using Innoactive.Creator.Core.Configuration.Modes;
+
+namespace Innoactive.Creator.Core
+{
+    /// <summary>
+    /// A base class for entities' configurators which have access to their entities' data.
+    /// </summary>
+    public abstract class Configurator<TData> : IConfigurator where TData : IData
+    {
+        /// <summary>
+        /// The data to configure.
+        /// </summary>
+        protected TData Data { get; }
+
+        protected Configurator(TData data)
+        {
+            Data = data;
+        }
+
+        /// <inheritdoc />
+        public abstract void Configure(IMode mode, Stage stage);
+    }
+}

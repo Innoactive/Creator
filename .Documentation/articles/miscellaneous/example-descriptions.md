@@ -11,7 +11,7 @@ The subfolders are organized as follows.
 
 Below the advanced examples are described in detail, it is assumed that the reader is familiar with the [tutorials](../getting-started/designer.md) for this project and knows the basics of working with the Innoactive Creator. A basic knowledge of Unity is required, but the trickier setup steps are explained.
 
-## Localization example
+## Localization Example
 
 **Scene:** `Assets/Examples/Advanced/LocalizationExample`
 
@@ -21,7 +21,7 @@ At the moment, this is the only example course fully localized in English and Ge
 
 It is possible to select English or German before clicking the `Start Training` button. The voiceover will be in the selected language.
 
-## Branching example
+## Branching Example
 
 **Scene:** `Assets/Examples/Advanced/BranchingExample`
 
@@ -29,7 +29,7 @@ This example showcases how it is possible to branch a step using multiple transi
 
 The sample training course requires the trainee to snap the sphere and the cube to their matching snapzones; the trainee can decide which object to snap first and the course will be completed when both objects are snapped.
 
-### Step description
+### Step Description
 
 **Snap Objects**: This step has two outgoing transitions with different activation conditions: one activates when the sphere is snapped to its target snapzone, the other when the cube is snapped. Depending on which object the trainee snaps first, the course will proceed to a different step.
 
@@ -37,7 +37,7 @@ The sample training course requires the trainee to snap the sphere and the cube 
 
 **End**: Both the previous steps converge in the *End* step, which simply acknowledges that the course is completed.
 
-### Training scene objects
+### Training Scene Objects
 
 The training course makes use of four training scene objects: the two interactable objects, Cube and Sphere, and the two corresponding snap zones. They are setup as follows:
 
@@ -64,7 +64,7 @@ With a *VRTK_PolicyList* it is possible to generate a list of [tags](https://doc
 
 > Learn more about [`VRTK_PolicyList`](https://vrtoolkit.readme.io/docs/vrtk_policylist).
 
-## Looping example
+## Looping Example
 
 **Scene:** `Assets/Examples/Advanced/LoopingExample`
 
@@ -72,7 +72,7 @@ This example showcases how it is possible to feed a branching step back to a pre
 
 In this course, the trainee has to bring the sphere next to the cube. If the sphere is dropped before the destination, the course will loop back to a previous step, where the trainee is asked to pick up the sphere.
 
-### Step description
+### Step Description
 
 **Intro**: An introductory voice over which will automatically proceed to the next step once done. This is a separate step in order to be outside of the loop, we don't want it repeated multiple times during the course.
 
@@ -84,7 +84,7 @@ In this course, the trainee has to bring the sphere next to the cube. If the sph
 
 **End**: The course is successfully completed, a short message plays and the course ends.
 
-### Training scene objects
+### Training Scene Objects
 
 The setup is rather simple in this example: the only training scene objects are the cube and the sphere. Both are meshes with colliders, with the following Innoactive Creator components added.
 
@@ -92,7 +92,7 @@ The setup is rather simple in this example: the only training scene objects are 
 
 **Sphere**: The sphere is just a standard `Training Scene Object` with a `Touchable Property` and a `Grabbable Property`.
 
-## Modes example
+## Modes Example
 
 **Scene:** `Assets/Examples/Advanced/ModesExample`
 
@@ -106,25 +106,25 @@ This configuration overrides the default one, providing the three highlighting m
 
 The training mode can be selected from the drop-down list next to the `Start Training`/`Skip Step` button.
 
-### Training scene objects
+### Training Scene Objects
 
 **Cube**: In order to be snapped, it needs to have a `Snappable Property`. Adding one will automatically make it touchable and grabbable as well.
 
 **CubeSnapZone**: It is a snapzone set up the standard way, a explained in the [branching example](#branching-example).
 
-### Step description
+### Step Description
 
 **Grab Cube**: This is just an introductory step. The introduction is rather long, but the `Play TTS Audio` behavior has its `Is blocking` checkbox unchecked. This means it will be interrupted as soon as the trainee completes the step by grabbing the cube.
 
 **Snap Cube**: This step checks that the cube is snapped in place. It works exactly as described earlier, but it's worth noting it has a `Play TTS Audio` behavior set to play in the execution stage `After Step Execution`. This means it will not play at the beginning of the step, but rather when the step is completed by satisfying the condition. This eliminates the necessity to have a further *End* step. Note that this behavior has its `Is blocking` checkbox checked. If it didn't, the step would complete immediately, the behavior would be skipped, and no audio would play.
 
-## Chapters example
+## Chapters Example
 
 **Scene:** `Assets/Examples/Advanced/ChaptersExample`
 
 This training course is built in multiple chapters. The first chapter requires the trainee to put the sphere in the box. In the second chapter, the trainee will snap the cube to the box in order to lock it. When this is done, the lid will descend and close the box.
 
-### Training scene objects
+### Training Scene Objects
 
 **Sphere**: A grabbable interactable sphere mesh with collider, meaning it is a `Training Scene Object` with a `Touchable Property` and a `Grabbable Property`.
 
@@ -138,7 +138,7 @@ This training course is built in multiple chapters. The first chapter requires t
 
 **BoxLidTarget** An empty game object whose position is used by the training course as the final position of the box lid.
 
-### Step description
+### Step Description
 
 **Fill Box/Place Sphere**: The first chapter contains only this step, which ends when the `Move Object into Collider` condition is completed. The condition is set with *Box* as the `Object to collide into`, and *Sphere* as the `Target object` to move in the collider. `Required seconds inside` is set to 0 seconds, so the condition will complete as soon as the sphere's collider intersects with the trigger inside the box. This step also deactivates the *CubeSnapZone* as soon as the course starts, so it won't be visible until the second chapter.
 

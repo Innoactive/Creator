@@ -13,20 +13,5 @@ namespace Innoactive.Creator.Tests.Utils.Mocks
             public Metadata Metadata { get; set; }
             public string Name { get; set; }
         }
-
-        public EmptyBehaviorMock()
-        {
-            Data = new EntityData();
-        }
-
-        private readonly IProcess<EntityData> process = new Process<EntityData>(new EmptyStageProcess<EntityData>(), new EmptyStageProcess<EntityData>(), new EmptyStageProcess<EntityData>());
-
-        protected override IProcess<EntityData> Process
-        {
-            get
-            {
-                return process;
-            }
-        }
     }
 }

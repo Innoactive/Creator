@@ -14,30 +14,36 @@ namespace Innoactive.Creator.Core
     [DataContract(IsReference = true)]
     public class Course : Entity<Course.EntityData>, ICourse
     {
+        /// <summary>
+        /// The data class for a course.
+        /// </summary>
         public class EntityData : EntityCollectionData<IChapter>, ICourseData
         {
+            /// <inheritdoc />
             [DataMember]
             public IList<IChapter> Chapters { get; set; }
 
+            /// <inheritdoc />
             public IChapter FirstChapter
             {
-                get
-                {
-                    return Chapters[0];
-                }
+                get { return Chapters[0]; }
             }
 
+            /// <inheritdoc />
             public override IEnumerable<IChapter> GetChildren()
             {
                 return Chapters.ToArray();
             }
 
+            /// <inheritdoc />
             public IChapter Current { get; set; }
 
+            /// <inheritdoc />
             [DataMember]
             [HideInTrainingInspector]
             public string Name { get; set; }
 
+            /// <inheritdoc />
             public IMode Mode { get; set; }
         }
 
@@ -47,31 +53,39 @@ namespace Innoactive.Creator.Core
         [DataMember]
         public IStep CurrentStep { get; protected set; }
 
-        private class ActivatingProcess : EntityIteratingProcess<EntityData, IChapter>
+        private class ActivatingProcess : EntityIteratingProcess<IChapter>
         {
             private IEnumerator<IChapter> enumerator;
 
-            public override void Start(EntityData data)
+            public ActivatingProcess(IEntitySequenceDataWithMode<IChapter> data) : base(data)
             {
-                base.Start(data);
-                enumerator = data.GetChildren().GetEnumerator();
             }
 
-            protected override bool ShouldActivateCurrent(EntityData data)
+            /// <inheritdoc />
+            public override void Start()
+            {
+                base.Start();
+                enumerator = Data.GetChildren().GetEnumerator();
+            }
+
+            /// <inheritdoc />
+            protected override bool ShouldActivateCurrent()
             {
                 return true;
             }
 
-            protected override bool ShouldDeactivateCurrent(EntityData data)
+            /// <inheritdoc />
+            protected override bool ShouldDeactivateCurrent()
             {
                 return true;
             }
 
+            /// <inheritdoc />
             protected override bool TryNext(out IChapter entity)
             {
                 if (enumerator == null || (enumerator.MoveNext() == false))
                 {
-                    entity = default(IChapter);
+                    entity = default;
                     return false;
                 }
                 else
@@ -82,22 +96,22 @@ namespace Innoactive.Creator.Core
             }
         }
 
+        /// <inheritdoc />
         ICourseData IDataOwner<ICourseData>.Data
         {
-            get
-            {
-                return Data;
-            }
+            get { return Data; }
         }
 
-        private readonly IProcess<EntityData> process = new Process<EntityData>(new ActivatingProcess(), new EmptyStageProcess<EntityData>(), new StopEntityIteratingProcess<EntityData, IChapter>());
-
-        protected override IProcess<EntityData> Process
+        /// <inheritdoc />
+        public override IProcess GetActivatingProcess()
         {
-            get
-            {
-                return process;
-            }
+            return new ActivatingProcess(Data);
+        }
+
+        /// <inheritdoc />
+        public override IProcess GetDeactivatingProcess()
+        {
+            return new StopEntityIteratingProcess<IChapter>(Data);
         }
 
         protected Course() : this(null, new IChapter[0])
@@ -110,11 +124,8 @@ namespace Innoactive.Creator.Core
 
         public Course(string name, IEnumerable<IChapter> chapters)
         {
-            Data = new EntityData()
-            {
-                Chapters = chapters.ToList(),
-                Name = name
-            };
+            Data.Chapters = chapters.ToList();
+            Data.Name = name;
         }
     }
 }

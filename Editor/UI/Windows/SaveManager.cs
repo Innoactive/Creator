@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor;
 using Innoactive.CreatorEditor.Configuration;
 using Innoactive.CreatorEditor.ImguiTester;
 using UnityEditor;

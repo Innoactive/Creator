@@ -1,12 +1,20 @@
-using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
 
 namespace Innoactive.Creator.Core
 {
-    public interface IStepData : INamedData, IDescribedData, IEntitySequenceData<IStepChild>, IModeData
+    /// <summary>
+    /// The interface for a step's data.
+    /// </summary>
+    public interface IStepData : INamedData, IDescribedData, IEntitySequenceDataWithMode<IStepChild>
     {
+        /// <summary>
+        /// The list of the step's behaviors.
+        /// </summary>
         IBehaviorCollection Behaviors { get; set; }
 
+        /// <summary>
+        /// The list of the step's transitions.
+        /// </summary>
         ITransitionCollection Transitions { get; set; }
     }
 }

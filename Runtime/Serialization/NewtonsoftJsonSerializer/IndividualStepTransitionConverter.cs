@@ -1,7 +1,5 @@
 using System;
-using Innoactive.Creator.Core.Serialization.NewtonsoftJson;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace Innoactive.Creator.Core.Serialization

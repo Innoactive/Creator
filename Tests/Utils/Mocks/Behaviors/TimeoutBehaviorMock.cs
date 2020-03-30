@@ -21,71 +21,76 @@ namespace Innoactive.Creator.Tests.Utils.Mocks
 
         public TimeoutBehaviorMock(float activatingTime, float deactivatingTime)
         {
-            Data = new EntityData
-            {
-                ActivatingTime = activatingTime,
-                DeactivatingTime = deactivatingTime
-            };
+            Data.ActivatingTime = activatingTime;
+            Data.DeactivatingTime = deactivatingTime;
         }
 
-        private class ActivatingProcess : IStageProcess<EntityData>
+        private class ActivatingProcess : Process<EntityData>
         {
-            public void Start(EntityData data)
+            public ActivatingProcess(EntityData data) : base(data)
             {
             }
 
-            public IEnumerator Update(EntityData data)
+            public override void Start()
+            {
+            }
+
+            public override IEnumerator Update()
             {
                 float startedAt = Time.time;
 
-                while (Time.time - startedAt < data.ActivatingTime)
+                while (Time.time - startedAt < Data.ActivatingTime)
                 {
                     yield return null;
                 }
             }
 
-            public void End(EntityData data)
+            public override void End()
             {
             }
 
-            public void FastForward(EntityData data)
+            public override void FastForward()
             {
             }
         }
 
-        private class DeactivatingProcess : IStageProcess<EntityData>
+        private class DeactivatingProcess : Process<EntityData>
         {
-            public void Start(EntityData data)
+            public DeactivatingProcess(EntityData data) : base(data)
             {
             }
 
-            public IEnumerator Update(EntityData data)
+            public override void Start()
+            {
+            }
+
+            public override IEnumerator Update()
             {
                 float startedAt = Time.time;
 
-                while (Time.time - startedAt < data.DeactivatingTime)
+                while (Time.time - startedAt < Data.DeactivatingTime)
                 {
                     yield return null;
                 }
             }
 
-            public void End(EntityData data)
+            public override void End()
             {
             }
 
-            public void FastForward(EntityData data)
+            public override void FastForward()
             {
             }
         }
 
-        private readonly IProcess<EntityData> process = new Process<EntityData>(new ActivatingProcess(), new EmptyStageProcess<EntityData>(), new DeactivatingProcess());
-
-        protected override IProcess<EntityData> Process
+        public override IProcess GetActivatingProcess()
         {
-            get
-            {
-                return process;
-            }
+            return new ActivatingProcess(Data);
+        }
+
+        public override IProcess GetDeactivatingProcess()
+        {
+            return new DeactivatingProcess(Data);
         }
     }
 }

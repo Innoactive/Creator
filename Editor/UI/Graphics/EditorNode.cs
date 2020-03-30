@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Innoactive.Creator.Core;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {

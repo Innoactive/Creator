@@ -4,7 +4,7 @@
 
 Unity is a popular cross-platform game engine and the preferred platform for creating immersive experiences. The Innoactive Creator is build on top of Unity, which allows fast content creation for template developers. It also abstracts all Unity logic, so training designers can concentrate on creating training courses.
 
-## How to set up Unity
+## How to Set up Unity
 
 ### Unity Hub
 
@@ -14,7 +14,7 @@ The Unity Hub is a standalone application that streamlines the process of findin
 
 >Learn more about the [Unity Hub](https://docs.unity3d.com/Manual/GettingStartedUnityHub.html).
 
-### Download Unity using the Unity Hub
+### Download Unity Using the Unity Hub
 
 ![Unity Hub Installs](../images/unity-setup/unity-hub-installs-panel.png "Unity Hub - Installs")
 
@@ -30,7 +30,7 @@ In order to install Unity go to `Installs`, then `Add`, and select `Unity 2018.4
 
 > If you already have a version of Unity installed that is not shown in the `Installs` section, you can link it to Unity Hub by going to `Installs`, then `Locate` and selecting the `Unity.exe` of your Unity version.
 
-### Create a project using the Unity Hub
+### Create a Project Using the Unity Hub
 
 ![Unity Hub Projects](../images/unity-setup/unity-hub-projects-panel.png "Unity Hub - Projects")
 
@@ -52,7 +52,7 @@ Every Unity project opened using Unity Hub will be added to a list that populate
 
 ---
 
-## API compatibility level
+## API Compatibility Level
 
 The `Innoactive Creator` requires `.Net API compatibility level` to be set to `.NET 4.X`. Unity by default uses a different configuration. Importing the `Innoactive Creator` without properly setting `.NET 4.X` in Unity will return the following error:
 
@@ -60,7 +60,7 @@ The `Innoactive Creator` requires `.Net API compatibility level` to be set to `.
 
 >We recommend to set `.NET 4.X` as `Api Compatibility Level` before importing the `Innoactive Creator` to avoid any error.
 
-### How to set .Net API compatibility level to .NET 4.X in Unity
+### How to Set .Net API Compatibility Level to .NET 4.X in Unity
 
 The `Player Settings` panel allows you to set various options for the final application built by Unity.
 
@@ -74,7 +74,7 @@ The `Player Settings` panel contains up to 6 different sections (variations depe
 
 ## Appendix
 
-### Workaround for long project paths
+### Workaround for Long Project Paths
 
 If it is not possible to have a total project path with not more than 28 symbols, assign a drive letter to its root folder. Do the following:
 

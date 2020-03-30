@@ -6,9 +6,9 @@ using System.Linq;
 using Innoactive.Creator.Core.Behaviors;
 using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Utils;
-using Innoactive.CreatorEditor.UI;
 using Innoactive.Creator.Core.Serialization;
 using Innoactive.Creator.Core.Serialization.NewtonsoftJson;
+using Innoactive.CreatorEditor.UI.StepInspector.Menu;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.Configuration
@@ -58,15 +58,15 @@ namespace Innoactive.CreatorEditor.Configuration
         }
 
         /// <inheritdoc />
-        public virtual ReadOnlyCollection<StepInspectorMenu.Option<IBehavior>> BehaviorsMenuContent
+        public virtual ReadOnlyCollection<MenuOption<IBehavior>> BehaviorsMenuContent
         {
-            get { return AllowedMenuItemsSettings.GetBehaviorMenuOptions().Cast<StepInspectorMenu.Option<IBehavior>>().ToList().AsReadOnly(); }
+            get { return AllowedMenuItemsSettings.GetBehaviorMenuOptions().Cast<MenuOption<IBehavior>>().ToList().AsReadOnly(); }
         }
 
         /// <inheritdoc />
-        public virtual ReadOnlyCollection<StepInspectorMenu.Option<ICondition>> ConditionsMenuContent
+        public virtual ReadOnlyCollection<MenuOption<ICondition>> ConditionsMenuContent
         {
-            get { return AllowedMenuItemsSettings.GetConditionMenuOptions().Cast<StepInspectorMenu.Option<ICondition>>().ToList().AsReadOnly(); }
+            get { return AllowedMenuItemsSettings.GetConditionMenuOptions().Cast<MenuOption<ICondition>>().ToList().AsReadOnly(); }
         }
 
         /// <inheritdoc />
