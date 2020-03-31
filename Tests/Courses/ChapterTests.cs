@@ -92,7 +92,7 @@ namespace Innoactive.Creator.Tests.Courses
         {
             // Setup Chapter
             Chapter chapter = TestLinearChapterBuilder.SetupChapterBuilder(3, true).Build();
-            chapter.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            chapter.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // Activate should work on simple steps.
             chapter.LifeCycle.Activate();
@@ -115,7 +115,7 @@ namespace Innoactive.Creator.Tests.Courses
             TestLinearChapterBuilder builder = TestLinearChapterBuilder.SetupChapterBuilder(2, true);
             Chapter chapter = builder.Build();
 
-            chapter.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            chapter.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // Activate should work on simple steps.
             chapter.LifeCycle.Activate();
@@ -191,7 +191,7 @@ namespace Innoactive.Creator.Tests.Courses
             step1.Data.Transitions.Data.Transitions.Add(transition1);
             step2.Data.Transitions.Data.Transitions.Add(transition2);
 
-            chapter.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            chapter.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // When we activate the chapter and complete every condition,
             chapter.LifeCycle.Activate();
@@ -280,7 +280,7 @@ namespace Innoactive.Creator.Tests.Courses
             step2.Data.Transitions.Data.Transitions.Add(transition3);
             step3.Data.Transitions.Data.Transitions.Add(transitionToEnd);
 
-            chapter.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            chapter.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // When we activate the chapter and complete the third condition after looping the first two steps once,
             chapter.LifeCycle.Activate();
@@ -360,7 +360,7 @@ namespace Innoactive.Creator.Tests.Courses
                     .AddCondition(new EndlessConditionMock()))
                 .Build();
 
-            chapter.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            chapter.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // When it's marked to be fast-forwarded,
             chapter.LifeCycle.MarkToFastForward();
@@ -381,7 +381,7 @@ namespace Innoactive.Creator.Tests.Courses
                     .AddCondition(new EndlessConditionMock()))
                 .Build();
 
-            chapter.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            chapter.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             chapter.LifeCycle.Activate();
 
@@ -414,7 +414,7 @@ namespace Innoactive.Creator.Tests.Courses
             branchingStep.Data.Transitions.Data.Transitions.Add(secondTransition);
             branchingStep.Data.Transitions.Data.Transitions.Add(thirdTransition);
 
-            chapter.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            chapter.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
             chapter.LifeCycle.Activate();
 
             yield return null;
@@ -443,7 +443,7 @@ namespace Innoactive.Creator.Tests.Courses
             loopingStep.Data.Transitions.Data.Transitions.Add(loopingTransition);
             loopingStep.Data.Transitions.Data.Transitions.Add(endTransition);
 
-            chapter.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            chapter.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
             chapter.LifeCycle.Activate();
 
             int loops = 0;
@@ -494,7 +494,7 @@ namespace Innoactive.Creator.Tests.Courses
             secondStep.Data.Transitions.Data.Transitions.Add(secondToFirst);
             secondStep.Data.Transitions.Data.Transitions.Add(secondToEnd);
 
-            chapter.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            chapter.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
             chapter.LifeCycle.Activate();
 
             int loops = 0;

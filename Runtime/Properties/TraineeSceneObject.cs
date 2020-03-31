@@ -7,6 +7,10 @@ namespace Innoactive.Creator.Core.Properties
     /// </summary>
     public class TraineeSceneObject : TrainingSceneObject
     {
-
+        protected new void Awake()
+        {
+            base.Awake();
+            ChangeUniqueName("Trainee");
+        }
     }
 }

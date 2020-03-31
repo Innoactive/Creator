@@ -92,19 +92,5 @@ namespace Innoactive.Creator.Unity
 
             return false;
         }
-
-        /// <summary>
-        /// Setup training configuration in the scene, if it is not already present.
-        /// </summary>
-        public static void SetupTrainingConfiguration()
-        {
-            if (RuntimeConfigurator.Exists)
-            {
-                Debug.Log("A training runtime configurator is already set up in the scene.");
-                return;
-            }
-
-            new GameObject(TrainingConfigurationName).AddComponent<RuntimeConfigurator>();
-        }
     }
 }

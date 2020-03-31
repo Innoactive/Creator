@@ -35,8 +35,6 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         /// <inheritdoc />
         protected override TrainingWindow Given()
         {
-            SceneUtils.SetupTrainingConfiguration();
-
             TrainingWindow window = ScriptableObject.CreateInstance<TrainingWindow>();
             window.ShowUtility();
             window.position = new Rect(Vector2.zero, window.position.size);

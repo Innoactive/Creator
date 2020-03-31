@@ -17,10 +17,8 @@ namespace Innoactive.Creator.Tests.Utils
         private static AudioSource audioSource;
 
         [SetUp]
-        public override void SetUp()
+        public void SetUp()
         {
-            base.SetUp();
-
             // Setup the player and its audio source in here.
             // AudioSource.playOnAwake is by default true. Thus audioSource.isPlaying is true during the first frame.
             // The first frame is skipped after setup and audioSource.isPlaying is false as desired.

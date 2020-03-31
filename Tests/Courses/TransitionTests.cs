@@ -41,7 +41,7 @@ namespace Innoactive.Creator.Tests.Courses
             // Given an activating transition with a condition,
             Transition transition = new Transition();
             transition.Data.Conditions.Add(new OptionalEndlessConditionMock());
-            transition.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            transition.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             transition.LifeCycle.Activate();
 
@@ -70,7 +70,7 @@ namespace Innoactive.Creator.Tests.Courses
             Transition transition = new Transition();
             transition.Data.Conditions.Add(new OptionalEndlessConditionMock());
             transition.Data.Conditions.Add(new EndlessConditionMock());
-            transition.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            transition.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             transition.LifeCycle.Activate();
 
@@ -101,7 +101,7 @@ namespace Innoactive.Creator.Tests.Courses
             Transition transition = new Transition();
             transition.Data.Conditions.Add(new OptionalEndlessConditionMock());
             transition.Data.Conditions.Add(notOptional);
-            transition.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            transition.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             transition.LifeCycle.Activate();
 
@@ -134,7 +134,7 @@ namespace Innoactive.Creator.Tests.Courses
             Transition transition = new Transition();
             transition.Data.Conditions.Add(condition1);
             transition.Data.Conditions.Add(condition2);
-            transition.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            transition.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // After it is activated and the conditions are completed,
             transition.LifeCycle.Activate();
