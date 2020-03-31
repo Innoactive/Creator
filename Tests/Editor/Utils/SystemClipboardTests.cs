@@ -1,15 +1,11 @@
 ﻿using System.Linq;
 using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Utils.Builders;
 using Innoactive.Creator.Tests.Utils.Mocks;
-using Innoactive.CreatorEditor.Configuration;
 using Innoactive.CreatorEditor.Utils;
 using NUnit.Framework;
 using UnityEditor;
-using UnityEngine;
 
 namespace Innoactive.CreatorEditor.Tests
 {
@@ -23,7 +19,7 @@ namespace Innoactive.CreatorEditor.Tests
                 return;
             }
 
-            TrainingSceneSetup.Instance.Run();
+            TrainingSceneSetup.Run();
         }
 
         [Test]

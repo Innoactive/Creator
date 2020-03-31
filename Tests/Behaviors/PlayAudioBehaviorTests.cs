@@ -3,7 +3,6 @@ using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Audio;
 using Innoactive.Creator.Core.Behaviors;
 using Innoactive.Creator.Core.Configuration;
-using Innoactive.CreatorEditor.Configuration;
 using Innoactive.Creator.Core.Internationalization;
 using Innoactive.Creator.Tests.Utils;
 using NUnit.Framework;
