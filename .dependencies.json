@@ -18,7 +18,7 @@
         {
             "name": "Components\\Basic-Behaviors-And-Conditions",
             "repository": "git@github.com:Innoactive/Basic-Conditions-And-Behaviors.git",
-            "branch": "develop"
+            "branch": "feature/configuration-update"
         }
     ]
 }
