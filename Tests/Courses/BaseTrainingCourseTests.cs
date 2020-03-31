@@ -122,7 +122,7 @@ namespace Innoactive.Creator.Tests.Courses
                         .AddCondition(new EndlessConditionMock())))
                 .Build();
 
-            course.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            course.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // When you mark it to fast-forward,
             course.LifeCycle.MarkToFastForward();

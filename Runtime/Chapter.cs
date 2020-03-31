@@ -8,6 +8,7 @@ using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
 using Innoactive.Creator.Core.Exceptions;
 using Innoactive.Creator.Core.Utils;
+using Innoactive.Creator.Core.Utils.Logging;
 
 namespace Innoactive.Creator.Core
 {
@@ -197,11 +198,11 @@ namespace Innoactive.Creator.Core
                 Data.Steps.Add(firstStep);
             }
 
-            if (RuntimeConfigurator.Configuration.EntityStateLoggerConfig.LogChapters)
+            if (LifeCycleLoggingConfig.Instance.LogChapters)
             {
                 LifeCycle.StageChanged += (sender, args) =>
                 {
-                    RuntimeConfigurator.Configuration.EntityStateLogger.LogFormat(LogType.Log, "<b>Chapter</b> <i>'{0}'</i> is <b>{1}</b>.\n", Data.Name, LifeCycle.Stage.ToString());
+                    Debug.LogFormat("<b>Chapter</b> <i>'{0}'</i> is <b>{1}</b>.\n", Data.Name, LifeCycle.Stage.ToString());
                 };
             }
         }

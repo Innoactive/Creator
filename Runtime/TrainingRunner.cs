@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.Configuration.Modes;
 using UnityEngine;
 
 namespace Innoactive.Creator.Core
@@ -11,11 +12,11 @@ namespace Innoactive.Creator.Core
         {
             public ICourse course = null;
 
-            private void HandleModeChanged(object sender, ModeChangedEventArgs e)
+            private void HandleModeChanged(object sender, ModeChangedEventArgs args)
             {
                 if (course != null)
                 {
-                    course.Configure(e.Mode);
+                    course.Configure(args.Mode);
                 }
             }
 
@@ -53,7 +54,7 @@ namespace Innoactive.Creator.Core
                 RuntimeConfigurator.ModeChanged += HandleModeChanged;
 
                 course.LifeCycle.StageChanged += HandleCourseStageChanged;
-                course.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+                course.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
                 course.LifeCycle.Activate();
             }

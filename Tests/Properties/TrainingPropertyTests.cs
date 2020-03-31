@@ -35,7 +35,6 @@ namespace Innoactive.Creator.Tests.Properties
         public override void SetUp()
         {
             base.SetUp();
-
             GameObject gameObject = new GameObject("Scene Object");
             SceneObject = gameObject.AddComponent<TrainingSceneObject>();
         }

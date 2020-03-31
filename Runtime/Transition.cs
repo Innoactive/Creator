@@ -6,6 +6,7 @@ using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
+using Innoactive.Creator.Core.Utils.Logging;
 using Innoactive.Creator.Unity;
 using UnityEngine;
 
@@ -131,11 +132,11 @@ namespace Innoactive.Creator.Core
             Data.Conditions = new List<ICondition>();
             Data.TargetStep = null;
 
-            if (RuntimeConfigurator.Configuration.EntityStateLoggerConfig.LogTransitions)
+            if (LifeCycleLoggingConfig.Instance.LogTransitions)
             {
                 LifeCycle.StageChanged += (sender, args) =>
                 {
-                    RuntimeConfigurator.Configuration.EntityStateLogger.LogFormat(LogType.Log, "{0}<b>Transition to</b> <i>{1}</i> is <b>{2}</b>.\n", ConsoleUtils.GetTabs(3), Data.TargetStep != null ? Data.TargetStep.Data.Name + " (Step)" : "chapter's end", LifeCycle.Stage);
+                    Debug.LogFormat("{0}<b>Transition to</b> <i>{1}</i> is <b>{2}</b>.\n", ConsoleUtils.GetTabs(3), Data.TargetStep != null ? Data.TargetStep.Data.Name + " (Step)" : "chapter's end", LifeCycle.Stage);
                 };
             }
         }

@@ -17,15 +17,15 @@ namespace Innoactive.CreatorEditor.Configuration
         string DefaultCourseStreamingAssetsFolder { get; }
 
         /// <summary>
-        /// Serializer used to serialize training courses and steps.
-        /// </summary>
-        ICourseSerializer Serializer { get; }
-
-        /// <summary>
         /// Assets path where to save the serialized <see cref="AllowedMenuItemsSettings"/> file.
         /// It has to start with "Assets/".
         /// </summary>
         string AllowedMenuItemsSettingsAssetPath { get; }
+
+        /// <summary>
+        /// Serializer used to serialize training courses and steps.
+        /// </summary>
+        ICourseSerializer Serializer { get; }
 
         /// <summary>
         /// The current instance of the <see cref="AllowedMenuItemsSettings"/> object.
@@ -42,10 +42,5 @@ namespace Innoactive.CreatorEditor.Configuration
         /// List of available options in "Add new condition" dropdown.
         /// </summary>
         ReadOnlyCollection<MenuOption<ICondition>> ConditionsMenuContent { get; }
-
-        /// <summary>
-        /// Setup the current unity scene to be a functioning training scene.
-        /// </summary>
-        void SetupTrainingScene();
     }
 }

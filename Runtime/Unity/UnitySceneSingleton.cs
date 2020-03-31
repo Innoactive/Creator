@@ -5,7 +5,6 @@ namespace Innoactive.Creator.Unity
     /// <summary>
     /// An UnitySceneSingleton is intended to be destroyed on scene change.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     public abstract class UnitySceneSingleton<T> : MonoBehaviour where T : UnitySceneSingleton<T>
     {
         /// <summary>
@@ -30,21 +29,33 @@ namespace Innoactive.Creator.Unity
                     if (instance == null)
                     {
                         instance = FindObjectOfType<T>();
-                        if (instance == null)
-                        {
-                            GameObject g = new GameObject();
-                            g.name = string.Format("[{0}_SceneSingleton]", typeof(T).Name);
-                            instance = g.AddComponent<T>();
-                        }
+                    }
+
+                    if (instance == null)
+                    {
+                        GameObject g = new GameObject();
+                        instance = g.AddComponent<T>();
+                        g.name = instance.GetName();
                     }
                 }
 
                 return instance;
             }
+
             protected set
             {
                 instance = value;
             }
+        }
+
+        public static bool Exists
+        {
+            get { return instance != null; }
+        }
+
+        protected virtual string GetName()
+        {
+            return string.Format("[{0}_SceneSingleton]", typeof(T).Name);
         }
 
         protected virtual void Awake()
