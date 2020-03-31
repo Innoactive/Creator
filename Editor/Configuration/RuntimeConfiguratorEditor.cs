@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Innoactive.Creator.Core.Configuration;
@@ -16,33 +17,21 @@ namespace Innoactive.CreatorEditor.Configuration
     [CustomEditor(typeof(RuntimeConfigurator))]
     public class RuntimeConfiguratorEditor : Editor
     {
-        private SerializedProperty configurationName;
-        private SerializedProperty selectedCourseStreamingAssetsPath;
-        private static readonly string[] configurationTypeNames;
-        private static readonly string[] shortConfigurationTypeNames;
-        private static string[] trainingCourseStreamingAssetsPaths;
-        private static string[] trainingCourseDisplayNames;
-        private int selectedConfigurationIndex;
-        private int selectedCourseIndex;
-        private string selectedCourse;
-        private string selectedConfiguration;
+        private RuntimeConfigurator configurator;
+
+        private static List<Type> configurationTypes;
+        private static string[] configurationTypeNames;
+
+        private static List<string> trainingCourseDisplayNames = new List<string> {"<none>"};
+
         private string defaultCoursePath;
         private static bool isDirty = true;
 
         static RuntimeConfiguratorEditor()
         {
-            configurationTypeNames = ReflectionUtils.GetConcreteImplementationsOf<IRuntimeConfiguration>()
-                .Select(type => type.AssemblyQualifiedName)
-                .ToArray();
-
-            shortConfigurationTypeNames = configurationTypeNames.Select(assemblyQualifiedName =>
-            {
-                string fullName = assemblyQualifiedName.Substring(0, assemblyQualifiedName.IndexOf(','));
-                int lastIndexPeriod = fullName.LastIndexOf('.') + 1;
-                Mathf.Clamp(lastIndexPeriod, 0, fullName.Length - 1);
-                string shortName = fullName.Substring(lastIndexPeriod).Replace('+', '.');
-                return string.Format("{0} ({1})", shortName, fullName);
-            }).ToArray();
+            configurationTypes = ReflectionUtils.GetConcreteImplementationsOf<IRuntimeConfiguration>().ToList();
+            configurationTypes.Sort(((type1, type2) => String.Compare(type1.Name, type2.Name, StringComparison.Ordinal)));
+            configurationTypeNames = configurationTypes.Select(t => t.Name).ToArray();
 
             CourseAssetPostprocessor.CourseFileStructureChanged += OnCourseFileStructureChanged;
         }
@@ -52,13 +41,12 @@ namespace Innoactive.CreatorEditor.Configuration
         /// </summary>
         public static bool IsCourseListEmpty()
         {
-            return trainingCourseStreamingAssetsPaths == null || trainingCourseStreamingAssetsPaths.Length <= 0;
+            return trainingCourseDisplayNames.Count == 1 && trainingCourseDisplayNames[0] == "<none>";
         }
 
         protected void OnEnable()
         {
-            configurationName = serializedObject.FindProperty("runtimeConfigurationName");
-            selectedCourseStreamingAssetsPath = serializedObject.FindProperty("selectedCourseStreamingAssetsPath");
+            configurator = target as RuntimeConfigurator;
             defaultCoursePath = EditorConfigurator.Instance.DefaultCourseStreamingAssetsFolder;
 
             // Create training course path if not present.
@@ -67,41 +55,28 @@ namespace Innoactive.CreatorEditor.Configuration
             {
                 Directory.CreateDirectory(absolutePath);
             }
-
-            UpdateAvailableCourses();
         }
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+            // Courses can change without recompile so we have to check for them.
+            UpdateAvailableCourses();
 
-            UpdateSelectedConfigurationName();
-            UpdateSelectedCoursePath();
-
-            selectedConfigurationIndex = EditorGUILayout.Popup("Configuration", selectedConfigurationIndex, shortConfigurationTypeNames);
-            configurationName.stringValue = configurationTypeNames[selectedConfigurationIndex];
-
-            selectedCourseIndex = EditorGUILayout.Popup("Selected Training Course", selectedCourseIndex, trainingCourseDisplayNames);
-
-            if (trainingCourseStreamingAssetsPaths.Length > 0)
-            {
-                selectedCourseStreamingAssetsPath.stringValue = trainingCourseStreamingAssetsPaths[selectedCourseIndex];
-            }
+            DrawRuntimeConfigurationDropDown();
 
             EditorGUI.BeginDisabledGroup(IsCourseListEmpty());
             {
+                DrawCourseSelectionDropDown();
                 GUILayout.BeginHorizontal();
                 {
                     if (GUILayout.Button("Open course in Workflow Editor"))
                     {
                         TrainingWindow trainingWindow = TrainingWindow.GetWindow();
-
                         trainingWindow.LoadTrainingCourseFromFile(GetSelectedCourseAbsolutePath());
-
                         trainingWindow.Focus();
                     }
 
-                    if (GUILayout.Button(new GUIContent("Show course folder in Explorer...", Path.GetDirectoryName(GetSelectedCourseAbsolutePath()))))
+                    if (GUILayout.Button(new GUIContent("Show course folder in Explorer...")))
                     {
                         EditorUtility.RevealInFinder(Path.GetDirectoryName(GetSelectedCourseAbsolutePath()));
                     }
@@ -113,6 +88,27 @@ namespace Innoactive.CreatorEditor.Configuration
             serializedObject.ApplyModifiedProperties();
         }
 
+        private void DrawRuntimeConfigurationDropDown()
+        {
+            int index = configurationTypes.FindIndex(t =>
+                t.AssemblyQualifiedName == configurator.RuntimeConfigurationName);
+            index = EditorGUILayout.Popup("Configuration", index, configurationTypeNames);
+            configurator.RuntimeConfigurationName = configurationTypes[index].AssemblyQualifiedName;
+        }
+
+        private void DrawCourseSelectionDropDown()
+        {
+            int index = trainingCourseDisplayNames.FindIndex(configurator.SelectedCourse.Equals);
+            index = EditorGUILayout.Popup("Selected Training Course", index, trainingCourseDisplayNames.ToArray());
+
+            if (index < 0)
+            {
+                index = 0;
+            }
+
+            configurator.SelectedCourse = trainingCourseDisplayNames[index];
+        }
+
         private static void OnCourseFileStructureChanged(object sender, CourseAssetPostprocessorEventArgs args)
         {
             isDirty = true;
@@ -120,61 +116,38 @@ namespace Innoactive.CreatorEditor.Configuration
 
         private string GetSelectedCourseAbsolutePath()
         {
-            return EditorCourseUtils.GetTrainingPath(selectedCourseStreamingAssetsPath.stringValue);
-        }
-
-        private void UpdateSelectedConfigurationName()
-        {
-            if (configurationName.stringValue != selectedConfiguration)
-            {
-                selectedConfigurationIndex = Array.IndexOf(configurationTypeNames, configurationName.stringValue);
-
-                if (selectedConfigurationIndex < 0)
-                {
-                    selectedConfigurationIndex = Array.IndexOf(configurationTypeNames, typeof(DefaultRuntimeConfiguration).AssemblyQualifiedName);
-                }
-
-                selectedConfiguration = configurationName.stringValue;
-            }
-        }
-
-        private void UpdateSelectedCoursePath()
-        {
-            string currentCoursePath = selectedCourseStreamingAssetsPath.stringValue;
-
-            if (isDirty == false && (string.IsNullOrEmpty(currentCoursePath) || currentCoursePath == selectedCourse))
-            {
-                return;
-            }
-
-            isDirty = false;
-            UpdateAvailableCourses();
-            selectedCourseIndex = Array.IndexOf(trainingCourseStreamingAssetsPaths, currentCoursePath);
-
-            if (selectedCourseIndex < 0)
-            {
-                selectedCourseIndex = 0;
-            }
-
-            selectedCourse = selectedCourseStreamingAssetsPath.stringValue = currentCoursePath;
+            return EditorCourseUtils.GetTrainingPath(configurator.SelectedCourse);
         }
 
         private void UpdateAvailableCourses()
         {
-            trainingCourseStreamingAssetsPaths = Directory.GetFiles(Path.Combine(Application.streamingAssetsPath, defaultCoursePath).Replace('/', Path.DirectorySeparatorChar), "*.json", SearchOption.AllDirectories)
+            if (isDirty == false)
+            {
+                return;
+            }
+            isDirty = false;
+
+
+            List<string> courses = Directory.GetFiles(Path.Combine(Application.streamingAssetsPath, defaultCoursePath).Replace('/', Path.DirectorySeparatorChar), "*.json", SearchOption.AllDirectories)
                 .Where(FileUtils.IsCourseFile)
                 .Select(path => path.Substring(Application.streamingAssetsPath.Length + 1))
-                .ToArray();
+                .ToList();
 
             // Create dummy entry if no files are present.
-            if (trainingCourseStreamingAssetsPaths.Length == 0)
+            if (courses.Count == 0)
             {
-                trainingCourseDisplayNames = new string[] { "<none>" };
+                trainingCourseDisplayNames.Clear();
+                trainingCourseDisplayNames.Add("<none>");
                 return;
             }
 
-            trainingCourseStreamingAssetsPaths = trainingCourseStreamingAssetsPaths.OrderByAlphaNumericNaturalSort(s => s).ToArray();
-            trainingCourseDisplayNames = trainingCourseStreamingAssetsPaths.Select(Path.GetFileNameWithoutExtension).ToArray();
+            trainingCourseDisplayNames = courses.Select(Path.GetFileNameWithoutExtension).ToList();
+            trainingCourseDisplayNames.Sort();
+
+            if (string.IsNullOrEmpty(configurator.SelectedCourse))
+            {
+                configurator.SelectedCourse = trainingCourseDisplayNames[0];
+            }
         }
     }
 }

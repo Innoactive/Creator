@@ -58,7 +58,7 @@ namespace Innoactive.Creator.Core.SceneObjects
             get { return RuntimeConfigurator.Configuration.SceneObjectRegistry.ContainsGuid(Guid); }
         }
 
-        private void Awake()
+        protected void Awake()
         {
             if (IsRegistered)
             {
@@ -70,10 +70,7 @@ namespace Innoactive.Creator.Core.SceneObjects
 
         private void OnDestroy()
         {
-            if (RuntimeConfigurator.Exists)
-            {
-                RuntimeConfigurator.Configuration.SceneObjectRegistry.Unregister(this);
-            }
+            RuntimeConfigurator.Configuration.SceneObjectRegistry.Unregister(this);
         }
 
         public bool CheckHasProperty<T>() where T : ISceneObjectProperty

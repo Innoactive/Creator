@@ -5,7 +5,7 @@
     /// Can be used to e.g. setup training classes or interaction frameworks.
     /// </summary>
     /// <remarks>
-    /// See <see cref="TrainingSceneSetup"/> as a reference.
+    /// See <see cref="TrainingConfigurationSetup"/> as a reference.
     /// </remarks>
     public abstract class SceneSetup
     {

@@ -1,4 +1,4 @@
-using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.Configuration.Modes;
 using NUnit.Framework;
 
 namespace Innoactive.Creator.Tests.Utils

@@ -15,7 +15,7 @@ namespace Innoactive.Creator.Tests.Behaviors
         {
             // Given a non-blocking behavior,
             EndlessBehaviorMock behaviorMock = new EndlessBehaviorMock(false);
-            behaviorMock.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            behaviorMock.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // When we activate it,
             behaviorMock.LifeCycle.Activate();
@@ -31,7 +31,7 @@ namespace Innoactive.Creator.Tests.Behaviors
         {
             // Given a non-blocking behavior,
             EndlessBehaviorMock behaviorMock = new EndlessBehaviorMock(false);
-            behaviorMock.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            behaviorMock.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // When we activate and finish activation,
             behaviorMock.LifeCycle.Activate();
@@ -53,7 +53,7 @@ namespace Innoactive.Creator.Tests.Behaviors
         {
             // Given a blocking behavior,
             EndlessBehaviorMock behaviorMock = new EndlessBehaviorMock(true);
-            behaviorMock.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            behaviorMock.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // When we activate it,
             behaviorMock.LifeCycle.Activate();
@@ -69,7 +69,7 @@ namespace Innoactive.Creator.Tests.Behaviors
         {
             // Given a non-blocking behavior,
             EndlessBehaviorMock behaviorMock = new EndlessBehaviorMock(false);
-            behaviorMock.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            behaviorMock.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // When we mark it to fast-forward,
             behaviorMock.LifeCycle.MarkToFastForward();
@@ -85,7 +85,7 @@ namespace Innoactive.Creator.Tests.Behaviors
         {
             // Given a non-blocking behavior,
             EndlessBehaviorMock behaviorMock = new EndlessBehaviorMock(false);
-            behaviorMock.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            behaviorMock.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // When we mark it to fast-forward and activate it,
             behaviorMock.LifeCycle.MarkToFastForward();
@@ -102,7 +102,7 @@ namespace Innoactive.Creator.Tests.Behaviors
         {
             // Given a blocking behavior,
             EndlessBehaviorMock behaviorMock = new EndlessBehaviorMock(true);
-            behaviorMock.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            behaviorMock.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // When we mark it to fast-forward and activate it,
             behaviorMock.LifeCycle.MarkToFastForward();
@@ -119,7 +119,7 @@ namespace Innoactive.Creator.Tests.Behaviors
         {
             // Given an activating non-blocking behavior,
             EndlessBehaviorMock behaviorMock = new EndlessBehaviorMock(false);
-            behaviorMock.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            behaviorMock.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             behaviorMock.LifeCycle.Activate();
 
@@ -137,7 +137,7 @@ namespace Innoactive.Creator.Tests.Behaviors
         {
             // Given an activating blocking behavior,
             EndlessBehaviorMock behaviorMock = new EndlessBehaviorMock(true);
-            behaviorMock.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            behaviorMock.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             behaviorMock.LifeCycle.Activate();
 
@@ -162,7 +162,7 @@ namespace Innoactive.Creator.Tests.Behaviors
             step.Data.Behaviors.Data.Behaviors.Add(nonBlockingBehaviorMock);
             IChapter chapter = new Chapter("NonBlockingChapter", step);
 
-            chapter.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            chapter.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // When we activate the chapter,
             chapter.LifeCycle.Activate();
@@ -189,7 +189,7 @@ namespace Innoactive.Creator.Tests.Behaviors
             step.Data.Behaviors.Data.Behaviors.Add(blockingBehaviorMock);
             IChapter chapter = new Chapter("BlockingChapter", step);
 
-            chapter.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            chapter.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // When we activate the chapter,
             chapter.LifeCycle.Activate();
@@ -237,7 +237,7 @@ namespace Innoactive.Creator.Tests.Behaviors
             step.Data.Behaviors.Data.Behaviors.Add(nonBlockingBehaviorMock);
             IChapter chapter = new Chapter("NonBlockingChapter", step);
 
-            chapter.Configure(RuntimeConfigurator.Configuration.GetCurrentMode());
+            chapter.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
             // When we activate the chapter,
             chapter.LifeCycle.Activate();

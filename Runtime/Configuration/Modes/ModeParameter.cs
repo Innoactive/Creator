@@ -1,7 +1,7 @@
 using System;
 using Innoactive.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Creator.Core.Configuration
+namespace Innoactive.Creator.Core.Configuration.Modes
 {
     /// <summary>
     /// ModeParameter is responsible for fetching its parameter value from a <see cref="IMode"/>.

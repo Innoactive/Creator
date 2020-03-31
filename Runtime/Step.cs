@@ -4,10 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Attributes;
-using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
 using Innoactive.Creator.Core.EntityOwners.FoldedEntityCollection;
+using Innoactive.Creator.Core.Utils.Logging;
 using Innoactive.Creator.Unity;
 
 namespace Innoactive.Creator.Core
@@ -132,11 +132,11 @@ namespace Innoactive.Creator.Core
             Data.Behaviors = new BehaviorCollection();
             Data.Name = name;
 
-            if (RuntimeConfigurator.Configuration.EntityStateLoggerConfig.LogSteps)
+            if (LifeCycleLoggingConfig.Instance.LogSteps)
             {
                 LifeCycle.StageChanged += (sender, args) =>
                 {
-                    RuntimeConfigurator.Configuration.EntityStateLogger.LogFormat(LogType.Log, "{0}<b>Step</b> <i>'{1}'</i> is <b>{2}</b>.\n", ConsoleUtils.GetTabs(), Data.Name, LifeCycle.Stage);
+                    Debug.LogFormat("{0}<b>Step</b> <i>'{1}'</i> is <b>{2}</b>.\n", ConsoleUtils.GetTabs(), Data.Name, LifeCycle.Stage);
                 };
             }
         }
