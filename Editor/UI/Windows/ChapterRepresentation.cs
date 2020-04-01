@@ -266,27 +266,17 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             joint.GraphicalEventHandler.PointerUp += (sender, args) =>
             {
-                EntryJoint endJoint = Graphics.GetGraphicalElementWithHandlerAtPoint(args.PointerPosition).FirstOrDefault() as EntryJoint;
-
-                if (endJoint == null)
-                {
-                    joint.DragDelta = Vector2.zero;
-                    return;
-                }
-
-                StepNode endJointStepNode = endJoint.Parent as StepNode;
-
-                IStep targetStep = null;
+                joint.DragDelta = Vector2.zero;
                 IStep oldStep = chapter.Data.FirstStep;
 
-                if (endJointStepNode != null)
+                if (TryGetStepForTransitionDrag(args.PointerPosition, out IStep target) == false)
                 {
-                    targetStep = endJointStepNode.Step;
+                    return;
                 }
 
                 RevertableChangesHandler.Do(new TrainingCommand(() =>
                     {
-                        chapter.Data.FirstStep = targetStep;
+                        chapter.Data.FirstStep = target;
                         MarkToRefresh();
                     },
                     () =>
@@ -333,28 +323,12 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
                     joint.GraphicalEventHandler.PointerUp += (sender, args) =>
                     {
-                        GraphicalElement elementUnderCursor = Graphics.GetGraphicalElementWithHandlerAtPoint(args.PointerPosition).FirstOrDefault();
-
-                        EntryJoint endJoint = elementUnderCursor as EntryJoint;
-
-                        if (endJoint == null)
-                        {
-                            joint.DragDelta = Vector2.zero;
-
-                            if (elementUnderCursor != null)
-                            {
-                                return;
-                            }
-                        }
-
-                        StepNode endJointStepNode = endJoint == null ? null : endJoint.Parent as StepNode;
-
-                        IStep targetStep = null;
+                        joint.DragDelta = Vector2.zero;
                         IStep oldStep = closuredTransition.Data.TargetStep;
 
-                        if (endJointStepNode != null)
+                        if (TryGetStepForTransitionDrag(args.PointerPosition, out IStep targetStep) == false)
                         {
-                            targetStep = endJointStepNode.Step;
+                            return;
                         }
 
                         RevertableChangesHandler.Do(new TrainingCommand(() =>
@@ -370,8 +344,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
                                 MarkToRefresh();
                             }
                         ));
-
-                        joint.DragDelta = Vector2.zero;
                     };
 
                     joint.GraphicalEventHandler.ContextClick += (sender, args) =>
@@ -395,6 +367,32 @@ namespace Innoactive.CreatorEditor.UI.Windows
                         });
                     };
                 }
+            }
+        }
+
+        private bool TryGetStepForTransitionDrag(Vector2 pointerPosition, out IStep step)
+        {
+            step = null;
+
+            GraphicalElement elementUnderCursor = Graphics.GetGraphicalElementWithHandlerAtPoint(pointerPosition).FirstOrDefault();
+
+            if (elementUnderCursor is EntryJoint endJoint)
+            {
+                if (endJoint.Parent is StepNode stepNode)
+                {
+                    step = stepNode.Step;
+                }
+
+                return true;
+            }
+            else if (elementUnderCursor is StepNode stepNode)
+            {
+                step = stepNode.Step;
+                return true;
+            }
+            else
+            {
+                return elementUnderCursor == null;
             }
         }
 
