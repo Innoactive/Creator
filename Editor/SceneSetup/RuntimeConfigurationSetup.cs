@@ -1,4 +1,6 @@
 ﻿using Innoactive.Creator.Core.Configuration;
+using UnityEditor;
+using UnityEngine;
 
 namespace Innoactive.CreatorEditor
 {
@@ -12,7 +14,9 @@ namespace Innoactive.CreatorEditor
         {
             if (RuntimeConfigurator.Exists == false)
             {
-                RuntimeConfigurator configurator = RuntimeConfigurator.Instance;
+                GameObject obj = new GameObject("[TRAINING_CONFIGURATION]");
+                obj.AddComponent<RuntimeConfigurator>();
+                Selection.activeObject = obj;
             }
         }
     }

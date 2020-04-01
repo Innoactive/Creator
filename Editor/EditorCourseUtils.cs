@@ -39,8 +39,7 @@ namespace Innoactive.CreatorEditor
             if (SaveManager.SaveTrainingCourseToFile(course))
             {
                 trainingWindow.IsDirty = false;
-                string path = GetTrainingPath(course).Substring(Application.streamingAssetsPath.Length + 1);
-                RuntimeConfigurator.SetSelectedTrainingCourse(path);
+                RuntimeConfigurator.Instance.SetSelectedTrainingCourse(GetCoursePath(course));
                 return true;
             }
             Debug.LogError("Could not save the training course");
@@ -59,7 +58,7 @@ namespace Innoactive.CreatorEditor
                 ICourse course = serializer.CourseFromByteArray(file);
 
                 int counter = 0;
-                while (IsTrainingExisting(course.Data.Name))
+                while (IsCourseExisting(course.Data.Name))
                 {
                     if (counter > 0)
                     {
@@ -81,27 +80,53 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Checks if training with given name already exists in the project.
         /// </summary>
-        public static bool IsTrainingExisting(string name)
+        public static bool IsCourseExisting(string course)
         {
-            return Directory.Exists(Path.GetDirectoryName(GetTrainingPath(name)));
+            return Directory.Exists(Path.GetDirectoryName(GetCoursePath(course)));
         }
 
         /// <summary>
-        /// Get the course path by training name.
+        /// Get the course path by course name.
         /// </summary>
-        public static string GetTrainingPath(string name)
+        public static string GetCoursePath(string course)
         {
-            name = Path.GetFileNameWithoutExtension(name);
+            course = Path.GetFileNameWithoutExtension(course);
             string fileFormat = EditorConfigurator.Instance.Serializer.FileFormat;
-            return string.Format("{0}/{1}/{2}/{2}.{3}", Application.streamingAssetsPath, EditorConfigurator.Instance.DefaultCourseStreamingAssetsFolder, name, fileFormat).Replace('/', Path.DirectorySeparatorChar);
+            return string.Format("{0}/{1}/{1}.{2}", EditorConfigurator.Instance.DefaultCourseStreamingAssetsFolder, course, fileFormat).Replace('/', Path.DirectorySeparatorChar);
         }
 
         /// <summary>
         /// Get the course path by course.
         /// </summary>
-        public static string GetTrainingPath(ICourse course)
+        public static string GetCoursePath(ICourse course)
         {
-            return GetTrainingPath(course.Data.Name);
+            return GetCoursePath(course.Data.Name);
+        }
+
+        /// <summary>
+        /// Get the absolute course path by course name.
+        /// </summary>
+        public static string GetAbsoluteCoursePath(string course)
+        {
+            course = Path.GetFileNameWithoutExtension(course);
+            string fileFormat = EditorConfigurator.Instance.Serializer.FileFormat;
+            return string.Format("{0}/{1}/{2}/{2}.{3}", Application.streamingAssetsPath, EditorConfigurator.Instance.DefaultCourseStreamingAssetsFolder, course, fileFormat).Replace('/', Path.DirectorySeparatorChar);
+        }
+
+        /// <summary>
+        /// Get the absolute course path by course.
+        /// </summary>
+        public static string GetAbsoluteCoursePath(ICourse course)
+        {
+            return GetAbsoluteCoursePath(course.Data.Name);
+        }
+
+        /// <summary>
+        /// Returns the currently active course's name.
+        /// </summary>
+        public static string GetActiveCourseName()
+        {
+            return Path.GetFileNameWithoutExtension(RuntimeConfigurator.Instance.GetSelectedTrainingCourse());
         }
     }
 }

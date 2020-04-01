@@ -84,7 +84,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 }
                 else
                 {
-                    string trainingCoursePath = EditorCourseUtils.GetTrainingPath(trainingName);
+                    string trainingCoursePath = EditorCourseUtils.GetCoursePath(trainingName);
                     string trainingCourseFolder = Path.GetDirectoryName(trainingCoursePath);
 
                     if (Directory.Exists(trainingCourseFolder))

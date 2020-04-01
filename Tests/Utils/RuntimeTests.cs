@@ -17,7 +17,7 @@ namespace Innoactive.Creator.Tests.Utils
         [SetUp]
         public virtual void SetUp()
         {
-            RuntimeConfigurator configurator = RuntimeConfigurator.Instance;
+            new RuntimeConfigurationSetup().Setup();
         }
 
         [TearDown]
