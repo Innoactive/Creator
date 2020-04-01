@@ -59,7 +59,7 @@ namespace Innoactive.Creator.Core.Configuration
         }
 
         /// <summary>
-        /// Checks if an training runtime configurator instance exists in scene.
+        /// Checks if a training runtime configurator instance exists in scene.
         /// </summary>
         public static bool Exists
         {

@@ -110,7 +110,7 @@ namespace Innoactive.CreatorEditor
         {
             course = Path.GetFileNameWithoutExtension(course);
             string fileFormat = EditorConfigurator.Instance.Serializer.FileFormat;
-            return string.Format("{0}/{1}/{2}/{2}.{3}", Application.streamingAssetsPath,EditorConfigurator.Instance.DefaultCourseStreamingAssetsFolder, course, fileFormat).Replace('/', Path.DirectorySeparatorChar);
+            return string.Format("{0}/{1}/{2}/{2}.{3}", Application.streamingAssetsPath, EditorConfigurator.Instance.DefaultCourseStreamingAssetsFolder, course, fileFormat).Replace('/', Path.DirectorySeparatorChar);
         }
 
         /// <summary>
