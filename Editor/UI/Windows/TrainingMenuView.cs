@@ -96,6 +96,8 @@ namespace Innoactive.CreatorEditor.UI.Windows
             Course = course;
             ParentWindow = parent;
 
+            activeChapter = 0;
+
             if (deleteIcon == null)
             {
                 LoadIcons();
