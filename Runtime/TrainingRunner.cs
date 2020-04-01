@@ -73,7 +73,6 @@ namespace Innoactive.Creator.Core
         public static void Initialize(ICourse course)
         {
             instance = new GameObject("[TRAINING_RUNNER]").AddComponent<TrainingRunnerInstance>();
-
             instance.course = course;
         }
 
