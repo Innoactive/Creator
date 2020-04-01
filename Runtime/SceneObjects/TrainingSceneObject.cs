@@ -70,7 +70,10 @@ namespace Innoactive.Creator.Core.SceneObjects
 
         private void OnDestroy()
         {
-            RuntimeConfigurator.Configuration.SceneObjectRegistry.Unregister(this);
+            if (RuntimeConfigurator.Exists)
+            {
+                RuntimeConfigurator.Configuration.SceneObjectRegistry.Unregister(this);
+            }
         }
 
         public bool CheckHasProperty<T>() where T : ISceneObjectProperty

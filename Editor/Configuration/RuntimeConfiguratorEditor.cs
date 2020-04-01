@@ -91,14 +91,20 @@ namespace Innoactive.CreatorEditor.Configuration
         private void DrawRuntimeConfigurationDropDown()
         {
             int index = configurationTypes.FindIndex(t =>
-                t.AssemblyQualifiedName == configurator.RuntimeConfigurationName);
+                t.AssemblyQualifiedName == configurator.GetRuntimeConfigurationName());
             index = EditorGUILayout.Popup("Configuration", index, configurationTypeNames);
-            configurator.RuntimeConfigurationName = configurationTypes[index].AssemblyQualifiedName;
+            configurator.SetRuntimeConfigurationName(configurationTypes[index].AssemblyQualifiedName);
         }
 
         private void DrawCourseSelectionDropDown()
         {
-            int index = trainingCourseDisplayNames.FindIndex(configurator.SelectedCourse.Equals);
+            int index = 0;
+            string course = EditorCourseUtils.GetActiveCourseName();
+            if (string.IsNullOrEmpty(course) == false)
+            {
+                index = trainingCourseDisplayNames.FindIndex(course.Equals);
+            }
+
             index = EditorGUILayout.Popup("Selected Training Course", index, trainingCourseDisplayNames.ToArray());
 
             if (index < 0)
@@ -106,7 +112,7 @@ namespace Innoactive.CreatorEditor.Configuration
                 index = 0;
             }
 
-            configurator.SelectedCourse = trainingCourseDisplayNames[index];
+            configurator.SetSelectedTrainingCourse(EditorCourseUtils.GetCoursePath(trainingCourseDisplayNames[index]));
         }
 
         private static void OnCourseFileStructureChanged(object sender, CourseAssetPostprocessorEventArgs args)
@@ -116,7 +122,7 @@ namespace Innoactive.CreatorEditor.Configuration
 
         private string GetSelectedCourseAbsolutePath()
         {
-            return EditorCourseUtils.GetTrainingPath(configurator.SelectedCourse);
+            return EditorCourseUtils.GetAbsoluteCoursePath(configurator.GetSelectedTrainingCourse());
         }
 
         private void UpdateAvailableCourses()
@@ -144,9 +150,9 @@ namespace Innoactive.CreatorEditor.Configuration
             trainingCourseDisplayNames = courses.Select(Path.GetFileNameWithoutExtension).ToList();
             trainingCourseDisplayNames.Sort();
 
-            if (string.IsNullOrEmpty(configurator.SelectedCourse))
+            if (string.IsNullOrEmpty(configurator.GetSelectedTrainingCourse()))
             {
-                configurator.SelectedCourse = trainingCourseDisplayNames[0];
+                configurator.SetSelectedTrainingCourse(EditorCourseUtils.GetCoursePath(trainingCourseDisplayNames[0]));
             }
         }
     }

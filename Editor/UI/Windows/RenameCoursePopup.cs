@@ -71,9 +71,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 if (string.IsNullOrEmpty(newName) == false && ValidateCourseName(newName))
                 {
                     string oldName = course.Data.Name;
-                    string oldPath = EditorCourseUtils.GetTrainingPath(oldName);
+                    string oldPath = EditorCourseUtils.GetCoursePath(oldName);
                     string oldFolder = Path.GetDirectoryName(oldPath);
-                    string newPath = EditorCourseUtils.GetTrainingPath(newName);
+                    string newPath = EditorCourseUtils.GetCoursePath(newName);
                     string newFolder = Path.GetDirectoryName(newPath);
 
                     RevertableChangesHandler.Do(new TrainingCommand(
@@ -89,7 +89,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                                 course.Data.Name = newName;
 
                                 SaveManager.SaveTrainingCourseToFile(course);
-                                RuntimeConfigurator.SetSelectedTrainingCourse(newPath.Substring(Application.streamingAssetsPath.Length + 1));
+                                RuntimeConfigurator.Instance.SetSelectedTrainingCourse(EditorCourseUtils.GetCoursePath(course));
                                 TrainingWindow.GetWindow().IsDirty = false;
                             }
                         },
@@ -108,7 +108,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                             course.Data.Name = oldName;
 
                             SaveManager.SaveTrainingCourseToFile(course);
-                            RuntimeConfigurator.SetSelectedTrainingCourse(oldPath.Substring(Application.streamingAssetsPath.Length + 1));
+                            RuntimeConfigurator.Instance.SetSelectedTrainingCourse(oldPath.Substring(Application.streamingAssetsPath.Length + 1));
                         }
                     ));
                 }
@@ -141,7 +141,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 return false;
             }
 
-            string newFolder = Path.GetDirectoryName(EditorCourseUtils.GetTrainingPath(courseName));
+            string newFolder = Path.GetDirectoryName(EditorCourseUtils.GetCoursePath(courseName));
             if (Directory.Exists(newFolder))
             {
                 EditorUtility.DisplayDialog("Changing the course name failed",
