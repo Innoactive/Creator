@@ -17,12 +17,11 @@ namespace Innoactive.Creator.Core.Configuration
     {
         private AudioSource instructionPlayer;
         private ISceneObjectRegistry sceneObjectRegistry;
-        private string selectedCourseStreamingAssetsPath;
 
         /// <summary>
         /// Default mode which white lists everything.
         /// </summary>
-        public static readonly IMode DefaultMode = new Mode("DefaultMode", new WhitelistTypeRule<IOptional>());
+        public static readonly IMode DefaultMode = new Mode("Default", new WhitelistTypeRule<IOptional>());
 
         /// <inheritdoc />
         public ISceneObjectRegistry SceneObjectRegistry
@@ -40,9 +39,7 @@ namespace Innoactive.Creator.Core.Configuration
 
         protected DefaultRuntimeConfiguration()
         {
-            List<IMode> modeList = new List<IMode>();
-            modeList.Add(DefaultMode);
-            Modes = new BaseModeHandler(modeList);
+            Modes = new BaseModeHandler(new List<IMode> {DefaultMode});
         }
 
         /// <inheritdoc />
@@ -84,10 +81,12 @@ namespace Innoactive.Creator.Core.Configuration
         /// <inheritdoc />
         public virtual ICourse LoadCourse(string path)
         {
+            Debug.LogFormat("Loading course with path: '{0}'", path);
             if (string.IsNullOrEmpty(path))
             {
                 throw new ArgumentException("Given path is null or empty!");
             }
+
             byte[] serialized = FileManager.Read(path);
             return Serializer.CourseFromByteArray(serialized);
         }

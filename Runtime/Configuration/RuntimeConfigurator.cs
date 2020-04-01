@@ -3,6 +3,7 @@ using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.Utils;
 using Innoactive.Creator.Unity;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Innoactive.Creator.Core.Configuration
 {
@@ -10,22 +11,8 @@ namespace Innoactive.Creator.Core.Configuration
     /// Configurator to set the training runtime configuration which is used by a training course during its execution.
     /// There has to be one and only one training runtime configurator game object per scene.
     /// </summary>
-    public sealed class RuntimeConfigurator : UnitySceneSingleton<RuntimeConfigurator>
+    public sealed class RuntimeConfigurator : MonoBehaviour
     {
-        /// <summary>
-        /// Fully qualified name of the runtime configuration used.
-        /// This field is magically filled by <see cref="RuntimeConfiguratorEditor"/>
-        /// </summary>
-        public string RuntimeConfigurationName = typeof(DefaultRuntimeConfiguration).AssemblyQualifiedName;
-
-        /// <summary>
-        /// Course name which is selected.
-        /// This field is magically filled by <see cref="RuntimeConfiguratorEditor"/>
-        /// </summary>
-        public string SelectedCourse;
-
-        private IRuntimeConfiguration runtimeConfiguration;
-
         /// <summary>
         /// The event that fires when a training mode or runtime configuration changes.
         /// </summary>
@@ -35,6 +22,57 @@ namespace Innoactive.Creator.Core.Configuration
         /// The event that fires when a training runtime configuration changes.
         /// </summary>
         public static event EventHandler<EventArgs> RuntimeConfigurationChanged;
+
+        /// <summary>
+        /// Fully qualified name of the runtime configuration used.
+        /// This field is magically filled by <see cref="RuntimeConfiguratorEditor"/>
+        /// </summary>
+        [SerializeField]
+        private string runtimeConfigurationName = typeof(DefaultRuntimeConfiguration).AssemblyQualifiedName;
+
+        /// <summary>
+        /// Course name which is selected.
+        /// This field is magically filled by <see cref="RuntimeConfiguratorEditor"/>
+        /// </summary>
+        [SerializeField]
+        private string selectedCourse = "";
+
+        private IRuntimeConfiguration runtimeConfiguration;
+
+        private static RuntimeConfigurator instance;
+
+        private static RuntimeConfigurator LookUpForGameObject()
+        {
+            RuntimeConfigurator[] instances = FindObjectsOfType<RuntimeConfigurator>();
+
+            if (instances.Length > 1)
+            {
+                Debug.LogError("More than one training runtime configurator is found in the scene. Taking the first one. This may lead to unexpected behaviour.");
+            }
+
+            if (instances.Length == 0)
+            {
+                return null;
+            }
+
+            return instances[0];
+        }
+
+        /// <summary>
+        /// Checks if an training runtime configurator instance exists in scene.
+        /// </summary>
+        public static bool Exists
+        {
+            get
+            {
+                if (instance == null || instance.Equals(null))
+                {
+                    instance = LookUpForGameObject();
+                }
+
+                return (instance != null && instance.Equals(null) == false);
+            }
+        }
 
         /// <summary>
         /// Shortcut to get the <see cref="IRuntimeConfiguration"/> of the instance.
@@ -48,11 +86,11 @@ namespace Innoactive.Creator.Core.Configuration
                     return Instance.runtimeConfiguration;
                 }
 
-                Type type = ReflectionUtils.GetTypeFromAssemblyQualifiedName(Instance.RuntimeConfigurationName);
+                Type type = ReflectionUtils.GetTypeFromAssemblyQualifiedName(Instance.runtimeConfigurationName);
 
                 if (type == null)
                 {
-                    Debug.LogErrorFormat("IRuntimeConfiguration type '{0}' cannot be found. Using '{1}' instead.", Instance.RuntimeConfigurationName, typeof(DefaultRuntimeConfiguration).AssemblyQualifiedName);
+                    Debug.LogErrorFormat("IRuntimeConfiguration type '{0}' cannot be found. Using '{1}' instead.", Instance.runtimeConfigurationName, typeof(DefaultRuntimeConfiguration).AssemblyQualifiedName);
                     type = typeof(DefaultRuntimeConfiguration);
                 }
 
@@ -79,7 +117,7 @@ namespace Innoactive.Creator.Core.Configuration
 
                 value.Modes.ModeChanged += RuntimeConfigurationModeChanged;
 
-                Instance.RuntimeConfigurationName = value.GetType().AssemblyQualifiedName;
+                Instance.runtimeConfigurationName = value.GetType().AssemblyQualifiedName;
                 Instance.runtimeConfiguration = value;
                 Configuration.SceneObjectRegistry.RegisterAll();
 
@@ -88,34 +126,64 @@ namespace Innoactive.Creator.Core.Configuration
         }
 
         /// <summary>
+        /// Current instance of the RuntimeConfigurator.
+        /// </summary>
+        /// <exception cref="NullReferenceException">Will throw a NPE if there is no RuntimeConfigurator added to the scene.</exception>
+        public static RuntimeConfigurator Instance
+        {
+            get
+            {
+                if (Exists == false)
+                {
+                    throw new NullReferenceException("Training runtime configurator is not set in the scene. Create an empty game object with the 'RuntimeConfigurator' script attached to it.");
+                }
+
+                return instance;
+            }
+        }
+
+        /// <summary>
+        /// Returns the assembly qualified name of the runtime configuration.
+        /// </summary>
+        public string GetRuntimeConfigurationName()
+        {
+            return Instance.runtimeConfigurationName;
+        }
+
+        /// <summary>
+        /// Sets the runtime configuration name, expects an assembly qualified name.
+        /// </summary>
+        public void SetRuntimeConfigurationName(string name)
+        {
+            Instance.runtimeConfigurationName = name;
+        }
+
+        /// <summary>
         /// Returns the path to the selected training course.
         /// </summary>
-        public static string GetSelectedTrainingCourse()
+        public string GetSelectedTrainingCourse()
         {
-            return Instance.SelectedCourse;
+            return Instance.selectedCourse;
         }
 
         /// <summary>
         /// Sets the path to the selected training course.
         /// </summary>
-        public static void SetSelectedTrainingCourse(string path)
+        public void SetSelectedTrainingCourse(string path)
         {
-            Instance.SelectedCourse = path;
+            Instance.selectedCourse = path;
         }
 
-        protected override void Awake()
+        private void Awake()
         {
-            base.Awake();
             Configuration.SceneObjectRegistry.RegisterAll();
             RuntimeConfigurationChanged += HandleRuntimeConfigurationChanged;
         }
 
-        protected override void OnDestroy()
+        private void OnDestroy()
         {
             ModeChanged = null;
             RuntimeConfigurationChanged = null;
-
-            base.OnDestroy();
         }
 
         private static void EmitModeChanged()
@@ -136,11 +204,6 @@ namespace Innoactive.Creator.Core.Configuration
         private static void RuntimeConfigurationModeChanged(object sender, ModeChangedEventArgs modeChangedEventArgs)
         {
             EmitModeChanged();
-        }
-
-        protected override string GetName()
-        {
-            return SceneUtils.TrainingConfigurationName;
         }
     }
 }
