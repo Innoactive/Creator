@@ -2,11 +2,11 @@
 
 ## Unity Version
 
-We are not supporting Unity 2017/2018 anymore. Use Unity 2019.3 for this release. As soon as Unity Technologies releases Unity 2019.4 LTS, we will support only this version. It helps us to focus development and quality assurance of our product.
+We are not supporting Unity 2017 or 2018 anymore. Use Unity 2019.3 for this release. As soon as Unity Technologies releases Unity 2019.4 LTS, we will support only this version. It helps us to focus development and quality assurance of our product.
 
 ## Serializer
 
-You can replace the default training serializer with your own, as long as it supports `System.Xml.Serialization` attributes `DataContract` and `DataMember`. 
+You can replace the default training serializer with your own, as long as it supports `DataContract` and `DataMember` attributes of `System.Xml.Serialization`.
 
 The default implementation still uses NewtonsoftJson.
 
@@ -16,7 +16,7 @@ We have extracted some parts of the Innoactive Creator package into separate com
 
 ## Unity XR and VRTK Support
 
-The previous change allowed us to remove hard dependency to VRTK and add Unity XR support. We will release VRTK component with v2.0, but we will not support it anymore. The new recommended VR framework is Unity XR.
+The previous change allowed us to remove hard dependency to VRTK and add Unity XR support. We will release VRTK component with v2.0 but we will not support it anymore. The new recommended VR framework is Unity XR.
 
 You can write your own component to support any VR framework you want.
 
@@ -26,7 +26,7 @@ The Innoactive Creator supports standalone devices now.
 
 ## Loading Training Courses
 
-Runtime configurations load training courses asyncroniously now. We needed it for the support of standalone devices. You could use it, for example, to load courses over the Internet.
+Runtime configurations load training courses asyncroniously now. We need it for the support of standalone devices. You could use it, for example, to load courses over the Internet.
 
 ## Scene Setup
 
@@ -38,7 +38,7 @@ We have moved logging and training mode handling to separate classes.
 
 ## Assemblies
 
-Unity supports separate assemblies now and we made use of it to make some of our code `internal`. We had to keep them public and keep that part of our API unchanged. It was extra work that had no real value for you.
+Unity supports separate assemblies now and we made use of it to make some of our code `internal`. We had to keep them public and keep that part of our API unchanged. It was extra work that was yielding no real value for you.
 
 ## Namespaces
 
