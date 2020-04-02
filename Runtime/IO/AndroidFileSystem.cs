@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.IO.Compression;
 
-namespace Innoactive.Creator.IO
+namespace Innoactive.Creator.Core.IO
 {
     /// <summary>
     /// Android implementation of <see cref="IPlatformFileSystem"/>.
