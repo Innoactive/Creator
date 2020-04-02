@@ -112,7 +112,10 @@ namespace Innoactive.CreatorEditor.Configuration
                 index = 0;
             }
 
-            configurator.SetSelectedTrainingCourse(EditorCourseUtils.GetCoursePath(trainingCourseDisplayNames[index]));
+            if (IsCourseListEmpty() == false)
+            {
+                configurator.SetSelectedTrainingCourse(EditorCourseUtils.GetCoursePath(trainingCourseDisplayNames[index]));
+            }
         }
 
         private static void OnCourseFileStructureChanged(object sender, CourseAssetPostprocessorEventArgs args)
