@@ -2,13 +2,17 @@
 
 This chapter is a collection of questions that we had while we were exploring Unity XR. We share our findings in hope that they will help you, too.
 
+*Q: Where can I find the documentation for Unity XR Interactions?*
+
+A: You can find it [here](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@0.9/manual/index.html).
+
 *Q: Why am I flying over the ground?*
 
 A: Set the `Tracking Origin Mode` to `Floor` in the `XR Rig Inspector` component of the `[XR_Setup]` game object.
 
 *Q: Why cannot I teleport on a plane?*
 
-A: Add the `Teleportation Area` component to the plane game object.
+A: Add the `Teleportation Area` or the `Teleportation Anchor` component to the plane game object.
 
 *Q: Where is the Highlight behavior?*
 
