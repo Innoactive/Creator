@@ -6,6 +6,20 @@ This chapter is a collection of questions that we had while we were exploring Un
 
 A: You can find it [here](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@0.9/manual/index.html).
 
+*Q: How do I use it with an Oculus headset?*
+
+Go to `Unity > Edit > Project Settings... > XR Plugin Management`. Press `Install XR Plugin Management`. Let Unity import assets and click `Install Oculus XR Plugin`.
+
+*Q: How do I use it with Windows Mixed Reality?*
+
+Go to `Unity > Edit > Project Settings... > XR Plugin Management`. Press `Install XR Plugin Management`. Let Unity import assets and click `Install Windows XR Plugin`.
+
+*Q: How do I use it with an HTC Vive, Valve Index, or similar headsets?*
+
+There is no SteamVR/OpenVR XR Plugin yet. Unity Technologies works on it and will release it soon. 
+
+For now, go to `Unity > Edit > Project Settings... > Player > XR Settings > Deprecated Settings`. Toggle `Enable Virtual Reality Supported`. Let Unity import assets. Click on the `+` button under the `Virtual Reality SDKs` and add OpenVR to the list.
+
 *Q: Why am I flying over the ground?*
 
 A: Set the `Tracking Origin Mode` to `Floor` in the `XR Rig Inspector` component of the `[XR_Setup]` game object.
