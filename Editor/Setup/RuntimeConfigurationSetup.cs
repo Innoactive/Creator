@@ -1,6 +1,6 @@
-﻿using Innoactive.Creator.Core.Configuration;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
+using Innoactive.Creator.Core.Configuration;
 
 namespace Innoactive.CreatorEditor
 {
