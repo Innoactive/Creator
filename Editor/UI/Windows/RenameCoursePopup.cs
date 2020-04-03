@@ -71,9 +71,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 if (string.IsNullOrEmpty(newName) == false && ValidateCourseName(newName))
                 {
                     string oldName = course.Data.Name;
-                    string oldPath = EditorCourseUtils.GetCoursePath(oldName);
+                    string oldPath = EditorCourseUtils.GetAbsoluteCoursePath(oldName);
                     string oldFolder = Path.GetDirectoryName(oldPath);
-                    string newPath = EditorCourseUtils.GetCoursePath(newName);
+                    string newPath = EditorCourseUtils.GetAbsoluteCoursePath(newName);
                     string newFolder = Path.GetDirectoryName(newPath);
 
                     RevertableChangesHandler.Do(new TrainingCommand(
@@ -91,6 +91,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                                 SaveManager.SaveTrainingCourseToFile(course);
                                 RuntimeConfigurator.Instance.SetSelectedTrainingCourse(EditorCourseUtils.GetCoursePath(course));
                                 TrainingWindow.GetWindow().IsDirty = false;
+                                AssetDatabase.Refresh();
                             }
                         },
                         // ReSharper disable once ImplicitlyCapturedClosure
@@ -109,6 +110,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
                             SaveManager.SaveTrainingCourseToFile(course);
                             RuntimeConfigurator.Instance.SetSelectedTrainingCourse(oldPath.Substring(Application.streamingAssetsPath.Length + 1));
+                            AssetDatabase.Refresh();
                         }
                     ));
                 }
