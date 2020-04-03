@@ -1,8 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using CommandLine;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -38,6 +36,9 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Sets up given <paramref name="prefab"/> in current scene.
         /// </summary>
+        /// <remarks>Extensions must be omitted. All asset names and paths in Unity use forward slashes, paths using backslashes will not work.</remarks>
+        /// <param name="prefab">Name or path to the target resource to setup.</param>
+        /// <exception cref="FileNotFoundException">Exception thrown if no prefab can be found in project with given <paramref name="prefab"/>.</exception>
         protected void SetupPrefab(string prefab)
         {
             string prefabName = Path.GetFileName(prefab);
@@ -68,9 +69,7 @@ namespace Innoactive.CreatorEditor
         /// </summary>
         protected bool IsPrefabMissingInScene(string prefabName)
         {
-            GameObject prefab = GameObject.Find(prefabName);
-
-            return prefab == null;
+            return GameObject.Find(prefabName) == null;
         }
     }
 }
