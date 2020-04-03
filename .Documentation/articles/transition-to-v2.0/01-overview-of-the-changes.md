@@ -14,19 +14,15 @@ The default implementation still uses NewtonsoftJson.
 
 We have extracted some parts of the Innoactive Creator package into separate components. For now, we ship two template packages that include everything you need. We will provide detailed instructions on how to configure components in the actual release.
 
-## Unity XR and VRTK Support
+## Abstracted VR
 
-The previous change allowed us to remove hard dependency to VRTK and add Unity XR support. We will release VRTK component with v2.0 but we will not support it anymore. The new recommended VR framework is Unity XR.
+The previous change allowed us to remove hard dependency to VRTK and integrate our product with Unity XR. We will release VRTK component with v2.0 but we will not support it anymore. The new recommended VR framework is Unity XR.
 
 You can write your own component to support any VR framework you want.
 
 ## Standalone Devices Support
 
 The Innoactive Creator supports standalone devices now.
-
-## Loading Training Courses
-
-Runtime configurations load training courses asyncroniously now. We need it for the support of standalone devices. You could use it, for example, to load courses over the Internet.
 
 ## Scene Setup
 
