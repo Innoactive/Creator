@@ -71,9 +71,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 if (string.IsNullOrEmpty(newName) == false && ValidateCourseName(newName))
                 {
                     string oldName = course.Data.Name;
-                    string oldPath = EditorCourseUtils.GetCoursePath(oldName);
+                    string oldPath = EditorCourseUtils.GetAbsoluteCoursePath(oldName);
                     string oldFolder = Path.GetDirectoryName(oldPath);
-                    string newPath = EditorCourseUtils.GetCoursePath(newName);
+                    string newPath = EditorCourseUtils.GetAbsoluteCoursePath(newName);
                     string newFolder = Path.GetDirectoryName(newPath);
 
                     RevertableChangesHandler.Do(new TrainingCommand(
