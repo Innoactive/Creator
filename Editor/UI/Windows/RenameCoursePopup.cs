@@ -91,6 +91,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                                 SaveManager.SaveTrainingCourseToFile(course);
                                 RuntimeConfigurator.Instance.SetSelectedTrainingCourse(EditorCourseUtils.GetCoursePath(course));
                                 TrainingWindow.GetWindow().IsDirty = false;
+                                AssetDatabase.Refresh();
                             }
                         },
                         // ReSharper disable once ImplicitlyCapturedClosure
@@ -109,6 +110,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
                             SaveManager.SaveTrainingCourseToFile(course);
                             RuntimeConfigurator.Instance.SetSelectedTrainingCourse(oldPath.Substring(Application.streamingAssetsPath.Length + 1));
+                            AssetDatabase.Refresh();
                         }
                     ));
                 }
