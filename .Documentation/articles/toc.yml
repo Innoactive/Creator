@@ -62,6 +62,8 @@
       href: transition-to-v2.0/01-overview-of-the-changes.md
     - name: Update Behaviors and Conditions
       href: transition-to-v2.0/02-update-behaviors-and-conditions.md
+    - name: Unity XR FAQ
+      href: transition-to-v2.0/03-unity-xr-faq.md
 - name: Miscellaneous
   href: miscellaneous/index.md
   items:
