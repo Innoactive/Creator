@@ -19,14 +19,12 @@ namespace Innoactive.CreatorEditor
     {
         private const string ignoreEditorImguiTestsDefineSymbol = "INNOACTIVE_IGNORE_EDITOR_IMGUI_TESTS";
         private const string rootFileName = "training-module-root.txt";
-        private const string openVrPackageName = "com.unity.xr.openvr.standalone@1.0.5";
 
         private static string cachedRootFolder;
         private static ListRequest listRequest = null;
 
         static EditorUtils()
         {
-            AddOpenVrPackage();
             AssemblyReloadEvents.afterAssemblyReload += ResolveModuleFolder;
             EditorApplication.playModeStateChanged += ResolveModuleFolder;
         }
@@ -92,48 +90,6 @@ namespace Innoactive.CreatorEditor
         private static void ResolveModuleFolder(PlayModeStateChange state)
         {
             ResolveModuleFolder();
-        }
-
-        /// <summary>
-        /// Adds the OpenVR package dependency to the project.
-        /// If it is already added, it does nothing.
-        /// </summary>
-        private static void AddOpenVrPackage()
-        {
-            EditorApplication.update += WaitForEditorApplicationUpdate;
-        }
-
-        private static void WaitForEditorApplicationUpdate()
-        {
-            if (listRequest == null)
-            {
-                listRequest = UnityEditor.PackageManager.Client.List();
-            }
-
-            if (listRequest.IsCompleted == false)
-            {
-                return;
-            }
-            else if (listRequest.Status == StatusCode.Failure)
-            {
-                // UB can't occur in this case.
-                // ReSharper disable once DelegateSubtraction
-                EditorApplication.update -= WaitForEditorApplicationUpdate;
-                return;
-            }
-
-            PackageCollection listRequestResult = listRequest.Result;
-            string[] packageData = openVrPackageName.Split('@');
-
-            if (listRequestResult.Any(packageInfo => packageInfo.name == packageData[0] && packageInfo.version == packageData[1]) == false)
-            {
-                UnityEditor.PackageManager.Client.Add(openVrPackageName);
-                Debug.LogFormat("The 'OpenVR' package was not a dependency of this Unity project. The package 'OpenVR ({0})' has been automatically added.", openVrPackageName);
-            }
-
-            // UB can't occur in this case.
-            // ReSharper disable once DelegateSubtraction
-            EditorApplication.update -= WaitForEditorApplicationUpdate;
         }
 
         /// <summary>
