@@ -8,13 +8,23 @@ using Debug = UnityEngine.Debug;
 namespace Innoactive.CreatorEditor.PackageManager
 {
     /// <summary>
-    ///
+    /// Automatically retrieves all dependencies from the Unity's Package Manager at the startup.
     /// </summary>
     [InitializeOnLoad]
     public static class DependencyManager
     {
+        public class DependenciesEnabledEventArgs : EventArgs
+        {
+            public readonly List<Dependency> DependenciesList;
+
+            public DependenciesEnabledEventArgs(List<Dependency> dependenciesList)
+            {
+                DependenciesList = dependenciesList;
+            }
+        }
+
         /// <summary>
-        ///
+        /// Emitted when all found <see cref="Dependency"/> were installed.
         /// </summary>
         public static event EventHandler<DependenciesEnabledEventArgs> OnPostProcess;
 
@@ -94,19 +104,6 @@ namespace Innoactive.CreatorEditor.PackageManager
                 dependenciesList = dependenciesList.OrderBy(setup => setup.Priority).ToList();
                 dependencies = new Queue<Dependency>(dependenciesList);
             }
-        }
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    public class DependenciesEnabledEventArgs : EventArgs
-    {
-        public readonly List<Dependency> DependenciesList;
-
-        public DependenciesEnabledEventArgs(List<Dependency> dependenciesList)
-        {
-            DependenciesList = dependenciesList;
         }
     }
 }

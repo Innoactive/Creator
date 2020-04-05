@@ -3,12 +3,12 @@
 namespace Innoactive.CreatorEditor.PackageManager
 {
     /// <summary>
-    ///
+    /// Base class for dependencies used by the <see cref="DependencyManager"/>.
     /// </summary>
     public abstract class Dependency
     {
         /// <summary>
-        ///
+        /// A string representing the package to be added.
         /// </summary>
         public virtual string Package { get; } = "";
 
@@ -19,17 +19,17 @@ namespace Innoactive.CreatorEditor.PackageManager
         public virtual int Priority { get; } = 0;
 
         /// <summary>
-        ///
+        /// Emitted when this <see cref="Dependency"/> is set as enabled.
         /// </summary>
         public event EventHandler<EventArgs> OnPackageEnabled;
 
         /// <summary>
-        ///
+        /// Emitted when this <see cref="Dependency"/> is set as disabled.
         /// </summary>
         public event EventHandler<EventArgs> OnPackageDisabled;
 
         /// <summary>
-        ///
+        /// Represents the current status of this <see cref="Dependency"/>.
         /// </summary>
         internal bool IsEnabled
         {

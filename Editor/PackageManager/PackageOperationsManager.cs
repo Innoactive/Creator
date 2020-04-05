@@ -6,6 +6,9 @@ using Debug = UnityEngine.Debug;
 
 namespace Innoactive.CreatorEditor.PackageManager
 {
+    /// <summary>
+    /// Handles differnt Unity's Package Manager requests.
+    /// </summary>
     [InitializeOnLoad]
     internal static class PackageOperationsManager
     {
@@ -25,7 +28,7 @@ namespace Innoactive.CreatorEditor.PackageManager
         private static PackageCollection packageCollection;
 
         /// <summary>
-        ///
+        /// List of currently loaded packages in the Unity's Package Manager.
         /// </summary>
         public static PackageCollection Packages { get { return packageCollection; } }
 
@@ -38,9 +41,9 @@ namespace Innoactive.CreatorEditor.PackageManager
         }
 
         /// <summary>
-        ///
+        /// Adds a package dependency to the Project.
         /// </summary>
-        /// <param name="package"></param>
+        /// <param name="package">A string representing the package to be added.</param>
         public static void LoadPackage(string package)
         {
             if (string.IsNullOrEmpty(currentPackage))
@@ -58,10 +61,9 @@ namespace Innoactive.CreatorEditor.PackageManager
         }
 
         /// <summary>
-        ///
+        /// Returns true if the <see cref="PackageOperationsManager"/> has already collected a list of currently available packages and
+        /// given <paramref name="package"/> is already on that list.
         /// </summary>
-        /// <param name="package"></param>
-        /// <returns></returns>
         public static bool IsPackageLoaded(string package)
         {
             return packageCollection != null && packageCollection.Any(packageInfo => packageInfo.name == package);

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Innoactive.CreatorEditor.PackageManager
 {
     /// <summary>
-    ///
+    /// Utility class that ensures all Creator's prefabs are properly setup in the project.
     /// </summary>
     [InitializeOnLoad]
     internal static class PrefabsValidator
@@ -14,7 +14,7 @@ namespace Innoactive.CreatorEditor.PackageManager
             DependencyManager.OnPostProcess += OnPostProcess;
         }
 
-        private static void OnPostProcess(object sender, DependenciesEnabledEventArgs e)
+        private static void OnPostProcess(object sender, DependencyManager.DependenciesEnabledEventArgs e)
         {
             DependencyManager.OnPostProcess -= OnPostProcess;
             ReimportCreatorPrefabs();
