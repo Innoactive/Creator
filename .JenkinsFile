@@ -110,7 +110,7 @@ pipeline
             {
                 anyOf 
                 {
-                    tag pattern: "v(\\d+\\.\\d+\\.\\d+(-docu)?)", comparator: "REGEXP"
+                    tag pattern: "v(\\d+\\.\\d+\\.\\d+(-docu|-preview)?)", comparator: "REGEXP"
                     expression { params.BUILD_DOCUMENTATION == true }
                 }
             }
@@ -164,7 +164,7 @@ pipeline
                 {
                     when
                     {
-                        tag pattern: "v(\\d+\\.\\d+\\.\\d+(-docu)?)", comparator: "REGEXP"
+                        tag pattern: "v(\\d+\\.\\d+\\.\\d+(-docu|-preview)?)", comparator: "REGEXP"
                     }
                     steps
                     {

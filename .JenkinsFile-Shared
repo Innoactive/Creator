@@ -131,7 +131,7 @@ def DeployDocumentation()
                         flatten: false,
                         makeEmptyDirs: false,
                         noDefaultExcludes: false,
-                        patternSeparator: '[, ]+',
+                        patternSeparator: '[, ]+',                        
                         remoteDirectory: tagNameNoPostfix,
                         remoteDirectorySDF: false,
                         removePrefix: 'Assets/Innoactive/Creator/Core/.Documentation/_site/',
