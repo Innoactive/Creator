@@ -1,6 +1,6 @@
 # Dependency Manager
 
-The Creator works as a distributed network of components, each component handles one specific functionality. Due to the nature of some components, they some times depend on some [Unity Packages](https://docs.unity3d.com/Manual/PackagesList.html) that are not enabled by default and without them, the component will not work. This is a problem, that is why we introduce a system that allows us to automatically retrieve all required dependencies from the [Unity Package Manager](https://docs.unity3d.com/Packages/com.unity.package-manager-ui@1.8/manual/index.html). By using a `Dependency Manager` we ensure the `Creator` to be as standalone as possible.
+The Creator works as a distributed network of components. Each component handles one specific functionality. Due to the nature of some components, they sometimes depend on some [Unity Packages](https://docs.unity3d.com/Manual/PackagesList.html) that are not enabled by default. Without them, the component will not work. This is a problem. That is why we introduced a system that allows us to automatically retrieve all required dependencies from the [Unity Package Manager](https://docs.unity3d.com/Packages/com.unity.package-manager-ui@1.8/manual/index.html). By using a `Dependency Manager` we ensure the `Creator` to be as standalone as possible.
 
 ## Overview
 
