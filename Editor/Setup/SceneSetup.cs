@@ -54,8 +54,6 @@ namespace Innoactive.CreatorEditor
                 }
 
                 string assetPath = AssetDatabase.GUIDToAssetPath(prefabsGUIDs.First());
-                AssetDatabase.ImportAsset(assetPath);
-
                 string[] brokenPaths = Regex.Split(assetPath, "Resources/");
                 string relativePath = brokenPaths.Last().Replace(".prefab", string.Empty);
 
