@@ -8,4 +8,4 @@ We have extended the Innoactive Creator with new features and made it easier to 
 
 We recommend to develop new training applications with v2.0 when we will make it ready for production. We recommend to still use v1.3.1 for existing projects.
 
-We have split this guide in three chapters: [Overview of the Changes](01-overview-of-the-changes.md), [Update Behaviors and Conditions](02-update-behaviors-and-conditions.md), and [Unity XR FAQ](03-unity-xr-faq.md). 
+We have split this guide in three chapters: [Overview of the Changes](01-overview-of-the-changes.md), [Update Behaviors and Conditions](02-update-behaviors-and-conditions.md), and [Unity XR FAQ](03-unity-xr-faq.md).

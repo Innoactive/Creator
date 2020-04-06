@@ -1,5 +1,7 @@
 # Overview of the Changes
 
+This chapter lists most important changes and additions to the Innoactive Creator.
+
 ## Unity Version
 
 We start to support Unity 2019 and stop supporting Unity 2017 or 2018. 
