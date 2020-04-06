@@ -70,3 +70,5 @@
       href: miscellaneous/snapzones.md
     - name: Text To Speech Engine (TTS) (Developer)
       href: miscellaneous/setup-text-to-speech.md
+    - name: Dependency Manager
+      href: miscellaneous/dependency-manager.md
