@@ -8,7 +8,7 @@ The `Dependency Manager` guarantees that all required `Unity packages` are enabl
 
 ### Dependency
 
-It can be consider as `Dependency` any `Unity package` required for any of the `Creator`\`s components or templates that whitout it, the component or template could not work.
+A `Dependency` can be considered as a `Unity package` that is required for any of the `Creator`\`s components or templates. Without it, the component or template would not work.
 
 ### Usage
 
