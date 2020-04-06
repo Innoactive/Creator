@@ -14,7 +14,7 @@ A `Dependency` can be considered as a `Unity package` that is required for any o
 
 The `Dependency Manager` collects all `Dependency` type classes in the project and order them according to their `Priority` property value. Once all dependencies are collected and prioritized, the `Dependency Manager` queue them to be enabled one by one in an asynchronous process. Each dependency enables a single `Unity package` in the `Package Manager`.
 
-To make the `Dependency Manager` to automatically add a new dependency or validate if it is enabled in the project it is necessary to create a new class inheriting from the `Dependency` class and overriding their properties `Package` and `Priority`.
+To make the `Dependency Manager` automatically add a new dependency or validate, if the dependency is enabled in the project, it is necessary to create a new class inheriting from the `Dependency` class and overriding their properties `Package` and `Priority`.
 
 ```csharp
 using Innoactive.CreatorEditor.PackageManager;
