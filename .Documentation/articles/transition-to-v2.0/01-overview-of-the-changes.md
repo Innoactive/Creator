@@ -1,6 +1,6 @@
 # Overview of the Changes
 
-This chapter lists most important changes and additions to the Innoactive Creator.
+This chapter lists most important changes and additions to the Innoactive Creator. We will provide full documentation with the actual release of v2.0.
 
 ## Unity Version
 
@@ -32,7 +32,9 @@ You can write your own component to support any VR framework you want.
 
 ## Standalone Devices Support
 
-The Innoactive Creator supports standalone devices now.
+The Innoactive Creator supports standalone devices now. 
+
+*If you use the default course serializer, go to `Unity > Edit > Project Settings... > Player > Other Settings`. Set API compitability settings to .NET 4.x.*
 
 ## Scene Setup
 
