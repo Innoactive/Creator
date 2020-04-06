@@ -20,7 +20,7 @@ A: There is no SteamVR/OpenVR XR Plugin yet. Unity Technologies works on it and 
 
 For now, go to `Unity > Edit > Project Settings... > Player > XR Settings > Deprecated Settings`. Toggle `Enable Virtual Reality Supported`. Let Unity import assets. Click on the `+` button under the `Virtual Reality SDKs` and add OpenVR to the list.
 
-*Q: Why does not it work after I have changed the build target?*
+*Q: Why does it not work after I have changed the build target?*
 
 A: Unity uses separate sets of player settings for each platform. Just repeat steps from the answers above.
 
