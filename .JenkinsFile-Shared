@@ -131,7 +131,11 @@ def DeployDocumentation()
                         flatten: false,
                         makeEmptyDirs: false,
                         noDefaultExcludes: false,
+<<<<<<< HEAD
                         patternSeparator: '[, ]+',
+=======
+                        patternSeparator: '[, ]+',                        
+>>>>>>> c3ee5e0... Make jenkins to build docu if tag matches v1.2.3 or v1.2.3-preview or v1.2.3-docu
                         remoteDirectory: tagNameNoPostfix,
                         remoteDirectorySDF: false,
                         removePrefix: 'Assets/Innoactive/Creator/Core/.Documentation/_site/',

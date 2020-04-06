@@ -110,7 +110,11 @@ pipeline
             {
                 anyOf 
                 {
+<<<<<<< HEAD
                     tag pattern: "v(\\d+\\.\\d+\\.\\d+(-docu)?)", comparator: "REGEXP"
+=======
+                    tag pattern: "v(\\d+\\.\\d+\\.\\d+(-docu|-preview)?)", comparator: "REGEXP"
+>>>>>>> c3ee5e0... Make jenkins to build docu if tag matches v1.2.3 or v1.2.3-preview or v1.2.3-docu
                     expression { params.BUILD_DOCUMENTATION == true }
                 }
             }
@@ -164,7 +168,11 @@ pipeline
                 {
                     when
                     {
+<<<<<<< HEAD
                         tag pattern: "v(\\d+\\.\\d+\\.\\d+(-docu)?)", comparator: "REGEXP"
+=======
+                        tag pattern: "v(\\d+\\.\\d+\\.\\d+(-docu|-preview)?)", comparator: "REGEXP"
+>>>>>>> c3ee5e0... Make jenkins to build docu if tag matches v1.2.3 or v1.2.3-preview or v1.2.3-docu
                     }
                     steps
                     {
