@@ -61,6 +61,17 @@
       href: developer/08-conditions.md
     - name: Properties
       href: developer/09-properties.md
+- name: Transition Guilde to v2.0 for Developers
+  href: transition-to-v2.0
+  items:
+    - name: Overview
+      href: transition-to-v2.0/index.md
+    - name: Overview of the Changes
+      href: transition-to-v2.0/01-overview-of-the-changes.md
+    - name: Update Behaviors and Conditions
+      href: transition-to-v2.0/02-update-behaviors-and-conditions.md
+    - name: Unity XR FAQ
+      href: transition-to-v2.0/03-unity-xr-faq.md
 - name: Miscellaneous
   href: miscellaneous/index.md
   items:
