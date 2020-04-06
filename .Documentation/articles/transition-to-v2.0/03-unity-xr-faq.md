@@ -48,6 +48,6 @@ A: In Unity XR, you can see it only through VR headset when the application is r
 
 A: Snap zone resets local position and rotation of a snapped object and its children. This is a Unity XR bug and Unity Technologies is working on it.
 
-*Q: Can my Snap Zone have children game objects?*
+*Q: Can my Snap Zone have interactable children?*
 
-A: Yes, as long as you disable them before snapping another object. You can do it with Enable and Disable behaviors.
+A: Yes, as long as they have different interaction layer. Alternatively, you could disable all interactable children before snapping an object. You can do it with Enable and Disable behaviors.

@@ -2,7 +2,9 @@
 
 ## Unity Version
 
-We are not supporting Unity 2017 or 2018 anymore. Use Unity 2019.3 for this release. As soon as Unity Technologies releases Unity 2019.4 LTS, we will support only this version. It helps us to focus development and quality assurance of our product.
+We start to support Unity 2019 and stop supporting Unity 2017 or 2018. 
+
+Use Unity 2019.3 with this release. As soon as Unity Technologies releases Unity 2019.4 LTS, we will support only that version. It helps us to focus development and quality assurance of our product.
 
 ## Serializer
 
@@ -12,11 +14,13 @@ The default implementation still uses NewtonsoftJson.
 
 ## Components
 
-We have extracted some parts of the Innoactive Creator package into separate components. For now, we ship two template packages that include everything you need. We will provide detailed instructions on how to configure components in the actual release.
+We have extracted built-in behaviors, conditions, and properties of the Innoactive Creator into separate components. It makes the Innoactive Creator more flexible and speeds up our releasing process. 
+
+For now, we ship two template packages that include everything you need. We will provide detailed instructions on how to configure components in the actual release.
 
 ## Dependencies
 
-We made the Innoactive creator independent from our legacy code and from a number of external projects.
+We made the Innoactive Creator independent from our legacy code and from a number of external projects.
 
 ## Abstracted VR
 

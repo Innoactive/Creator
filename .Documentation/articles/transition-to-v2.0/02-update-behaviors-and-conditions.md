@@ -23,7 +23,7 @@ Replace references to `Innoactive.Hub.Training.Editors` to `Innoactive.CreatorEd
 
 ## Stage Process
 
-Thoughout this chapter, the `EntityData` refers to the data type which your entity uses.
+Throughout this chapter, the `EntityData` refers to the data type which your entity uses.
 
 ### Replace base class/interface
 
@@ -269,7 +269,7 @@ Before:
 public void Complete(EntityData data) 
 {
     data.Value.Set();
-    data.IsCompleted = true;
+    // ...
 }
 ```
 
@@ -283,6 +283,25 @@ public override void Complete()
 ```
 
 ### Do not call base.Complete() and do not set Data.IsCompleted to true
+
+Before:
+
+```csharp
+public void Complete(EntityData data) 
+{
+    /* Implementation */ 
+    data.IsCompleted = true;
+}
+```
+
+After:
+
+```csharp
+public override void Complete() 
+{
+    /* Implementation */ 
+}
+```
 
 ## Menu items
 
@@ -315,8 +334,8 @@ By default, these methods return empty processes.
 
 ### Reference configurators
 
-The `Configurator` property is replaced with `GetConfigurator`. The usage of `BaseConfigurator` is not required anymore.
+The `Configurator` property is replaced with `GetConfigurator()` method. The usage of `BaseConfigurator` is not required anymore.
 
 ### Reference autocompleters
 
-The `Autocompleter` property is replaced with `GetAutocompleter()`.
+The `Autocompleter` property is replaced with `GetAutocompleter()` method.
