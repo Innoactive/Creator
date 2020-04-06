@@ -88,7 +88,7 @@ namespace Innoactive.CreatorEditor.PackageManager
                 {
                     Dependency dependencyInstance = ReflectionUtils.CreateInstanceOfType(dependencyType) as Dependency;
 
-                    if (dependencyInstance != null)
+                    if (dependencyInstance != null && string.IsNullOrEmpty(dependencyInstance.Package))
                     {
                         dependenciesList.Add(dependencyInstance);
                     }
