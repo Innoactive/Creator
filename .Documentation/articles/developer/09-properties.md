@@ -18,7 +18,7 @@ For this, we would need to create a new property. It would provide a method that
 
 ### Create the Property
 
-Create a new `.cs` file in the `Assets` folder with the following content:
+Create a new `ScalableProperty.cs` file in the `Assets` folder with the following content:
 
 ```csharp
 using Innoactive.Hub.Training.SceneObjects.Properties;
@@ -130,7 +130,7 @@ There are no strict rules whenever a code should belong to an entity or to a pro
 
 From the examples above, a `HighlightBehavior` knows when to highlight an object, but only a `HighlightProperty` knows if it is done with particles, or with a color change, or by showing a big glowing arrow.
 
-If you have to set up the scene object in runtime, set up it in the `Awake()`, `Start()`, or `OnEnable()` method of your property class.
+If you have to set up the scene object in runtime, do it in the `Awake()`, `Start()`, or `OnEnable()` method of your property class.
 
 If your custom entity works only with specific objects, you could use properties to prevent training designers from making mistakes.
 
