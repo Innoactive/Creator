@@ -17,7 +17,7 @@ namespace Innoactive.CreatorEditor.Utils
             }
 
             string assetPath = Path.Combine(Application.dataPath.Remove(Application.dataPath.LastIndexOf('/')), filePath).Replace('/', Path.DirectorySeparatorChar);
-            string courseFolderPath = Path.Combine(Application.streamingAssetsPath, EditorConfigurator.Instance.DefaultCourseStreamingAssetsFolder).Replace('/', Path.DirectorySeparatorChar);
+            string courseFolderPath = Path.Combine(Application.streamingAssetsPath, EditorConfigurator.Instance.CourseStreamingAssetsFolder).Replace('/', Path.DirectorySeparatorChar);
 
             FileInfo file = new FileInfo(assetPath);
 

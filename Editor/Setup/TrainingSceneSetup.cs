@@ -19,7 +19,7 @@ namespace Innoactive.CreatorEditor
         public static void Run()
         {
             // Create default save folder.
-            Directory.CreateDirectory(EditorConfigurator.Instance.DefaultCourseStreamingAssetsFolder);
+            Directory.CreateDirectory(EditorConfigurator.Instance.CourseStreamingAssetsFolder);
 
             // Find and setup all OnSceneSetup classes in the project.
             IEnumerable<Type> types = ReflectionUtils.GetConcreteImplementationsOf<SceneSetup>();
