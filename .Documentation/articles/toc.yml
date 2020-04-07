@@ -1,6 +1,6 @@
 - name: Introduction
   href: index.md
-- name: Getting started
+- name: Getting Started
   href: getting-started
   items:
     - name: Overview
@@ -47,15 +47,15 @@
       href: developer/01-introduction.md
     - name: Using Innoactive Creator
       href: developer/02-using-innoactive-creator.md
-    - name: Set up a project
+    - name: Set Up a Project
       href: developer/03-set-up-a-project.md
-    - name: General concepts
+    - name: General Concepts
       href: developer/04-general-concepts.md
     - name: Behaviors
       href: developer/05-behaviors.md
-    - name: Menu items
+    - name: Menu Items
       href: developer/06-menu-items.md
-    - name: Run a training course
+    - name: Run a Training Course
       href: developer/07-run-a-course.md
     - name: Conditions
       href: developer/08-conditions.md

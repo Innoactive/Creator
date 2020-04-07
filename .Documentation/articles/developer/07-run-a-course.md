@@ -20,7 +20,7 @@ using Innoactive.Hub.Training;
 using Innoactive.Hub.Training.Configuration;
 using UnityEngine;
 
-// Unity components's classes should have the same names as their files.
+// Unity components' classes should have the same names as their files.
 public class TrainingCourseLoader : MonoBehaviour
 {
     private void Start()
