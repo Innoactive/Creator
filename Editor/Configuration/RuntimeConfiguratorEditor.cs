@@ -47,7 +47,7 @@ namespace Innoactive.CreatorEditor.Configuration
         protected void OnEnable()
         {
             configurator = target as RuntimeConfigurator;
-            defaultCoursePath = EditorConfigurator.Instance.DefaultCourseStreamingAssetsFolder;
+            defaultCoursePath = EditorConfigurator.Instance.CourseStreamingAssetsFolder;
 
             // Create training course path if not present.
             string absolutePath = Path.Combine(Application.streamingAssetsPath, defaultCoursePath);
