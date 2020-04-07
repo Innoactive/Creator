@@ -4,7 +4,7 @@ using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Behaviors;
 using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Internationalization;
-using Innoactive.Creator.Core.Utils.Builders;
+using Innoactive.Creator.Tests.Builder;
 using Innoactive.Creator.Tests.Utils;
 using Innoactive.Creator.Tests.Utils.Mocks;
 using UnityEngine.Assertions;

@@ -11,7 +11,7 @@ namespace Innoactive.CreatorEditor
     /// <summary>
     /// Can be run to setup the current scene as a training scene.
     /// </summary>
-    public static class TrainingSceneSetup
+    internal static class TrainingSceneSetup
     {
         /// <summary>
         /// Fetches all implementations of <see cref="SceneSetup"/> and runs it.

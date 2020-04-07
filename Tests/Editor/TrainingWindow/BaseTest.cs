@@ -28,7 +28,7 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         {
             get
             {
-                return EditorUtils.GetModuleFolder() + "/Editor/Tests/Windows/TrainingWindow/Records";
+                return EditorUtils.GetCoreFolder() + "/Tests/Editor/TrainingWindow/Records";
             }
         }
 

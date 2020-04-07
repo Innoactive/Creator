@@ -1,6 +1,6 @@
 namespace Innoactive.Creator.Unity
 {
-    public static class ConsoleUtils
+    internal static class ConsoleUtils
     {
         private const string tab = "    ";
 

@@ -8,7 +8,7 @@ namespace Innoactive.Creator.Core.Utils
     /// <summary>
     /// Utilities related to sorting elements in collections.
     /// </summary>
-    public static class SortingUtils
+    internal static class SortingUtils
     {
         /// <summary>
         /// Sorts elements using natural sort order.

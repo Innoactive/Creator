@@ -49,8 +49,8 @@ namespace Innoactive.Creator.Tests.Utils
             // When running it and changing the mode during execution several times,
             // Then the corresponding ActivationStageBehaviorMock of the current step is activated and deactivated accordingly.
             // The other ActivationStageBehaviorMock of the other steps stay inactive.
-            TrainingRunner.Initialize(course);
-            TrainingRunner.Run();
+            CourseRunner.Initialize(course);
+            CourseRunner.Run();
             course.Configure(unrestricted);
 
             yield return new WaitUntil(() => behavior1.LifeCycle.Stage == Stage.Activating);
@@ -136,8 +136,8 @@ namespace Innoactive.Creator.Tests.Utils
             // When running it and changing the mode during execution several times,
             // Then the corresponding ActivationStageBehaviorMock of the current step is activated and deactivated accordingly.
             // The other ActivationStageBehaviorMock of the other steps stay inactive.
-            TrainingRunner.Initialize(course);
-            TrainingRunner.Run();
+            CourseRunner.Initialize(course);
+            CourseRunner.Run();
             course.Configure(unrestricted);
 
             ICondition condition1 = course.Data.FirstChapter.Data.FirstStep.Data.Transitions.Data.Transitions[0].Data.Conditions[0];
