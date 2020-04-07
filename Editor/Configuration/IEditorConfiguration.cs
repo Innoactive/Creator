@@ -14,7 +14,7 @@ namespace Innoactive.CreatorEditor.Configuration
         /// <summary>
         /// Absolute path where training courses are stored.
         /// </summary>
-        string DefaultCourseStreamingAssetsFolder { get; }
+        string CourseStreamingAssetsFolder { get; }
 
         /// <summary>
         /// Assets path where to save the serialized <see cref="AllowedMenuItemsSettings"/> file.
