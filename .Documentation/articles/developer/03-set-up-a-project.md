@@ -17,7 +17,7 @@ The Innoactive Creator supports only Windows 10. We use Microsoft Text-to-Speech
 
 Now install Unity 2018.4.
 
-You can get it with the [Unity Hub](https://docs.unity3d.com/Manual/GettingStartedUnityHub.html), a standalone application that manages your Unity projects and editors's installations. Follow the [guide](https://docs.unity3d.com/Manual/GettingStartedInstallingHub.html) to install both the Unity Hub and the Unity Editor 2018.4.
+You can get it with the [Unity Hub](https://docs.unity3d.com/Manual/GettingStartedUnityHub.html), a standalone application that manages your Unity projects and editors' installations. Follow the [guide](https://docs.unity3d.com/Manual/GettingStartedInstallingHub.html) to install both the Unity Hub and the Unity Editor 2018.4.
 
 Alternatively, you can download Unity 2018.4 from the [LTS Releases page](https://unity3d.com/unity/qa/lts-releases?version=2018.4).
 
