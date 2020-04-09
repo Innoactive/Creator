@@ -45,24 +45,23 @@ The training course makes use of four training scene objects: the two interactab
 
 **Snap Zones**: These need, along with being training scene objects, a `Snap Zone Property` component and a properly configured snap zone. This can be accomplished by using the following components and configuration:
 
-* A [`SnapDropZone`](https://vrtoolkit.readme.io/docs/snap-drop-zone) component.
-    - The `Highlight Object Prefab` can be assigned an object used to display a preview of the object in the final snapped position. We could use directly the cube and the sphere, but we decided to use copies of those called `CubeSnapTarget` and `SphereSnapTarget`. This makes sure no logic is present on those object (e.g. `Training Scene Object` component) and allows to use a different transparent material.
-    - The `Snap Type` should be changed to `Joint` as it's the most reliable mode at the moment.
-    - The `Highlight Always Active` checkbox ensures snap targets are always visible, so we know where to snap the sphere and where to snap the cube.
+* A `SnapZone` component.
+    - The `Shown Highlight Object` can be assigned an object used to display a preview of the object in the final snapped position. We could use directly the cube and the sphere, but we decided to use copies of those called `CubeSnapTarget` and `SphereSnapTarget`. This makes sure no logic is present on those object (e.g. `Training Scene Object` component) and allows to use a different transparent material. This is optional and if not set, no object will be shown.
+    - The `Interactable Hover Mesh Material` can be assigned a material which will be used for showing the highlight object on hovering in the snap zone. This is optional and if not set, a default material will be created.
+    - The `Show Interactable Hover Mesh` checkbox ensures snap targets are visible, when an object is hovering in the snap zone.
     - All other settings, except colors, are set to default.
 * A [collider](https://docs.unity3d.com/Manual/CollidersOverview.html) with the `Is Trigger` checkbox ticked: the object will snap if inside this collider. Setting it to a trigger makes it possible to move through it instead of processing collisions. The colliders are respectively a `Box Collider` for the cube and a `Sphere Collider` for the sphere, both set to exactly the size of the snap target.
-* A [`Rigidbody`](https://docs.unity3d.com/Manual/class-Rigidbody.html) component: this is required by the `Fixed Joint`. The `Is Kinematic` checkbox is ticked to make sure it does not react to physics (i.e. the game object stays where we place it, and isn't moved by forces or gravity).
-* A [`Fixed Joint`](https://docs.unity3d.com/Manual/class-FixedJoint.html) component: this is required to operate the `SnapDropZone` in joint mode. No further configuration is required on this component.
+* A [`Rigidbody`](https://docs.unity3d.com/Manual/class-Rigidbody.html) component.
 
-#### Policy List
+#### Restricting Objects that can interact with a Snap Zone
 In our example, we want the *Cube* to only be snapped in its corresponding snap zone called _CubeSnapZone_ but not in the Snap Zone designated for the *Sphere*, called _SphereSnapZone_ and vice versa.
 
-For this, every `SnapDropZone` has a field called `Valid Object List Policy` that can be filled with a `VRTK_PolicyList`.
+For this, every `SnapZone` has a field called `Interaction Layer Mask`. In here you can set which objects can be snapped into this snap zone. It uses Unity's [Layers](https://docs.unity3d.com/Manual/Layers.html), so you can add new ones for your own need.
 
-With a *VRTK_PolicyList* it is possible to generate a list of [tags](https://docs.unity3d.com/Manual/Tags.html), [scripts](https://docs.unity3d.com/Manual/CreatingAndUsingScripts.html), and/or [layers](https://docs.unity3d.com/Manual/Layers.html). Depending on your choice (**Include** or **Ignored**), all GameObjects that match these criteria will then be either ignored or taken into account. Make sure the correct policy list is referenced by the corresponding `Snap Drop Zone`.
+Additionally, you have to assign the correct layer to the interactable objects - the cube and the sphere. Both objects have an `Interactable Object` component which has an `InteractionLayerMask` field. Only interactors which have one of the allowed layers can interact with this object. For the *Cube* everything but the layer _Sphere_ is selected and for the *Sphere* everything but the _Cube_ layer is checked. *Note:* It is recommended to only unselect the layers you do not want to allow interaction with otherwise you might remove controller interaction.
 
 
-> Learn more about [`VRTK_PolicyList`](https://vrtoolkit.readme.io/docs/vrtk_policylist).
+> Learn more about [`Interaction Layer Masks`](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@0.9/manual/index.html#interactionlayermask).
 
 ## Looping Example
 
@@ -122,7 +121,7 @@ The training mode can be selected from the drop-down list next to the `Start Tra
 
 **Scene:** `Assets/Examples/Advanced/ChaptersExample`
 
-This training course is built in multiple chapters. The first chapter requires the trainee to put the sphere in the box. In the second chapter, the trainee will snap the cube to the box in order to lock it. When this is done, the lid will descend and close the box.
+This training course is built in multiple chapters. The first chapter requires the trainee to put the sphere in the box. In the second chapter, the trainee will snap the cube to the box in order to lock it. When this is done, the lid will descend and close the box. In the final chapter the trainee's success is celebrated with some confetti. 
 
 ### Training Scene Objects
 
@@ -145,3 +144,5 @@ This training course is built in multiple chapters. The first chapter requires t
 **Lock Box/Snap Cube**: In the second chapter, the trainee is required to snap the cube in front of the box. This step is similar to the snapping steps in other examples, but note how it immediately enables the *CubeSnapZone*, making it visible in the scene.
 
 **Lock Box/Lock Box**: After the trainee is successful, this step takes care of animating the *BoxLid* via a `Move Object` behavior. The object will be moved to the position of `BoxLidTarget` and will reach the final position after 3 seconds.
+
+**Celebration/Confetti**: After the box has closed the final chapter is entered. In this chapter the success of the trainee is celebrated with confetti which is done in a single step with the custom `Spawn Confetti Behavior`.
