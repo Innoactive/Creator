@@ -45,7 +45,7 @@ The training course makes use of four training scene objects: the two interactab
 
 **Snap Zones**: These need, along with being training scene objects, a `Snap Zone Property` component and a properly configured snap zone. This can be accomplished by using the following components and configuration:
 
-* A [`SnapZone`](https://vrtoolkit.readme.io/docs/snap-drop-zone) component.
+* A `SnapZone` component.
     - The `Shown Highlight Object` can be assigned an object used to display a preview of the object in the final snapped position. We could use directly the cube and the sphere, but we decided to use copies of those called `CubeSnapTarget` and `SphereSnapTarget`. This makes sure no logic is present on those object (e.g. `Training Scene Object` component) and allows to use a different transparent material. This is optional and if not set, no object will be shown.
     - The `Interactable Hover Mesh Material` can be assigned a material which will be used for showing the highlight object on hovering in the snap zone. This is optional and if not set, a default material will be created.
     - The `Show Interactable Hover Mesh` checkbox ensures snap targets are visible, when an object is hovering in the snap zone.
