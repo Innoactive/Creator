@@ -53,7 +53,7 @@ The training course makes use of four training scene objects: the two interactab
 * A [collider](https://docs.unity3d.com/Manual/CollidersOverview.html) with the `Is Trigger` checkbox ticked: the object will snap if inside this collider. Setting it to a trigger makes it possible to move through it instead of processing collisions. The colliders are respectively a `Box Collider` for the cube and a `Sphere Collider` for the sphere, both set to exactly the size of the snap target.
 * A [`Rigidbody`](https://docs.unity3d.com/Manual/class-Rigidbody.html) component.
 
-#### Restricting Objects that can snap
+#### Restricting Objects that can interact with a Snap Zone
 In our example, we want the *Cube* to only be snapped in its corresponding snap zone called _CubeSnapZone_ but not in the Snap Zone designated for the *Sphere*, called _SphereSnapZone_ and vice versa.
 
 For this, every `SnapZone` has a field called `Interaction Layer Mask`. In here you can set which objects can be snapped into this snap zone. It uses Unity's [Layers](https://docs.unity3d.com/Manual/Layers.html), so you can add new ones for your own need.
