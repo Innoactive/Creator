@@ -100,7 +100,7 @@ namespace Innoactive.Creator.Core
         /// <summary>
         /// Skips the given amount of chapters.
         /// </summary>
-        /// <param name="numberOfChapters">Number of chapters</param>
+        /// <param name="numberOfChapters">Number of chapters.</param>
         public static void SkipChapters(int numberOfChapters)
         {
             IList<IChapter> chapters = Current.Data.Chapters;
