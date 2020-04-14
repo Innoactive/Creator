@@ -66,6 +66,12 @@ namespace Innoactive.CreatorEditor.PackageManager
         /// </summary>
         public static bool IsPackageLoaded(string package)
         {
+            if (package.Contains('@'))
+            {
+                string[] packageData = package.Split('@');
+                return packageCollection != null && packageCollection.Any(packageInfo => packageInfo.name == packageData.First() && packageInfo.version == packageData.Last());
+            }
+
             return packageCollection != null && packageCollection.Any(packageInfo => packageInfo.name == package);
         }
 
