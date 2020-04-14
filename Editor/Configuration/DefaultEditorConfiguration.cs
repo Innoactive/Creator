@@ -16,7 +16,7 @@ namespace Innoactive.CreatorEditor.Configuration
         private AllowedMenuItemsSettings allowedMenuItemsSettings;
 
         /// <inheritdoc />
-        public virtual string CourseStreamingAssetsFolder
+        public virtual string CourseStreamingAssetsSubdirectory
         {
             get { return "Training"; }
         }

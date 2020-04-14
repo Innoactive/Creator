@@ -18,19 +18,14 @@ namespace Innoactive.CreatorEditor
 
         private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
         {
-            if (CourseFileStructureChanged != null && (
-                GetTrainingCourseAssets(importedAssets).Any() ||
-                GetTrainingCourseAssets(deletedAssets).Any() ||
-                GetTrainingCourseAssets(movedAssets).Any() ||
-                GetTrainingCourseAssets(movedFromAssetPaths).Any()))
+            if (CourseFileStructureChanged != null &&
+                importedAssets.Concat(deletedAssets)
+                    .Concat(movedAssets)
+                    .Concat(movedFromAssetPaths)
+                    .Any(CourseAssetManager.IsCourseAsset))
             {
                 CourseFileStructureChanged.Invoke(null, new CourseAssetPostprocessorEventArgs());
             }
-        }
-
-        private static IEnumerable<string> GetTrainingCourseAssets(IEnumerable<string> assets)
-        {
-            return assets.Where(CourseUtils.IsCourseFile).ToArray();
         }
     }
 

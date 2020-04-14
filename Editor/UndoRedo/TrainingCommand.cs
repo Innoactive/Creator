@@ -13,26 +13,19 @@ namespace Innoactive.CreatorEditor.UndoRedo
         /// <inheritdoc />
         public override void Do()
         {
-            if (TrainingWindow.IsOpen)
-            {
-                wasDirty = TrainingWindow.GetWindow().IsDirty;
-                TrainingWindow.GetWindow().IsDirty = true;
-            }
-
             base.Do();
+            CourseAssetManager.Save();
         }
 
         /// <inheritdoc />
         public override void Undo()
         {
             base.Undo();
-
-            if (TrainingWindow.IsOpen)
-            {
-                TrainingWindow.GetWindow().IsDirty = wasDirty;
-            }
+            CourseAssetManager.Save();
         }
 
-        public TrainingCommand(Action doCallback, Action undoCallback) : base(doCallback, undoCallback) { }
+        public TrainingCommand(Action doCallback, Action undoCallback) : base(doCallback, undoCallback)
+        {
+        }
     }
 }

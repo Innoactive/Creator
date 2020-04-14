@@ -1,6 +1,5 @@
-﻿using System.IO;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Configuration;
+﻿using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.ImguiTester;
 using Innoactive.CreatorEditor.UndoRedo;
 using UnityEditor;
 using UnityEngine;
@@ -68,49 +67,45 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             if ((Event.current.keyCode == KeyCode.Return || Event.current.keyCode == KeyCode.KeypadEnter))
             {
-                if (string.IsNullOrEmpty(newName) == false && ValidateCourseName(newName))
+                if (CourseAssetManager.CanRename(course, newName, out string error) == false)
+                {
+                    if (string.IsNullOrEmpty(error) == false && string.IsNullOrEmpty(error) == false)
+                    {
+                        TestableEditorElements.DisplayDialog("Cannot rename the course", error, "OK");
+                    }
+                }
+                else
                 {
                     string oldName = course.Data.Name;
-                    string oldPath = CourseUtils.GetAbsoluteCoursePath(oldName);
-                    string oldFolder = Path.GetDirectoryName(oldPath);
-                    string newPath = CourseUtils.GetAbsoluteCoursePath(newName);
-                    string newFolder = Path.GetDirectoryName(newPath);
 
                     RevertableChangesHandler.Do(new TrainingCommand(
-                        // ReSharper disable once ImplicitlyCapturedClosure
                         () =>
                         {
-                            if (ValidateCourseName(newName))
+                            if (CourseAssetManager.CanRename(course, newName, out string errorMessage) == false)
                             {
-                                Directory.Move(oldFolder, newFolder);
-                                File.Move(string.Format("{0}.meta", oldFolder), string.Format("{0}.meta", newFolder));
-                                File.Move(string.Format("{0}/{1}.json", newFolder, oldName), newPath);
-                                File.Move(string.Format("{0}/{1}.json.meta", newFolder, oldName), string.Format("{0}.meta", newPath));
-                                course.Data.Name = newName;
+                                if (string.IsNullOrEmpty(errorMessage) == false)
+                                {
+                                    TestableEditorElements.DisplayDialog("Cannot rename the course", errorMessage, "OK");
+                                }
 
-                                SaveManager.SaveTrainingCourseToFile(course);
-                                RuntimeConfigurator.Instance.SetSelectedTrainingCourse(CourseUtils.GetCoursePath(course));
-                                TrainingWindow.GetWindow().IsDirty = false;
-                                AssetDatabase.Refresh();
+                                RevertableChangesHandler.FlushStack();
                             }
+
+                            CourseAssetManager.RenameCourse(course, newName);
                         },
-                        // ReSharper disable once ImplicitlyCapturedClosure
                         () =>
                         {
-                            if (Directory.Exists(newFolder) == false)
+                            if (CourseAssetManager.CanRename(course, newName, out string errorMessage) == false)
                             {
-                                return;
+                                if (string.IsNullOrEmpty(errorMessage) == false)
+                                {
+                                    TestableEditorElements.DisplayDialog("Cannot rename the course", errorMessage, "OK");
+                                }
+
+                                RevertableChangesHandler.FlushStack();
                             }
 
-                            Directory.Move(newFolder, oldFolder);
-                            File.Move(string.Format("{0}.meta", newFolder), string.Format("{0}.meta", oldFolder));
-                            File.Move(string.Format("{0}/{1}.json", oldFolder, newName), oldPath);
-                            File.Move(string.Format("{0}/{1}.json.meta", oldFolder, newName), string.Format("{0}.meta", oldPath));
-                            course.Data.Name = oldName;
-
-                            SaveManager.SaveTrainingCourseToFile(course);
-                            RuntimeConfigurator.Instance.SetSelectedTrainingCourse(oldPath.Substring(Application.streamingAssetsPath.Length + 1));
-                            AssetDatabase.Refresh();
+                            CourseAssetManager.RenameCourse(course, oldName);
                         }
                     ));
                 }
@@ -125,33 +120,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 instance.IsClosed = true;
                 Event.current.Use();
             }
-        }
-
-        private bool ValidateCourseName(string courseName)
-        {
-            if (course.Data.Name.Equals(courseName))
-            {
-                return false;
-            }
-
-            int invalidCharacterIndex = -1;
-            if ((invalidCharacterIndex = courseName.IndexOfAny(Path.GetInvalidFileNameChars())) >= 0)
-            {
-                EditorUtility.DisplayDialog("Changing the course name failed",
-                    string.Format("Course name contains invalid character: {0}",
-                        courseName[invalidCharacterIndex]), "ok");
-                return false;
-            }
-
-            string newFolder = Path.GetDirectoryName(CourseUtils.GetCoursePath(courseName));
-            if (Directory.Exists(newFolder))
-            {
-                EditorUtility.DisplayDialog("Changing the course name failed",
-                    string.Format("Training course with name \"{0}\" already exists!", courseName), "ok");
-                return false;
-            }
-
-            return true;
         }
     }
 }

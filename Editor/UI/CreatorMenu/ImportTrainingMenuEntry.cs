@@ -39,16 +39,16 @@ namespace Innoactive.CreatorEditor.CreatorMenu
             }
             else
             {
-                ChooseSerializerPopup.Show(result, (serializer) => { StartImport(path, serializer); });
+                ChooseSerializerPopup.Show(result, (serializer) =>
+                {
+                    StartImport(path, serializer);
+                });
             }
         }
 
         private static void StartImport(string path, ICourseSerializer serializer)
         {
-            if (CourseUtils.ImportTrainingCourse(path, serializer))
-            {
-                EditorUtility.DisplayDialog("Training successfully imported", "Your training course was successfully imported.", "OK");
-            }
+            CourseAssetManager.Import(path, serializer);
         }
 
         private static List<ICourseSerializer> GetFittingSerializer(string format)

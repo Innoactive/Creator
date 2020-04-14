@@ -72,36 +72,28 @@ namespace Innoactive.CreatorEditor.UI.Windows
         {
             get
             {
-                return Course.Data.Chapters[activeChapter];
+                return CourseAssetManager.TrackedCourse?.Data.Chapters[activeChapter];
             }
         }
         #endregion
-
-        protected ICourse Course { get; private set; }
 
         protected TrainingWindow ParentWindow { get; private set; }
 
         [SerializeField]
         private Vector2 scrollPosition;
 
-        private ChangeNamePopup changeNamePopup;
+        private ChangeNamePopup renameChapterPopup;
         private RenameCoursePopup renameCoursePopup;
 
         /// <summary>
         /// Initialises the windows with the correct training and TrainingWindow (parent).
         /// This has to be done after every time the editor reloaded the assembly (recompile).
         /// </summary>
-        public void Initialise(ICourse course, TrainingWindow parent)
+        public void Initialise(TrainingWindow parent)
         {
-            Course = course;
             ParentWindow = parent;
 
             activeChapter = 0;
-
-            if (deleteIcon == null)
-            {
-                LoadIcons();
-            }
         }
 
         private void LoadIcons()
@@ -120,6 +112,16 @@ namespace Innoactive.CreatorEditor.UI.Windows
         /// </summary>
         public void Draw()
         {
+            if (deleteIcon == null)
+            {
+                LoadIcons();
+            }
+
+            if (CourseAssetManager.TrackedCourse == null)
+            {
+                return;
+            }
+
             IsExtended = isExtended;
             GUILayout.BeginArea(new Rect(0f, 0f, IsExtended ? ExtendedMenuWidth : MinimizedMenuWidth, ParentWindow.position.size.y));
             {
@@ -145,7 +147,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                     }
                     GUILayout.EndScrollView();
 
-                    if (changeNamePopup == null || changeNamePopup.IsClosed)
+                    if (renameChapterPopup == null || renameChapterPopup.IsClosed)
                     {
                         scrollPosition = deltaPosition;
                     }
@@ -168,26 +170,17 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 EditorGUILayout.LabelField(labelContent, labelStyle, GUILayout.Width(labelStyle.CalcSize(labelContent).x));
 
                 GUIStyle nameStyle = new GUIStyle(EditorStyles.label) { wordWrap = true };
-                GUIContent nameContent = new GUIContent(Course.Data.Name, Course.Data.Name);
+                GUIContent nameContent = new GUIContent(CourseAssetManager.TrackedCourse.Data.Name, CourseAssetManager.TrackedCourse.Data.Name);
 
                 if (renameCoursePopup == null || renameCoursePopup.IsClosed)
                 {
-                    EditorGUILayout.LabelField(Course.Data.Name, nameStyle, GUILayout.Width(180f), GUILayout.Height(nameStyle.CalcHeight(nameContent, 180f)));Rect labelPosition = GUILayoutUtility.GetLastRect();
+                    EditorGUILayout.LabelField(CourseAssetManager.TrackedCourse.Data.Name, nameStyle, GUILayout.Width(180f), GUILayout.Height(nameStyle.CalcHeight(nameContent, 180f)));Rect labelPosition = GUILayoutUtility.GetLastRect();
                     if (FlatIconButton(editIcon.Texture))
                     {
                         labelPosition = new Rect(labelPosition.x + ParentWindow.position.x - 2, labelPosition.height + labelPosition.y + ParentWindow.position.y + 4 + ExpandButtonHeight, labelPosition.width, labelPosition.height);
-                        renameCoursePopup = RenameCoursePopup.Open(Course, labelPosition, scrollPosition);
+                        renameCoursePopup = RenameCoursePopup.Open(CourseAssetManager.TrackedCourse, labelPosition, scrollPosition);
                     }
                 }
-            }
-            GUILayout.EndHorizontal();
-
-            GUILayout.Space(VerticalSpace);
-
-            GUILayout.BeginHorizontal();
-            {
-                GUILayout.FlexibleSpace();
-                AddSaveButton();
             }
             GUILayout.EndHorizontal();
         }
@@ -204,7 +197,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             GUILayout.Space(VerticalSpace);
 
-            for (int position = 0; position < Course.Data.Chapters.Count; position++)
+            for (int position = 0; position < CourseAssetManager.TrackedCourse.Data.Chapters.Count; position++)
             {
                 DrawChapter(position);
             }
@@ -268,13 +261,13 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
                 GUIStyle style = new GUIStyle(GUI.skin.label);
                 style.alignment = TextAnchor.MiddleLeft;
-                GUILayout.Label(Course.Data.Chapters[position].Data.Name, style, GUILayout.Width(160f), GUILayout.Height(20f));
+                GUILayout.Label(CourseAssetManager.TrackedCourse.Data.Chapters[position].Data.Name, style, GUILayout.Width(160f), GUILayout.Height(20f));
                 Rect labelPosition = GUILayoutUtility.GetLastRect();
 
                 GUILayout.FlexibleSpace();
                 AddMoveUpButton(position);
                 AddMoveDownButton(position);
-                AddRemoveButton(position, Course.Data.Chapters.Count == 1);
+                AddRemoveButton(position, CourseAssetManager.TrackedCourse.Data.Chapters.Count == 1);
                 AddRenameButton(position, labelPosition);
             }
             GUILayout.EndHorizontal();
@@ -294,13 +287,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
         #endregion
 
         #region Button Actions
-        private void AddSaveButton()
-        {
-            if (GUILayout.Button("Save", GUILayout.Width(80f)))
-            {
-                TrainingWindow.GetWindow().SaveTraining();
-            }
-        }
 
         private void AddMoveUpButton(int position)
         {
@@ -328,7 +314,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
         {
             if (FlatIconButton(arrowDownIcon.Texture))
             {
-                if (position + 1 < Course.Data.Chapters.Count)
+                if (position + 1 < CourseAssetManager.TrackedCourse.Data.Chapters.Count)
                 {
                     RevertableChangesHandler.Do(new TrainingCommand(
                         // ReSharper disable once ImplicitlyCapturedClosure
@@ -351,7 +337,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             if (FlatIconButton(editIcon.Texture))
             {
                 labelPosition = new Rect(labelPosition.x + ParentWindow.position.x - 2, labelPosition.height + labelPosition.y + ParentWindow.position.y + 4 + ExpandButtonHeight, labelPosition.width, labelPosition.height);
-                changeNamePopup = ChangeNamePopup.Open(Course.Data.Chapters[position].Data, labelPosition, scrollPosition);
+                renameChapterPopup = ChangeNamePopup.Open(CourseAssetManager.TrackedCourse.Data.Chapters[position].Data, labelPosition, scrollPosition);
             }
         }
 
@@ -361,9 +347,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 if (FlatIconButton(deleteIcon.Texture))
                 {
-                    IChapter chapter = Course.Data.Chapters[position];
-                    bool isDeleteTriggered = EditorUtility.DisplayDialog(string.Format("Delete Chapter '{0}'", chapter.Data.Name),
-                        string.Format("Do you really want to delete chapter '{0}'? You will lose all steps stored there.", chapter.Data.Name), "Delete",
+                    IChapter chapter = CourseAssetManager.TrackedCourse.Data.Chapters[position];
+                    bool isDeleteTriggered = EditorUtility.DisplayDialog($"Delete Chapter '{chapter.Data.Name}'",
+                        $"Do you really want to delete chapter '{chapter.Data.Name}'? You will lose all steps stored there.", "Delete",
                         "Cancel");
 
                     if (isDeleteTriggered)
@@ -377,7 +363,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                             // ReSharper disable once ImplicitlyCapturedClosure
                             () =>
                             {
-                                Course.Data.Chapters.Insert(position, chapter);
+                                CourseAssetManager.TrackedCourse.Data.Chapters.Insert(position, chapter);
                                 if (position == activeChapter)
                                 {
                                     EmitChapterChanged();
@@ -404,14 +390,14 @@ namespace Innoactive.CreatorEditor.UI.Windows
                         // ReSharper disable once ImplicitlyCapturedClosure
                         () =>
                         {
-                            Course.Data.Chapters.Add(new Chapter("Chapter " + (Course.Data.Chapters.Count + 1), null));
-                            activeChapter = Course.Data.Chapters.Count - 1;
+                            CourseAssetManager.TrackedCourse.Data.Chapters.Add(new Chapter("Chapter " + (CourseAssetManager.TrackedCourse.Data.Chapters.Count + 1), null));
+                            activeChapter = CourseAssetManager.TrackedCourse.Data.Chapters.Count - 1;
                             EmitChapterChanged();
                         },
                         // ReSharper disable once ImplicitlyCapturedClosure
                         () =>
                         {
-                            RemoveChapterAt(Course.Data.Chapters.Count - 1);
+                            RemoveChapterAt(CourseAssetManager.TrackedCourse.Data.Chapters.Count - 1);
                         }
                     ));
                 }
@@ -428,9 +414,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
         #region Private helpers
         private void MoveChapterUp(int position)
         {
-            IChapter chapter = Course.Data.Chapters[position];
-            Course.Data.Chapters.RemoveAt(position);
-            Course.Data.Chapters.Insert(position - 1, chapter);
+            IChapter chapter = CourseAssetManager.TrackedCourse.Data.Chapters[position];
+            CourseAssetManager.TrackedCourse.Data.Chapters.RemoveAt(position);
+            CourseAssetManager.TrackedCourse.Data.Chapters.Insert(position - 1, chapter);
 
             if (activeChapter == position)
             {
@@ -444,9 +430,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void MoveChapterDown(int position)
         {
-            IChapter chapter = Course.Data.Chapters[position];
-            Course.Data.Chapters.RemoveAt(position);
-            Course.Data.Chapters.Insert(position + 1, chapter);
+            IChapter chapter = CourseAssetManager.TrackedCourse.Data.Chapters[position];
+            CourseAssetManager.TrackedCourse.Data.Chapters.RemoveAt(position);
+            CourseAssetManager.TrackedCourse.Data.Chapters.Insert(position + 1, chapter);
 
             if (activeChapter == position)
             {
@@ -476,21 +462,18 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void EmitChapterChanged()
         {
-            if (ChapterChanged != null)
-            {
-                ChapterChanged.Invoke(this, new ChapterChangedEventArgs(CurrentChapter));
-            }
+            ChapterChanged?.Invoke(this, new ChapterChangedEventArgs(CurrentChapter));
         }
 
         private void RemoveChapterAt(int position)
         {
             if (position > 0)
             {
-                Course.Data.Chapters.RemoveAt(position);
+                CourseAssetManager.TrackedCourse.Data.Chapters.RemoveAt(position);
             }
-            else if (Course.Data.Chapters.Count > 1)
+            else if (CourseAssetManager.TrackedCourse.Data.Chapters.Count > 1)
             {
-                Course.Data.Chapters.RemoveAt(position);
+                CourseAssetManager.TrackedCourse.Data.Chapters.RemoveAt(position);
             }
 
             if (position < activeChapter)
@@ -500,7 +483,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             if (activeChapter == position)
             {
-                if (Course.Data.Chapters.Count == position)
+                if (CourseAssetManager.TrackedCourse.Data.Chapters.Count == position)
                 {
                     activeChapter--;
                 }

@@ -1,6 +1,4 @@
-﻿using System.IO;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Configuration;
+﻿using Innoactive.Creator.Core.Configuration;
 using UnityEditor;
 using UnityEngine;
 
@@ -37,7 +35,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             window.Focus();
         }
 
-        private string trainingName;
+        private string courseName;
         private Vector2 scrollPosition;
         private string errorMessage;
 
@@ -61,51 +59,31 @@ namespace Innoactive.CreatorEditor.UI.Windows
             }
 
             EditorGUI.BeginDisabledGroup(RuntimeConfigurator.Exists == false);
-            EditorGUILayout.LabelField("<b>Create a new training course.</b>", labelStyle);
-
-            trainingName = EditorGUILayout.TextField(new GUIContent("Training Course Name", "Set a file name for the new training course."), trainingName);
-
-            EditorGUILayout.LabelField("The new course will be set for the current scene.");
-
-            GUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-            // ReSharper disable once InvertIf
-            if (GUILayout.Button("Create", GUILayout.Width(128), GUILayout.Height(32)))
             {
-                int invalidCharacterIndex;
+                EditorGUILayout.LabelField("<b>Create a new training course.</b>", labelStyle);
 
-                if (string.IsNullOrEmpty(trainingName))
-                {
-                    errorMessage = "Training course name is empty!";
-                }
-                else if ((invalidCharacterIndex = trainingName.IndexOfAny(Path.GetInvalidFileNameChars())) >= 0)
-                {
-                    errorMessage = string.Format("Course name contains invalid character: {0}", trainingName[invalidCharacterIndex]);
-                }
-                else
-                {
-                    string trainingCoursePath = CourseUtils.GetCoursePath(trainingName);
-                    string trainingCourseFolder = Path.GetDirectoryName(trainingCoursePath);
+                courseName = EditorGUILayout.TextField(new GUIContent("Training Course Name", "Set a file name for the new training course."), courseName);
 
-                    if (Directory.Exists(trainingCourseFolder))
+                EditorGUILayout.LabelField("The new course will be set for the current scene.");
+
+                GUILayout.BeginHorizontal();
+                {
+                    GUILayout.FlexibleSpace();
+
+                    if (GUILayout.Button("Create", GUILayout.Width(128), GUILayout.Height(32)))
                     {
-                        errorMessage = string.Format("Training course with name \"{0}\" already exists!", trainingName);
-                    }
-                    else
-                    {
-                        ICourse course = CourseUtils.CreateCourse(trainingName);
-                        if (CourseUtils.SetTrainingCourseActive(course))
+                        if (CourseAssetManager.CanCreate(courseName, out errorMessage))
                         {
-                            Debug.Log("Newly created course saved.");
-                            Close();
+                            CourseAssetManager.CreateEmpty(courseName);
+                            CourseAssetManager.Track(courseName);
                         }
                     }
-                }
-            }
 
+                    GUILayout.FlexibleSpace();
+                }
+                GUILayout.EndHorizontal();
+            }
             EditorGUI.EndDisabledGroup();
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
 
             if (string.IsNullOrEmpty(errorMessage) == false)
             {
