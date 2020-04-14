@@ -112,7 +112,7 @@ namespace Innoactive.Creator.Core
         }
 
         /// <summary>
-        /// Skips the current step and using given transition.
+        /// Skips the current step and uses given transition.
         /// </summary>
         /// <param name="transition">Transition which should be used.</param>
         public static void SkipStep(ITransition transition)
