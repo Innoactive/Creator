@@ -69,7 +69,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             Action doCallback = () => assignValueCallback(getNewValueCallback());
             // ReSharper disable once ImplicitlyCapturedClosure
             Action undoCallback = () => assignValueCallback(getOldValueCallback());
-            RevertableChangesHandler.Do(new TrainingCommand(doCallback, undoCallback));
+            RevertableChangesHandler.Do(new CourseCommand(doCallback, undoCallback));
         }
     }
 }

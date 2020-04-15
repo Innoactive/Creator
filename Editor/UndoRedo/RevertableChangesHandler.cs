@@ -86,7 +86,7 @@ namespace Innoactive.CreatorEditor.UndoRedo
                 List<IRevertableCommand> undoCommands = groupedCommands[groupName];
                 List<IRevertableCommand> redoCommands = undoCommands;
 
-                RegisterCommand(new TrainingCommand(
+                RegisterCommand(new CourseCommand(
                     ()=>
                     {
                         foreach (IRevertableCommand command in redoCommands)

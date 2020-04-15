@@ -7,9 +7,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
     /// <summary>
     /// Wizard for training course creation and management.
     /// </summary>
-    public class TrainingWizard : EditorWindow
+    public class CreatingCourseWizard : EditorWindow
     {
-        private static TrainingWizard window;
+        private static CreatingCourseWizard window;
         private const string menuPath = "Innoactive/Creator/Create New Course...";
 
         [MenuItem(menuPath, false, 12)]
@@ -17,7 +17,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
         {
             if (window == null)
             {
-                TrainingWizard[] openedTrainingWizards = Resources.FindObjectsOfTypeAll<TrainingWizard>();
+                CreatingCourseWizard[] openedTrainingWizards = Resources.FindObjectsOfTypeAll<CreatingCourseWizard>();
 
                 if (openedTrainingWizards.Length > 1)
                 {
@@ -28,7 +28,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                     Debug.LogWarning("There were more than one create course windows open. This should not happen. The redundant windows were closed.");
                 }
 
-                window = openedTrainingWizards.Length > 0 ? openedTrainingWizards[0] : GetWindow<TrainingWizard>();
+                window = openedTrainingWizards.Length > 0 ? openedTrainingWizards[0] : GetWindow<CreatingCourseWizard>();
             }
 
             window.Show();

@@ -11,7 +11,7 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
     /// <summary>
     /// Base class for all training window tests.
     /// </summary>
-    public abstract class BaseTest : EditorImguiTest<TrainingWindow>
+    public abstract class BaseTest : EditorImguiTest<CourseWindow>
     {
         /// <summary>
         /// Returns all <see cref="ITransition"/>s contained in given <see cref="IStep"/>.
@@ -27,9 +27,9 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         }
 
         /// <summary>
-        /// Returns the <see cref="ICourse"/> contained in given <see cref="TrainingWindow"/>.
+        /// Returns the <see cref="ICourse"/> contained in given <see cref="CourseWindow"/>.
         /// </summary>
-        protected static ICourse ExtractTraining(TrainingWindow window)
+        protected static ICourse ExtractTraining(CourseWindow window)
         {
             ICourse course = CourseAssetManager.TrackedCourse;
             Assert.NotNull(course);
@@ -67,13 +67,13 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         }
 
         /// <inheritdoc />
-        protected override TrainingWindow Given()
+        protected override CourseWindow Given()
         {
             CourseAssetManager.Import(new Course("Test", new Chapter("Test", null)));
-            TrainingWindow window = ScriptableObject.CreateInstance<TrainingWindow>();
+            CourseWindow window = ScriptableObject.CreateInstance<CourseWindow>();
             window.ShowUtility();
             window.position = new Rect(Vector2.zero, window.position.size);
-            window.minSize = TrainingWindow.GetWindow().maxSize = new Vector2(1024f, 512f);
+            window.minSize = CourseWindow.GetWindow().maxSize = new Vector2(1024f, 512f);
             CourseAssetManager.Track("Test");
 
             return window;

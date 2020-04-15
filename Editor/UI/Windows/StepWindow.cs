@@ -20,11 +20,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
         private Rect stepRect;
 
         /// <summary>
-        /// Returns true if there is an instance of <see cref="TrainingWindow"/> is opened.
+        /// Returns true if there is an instance of <see cref="CourseWindow"/> is opened.
         /// </summary>
         public static bool IsTrainingWindowOpen
         {
-            get { return EditorUtils.IsWindowOpened<TrainingWindow>(); }
+            get { return EditorUtils.IsWindowOpened<CourseWindow>(); }
         }
 
         /// <summary>
@@ -64,9 +64,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void OnGUI()
         {
-            if (TrainingWindow.IsOpen && TrainingWindow.GetWindow().GetChapter() != null)
+            if (CourseWindow.IsOpen && CourseWindow.GetWindow().GetChapter() != null)
             {
-                step = TrainingWindow.GetWindow().GetChapter().ChapterMetadata.LastSelectedStep;
+                step = CourseWindow.GetWindow().GetChapter().ChapterMetadata.LastSelectedStep;
             }
 
             titleContent = new GUIContent("Step");
@@ -95,10 +95,10 @@ namespace Innoactive.CreatorEditor.UI.Windows
         private void SetStep(object step)
         {
             this.step = (Step)step;
-            if (TrainingWindow.IsOpen)
+            if (CourseWindow.IsOpen)
             {
-                TrainingWindow.GetWindow().GetChapter().ChapterMetadata.LastSelectedStep = this.step;
-                TrainingWindow.GetWindow().RefreshChapterRepresentation();
+                CourseWindow.GetWindow().GetChapter().ChapterMetadata.LastSelectedStep = this.step;
+                CourseWindow.GetWindow().RefreshChapterRepresentation();
             }
         }
     }

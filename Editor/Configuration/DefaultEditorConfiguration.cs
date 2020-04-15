@@ -34,6 +34,18 @@ namespace Innoactive.CreatorEditor.Configuration
         }
 
         /// <inheritdoc />
+        public virtual ReadOnlyCollection<MenuOption<IBehavior>> BehaviorsMenuContent
+        {
+            get { return AllowedMenuItemsSettings.GetBehaviorMenuOptions().Cast<MenuOption<IBehavior>>().ToList().AsReadOnly(); }
+        }
+
+        /// <inheritdoc />
+        public virtual ReadOnlyCollection<MenuOption<ICondition>> ConditionsMenuContent
+        {
+            get { return AllowedMenuItemsSettings.GetConditionMenuOptions().Cast<MenuOption<ICondition>>().ToList().AsReadOnly(); }
+        }
+
+        /// <inheritdoc />
         public virtual AllowedMenuItemsSettings AllowedMenuItemsSettings
         {
             get
@@ -50,18 +62,6 @@ namespace Innoactive.CreatorEditor.Configuration
 
         protected DefaultEditorConfiguration()
         {
-        }
-
-        /// <inheritdoc />
-        public virtual ReadOnlyCollection<MenuOption<IBehavior>> BehaviorsMenuContent
-        {
-            get { return AllowedMenuItemsSettings.GetBehaviorMenuOptions().Cast<MenuOption<IBehavior>>().ToList().AsReadOnly(); }
-        }
-
-        /// <inheritdoc />
-        public virtual ReadOnlyCollection<MenuOption<ICondition>> ConditionsMenuContent
-        {
-            get { return AllowedMenuItemsSettings.GetConditionMenuOptions().Cast<MenuOption<ICondition>>().ToList().AsReadOnly(); }
         }
     }
 }

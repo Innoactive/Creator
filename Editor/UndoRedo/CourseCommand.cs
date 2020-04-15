@@ -4,9 +4,9 @@ using Innoactive.CreatorEditor.UI.Windows;
 namespace Innoactive.CreatorEditor.UndoRedo
 {
     /// <summary>
-    /// A <see cref="CallbackCommand"/> which marks <see cref="TrainingWindow"/> as dirty.
+    /// A <see cref="CallbackCommand"/> which makes the <seealso cref="CourseAssetManager"/> to save the course.
     /// </summary>
-    public class TrainingCommand : CallbackCommand
+    public class CourseCommand : CallbackCommand
     {
         private bool wasDirty;
 
@@ -24,7 +24,7 @@ namespace Innoactive.CreatorEditor.UndoRedo
             CourseAssetManager.Save();
         }
 
-        public TrainingCommand(Action doCallback, Action undoCallback) : base(doCallback, undoCallback)
+        public CourseCommand(Action doCallback, Action undoCallback) : base(doCallback, undoCallback)
         {
         }
     }

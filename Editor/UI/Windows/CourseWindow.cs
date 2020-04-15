@@ -8,9 +8,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
     /// <summary>
     /// Workflow Editor window.
     /// </summary>
-    public class TrainingWindow : EditorWindow
+    public class CourseWindow : EditorWindow
     {
-        private static TrainingWindow window;
+        private static CourseWindow window;
 
         [SerializeField]
         private Vector2 currentScrollPosition;
@@ -21,32 +21,30 @@ namespace Innoactive.CreatorEditor.UI.Windows
         private EditorIcon titleIcon;
 
         [SerializeField]
-        private TrainingMenuView chapterMenu;
+        private CourseMenuView chapterMenu;
 
         private ChapterRepresentation chapterRepresentation;
 
+        /// <summary>
+        /// Is this window open?
+        /// </summary>
         public static bool IsOpen
         {
-            get { return EditorUtils.IsWindowOpened<TrainingWindow>(); }
+            get { return EditorUtils.IsWindowOpened<CourseWindow>(); }
         }
 
-        public static TrainingWindow GetWindow()
+        /// <summary>
+        /// Returns the instance of currently opened window. Opens a new one if there is none.
+        /// </summary>
+        public static CourseWindow GetWindow()
         {
             if (IsOpen == false)
             {
-                window = GetWindow<TrainingWindow>();
+                window = GetWindow<CourseWindow>();
                 window.minSize = new Vector2(400f, 100f);
             }
 
             return window;
-        }
-
-        private void SetTrainingCourse(ICourse course)
-        {
-            lastEditedCourse = course?.Data.Name;
-
-            RevertableChangesHandler.FlushStack();
-            chapterRepresentation.SetChapter(course?.Data.FirstChapter);
         }
 
         public void RefreshChapterRepresentation()
@@ -64,10 +62,20 @@ namespace Innoactive.CreatorEditor.UI.Windows
             chapterRepresentation.SetChapter(chapterMenu.CurrentChapter);
         }
 
-
+        /// <summary>
+        /// Returns the chapter which is currently selected by the user.
+        /// </summary>
         public IChapter GetChapter()
         {
             return CourseAssetManager.TrackedCourse == null ? null : chapterMenu.CurrentChapter;
+        }
+
+        private void SetCourse(ICourse course)
+        {
+            lastEditedCourse = course?.Data.Name;
+
+            RevertableChangesHandler.FlushStack();
+            chapterRepresentation.SetChapter(course?.Data.FirstChapter);
         }
 
         private void OnInspectorUpdate()
@@ -86,7 +94,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             if (chapterMenu == null)
             {
-                chapterMenu = CreateInstance<TrainingMenuView>();
+                chapterMenu = CreateInstance<CourseMenuView>();
                 chapterMenu.Initialise(this);
             }
 
@@ -127,7 +135,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
         {
             if (CourseAssetManager.TrackedCourse?.Data.Name != lastEditedCourse)
             {
-                SetTrainingCourse(CourseAssetManager.TrackedCourse);
+                SetCourse(CourseAssetManager.TrackedCourse);
             }
 
             if (CourseAssetManager.TrackedCourse == null)
@@ -137,7 +145,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             SetTabName();
 
-            float width = chapterMenu.IsExtended ? TrainingMenuView.ExtendedMenuWidth : TrainingMenuView.MinimizedMenuWidth;
+            float width = chapterMenu.IsExtended ? CourseMenuView.ExtendedMenuWidth : CourseMenuView.MinimizedMenuWidth;
             Rect scrollRect = EditorDrawingHelper.GetNextLineRect(new Rect(width, 0f, position.size.x - width, position.size.y));
 
             Vector2 centerViewpointOnCanvas = currentScrollPosition + scrollRect.size / 2f;

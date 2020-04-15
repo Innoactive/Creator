@@ -78,7 +78,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 }
 
                 string oldName = nameable.Name;
-                RevertableChangesHandler.Do(new TrainingCommand(
+                RevertableChangesHandler.Do(new CourseCommand(
                     // ReSharper disable once ImplicitlyCapturedClosure
                     () =>
                     {

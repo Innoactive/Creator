@@ -70,9 +70,9 @@ namespace Innoactive.CreatorEditor.Configuration
                 {
                     if (GUILayout.Button("Open course in Workflow Editor"))
                     {
-                        TrainingWindow trainingWindow = TrainingWindow.GetWindow();
+                        CourseWindow courseWindow = CourseWindow.GetWindow();
                         CourseAssetManager.Track(configurator.GetSelectedCourse());
-                        trainingWindow.Focus();
+                        courseWindow.Focus();
                     }
 
                     if (GUILayout.Button(new GUIContent("Show course folder in Explorer...")))

@@ -28,7 +28,7 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         }
 
         /// <inheritdoc />
-        protected override void Then(TrainingWindow window)
+        protected override void Then(CourseWindow window)
         {
             ICourse result = ExtractTraining(window);
 

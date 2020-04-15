@@ -78,7 +78,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 {
                     string oldName = course.Data.Name;
 
-                    RevertableChangesHandler.Do(new TrainingCommand(
+                    RevertableChangesHandler.Do(new CourseCommand(
                         () =>
                         {
                             if (CourseAssetManager.CanRename(course, newName, out string errorMessage) == false)

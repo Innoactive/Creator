@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Innoactive.Creator.Tests.TrainingWizardTests
 {
-    public class CreateTrainingTest : EditorImguiTest<TrainingWizard>
+    public class CreateTrainingTest : EditorImguiTest<CreatingCourseWizard>
     {
         public override string GivenDescription
         {
@@ -40,39 +40,39 @@ namespace Innoactive.Creator.Tests.TrainingWizardTests
             }
         }
 
-        protected override TrainingWizard Given()
+        protected override CreatingCourseWizard Given()
         {
-            foreach (TrainingWizard window in Resources.FindObjectsOfTypeAll<TrainingWizard>())
+            foreach (CreatingCourseWizard window in Resources.FindObjectsOfTypeAll<CreatingCourseWizard>())
             {
                 window.Close();
             }
 
-            foreach (TrainingWindow window in Resources.FindObjectsOfTypeAll<TrainingWindow>())
+            foreach (CourseWindow window in Resources.FindObjectsOfTypeAll<CourseWindow>())
             {
                 window.Close();
             }
 
-            TrainingWizard wizard = ScriptableObject.CreateInstance<TrainingWizard>();
+            CreatingCourseWizard wizard = ScriptableObject.CreateInstance<CreatingCourseWizard>();
             wizard.ShowUtility();
             wizard.maxSize = wizard.minSize;
             wizard.position = new Rect(Vector2.zero, wizard.minSize);
             return wizard;
         }
 
-        protected override void Then(TrainingWizard window)
+        protected override void Then(CreatingCourseWizard window)
         {
-            Assert.False(EditorUtils.IsWindowOpened<TrainingWindow>());
+            Assert.False(EditorUtils.IsWindowOpened<CourseWindow>());
         }
 
         protected override void AdditionalTeardown()
         {
             base.AdditionalTeardown();
-            foreach (TrainingWizard window in Resources.FindObjectsOfTypeAll<TrainingWizard>())
+            foreach (CreatingCourseWizard window in Resources.FindObjectsOfTypeAll<CreatingCourseWizard>())
             {
                 window.Close();
             }
 
-            foreach (TrainingWindow window in Resources.FindObjectsOfTypeAll<TrainingWindow>())
+            foreach (CourseWindow window in Resources.FindObjectsOfTypeAll<CourseWindow>())
             {
                 window.Close();
             }

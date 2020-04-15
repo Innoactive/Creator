@@ -7,10 +7,9 @@ using UnityEngine;
 namespace Innoactive.CreatorEditor.UI.Windows
 {
     /// <summary>
-    /// TrainingMenuView is shown on the left side of the <see cref="TrainingWindow"/> and takes care about overall
-    /// settings for the Training itself, especially chapters.
+    /// CourseMenuWindow is shown on the left side of the <see cref="CourseWindow"/> and takes care about settings of the course, specifically chapters.
     /// </summary>
-    public class TrainingMenuView : ScriptableObject
+    public class CourseMenuView : ScriptableObject
     {
         #region Layout Constants
         public const float ExtendedMenuWidth = 330f;
@@ -77,7 +76,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
         }
         #endregion
 
-        protected TrainingWindow ParentWindow { get; private set; }
+        protected CourseWindow ParentWindow { get; private set; }
 
         [SerializeField]
         private Vector2 scrollPosition;
@@ -89,7 +88,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
         /// Initialises the windows with the correct training and TrainingWindow (parent).
         /// This has to be done after every time the editor reloaded the assembly (recompile).
         /// </summary>
-        public void Initialise(TrainingWindow parent)
+        public void Initialise(CourseWindow parent)
         {
             ParentWindow = parent;
 
@@ -294,7 +293,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 if (position > 0)
                 {
-                    RevertableChangesHandler.Do(new TrainingCommand(
+                    RevertableChangesHandler.Do(new CourseCommand(
                         // ReSharper disable once ImplicitlyCapturedClosure
                         () =>
                         {
@@ -316,7 +315,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 if (position + 1 < CourseAssetManager.TrackedCourse.Data.Chapters.Count)
                 {
-                    RevertableChangesHandler.Do(new TrainingCommand(
+                    RevertableChangesHandler.Do(new CourseCommand(
                         // ReSharper disable once ImplicitlyCapturedClosure
                         () =>
                         {
@@ -354,7 +353,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
                     if (isDeleteTriggered)
                     {
-                        RevertableChangesHandler.Do(new TrainingCommand(
+                        RevertableChangesHandler.Do(new CourseCommand(
                             // ReSharper disable once ImplicitlyCapturedClosure
                             () =>
                             {
@@ -386,7 +385,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 GUILayout.FlexibleSpace();
                 if (GUILayout.Button("+Add Chapter", GUILayout.Width(128), GUILayout.Height(32)))
                 {
-                    RevertableChangesHandler.Do(new TrainingCommand(
+                    RevertableChangesHandler.Do(new CourseCommand(
                         // ReSharper disable once ImplicitlyCapturedClosure
                         () =>
                         {
