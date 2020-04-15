@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace Innoactive.CreatorEditor.CreatorMenu
 {
-    public static class SetupSceneEntry
+    internal static class SetupSceneEntry
     {
         /// <summary>
         /// Setup the current unity scene to be a functioning training scene.

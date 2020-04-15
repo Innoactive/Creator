@@ -12,7 +12,7 @@ namespace Innoactive.CreatorEditor
     /// </summary>
     /// <remarks>See more: https://docs.unity3d.com/Manual/dotnetProfileAssemblies.html</remarks>
     [InitializeOnLoad]
-    public static class PlatformCompatibilityChecker
+    internal static class PlatformCompatibilityChecker
     {
         private const string ReferenceFileName = "csc.rsp";
         private static readonly string[] Dependencies = { "-r:System.IO.Compression.dll", "-r:System.IO.Compression.FileSystem.dll" };

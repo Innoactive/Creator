@@ -9,7 +9,7 @@ namespace Innoactive.CreatorEditor
     /// <summary>
     /// Monitors training course files added or removed from the project.
     /// </summary>
-    public class CourseAssetPostprocessor : AssetPostprocessor
+    internal class CourseAssetPostprocessor : AssetPostprocessor
     {
         /// <summary>
         /// Raised when a course file is added, removed or moved from the course folder.
@@ -30,14 +30,14 @@ namespace Innoactive.CreatorEditor
 
         private static IEnumerable<string> GetTrainingCourseAssets(IEnumerable<string> assets)
         {
-            return assets.Where(FileUtils.IsCourseFile).ToArray();
+            return assets.Where(CourseUtils.IsCourseFile).ToArray();
         }
     }
 
     /// <summary>
     /// Event args for <see cref="CourseAssetPostprocessor"/> events.
     /// </summary>
-    public class CourseAssetPostprocessorEventArgs : EventArgs
+    internal class CourseAssetPostprocessorEventArgs : EventArgs
     {
     }
 }

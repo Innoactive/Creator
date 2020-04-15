@@ -10,7 +10,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
     /// <summary>
     /// Handles changing the course name.
     /// </summary>
-    public class RenameCoursePopup : EditorWindow
+    internal class RenameCoursePopup : EditorWindow
     {
         private static RenameCoursePopup instance;
 
@@ -71,9 +71,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 if (string.IsNullOrEmpty(newName) == false && ValidateCourseName(newName))
                 {
                     string oldName = course.Data.Name;
-                    string oldPath = EditorCourseUtils.GetAbsoluteCoursePath(oldName);
+                    string oldPath = CourseUtils.GetAbsoluteCoursePath(oldName);
                     string oldFolder = Path.GetDirectoryName(oldPath);
-                    string newPath = EditorCourseUtils.GetAbsoluteCoursePath(newName);
+                    string newPath = CourseUtils.GetAbsoluteCoursePath(newName);
                     string newFolder = Path.GetDirectoryName(newPath);
 
                     RevertableChangesHandler.Do(new TrainingCommand(
@@ -89,7 +89,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                                 course.Data.Name = newName;
 
                                 SaveManager.SaveTrainingCourseToFile(course);
-                                RuntimeConfigurator.Instance.SetSelectedTrainingCourse(EditorCourseUtils.GetCoursePath(course));
+                                RuntimeConfigurator.Instance.SetSelectedTrainingCourse(CourseUtils.GetCoursePath(course));
                                 TrainingWindow.GetWindow().IsDirty = false;
                                 AssetDatabase.Refresh();
                             }
@@ -143,7 +143,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 return false;
             }
 
-            string newFolder = Path.GetDirectoryName(EditorCourseUtils.GetCoursePath(courseName));
+            string newFolder = Path.GetDirectoryName(CourseUtils.GetCoursePath(courseName));
             if (Directory.Exists(newFolder))
             {
                 EditorUtility.DisplayDialog("Changing the course name failed",

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Core.Utils.Builders;
+using Innoactive.Creator.Tests.Builder;
 using Innoactive.Creator.Tests.Utils.Mocks;
 using Innoactive.CreatorEditor.Utils;
 using NUnit.Framework;

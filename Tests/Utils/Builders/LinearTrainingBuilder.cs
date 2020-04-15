@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using Innoactive.Creator.Core;
 
-namespace Innoactive.Creator.Core.Utils.Builders
+namespace Innoactive.Creator.Tests.Builder
 {
     /// <summary>
     /// Builder that creates linear trainings.

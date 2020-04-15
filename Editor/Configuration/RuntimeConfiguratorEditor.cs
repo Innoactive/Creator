@@ -99,7 +99,7 @@ namespace Innoactive.CreatorEditor.Configuration
         private void DrawCourseSelectionDropDown()
         {
             int index = 0;
-            string course = EditorCourseUtils.GetActiveCourseName();
+            string course = CourseUtils.GetActiveCourseName();
             if (string.IsNullOrEmpty(course) == false)
             {
                 index = trainingCourseDisplayNames.FindIndex(course.Equals);
@@ -114,7 +114,7 @@ namespace Innoactive.CreatorEditor.Configuration
 
             if (IsCourseListEmpty() == false)
             {
-                configurator.SetSelectedTrainingCourse(EditorCourseUtils.GetCoursePath(trainingCourseDisplayNames[index]));
+                configurator.SetSelectedTrainingCourse(CourseUtils.GetCoursePath(trainingCourseDisplayNames[index]));
             }
         }
 
@@ -125,7 +125,7 @@ namespace Innoactive.CreatorEditor.Configuration
 
         private string GetSelectedCourseAbsolutePath()
         {
-            return EditorCourseUtils.GetAbsoluteCoursePath(configurator.GetSelectedTrainingCourse());
+            return CourseUtils.GetAbsoluteCoursePath(configurator.GetSelectedTrainingCourse());
         }
 
         private void UpdateAvailableCourses()
@@ -136,9 +136,8 @@ namespace Innoactive.CreatorEditor.Configuration
             }
             isDirty = false;
 
-
             List<string> courses = Directory.GetFiles(Path.Combine(Application.streamingAssetsPath, defaultCoursePath).Replace('/', Path.DirectorySeparatorChar), "*.json", SearchOption.AllDirectories)
-                .Where(FileUtils.IsCourseFile)
+                .Where(CourseUtils.IsCourseFile)
                 .Select(path => path.Substring(Application.streamingAssetsPath.Length + 1))
                 .ToList();
 
@@ -155,7 +154,7 @@ namespace Innoactive.CreatorEditor.Configuration
 
             if (string.IsNullOrEmpty(configurator.GetSelectedTrainingCourse()))
             {
-                configurator.SetSelectedTrainingCourse(EditorCourseUtils.GetCoursePath(trainingCourseDisplayNames[0]));
+                configurator.SetSelectedTrainingCourse(CourseUtils.GetCoursePath(trainingCourseDisplayNames[0]));
             }
         }
     }

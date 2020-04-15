@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Innoactive.CreatorEditor.UI.Windows
 {
     [InitializeOnLoad]
-    public static class AssemblyUnloadDetector
+    internal static class AssemblyUnloadDetector
     {
         static AssemblyUnloadDetector()
         {

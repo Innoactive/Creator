@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.CreatorMenu
 {
-    public static class ImportTrainingMenuEntry
+    internal static class ImportTrainingMenuEntry
     {
         /// <summary>
         /// Allows to import trainings.
@@ -45,7 +45,7 @@ namespace Innoactive.CreatorEditor.CreatorMenu
 
         private static void StartImport(string path, ICourseSerializer serializer)
         {
-            if (EditorCourseUtils.ImportTrainingCourse(path, serializer))
+            if (CourseUtils.ImportTrainingCourse(path, serializer))
             {
                 EditorUtility.DisplayDialog("Training successfully imported", "Your training course was successfully imported.", "OK");
             }
