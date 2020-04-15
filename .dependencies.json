@@ -3,7 +3,7 @@
         {
             "name": "Components\\VRTK-Interaction",
             "repository": "git@github.com:Innoactive/VRTK-Interaction-Component.git",
-            "branch": "chore/moved-builder"
+            "branch": "develop-2019"
         },
         {
             "name": "Components\\Text-To-Speech",
@@ -13,12 +13,12 @@
         {
             "name": "Components\\Basic-Interaction",
             "repository": "git@github.com:Innoactive/Basic-Interaction-Component.git",
-            "branch": "feature/moved-builder"
+            "branch": "develop"
         },
         {
             "name": "Components\\Basic-Behaviors-And-Conditions",
             "repository": "git@github.com:Innoactive/Basic-Conditions-And-Behaviors.git",
-            "branch": "feature/moved-builder"
+            "branch": "develop"
         }
     ]
 }
