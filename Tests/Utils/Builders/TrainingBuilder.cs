@@ -1,4 +1,6 @@
-namespace Innoactive.Creator.Core.Utils.Builders
+using Innoactive.Creator.Core;
+
+namespace Innoactive.Creator.Tests.Builder
 {
     public abstract class TrainingBuilder<TCourse> : BuilderWithResourcePath<TCourse> where TCourse : ICourse
     {

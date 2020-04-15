@@ -84,7 +84,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 }
                 else
                 {
-                    string trainingCoursePath = EditorCourseUtils.GetCoursePath(trainingName);
+                    string trainingCoursePath = CourseUtils.GetCoursePath(trainingName);
                     string trainingCourseFolder = Path.GetDirectoryName(trainingCoursePath);
 
                     if (Directory.Exists(trainingCourseFolder))
@@ -93,8 +93,8 @@ namespace Innoactive.CreatorEditor.UI.Windows
                     }
                     else
                     {
-                        ICourse course = EditorCourseUtils.CreateCourse(trainingName);
-                        if (EditorCourseUtils.SetTrainingCourseActive(course))
+                        ICourse course = CourseUtils.CreateCourse(trainingName);
+                        if (CourseUtils.SetTrainingCourseActive(course))
                         {
                             Debug.Log("Newly created course saved.");
                             Close();

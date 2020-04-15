@@ -36,7 +36,7 @@ namespace Innoactive.Creator.Tests.TrainingWizardTests
         {
             get
             {
-                return EditorUtils.GetModuleFolder() + "/Editor/Tests/Windows/TrainingWizard/Records";
+                return EditorUtils.GetCoreFolder() + "/Tests/Editor/TrainingWizard/Records";
             }
         }
 

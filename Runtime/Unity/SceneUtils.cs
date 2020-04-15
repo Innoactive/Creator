@@ -8,8 +8,6 @@ namespace Innoactive.Creator.Unity
 {
     public static class SceneUtils
     {
-        public const string TrainingConfigurationName = "[TRAINING_CONFIGURATION]";
-
         /// <summary>
         /// Get all loaded components, both active and inactive.
         /// </summary>

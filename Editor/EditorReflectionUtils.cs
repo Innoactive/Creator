@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Attributes;
 using Innoactive.CreatorEditor.UI.Drawers;
 using UnityEditor.Callbacks;
 
+[assembly: InternalsVisibleTo("Innoactive.creator.Core.Tests")]
+[assembly: InternalsVisibleTo("Innoactive.creator.Core.Tests.Editmode")]
+
 namespace Innoactive.CreatorEditor
 {
     /// <summary>
     /// Helper class for reflection.
     /// </summary>
-    public static class EditorReflectionUtils
+    internal static class EditorReflectionUtils
     {
         private static readonly Dictionary<Type, IEnumerable<MemberInfo>> fieldAndPropertiesToDrawCache = new Dictionary<Type, IEnumerable<MemberInfo>>();
         private static readonly Dictionary<MemberInfo, HashSet<Attribute>> membersAttributesCache = new Dictionary<MemberInfo, HashSet<Attribute>>();

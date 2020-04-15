@@ -22,7 +22,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                     throw new NullReferenceException("The training course is not saved because it doesn't exist.");
                 }
 
-                string path = EditorCourseUtils.GetAbsoluteCoursePath(course);
+                string path = CourseUtils.GetAbsoluteCoursePath(course);
 
                 string directory = Path.GetDirectoryName(path);
                 if (string.IsNullOrEmpty(directory) == false && Directory.Exists(directory) == false)

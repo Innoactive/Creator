@@ -13,7 +13,7 @@ namespace Innoactive.Creator.Core.Properties
     /// <summary>
     /// Helper class that adds functionality to any <see cref="ISceneObject"/>.
     /// </summary>
-    public static class ISceneObjectExtensions
+    public static class SceneObjectExtensions
     {
         /// <summary>
         /// Ensures that this <see cref="ISceneObject"/>'s UniqueName is not duplicated.
@@ -44,30 +44,6 @@ namespace Innoactive.Creator.Core.Properties
         public static ISceneObjectProperty AddTrainingProperty<T>(this ISceneObject sceneObject)
         {
             return AddTrainingProperty(sceneObject, typeof(T));
-        }
-
-        /// <summary>
-        /// Adds a type of <paramref name="trainingProperty"/> into this <see cref="ISceneObject"/>.
-        /// </summary>
-        /// <param name="sceneObject"><see cref="ISceneObject"/> to whom the <paramref name="trainingProperty"/> will be added.</param>
-        /// <param name="trainingProperty"><see cref="ISceneObjectProperty"/> to be added to <paramref name="sceneObject"/>.</param>
-        /// <returns>A reference to the <see cref="ISceneObjectProperty"/> added to <paramref name="sceneObject"/>.</returns>
-        public static ISceneObjectProperty AddTrainingProperty(this ISceneObject sceneObject, TrainingSceneObjectProperty trainingProperty)
-        {
-            Type trainingPropertyType = trainingProperty.GetType();
-            return AddTrainingProperty(sceneObject, trainingPropertyType);
-        }
-
-        /// <summary>
-        /// Adds a type of <paramref name="trainingProperty"/> into this <see cref="ISceneObject"/>.
-        /// </summary>
-        /// <param name="sceneObject"><see cref="ISceneObject"/> to whom the <paramref name="trainingProperty"/> will be added.</param>
-        /// <param name="trainingProperty"><see cref="ISceneObjectProperty"/> to be added to <paramref name="sceneObject"/>.</param>
-        /// <returns>A reference to the <see cref="ISceneObjectProperty"/> added to <paramref name="sceneObject"/>.</returns>
-        public static ISceneObjectProperty AddTrainingProperty(this ISceneObject sceneObject, Component trainingProperty)
-        {
-            Type trainingPropertyType = trainingProperty.GetType();
-            return AddTrainingProperty(sceneObject, trainingPropertyType);
         }
 
         /// <summary>
@@ -110,31 +86,6 @@ namespace Innoactive.Creator.Core.Properties
         }
 
         /// <summary>
-        /// Removes <see cref="ISceneObjectProperty"/> of type <typeparamref name="T"/> from this <see cref="ISceneObject"/>.
-        /// </summary>
-        /// <param name="sceneObject"><see cref="ISceneObject"/> from whom the type <typeparamref name="T"/> will be removed.</param>
-        /// <param name="removeDependencies">If true, this method also removes other components that are marked as `RequiredComponent` by <paramref name="trainingProperty"/>.</param>
-        /// <param name="excludedFromBeingRemoved">The training properties in this list will not be removed if any is a dependency of <paramref name="trainingProperty"/>. Only relevant if <paramref name="removeDependencies"/> is true.</param>
-        /// <typeparam name="T">The type of <see cref="ISceneObjectProperty"/> to be removed from <paramref name="sceneObject"/>.</typeparam>
-        public static void RemoveTrainingProperty<T>(this ISceneObject sceneObject, bool removeDependencies = false, IEnumerable<Component> excludedFromBeingRemoved = null)
-        {
-            RemoveTrainingProperty(sceneObject, typeof(T), removeDependencies, excludedFromBeingRemoved);
-        }
-
-        /// <summary>
-        /// Removes type of <paramref name="trainingProperty"/> from this <see cref="ISceneObject"/>.
-        /// </summary>
-        /// <param name="sceneObject"><see cref="ISceneObject"/> from whom the <paramref name="trainingProperty"/> will be removed.</param>
-        /// <param name="trainingProperty"><see cref="ISceneObjectProperty"/> to be removed from <paramref name="sceneObject"/>.</param>
-        /// <param name="removeDependencies">If true, this method also removes other components that are marked as `RequiredComponent` by <paramref name="trainingProperty"/>.</param>
-        /// <param name="excludedFromBeingRemoved">The training properties in this list will not be removed if any is a dependency of <paramref name="trainingProperty"/>. Only relevant if <paramref name="removeDependencies"/> is true.</param>
-        public static void RemoveTrainingProperty(this ISceneObject sceneObject, TrainingSceneObjectProperty trainingProperty, bool removeDependencies = false, IEnumerable<Component> excludedFromBeingRemoved = null)
-        {
-            Type trainingPropertyType = trainingProperty.GetType();
-            RemoveTrainingProperty(sceneObject, trainingPropertyType, removeDependencies, excludedFromBeingRemoved);
-        }
-
-        /// <summary>
         /// Removes type of <paramref name="trainingProperty"/> from this <see cref="ISceneObject"/>.
         /// </summary>
         /// <param name="sceneObject"><see cref="ISceneObject"/> from whom the <paramref name="trainingProperty"/> will be removed.</param>
@@ -165,25 +116,6 @@ namespace Innoactive.Creator.Core.Properties
 
             IEnumerable<Type> typesToIgnore = GetTypesFromComponents(excludedFromBeingRemoved);
             RemoveProperty(sceneObject, trainingProperty, removeDependencies, typesToIgnore);
-        }
-
-        /// <summary>
-        /// Removes type of <paramref name="trainingProperty"/> from this <see cref="ISceneObject"/>.
-        /// </summary>
-        /// <param name="sceneObject"><see cref="ISceneObject"/> from whom the <paramref name="trainingProperty"/> will be removed.</param>
-        /// <param name="trainingProperty">Typo of <see cref="ISceneObjectProperty"/> to be removed from <paramref name="sceneObject"/>.</param>
-        /// <param name="removeDependencies">If true, this method also removes other components that are marked as `RequiredComponent` by <paramref name="trainingProperty"/>.</param>
-        /// <param name="excludedFromBeingRemoved">The training properties in this list will not be removed if any is a dependency of <paramref name="trainingProperty"/>. Only relevant if <paramref name="removeDependencies"/> is true.</param>
-        public static void RemoveTrainingProperty(this ISceneObject sceneObject, Type trainingProperty, bool removeDependencies, IEnumerable<Type> excludedFromBeingRemoved)
-        {
-            Component trainingComponent = sceneObject.GameObject.GetComponent(trainingProperty);
-
-            if (AreParametersNullOrInvalid(sceneObject, trainingProperty) || trainingComponent == null)
-            {
-                return;
-            }
-
-            RemoveProperty(sceneObject, trainingProperty, removeDependencies, excludedFromBeingRemoved);
         }
 
         private static void RemoveProperty(ISceneObject sceneObject, Type typeToRemove, bool removeDependencies, IEnumerable<Type> typesToIgnore)

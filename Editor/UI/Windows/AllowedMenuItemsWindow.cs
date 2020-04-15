@@ -14,7 +14,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
     /// <summary>
     /// Window that allows to manage the allowed menu items.
     /// </summary>
-    public class AllowedMenuItemsWindow : EditorWindow
+    internal class AllowedMenuItemsWindow : EditorWindow
     {
         private static AllowedMenuItemsWindow window;
 

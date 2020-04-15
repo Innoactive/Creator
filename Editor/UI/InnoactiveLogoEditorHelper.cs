@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI
     /// Helper editor class that allows retrieving or drawing a Innoactive Logo that
     /// fits the current Unity color theme.
     /// </summary>
-    public static class InnoactiveLogoEditorHelper
+    internal static class InnoactiveLogoEditorHelper
     {
         /// <summary>
         /// Filename of light Innoactive Hub logo (used for dark Unity theme)

@@ -4,7 +4,7 @@ using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Tests.Utils;
 using Innoactive.Creator.Tests.Utils.Mocks;
-using Innoactive.Creator.Core.Utils.Builders;
+using Innoactive.Creator.Tests.Builder;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -33,8 +33,8 @@ namespace Innoactive.Creator.Tests.Courses
             Chapter chapter1 = TestLinearChapterBuilder.SetupChapterBuilder(3, false).Build();
             Course course = new Course("MyCourse", chapter1);
 
-            TrainingRunner.Initialize(course);
-            TrainingRunner.Run();
+            CourseRunner.Initialize(course);
+            CourseRunner.Run();
 
             Debug.Log(chapter1.LifeCycle.Stage);
             yield return null;
@@ -61,8 +61,8 @@ namespace Innoactive.Creator.Tests.Courses
                 chapter2
             });
 
-            TrainingRunner.Initialize(course);
-            TrainingRunner.Run();
+            CourseRunner.Initialize(course);
+            CourseRunner.Run();
 
             yield return new WaitUntil(() => chapter1.LifeCycle.Stage == Stage.Activating);
 
@@ -100,8 +100,8 @@ namespace Innoactive.Creator.Tests.Courses
                 }
             };
 
-            TrainingRunner.Initialize(course);
-            TrainingRunner.Run();
+            CourseRunner.Initialize(course);
+            CourseRunner.Run();
 
             while (course.LifeCycle.Stage != Stage.Inactive)
             {
@@ -145,8 +145,8 @@ namespace Innoactive.Creator.Tests.Courses
             // When you mark it to fast-forward and activate it,
             course.LifeCycle.MarkToFastForward();
 
-            TrainingRunner.Initialize(course);
-            TrainingRunner.Run();
+            CourseRunner.Initialize(course);
+            CourseRunner.Run();
 
             yield return null;
 
@@ -165,8 +165,8 @@ namespace Innoactive.Creator.Tests.Courses
                         .AddCondition(new EndlessConditionMock())))
                 .Build();
 
-            TrainingRunner.Initialize(course);
-            TrainingRunner.Run();
+            CourseRunner.Initialize(course);
+            CourseRunner.Run();
 
             // When you mark it to fast-forward,
             course.LifeCycle.MarkToFastForward();
