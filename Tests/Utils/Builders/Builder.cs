@@ -1,6 +1,7 @@
 using System;
+using Innoactive.Creator.Core.Utils;
 
-namespace Innoactive.Creator.Core.Utils.Builders
+namespace Innoactive.Creator.Tests.Builder
 {
     /// <summary>
     /// Abstract Builder pattern class.

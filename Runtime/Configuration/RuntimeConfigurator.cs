@@ -147,7 +147,7 @@ namespace Innoactive.Creator.Core.Configuration
         /// </summary>
         public string GetRuntimeConfigurationName()
         {
-            return Instance.runtimeConfigurationName;
+            return runtimeConfigurationName;
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Innoactive.Creator.Core.Configuration
         /// </summary>
         public void SetRuntimeConfigurationName(string name)
         {
-            Instance.runtimeConfigurationName = name;
+            runtimeConfigurationName = name;
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace Innoactive.Creator.Core.Configuration
         /// </summary>
         public string GetSelectedTrainingCourse()
         {
-            return Instance.selectedCourse;
+            return selectedCourse;
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace Innoactive.Creator.Core.Configuration
         /// </summary>
         public void SetSelectedTrainingCourse(string path)
         {
-            Instance.selectedCourse = path;
+            selectedCourse = path;
         }
 
         private void Awake()

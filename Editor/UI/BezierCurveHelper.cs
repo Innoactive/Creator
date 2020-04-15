@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI
 {
-    public static class BezierCurveHelper
+    internal static class BezierCurveHelper
     {
         /// <summary>
         /// Calculates a Bezier curve using "De Casteljau's algorithm".

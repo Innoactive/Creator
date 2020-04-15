@@ -10,7 +10,7 @@ namespace Innoactive.CreatorEditor.CreatorMenu
     /// <summary>
     /// Allows user to select which serializer they want to use.
     /// </summary>
-    public class ChooseSerializerPopup : EditorWindow
+    internal class ChooseSerializerPopup : EditorWindow
     {
         private static ChooseSerializerPopup instance;
 

@@ -10,7 +10,7 @@ namespace Innoactive.CreatorEditor.UI
     /// This class adds names to newly added entities.
     /// </summary>
     [CustomEditor(typeof(TrainingSceneObject))]
-    public class SceneObjectEditor : Editor
+    internal class SceneObjectEditor : Editor
     {
         private void OnEnable()
         {

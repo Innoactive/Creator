@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Innoactive.CreatorEditor.UI
 {
     [InitializeOnLoad]
-    public static class EditorColorUtils
+    internal static class EditorColorUtils
     {
         private static Color ModeTint { get; set; }
         private static Color DefaultColor { get; set; }

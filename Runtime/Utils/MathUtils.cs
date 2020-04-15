@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Innoactive.Creator.Core.Utils
 {
-    public static class MathUtils
+    internal static class MathUtils
     {
         public static bool FindPathInGraph<T>(this T start, Func<T, IEnumerable<T>> getOutcomingConnections, T target, out IList<T> result)
         {

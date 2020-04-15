@@ -6,9 +6,12 @@ using UnityEngine;
 
 namespace Innoactive.Creator.Core
 {
-    public static class TrainingRunner
+    /// <summary>
+    /// Runs a <see cref="ICourse"/>, expects to be run only once.
+    /// </summary>
+    public static class CourseRunner
     {
-        private class TrainingRunnerInstance : MonoBehaviour
+        private class CourseRunnerInstance : MonoBehaviour
         {
             public ICourse course = null;
 
@@ -60,8 +63,22 @@ namespace Innoactive.Creator.Core
             }
         }
 
-        private static TrainingRunnerInstance instance;
+        private static CourseRunnerInstance instance;
 
+        /// <summary>
+        /// Currently running <see cref="ICourse"/>
+        /// </summary>
+        public static ICourse Current
+        {
+            get
+            {
+                return instance == null ? null : instance.course;
+            }
+        }
+
+        /// <summary>
+        /// Returns true if the current <see cref="ICourse"/> is running.
+        /// </summary>
         public static bool IsRunning
         {
             get
@@ -70,12 +87,20 @@ namespace Innoactive.Creator.Core
             }
         }
 
+        /// <summary>
+        /// Initializes the training runner by creating all required component in scene.
+        /// </summary>
+        /// <param name="course">The course which should be run.</param>
         public static void Initialize(ICourse course)
         {
-            instance = new GameObject("[TRAINING_RUNNER]").AddComponent<TrainingRunnerInstance>();
+            instance = new GameObject("[TRAINING_RUNNER]").AddComponent<CourseRunnerInstance>();
             instance.course = course;
         }
 
+        /// <summary>
+        /// Skips the given amount of chapters.
+        /// </summary>
+        /// <param name="numberOfChapters">Number of chapters.</param>
         public static void SkipChapters(int numberOfChapters)
         {
             IList<IChapter> chapters = Current.Data.Chapters;
@@ -86,6 +111,10 @@ namespace Innoactive.Creator.Core
             }
         }
 
+        /// <summary>
+        /// Skips the current step and uses given transition.
+        /// </summary>
+        /// <param name="transition">Transition which should be used.</param>
         public static void SkipStep(ITransition transition)
         {
             if (IsRunning == false)
@@ -97,6 +126,9 @@ namespace Innoactive.Creator.Core
             transition.Autocomplete();
         }
 
+        /// <summary>
+        /// Starts the course.
+        /// </summary>
         public static void Run()
         {
             if (IsRunning)
@@ -105,14 +137,6 @@ namespace Innoactive.Creator.Core
             }
 
             instance.Execute();
-        }
-
-        public static ICourse Current
-        {
-            get
-            {
-                return instance == null ? null : instance.course;
-            }
         }
     }
 }

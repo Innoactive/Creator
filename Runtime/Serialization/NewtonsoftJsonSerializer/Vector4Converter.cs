@@ -9,7 +9,7 @@ namespace Innoactive.Creator.Core.Serialization
     /// Converts Vector4 into json and back.
     /// </summary>
     [NewtonsoftConverter]
-    public class Vector4Converter : JsonConverter
+    internal class Vector4Converter : JsonConverter
     {
         /// <inheritDoc/>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
