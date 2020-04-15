@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Windows
 {
-    public class ChangeNamePopup : EditorWindow
+    internal class ChangeNamePopup : EditorWindow
     {
         private static ChangeNamePopup instance;
 

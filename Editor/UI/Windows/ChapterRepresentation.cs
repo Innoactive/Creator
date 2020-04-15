@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Windows
 {
-    public class ChapterRepresentation
+    internal class ChapterRepresentation
     {
         public EditorGraphics Graphics { get; private set; }
 

@@ -11,10 +11,10 @@ namespace Innoactive.CreatorEditor.UI
     ///
     /// DO NOT ADD FILE ENDINGS TO THE PATH!
     /// </summary>
-    public class EditorIcon
+    internal class EditorIcon
     {
-        public const string LightTextureFileEnding = "_light";
-        public const string DarkTextureFileEnding = "_dark";
+        private const string LightTextureFileEnding = "_light";
+        private const string DarkTextureFileEnding = "_dark";
 
         private readonly Texture2D iconLight;
         private readonly Texture2D iconDark;

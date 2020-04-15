@@ -1,4 +1,4 @@
-namespace Innoactive.Creator.Core.Utils.Builders
+namespace Innoactive.Creator.Tests.Builder
 {
     public abstract class StepBuilder<TStep> : BuilderWithResourcePath<TStep>
     {

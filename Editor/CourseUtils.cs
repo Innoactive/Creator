@@ -2,9 +2,12 @@ using System;
 using System.IO;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.Exceptions;
 using Innoactive.Creator.Core.Serialization;
 using Innoactive.CreatorEditor.Configuration;
 using Innoactive.CreatorEditor.UI.Windows;
+using UnityEditor;
+using UnityEditor.Callbacks;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor
@@ -12,8 +15,10 @@ namespace Innoactive.CreatorEditor
     /// <summary>
     /// Course utility functions at editor runtime.
     /// </summary>
-    public static class EditorCourseUtils
+    public static class CourseUtils
     {
+        private static string coreFolder;
+
         /// <summary>
         /// Creates an empty course with given name.
         /// </summary>
@@ -127,6 +132,24 @@ namespace Innoactive.CreatorEditor
         public static string GetActiveCourseName()
         {
             return Path.GetFileNameWithoutExtension(RuntimeConfigurator.Instance.GetSelectedTrainingCourse());
+        }
+
+        /// <summary>
+        /// Returns true if the file at given <paramref name="filePath"/> is a course. It does not check the validity of the file's contents.
+        /// </summary>
+        public static bool IsCourseFile(string filePath)
+        {
+            if (File.Exists(filePath) == false)
+            {
+                return false;
+            }
+
+            string assetPath = Path.Combine(Application.dataPath.Remove(Application.dataPath.LastIndexOf('/')), filePath).Replace('/', Path.DirectorySeparatorChar);
+            string courseFolderPath = Path.Combine(Application.streamingAssetsPath, EditorConfigurator.Instance.CourseStreamingAssetsFolder).Replace('/', Path.DirectorySeparatorChar);
+
+            FileInfo file = new FileInfo(assetPath);
+
+            return new DirectoryInfo(courseFolderPath).FullName == file.Directory.Parent.FullName && Path.GetFileNameWithoutExtension(filePath) == file.Directory.Name;
         }
     }
 }

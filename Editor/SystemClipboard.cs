@@ -9,7 +9,7 @@ namespace Innoactive.CreatorEditor.Utils
     /// A utility class that converts a step from/to UTF-8 string using the serializer from the current <see cref="IEditorConfiguration"/>
     /// and then copies or pastes it from the system's copy buffer.
     /// </summary>
-    public static class SystemClipboard
+    internal static class SystemClipboard
     {
         /// <summary>
         /// Tries to deserialize step from the system's copy buffer. Does not handle exceptions.

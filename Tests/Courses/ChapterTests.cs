@@ -4,7 +4,7 @@ using System.Linq;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Exceptions;
-using Innoactive.Creator.Core.Utils.Builders;
+using Innoactive.Creator.Tests.Builder;
 using Innoactive.Creator.Tests.Utils;
 using Innoactive.Creator.Tests.Utils.Mocks;
 using NUnit.Framework;
@@ -75,8 +75,8 @@ namespace Innoactive.Creator.Tests.Courses
             Chapter chapter = TestLinearChapterBuilder.SetupChapterBuilder(1, false).Build();
 
             // Activate should work on simple steps.
-            TrainingRunner.Initialize(new Course("Course", chapter));
-            TrainingRunner.Run();
+            CourseRunner.Initialize(new Course("Course", chapter));
+            CourseRunner.Run();
 
             while (chapter.LifeCycle.Stage != Stage.Inactive)
             {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Creator.Core.Utils.Builders
+namespace Innoactive.Creator.Tests.Builder
 {
     /// <summary>
     /// Abstract Builder with ResourcePath property.

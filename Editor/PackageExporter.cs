@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor
 {
-    public static class PackageExporter
+    internal static class PackageExporter
     {
         private class PackageExporterArguments
         {

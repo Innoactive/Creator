@@ -3,7 +3,7 @@ using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.SceneObjects;
 
-namespace Innoactive.Creator.Core.Utils.Builders
+namespace Innoactive.Creator.Tests.Builder
 {
     /// <summary>
     /// Static class to provide fast access to predefined builders.
