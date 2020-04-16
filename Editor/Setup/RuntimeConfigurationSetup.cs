@@ -9,12 +9,13 @@ namespace Innoactive.CreatorEditor
     /// </summary>
     internal class RuntimeConfigurationSetup : SceneSetup
     {
+        public static readonly string TrainingConfiugrationName = "[TRAINING_CONFIGURATION]";
         /// <inheritdoc/>
         public override void Setup()
         {
             if (RuntimeConfigurator.Exists == false)
             {
-                GameObject obj = new GameObject("[TRAINING_CONFIGURATION]");
+                GameObject obj = new GameObject(TrainingConfiugrationName);
                 obj.AddComponent<RuntimeConfigurator>();
                 Selection.activeObject = obj;
             }
