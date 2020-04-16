@@ -25,11 +25,17 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         private readonly string drawIsBlockingToggleName = typeof(DrawIsBlockingToggleAttribute).FullName;
         private readonly string listOfName = typeof(ListOfAttribute).FullName;
         private readonly string extendableListName = typeof(ExtendableListAttribute).FullName;
+        private readonly string keepPopulatedName = typeof(KeepPopulatedAttribute).FullName;
 
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
             MetadataWrapper wrapper = (MetadataWrapper) currentValue;
+
+            if (wrapper.Metadata.ContainsKey(keepPopulatedName))
+            {
+                return HandleKeepPopulated(rect, wrapper, changeValueCallback, label);
+            }
 
             if (wrapper.Metadata.ContainsKey(separatedName))
             {
@@ -259,6 +265,36 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             rect.height = currentY;
             return rect;
+        }
+
+        private Rect HandleKeepPopulated(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label)
+        {
+            if (wrapper.Value == null || (wrapper.Value is IList == false))
+            {
+                if (wrapper.Value != null)
+                {
+                    Debug.LogWarning("KeepPopulated can be used only with IList members.");
+                }
+
+                return rect;
+            }
+
+            IList list = (IList) wrapper.Value;
+
+            if (list.Count == 0)
+            {
+                Type entryType = (Type) wrapper.Metadata[keepPopulatedName];
+                if (entryType != null)
+                {
+                    ReflectionUtils.InsertIntoList(ref list, 0, ReflectionUtils.CreateInstanceOfType(entryType));
+                }
+                else
+                {
+                    Debug.LogError("No Type found to create default instance with");
+                }
+            }
+
+            return DrawRecursively(rect, wrapper, keepPopulatedName, changeValueCallback, label);
         }
 
         private Rect DrawListOf(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label)

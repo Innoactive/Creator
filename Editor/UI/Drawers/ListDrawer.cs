@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Linq;
+using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Utils;
 using UnityEditor;
 using UnityEngine;
@@ -37,7 +39,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             list.CopyTo(entries, 0);
 
             int closuredLength = entries.Length;
-
             for (int index = 0; index < entries.Length; index++)
             {
                 currentY += EditorDrawingHelper.VerticalSpacing;

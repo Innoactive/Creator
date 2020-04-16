@@ -446,6 +446,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             options.Add(new TestableEditorElements.MenuItem(new GUIContent("Add step"), false, () =>
             {
                 IStep step = new Step("New Step");
+                step.Data.Transitions.Data.Transitions.Add(new Transition());
                 step.StepMetadata.Position = e.PointerPosition;
 
                 AddStepWithUndo(step);
