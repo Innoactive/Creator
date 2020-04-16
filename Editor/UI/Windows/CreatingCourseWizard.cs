@@ -76,6 +76,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                         {
                             CourseAssetManager.CreateEmpty(courseName);
                             CourseAssetManager.Track(courseName);
+                            CourseWindow.GetWindow();
                         }
                     }
 

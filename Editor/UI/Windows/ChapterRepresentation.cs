@@ -474,6 +474,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             Graphics.Canvas.ContextClick += HandleCanvasContextClick;
 
+            if (chapter == null)
+            {
+                return;
+            }
+
             EntryNode entryNode = CreateEntryNode(chapter);
             IDictionary<IStep, StepNode> stepNodes = SetupSteps(chapter);
             SetupTransitions(chapter, entryNode, stepNodes);
