@@ -77,6 +77,8 @@ namespace Innoactive.CreatorEditor.UI.Windows
                         {
                             CourseAssetManager.Import(new Course(courseName, new Chapter("Chapter 1", null)));
                             CourseAssetManager.Track(courseName);
+                            RuntimeConfigurator.Instance.SetSelectedCourse(CourseAssetManager.GetCourseStreamingAssetPath(courseName));
+
                             CourseWindow.GetWindow();
                             Close();
                         }

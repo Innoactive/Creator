@@ -35,7 +35,7 @@ namespace Innoactive.Creator.Core.Configuration
         /// </summary>
         [FormerlySerializedAs("selectedCourse")]
         [SerializeField]
-        private string selectedCourseFullPath = "";
+        private string selectedCourseStreamingAssetsPath = "";
 
         private IRuntimeConfiguration runtimeConfiguration;
 
@@ -163,7 +163,7 @@ namespace Innoactive.Creator.Core.Configuration
         /// </summary>
         public string GetSelectedCourse()
         {
-            return selectedCourseFullPath;
+            return selectedCourseStreamingAssetsPath;
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace Innoactive.Creator.Core.Configuration
         /// </summary>
         public void SetSelectedCourse(string path)
         {
-            selectedCourseFullPath = path;
+            selectedCourseStreamingAssetsPath = path;
         }
 
         private void Awake()

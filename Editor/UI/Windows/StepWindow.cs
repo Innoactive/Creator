@@ -68,6 +68,10 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 step = CourseWindow.GetWindow().GetChapter().ChapterMetadata.LastSelectedStep;
             }
+            else
+            {
+                step = null;
+            }
 
             titleContent = new GUIContent("Step");
 

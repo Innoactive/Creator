@@ -60,6 +60,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             if (chapterRepresentation == null)
             {
                 chapterRepresentation = new ChapterRepresentation();
+                chapterRepresentation.Graphics.Canvas.PointerDrag += (o, eventArgs) => currentScrollPosition -= eventArgs.PointerDelta;
             }
 
             chapterRepresentation.SetChapter(chapterMenu.CurrentChapter);
@@ -78,6 +79,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             lastEditedCourse = course?.Data.Name;
 
             RevertableChangesHandler.FlushStack();
+            chapterMenu.Initialise(this);
             chapterRepresentation.SetChapter(course?.Data.FirstChapter);
         }
 
@@ -114,9 +116,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             if (chapterRepresentation == null)
             {
-                chapterRepresentation = new ChapterRepresentation();
-                chapterRepresentation.SetChapter(CourseAssetManager.TrackedCourse?.Data.FirstChapter);
-                chapterRepresentation.Graphics.Canvas.PointerDrag += (o, eventArgs) => currentScrollPosition -= eventArgs.PointerDelta;
+                RefreshChapterRepresentation();
             }
 
             if (window != null && window != this)

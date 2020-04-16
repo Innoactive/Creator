@@ -39,6 +39,11 @@ namespace Innoactive.CreatorEditor
         /// </summary>
         public static void Track(string courseName)
         {
+            if (TrackedCourse?.Data.Name == courseName)
+            {
+                return;
+            }
+
             ICourse course = Load(courseName);
             Track(course);
         }
