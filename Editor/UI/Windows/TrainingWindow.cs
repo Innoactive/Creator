@@ -173,9 +173,15 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 titleIcon = new EditorIcon("icon_training_editor");
             }
 
-            if (window != null && window != this)
+            if (window != null && window.Equals(null) == false && window != this)
             {
-                window.Close();
+                try
+                {
+                    window.Close();
+                }
+                catch(NullReferenceException)
+                {
+                }
             }
 
             window = this;
