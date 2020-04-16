@@ -77,7 +77,7 @@ namespace Innoactive.CreatorEditor.Configuration
 
                     if (GUILayout.Button(new GUIContent("Show course folder in Explorer...")))
                     {
-                        EditorUtility.RevealInFinder(CourseAssetManager.GetCourseAsset(CourseAssetManager.TrackedCourse.Data.Name));
+                        EditorUtility.RevealInFinder(CourseAssetManager.GetCourseAssetPath(CourseAssetManager.TrackedCourse.Data.Name));
                     }
                 }
                 GUILayout.EndHorizontal();
@@ -115,7 +115,7 @@ namespace Innoactive.CreatorEditor.Configuration
 
             if (IsCourseListEmpty() == false)
             {
-                configurator.SetSelectedCourse(CourseAssetManager.GetCourseStreamingAsset(trainingCourseDisplayNames[index]));
+                configurator.SetSelectedCourse(CourseAssetManager.GetCourseStreamingAssetPath(trainingCourseDisplayNames[index]));
                 CourseAssetManager.Track(trainingCourseDisplayNames[index]);
             }
         }

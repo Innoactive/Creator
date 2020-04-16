@@ -1,4 +1,5 @@
-﻿using Innoactive.Creator.Core.Configuration;
+﻿using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Configuration;
 using UnityEditor;
 using UnityEngine;
 
@@ -74,9 +75,10 @@ namespace Innoactive.CreatorEditor.UI.Windows
                     {
                         if (CourseAssetManager.CanCreate(courseName, out errorMessage))
                         {
-                            CourseAssetManager.CreateEmpty(courseName);
+                            CourseAssetManager.Import(new Course(courseName, new Chapter("Chapter 1", null)));
                             CourseAssetManager.Track(courseName);
                             CourseWindow.GetWindow();
+                            Close();
                         }
                     }
 

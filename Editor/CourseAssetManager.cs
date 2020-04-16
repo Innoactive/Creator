@@ -11,20 +11,15 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor
 {
+    /// <summary>
+    /// A static class that handles the course assets. It lets you to save, load, delete, and import training courses and provides multiple related utility methods.
+    /// </summary>
     public static class CourseAssetManager
     {
         /// <summary>
         /// The course that is currently edited by the user through <seealso cref="CourseWindow"/> and <seealso cref="StepWindow"/>.
         /// </summary>
         public static ICourse TrackedCourse { get; private set; }
-
-        /// <summary>
-        /// Creates a new empty course with a given name. Check if it possible with the <see cref="CanCreate"/> method.
-        /// </summary>
-        public static void CreateEmpty(string courseName)
-        {
-            Import(new Course(courseName, new Chapter("Chapter 1", null)));
-        }
 
         /// <summary>
         /// Saves the tracked course to the disk.
@@ -44,11 +39,6 @@ namespace Innoactive.CreatorEditor
         /// </summary>
         public static void Track(string courseName)
         {
-            if (IsCourseAssetExist(courseName) == false)
-            {
-                Track(default(ICourse));
-            }
-
             ICourse course = Load(courseName);
             Track(course);
         }
@@ -61,9 +51,8 @@ namespace Innoactive.CreatorEditor
             if (IsCourseAssetExist(courseName))
             {
                 Directory.Delete(GetCourseAssetDirectory(courseName));
+                AssetDatabase.Refresh();
             }
-
-            AssetDatabase.Refresh();
         }
 
         /// <summary>
@@ -72,6 +61,7 @@ namespace Innoactive.CreatorEditor
         public static void Import(ICourse course)
         {
             int counter = 0;
+            string oldName = course.Data.Name;
             while (IsCourseAssetExist(course.Data.Name))
             {
                 if (counter > 0)
@@ -83,17 +73,25 @@ namespace Innoactive.CreatorEditor
                 course.Data.Name += " " + counter;
             }
 
+            if (oldName != course.Data.Name)
+            {
+                Debug.LogWarning($"We detected a name collision while importing course \"{oldName}\". We have renamed it to \"{course.Data.Name}\" before importing.");
+            }
+
             Save(course);
         }
 
         /// <summary>
         /// Imports the course from file at given file <paramref name="path"/> if the file extensions matches the <paramref name="serializer"/>.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="serializer"></param>
         public static void Import(string path, ICourseSerializer serializer)
         {
             ICourse course;
+
+            if (Path.GetExtension(path) != $".{serializer.FileFormat}")
+            {
+                Debug.LogError($"The file extension of {path} does not match the expected file extension of {serializer.FileFormat} of the current serializer.");
+            }
 
             try
             {
@@ -112,7 +110,7 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Returns the asset path to the course with the <paramref name="courseName"/>.
         /// </summary>
-        public static string GetCourseAsset(string courseName)
+        public static string GetCourseAssetPath(string courseName)
         {
             return $"{GetCourseAssetDirectory(courseName)}/{courseName}.{EditorConfigurator.Instance.Serializer.FileFormat}";
         }
@@ -120,7 +118,7 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Returns the relative path from the streaming assets directory to the course with the <paramref name="courseName"/>.
         /// </summary>
-        public static string GetCourseStreamingAsset(string courseName)
+        public static string GetCourseStreamingAssetPath(string courseName)
         {
             return $"{GetCourseStreamingAssetsSubdirectory(courseName)}/{courseName}.{EditorConfigurator.Instance.Serializer.FileFormat}";
         }
@@ -154,7 +152,7 @@ namespace Innoactive.CreatorEditor
             Directory.Move(oldDirectory, newDirectory);
             File.Move($"{oldDirectory}.meta", $"{newDirectory}.meta");
 
-            string newAsset = GetCourseAsset(newName);
+            string newAsset = GetCourseAssetPath(newName);
             string oldAsset = $"{GetCourseAssetDirectory(newName)}/{course.Data.Name}.{EditorConfigurator.Instance.Serializer.FileFormat}";
             File.Move(oldAsset, newAsset);
             File.Move($"{oldAsset}.meta", $"{newAsset}.meta");
@@ -166,13 +164,12 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Returns a list of names of all courses in the project.
         /// </summary>
-        /// <returns></returns>
         public static IEnumerable<string> GetAllCourses()
         {
             DirectoryInfo coursesDirectory = new DirectoryInfo($"{Application.streamingAssetsPath}/{EditorConfigurator.Instance.CourseStreamingAssetsSubdirectory}");
             return coursesDirectory.GetDirectories()
                 .Select(directory => directory.Name)
-                .Where(courseName => File.Exists(GetCourseAsset(courseName)))
+                .Where(courseName => File.Exists(GetCourseAssetPath(courseName)))
                 .ToList();
         }
 
@@ -180,7 +177,6 @@ namespace Innoactive.CreatorEditor
         /// Checks if you can create a course with the given <paramref name="courseName"/>.
         /// </summary>
         /// <param name="errorMessage">Empty if you can create the course or must fail silently. </param>
-        /// <returns></returns>
         public static bool CanCreate(string courseName, out string errorMessage)
         {
             errorMessage = string.Empty;
@@ -211,7 +207,6 @@ namespace Innoactive.CreatorEditor
         /// Checks if you can rename the <paramref name="course"/> with to the <paramref name="newName"/>.
         /// </summary>
         /// <param name="errorMessage">Empty if you can create the course or must fail silently. </param>
-        /// <returns></returns>
         public static bool CanRename(ICourse course, string newName, out string errorMessage)
         {
             errorMessage = string.Empty;
@@ -221,7 +216,7 @@ namespace Innoactive.CreatorEditor
 
         private static void Save(ICourse course)
         {
-            string path = GetCourseAsset(course.Data.Name);
+            string path = GetCourseAssetPath(course.Data.Name);
 
             Directory.CreateDirectory(GetCourseAssetDirectory(course.Data.Name));
             StreamWriter stream = File.CreateText(path);
@@ -241,12 +236,12 @@ namespace Innoactive.CreatorEditor
 
         private static ICourse Load(string courseName)
         {
-            return IsCourseAssetExist(courseName) == false ? null : EditorConfigurator.Instance.Serializer.CourseFromByteArray(File.ReadAllBytes(GetCourseAsset(courseName)));
+            return IsCourseAssetExist(courseName) == false ? null : EditorConfigurator.Instance.Serializer.CourseFromByteArray(File.ReadAllBytes(GetCourseAssetPath(courseName)));
         }
 
         private static bool IsCourseAssetExist(string courseName)
         {
-            return File.Exists(GetCourseAsset(courseName));
+            return File.Exists(GetCourseAssetPath(courseName));
         }
 
         private static string GetCourseAssetDirectory(string courseName)

@@ -47,6 +47,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
             return window;
         }
 
+        /// <summary>
+        /// Updates the chapter representation to the currently tracked course and selected chapter.
+        /// </summary>
         public void RefreshChapterRepresentation()
         {
             if (CourseAssetManager.TrackedCourse == null)
