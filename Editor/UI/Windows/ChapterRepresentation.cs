@@ -17,6 +17,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
         private IChapter currentChapter;
         private StepNode lastSelectedStepNode;
 
+        private WorkflowEditorGrid grid;
+        private float gridCellSize = 10f;
+
         private bool isUpdated = false;
 
         public Rect BoundingBox
@@ -32,10 +35,12 @@ namespace Innoactive.CreatorEditor.UI.Windows
         private void SetupNode(EditorNode node, Action<Vector2> setPositionInModel)
         {
             Vector2 positionBeforeDrag = node.Position;
+            Vector2 deltaOnPointerDown = Vector2.zero;
 
             node.GraphicalEventHandler.PointerDown += (sender, args) =>
             {
                 positionBeforeDrag = node.Position;
+                deltaOnPointerDown = node.Position - args.PointerPosition;
             };
 
             node.GraphicalEventHandler.PointerUp += (sender, args) =>
@@ -61,8 +66,29 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             node.GraphicalEventHandler.PointerDrag += (sender, args) =>
             {
-                node.RelativePosition += args.PointerDelta;
+                SetNewPositionOnGrid(node, args.PointerPosition, deltaOnPointerDown);
             };
+        }
+
+        /// Clamps the position of the node on the background grid.
+        private void SetNewPositionOnGrid(EditorNode node, Vector2 position, Vector2 delta)
+        {
+            // Add original delta pointer position onto the absolute position of the node.
+            node.Position = position + delta;
+            Vector2 newPos = node.RelativePosition;
+
+            // Calculate x and y offset dependent on the size of the grid cells.
+            float xOffset = newPos.x % gridCellSize;
+            float addedX = xOffset < gridCellSize / 2 ? -xOffset : gridCellSize - xOffset;
+
+            float yOffset = newPos.y % gridCellSize;
+            float addedY = yOffset < gridCellSize / 2 ? -yOffset : gridCellSize - yOffset;
+
+            // Add offsets and subtract bounding box offsets
+            newPos += new Vector2(addedX, addedY);
+            newPos -= new Vector2(node.LocalBoundingBox.x % gridCellSize, node.LocalBoundingBox.y % gridCellSize);
+            
+            node.RelativePosition = newPos;
         }
 
         private void DeleteStepWithUndo(IStep step, StepNode ownerNode)
@@ -472,6 +498,8 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             Graphics.Reset();
 
+            grid = new WorkflowEditorGrid(Graphics, gridCellSize);
+
             Graphics.Canvas.ContextClick += HandleCanvasContextClick;
 
             EntryNode entryNode = CreateEntryNode(chapter);
@@ -488,6 +516,8 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 SetChapter(currentChapter);
                 isUpdated = true;
             }
+
+            grid.SetSize(controlRect);
 
             Graphics.HandleEvent(current, controlRect);
         }
