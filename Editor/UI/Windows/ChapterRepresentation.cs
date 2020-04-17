@@ -352,13 +352,22 @@ namespace Innoactive.CreatorEditor.UI.Windows
                         {
                             new TestableEditorElements.MenuItem(new GUIContent("Delete transition"), false, () =>
                             {
+                                bool isLast = closuredStep.Data.Transitions.Data.Transitions.Count == 1;
                                 RevertableChangesHandler.Do(new TrainingCommand(() =>
                                     {
                                         closuredStep.Data.Transitions.Data.Transitions.Remove(closuredTransition);
+                                        if (isLast)
+                                        {
+                                            closuredStep.Data.Transitions.Data.Transitions.Add(new Transition());
+                                        }
                                         MarkToRefresh();
                                     },
                                     () =>
                                     {
+                                        if (isLast)
+                                        {
+                                            closuredStep.Data.Transitions.Data.Transitions.RemoveAt(0);
+                                        }
                                         closuredStep.Data.Transitions.Data.Transitions.Insert(transitionIndex, closuredTransition);
                                         MarkToRefresh();
                                     }
