@@ -263,5 +263,29 @@ namespace Innoactive.CreatorEditor.UI
                 lastPosition = points[i];
             }
         }
+
+        /// <summary>
+        /// Draws a horizontal line starting at <paramref name="startPoint"/> with given <paramref name="length"/>.
+        /// </summary>
+        /// <param name="startPoint">Origin of line.</param>
+        /// <param name="length">Length of line.</param>
+        /// <param name="color">Color or line.</param>
+        public static void DrawHorizontalLine(Vector2 startPoint, float length, Color color)
+        {
+            color = GUI.color * color;
+            EditorGUI.DrawRect(new Rect(startPoint.x, startPoint.y, length, 1), color);
+        }
+
+        /// <summary>
+        /// Draws a vertical line starting at <paramref name="startPoint"/> with given <paramref name="length"/>.
+        /// </summary>
+        /// <param name="startPoint">Origin of line.</param>
+        /// <param name="length">Length of line.</param>
+        /// <param name="color">Color or line.</param>
+        public static void DrawVerticalLine(Vector2 startPoint, float length, Color color)
+        {
+            color = GUI.color * color;
+            EditorGUI.DrawRect(new Rect(startPoint.x, startPoint.y, 1, length), color);
+        }
     }
 }
