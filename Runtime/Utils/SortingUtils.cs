@@ -19,7 +19,11 @@ namespace Innoactive.Creator.Core.Utils
         {
             IEnumerable<T> enumerable = source as T[] ?? source.ToArray();
 
-            int max = enumerable.Select(i => FindMaxNumberInAlphaNumeric(selector(i))).Max();
+            int max = 0;
+            if (enumerable.Any())
+            {
+                max = enumerable.Select(i => FindMaxNumberInAlphaNumeric(selector(i))).Max();
+            }
 
             return enumerable.OrderBy(i => UnifyNumbersInAlphaNumericToHaveEqualLengths(selector(i), max));
         }
