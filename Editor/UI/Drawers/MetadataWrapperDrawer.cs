@@ -56,7 +56,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             {
                 return DrawExtendableList(rect, wrapper, changeValueCallback, label);
             }
-            
+
             if (wrapper.Metadata.ContainsKey(keepPopulatedName))
             {
                 return HandleKeepPopulated(rect, wrapper, changeValueCallback, label);
@@ -286,7 +286,15 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 Type entryType = (Type) wrapper.Metadata[keepPopulatedName];
                 if (entryType != null)
                 {
-                    ReflectionUtils.InsertIntoList(ref list, 0, ReflectionUtils.CreateInstanceOfType(entryType));
+                    Type listType = ReflectionUtils.GetEntryType(list);
+                    if (listType.IsAssignableFrom(entryType))
+                    {
+                        ReflectionUtils.InsertIntoList(ref list, 0, ReflectionUtils.CreateInstanceOfType(entryType));
+                    }
+                    else
+                    {
+                        Debug.LogErrorFormat("Trying to add an keep populuated entry with type {0} to list filled {1}", entryType.Name, listType.Name);
+                    }
                 }
                 else
                 {
