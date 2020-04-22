@@ -32,11 +32,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         {
             MetadataWrapper wrapper = (MetadataWrapper) currentValue;
 
-            if (wrapper.Metadata.ContainsKey(keepPopulatedName))
-            {
-                return HandleKeepPopulated(rect, wrapper, changeValueCallback, label);
-            }
-
             if (wrapper.Metadata.ContainsKey(separatedName))
             {
                 return DrawSeparated(rect, wrapper, changeValueCallback, label);
@@ -60,6 +55,11 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             if (wrapper.Metadata.ContainsKey(extendableListName))
             {
                 return DrawExtendableList(rect, wrapper, changeValueCallback, label);
+            }
+            
+            if (wrapper.Metadata.ContainsKey(keepPopulatedName))
+            {
+                return HandleKeepPopulated(rect, wrapper, changeValueCallback, label);
             }
 
             if (wrapper.Metadata.ContainsKey(listOfName))
