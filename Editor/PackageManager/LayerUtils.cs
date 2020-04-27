@@ -45,7 +45,7 @@ namespace Innoactive.CreatorEditor.PackageManager
             }
 
             // First 8 slots are reserved by Unity.
-            for (int i=8; i<layersField.arraySize; i++)
+            for (int i = 8; i < layersField.arraySize; i++)
             {
                 if (newLayers.Any())
                 {
