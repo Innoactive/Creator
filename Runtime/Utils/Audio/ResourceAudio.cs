@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Internationalization;
@@ -12,6 +13,8 @@ namespace Innoactive.Creator.Core.Audio
     public class ResourceAudio : IAudioData
     {
         private LocalizedString path;
+
+        public string Name { get; } = "Audio File";
 
         [DataMember]
         [UsesSpecificTrainingDrawer("ResourceAudioDataLocalizedStringDrawer")]

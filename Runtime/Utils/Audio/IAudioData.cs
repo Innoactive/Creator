@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 using UnityEngine;
 
 namespace Innoactive.Creator.Core.Audio
@@ -8,6 +9,12 @@ namespace Innoactive.Creator.Core.Audio
     /// </summary>
     public interface IAudioData
     {
+        /// <summary>
+        /// Name of the Audio source, used for displaying.
+        /// </summary>
+        [IgnoreDataMember]
+        string Name { get; }
+
         /// <summary>
         /// Determs if the AudioSource has an AudioClip which can be played.
         /// </summary>
