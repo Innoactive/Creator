@@ -14,7 +14,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
     {
         #region Layout Constants
         public const float ExtendedMenuWidth = 330f;
-        public const float MinimizedMenuWidth = ExpandButtonWidth + ChapterPadding * 2f;
+        public const float MinimizedMenuWidth = ExpandButtonWidth + ChapterPaddingTop * 2f;
 
         public const float ExpandButtonHeight = ExpandButtonWidth;
         public const float ExpandButtonWidth = 28f;
@@ -22,9 +22,10 @@ namespace Innoactive.CreatorEditor.UI.Windows
         public const float VerticalSpace = 8f;
         public const float TabSpace = 8f;
 
-        public const float ChapterPadding = 5f;
+        public const float ChapterPaddingTop = 8f;
+        public const float ChapterPaddingBottom = 6f;
 
-        public const float ButtonSize = 20f;
+        public const float ButtonSize = 18f;
 
         private static EditorIcon deleteIcon;
         private static EditorIcon arrowUpIcon;
@@ -213,26 +214,24 @@ namespace Innoactive.CreatorEditor.UI.Windows
         private void DrawChapter(int position)
         {
             EditorColorUtils.ResetBackgroundColor();
-            if (position != activeChapter)
+
+            GUIStyle chapterBoxStyle = GUI.skin.GetStyle("Label");
+            if (position == activeChapter)
             {
-                if (EditorGUIUtility.isProSkin)
-                {
-                    EditorColorUtils.SetBackgroundColor(Color.gray);
-                }
-            }
-            else if (EditorGUIUtility.isProSkin == false)
-            {
-                EditorColorUtils.SetBackgroundColor(new Color(0.8f, 0.8f, 0.8f));
+                chapterBoxStyle = GUI.skin.GetStyle("selectionRect");
             }
 
-            GUILayout.BeginHorizontal("box");
+            chapterBoxStyle.margin = new RectOffset(0, 0, 4, 4);
+            chapterBoxStyle.padding = new RectOffset(2, 2, 2, 2);
+
+            GUILayout.BeginHorizontal(chapterBoxStyle);
             {
                 EditorColorUtils.ResetBackgroundColor();
                 GUILayout.BeginVertical();
                 {
-                    GUILayout.Space(ChapterPadding);
+                    GUILayout.Space(ChapterPaddingTop);
                     DrawChapterContent(position);
-                    GUILayout.Space(ChapterPadding);
+                    GUILayout.Space(ChapterPaddingBottom);
                 }
                 GUILayout.EndVertical();
             }
@@ -259,7 +258,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 GUILayout.Space(TabSpace);
                 if (isActiveChapter)
                 {
-                    GUILayout.Space(ChapterPadding);
+                    GUILayout.Space(ChapterPaddingTop);
                 }
 
                 EditorColorUtils.SetTransparency(isActiveChapter ? 0.8f : 0.25f);
@@ -267,7 +266,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 EditorColorUtils.ResetColor();
 
                 GUIStyle style = new GUIStyle(GUI.skin.label);
-                style.alignment = TextAnchor.MiddleLeft;
+                style.alignment = TextAnchor.UpperLeft;
                 GUILayout.Label(Course.Data.Chapters[position].Data.Name, style, GUILayout.Width(160f), GUILayout.Height(20f));
                 Rect labelPosition = GUILayoutUtility.GetLastRect();
 
@@ -276,13 +275,15 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 AddMoveDownButton(position);
                 AddRemoveButton(position, Course.Data.Chapters.Count == 1);
                 AddRenameButton(position, labelPosition);
+
+                GUILayout.Space(4);
             }
             GUILayout.EndHorizontal();
         }
 
         private void DrawExtendToggle()
         {
-            Rect buttonPosition = new Rect((IsExtended ? ExtendedMenuWidth : MinimizedMenuWidth) - ExpandButtonWidth - ChapterPadding, ChapterPadding, ExpandButtonWidth, ExpandButtonHeight);
+            Rect buttonPosition = new Rect((IsExtended ? ExtendedMenuWidth : MinimizedMenuWidth) - ExpandButtonWidth - ChapterPaddingTop, ChapterPaddingTop, ExpandButtonWidth, ExpandButtonHeight);
             GUIStyle style = new GUIStyle();
             style.imagePosition = ImagePosition.ImageOnly;
             if (GUI.Button(buttonPosition, IsExtended ? new GUIContent(chapterMenuCollapseIcon.Texture) : new GUIContent(chapterMenuExpandIcon.Texture), style))
