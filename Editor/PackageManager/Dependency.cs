@@ -19,6 +19,11 @@ namespace Innoactive.CreatorEditor.PackageManager
         public virtual int Priority { get; } = 0;
 
         /// <summary>
+        /// A list of layers to be added.
+        /// </summary>
+        protected virtual string[] Layers { get; } = null;
+
+        /// <summary>
         /// Emitted when this <see cref="Dependency"/> is set as enabled.
         /// </summary>
         public event EventHandler<EventArgs> OnPackageEnabled;
@@ -41,6 +46,7 @@ namespace Innoactive.CreatorEditor.PackageManager
                     if (value)
                     {
                         EmitOnEnabled();
+                        AddMissingLayers();
                     }
                     else
                     {
@@ -62,6 +68,14 @@ namespace Innoactive.CreatorEditor.PackageManager
         protected virtual void EmitOnDisabled()
         {
             OnPackageDisabled?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void AddMissingLayers()
+        {
+            if (Layers != null)
+            {
+                LayerUtils.AddLayers(Layers);
+            }
         }
     }
 }
