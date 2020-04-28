@@ -10,12 +10,6 @@ namespace Innoactive.Creator.Core.Audio
     public interface IAudioData
     {
         /// <summary>
-        /// Name of the Audio source, used for displaying.
-        /// </summary>
-        [IgnoreDataMember]
-        string SourceName { get; }
-
-        /// <summary>
         /// Determs if the AudioSource has an AudioClip which can be played.
         /// </summary>
         bool HasAudioClip { get; }

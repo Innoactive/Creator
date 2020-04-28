@@ -10,11 +10,10 @@ namespace Innoactive.Creator.Core.Audio
     /// Unity resource based audio data.
     /// </summary>
     [DataContract(IsReference = true)]
+    [DisplayName("Play Audio File")]
     public class ResourceAudio : IAudioData
     {
         private LocalizedString path;
-
-        public string SourceName { get; } = "Audio File";
 
         [DataMember]
         [UsesSpecificTrainingDrawer("ResourceAudioDataLocalizedStringDrawer")]
