@@ -13,7 +13,7 @@ namespace Innoactive.Creator.Core.Audio
         /// Name of the Audio source, used for displaying.
         /// </summary>
         [IgnoreDataMember]
-        string Name { get; }
+        string SourceName { get; }
 
         /// <summary>
         /// Determs if the AudioSource has an AudioClip which can be played.

@@ -14,7 +14,7 @@ namespace Innoactive.Creator.Core.Audio
     {
         private LocalizedString path;
 
-        public string Name { get; } = "Audio File";
+        public string SourceName { get; } = "Audio File";
 
         [DataMember]
         [UsesSpecificTrainingDrawer("ResourceAudioDataLocalizedStringDrawer")]
