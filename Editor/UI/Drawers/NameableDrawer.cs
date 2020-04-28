@@ -38,8 +38,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 padding = new RectOffset(4, 0, 0, 0)
             };
 
-            labelStyle.padding.left = 4;
-
             EditorGUI.LabelField(typeRect, GetTypeNameLabel(nameable, nameable.GetType()), labelStyle);
 
             if (newName != nameable.Name)

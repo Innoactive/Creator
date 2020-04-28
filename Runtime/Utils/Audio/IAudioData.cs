@@ -1,4 +1,3 @@
-using System.Runtime.Serialization;
 using UnityEngine;
 
 namespace Innoactive.Creator.Core.Audio
