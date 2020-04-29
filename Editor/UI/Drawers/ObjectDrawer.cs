@@ -30,12 +30,10 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 return rect;
             }
 
-            if (label != null && (label.image != null || label.text != null))
+            if (label != null && label != GUIContent.none && (label.image != null || label.text != null))
             {
                 height += DrawLabel(nextPosition, currentValue, changeValueCallback, label);
             }
-
-            height += EditorDrawingHelper.VerticalSpacing;
 
             foreach (MemberInfo memberInfoToDraw in GetMembersToDraw(currentValue))
             {
