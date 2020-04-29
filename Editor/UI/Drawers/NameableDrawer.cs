@@ -34,7 +34,8 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             GUIStyle labelStyle = new GUIStyle(EditorStyles.label)
             {
                 fontStyle = FontStyle.Bold,
-                fontSize = 12
+                fontSize = 12,
+                padding = new RectOffset(4, 0, 0, 0)
             };
 
             EditorGUI.LabelField(typeRect, GetTypeNameLabel(nameable, nameable.GetType()), labelStyle);
