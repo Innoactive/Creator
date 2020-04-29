@@ -82,6 +82,20 @@ namespace Innoactive.CreatorEditor
             return coreFolder;
         }
 
+        /// <summary>
+        /// Returns the Creator Core version as string.
+        /// </summary>
+        internal static string GetCoreVersion()
+        {
+            string versionFilePath = Path.Combine(GetCoreFolder(), "version.txt");
+            if (File.Exists(versionFilePath))
+            {
+                return File.ReadAllText(versionFilePath);
+            }
+
+            return "unknown";
+        }
+
         private static void ResolveCoreFolder(PlayModeStateChange state)
         {
             ResolveCoreFolder();
