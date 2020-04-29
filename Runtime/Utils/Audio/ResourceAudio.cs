@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Internationalization;
@@ -9,6 +10,7 @@ namespace Innoactive.Creator.Core.Audio
     /// Unity resource based audio data.
     /// </summary>
     [DataContract(IsReference = true)]
+    [DisplayName("Play Audio File")]
     public class ResourceAudio : IAudioData
     {
         private LocalizedString path;
