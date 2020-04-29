@@ -8,7 +8,7 @@
         {
             "name": "Components\\Text-To-Speech",
             "repository": "git@github.com:Innoactive/TextToSpeech-Component.git",
-            "branch": "bugfix/audio-sources-not-properly-displayed-TRNG-777"
+            "branch": "develop-2019"
         },
         {
             "name": "Components\\Basic-Interaction",
