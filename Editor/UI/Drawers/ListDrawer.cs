@@ -37,7 +37,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             list.CopyTo(entries, 0);
 
             int closuredLength = entries.Length;
-
             for (int index = 0; index < entries.Length; index++)
             {
                 currentY += EditorDrawingHelper.VerticalSpacing;

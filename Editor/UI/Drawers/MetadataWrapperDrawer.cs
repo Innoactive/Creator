@@ -25,6 +25,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         private readonly string drawIsBlockingToggleName = typeof(DrawIsBlockingToggleAttribute).FullName;
         private readonly string listOfName = typeof(ListOfAttribute).FullName;
         private readonly string extendableListName = typeof(ExtendableListAttribute).FullName;
+        private readonly string keepPopulatedName = typeof(KeepPopulatedAttribute).FullName;
 
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
@@ -54,6 +55,11 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             if (wrapper.Metadata.ContainsKey(extendableListName))
             {
                 return DrawExtendableList(rect, wrapper, changeValueCallback, label);
+            }
+
+            if (wrapper.Metadata.ContainsKey(keepPopulatedName))
+            {
+                return HandleKeepPopulated(rect, wrapper, changeValueCallback, label);
             }
 
             if (wrapper.Metadata.ContainsKey(listOfName))
@@ -259,6 +265,44 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             rect.height = currentY;
             return rect;
+        }
+
+        private Rect HandleKeepPopulated(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label)
+        {
+            if (wrapper.Value == null || (wrapper.Value is IList == false))
+            {
+                if (wrapper.Value != null)
+                {
+                    Debug.LogWarning("KeepPopulated can be used only with IList members.");
+                }
+
+                return rect;
+            }
+
+            IList list = (IList) wrapper.Value;
+
+            if (list.Count == 0)
+            {
+                Type entryType = (Type) wrapper.Metadata[keepPopulatedName];
+                if (entryType != null)
+                {
+                    Type listType = ReflectionUtils.GetEntryType(list);
+                    if (listType.IsAssignableFrom(entryType))
+                    {
+                        ReflectionUtils.InsertIntoList(ref list, 0, ReflectionUtils.CreateInstanceOfType(entryType));
+                    }
+                    else
+                    {
+                        Debug.LogErrorFormat("Trying to add an keep populuated entry with type {0} to list filled {1}", entryType.Name, listType.Name);
+                    }
+                }
+                else
+                {
+                    Debug.LogError("No Type found to create default instance with");
+                }
+            }
+
+            return DrawRecursively(rect, wrapper, keepPopulatedName, changeValueCallback, label);
         }
 
         private Rect DrawListOf(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label)
