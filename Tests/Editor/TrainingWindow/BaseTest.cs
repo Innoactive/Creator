@@ -12,7 +12,7 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
     /// <summary>
     /// Base class for all training window tests.
     /// </summary>
-    public abstract class BaseTest : EditorImguiTest<TrainingWindow>
+    internal abstract class BaseTest : EditorImguiTest<TrainingWindow>
     {
         /// <inheritdoc />
         public override string GivenDescription

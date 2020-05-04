@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     /// Training drawer for `System.Color` members.
     /// </summary>
     [DefaultTrainingDrawer(typeof(Color))]
-    public class SystemColorDrawer : AbstractDrawer
+    internal class SystemColorDrawer : AbstractDrawer
     {
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)

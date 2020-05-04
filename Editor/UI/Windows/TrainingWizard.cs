@@ -9,7 +9,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
     /// <summary>
     /// Wizard for training course creation and management.
     /// </summary>
-    public class TrainingWizard : EditorWindow
+    internal class TrainingWizard : EditorWindow
     {
         private static TrainingWizard window;
         private const string menuPath = "Innoactive/Creator/Create New Course...";

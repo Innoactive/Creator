@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
-    public class EntryJoint : GraphicalElement
+    internal class EntryJoint : GraphicalElement
     {
         private readonly Vector2 size = new Vector2(16f, 16f);
         private readonly EntryJointRenderer renderer;

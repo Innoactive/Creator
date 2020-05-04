@@ -3,7 +3,7 @@
     /// <summary>
     /// Base class for all graphical element renderers.
     /// </summary>
-    public abstract class GraphicalElementRenderer<TOwner> : GraphicalElementRenderer where TOwner : GraphicalElement
+    internal abstract class GraphicalElementRenderer<TOwner> : GraphicalElementRenderer where TOwner : GraphicalElement
     {
         /// <summary>
         /// Graphical element to which this renderer belongs.

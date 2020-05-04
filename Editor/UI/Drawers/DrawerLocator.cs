@@ -7,7 +7,7 @@ using Innoactive.Creator.Core.Utils;
 
 namespace Innoactive.CreatorEditor.UI.Drawers
 {
-    public static class DrawerLocator
+    internal static class DrawerLocator
     {
         private static readonly Dictionary<Type, ITrainingDrawer> allDrawers;
         private static readonly Dictionary<Type, ITrainingDrawer> defaultDrawers;

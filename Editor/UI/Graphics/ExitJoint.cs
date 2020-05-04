@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
-    public class ExitJoint : GraphicalElement
+    internal class ExitJoint : GraphicalElement
     {
         public Vector2 DragDelta { get; set; }
 

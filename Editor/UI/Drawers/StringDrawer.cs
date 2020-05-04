@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     /// Training drawer for string members.
     /// </summary>
     [DefaultTrainingDrawer(typeof(string))]
-    public class StringDrawer : AbstractDrawer
+    internal class StringDrawer : AbstractDrawer
     {
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)

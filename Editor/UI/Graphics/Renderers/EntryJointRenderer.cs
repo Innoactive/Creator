@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
-    public class EntryJointRenderer : MulticoloredGraphicalElementRenderer<EntryJoint>
+    internal class EntryJointRenderer : MulticoloredGraphicalElementRenderer<EntryJoint>
     {
         public EntryJointRenderer(EntryJoint owner, WorkflowEditorColorPalette colorPalette) : base(owner, colorPalette)
         {

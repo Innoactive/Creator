@@ -12,7 +12,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
     /// <summary>
     /// Workflow Editor window.
     /// </summary>
-    public class TrainingWindow : EditorWindow
+    internal class TrainingWindow : EditorWindow
     {
         private static TrainingWindow window;
         private ICourse activeCourse;

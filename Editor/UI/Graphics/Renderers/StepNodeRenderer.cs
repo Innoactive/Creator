@@ -2,7 +2,7 @@
 
 namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
 {
-    public class StepNodeRenderer : MulticoloredGraphicalElementRenderer<StepNode>
+    internal class StepNodeRenderer : MulticoloredGraphicalElementRenderer<StepNode>
     {
         private const float labelBorderOffsetInwards = 10f;
 

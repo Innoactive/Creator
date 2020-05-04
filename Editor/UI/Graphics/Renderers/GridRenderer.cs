@@ -5,7 +5,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
     /// <summary>
     /// Base class which handles rendering of a <see cref="Grid"/>.
     /// </summary>
-    public abstract class GridRenderer<TOwner> : GraphicalElementRenderer<TOwner> where TOwner : Grid
+    internal abstract class GridRenderer<TOwner> : GraphicalElementRenderer<TOwner> where TOwner : Grid
     {
         /// <summary>
         /// Bounding box of the grid.

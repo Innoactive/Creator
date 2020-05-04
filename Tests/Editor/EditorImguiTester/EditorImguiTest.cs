@@ -6,15 +6,15 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.TestTools;
 using Innoactive.Creator.Core.Utils;
+using UnityEngine.TestTools;
 
 namespace Innoactive.CreatorEditor.ImguiTester
 {
     /// <summary>
     /// Inherit from this class to implement your own editor IMGUI tests.
     /// </summary>
-    public abstract class EditorImguiTest<T> : IEditorImguiTest where T : EditorWindow
+    internal abstract class EditorImguiTest<T> : IEditorImguiTest where T : EditorWindow
     {
         private static JsonSerializerSettings JsonSerializerSettings
         {

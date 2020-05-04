@@ -10,7 +10,7 @@ namespace Innoactive.CreatorEditor.UI
     /// <summary>
     /// UI events handler and graphical elements drawer.
     /// </summary>
-    public class EditorGraphics
+    internal class EditorGraphics
     {
         #region constants
         private const float contentBorderThickness = 200f;

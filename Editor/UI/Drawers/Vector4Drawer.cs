@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     /// Training drawer for `Vector4`.
     /// </summary>
     [DefaultTrainingDrawer(typeof(Vector4))]
-    public class Vector4Drawer : AbstractDrawer
+    internal class Vector4Drawer : AbstractDrawer
     {
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)

@@ -5,7 +5,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
     /// <summary>
     /// Base class for graphical element renderers that use only one color.
     /// </summary>
-    public abstract class ColoredGraphicalElementRenderer<TOwner> : GraphicalElementRenderer<TOwner> where TOwner : GraphicalElement
+    internal abstract class ColoredGraphicalElementRenderer<TOwner> : GraphicalElementRenderer<TOwner> where TOwner : GraphicalElement
     {
         /// <summary>
         /// Color palette which is used in current Workflow Editor window. Use colors from it to keep your elements in the same style.

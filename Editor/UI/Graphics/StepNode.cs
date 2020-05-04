@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
     /// <summary>
     /// Represents step node of the workflow editor.
     /// </summary>
-    public class StepNode : EditorNode
+    internal class StepNode : EditorNode
     {
         private static readonly Vector2 initialSize = new Vector2(100f, 24f);
         private Vector2 size = initialSize;

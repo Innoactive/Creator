@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     /// <summary>
     /// Custom color drawer for the case when color is stored as a list of four floats.
     /// </summary>
-    public class ListFloatColorDrawer : AbstractDrawer
+    internal class ListFloatColorDrawer : AbstractDrawer
     {
         private static List<float> ColorToList(Color color)
         {

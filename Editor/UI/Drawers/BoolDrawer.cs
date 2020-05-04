@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     /// Training drawer for boolean members.
     /// </summary>
     [DefaultTrainingDrawer(typeof(bool))]
-    public class BoolDrawer : AbstractDrawer
+    internal class BoolDrawer : AbstractDrawer
     {
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)

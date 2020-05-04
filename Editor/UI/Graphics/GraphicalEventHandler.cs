@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
-    public class GraphicalEventHandler
+    internal class GraphicalEventHandler
     {
         public event EventHandler<PointerGraphicalElementEventArgs> PointerDown;
         public event EventHandler<PointerGraphicalElementEventArgs> PointerUp;
