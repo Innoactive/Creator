@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
-    public class EntryNodeRenderer : ColoredGraphicalElementRenderer<EntryNode>
+    internal class EntryNodeRenderer : ColoredGraphicalElementRenderer<EntryNode>
     {
         /// <inheritdoc />
         public override Color NormalColor

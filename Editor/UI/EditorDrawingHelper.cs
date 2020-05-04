@@ -7,7 +7,7 @@ namespace Innoactive.CreatorEditor.UI
     /// <summary>
     /// Helper class for drawing primitives in custom editors.
     /// </summary>
-    public static class EditorDrawingHelper
+    internal static class EditorDrawingHelper
     {
         private static readonly Vector2 addComponentButtonSize = new Vector2(228, 22);
 

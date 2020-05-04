@@ -10,7 +10,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
     /// TrainingMenuView is shown on the left side of the <see cref="TrainingWindow"/> and takes care about overall
     /// settings for the Training itself, especially chapters.
     /// </summary>
-    public class TrainingMenuView : ScriptableObject
+    internal class TrainingMenuView : ScriptableObject
     {
         #region Layout Constants
         public const float ExtendedMenuWidth = 330f;

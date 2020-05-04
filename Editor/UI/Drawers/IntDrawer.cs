@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     /// Training drawer for int values.
     /// </summary>
     [DefaultTrainingDrawer(typeof(int))]
-    public class IntDrawer : AbstractDrawer
+    internal class IntDrawer : AbstractDrawer
     {
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)

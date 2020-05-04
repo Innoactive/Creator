@@ -9,7 +9,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     /// Training drawer for `System.Enum` members.
     /// </summary>
     [DefaultTrainingDrawer(typeof(Enum))]
-    public class EnumDrawer : AbstractDrawer
+    internal class EnumDrawer : AbstractDrawer
     {
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)

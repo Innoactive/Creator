@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Windows
 {
-    public static class SaveManager
+    internal static class SaveManager
     {
         /// <summary>
         /// Save the training to given path.

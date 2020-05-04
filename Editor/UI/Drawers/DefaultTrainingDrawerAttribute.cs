@@ -6,7 +6,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     /// Marks a training drawer as a default drawer for a given type.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class DefaultTrainingDrawerAttribute : Attribute
+    internal class DefaultTrainingDrawerAttribute : Attribute
     {
         /// <summary>
         /// Objects of which type can be processed  by this training drawer.

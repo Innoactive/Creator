@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     /// Training drawer for `UnityEngine.Color32` member.
     /// </summary>
     [DefaultTrainingDrawer(typeof(Color32))]
-    public class UnityColor32Drawer : AbstractDrawer
+    internal class UnityColor32Drawer : AbstractDrawer
     {
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)

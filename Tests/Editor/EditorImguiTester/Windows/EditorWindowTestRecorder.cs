@@ -12,7 +12,7 @@ namespace Innoactive.CreatorEditor.ImguiTester
     /// <summary>
     /// Utility window which draws itself on top of a given window and intercepts the events.
     /// </summary>
-    public class EditorWindowTestRecorder : EditorWindow
+    internal class EditorWindowTestRecorder : EditorWindow
     {
         private static readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings {Converters = new List<JsonConverter> {new ImguiEventConverter()}};
         private readonly IList<UserAction> userActions = new List<UserAction>();

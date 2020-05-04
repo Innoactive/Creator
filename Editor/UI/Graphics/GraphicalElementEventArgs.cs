@@ -2,7 +2,7 @@
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
-    public class GraphicalElementEventArgs : EventArgs
+    internal class GraphicalElementEventArgs : EventArgs
     {
     }
 }

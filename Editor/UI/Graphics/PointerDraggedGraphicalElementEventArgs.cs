@@ -2,7 +2,7 @@
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
-    public class PointerDraggedGraphicalElementEventArgs : PointerGraphicalElementEventArgs
+    internal class PointerDraggedGraphicalElementEventArgs : PointerGraphicalElementEventArgs
     {
         public Vector2 PointerDelta
         {

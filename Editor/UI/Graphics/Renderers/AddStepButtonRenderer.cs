@@ -5,7 +5,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
     /// <summary>
     /// Renderer for AddStepButton graphical elements.
     /// </summary>
-    public class AddStepButtonRenderer : MulticoloredGraphicalElementRenderer<AddStepButton>
+    internal class AddStepButtonRenderer : MulticoloredGraphicalElementRenderer<AddStepButton>
     {
         /// <inheritdoc />
         public override Color NormalColor

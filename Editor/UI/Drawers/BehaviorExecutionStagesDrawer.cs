@@ -9,7 +9,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     /// Training drawer for <see cref="BehaviorExecutionStages"/> members.
     /// </summary>
     [DefaultTrainingDrawer(typeof(BehaviorExecutionStages))]
-    public class BehaviorExecutionStagesDrawer : AbstractDrawer
+    internal class BehaviorExecutionStagesDrawer : AbstractDrawer
     {
         private enum ExecutionStages
         {

@@ -3,7 +3,7 @@
     /// <summary>
     /// Handles rendering of a <see cref="WorkflowEditorGrid"/>.
     /// </summary>
-    public class WorkflowEditorGridRenderer : GridRenderer<WorkflowEditorGrid>
+    internal class WorkflowEditorGridRenderer : GridRenderer<WorkflowEditorGrid>
     {
         public WorkflowEditorGridRenderer(WorkflowEditorGrid owner) : base(owner)
         {

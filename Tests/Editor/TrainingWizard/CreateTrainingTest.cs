@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Innoactive.Creator.Tests.TrainingWizardTests
 {
-    public class CreateTrainingTest : EditorImguiTest<TrainingWizard>
+    internal class CreateTrainingTest : EditorImguiTest<TrainingWizard>
     {
         public override string GivenDescription
         {

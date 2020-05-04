@@ -6,7 +6,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
     /// <summary>
     /// Represents the beginning of a training in the training workflow.
     /// </summary>
-    public class EntryNode : EditorNode
+    internal class EntryNode : EditorNode
     {
         private static readonly Vector2 size = new Vector2(24f, 24f);
         private readonly GraphicalElementRenderer renderer;

@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
     /// <summary>
     /// Represents transition arrow between two steps.
     /// </summary>
-    public class TransitionElement : GraphicalElement
+    internal class TransitionElement : GraphicalElement
     {
         private readonly TransitionRenderer renderer;
 
