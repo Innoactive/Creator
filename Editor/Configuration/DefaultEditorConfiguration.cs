@@ -16,7 +16,7 @@ namespace Innoactive.CreatorEditor.Configuration
         private AllowedMenuItemsSettings allowedMenuItemsSettings;
 
         /// <inheritdoc />
-        public virtual string CourseStreamingAssetsFolder
+        public virtual string CourseStreamingAssetsSubdirectory
         {
             get { return "Training"; }
         }
@@ -31,6 +31,18 @@ namespace Innoactive.CreatorEditor.Configuration
         public virtual ICourseSerializer Serializer
         {
             get { return new NewtonsoftJsonCourseSerializer(); }
+        }
+
+        /// <inheritdoc />
+        public virtual ReadOnlyCollection<MenuOption<IBehavior>> BehaviorsMenuContent
+        {
+            get { return AllowedMenuItemsSettings.GetBehaviorMenuOptions().Cast<MenuOption<IBehavior>>().ToList().AsReadOnly(); }
+        }
+
+        /// <inheritdoc />
+        public virtual ReadOnlyCollection<MenuOption<ICondition>> ConditionsMenuContent
+        {
+            get { return AllowedMenuItemsSettings.GetConditionMenuOptions().Cast<MenuOption<ICondition>>().ToList().AsReadOnly(); }
         }
 
         /// <inheritdoc />
@@ -50,18 +62,6 @@ namespace Innoactive.CreatorEditor.Configuration
 
         protected DefaultEditorConfiguration()
         {
-        }
-
-        /// <inheritdoc />
-        public virtual ReadOnlyCollection<MenuOption<IBehavior>> BehaviorsMenuContent
-        {
-            get { return AllowedMenuItemsSettings.GetBehaviorMenuOptions().Cast<MenuOption<IBehavior>>().ToList().AsReadOnly(); }
-        }
-
-        /// <inheritdoc />
-        public virtual ReadOnlyCollection<MenuOption<ICondition>> ConditionsMenuContent
-        {
-            get { return AllowedMenuItemsSettings.GetConditionMenuOptions().Cast<MenuOption<ICondition>>().ToList().AsReadOnly(); }
         }
     }
 }

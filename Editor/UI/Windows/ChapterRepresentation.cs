@@ -53,7 +53,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 Vector2 positionAfterDrag = node.Position;
                 Vector2 closuredPositionBeforeDrag = positionBeforeDrag;
 
-                RevertableChangesHandler.Do(new TrainingCommand(() =>
+                RevertableChangesHandler.Do(new CourseCommand(() =>
                 {
                     setPositionInModel(positionAfterDrag);
                     MarkToRefresh();
@@ -87,7 +87,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             // Add offsets and subtract bounding box offsets
             newPos += new Vector2(addedX, addedY);
             newPos -= new Vector2(node.LocalBoundingBox.x % gridCellSize, node.LocalBoundingBox.y % gridCellSize);
-            
+
             node.RelativePosition = newPos;
         }
 
@@ -97,7 +97,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             bool wasFirstStep = step == currentChapter.Data.FirstStep;
 
-            RevertableChangesHandler.Do(new TrainingCommand(
+            RevertableChangesHandler.Do(new CourseCommand(
                 () =>
                 {
                     foreach (ITransition transition in incomingTransitions)
@@ -176,7 +176,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 ITransition transition = new Transition();
 
-                RevertableChangesHandler.Do(new TrainingCommand(
+                RevertableChangesHandler.Do(new CourseCommand(
                     () =>
                     {
                         step.Data.Transitions.Data.Transitions.Add(transition);
@@ -223,10 +223,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             SelectStepNode(stepNode);
             Graphics.BringToTop(stepNode);
 
-            if (stepNode != null)
-            {
-                StepWindow.ShowInspector();
-            }
+            Editors.StartEditingStep(stepNode?.Step);
         }
 
         private void MarkToRefresh()
@@ -270,7 +267,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                     {
                         IStep firstStep = chapter.Data.FirstStep;
 
-                        RevertableChangesHandler.Do(new TrainingCommand(() =>
+                        RevertableChangesHandler.Do(new CourseCommand(() =>
                             {
                                 chapter.Data.FirstStep = null;
                                 MarkToRefresh();
@@ -300,7 +297,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                     return;
                 }
 
-                RevertableChangesHandler.Do(new TrainingCommand(() =>
+                RevertableChangesHandler.Do(new CourseCommand(() =>
                     {
                         chapter.Data.FirstStep = target;
                         MarkToRefresh();
@@ -357,7 +354,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                             return;
                         }
 
-                        RevertableChangesHandler.Do(new TrainingCommand(() =>
+                        RevertableChangesHandler.Do(new CourseCommand(() =>
                             {
                                 closuredTransition.Data.TargetStep = targetStep;
                                 SelectStepNode(stepNodes[closuredStep]);
@@ -379,13 +376,14 @@ namespace Innoactive.CreatorEditor.UI.Windows
                             new TestableEditorElements.MenuItem(new GUIContent("Delete transition"), false, () =>
                             {
                                 bool isLast = closuredStep.Data.Transitions.Data.Transitions.Count == 1;
-                                RevertableChangesHandler.Do(new TrainingCommand(() =>
+                                RevertableChangesHandler.Do(new CourseCommand(() =>
                                     {
                                         closuredStep.Data.Transitions.Data.Transitions.Remove(closuredTransition);
                                         if (isLast)
                                         {
                                             closuredStep.Data.Transitions.Data.Transitions.Add(new Transition());
                                         }
+
                                         MarkToRefresh();
                                     },
                                     () =>
@@ -394,6 +392,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                                         {
                                             closuredStep.Data.Transitions.Data.Transitions.RemoveAt(0);
                                         }
+
                                         closuredStep.Data.Transitions.Data.Transitions.Insert(transitionIndex, closuredTransition);
                                         MarkToRefresh();
                                     }
@@ -462,7 +461,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void AddStepWithUndo(IStep step)
         {
-            RevertableChangesHandler.Do(new TrainingCommand(() =>
+            RevertableChangesHandler.Do(new CourseCommand(() =>
                 {
                     AddStep(step);
                     currentChapter.ChapterMetadata.LastSelectedStep = step;

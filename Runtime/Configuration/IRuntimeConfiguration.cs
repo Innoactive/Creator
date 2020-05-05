@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.ObjectModel;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Core.Serialization;

@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 24d3b130900b7774a840d335ba38d6c2
+=======
+<<<<<<< HEAD:Editor/example_palette.json.meta
+guid: a704a9d335188c447a845727010626e8
+=======
+guid: 24d3b130900b7774a840d335ba38d6c2
+>>>>>>> 1:Tests/Editor/TrainingWindow/Records/Innoactive.Creator.Tests.TrainingWindowTests.AddTwoStepsRemoveOneTest.json.meta
+>>>>>>> 1
 TextScriptImporter:
   externalObjects: {}
   userData: 

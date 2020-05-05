@@ -1,3 +1,4 @@
+using System;
 using Innoactive.CreatorEditor;
 using Innoactive.CreatorEditor.UI.Windows;
 using Innoactive.CreatorEditor.ImguiTester;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace Innoactive.Creator.Tests.TrainingWizardTests
 {
-    public class CreateTrainingTest : EditorImguiTest<TrainingWizard>
+    public class CreateTrainingTest : EditorImguiTest<CourseCreationWizard>
     {
         public override string GivenDescription
         {
@@ -40,42 +41,46 @@ namespace Innoactive.Creator.Tests.TrainingWizardTests
             }
         }
 
-        protected override TrainingWizard Given()
+        protected override CourseCreationWizard Given()
         {
-            foreach (TrainingWizard window in Resources.FindObjectsOfTypeAll<TrainingWizard>())
+            throw new NotImplementedException("Create TestStrategy for Editors.");
+
+            foreach (CourseCreationWizard window in Resources.FindObjectsOfTypeAll<CourseCreationWizard>())
             {
                 window.Close();
             }
 
-            foreach (TrainingWindow window in Resources.FindObjectsOfTypeAll<TrainingWindow>())
+            foreach (CourseWindow window in Resources.FindObjectsOfTypeAll<CourseWindow>())
             {
                 window.Close();
             }
 
-            TrainingWizard wizard = ScriptableObject.CreateInstance<TrainingWizard>();
+            CourseCreationWizard wizard = ScriptableObject.CreateInstance<CourseCreationWizard>();
             wizard.ShowUtility();
             wizard.maxSize = wizard.minSize;
             wizard.position = new Rect(Vector2.zero, wizard.minSize);
             return wizard;
         }
 
-        protected override void Then(TrainingWizard window)
+        protected override void Then(CourseCreationWizard window)
         {
-            Assert.False(EditorUtils.IsWindowOpened<TrainingWindow>());
+            Assert.False(EditorUtils.IsWindowOpened<CourseWindow>());
         }
 
         protected override void AdditionalTeardown()
         {
             base.AdditionalTeardown();
-            foreach (TrainingWizard window in Resources.FindObjectsOfTypeAll<TrainingWizard>())
+            foreach (CourseCreationWizard window in Resources.FindObjectsOfTypeAll<CourseCreationWizard>())
             {
                 window.Close();
             }
 
-            foreach (TrainingWindow window in Resources.FindObjectsOfTypeAll<TrainingWindow>())
+            foreach (CourseWindow window in Resources.FindObjectsOfTypeAll<CourseWindow>())
             {
                 window.Close();
             }
+
+            Editors.SetDefaultStrategy();
         }
     }
 }

@@ -9,9 +9,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
     /// <summary>
     /// Wizard for training course creation and management.
     /// </summary>
-    public class TrainingWizard : EditorWindow
+    public class CourseCreationWizard : EditorWindow
     {
-        private static TrainingWizard window;
+        private static CourseCreationWizard window;
         private const string menuPath = "Innoactive/Creator/Create New Course...";
 
         [MenuItem(menuPath, false, 12)]
@@ -19,7 +19,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
         {
             if (window == null)
             {
-                TrainingWizard[] openedTrainingWizards = Resources.FindObjectsOfTypeAll<TrainingWizard>();
+                CourseCreationWizard[] openedTrainingWizards = Resources.FindObjectsOfTypeAll<CourseCreationWizard>();
 
                 if (openedTrainingWizards.Length > 1)
                 {
@@ -30,14 +30,14 @@ namespace Innoactive.CreatorEditor.UI.Windows
                     Debug.LogWarning("There were more than one create course windows open. This should not happen. The redundant windows were closed.");
                 }
 
-                window = openedTrainingWizards.Length > 0 ? openedTrainingWizards[0] : GetWindow<TrainingWizard>();
+                window = openedTrainingWizards.Length > 0 ? openedTrainingWizards[0] : GetWindow<CourseCreationWizard>();
             }
 
             window.Show();
             window.Focus();
         }
 
-        private string trainingName;
+        private string courseName;
         private Vector2 scrollPosition;
         private string errorMessage;
 
@@ -63,7 +63,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             EditorGUI.BeginDisabledGroup(RuntimeConfigurator.Exists == false);
             EditorGUILayout.LabelField("<b>Create a new training course.</b>", labelStyle);
 
-            trainingName = EditorGUILayout.TextField(new GUIContent("Training Course Name", "Set a file name for the new training course."), trainingName);
+            courseName = EditorGUILayout.TextField(new GUIContent("Training Course Name", "Set a file name for the new training course."), courseName);
 
             EditorGUILayout.LabelField("The new course will be set for the current scene.");
 
@@ -72,34 +72,14 @@ namespace Innoactive.CreatorEditor.UI.Windows
             // ReSharper disable once InvertIf
             if (GUILayout.Button("Create", GUILayout.Width(128), GUILayout.Height(32)))
             {
-                int invalidCharacterIndex;
+                if (CourseAssetManager.CanCreate(courseName, out errorMessage))
+                {
+                    CourseAssetManager.Import(new Course(courseName, new Chapter("Chapter 1", null)));
+                    RuntimeConfigurator.Instance.SetSelectedCourse(CourseAssetManager.GetCourseStreamingAssetPath(courseName));
+                    Editors.SetCurrentCourse(courseName);
+                    Editors.StartEditing();
 
-                if (string.IsNullOrEmpty(trainingName))
-                {
-                    errorMessage = "Training course name is empty!";
-                }
-                else if ((invalidCharacterIndex = trainingName.IndexOfAny(Path.GetInvalidFileNameChars())) >= 0)
-                {
-                    errorMessage = string.Format("Course name contains invalid character: {0}", trainingName[invalidCharacterIndex]);
-                }
-                else
-                {
-                    string trainingCoursePath = CourseUtils.GetCoursePath(trainingName);
-                    string trainingCourseFolder = Path.GetDirectoryName(trainingCoursePath);
-
-                    if (Directory.Exists(trainingCourseFolder))
-                    {
-                        errorMessage = string.Format("Training course with name \"{0}\" already exists!", trainingName);
-                    }
-                    else
-                    {
-                        ICourse course = CourseUtils.CreateCourse(trainingName);
-                        if (CourseUtils.SetTrainingCourseActive(course))
-                        {
-                            Debug.Log("Newly created course saved.");
-                            Close();
-                        }
-                    }
+                    Close();
                 }
             }
 

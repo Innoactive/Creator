@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Innoactive.CreatorEditor.UI.Windows
 {
     /// <summary>
-    /// TrainingMenuView is shown on the left side of the <see cref="TrainingWindow"/> and takes care about overall
+    /// TrainingMenuView is shown on the left side of the <see cref="CourseWindow"/> and takes care about overall
     /// settings for the Training itself, especially chapters.
     /// </summary>
     public class TrainingMenuView : ScriptableObject
@@ -80,7 +80,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         protected ICourse Course { get; private set; }
 
-        protected TrainingWindow ParentWindow { get; private set; }
+        protected CourseWindow ParentWindow { get; private set; }
 
         [SerializeField]
         private Vector2 scrollPosition;
@@ -92,7 +92,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
         /// Initialises the windows with the correct training and TrainingWindow (parent).
         /// This has to be done after every time the editor reloaded the assembly (recompile).
         /// </summary>
-        public void Initialise(ICourse course, TrainingWindow parent)
+        public void Initialise(ICourse course, CourseWindow parent)
         {
             Course = course;
             ParentWindow = parent;
@@ -180,15 +180,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
                         renameCoursePopup = RenameCoursePopup.Open(Course, labelPosition, scrollPosition);
                     }
                 }
-            }
-            GUILayout.EndHorizontal();
-
-            GUILayout.Space(VerticalSpace);
-
-            GUILayout.BeginHorizontal();
-            {
-                GUILayout.FlexibleSpace();
-                AddSaveButton();
             }
             GUILayout.EndHorizontal();
         }
@@ -295,21 +286,13 @@ namespace Innoactive.CreatorEditor.UI.Windows
         #endregion
 
         #region Button Actions
-        private void AddSaveButton()
-        {
-            if (GUILayout.Button("Save", GUILayout.Width(80f)))
-            {
-                TrainingWindow.GetWindow().SaveTraining();
-            }
-        }
-
         private void AddMoveUpButton(int position)
         {
             if (FlatIconButton(arrowUpIcon.Texture))
             {
                 if (position > 0)
                 {
-                    RevertableChangesHandler.Do(new TrainingCommand(
+                    RevertableChangesHandler.Do(new CourseCommand(
                         // ReSharper disable once ImplicitlyCapturedClosure
                         () =>
                         {
@@ -331,7 +314,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 if (position + 1 < Course.Data.Chapters.Count)
                 {
-                    RevertableChangesHandler.Do(new TrainingCommand(
+                    RevertableChangesHandler.Do(new CourseCommand(
                         // ReSharper disable once ImplicitlyCapturedClosure
                         () =>
                         {
@@ -363,13 +346,13 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 if (FlatIconButton(deleteIcon.Texture))
                 {
                     IChapter chapter = Course.Data.Chapters[position];
-                    bool isDeleteTriggered = EditorUtility.DisplayDialog(string.Format("Delete Chapter '{0}'", chapter.Data.Name),
-                        string.Format("Do you really want to delete chapter '{0}'? You will lose all steps stored there.", chapter.Data.Name), "Delete",
+                    bool isDeleteTriggered = EditorUtility.DisplayDialog($"Delete Chapter '{chapter.Data.Name}'",
+                        $"Do you really want to delete chapter '{chapter.Data.Name}'? You will lose all steps stored there.", "Delete",
                         "Cancel");
 
                     if (isDeleteTriggered)
                     {
-                        RevertableChangesHandler.Do(new TrainingCommand(
+                        RevertableChangesHandler.Do(new CourseCommand(
                             // ReSharper disable once ImplicitlyCapturedClosure
                             () =>
                             {
@@ -401,7 +384,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 GUILayout.FlexibleSpace();
                 if (GUILayout.Button("+Add Chapter", GUILayout.Width(128), GUILayout.Height(32)))
                 {
-                    RevertableChangesHandler.Do(new TrainingCommand(
+                    RevertableChangesHandler.Do(new CourseCommand(
                         // ReSharper disable once ImplicitlyCapturedClosure
                         () =>
                         {

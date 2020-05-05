@@ -20,14 +20,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
         private Rect stepRect;
 
         /// <summary>
-        /// Returns true if there is an instance of <see cref="TrainingWindow"/> is opened.
-        /// </summary>
-        public static bool IsTrainingWindowOpen
-        {
-            get { return EditorUtils.IsWindowOpened<TrainingWindow>(); }
-        }
-
-        /// <summary>
         /// Returns the first <see cref="StepWindow"/> which is currently opened.
         /// If there is none, creates and shows <see cref="StepWindow"/>.
         /// </summary>
@@ -42,19 +34,14 @@ namespace Innoactive.CreatorEditor.UI.Windows
             instance.Repaint();
         }
 
-        /// <summary>
-        /// Closes currently opened <see cref="StepWindow"/>.
-        /// </summary>
-        public static void HideInspector()
+        private void OnEnable()
         {
-            if (IsTrainingWindowOpen == false)
-            {
-                return;
-            }
+            Editors.StepWindowOpened(this);
+        }
 
-            StepWindow instance = GetWindow<StepWindow>();
-            instance.step = null;
-            instance.Close();
+        private void OnDestroy()
+        {
+            Editors.StepWindowClosed(this);
         }
 
         private void OnInspectorUpdate()
@@ -64,12 +51,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void OnGUI()
         {
-            if (TrainingWindow.IsOpen && TrainingWindow.GetWindow().GetChapter() != null)
-            {
-                step = TrainingWindow.GetWindow().GetChapter().ChapterMetadata.LastSelectedStep;
-            }
-
-            titleContent = new GUIContent("Step");
+            titleContent = new GUIContent("Step Editor");
 
             if (step == null)
             {
@@ -87,19 +69,20 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             scrollPosition = GUI.BeginScrollView(new Rect(0, 0, position.width, position.height), scrollPosition, stepRect, false, false);
             {
-                stepRect = drawer.Draw(stepRect, step, SetStep, "Step");
+                stepRect = drawer.Draw(stepRect, step, ModifyStep, "Step");
             }
             GUI.EndScrollView();
         }
 
-        private void SetStep(object step)
+        private void ModifyStep(object newStep)
         {
-            this.step = (Step)step;
-            if (TrainingWindow.IsOpen)
-            {
-                TrainingWindow.GetWindow().GetChapter().ChapterMetadata.LastSelectedStep = this.step;
-                TrainingWindow.GetWindow().RefreshChapterRepresentation();
-            }
+            step = (IStep)newStep;
+            Editors.CurrentStepModified(step);
+        }
+
+        public void SetStep(IStep newStep)
+        {
+            step = newStep;
         }
     }
 }

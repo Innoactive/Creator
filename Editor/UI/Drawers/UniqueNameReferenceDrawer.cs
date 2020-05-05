@@ -46,7 +46,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             {
 
                 RevertableChangesHandler.Do(
-                    new TrainingCommand(
+                    new CourseCommand(
                         () =>
                         {
                             uniqueNameReference.UniqueName = newUniqueName;
@@ -174,7 +174,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                     Component[] alreadyAttachedProperties = selectedSceneObject.GetComponents(typeof(Component));
 
                     RevertableChangesHandler.Do(
-                        new TrainingCommand(
+                        new CourseCommand(
                             ()=> SceneObjectAutomaticSetup(selectedSceneObject, valueType),
                             ()=> UndoSceneObjectAutomaticSetup(selectedSceneObject, valueType, isAlreadySceneObject, alreadyAttachedProperties)),
                         undoGroupName);
