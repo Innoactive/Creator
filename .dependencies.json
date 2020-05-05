@@ -3,12 +3,12 @@
         {
             "name": "Components\\VRTK-Interaction",
             "repository": "git@github.com:Innoactive/VRTK-Interaction-Component.git",
-            "branch": "develop-2019"
+            "branch": "develop"
         },
         {
             "name": "Components\\Text-To-Speech",
             "repository": "git@github.com:Innoactive/TextToSpeech-Component.git",
-            "branch": "develop-2019"
+            "branch": "develop"
         },
         {
             "name": "Components\\Basic-Interaction",
