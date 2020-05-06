@@ -57,7 +57,6 @@ namespace Innoactive.CreatorEditor.Configuration
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
             serializedObject.Update();
 
             // Courses can change without recompile so we have to check for them.
