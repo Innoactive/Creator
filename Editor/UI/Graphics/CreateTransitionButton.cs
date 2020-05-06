@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
-    public class CreateTransitionButton : GraphicalElement
+    internal class CreateTransitionButton : GraphicalElement
     {
         private readonly Vector2 size = new Vector2(16f, 16f);
 

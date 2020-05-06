@@ -5,7 +5,7 @@ using Innoactive.Creator.Core.Exceptions;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.ImguiTester
+namespace Innoactive.CreatorEditor
 {
     public static class TestableEditorElements
     {

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.ImguiTester;
 using Innoactive.CreatorEditor.UI.Graphics;
 using Innoactive.CreatorEditor.UndoRedo;
 using Innoactive.CreatorEditor.Utils;

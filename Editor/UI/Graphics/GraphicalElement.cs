@@ -9,7 +9,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
     /// <summary>
     /// Base class for all views in the workflow editor.
     /// </summary>
-    public abstract class GraphicalElement
+    internal abstract class GraphicalElement
     {
         private readonly List<GraphicalElement> children = new List<GraphicalElement>();
         private GraphicalElement parent;

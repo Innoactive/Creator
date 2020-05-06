@@ -11,7 +11,7 @@ namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
     /// <summary>
     /// Base class for all training window tests.
     /// </summary>
-    public abstract class BaseTest : EditorImguiTest<CourseWindow>
+    internal abstract class BaseTest : EditorImguiTest<CourseWindow>
     {
         /// <summary>
         /// Returns all <see cref="ITransition"/>s contained in given <see cref="IStep"/>.

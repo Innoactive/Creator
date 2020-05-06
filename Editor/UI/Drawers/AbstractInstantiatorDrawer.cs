@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.CreatorEditor.ImguiTester;
 using Innoactive.CreatorEditor.UI.StepInspector.Menu;
 using UnityEngine;
 
@@ -12,7 +11,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     /// Drawers for "Add Behavior", "Add Condition", "Add Transition" buttons inherit from this class.
     /// </summary>
     /// <typeparam name="T">A type of an object to instantiate.</typeparam>
-    public abstract class AbstractInstantiatorDrawer<T> : AbstractDrawer
+    internal abstract class AbstractInstantiatorDrawer<T> : AbstractDrawer
     {
         /// <summary>
         /// Converts a list of <seealso cref="StepInspector.Menu.MenuOption"/> <paramref name="options"/> to <seealso cref="TestableEditorElements.MenuOption"/> options.

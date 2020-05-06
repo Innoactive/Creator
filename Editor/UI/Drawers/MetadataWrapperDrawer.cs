@@ -17,7 +17,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     /// After that, an actual object is drawn.
     /// </summary>
     [DefaultTrainingDrawer(typeof(MetadataWrapper))]
-    public class MetadataWrapperDrawer : AbstractDrawer
+    internal class MetadataWrapperDrawer : AbstractDrawer
     {
         private readonly string separatedName = typeof(SeparatedAttribute).FullName;
         private readonly string deletableName = typeof(DeletableAttribute).FullName;

@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.TestTools
     /// Data structure for an atomic user action (click mouse, select item in a context menu).
     /// </summary>
     [DataContract(IsReference = false)]
-    public class UserAction
+    internal class UserAction
     {
         [DataMember]
         public Event Event { get; set; }

@@ -6,7 +6,7 @@ using Innoactive.CreatorEditor.UI.Windows;
 
 namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 {
-    public class BranchTest : BaseTest
+    internal class BranchTest : BaseTest
     {
         /// <inheritdoc />
         public override string WhenDescription

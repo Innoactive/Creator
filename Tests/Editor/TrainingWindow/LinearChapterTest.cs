@@ -6,7 +6,7 @@ using Innoactive.CreatorEditor.UI.Windows;
 
 namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 {
-    public class LinearChapterTest : BaseTest
+    internal class LinearChapterTest : BaseTest
     {
         private int iteratedSteps;
         private List<IStep> validatedSteps = new List<IStep>();

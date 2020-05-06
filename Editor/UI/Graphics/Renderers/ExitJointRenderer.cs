@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
-    public class ExitJointRenderer : MulticoloredGraphicalElementRenderer<ExitJoint>
+    internal class ExitJointRenderer : MulticoloredGraphicalElementRenderer<ExitJoint>
     {
         public ExitJointRenderer(ExitJoint owner, WorkflowEditorColorPalette colorPalette) : base(owner, colorPalette)
         {

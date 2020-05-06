@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Innoactive.CreatorEditor.UI.Drawers
 {
     [DefaultTrainingDrawer(typeof(BehaviorCollection))]
-    public class BehaviorCollectionDrawer : DataOwnerDrawer
+    internal class BehaviorCollectionDrawer : DataOwnerDrawer
     {
         public override GUIContent GetLabel(MemberInfo memberInfo, object memberOwner)
         {

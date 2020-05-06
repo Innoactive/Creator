@@ -5,7 +5,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
     /// <summary>
     /// Base class for Entry and Exit nodes.
     /// </summary>
-    public abstract class EditorNode : GraphicalElement
+    internal abstract class EditorNode : GraphicalElement
     {
         /// <summary>
         /// List of entry joints, to which incoming Transitions can connect. Since workflow is linear for now, there is only one joint per editor node.

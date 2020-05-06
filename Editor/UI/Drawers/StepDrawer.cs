@@ -10,7 +10,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     /// Skip label draw call, as well.
     /// </summary>
     [DefaultTrainingDrawer(typeof(Step.EntityData))]
-    public class StepDrawer : ObjectDrawer
+    internal class StepDrawer : ObjectDrawer
     {
         protected override float DrawLabel(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {

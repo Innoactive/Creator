@@ -6,7 +6,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
     /// <summary>
     /// Represents "Add new step" button. It is rendered at the middle of it's parent Transition and inserts a new step on click into the training workflow.
     /// </summary>
-    public class AddStepButton : GraphicalElement
+    internal class AddStepButton : GraphicalElement
     {
         private static readonly Vector2 size = new Vector2(20f, 20f);
 

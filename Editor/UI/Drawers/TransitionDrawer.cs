@@ -10,7 +10,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     /// Drawer for a transition which displays name of the target step as part of its label.
     /// </summary>
     [DefaultTrainingDrawer(typeof(Transition))]
-    public class TransitionDrawer : DataOwnerDrawer
+    internal class TransitionDrawer : DataOwnerDrawer
     {
         public override GUIContent GetLabel(object value, Type declaredType)
         {

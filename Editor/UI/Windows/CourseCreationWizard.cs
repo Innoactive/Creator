@@ -4,14 +4,12 @@ using Innoactive.Creator.Core.Configuration;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 namespace Innoactive.CreatorEditor.UI.Windows
 {
     /// <summary>
     /// Wizard for training course creation and management.
     /// </summary>
-    public class CourseCreationWizard : EditorWindow
+    internal class CourseCreationWizard : EditorWindow
     {
         private static CourseCreationWizard window;
         private const string menuPath = "Innoactive/Creator/Create New Course...";
@@ -29,6 +27,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                     {
                         openedTrainingWizards[i].Close();
                     }
+
                     Debug.LogWarning("There were more than one create course windows open. This should not happen. The redundant windows were closed.");
                 }
 

@@ -2,20 +2,23 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.TestTools;
 using Innoactive.Creator.Core.Utils;
 using Innoactive.CreatorEditor.ImguiTester;
+using UnityEngine.TestTools;
+
+[assembly: InternalsVisibleTo("Innoactive.Creator.Core.Tests.Editmode")]
 
 namespace Innoactive.CreatorEditor.TestTools
 {
     /// <summary>
     /// Inherit from this class to implement your own editor IMGUI tests.
     /// </summary>
-    public abstract class EditorImguiTest<T> : IEditorImguiTest where T : EditorWindow
+    internal abstract class EditorImguiTest<T> : IEditorImguiTest where T : EditorWindow
     {
 
         private static JsonSerializerSettings JsonSerializerSettings

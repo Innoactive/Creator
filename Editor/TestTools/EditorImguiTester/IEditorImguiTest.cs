@@ -9,7 +9,7 @@ namespace Innoactive.CreatorEditor.TestTools
     /// Used internally.
     /// See <see cref="EditorImguiTest{T}"/> instead.
     /// </summary>
-    public interface IEditorImguiTest
+    internal interface IEditorImguiTest
     {
         /// <summary>
         /// Invoked when test is either fails or passes.

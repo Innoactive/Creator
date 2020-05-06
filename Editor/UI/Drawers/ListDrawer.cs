@@ -10,7 +10,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     /// A default training drawer for types implementing `IList`.
     /// </summary>
     [DefaultTrainingDrawer(typeof(IList))]
-    public class ListDrawer : AbstractDrawer
+    internal class ListDrawer : AbstractDrawer
     {
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)

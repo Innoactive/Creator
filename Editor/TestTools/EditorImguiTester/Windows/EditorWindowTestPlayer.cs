@@ -9,7 +9,7 @@ namespace Innoactive.CreatorEditor.TestTools
     /// <summary>
     /// Utility window which sends given sequence of events to another window.
     /// </summary>
-    public class EditorWindowTestPlayer : EditorWindow
+    internal class EditorWindowTestPlayer : EditorWindow
     {
         public class FinishedEventArgs : EventArgs
         {

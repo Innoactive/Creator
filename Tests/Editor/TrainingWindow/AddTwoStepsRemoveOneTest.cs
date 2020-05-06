@@ -6,7 +6,7 @@ using Innoactive.CreatorEditor.UI.Windows;
 
 namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 {
-    public class AddTwoStepsRemoveOneTest : BaseTest
+    internal class AddTwoStepsRemoveOneTest : BaseTest
     {
         /// <inheritdoc />
         public override string WhenDescription

@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.TestTools
     /// <summary>
     /// Json converter for an IMGUI event.
     /// </summary>
-    public class ImguiEventConverter : JsonConverter
+    internal class ImguiEventConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {

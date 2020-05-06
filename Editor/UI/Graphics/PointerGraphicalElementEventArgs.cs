@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
-    public class PointerGraphicalElementEventArgs : GraphicalElementEventArgs
+    internal class PointerGraphicalElementEventArgs : GraphicalElementEventArgs
     {
         public Vector2 PointerPosition { get; private set; }
 

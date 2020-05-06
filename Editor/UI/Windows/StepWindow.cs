@@ -9,7 +9,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
     /// <summary>
     /// Step Inspector window of workflow editor.
     /// </summary>
-    public class StepWindow : EditorWindow
+    internal class StepWindow : EditorWindow
     {
         private IStep step;
 

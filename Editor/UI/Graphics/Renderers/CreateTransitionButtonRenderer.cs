@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
-    public class CreateTransitionButtonRenderer : MulticoloredGraphicalElementRenderer<CreateTransitionButton>
+    internal class CreateTransitionButtonRenderer : MulticoloredGraphicalElementRenderer<CreateTransitionButton>
     {
         public CreateTransitionButtonRenderer(CreateTransitionButton owner, WorkflowEditorColorPalette colorPalette) : base(owner, colorPalette)
         {

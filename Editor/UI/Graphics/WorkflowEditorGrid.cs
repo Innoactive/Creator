@@ -10,7 +10,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
     /// <summary>
     /// Represents the grid in the background of the chapter within the workflow editor.
     /// </summary>
-    public class WorkflowEditorGrid : Grid
+    internal class WorkflowEditorGrid : Grid
     {
         private readonly WorkflowEditorGridRenderer renderer;
 

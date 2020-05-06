@@ -12,7 +12,7 @@ namespace Innoactive.CreatorEditor.TestTools
     /// <summary>
     /// Editor window which allows user to manage editor IMGUI tests.
     /// </summary>
-    public sealed class EditorImguiTestsExplorer : EditorWindow
+    internal sealed class EditorImguiTestsExplorer : EditorWindow
     {
         private class TestMetadata
         {

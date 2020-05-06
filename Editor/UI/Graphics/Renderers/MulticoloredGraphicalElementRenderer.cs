@@ -5,7 +5,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
     /// <summary>
     /// Renderer for graphical elements that are supposed to change their color while being pressed or hovered over.
     /// </summary>
-    public abstract class MulticoloredGraphicalElementRenderer<TOwner> : ColoredGraphicalElementRenderer<TOwner> where TOwner : GraphicalElement
+    internal abstract class MulticoloredGraphicalElementRenderer<TOwner> : ColoredGraphicalElementRenderer<TOwner> where TOwner : GraphicalElement
     {
         /// <summary>
         /// Color of the element while that element is pressed down.

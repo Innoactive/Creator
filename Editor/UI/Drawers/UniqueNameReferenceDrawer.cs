@@ -15,7 +15,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     /// Training drawer for <see cref="UniqueNameReference"/> members.
     /// </summary>
     [DefaultTrainingDrawer(typeof(UniqueNameReference))]
-    public class UniqueNameReferenceDrawer : AbstractDrawer
+    internal class UniqueNameReferenceDrawer : AbstractDrawer
     {
         private bool isUndoOperation;
         private const string undoGroupName = "brotcat";
