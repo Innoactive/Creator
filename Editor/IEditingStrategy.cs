@@ -14,5 +14,7 @@ namespace Innoactive.CreatorEditor
         void HandleCurrentCourseChanged(string courseName);
         void HandleCurrentStepModified(IStep step);
         void HandleStartEditingStep(IStep step);
+        void HandleProjectIsGoingToUnload();
+        void HandleProjectIsGoingToSave();
     }
 }

@@ -40,5 +40,13 @@ namespace Innoactive.CreatorEditor.TestTools
         public void HandleStartEditingStep(IStep step)
         {
         }
+
+        public void HandleProjectIsGoingToUnload()
+        {
+        }
+
+        public void HandleProjectIsGoingToSave()
+        {
+        }
     }
 }

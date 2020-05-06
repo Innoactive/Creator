@@ -2,7 +2,9 @@
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Configuration;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Innoactive.CreatorEditor.UI.Windows
 {
@@ -76,6 +78,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 {
                     CourseAssetManager.Import(new Course(courseName, new Chapter("Chapter 1", null)));
                     RuntimeConfigurator.Instance.SetSelectedCourse(CourseAssetManager.GetCourseStreamingAssetPath(courseName));
+                    EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
                     Editors.SetCurrentCourse(courseName);
                     Editors.StartEditingCourse();
 

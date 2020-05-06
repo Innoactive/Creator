@@ -33,7 +33,6 @@ namespace Innoactive.Creator.Core.Configuration
         /// Course name which is selected.
         /// This field is magically filled by <see cref="RuntimeConfiguratorEditor"/>
         /// </summary>
-        [FormerlySerializedAs("selectedCourse")]
         [SerializeField]
         private string selectedCourseStreamingAssetsPath = "";
 

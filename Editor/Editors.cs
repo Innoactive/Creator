@@ -83,5 +83,15 @@ namespace Innoactive.CreatorEditor
         {
             strategy.HandleStartEditingStep(step);
         }
+
+        internal static void ProjectIsGoingToUnload()
+        {
+            strategy.HandleProjectIsGoingToUnload();
+        }
+
+        internal static void ProjectIsGoingToSave()
+        {
+            strategy.HandleProjectIsGoingToSave();
+        }
     }
 }

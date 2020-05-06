@@ -2,7 +2,7 @@ using System.Linq;
 using NUnit.Framework;
 using Innoactive.Creator.Core;
 using System.Collections.Generic;
-using Innoactive.CreatorEditor.Tests.CourseWindowTests;
+using Innoactive.CreatorEditor.UI.Windows;
 
 namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 {
@@ -27,7 +27,7 @@ namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
         }
 
         /// <inheritdoc />
-        protected override void Then(CreatorEditor.UI.Windows.CourseWindow window)
+        protected override void Then(CourseWindow window)
         {
             ICourse result = ExtractTraining(window);
 
@@ -40,9 +40,7 @@ namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
             IList<ITransition> transitions = GetTransitionsFromStep(firstStep);
             Assert.That(transitions.Count == 1);
 
-            IStep nextStep;
-
-            if (TryToGetStepFromTransition(transitions.First(), out nextStep))
+            if (TryToGetStepFromTransition(transitions.First(), out IStep nextStep))
             {
                 Assert.Fail("First step is not the end of the chapter.");
             }

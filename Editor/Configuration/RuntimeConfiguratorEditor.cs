@@ -57,6 +57,9 @@ namespace Innoactive.CreatorEditor.Configuration
 
         public override void OnInspectorGUI()
         {
+            base.OnInspectorGUI();
+            serializedObject.Update();
+
             // Courses can change without recompile so we have to check for them.
             UpdateAvailableCourses();
 
@@ -98,7 +101,7 @@ namespace Innoactive.CreatorEditor.Configuration
         {
             int index = 0;
 
-            string courseName = Path.GetFileNameWithoutExtension(configurator.GetSelectedCourse().Split('/').Last());
+            string courseName = CourseAssetManager.GetCourseNameFromPath(configurator.GetSelectedCourse());
 
             if (string.IsNullOrEmpty(courseName) == false)
             {
@@ -116,9 +119,15 @@ namespace Innoactive.CreatorEditor.Configuration
 
             if (IsCourseListEmpty() == false && configurator.GetSelectedCourse() != newCourseStreamingAssetsPath)
             {
-                configurator.SetSelectedCourse(newCourseStreamingAssetsPath);
+
+                SetConfiguratorSelectedCourse(newCourseStreamingAssetsPath);
                 Editors.SetCurrentCourse(trainingCourseDisplayNames[index]);
             }
+        }
+
+        private void SetConfiguratorSelectedCourse(string newPath)
+        {
+            serializedObject.FindProperty("selectedCourseStreamingAssetsPath").stringValue = newPath;
         }
 
         private static void OnCourseFileStructureChanged(object sender, CourseAssetPostprocessorEventArgs args)
@@ -148,8 +157,8 @@ namespace Innoactive.CreatorEditor.Configuration
 
             if (string.IsNullOrEmpty(configurator.GetSelectedCourse()))
             {
-                configurator.SetSelectedCourse(CourseAssetManager.GetCourseStreamingAssetPath(trainingCourseDisplayNames[0]));
-                Editors.SetCurrentCourse(configurator.GetSelectedCourse());
+                SetConfiguratorSelectedCourse(CourseAssetManager.GetCourseStreamingAssetPath(trainingCourseDisplayNames[0]));
+                Editors.SetCurrentCourse(CourseAssetManager.GetCourseAssetPath(configurator.GetSelectedCourse()));
             }
         }
     }
