@@ -9,8 +9,8 @@ using Innoactive.Creator.Core.Attributes;
 using Innoactive.CreatorEditor.UI.Drawers;
 using UnityEditor.Callbacks;
 
-[assembly: InternalsVisibleTo("Innoactive.creator.Core.Tests")]
-[assembly: InternalsVisibleTo("Innoactive.creator.Core.Tests.Editmode")]
+[assembly: InternalsVisibleTo("Innoactive.Creator.Core.Tests")]
+[assembly: InternalsVisibleTo("Innoactive.Creator.Core.Tests.Editmode")]
 
 namespace Innoactive.CreatorEditor
 {

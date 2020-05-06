@@ -40,9 +40,10 @@ namespace Innoactive.CreatorEditor.UI.Windows
             return window;
         }
 
-        public void SetTrainingCourse(ICourse course)
+        public void SetCourse(ICourse course)
         {
             RevertableChangesHandler.FlushStack();
+
             activeCourse = course;
 
             if (course == null)

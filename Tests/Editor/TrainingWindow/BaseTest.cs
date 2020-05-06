@@ -1,13 +1,12 @@
-using System;
 using UnityEngine;
 using NUnit.Framework;
 using System.Collections.Generic;
 using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor;
-using Innoactive.CreatorEditor.ImguiTester;
+using Innoactive.CreatorEditor.TestTools;
 using Innoactive.CreatorEditor.UI.Windows;
+using UnityEditor;
 
-namespace Innoactive.Creator.Tests.TrainingWindowTests
+namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 {
     /// <summary>
     /// Base class for all training window tests.
@@ -52,31 +51,30 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         /// <inheritdoc />
         public override string GivenDescription
         {
-            get
-            {
-                return "A training window with empty training and fixed size of 1024x512 pixels.";
-            }
+            get { return "A training window with empty training and fixed size of 1024x512 pixels."; }
         }
 
         /// <inheritdoc />
         protected override string AssetFolderForRecordedActions
         {
-            get
-            {
-                return EditorUtils.GetCoreFolder() + "/Tests/Editor/TrainingWindow/Records";
-            }
+            get { return EditorUtils.GetCoreFolder() + "/Tests/Editor/TrainingWindow/Records"; }
         }
 
         /// <inheritdoc />
         protected override CourseWindow Given()
         {
-            throw new NotImplementedException("Create TestStrategy for Editors.");
+            if (EditorUtils.IsWindowOpened<CourseWindow>())
+            {
+                EditorWindow.GetWindow<CourseWindow>().Close();
+            }
+
+            Editors.SetStrategy(new EmptyTestStrategy());
 
             CourseWindow window = ScriptableObject.CreateInstance<CourseWindow>();
             window.ShowUtility();
             window.position = new Rect(Vector2.zero, window.position.size);
-            window.minSize = CourseWindow.GetWindow().maxSize = new Vector2(1024f, 512f);
-            window.SetTrainingCourse(new Course("Test", new Chapter("Test", null)));
+            window.minSize = window.maxSize = new Vector2(1024f, 512f);
+            window.SetCourse(new Course("Test", new Chapter("Test", null)));
 
             return window;
         }
@@ -84,6 +82,11 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         /// <inheritdoc />
         protected override void AdditionalTeardown()
         {
+            if (EditorUtils.IsWindowOpened<CourseWindow>())
+            {
+                EditorWindow.GetWindow<CourseWindow>().Close();
+            }
+
             base.AdditionalTeardown();
             Editors.SetDefaultStrategy();
         }

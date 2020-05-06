@@ -4,7 +4,7 @@ using NUnit.Framework;
 using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UI.Windows;
 
-namespace Innoactive.Creator.Tests.TrainingWindowTests
+namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 {
     public class BranchTest : BaseTest
     {
@@ -13,7 +13,10 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         {
             get
             {
-                return "User creates a step with two transitions, each goes to another step each with one transition to the end of the chapter.";
+                return "1. Create three steps.\n" +
+                    "2. Connect one of them to the beginning of the chapter.\n" +
+                    "3. Add a second transition to that step.\n" +
+                    "4. Connect first step to the other two steps.\n";
             }
         }
 

@@ -2,8 +2,9 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
+using Innoactive.CreatorEditor.ImguiTester;
 
-namespace Innoactive.CreatorEditor.ImguiTester
+namespace Innoactive.CreatorEditor.TestTools
 {
     /// <summary>
     /// Utility window which sends given sequence of events to another window.

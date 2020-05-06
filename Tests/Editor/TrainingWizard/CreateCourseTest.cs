@@ -1,14 +1,13 @@
-using System;
-using Innoactive.CreatorEditor;
 using Innoactive.CreatorEditor.UI.Windows;
-using Innoactive.CreatorEditor.ImguiTester;
+using Innoactive.CreatorEditor.TestTools;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace Innoactive.Creator.Tests.TrainingWizardTests
+namespace Innoactive.CreatorEditor.Tests.CourseWizardTests
 {
-    public class CreateTrainingTest : EditorImguiTest<CourseCreationWizard>
+    internal class CreateCourseTest : EditorImguiTest<CourseCreationWizard>
     {
+        private const string courseName = "very_unique_test_course_name_which_you_should_never_use_1534";
         public override string GivenDescription
         {
             get
@@ -21,7 +20,7 @@ namespace Innoactive.Creator.Tests.TrainingWizardTests
         {
             get
             {
-                return "Click 'Create training' button.";
+                return $"Type in \"{courseName}\". Click 'Create training' button.";
             }
         }
 
@@ -43,14 +42,11 @@ namespace Innoactive.Creator.Tests.TrainingWizardTests
 
         protected override CourseCreationWizard Given()
         {
-            throw new NotImplementedException("Create TestStrategy for Editors.");
+            Editors.SetStrategy(new EmptyTestStrategy());
+
+            CourseAssetManager.Delete(courseName);
 
             foreach (CourseCreationWizard window in Resources.FindObjectsOfTypeAll<CourseCreationWizard>())
-            {
-                window.Close();
-            }
-
-            foreach (CourseWindow window in Resources.FindObjectsOfTypeAll<CourseWindow>())
             {
                 window.Close();
             }
@@ -75,11 +71,7 @@ namespace Innoactive.Creator.Tests.TrainingWizardTests
                 window.Close();
             }
 
-            foreach (CourseWindow window in Resources.FindObjectsOfTypeAll<CourseWindow>())
-            {
-                window.Close();
-            }
-
+            CourseAssetManager.Delete(courseName);
             Editors.SetDefaultStrategy();
         }
     }

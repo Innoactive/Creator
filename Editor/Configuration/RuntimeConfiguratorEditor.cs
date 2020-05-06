@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Utils;
-using Innoactive.CreatorEditor.UI.Windows;
 using UnityEditor;
 using UnityEngine;
 
@@ -68,15 +67,16 @@ namespace Innoactive.CreatorEditor.Configuration
                 DrawCourseSelectionDropDown();
                 GUILayout.BeginHorizontal();
                 {
-                    if (GUILayout.Button("Open course in Workflow Editor"))
+                    if (GUILayout.Button("Open Course in Workflow Editor"))
                     {
-                        Editors.SetCurrentCourse(configurator.GetSelectedCourse());
-                        Editors.StartEditing();
+                        Editors.SetCurrentCourse(CourseAssetManager.GetCourseNameFromPath(configurator.GetSelectedCourse()));
+                        Editors.StartEditingCourse();
                     }
 
-                    if (GUILayout.Button(new GUIContent("Show course folder in Explorer...")))
+                    if (GUILayout.Button(new GUIContent("Show Course in Explorer...")))
                     {
-                        EditorUtility.RevealInFinder(CourseAssetManager.GetCourseAssetPath(configurator.GetSelectedCourse()));
+                        string absolutePath = $"{new FileInfo(CourseAssetManager.GetCourseAssetPath(CourseAssetManager.GetCourseNameFromPath(configurator.GetSelectedCourse())))}";
+                        EditorUtility.RevealInFinder(absolutePath);
                     }
                 }
                 GUILayout.EndHorizontal();
@@ -112,9 +112,11 @@ namespace Innoactive.CreatorEditor.Configuration
                 index = 0;
             }
 
-            if (IsCourseListEmpty() == false)
+            string newCourseStreamingAssetsPath = CourseAssetManager.GetCourseStreamingAssetPath(trainingCourseDisplayNames[index]);
+
+            if (IsCourseListEmpty() == false && configurator.GetSelectedCourse() != newCourseStreamingAssetsPath)
             {
-                configurator.SetSelectedCourse(CourseAssetManager.GetCourseStreamingAssetPath(trainingCourseDisplayNames[index]));
+                configurator.SetSelectedCourse(newCourseStreamingAssetsPath);
                 Editors.SetCurrentCourse(trainingCourseDisplayNames[index]);
             }
         }

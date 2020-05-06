@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.CreatorEditor.ImguiTester
+namespace Innoactive.CreatorEditor.TestTools
 {
     /// <summary>
     /// Event args for event which is fired when Editor IMGUI test finishes it's execution.

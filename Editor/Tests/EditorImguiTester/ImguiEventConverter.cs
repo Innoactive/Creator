@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.ImguiTester
+namespace Innoactive.CreatorEditor.TestTools
 {
     /// <summary>
     /// Json converter for an IMGUI event.

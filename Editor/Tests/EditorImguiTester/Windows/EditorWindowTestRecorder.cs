@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Innoactive.CreatorEditor.ImguiTester;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.ImguiTester
+namespace Innoactive.CreatorEditor.TestTools
 {
     /// <summary>
     /// Utility window which draws itself on top of a given window and intercepts the events.

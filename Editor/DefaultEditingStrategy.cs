@@ -19,7 +19,7 @@ namespace Innoactive.CreatorEditor
 
             courseWindow = window;
 
-            courseWindow.SetTrainingCourse(course);
+            courseWindow.SetCourse(course);
         }
 
         public void HandleNewStepWindow(StepWindow window)
@@ -61,7 +61,7 @@ namespace Innoactive.CreatorEditor
             }
         }
 
-        public void HandleStartEditing()
+        public void HandleStartEditingCourse()
         {
             CourseWindow.GetWindow();
         }
@@ -73,7 +73,7 @@ namespace Innoactive.CreatorEditor
 
             if (courseWindow != null)
             {
-                courseWindow.SetTrainingCourse(course);
+                courseWindow.SetCourse(course);
             }
 
             if (stepWindow != null)

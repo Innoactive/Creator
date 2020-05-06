@@ -6,98 +6,20 @@ using System.Text;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Serialization;
 using Innoactive.CreatorEditor.Configuration;
-using Innoactive.CreatorEditor.UI.Windows;
 using UnityEditor;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor
 {
-    [InitializeOnLoad]
-    public static class Editors
-    {
-        public const string LastEditedCourseNameKey = "Innoactive.Creator.Editors.LastEditedCourseName";
-
-        private static IEditingStrategy strategy;
-
-        static Editors()
-        {
-            SetDefaultStrategy();
-
-            string lastEditedCourseName = EditorPrefs.GetString(LastEditedCourseNameKey);
-            SetCurrentCourse(lastEditedCourseName);
-        }
-
-        public static void SetDefaultStrategy()
-        {
-            SetStrategy(new DefaultEditingStrategy());
-        }
-
-        internal static void SetStrategy(IEditingStrategy newStrategy)
-        {
-            strategy = newStrategy;
-
-            if (newStrategy == null)
-            {
-                Debug.LogError("An editing strategy cannot be null, set to default instead.");
-                SetDefaultStrategy();
-            }
-        }
-
-        public static void CourseWindowOpened(CourseWindow window)
-        {
-            strategy.HandleNewCourseWindow(window);
-        }
-
-        public static void CourseWindowClosed(CourseWindow window)
-        {
-            strategy.HandleCourseWindowClosed(window);
-        }
-
-        public static void StepWindowClosed(StepWindow window)
-        {
-            strategy.HandleStepWindowClosed(window);
-        }
-
-        public static void StepWindowOpened(StepWindow window)
-        {
-            strategy.HandleNewStepWindow(window);
-        }
-
-        public static void SetCurrentCourse(string courseName)
-        {
-            strategy.HandleCurrentCourseChanged(courseName);
-        }
-
-        public static void StartEditing()
-        {
-            strategy.HandleStartEditing();
-        }
-
-        public static void CurrentCourseModified()
-        {
-            strategy.HandleCurrentCourseModified();
-        }
-
-        public static void CurrentStepModified(IStep step)
-        {
-            strategy.HandleCurrentStepModified(step);
-        }
-
-        public static void StartEditingStep(IStep step)
-        {
-            strategy.HandleStartEditingStep(step);
-        }
-    }
-
     /// <summary>
     /// A static class that handles the course assets. It lets you to save, load, delete, and import training courses and provides multiple related utility methods.
     /// </summary>
-    public static class CourseAssetManager
+    internal static class CourseAssetManager
     {
         /// <summary>
         /// Deletes the course with <paramref name="courseName"/>.
         /// </summary>
-        public static void Delete(string courseName)
+        internal static void Delete(string courseName)
         {
             if (IsCourseAssetExist(courseName))
             {
@@ -109,7 +31,7 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Imports the given <paramref name="course"/> by saving it to the proper directory. If there is a name collision, this course will be renamed.
         /// </summary>
-        public static void Import(ICourse course)
+        internal static void Import(ICourse course)
         {
             int counter = 0;
             string oldName = course.Data.Name;
@@ -135,7 +57,7 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Imports the course from file at given file <paramref name="path"/> if the file extensions matches the <paramref name="serializer"/>.
         /// </summary>
-        public static void Import(string path, ICourseSerializer serializer)
+        internal static void Import(string path, ICourseSerializer serializer)
         {
             ICourse course;
 
@@ -161,7 +83,7 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Returns the asset path to the course with the <paramref name="courseName"/>.
         /// </summary>
-        public static string GetCourseAssetPath(string courseName)
+        internal static string GetCourseAssetPath(string courseName)
         {
             return $"{GetCourseAssetDirectory(courseName)}/{courseName}.{EditorConfigurator.Instance.Serializer.FileFormat}";
         }
@@ -169,7 +91,7 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Returns the relative path from the streaming assets directory to the course with the <paramref name="courseName"/>.
         /// </summary>
-        public static string GetCourseStreamingAssetPath(string courseName)
+        internal static string GetCourseStreamingAssetPath(string courseName)
         {
             return $"{GetCourseStreamingAssetsSubdirectory(courseName)}/{courseName}.{EditorConfigurator.Instance.Serializer.FileFormat}";
         }
@@ -177,13 +99,8 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Returns true if the file at given <paramref name="assetPath"/> is a course. It does not check the validity of the file's contents.
         /// </summary>
-        public static bool IsCourseAsset(string assetPath)
+        internal static bool IsValidCourseAssetPath(string assetPath)
         {
-            if (File.Exists(assetPath) == false)
-            {
-                return false;
-            }
-
             string filePath = Path.Combine(Application.dataPath.Remove(Application.dataPath.LastIndexOf('/')), assetPath).Replace('/', Path.DirectorySeparatorChar);
             string courseFolderPath = Path.Combine(Application.streamingAssetsPath, EditorConfigurator.Instance.CourseStreamingAssetsSubdirectory).Replace('/', Path.DirectorySeparatorChar);
 
@@ -198,7 +115,7 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Renames the <paramref name="course"/> to the <paramref name="newName"/> and moves it to the appropriate directory. Check if you can rename before with the <seealso cref="CanRename"/> method.
         /// </summary>
-        public static void RenameCourse(ICourse course, string newName)
+        internal static void RenameCourse(ICourse course, string newName)
         {
             string oldDirectory = GetCourseAssetDirectory(course.Data.Name);
             string newDirectory = GetCourseAssetDirectory(newName);
@@ -218,7 +135,7 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Returns a list of names of all courses in the project.
         /// </summary>
-        public static IEnumerable<string> GetAllCourses()
+        internal static IEnumerable<string> GetAllCourses()
         {
             DirectoryInfo coursesDirectory = new DirectoryInfo($"{Application.streamingAssetsPath}/{EditorConfigurator.Instance.CourseStreamingAssetsSubdirectory}");
             return coursesDirectory.GetDirectories()
@@ -231,7 +148,7 @@ namespace Innoactive.CreatorEditor
         /// Checks if you can create a course with the given <paramref name="courseName"/>.
         /// </summary>
         /// <param name="errorMessage">Empty if you can create the course or must fail silently. </param>
-        public static bool CanCreate(string courseName, out string errorMessage)
+        internal static bool CanCreate(string courseName, out string errorMessage)
         {
             errorMessage = string.Empty;
 
@@ -258,17 +175,21 @@ namespace Innoactive.CreatorEditor
         }
 
         /// <summary>
-        /// Checks if you can rename the <paramref name="course"/> with to the <paramref name="newName"/>.
+        /// Checks if you can rename the <paramref name="course"/> to the <paramref name="newName"/>.
         /// </summary>
         /// <param name="errorMessage">Empty if you can create the course or must fail silently. </param>
-        public static bool CanRename(ICourse course, string newName, out string errorMessage)
+        internal static bool CanRename(ICourse course, string newName, out string errorMessage)
         {
             errorMessage = string.Empty;
 
             return course.Data.Name != newName && CanCreate(newName, out errorMessage);
         }
 
-        public static void Save(ICourse course)
+        /// <summary>
+        /// Save the <paramref name="course"/> to the file system.
+        /// </summary>
+        /// <param name="course"></param>
+        internal static void Save(ICourse course)
         {
             string path = GetCourseAssetPath(course.Data.Name);
 
@@ -281,9 +202,22 @@ namespace Innoactive.CreatorEditor
             stream.Close();
         }
 
-        public static ICourse Load(string courseName)
+        /// <summary>
+        /// Loads the course with the given <paramref name="courseName"/> from the file system and converts it into the <seealso cref="ICourse"/> instance.
+        /// </summary>
+        /// <param name="courseName"></param>
+        /// <returns></returns>
+        internal static ICourse Load(string courseName)
         {
             return IsCourseAssetExist(courseName) == false ? null : EditorConfigurator.Instance.Serializer.CourseFromByteArray(File.ReadAllBytes(GetCourseAssetPath(courseName)));
+        }
+
+        /// <summary>
+        /// Extracts the file name from the <paramref name="coursePath"/>. Works with both relative and full paths.
+        /// </summary>
+        internal static string GetCourseNameFromPath(string coursePath)
+        {
+            return Path.GetFileNameWithoutExtension(coursePath);
         }
 
         private static bool IsCourseAssetExist(string courseName)

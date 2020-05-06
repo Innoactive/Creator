@@ -22,7 +22,7 @@ namespace Innoactive.CreatorEditor
                 importedAssets.Concat(deletedAssets)
                     .Concat(movedAssets)
                     .Concat(movedFromAssetPaths)
-                    .Any(CourseAssetManager.IsCourseAsset))
+                    .Any(CourseAssetManager.IsValidCourseAssetPath))
             {
                 CourseFileStructureChanged.Invoke(null, new CourseAssetPostprocessorEventArgs());
             }

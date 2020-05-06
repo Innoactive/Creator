@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.ImguiTester
+namespace Innoactive.CreatorEditor.TestTools
 {
     /// <summary>
     /// Data structure for an atomic user action (click mouse, select item in a context menu).

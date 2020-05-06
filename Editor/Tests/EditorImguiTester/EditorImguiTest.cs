@@ -8,14 +8,16 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;
 using Innoactive.Creator.Core.Utils;
+using Innoactive.CreatorEditor.ImguiTester;
 
-namespace Innoactive.CreatorEditor.ImguiTester
+namespace Innoactive.CreatorEditor.TestTools
 {
     /// <summary>
     /// Inherit from this class to implement your own editor IMGUI tests.
     /// </summary>
     public abstract class EditorImguiTest<T> : IEditorImguiTest where T : EditorWindow
     {
+
         private static JsonSerializerSettings JsonSerializerSettings
         {
             get

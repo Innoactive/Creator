@@ -76,6 +76,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void ModifyStep(object newStep)
         {
+            // DEBUG: Here?
             step = (IStep)newStep;
             Editors.CurrentStepModified(step);
         }

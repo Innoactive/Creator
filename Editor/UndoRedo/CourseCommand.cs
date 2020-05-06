@@ -4,7 +4,7 @@ using Innoactive.CreatorEditor.UI.Windows;
 namespace Innoactive.CreatorEditor.UndoRedo
 {
     /// <summary>
-    /// A <see cref="CallbackCommand"/> which marks <see cref="CourseWindow"/> as dirty.
+    /// A <see cref="CallbackCommand"/> which notifies the <seealso cref="Editors"/> class that the current course was modified.
     /// </summary>
     public class CourseCommand : CallbackCommand
     {

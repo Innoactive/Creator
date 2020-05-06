@@ -1,4 +1,4 @@
-namespace Innoactive.CreatorEditor.ImguiTester
+namespace Innoactive.CreatorEditor.TestTools
 {
     /// <summary>
     /// State of <see cref="EditorImguiTest{T}"/>

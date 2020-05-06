@@ -10,7 +10,7 @@ namespace Innoactive.CreatorEditor
         void HandleCurrentCourseModified();
         void HandleCourseWindowClosed(CourseWindow window);
         void HandleStepWindowClosed(StepWindow window);
-        void HandleStartEditing();
+        void HandleStartEditingCourse();
         void HandleCurrentCourseChanged(string courseName);
         void HandleCurrentStepModified(IStep step);
         void HandleStartEditingStep(IStep step);

@@ -223,6 +223,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             SelectStepNode(stepNode);
             Graphics.BringToTop(stepNode);
 
+            // DEBUG: Here?
             Editors.StartEditingStep(stepNode?.Step);
         }
 

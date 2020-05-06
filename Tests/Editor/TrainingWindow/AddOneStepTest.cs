@@ -2,9 +2,9 @@ using System.Linq;
 using NUnit.Framework;
 using Innoactive.Creator.Core;
 using System.Collections.Generic;
-using Innoactive.CreatorEditor.UI.Windows;
+using Innoactive.CreatorEditor.Tests.CourseWindowTests;
 
-namespace Innoactive.Creator.Tests.TrainingWindowTests
+namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 {
     public class AddOneStepTest : BaseTest
     {
@@ -13,7 +13,7 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         {
             get
             {
-                return "User clicks once at add button.";
+                return "Add one step to the workflow. Connect it to the start of the chapter.";
             }
         }
 
@@ -27,7 +27,7 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         }
 
         /// <inheritdoc />
-        protected override void Then(CourseWindow window)
+        protected override void Then(CreatorEditor.UI.Windows.CourseWindow window)
         {
             ICourse result = ExtractTraining(window);
 
