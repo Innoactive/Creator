@@ -53,7 +53,7 @@
       href: developer/08-conditions.md
     - name: Properties
       href: developer/09-properties.md
-- name: Transition Guilde to v2.0 for Developers
+- name: Transition Guide to v2.0 for Developers
   href: transition-to-v2.0
   items:
     - name: Overview
