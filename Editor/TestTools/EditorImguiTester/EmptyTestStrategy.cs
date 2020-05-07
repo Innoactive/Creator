@@ -1,8 +1,5 @@
-using System.Runtime.CompilerServices;
 using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UI.Windows;
-
-[assembly: InternalsVisibleTo("Innoactive.Creator.Tests.Editmode")]
 
 namespace Innoactive.CreatorEditor.TestTools
 {

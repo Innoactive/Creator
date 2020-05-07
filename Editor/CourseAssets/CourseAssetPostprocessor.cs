@@ -20,17 +20,10 @@ namespace Innoactive.CreatorEditor
                 importedAssets.Concat(deletedAssets)
                     .Concat(movedAssets)
                     .Concat(movedFromAssetPaths)
-                    .Any(CourseAssetManager.IsValidCourseAssetPath))
+                    .Any(CourseAssetUtils.IsValidCourseAssetPath))
             {
                 CourseFileStructureChanged.Invoke(null, new CourseAssetPostprocessorEventArgs());
             }
         }
-    }
-
-    /// <summary>
-    /// Event args for <see cref="CourseAssetPostprocessor"/> events.
-    /// </summary>
-    internal class CourseAssetPostprocessorEventArgs : EventArgs
-    {
     }
 }

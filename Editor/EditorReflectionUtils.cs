@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Attributes;
 using Innoactive.CreatorEditor.UI.Drawers;
 using UnityEditor.Callbacks;
-
-[assembly: InternalsVisibleTo("Innoactive.Creator.Core.Tests")]
-[assembly: InternalsVisibleTo("Innoactive.Creator.Core.Tests.Editmode")]
 
 namespace Innoactive.CreatorEditor
 {

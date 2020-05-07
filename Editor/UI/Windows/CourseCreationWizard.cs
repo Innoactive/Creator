@@ -73,13 +73,13 @@ namespace Innoactive.CreatorEditor.UI.Windows
             // ReSharper disable once InvertIf
             if (GUILayout.Button("Create", GUILayout.Width(128), GUILayout.Height(32)))
             {
-                if (CourseAssetManager.CanCreate(courseName, out errorMessage))
+                if (CourseAssetUtils.CanCreate(courseName, out errorMessage))
                 {
                     CourseAssetManager.Import(new Course(courseName, new Chapter("Chapter 1", null)));
-                    RuntimeConfigurator.Instance.SetSelectedCourse(CourseAssetManager.GetCourseStreamingAssetPath(courseName));
+                    RuntimeConfigurator.Instance.SetSelectedCourse(CourseAssetUtils.GetCourseStreamingAssetPath(courseName));
                     EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-                    Editors.SetCurrentCourse(courseName);
-                    Editors.StartEditingCourse();
+                    GlobalEditorHandler.SetCurrentCourse(courseName);
+                    GlobalEditorHandler.StartEditingCourse();
 
                     Close();
                 }

@@ -102,7 +102,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 titleIcon = new EditorIcon("icon_training_editor");
             }
 
-            Editors.CourseWindowOpened(this);
+            GlobalEditorHandler.CourseWindowOpened(this);
         }
 
         private void SetTabName()
@@ -133,7 +133,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void OnDestroy()
         {
-            Editors.CourseWindowClosed(this);
+            GlobalEditorHandler.CourseWindowClosed(this);
         }
 
         private void HandleEditorCommands(Vector2 centerViewpointOnCanvas)

@@ -1,21 +1,18 @@
-using System.Runtime.CompilerServices;
 using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UI.Windows;
 using UnityEditor;
 using UnityEngine;
 
-[assembly: InternalsVisibleTo("Innoactive.CreatorEditor.TestTools")]
-
 namespace Innoactive.CreatorEditor
 {
     [InitializeOnLoad]
-    internal static class Editors
+    internal static class GlobalEditorHandler
     {
         internal const string LastEditedCourseNameKey = "Innoactive.Creator.Editors.LastEditedCourseName";
 
         private static IEditingStrategy strategy;
 
-        static Editors()
+        static GlobalEditorHandler()
         {
             SetDefaultStrategy();
 

@@ -36,12 +36,12 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void OnEnable()
         {
-            Editors.StepWindowOpened(this);
+            GlobalEditorHandler.StepWindowOpened(this);
         }
 
         private void OnDestroy()
         {
-            Editors.StepWindowClosed(this);
+            GlobalEditorHandler.StepWindowClosed(this);
         }
 
         private void OnInspectorUpdate()
@@ -76,9 +76,8 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void ModifyStep(object newStep)
         {
-            // DEBUG: Here?
             step = (IStep)newStep;
-            Editors.CurrentStepModified(step);
+            GlobalEditorHandler.CurrentStepModified(step);
         }
 
         public void SetStep(IStep newStep)

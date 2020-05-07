@@ -4,7 +4,7 @@ using Innoactive.CreatorEditor.UI.Windows;
 namespace Innoactive.CreatorEditor.UndoRedo
 {
     /// <summary>
-    /// A <see cref="CallbackCommand"/> which notifies the <seealso cref="Editors"/> class that the current course was modified.
+    /// A <see cref="CallbackCommand"/> which notifies the <seealso cref="GlobalEditorHandler"/> class that the current course was modified.
     /// </summary>
     public class CourseCommand : CallbackCommand
     {
@@ -13,7 +13,7 @@ namespace Innoactive.CreatorEditor.UndoRedo
         {
             base.Do();
 
-            Editors.CurrentCourseModified();
+            GlobalEditorHandler.CurrentCourseModified();
         }
 
         /// <inheritdoc />
@@ -21,7 +21,7 @@ namespace Innoactive.CreatorEditor.UndoRedo
         {
             base.Undo();
 
-            Editors.CurrentCourseModified();
+            GlobalEditorHandler.CurrentCourseModified();
         }
 
         public CourseCommand(Action doCallback, Action undoCallback) : base(doCallback, undoCallback) { }

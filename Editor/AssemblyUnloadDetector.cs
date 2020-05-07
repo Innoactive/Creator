@@ -14,12 +14,12 @@ namespace Innoactive.CreatorEditor
 
         private static void OnBeforeAssemblyReload()
         {
-            Editors.ProjectIsGoingToUnload();
+            GlobalEditorHandler.ProjectIsGoingToUnload();
         }
 
         private static void OnExitingMode()
         {
-            Editors.ProjectIsGoingToUnload();
+            GlobalEditorHandler.ProjectIsGoingToUnload();
         }
 
         private static void OnPlayModeStateChanged(PlayModeStateChange state)

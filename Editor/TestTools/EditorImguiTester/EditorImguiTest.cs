@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using UnityEditor;
@@ -10,8 +9,6 @@ using UnityEngine;
 using Innoactive.Creator.Core.Utils;
 using Innoactive.CreatorEditor.ImguiTester;
 using UnityEngine.TestTools;
-
-[assembly: InternalsVisibleTo("Innoactive.Creator.Core.Tests.Editmode")]
 
 namespace Innoactive.CreatorEditor.TestTools
 {

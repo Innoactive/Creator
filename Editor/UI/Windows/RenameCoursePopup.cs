@@ -66,7 +66,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             if ((Event.current.keyCode == KeyCode.Return || Event.current.keyCode == KeyCode.KeypadEnter))
             {
-                if (CourseAssetManager.CanRename(course, newName, out string error) == false)
+                if (CourseAssetUtils.CanRename(course, newName, out string error) == false)
                 {
                     if (string.IsNullOrEmpty(error) == false && string.IsNullOrEmpty(error) == false)
                     {
@@ -80,7 +80,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                     RevertableChangesHandler.Do(new CourseCommand(
                         () =>
                         {
-                            if (CourseAssetManager.CanRename(course, newName, out string errorMessage) == false)
+                            if (CourseAssetUtils.CanRename(course, newName, out string errorMessage) == false)
                             {
                                 if (string.IsNullOrEmpty(errorMessage) == false)
                                 {
@@ -96,7 +96,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                         },
                         () =>
                         {
-                            if (CourseAssetManager.CanRename(course, newName, out string errorMessage) == false)
+                            if (CourseAssetUtils.CanRename(course, newName, out string errorMessage) == false)
                             {
                                 if (string.IsNullOrEmpty(errorMessage) == false)
                                 {

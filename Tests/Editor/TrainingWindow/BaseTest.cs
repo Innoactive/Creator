@@ -68,7 +68,7 @@ namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
                 EditorWindow.GetWindow<CourseWindow>().Close();
             }
 
-            Editors.SetStrategy(new EmptyTestStrategy());
+            GlobalEditorHandler.SetStrategy(new EmptyTestStrategy());
 
             CourseWindow window = ScriptableObject.CreateInstance<CourseWindow>();
             window.ShowUtility();
@@ -88,7 +88,7 @@ namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
             }
 
             base.AdditionalTeardown();
-            Editors.SetDefaultStrategy();
+            GlobalEditorHandler.SetDefaultStrategy();
         }
     }
 }

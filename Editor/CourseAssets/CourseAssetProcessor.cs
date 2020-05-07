@@ -4,7 +4,7 @@ namespace Innoactive.CreatorEditor
     {
         private static string[] OnWillSaveAssets(string[] paths)
         {
-            Editors.ProjectIsGoingToSave();
+            GlobalEditorHandler.ProjectIsGoingToSave();
             return paths;
         }
     }

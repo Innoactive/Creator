@@ -46,28 +46,35 @@ namespace Innoactive.CreatorEditor
 
         public void HandleCourseWindowClosed(CourseWindow window)
         {
+            if (courseWindow != window)
+            {
+                return;
+            }
+
+            if (course != null)
+            {
+                CourseAssetManager.Save(course);
+            }
+
             if (stepWindow != null)
             {
-                if (course != null)
-                {
-                    CourseAssetManager.Save(course);
-                }
-
                 stepWindow.Close();
             }
         }
 
         public void HandleStepWindowClosed(StepWindow window)
         {
-            if (stepWindow == window)
+            if (stepWindow != window)
             {
-                if (course != null)
-                {
-                    CourseAssetManager.Save(course);
-                }
-
-                stepWindow = null;
+                return;
             }
+
+            if (course != null)
+            {
+                CourseAssetManager.Save(course);
+            }
+
+            stepWindow = null;
         }
 
         public void HandleStartEditingCourse()
@@ -82,7 +89,7 @@ namespace Innoactive.CreatorEditor
                 CourseAssetManager.Save(course);
             }
 
-            EditorPrefs.SetString(Editors.LastEditedCourseNameKey, courseName);
+            EditorPrefs.SetString(GlobalEditorHandler.LastEditedCourseNameKey, courseName);
             course = CourseAssetManager.Load(courseName);
 
             if (courseWindow != null)

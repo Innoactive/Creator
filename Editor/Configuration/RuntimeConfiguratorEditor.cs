@@ -71,13 +71,13 @@ namespace Innoactive.CreatorEditor.Configuration
                 {
                     if (GUILayout.Button("Open Course in Workflow Editor"))
                     {
-                        Editors.SetCurrentCourse(CourseAssetManager.GetCourseNameFromPath(configurator.GetSelectedCourse()));
-                        Editors.StartEditingCourse();
+                        GlobalEditorHandler.SetCurrentCourse(CourseAssetUtils.GetCourseNameFromPath(configurator.GetSelectedCourse()));
+                        GlobalEditorHandler.StartEditingCourse();
                     }
 
                     if (GUILayout.Button(new GUIContent("Show Course in Explorer...")))
                     {
-                        string absolutePath = $"{new FileInfo(CourseAssetManager.GetCourseAssetPath(CourseAssetManager.GetCourseNameFromPath(configurator.GetSelectedCourse())))}";
+                        string absolutePath = $"{new FileInfo(CourseAssetUtils.GetCourseAssetPath(CourseAssetUtils.GetCourseNameFromPath(configurator.GetSelectedCourse())))}";
                         EditorUtility.RevealInFinder(absolutePath);
                     }
                 }
@@ -100,7 +100,7 @@ namespace Innoactive.CreatorEditor.Configuration
         {
             int index = 0;
 
-            string courseName = CourseAssetManager.GetCourseNameFromPath(configurator.GetSelectedCourse());
+            string courseName = CourseAssetUtils.GetCourseNameFromPath(configurator.GetSelectedCourse());
 
             if (string.IsNullOrEmpty(courseName) == false)
             {
@@ -114,13 +114,13 @@ namespace Innoactive.CreatorEditor.Configuration
                 index = 0;
             }
 
-            string newCourseStreamingAssetsPath = CourseAssetManager.GetCourseStreamingAssetPath(trainingCourseDisplayNames[index]);
+            string newCourseStreamingAssetsPath = CourseAssetUtils.GetCourseStreamingAssetPath(trainingCourseDisplayNames[index]);
 
             if (IsCourseListEmpty() == false && configurator.GetSelectedCourse() != newCourseStreamingAssetsPath)
             {
 
                 SetConfiguratorSelectedCourse(newCourseStreamingAssetsPath);
-                Editors.SetCurrentCourse(trainingCourseDisplayNames[index]);
+                GlobalEditorHandler.SetCurrentCourse(trainingCourseDisplayNames[index]);
             }
         }
 
@@ -141,7 +141,7 @@ namespace Innoactive.CreatorEditor.Configuration
                 return;
             }
 
-            List<string> courses = CourseAssetManager.GetAllCourses().ToList();
+            List<string> courses = CourseAssetUtils.GetAllCourses().ToList();
 
             // Create dummy entry if no files are present.
             if (courses.Any() == false)
@@ -156,8 +156,8 @@ namespace Innoactive.CreatorEditor.Configuration
 
             if (string.IsNullOrEmpty(configurator.GetSelectedCourse()))
             {
-                SetConfiguratorSelectedCourse(CourseAssetManager.GetCourseStreamingAssetPath(trainingCourseDisplayNames[0]));
-                Editors.SetCurrentCourse(CourseAssetManager.GetCourseAssetPath(configurator.GetSelectedCourse()));
+                SetConfiguratorSelectedCourse(CourseAssetUtils.GetCourseStreamingAssetPath(trainingCourseDisplayNames[0]));
+                GlobalEditorHandler.SetCurrentCourse(CourseAssetUtils.GetCourseAssetPath(configurator.GetSelectedCourse()));
             }
         }
     }

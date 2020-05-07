@@ -31,7 +31,7 @@ namespace Innoactive.CreatorEditor.Tests.CourseWizardTests
 
         protected override CourseCreationWizard Given()
         {
-            Editors.SetStrategy(new EmptyTestStrategy());
+            GlobalEditorHandler.SetStrategy(new EmptyTestStrategy());
 
             CourseAssetManager.Delete(courseName);
 
@@ -61,7 +61,7 @@ namespace Innoactive.CreatorEditor.Tests.CourseWizardTests
             }
 
             CourseAssetManager.Delete(courseName);
-            Editors.SetDefaultStrategy();
+            GlobalEditorHandler.SetDefaultStrategy();
         }
     }
 }
