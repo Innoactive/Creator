@@ -117,6 +117,12 @@ namespace Innoactive.CreatorEditor
         /// </summary>
         internal static void RenameCourse(ICourse course, string newName)
         {
+            if (CourseAssetUtils.CanRename(course, newName, out string errorMessage))
+            {
+                Debug.LogError($"Course {course.Data.Name} was not renamed because:\n\n{errorMessage}");
+                return;
+            }
+
             string oldDirectory = CourseAssetUtils.GetCourseAssetDirectory(course.Data.Name);
             string newDirectory = CourseAssetUtils.GetCourseAssetDirectory(newName);
 
