@@ -17,8 +17,6 @@ namespace Innoactive.CreatorEditor
     /// </summary>
     public static class CourseUtils
     {
-        private static string coreFolder;
-
         /// <summary>
         /// Creates an empty course with given name.
         /// </summary>
