@@ -41,11 +41,11 @@ namespace Innoactive.CreatorEditor.Analytics
                     // Create a new session ID.
                     EditorPrefs.SetString(BaseAnalyticsTracker.KeySessionId, Guid.NewGuid().ToString());
                     IAnalyticsTracker tracker = AnalyticsUtils.CreateTracker();
-                    // Send simple hallo
+                    // Send "hello".
                     tracker.Send(new AnalyticsEvent() {Category = "system", Action = "hello", Label = ""});
-                    // Send unity version used
+                    // Send the Unity Editor version.
                     tracker.Send(new AnalyticsEvent() {Category = "unity", Action = "version", Label = Application.unityVersion});
-                    // Send creator core version used
+                    // Send the Creator Core version.
                     tracker.Send(new AnalyticsEvent() {Category = "creator", Action = "version", Label = EditorUtils.GetCoreVersion()});
                 }
             }

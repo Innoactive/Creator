@@ -48,7 +48,7 @@ namespace Innoactive.CreatorEditor.Analytics
             titleContent = new GUIContent("Usage statistics");
 
             EditorGUILayout.Space(8f);
-            EditorGUILayout.HelpBox(new GUIContent("To help Innoactive improve the Creator we are sending anonymous data about your software configuration. Right now we are tracking:\n\n * Creator version\n * Unity version\n * System Language\n\nThe collected data exclude any sensitive data like source code, file names, created course structure.\n\nYou can check the source code of our analytics engine in this folder: Core/Editor/Analytics\n\nIf you want to disable tracking go to Innoactive/Creator/Windows/Analytics Settings"));
+            EditorGUILayout.HelpBox(new GUIContent(" To improve the Creator, we collect anonymous data about your software configuration. This data excludes any sensitive data like source code, file names, or your courses structure. Right now we are tracking:\n\n * The Creator version\n * The Unity version\n * The system language\n\n\You can check the source code of our analytics engine in the following folder: Core/Editor/Analytics\n\nIf you want to disable tracking, open Innoactive > Creator > Windows > Analytics Settings in the Unity's menu bar."));
             EditorGUILayout.Space(4f);
 
             if (GUILayout.Button("Accept"))
