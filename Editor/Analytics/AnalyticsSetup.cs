@@ -32,7 +32,7 @@ namespace Innoactive.CreatorEditor.Analytics
             {
                 SetupTrackingPopup.ShowWindow();
             }
-            else if (trackingState >= AnalyticsState.Minimum)
+            else if (trackingState >= AnalyticsState.Minimal)
             {
                 // Only run once a day.
                 if (DateTime.Today.Ticks != EditorPrefs.GetFloat(KeyLastDayActive, 0L))
