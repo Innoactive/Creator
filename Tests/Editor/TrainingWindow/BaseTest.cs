@@ -31,7 +31,7 @@ namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
         /// </summary>
         protected static ICourse ExtractTraining(CourseWindow window)
         {
-            ICourse course = window.GetTrainingCourse();
+            ICourse course = window.GetCourse();
             Assert.NotNull(course);
             return course;
         }

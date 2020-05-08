@@ -1,5 +1,4 @@
-﻿using System;
-using Innoactive.Creator.Core;
+﻿using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UndoRedo;
 using UnityEditor;
 using UnityEngine;
@@ -11,7 +10,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
     /// </summary>
     public class CourseWindow : EditorWindow
     {
-        private static CourseWindow window;
         private ICourse activeCourse;
 
         [SerializeField]
@@ -24,22 +22,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private ChapterRepresentation chapterRepresentation;
 
-        public static bool IsOpen
-        {
-            get { return EditorUtils.IsWindowOpened<CourseWindow>(); }
-        }
-
-        public static CourseWindow GetWindow()
-        {
-            if (IsOpen == false)
-            {
-                window = GetWindow<CourseWindow>();
-                window.minSize = new Vector2(400f, 100f);
-            }
-
-            return window;
-        }
-
+        /// <summary>
+        /// Sets the <paramref name="course"/> to be displayed and edited in this window.
+        /// </summary>
         public void SetCourse(ICourse course)
         {
             RevertableChangesHandler.FlushStack();
@@ -60,12 +45,18 @@ namespace Innoactive.CreatorEditor.UI.Windows
             chapterRepresentation.SetChapter(course.Data.FirstChapter);
         }
 
-        public ICourse GetTrainingCourse()
+        /// <summary>
+        /// Returns currently edited course.
+        /// </summary>
+        internal ICourse GetCourse()
         {
             return activeCourse;
         }
 
-        public void RefreshChapterRepresentation()
+        /// <summary>
+        /// Updates the chapter representation to the selected chapter.
+        /// </summary>
+        internal void RefreshChapterRepresentation()
         {
             if (activeCourse != null)
             {
@@ -73,7 +64,10 @@ namespace Innoactive.CreatorEditor.UI.Windows
             }
         }
 
-        public IChapter GetChapter()
+        /// <summary>
+        /// Returns currently selected chapter.
+        /// </summary>
+        internal IChapter GetChapter()
         {
             return activeCourse == null ? null : chapterMenu.CurrentChapter;
         }

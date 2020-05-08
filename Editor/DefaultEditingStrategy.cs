@@ -89,7 +89,11 @@ namespace Innoactive.CreatorEditor
         /// <inheritdoc/>
         public void HandleStartEditingCourse()
         {
-            CourseWindow.GetWindow();
+            if (courseWindow == null)
+            {
+                courseWindow = EditorWindow.GetWindow<CourseWindow>();
+                courseWindow.minSize = new Vector2(400f, 100f);
+            }
         }
 
         /// <inheritdoc/>
