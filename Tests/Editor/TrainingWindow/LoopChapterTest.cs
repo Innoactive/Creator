@@ -4,7 +4,7 @@ using NUnit.Framework;
 using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UI.Windows;
 
-namespace Innoactive.Creator.Tests.TrainingWindowTests
+namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 {
     internal class LoopChapterTest : BaseTest
     {
@@ -27,15 +27,15 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         }
 
         /// <inheritdoc />
-        protected override TrainingWindow Given()
+        protected override CourseWindow Given()
         {
-            TrainingWindow window = base.Given();
+            CourseWindow window = base.Given();
 
             return window;
         }
 
         /// <inheritdoc />
-        protected override void Then(TrainingWindow window)
+        protected override void Then(CourseWindow window)
         {
             ICourse result = ExtractTraining(window);
             IChapter firstChapter = result.Data.Chapters.First();

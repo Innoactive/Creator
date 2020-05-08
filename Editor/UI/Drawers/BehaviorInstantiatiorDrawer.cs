@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Innoactive.Creator.Core.Behaviors;
 using Innoactive.CreatorEditor.Configuration;
-using Innoactive.CreatorEditor.ImguiTester;
 using UnityEditor;
 using UnityEngine;
 

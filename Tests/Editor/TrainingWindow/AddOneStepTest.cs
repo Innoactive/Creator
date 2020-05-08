@@ -4,7 +4,7 @@ using Innoactive.Creator.Core;
 using System.Collections.Generic;
 using Innoactive.CreatorEditor.UI.Windows;
 
-namespace Innoactive.Creator.Tests.TrainingWindowTests
+namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 {
     internal class AddOneStepTest : BaseTest
     {
@@ -13,7 +13,7 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         {
             get
             {
-                return "User clicks once at add button.";
+                return "Add one step to the workflow. Connect it to the start of the chapter.";
             }
         }
 
@@ -27,7 +27,7 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         }
 
         /// <inheritdoc />
-        protected override void Then(TrainingWindow window)
+        protected override void Then(CourseWindow window)
         {
             ICourse result = ExtractTraining(window);
 
@@ -40,9 +40,7 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
             IList<ITransition> transitions = GetTransitionsFromStep(firstStep);
             Assert.That(transitions.Count == 1);
 
-            IStep nextStep;
-
-            if (TryToGetStepFromTransition(transitions.First(), out nextStep))
+            if (TryToGetStepFromTransition(transitions.First(), out IStep nextStep))
             {
                 Assert.Fail("First step is not the end of the chapter.");
             }

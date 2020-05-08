@@ -81,7 +81,6 @@ namespace Innoactive.Creator.Core.Configuration
         /// <inheritdoc />
         public virtual ICourse LoadCourse(string path)
         {
-            Debug.LogFormat("Loading course with path: '{0}'", path);
             if (string.IsNullOrEmpty(path))
             {
                 throw new ArgumentException("Given path is null or empty!");

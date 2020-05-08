@@ -4,7 +4,7 @@ using NUnit.Framework;
 using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UI.Windows;
 
-namespace Innoactive.Creator.Tests.TrainingWindowTests
+namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 {
     internal class LinearChapterTest : BaseTest
     {
@@ -16,7 +16,9 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         {
             get
             {
-                return "User adds a linear chapter.";
+                return "Add a step to the chapter. Connect it to the chapter's start node.\n" +
+                    "Add a second chapter.\n" +
+                    "Add a step to that chapter and connect it to the chapter's start node.";
             }
         }
 
@@ -30,16 +32,16 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         }
 
         /// <inheritdoc />
-        protected override TrainingWindow Given()
+        protected override CourseWindow Given()
         {
-            TrainingWindow window = base.Given();
+            CourseWindow window = base.Given();
             iteratedSteps = 0;
 
             return window;
         }
 
         /// <inheritdoc />
-        protected override void Then(TrainingWindow window)
+        protected override void Then(CourseWindow window)
         {
             ICourse result = ExtractTraining(window);
             IChapter firstChapter = result.Data.Chapters.First();

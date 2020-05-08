@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UI.Windows;
 
-namespace Innoactive.Creator.Tests.TrainingWindowTests
+namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 {
     internal class AddTwoStepsRemoveOneTest : BaseTest
     {
@@ -13,8 +13,9 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         {
             get
             {
-                return "1. Add two new steps" + "\n" +
-                       "2. Delete one step.";
+                return "1. Add two new steps." + "\n" +
+                       "2. Delete one step." + "\n" +
+                       "3. Connect the step to the start of the chapter.";
             }
         }
 
@@ -28,7 +29,7 @@ namespace Innoactive.Creator.Tests.TrainingWindowTests
         }
 
         /// <inheritdoc />
-        protected override void Then(TrainingWindow window)
+        protected override void Then(CourseWindow window)
         {
             ICourse result = ExtractTraining(window);
 

@@ -35,19 +35,14 @@ namespace Innoactive.CreatorEditor.CreatorMenu
 
             if (result.Count == 1)
             {
-                StartImport(path, result.First());
+                CourseAssetManager.Import(path, result.First());
             }
             else
             {
-                ChooseSerializerPopup.Show(result, (serializer) => { StartImport(path, serializer); });
-            }
-        }
-
-        private static void StartImport(string path, ICourseSerializer serializer)
-        {
-            if (CourseUtils.ImportTrainingCourse(path, serializer))
-            {
-                EditorUtility.DisplayDialog("Training successfully imported", "Your training course was successfully imported.", "OK");
+                ChooseSerializerPopup.Show(result, (serializer) =>
+                {
+                    CourseAssetManager.Import(path, serializer);
+                });
             }
         }
 

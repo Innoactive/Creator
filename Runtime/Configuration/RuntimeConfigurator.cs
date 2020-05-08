@@ -1,7 +1,6 @@
 using System;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.Utils;
-using Innoactive.Creator.Unity;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -35,7 +34,7 @@ namespace Innoactive.Creator.Core.Configuration
         /// This field is magically filled by <see cref="RuntimeConfiguratorEditor"/>
         /// </summary>
         [SerializeField]
-        private string selectedCourse = "";
+        private string selectedCourseStreamingAssetsPath = "";
 
         private IRuntimeConfiguration runtimeConfiguration;
 
@@ -153,25 +152,25 @@ namespace Innoactive.Creator.Core.Configuration
         /// <summary>
         /// Sets the runtime configuration name, expects an assembly qualified name.
         /// </summary>
-        public void SetRuntimeConfigurationName(string name)
+        public void SetRuntimeConfigurationName(string configurationName)
         {
-            runtimeConfigurationName = name;
+            runtimeConfigurationName = configurationName;
         }
 
         /// <summary>
         /// Returns the path to the selected training course.
         /// </summary>
-        public string GetSelectedTrainingCourse()
+        public string GetSelectedCourse()
         {
-            return selectedCourse;
+            return selectedCourseStreamingAssetsPath;
         }
 
         /// <summary>
         /// Sets the path to the selected training course.
         /// </summary>
-        public void SetSelectedTrainingCourse(string path)
+        public void SetSelectedCourse(string path)
         {
-            selectedCourse = path;
+            selectedCourseStreamingAssetsPath = path;
         }
 
         private void Awake()
