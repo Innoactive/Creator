@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using UnityEditor;
 
 namespace Innoactive.CreatorEditor.Analytics
 {
@@ -8,7 +9,7 @@ namespace Innoactive.CreatorEditor.Analytics
     /// </summary>
     internal abstract class BaseAnalyticsTracker : IAnalyticsTracker
     {
-        public const string KeySessionId = "SessionID";
+        public const string KeySessionId = "Innoactive.Creator.Analytics.SessionID";
 
         private string sessionId;
         public string SessionId
@@ -33,11 +34,11 @@ namespace Innoactive.CreatorEditor.Analytics
 
         protected string SetSessionId()
         {
-            sessionId = RegistryUtils.GetRegistryEntry<string>(RegistryUtils.AnalyticsEntry, KeySessionId, null);
+            sessionId = EditorPrefs.GetString(KeySessionId, null);
             if (string.IsNullOrEmpty(sessionId))
             {
                 sessionId = Guid.NewGuid().ToString();
-                RegistryUtils.SetRegistryEntry(RegistryUtils.AnalyticsEntry,KeySessionId, sessionId);
+                EditorPrefs.SetString(KeySessionId, sessionId);
             }
 
             return sessionId;

@@ -13,12 +13,11 @@ namespace Innoactive.CreatorEditor.Analytics
     [InitializeOnLoad]
     internal class AnalyticsSetup
     {
-        private const string KeyLastDayActive = "LastDayActive";
+        private const string KeyLastDayActive = "Innoactive.Creator.Analytics.LastDayActive";
 
         static AnalyticsSetup()
         {
             AnalyticsState trackingState = AnalyticsUtils.GetTrackingState();
-
             if (trackingState == AnalyticsState.Disabled)
             {
                 return;
@@ -36,11 +35,11 @@ namespace Innoactive.CreatorEditor.Analytics
             else if (trackingState >= AnalyticsState.Minimum)
             {
                 // Only run once a day.
-                if (DateTime.Today.Ticks != RegistryUtils.GetRegistryEntry(RegistryUtils.AnalyticsEntry, KeyLastDayActive, 0L))
+                if (DateTime.Today.Ticks != EditorPrefs.GetFloat(KeyLastDayActive, 0L))
                 {
-                    RegistryUtils.SetRegistryEntry(RegistryUtils.AnalyticsEntry,KeyLastDayActive, DateTime.Today.Ticks);
+                    EditorPrefs.SetFloat(KeyLastDayActive, DateTime.Today.Ticks);
                     // Create new Session id
-                    RegistryUtils.SetRegistryEntry(RegistryUtils.AnalyticsEntry,BaseAnalyticsTracker.KeySessionId, Guid.NewGuid().ToString());
+                    EditorPrefs.SetString(BaseAnalyticsTracker.KeySessionId, Guid.NewGuid().ToString());
                     IAnalyticsTracker tracker = AnalyticsUtils.CreateTracker();
                     // Send simple hallo
                     tracker.Send(new AnalyticsEvent() {Category = "system", Action = "hello", Label = ""});

@@ -4,7 +4,7 @@ namespace Innoactive.CreatorEditor.Analytics
 {
     internal class AnalyticsUtils
     {
-        private const string KeyTrackingState = "State";
+        private const string KeyTrackingState = "Innoactive.Creator.Analytics.State";
 
         internal static IAnalyticsTracker CreateTracker()
         {
@@ -18,12 +18,12 @@ namespace Innoactive.CreatorEditor.Analytics
             {
                 return AnalyticsState.Disabled;
             }
-            return RegistryUtils.GetRegistryEntry(RegistryUtils.AnalyticsEntry,KeyTrackingState, AnalyticsState.Unknown);
+            return EditorPrefExtensions.GetEnum(KeyTrackingState, AnalyticsState.Unknown);
         }
 
         internal static void SetTrackingTo(AnalyticsState state)
         {
-            RegistryUtils.SetRegistryEntry(RegistryUtils.AnalyticsEntry,KeyTrackingState, state);
+            EditorPrefExtensions.SetEnum(KeyTrackingState, state);
         }
     }
 }
