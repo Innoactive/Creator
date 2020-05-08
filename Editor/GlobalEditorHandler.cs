@@ -16,7 +16,7 @@ namespace Innoactive.CreatorEditor
         {
             SetDefaultStrategy();
 
-            string lastEditedCourseName = EditorPrefs.GetString(LastEditedCourseNameKey);
+            string lastEditedCourseName = PlayerPrefs.GetString(LastEditedCourseNameKey);
             SetCurrentCourse(lastEditedCourseName);
         }
 

@@ -1,6 +1,7 @@
 using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UI.Windows;
 using UnityEditor;
+using UnityEngine;
 
 namespace Innoactive.CreatorEditor
 {
@@ -99,7 +100,7 @@ namespace Innoactive.CreatorEditor
                 CourseAssetManager.Save(course);
             }
 
-            EditorPrefs.SetString(GlobalEditorHandler.LastEditedCourseNameKey, courseName);
+            PlayerPrefs.SetString(GlobalEditorHandler.LastEditedCourseNameKey, courseName);
             course = CourseAssetManager.Load(courseName);
 
             if (courseWindow != null)
