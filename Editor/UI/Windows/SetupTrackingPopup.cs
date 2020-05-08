@@ -14,16 +14,16 @@ namespace Innoactive.CreatorEditor.Analytics
     {
         private static SetupTrackingPopup instance;
 
-        public static void ShowWindow()
+        public static void Open()
         {
+            EditorApplication.update += ShowWindow;
+        }
+        private static void ShowWindow()
+        {
+            EditorApplication.update -= ShowWindow;
             if (instance == null)
             {
-                instance = CreateInstance<SetupTrackingPopup>();
-
-                Rect position = new Rect(0, 0, 280f, 240f);
-                position.center = new Rect(0f, 0f, Display.main.renderingWidth, Display.main.renderingHeight).center;
-                instance.position = position;
-
+                instance = GetWindow<SetupTrackingPopup>(true);
                 AssemblyReloadEvents.beforeAssemblyReload += HideWindow;
                 instance.ShowUtility();
             }
@@ -48,7 +48,7 @@ namespace Innoactive.CreatorEditor.Analytics
             EditorGUILayout.Space(4f);
             EditorGUILayout.HelpBox(new GUIContent("To improve the Creator, we collect anonymous data about your software configuration. This data excludes any sensitive data like source code, file names, or your courses structure. Right now we are tracking:\n\n * The Creator version\n * The Unity version\n * The system language\n\nYou can check the source code of our analytics engine in the following folder: Core/Editor/Analytics\n\nIf you want to disable tracking, open Innoactive > Creator > Windows > Analytics Settings in the Unity's menu bar."));
             EditorGUILayout.Space(4f);
-            
+
             if (GUILayout.Button("Accept"))
             {
                 AnalyticsUtils.SetTrackingTo(AnalyticsState.Enabled);

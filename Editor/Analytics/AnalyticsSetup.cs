@@ -30,14 +30,14 @@ namespace Innoactive.CreatorEditor.Analytics
             }
             else if (trackingState == AnalyticsState.Unknown)
             {
-                SetupTrackingPopup.ShowWindow();
+                SetupTrackingPopup.Open();
             }
             else if (trackingState >= AnalyticsState.Minimal)
             {
                 // Only run once a day.
-                if (DateTime.Today.Ticks != EditorPrefs.GetFloat(KeyLastDayActive, 0L))
+                if (DateTime.Today.Ticks.ToString().Equals(EditorPrefs.GetString(KeyLastDayActive, "")))
                 {
-                    EditorPrefs.SetFloat(KeyLastDayActive, DateTime.Today.Ticks);
+                    EditorPrefs.SetString(KeyLastDayActive, DateTime.Today.Ticks.ToString());
                     // Create a new session ID.
                     EditorPrefs.SetString(BaseAnalyticsTracker.KeySessionId, Guid.NewGuid().ToString());
                     IAnalyticsTracker tracker = AnalyticsUtils.CreateTracker();
