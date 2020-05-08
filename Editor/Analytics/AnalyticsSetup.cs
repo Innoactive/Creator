@@ -38,7 +38,7 @@ namespace Innoactive.CreatorEditor.Analytics
                 if (DateTime.Today.Ticks != EditorPrefs.GetFloat(KeyLastDayActive, 0L))
                 {
                     EditorPrefs.SetFloat(KeyLastDayActive, DateTime.Today.Ticks);
-                    // Create new Session id
+                    // Create a new session ID.
                     EditorPrefs.SetString(BaseAnalyticsTracker.KeySessionId, Guid.NewGuid().ToString());
                     IAnalyticsTracker tracker = AnalyticsUtils.CreateTracker();
                     // Send simple hallo
