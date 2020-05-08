@@ -35,7 +35,7 @@ namespace Innoactive.CreatorEditor.Analytics
             else if (trackingState >= AnalyticsState.Minimal)
             {
                 // Only run once a day.
-                if (DateTime.Today.Ticks.ToString().Equals(EditorPrefs.GetString(KeyLastDayActive, "")))
+                if (DateTime.Today.Ticks.ToString().Equals(EditorPrefs.GetString(KeyLastDayActive, null)) == false)
                 {
                     EditorPrefs.SetString(KeyLastDayActive, DateTime.Today.Ticks.ToString());
                     // Create a new session ID.
