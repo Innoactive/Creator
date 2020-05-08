@@ -6,6 +6,7 @@ using Innoactive.CreatorEditor.UI;
 using Innoactive.CreatorEditor.UI.Windows;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Innoactive.CreatorEditor.Analytics
 {
@@ -20,14 +21,12 @@ namespace Innoactive.CreatorEditor.Analytics
                 instance = CreateInstance<SetupTrackingPopup>();
 
                 Rect position = new Rect(0, 0, 280f, 240f);
-                position.center = new Rect(0f, 0f, Screen.currentResolution.width, Screen.currentResolution.height).center;
+                position.center = new Rect(0f, 0f, Display.main.renderingWidth, Display.main.renderingHeight).center;
                 instance.position = position;
 
                 AssemblyReloadEvents.beforeAssemblyReload += HideWindow;
-
                 instance.ShowUtility();
             }
-
 
             instance.minSize = new Vector2(280f, 224f);
             instance.maxSize = new Vector2(280f, 224f);
