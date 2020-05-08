@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor
 {
+    /// <summary>
+    /// A class that handles interactions between Creator windows and course assets by using selected <seealso cref="IEditingStrategy"/> strategy.
+    /// </summary>
     [InitializeOnLoad]
     internal static class GlobalEditorHandler
     {
