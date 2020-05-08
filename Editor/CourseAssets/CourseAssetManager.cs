@@ -19,7 +19,7 @@ namespace Innoactive.CreatorEditor
         /// </summary>
         internal static void Delete(string courseName)
         {
-            if (CourseAssetUtils.IsCourseAssetExist(courseName))
+            if (CourseAssetUtils.DoesCourseAssetExist(courseName))
             {
                 Directory.Delete(CourseAssetUtils.GetCourseAssetDirectory(courseName));
                 AssetDatabase.Refresh();
@@ -33,7 +33,7 @@ namespace Innoactive.CreatorEditor
         {
             int counter = 0;
             string oldName = course.Data.Name;
-            while (CourseAssetUtils.IsCourseAssetExist(course.Data.Name))
+            while (CourseAssetUtils.DoesCourseAssetExist(course.Data.Name))
             {
                 if (counter > 0)
                 {
@@ -81,7 +81,6 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Save the <paramref name="course"/> to the file system.
         /// </summary>
-        /// <param name="course"></param>
         internal static void Save(ICourse course)
         {
             string path = CourseAssetUtils.GetCourseAssetPath(course.Data.Name);
@@ -98,13 +97,13 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Loads the course with the given <paramref name="courseName"/> from the file system and converts it into the <seealso cref="ICourse"/> instance.
         /// </summary>
-        /// <param name="courseName"></param>
-        /// <returns></returns>
         internal static ICourse Load(string courseName)
         {
-            if (CourseAssetUtils.IsCourseAssetExist(courseName))
+            if (CourseAssetUtils.DoesCourseAssetExist(courseName))
             {
-                return EditorConfigurator.Instance.Serializer.CourseFromByteArray(File.ReadAllBytes(CourseAssetUtils.GetCourseAssetPath(courseName)));
+                string courseAssetPath = CourseAssetUtils.GetCourseAssetPath(courseName);
+                byte[] courseBytes = File.ReadAllBytes(courseAssetPath);
+                return EditorConfigurator.Instance.Serializer.CourseFromByteArray(courseBytes);
             }
             else
             {
@@ -117,7 +116,7 @@ namespace Innoactive.CreatorEditor
         /// </summary>
         internal static void RenameCourse(ICourse course, string newName)
         {
-            if (CourseAssetUtils.CanRename(course, newName, out string errorMessage))
+            if (CourseAssetUtils.CanRename(course, newName, out string errorMessage) == false)
             {
                 Debug.LogError($"Course {course.Data.Name} was not renamed because:\n\n{errorMessage}");
                 return;

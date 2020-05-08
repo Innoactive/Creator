@@ -4,12 +4,16 @@ using UnityEditor;
 
 namespace Innoactive.CreatorEditor
 {
+    /// <summary>
+    /// This strategy is used by default and it handles interaction between course assets and various Creator windows.
+    /// </summary>
     internal class DefaultEditingStrategy : IEditingStrategy
     {
         private CourseWindow courseWindow;
         private StepWindow stepWindow;
         private ICourse course;
 
+        /// <inheritdoc/>
         public void HandleNewCourseWindow(CourseWindow window)
         {
             if (courseWindow != null && courseWindow != window)
@@ -22,6 +26,7 @@ namespace Innoactive.CreatorEditor
             courseWindow.SetCourse(course);
         }
 
+        /// <inheritdoc/>
         public void HandleNewStepWindow(StepWindow window)
         {
             if (courseWindow == null)
@@ -40,10 +45,12 @@ namespace Innoactive.CreatorEditor
             HandleStartEditingStep(courseWindow.GetChapter().ChapterMetadata.LastSelectedStep);
         }
 
+        /// <inheritdoc/>
         public void HandleCurrentCourseModified()
         {
         }
 
+        /// <inheritdoc/>
         public void HandleCourseWindowClosed(CourseWindow window)
         {
             if (courseWindow != window)
@@ -62,6 +69,7 @@ namespace Innoactive.CreatorEditor
             }
         }
 
+        /// <inheritdoc/>
         public void HandleStepWindowClosed(StepWindow window)
         {
             if (stepWindow != window)
@@ -77,11 +85,13 @@ namespace Innoactive.CreatorEditor
             stepWindow = null;
         }
 
+        /// <inheritdoc/>
         public void HandleStartEditingCourse()
         {
             CourseWindow.GetWindow();
         }
 
+        /// <inheritdoc/>
         public void HandleCurrentCourseChanged(string courseName)
         {
             if (course != null)
@@ -103,12 +113,14 @@ namespace Innoactive.CreatorEditor
             }
         }
 
+        /// <inheritdoc/>
         public void HandleCurrentStepModified(IStep step)
         {
             courseWindow.GetChapter().ChapterMetadata.LastSelectedStep = step;
             courseWindow.RefreshChapterRepresentation();
         }
 
+        /// <inheritdoc/>
         public void HandleStartEditingStep(IStep step)
         {
             if (stepWindow == null)
@@ -120,6 +132,7 @@ namespace Innoactive.CreatorEditor
             stepWindow.SetStep(step);
         }
 
+        /// <inheritdoc/>
         public void HandleProjectIsGoingToUnload()
         {
             if (course != null)
@@ -128,6 +141,7 @@ namespace Innoactive.CreatorEditor
             }
         }
 
+        /// <inheritdoc/>
         public void HandleProjectIsGoingToSave()
         {
             if (course != null)

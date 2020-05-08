@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor
 {
+    /// <summary>
+    /// A collection of helper functions which are related to course asset handling.
+    /// </summary>
     internal static class CourseAssetUtils
     {
         /// <summary>
@@ -64,7 +67,7 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Checks if you can create a course with the given <paramref name="courseName"/>.
         /// </summary>
-        /// <param name="errorMessage">Empty if you can create the course or must fail silently. </param>
+        /// <param name="errorMessage">Empty if you can create the course or must fail silently.</param>
         internal static bool CanCreate(string courseName, out string errorMessage)
         {
             errorMessage = string.Empty;
@@ -82,7 +85,7 @@ namespace Innoactive.CreatorEditor
                 return false;
             }
 
-            if (IsCourseAssetExist(courseName))
+            if (DoesCourseAssetExist(courseName))
             {
                 errorMessage = $"A course with the name \"{courseName}\" already exists!";
                 return false;
@@ -94,7 +97,7 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Checks if you can rename the <paramref name="course"/> to the <paramref name="newName"/>.
         /// </summary>
-        /// <param name="errorMessage">Empty if you can create the course or must fail silently. </param>
+        /// <param name="errorMessage">Empty if you can create the course or must fail silently.</param>
         internal static bool CanRename(ICourse course, string newName, out string errorMessage)
         {
             errorMessage = string.Empty;
@@ -102,11 +105,17 @@ namespace Innoactive.CreatorEditor
             return course.Data.Name != newName && CanCreate(newName, out errorMessage);
         }
 
-        internal static bool IsCourseAssetExist(string courseName)
+        /// <summary>
+        /// Returns true if there is a course asset for the <paramref name="courseName"/>.
+        /// </summary>
+        internal static bool DoesCourseAssetExist(string courseName)
         {
             return File.Exists(GetCourseAssetPath(courseName));
         }
 
+        /// <summary>
+        /// Returns the directory of the course <paramref name="courseName"/> relative to the project root folder (Assets/StreamingAssets/...).
+        /// </summary>
         internal static string GetCourseAssetDirectory(string courseName)
         {
             return $"{Application.streamingAssetsPath}/{GetCourseStreamingAssetsSubdirectory(courseName)}";

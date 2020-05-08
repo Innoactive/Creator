@@ -15,7 +15,12 @@ namespace Innoactive.CreatorEditor.Configuration
     [CustomEditor(typeof(RuntimeConfigurator))]
     public class RuntimeConfiguratorEditor : Editor
     {
+        private const string configuratorSelectedCoursePropertyName = "selectedCourseStreamingAssetsPath";
+
         private RuntimeConfigurator configurator;
+        private SerializedProperty configuratorSelectedCourseProperty;
+
+
 
         private static readonly List<Type> configurationTypes;
         private static readonly string[] configurationTypeNames;
@@ -45,6 +50,9 @@ namespace Innoactive.CreatorEditor.Configuration
         protected void OnEnable()
         {
             configurator = target as RuntimeConfigurator;
+
+            configuratorSelectedCourseProperty = serializedObject.FindProperty(configuratorSelectedCoursePropertyName);
+
             defaultCoursePath = EditorConfigurator.Instance.CourseStreamingAssetsSubdirectory;
 
             // Create training course path if not present.
@@ -126,7 +134,7 @@ namespace Innoactive.CreatorEditor.Configuration
 
         private void SetConfiguratorSelectedCourse(string newPath)
         {
-            serializedObject.FindProperty("selectedCourseStreamingAssetsPath").stringValue = newPath;
+            configuratorSelectedCourseProperty.stringValue = newPath;
         }
 
         private static void OnCourseFileStructureChanged(object sender, CourseAssetPostprocessorEventArgs args)
