@@ -48,4 +48,4 @@ We have changed the namespaces from `Innoactive.Hub.Training` to `Innoactive.Cre
 
 ## Entities
 
-We have refactored the public API of entities (behaviors and conditions). While it still reflects the established concepts, it makes easier to understand and implement them. We provide a [separate chapter](02-update-behaviors-and-conditions.md) on how to update your behaviors and conditions to this version. Alternatively, you can skim though the updated [developer's tutorial](../developer/index.md).
+We have refactored the public API of entities (behaviors and conditions). While it still reflects the established concepts, it makes easier to understand and implement them. We provide a [separate chapter](02-update-behaviors-and-conditions.md) on how to update your behaviors and conditions to this version. Alternatively, you can skim through the updated [developer's tutorial](../developer/index.md).

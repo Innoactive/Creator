@@ -54,7 +54,6 @@ private class ActiveProcess : BaseActiveProcessOverCompletable<EntityData> { /* 
 ### Add a public constuctor
 
 ```csharp
-
 // After:
 public ActiveProcess(EntityData data) : base(data) { }
 ```
