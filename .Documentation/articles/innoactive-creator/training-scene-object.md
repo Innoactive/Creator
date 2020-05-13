@@ -30,14 +30,13 @@ You can click on the small button next to the object field. It will open a new w
 
 Properties are components that can be added to a `Training Scene Object` in order to make additional capabilities of the object visible to the training course. For example, a `Grabbable Property` allows the training course to know if the object is being grabbed by the user or not.
 
-
 Properties also act as an abstraction of the underlying interaction framework: adding the `Grabbable Property` to a game object will  automatically add the necessary components for the object to be grabbed in VR. The training course, however, has no knowledge of what determines if the object has been grabbed or not: it only talks to the property, without having to worry about how things work under the hood.
 
 Naturally, to be able to grab an object you must be able to touch it first. Prerequisite properties are automatically added as well, so in this case a `Touchable Property` will be automatically added to the `Training Scene Object`. If the game object was no `Training Scene Object` before, it will also automatically get this component once you add any property.
 
 Behaviors and conditions often require an object to have one or more specific properties. For example, a `Snap Object` condition will require a `Training Scene Object` with the `Snappable Property` component, and another one with the `Snap Zone Property`.
 
-The Innoactive Creator implements the following default properties:
+The **Innoactive Base Template** has the following default properties:
 
 * `Touchable Property`: The training course is aware of when the object is touched.
 * `Grabbable Property`: The training course knows whether the object is being grabbed or not. Requires a `Touchable Property` as well.

@@ -1,6 +1,8 @@
 # Default Behaviors
 
-Take a look at the [Training Scene Object](training-scene-object.md) article if you have not read it yet. It will help you to understand how to handle training scene objects and training properties. 
+**The following behaviors are part of the *Basic Conditions and Behaviors Component*. Make sure it is added to your project to be able to use them.**
+
+Take a look at the [Training Scene Object](training-scene-object.md) article if you have not read it yet. It will help you to understand how to handle training scene objects and training properties.
 
 See [this article](step-inspector.md) to learn Step Inspector controls.
 
@@ -22,17 +24,18 @@ See [this article](step-inspector.md) to learn Step Inspector controls.
 
 **Description**
 
-The `Play Audio File` behavior plays audio clips from any `Resources` folder in your project's asset folder. 
+The `Play Audio File` behavior plays audio clips from any `Resources` folder in your project's asset folder.
 
 **Configuration**
 
-* **Localization key**\
+- **Localization key**\
     If you use localization files for your project, you can write the localization key for the corresponding sound file that you want to play into this text field. For more information on how to use localization files and Text to speech, look into [Text to speech engine (TTS)](../miscellaneous/setup-text-to-speech.md).
     If you do not use localization files, leave this text field empty and use the `Default resource path` field.
 
     > ***Example***
-    > 
+    >
     > You have the following localization file `EN.json`:
+    >
     > ```json
     > {
     >     "humming_sound": "Sounds/Teleporter/humming",
@@ -40,9 +43,10 @@ The `Play Audio File` behavior plays audio clips from any `Resources` folder in 
     >     "teleport_complete": "Congratulations! You successfully used the teleporter!"
     > }
     > ```
+    >
     > If you want to hear the teleport sound, you have to enter the `teleport_sound` key into the `Localization key` text field.
 
-* **Default resource path**\
+- **Default resource path**\
     If you want to play an audio clip from a file with this behavior, the file path must be the relative path **after** the `Resources` folder. The extension of the file must be omitted.
 
     > ***Example***
@@ -50,20 +54,22 @@ The `Play Audio File` behavior plays audio clips from any `Resources` folder in 
     > *File to be played:* `Assets/.../Resources/Sounds/teleport.ogg`\
     > *Path entered in the field:* `Sounds/teleport` 
 
-* **Execution stages**\
+- **Execution stages**\
     By default, the behavior is executed when it was activated. This can be changed with the `Execution stages` dropdown menu:
 
-    * `Before Step Execution`: Execution at activation (e. g. when the step activates the behavior during its activation).
-    * `After Step Execution`: Execution at deactivation (e. g. a transition to another step was activated and the step is deactivating).
-    * `Before and After Step Execution`: Execution at activation and deactivation.
+    - `Before Step Execution`: Execution at activation (e. g. when the step activates the behavior during its activation).
+    - `After Step Execution`: Execution at deactivation (e. g. a transition to another step was activated and the step is deactivating).
+    - `Before and After Step Execution`: Execution at activation and deactivation.
 
-* **Is blocking**\
+- **Is blocking**\
     By default, a behavior is blocking the transition to another step while the behavior is executing. If you want to skip a behavior's execution when a transition to another step is happening (e. g. when all conditions of one transition are met), you can uncheck this option. 
     In this case the unchecked `Is blocking` option means that the audio clip will be interrupted or not even started when a transition to another step is happening.
 
 ------
 
 ## Audio/Play TextToSpeech Audio
+
+**This behavior is part of the *TextToSpeech Component*. Make sure it is added to your project to use it.**
 
 **Description**
 
@@ -76,8 +82,9 @@ The `Play TextToSpeech Audio` behavior plays speech audio clips generated from t
     If you do not use localization files, leave this text field empty and use the `Default text` field.
 
     > ***Example***
-    > 
+    >
     > You have the following localization file `EN.json`:
+    >
     > ```json
     > {
     >     "grab_sphere": "Please, grab the sphere using the side button of your controller.",
@@ -86,19 +93,20 @@ The `Play TextToSpeech Audio` behavior plays speech audio clips generated from t
     >     "training_complete": "Congratulations! The training is complete."
     > }
     > ```
+    >
     > If you want to hear the spoken text *"Behold! The mighty flying cube!"*, you have to enter the `move_cube` key into the `Localization key` text field.
 
-* **Default text**\
+- **Default text**\
     The text entered into this text field is used, if either the `Localization key` text field is empty or the provided localization key is invalid (e. g. the key does not exist or the localization file is not loaded).
 
-* **Execution stages**\
+- **Execution stages**\
     By default, the behavior is executed when it was activated. This can be changed with the `Execution stages` dropdown menu:
 
-    * `Before Step Execution`: Execution at activation (e. g. when the step activates the behavior during its activation).
-    * `After Step Execution`: Execution at deactivation (e. g. a transition to another step was activated and the step is deactivating).
-    * `Before and After Step Execution`: Execution at activation and deactivation.
+    - `Before Step Execution`: Execution at activation (e. g. when the step activates the behavior during its activation).
+    - `After Step Execution`: Execution at deactivation (e. g. a transition to another step was activated and the step is deactivating).
+    - `Before and After Step Execution`: Execution at activation and deactivation.
 
-* **Is blocking**\
+- **Is blocking**\
     By default, a behavior is blocking the transition to another step while the behavior is executing. If you want to skip a behavior's execution when a transition to another step is happening (e. g. when all conditions of one transition are met), you can uncheck this option. 
     In this case the unchecked `Is blocking` option means that the audio clip will be interupted or not even started when a transition to another step is happening.
 
@@ -112,13 +120,13 @@ The `Behavior Sequence` contains a list of child behaviors which will be activat
 
 **Configuration**
 
-* **Repeat**\
+- **Repeat**\
     If this option is checked, the behavior sequence will start from the top of the child behaviors list over and over again as soon as the life cycle of the last child behavior in the list is finished.
 
-* **Child behaviors**\
+- **Child behaviors**\
     This is the list of all queued behaviors. By clicking on the `Add Behavior` button below it, you can add any behavior to it.
 
-* **Is blocking**\
+- **Is blocking**\
     By default, the behavior sequence is blocking the transition to another step while it is executing all its child behaviors in the list. After completion, it does not block the transition to another step anymore even if you enabled the `Repeat` option. 
     If you want to skip or interrupt the execution of the behavior sequence when a transition to another step is happening (e. g. when all conditions of one transition are met), you can uncheck this option. 
 
@@ -132,7 +140,7 @@ The activated `Delay` behavior completes after the specified amount of time. Thi
 
 **Configuration**
 
-* **Delay in seconds**\
+- **Delay in seconds**\
     In this field you can set the behavior's delay duration in seconds.
 
 ------
@@ -145,7 +153,7 @@ The `Disable Object` behavior **deactivates** the target's *GameObject* until it
 
 **Configuration**
 
-* **Object to disable**\
+- **Object to disable**\
     This field contains the `Training Scene Object` to be disabled.
 
 ------
@@ -158,7 +166,7 @@ The `Enable Object` behavior **activates** the target's *GameObject* until it wi
 
 **Configuration**
 
-* **Object to enable**\
+- **Object to enable**\
     This field contains the `Training Scene Object` to be enabled.
 
 ------
@@ -171,10 +179,10 @@ The `Highlight Object` behavior will highlight the target object in the specifie
 
 **Configuration**
 
-* **Hightlight color**\
+- **Hightlight color**\
     This field contains the color in which the target object will be colored.
 
-* **Object to highlight**\
+- **Object to highlight**\
     This field contains the `Training Scene Object` which should be highlighted.
 
 ------
@@ -187,8 +195,11 @@ The `Lock Object` behavior locks the target object so that you can no longer int
 
 **Configuration**
 
-* **Object to lock**\
+- **Object to lock**\
     This field contains the `Training Scene Object` to be locked.
+
+- **Lock only during this step**\
+    If ticked, the object is only locked while the current step is being executed. It is unlocked again when moving to the next step.
 
 ------
 
@@ -200,13 +211,13 @@ The `Move Object` behavior moves and rotates the target game object to the posit
 
 **Configuration**
 
-* **Object to move**\
+- **Object to move**\
     This field contains the `Training Scene Object` to be moved which should be moved and rotated.
 
-* **Final position provider**\
+- **Final position provider**\
     This field contains the `Training Scene Object` that is being used as position provider object which should be placed at the exact position and rotation where you want to move and rotate your target object to.
 
-* **Duration in seconds**\
+- **Duration in seconds**\
     In this field you can set the number of seconds it should take to move and rotate the target object.
 
 ------
@@ -219,5 +230,7 @@ The `Unlock Object` behavior unlocks a previously locked object so that it can b
 
 **Configuration**
 
-* **Object to unlock**\
+- **Object to unlock**\
     This field contains the `Training Scene Object` to be unlocked.
+- **Unlock only during this step**\
+    If ticked, the object is only unlocked while the current step is being executed. It is locked again when moving to the next step.

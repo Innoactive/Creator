@@ -6,7 +6,7 @@ The `Training Configuration` has all components that you need to run a training 
 
 ## Setup the Training Configuration in the Current Scene
 
-To get a `[TRAINING CONFIGURATION]` game object in your scene, you have to setup the scene as a training scene by selecting `Innoactive` > `Creator` > `Setup Current Scene as Training Scene` in Unity's toolbar.
+To get a `[TRAINING CONFIGURATION]` game object in your scene, you have to setup the scene as a training scene by selecting `Innoactive` > `Creator` > `Setup Training Scene` in Unity's toolbar.
 
 [![Setup Current Scene as Training Scene](../images/training-configuration/setup-scene.png "")](../images/training-configuration/setup-scene.png)
 

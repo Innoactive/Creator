@@ -1,5 +1,7 @@
 # Default Conditions
 
+**The following conditions are part of the *Basic Conditions and Behaviors Component*. Make sure it is added to your project to be able to use them.**
+
 Take a look at the [Training Scene Object](training-scene-object.md) article if you have not read it yet. It will help you to understand how to handle training scene objects and training properties. 
 
 See [this article](step-inspector.md) to learn Step Inspector controls.
