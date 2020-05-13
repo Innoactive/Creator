@@ -2,7 +2,7 @@
 
 This chapter will help you to rewrite behaviors and conditions designed for the Innoactive Creator v1.X to v2.0.
 
-We changed our public API to make it easier to understand. The logic behind it stays the same, and all changes you have to introduce are trivial. From our own experience, it takes only five to fifteen minutes to refactor a behavior our condition.
+We changed our public API to make it easier to understand. The logic behind it stays the same, and all changes you have to introduce are trivial. From our own experience, it takes only five to fifteen minutes to refactor a behavior or condition.
 
 ## Checklist
 
@@ -12,7 +12,7 @@ While updating our own code, we have figured out a fast and easy way to do so. F
 1. [Refactor stage processes' classes](#stage-process)
 1. [Refactor the configurator](#configurator)
 1. [Refactor the autocompleter](#autocompleter)
-1. [Refactor menu items](#menu-items)
+1. [Refactor the menu items](#menu-items)
 1. [Refactor the entity](#entity)
 
 When we mention the `EntityData` class throughout this chapter, we refer to the data type which your entity uses.
@@ -51,7 +51,7 @@ private class ActiveProcess : BaseStageProcessOverCompletable<EntityData> { /* I
 private class ActiveProcess : BaseActiveProcessOverCompletable<EntityData> { /* Implementation */ }
 ```
 
-### Add public constuctor
+### Add a public constuctor
 
 ```csharp
 
@@ -61,9 +61,9 @@ public ActiveProcess(EntityData data) : base(data) { }
 
 ### Change methods signatures
 
-If you have used the `IStageProcess<TData>` interface:
+If you have used the `IStageProcess<TData>` interface, update the following methods:
 
-The Start method:
+The `Start` method:
 
 ```csharp
 // Before:
@@ -73,7 +73,7 @@ public void Start(EntityData data) { /* Implementation */ }
 public override void Start() { /* Implementation */ }
 ```
 
-The Update method:
+The `Update` method:
 
 ```csharp
 // Before:
@@ -83,7 +83,7 @@ public IEnumerator Update(EntityData data) { /* Implementation */ }
 public override IEnumerator Update() { /* Implementation */ }
 ```
 
-The End method:
+The `End` method:
 
 ```csharp
 // Before:
@@ -93,7 +93,7 @@ public void End(EntityData data) { /* Implementation */ }
 public override void End() { /* Implementation */ }
 ```
 
-The FastForward method:
+The `FastForward` method:
 
 ```csharp
 // Before:
@@ -153,7 +153,7 @@ public void Configure(EntityData data, IMode mode, Stage stage) { /* Implementat
 public override void Configure(IMode mode, Stage stage) { /* Implementation */ }
 ```
 
-### Add public constructor
+### Add a public constructor
 
 ```csharp
 // After:
@@ -180,7 +180,7 @@ public override void Configure(IMode mode, Stage stage)
 
 Just like for stage processes and autocompleters, we pass the data instance in the constructor.
 
-Also, you don not have to set the `ICompletableData.IsCompleted` flag to true manually anymore.
+Also, you should not set the `ICompletableData.IsCompleted` flag to true manually anymore.
 
 ### Inherit from the abstract class
 
@@ -194,7 +194,7 @@ private class EntityAutocompleter : BaseAutocompleter<EntityData>
 private class EntityAutocompleter : Autocompleter<EntityData>
 ```
 
-### Add public constructor
+### Add a public constructor
 
 
 ```csharp
@@ -202,7 +202,7 @@ private class EntityAutocompleter : Autocompleter<EntityData>
 public EntityAutocompleter(EntityData data) : base(data) { }
 ```
 
-### Change method's signature
+### Change the method's signature
 
 ```csharp
 // Before:
@@ -248,7 +248,7 @@ public override void Complete()
 
 ## Menu Items
 
-In the old versions, we hid the menu item class inside the `Menu` class. It turned out that it was hard to find it both to humans and IDEs.
+In the old versions, we hid the menu item class inside the `Menu` class. It turned out that it was hard to find it both for humans and IDEs, so we have moved them out into the new `Innoactive.CreatorEditor.UI.StepInspector.Menu` namespace.
 
 Also, we have changed the `DisplayedMenu` property's return type to the plain and simple `string`.
 

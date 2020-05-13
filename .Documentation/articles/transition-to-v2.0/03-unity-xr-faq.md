@@ -6,7 +6,7 @@ Unity XR Interactions is a brand new VR framework. Starting from the v2.0, this 
 
 > Q: Which headsets does Unity XR support?
 
-A: See the Unity Technologies's [blog post](https://blogs.unity3d.com/2020/01/24/unity-xr-platform-updates/) to get the answer from first hands.
+A: See the Unity Technologies's [blog post](https://blogs.unity3d.com/2020/01/24/unity-xr-platform-updates/) to get the answer from the first hands.
 
 > Q: Where can I find the documentation for Unity XR Interactions?
 
@@ -26,7 +26,7 @@ A: There is no SteamVR/OpenVR XR Plugin yet. Unity Technologies works on it and 
 
 For now, go to `Unity > Edit > Project Settings... > Player > XR Settings > Deprecated Settings`. Toggle `Enable Virtual Reality Supported`. Let Unity import assets. Click on the `+` button under the `Virtual Reality SDKs` and add OpenVR to the list.
 
-> Q: Why does it not work after I have changed the build target?
+> Q: Why does it fail after I have changed the build target?
 
 A: Unity uses separate sets of player settings for each platform. Just repeat steps from the answers above for the current build target. You have to do it only once per target platform.
 
@@ -40,7 +40,7 @@ A: Set the `Tracking Origin Mode` to `Floor` in the `XR Rig Inspector` component
 
 A: Add the `Teleportation Area` or the `Teleportation Anchor` component to the plane game object.
 
-> Q: Why I cannot see an object highlight in the scene?
+> Q: Why cannot I see an object highlight in the scene?
 
 A: In Unity XR, you can see it only through VR headset when the application is running.
 
@@ -48,7 +48,7 @@ A: In Unity XR, you can see it only through VR headset when the application is r
 
 > Q: How to create a snap zone?
 
-A: Add a `Snapzone Property` component to a game object, a collider, and set the collider's `Is Trigger` field to `true`.
+A: Add a `Snapzone Property` component and a collider to a game object, and set the collider's `Is Trigger` field to `true`.
 
 > Q: Why my snapped object has a wrong rotation and position?
 
@@ -56,8 +56,8 @@ A: Snap zone resets local position and rotation of a snapped object and its chil
 
 > Q: Can my Snap Zone have interactable children?
 
-A: Yes, as long as they have different interaction layer. Alternatively, you could disable all interactable children before snapping an object. You can do it with Enable and Disable behaviors that we have included in the release package.
+A: Yes, as long as they have a different interaction layer. Alternatively, you could disable all interactable children before snapping an object. You can do it with Enable and Disable behaviors that we have included in the release package.
 
-> Q: How do I set up a highlight for a snap Zone?
+> Q: How do I set up a highlight for a snap zone?
 
 A: Given that you have a game object or a prefab that should serve as a highlight, drag it to the `Shown Highlight Object` field of the `Snap Zone` component.

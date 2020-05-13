@@ -1,6 +1,6 @@
 # Overview of the Changes
 
-This chapter compares the public Innoactive API v2.0 to v1.3.1, and highlights the most important additions and chagnes between them.
+This chapter compares the public Innoactive API v2.0 to v1.3.1, and highlights the most important additions and changes between them.
 
 ## Unity Version
 
@@ -12,7 +12,7 @@ Now you can replace the default training serializer with your own, as long as it
 
 ## Dependencies
 
-We made the Innoactive Creator independent from our old product and from a number of external projects. The core package weights eleven times less now.
+We made the Innoactive Creator independent from our old product code base and from a number of external projects. The core package weights eleven times less now.
 
 ## Components
 
@@ -20,15 +20,15 @@ We have extracted built-in behaviors, conditions, and properties of the Innoacti
 
 ## Abstracted VR
 
-With the previous change, we moved VR interactions into separate, interchangeable components. The integration with VRTK is a separate components, as well as the new component for Unity XR. You can now write your own component to support any VR framework you want, too.
+With the previous change, we moved VR interactions into separate, interchangeable components. We made the VRTK integration as separate component, and have created a new component for Unity XR. If you wish to use another VR framework, now you can integrate it on your own.
 
-The new recommended VR framework is Unity XR. We have updated the VRTK component to the new API, but this is our last release for it, as we drop our support for it from now on. While integrating Unity XR into our tool, we have collected our insights for working with it. You can find these insights in our [FAQ](03-unity-xr-faq.md) chapter.
+The new recommended VR framework is Unity XR. We have updated the VRTK component to the new API, but this is our last release for it, as we drop our support of VRTK from now on. While integrating Unity XR into our tool, we have collected our insights for working with it. We have documented them in the [FAQ](03-unity-xr-faq.md) chapter, as they could prove to be useful for you, as well.
 
 ## Standalone Devices Support
 
 The Innoactive Creator supports standalone devices now. 
 
-*If you use the default course serializer, go to `Unity > Edit > Project Settings... > Player > Other Settings`. Set API compitability settings to .NET 4.x.*
+*If you use the default course serializer, go to `Unity > Edit > Project Settings... > Player > Other Settings` and set API compitability settings to .NET 4.x.*
 
 ## Scene Setup
 
@@ -36,7 +36,7 @@ Instead of overriding `SetupTrainingScene()` method of the `DefaultRuntimeConfig
 
 ## Runtime Configuration
 
-We have moved logging and training mode handling out of the runtime configuration to separate classes.
+We have moved logging and training mode handling out of the runtime configuration class.
 
 ## Assemblies
 
@@ -44,7 +44,7 @@ Unity supports separate assemblies now and we made use of it to make some of our
 
 ## Namespaces
 
-We changed the namespaces from `Innoactive.Hub.Training` to `Innoactive.Creator` and from `Innoactive.Hub.Training.Editors` to `Innoactive.CreatorEditor`. This way, we removed remnants of the old name of our product to match our code to our branding.
+We have changed the namespaces from `Innoactive.Hub.Training` to `Innoactive.Creator` and from `Innoactive.Hub.Training.Editors` to `Innoactive.CreatorEditor`. This way, we removed remnants of the old name of our product to match our code to our branding.
 
 ## Entities
 
