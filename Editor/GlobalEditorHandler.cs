@@ -79,9 +79,14 @@ namespace Innoactive.CreatorEditor
             strategy.HandleCurrentStepModified(step);
         }
 
-        internal static void StartEditingStep(IStep step)
+        internal static void ChangeCurrentStep(IStep step)
         {
-            strategy.HandleStartEditingStep(step);
+            strategy.HandleCurrentStepChanged(step);
+        }
+
+        internal static void StartEditingStep()
+        {
+            strategy.HandleStartEditingStep();
         }
 
         internal static void ProjectIsGoingToUnload()

@@ -215,13 +215,15 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 stepNode.IsLastSelectedStep = true;
             }
+
+            GlobalEditorHandler.ChangeCurrentStep(step);
         }
 
         private void UserSelectStepNode(StepNode stepNode)
         {
             SelectStepNode(stepNode);
             Graphics.BringToTop(stepNode);
-            GlobalEditorHandler.StartEditingStep(stepNode?.Step);
+            GlobalEditorHandler.StartEditingStep();
         }
 
         private void MarkToRefresh()
@@ -438,6 +440,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             if (currentChapter.ChapterMetadata.LastSelectedStep == step)
             {
                 currentChapter.ChapterMetadata.LastSelectedStep = null;
+                GlobalEditorHandler.ChangeCurrentStep(null);
             }
 
             currentChapter.Data.Steps.Remove(step);
