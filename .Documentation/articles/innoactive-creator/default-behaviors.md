@@ -34,28 +34,28 @@ The `Play Audio File` behavior plays audio clips from any `Resources` folder in 
     If you use localization files for your project, you can write the localization key for the corresponding sound file that you want to play into this text field. For more information on how to use localization files and Text to speech, look into [Text to speech engine (TTS)](../miscellaneous/setup-text-to-speech.md).
     If you do not use localization files, leave this text field empty and use the `Default resource path` field.
 
-    > ##### Example
-    >
-    > You have the following localization file `EN.json`:
-    >
-    > ```json
-    > {
-    >     "humming_sound": "Sounds/Teleporter/humming",
-    >     "teleport_sound": "Sounds/teleport",
-    >     "teleport_complete": "Congratulations! You successfully used the teleporter!"
-    > }
-    > ```
-    >
-    > If you want to hear the teleport sound, you have to enter the `teleport_sound` key into the `Localization key` text field.
+    ##### Example
+
+    You have the following localization file `EN.json`:
+    
+    ```json
+    {
+        "humming_sound": "Sounds/Teleporter/humming",
+        "teleport_sound": "Sounds/teleport",
+        "teleport_complete": "Congratulations! You successfully used the teleporter!"
+    }
+    ```
+
+    If you want to hear the teleport sound, you have to enter the `teleport_sound` key into the `Localization key` text field.
 
 - #### Default resource path
 
     If you want to play an audio clip from a file with this behavior, the file path must be the relative path **after** the `Resources` folder. The extension of the file must be omitted.
 
-    > ##### Example
-    >  
-    > File to be played: `Assets/.../Resources/Sounds/teleport.ogg`  
-    > Path entered in the field: `Sounds/teleport` 
+    ##### Example
+     
+    File to be played: `Assets/.../Resources/Sounds/teleport.ogg`  
+    Path entered in the field: `Sounds/teleport` 
 
 - #### Execution stages
 
@@ -87,20 +87,20 @@ The `Play TextToSpeech Audio` behavior plays speech audio clips generated from t
     If you use localization files for your project, you can write the localization key for the corresponding text that you want to hear into this text field. For more information on how to use localization files and Text to speech, look into [Text to speech engine (TTS)](../miscellaneous/setup-text-to-speech.md).
     If you do not use localization files, leave this text field empty and use the `Default text` field.
 
-    > ***Example***
-    >
-    > You have the following localization file `EN.json`:
-    >
-    > ```json
-    > {
-    >     "grab_sphere": "Please, grab the sphere using the side button of your controller.",
-    >     "put_sphere": "Please, move the sphere closer to the cube.",
-    >     "move_cube": "Behold! The mighty flying cube!",
-    >     "training_complete": "Congratulations! The training is complete."
-    > }
-    > ```
-    >
-    > If you want to hear the spoken text *"Behold! The mighty flying cube!"*, you have to enter the `move_cube` key into the `Localization key` text field.
+    ##### Example
+
+    You have the following localization file `EN.json`:
+
+    ```json
+    {
+        "grab_sphere": "Please, grab the sphere using the side button of your controller.",
+        "put_sphere": "Please, move the sphere closer to the cube.",
+        "move_cube": "Behold! The mighty flying cube!",
+        "training_complete": "Congratulations! The training is complete."
+    }
+    ```
+
+    If you want to hear the spoken text *"Behold! The mighty flying cube!"*, you have to enter the `move_cube` key into the `Localization key` text field.
 
 - #### Default text
 
