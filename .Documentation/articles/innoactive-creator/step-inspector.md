@@ -24,26 +24,25 @@ To change the description of a step, click on the step in the [Workflow Editor](
 
 [![Change description of a step](../images/step-inspector/change-description.gif "How to change the description of a step.")](../images/step-inspector/change-description.gif)
 
-## Add Behaviors
+## Add and Remove Behaviors
 
-To add a behavior, click on the `Add Behavior` button in the Step Inspector.
+To add a behavior, click on the `Add Behavior` button in the Step Inspector. To remove one, click on the `X` button in the upper right corner of it.
 
 > Learn more about the [default behaviors](default-behaviors.md).
 
 [![Add a behavior to a step](../images/step-inspector/add-behavior.gif "How to add a behavior to a step.")](../images/step-inspector/add-behavior.gif)
 
-## Add Conditions
+## Add and Remove Conditions
 
-To add a condition, find the transition you want to add it to in the Step Inspector, and click on the `Add Condition` button.
+To add a condition, find the transition you want to add it to in the Step Inspector, and click on the `Add Condition` button. To remove a condition, click on the `X` button in the upper right corner of it.
 
 > Learn more about the [default conditions](default-conditions.md).
 
 [![Add a condition to a step](../images/step-inspector/add-condition.gif "How to add a condition to a step.")](../images/step-inspector/add-condition.gif)
 
-## Add Transitions
+## Add and Remove Transitions
 
-To add a transition in the Step Inspector, click on the `Add Transition` button. It will point to the end of the chapter by default. To choose another destination, see [the article about Workflow Editor](workflow-editor.md#add-transitions).
-
-Make sure that every step has at least one transition. Otherwise, the training course will not proceed past that step.
+To add a transition in the Step Inspector, click on the `Add Transition` button. It will point to the end of the chapter by default. To choose another destination, see [the article about Workflow Editor](workflow-editor.md#add-transitions).  
+You can remove a transition by clicking on the `X` button in the upper right corner of it.
 
 [![Add a transition to a step](../images/step-inspector/add-transition.gif "How to add a transition to a step.")](../images/step-inspector/add-transition.gif)
