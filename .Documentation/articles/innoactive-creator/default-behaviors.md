@@ -100,7 +100,7 @@ The `Play TextToSpeech Audio` behavior plays speech audio clips generated from t
     The text entered into this text field is used, if either the `Localization key` text field is empty or the provided localization key is invalid (e. g. the key does not exist or the localization file is not loaded).
 
 - **Execution stages**\
-    By default, the behavior is executed when a step was activated. This can be changed with the `Execution stages` dropdown menu:
+    By default, steps execute behaviors in the beginning, in their activation stage. This can be changed with the `Execution stages` dropdown menu:
 
     - `Before Step Execution`: The step invokes the behavior during its activation.
     - `After Step Execution`: Once a transition to another step has been activated and the current step deactivates, the behavior is invoked.
