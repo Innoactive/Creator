@@ -30,12 +30,6 @@ namespace Innoactive.CreatorEditor
         /// <inheritdoc/>
         public void HandleNewStepWindow(StepWindow window)
         {
-            if (courseWindow == null)
-            {
-                window.Close();
-                return;
-            }
-
             if (stepWindow != null && stepWindow != window)
             {
                 stepWindow.Close();
@@ -43,7 +37,7 @@ namespace Innoactive.CreatorEditor
 
             stepWindow = window;
 
-            HandleStartEditingStep(courseWindow.GetChapter().ChapterMetadata.LastSelectedStep);
+            HandleCurrentStepChanged(courseWindow.GetChapter().ChapterMetadata.LastSelectedStep);
         }
 
         /// <inheritdoc/>
@@ -126,15 +120,21 @@ namespace Innoactive.CreatorEditor
         }
 
         /// <inheritdoc/>
-        public void HandleStartEditingStep(IStep step)
+        public void HandleCurrentStepChanged(IStep step)
+        {
+            if (stepWindow != null)
+            {
+                stepWindow.SetStep(step);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void HandleStartEditingStep()
         {
             if (stepWindow == null)
             {
                 StepWindow.ShowInspector();
-                return;
             }
-
-            stepWindow.SetStep(step);
         }
 
         /// <inheritdoc/>

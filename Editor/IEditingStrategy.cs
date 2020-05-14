@@ -51,7 +51,13 @@ namespace Innoactive.CreatorEditor
         /// <summary>
         /// Invoked when a designer wants to start working on a step.
         /// </summary>
-        void HandleStartEditingStep(IStep step);
+        void HandleStartEditingStep();
+
+
+        /// <summary>
+        /// Invoked when a designer chooses a step to edit.
+        /// </summary>
+        void HandleCurrentStepChanged(IStep step);
 
         /// <summary>
         ///  Invoked when the project is going to be unloaded (when assemblies are unloaded, when user starts or stop runtime, when scripts were modified).

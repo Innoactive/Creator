@@ -49,7 +49,12 @@ namespace Innoactive.CreatorEditor.TestTools
         }
 
         /// <inheritdoc/>
-        public void HandleStartEditingStep(IStep step)
+        public void HandleStartEditingStep()
+        {
+        }
+
+        /// <inheritdoc/>
+        public void HandleCurrentStepChanged(IStep step)
         {
         }
 
