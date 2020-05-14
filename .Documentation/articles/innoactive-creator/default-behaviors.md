@@ -6,18 +6,18 @@ Take a look at the [Training Scene Object](training-scene-object.md) article if 
 
 See [this article](step-inspector.md) to learn Step Inspector controls.
 
-#### Default Behaviors:
+## Content
 
-  - [Audio/Play Audio File](#audioplay-audio-file)
-  - [Audio/Play TextToSpeech Audio](#audioplay-texttospeech-audio)
-  - [Behavior Sequence](#behavior-sequence)
-  - [Delay](#delay)
-  - [Disable Object](#disable-object)
-  - [Enable Object](#enable-object)
-  - [Hightlight Object](#hightlight-object)
-  - [Lock Object](#lock-object)
-  - [Move Object](#move-object)
-  - [Unlock Object](#unlock-object)
+- [Audio/Play Audio File](#audioplay-audio-file)
+- [Audio/Play TextToSpeech Audio](#audioplay-texttospeech-audio)
+- [Behavior Sequence](#behavior-sequence)
+- [Delay](#delay)
+- [Disable Object](#disable-object)
+- [Enable Object](#enable-object)
+- [Hightlight Object](#hightlight-object)
+- [Lock Object](#lock-object)
+- [Move Object](#move-object)
+- [Unlock Object](#unlock-object)
 
 ------
 

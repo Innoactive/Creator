@@ -6,15 +6,16 @@ Take a look at the [Training Scene Object](training-scene-object.md) article if 
 
 See [this article](step-inspector.md) to learn Step Inspector controls.
 
-- **Default Conditions:**
-  - [Grab Object](#grab-object)
-  - [Move Object into Collider](#move-object-into-collider)
-  - [Object Nearby](#object-nearby)
-  - [Release Object](#release-object)
-  - [Snap Object](#snap-object)
-  - [Timeout](#timeout)
-  - [Touch Object](#touch-object)
-  - [Use Object](#use-object)
+## Content
+
+- [Grab Object](#grab-object)
+- [Move Object into Collider](#move-object-into-collider)
+- [Object Nearby](#object-nearby)
+- [Release Object](#release-object)
+- [Snap Object](#snap-object)
+- [Timeout](#timeout)
+- [Touch Object](#touch-object)
+- [Use Object](#use-object)
 
 ------
 
@@ -26,7 +27,8 @@ The `Grab Object` condition is fulfilled once the specified `Training Scene Obje
 
 ### Configuration
 
-- **Grabbable object**\
+- #### Grabbable object
+
     This field contains the `Training Scene Object` with a `Grabbable Property` that is required to be grabbed.
     Besides, the object must have a collider component in order to be grabbed.
 
@@ -42,17 +44,20 @@ The `Move Object into Collider` condition is fulfilled if the target object is w
 
 ### Configuration
 
-- **Object to collide into**\
+- #### Object to collide into
+
     This field contains the `Training Scene Object` with the collider inside which you want to move the target object. Make sure you added the `Collider With Trigger Property` component to the game object with the collider. Besides, the collider component needs the `Is Trigger` property to be *enabled*.
 
     [![Object with trigger collider](../images/conditions/object_into_colliders_properties_1.png "")](../images/conditions/object_into_colliders_properties_1.png)
 
-- **Target object**\
+- #### Target object
+
     This field contains the `Training Scene Object` that you want to move into the *Object to collide into*. Make sure you added the `Training Scene Object` component to the game object in the Unity Inspector. Besides, the object must have a collider component with the `Is Trigger` property *disabled*.
 
     [![Target object with collider](../images/conditions/object_into_colliders_properties_2.png "")](../images/conditions/object_into_colliders_properties_2.png)
 
-- **Required seconds inside**\
+- #### Required seconds inside
+
     In this field, you can set the time in seconds the target object should stay within the collider.
   
 ------
@@ -65,16 +70,20 @@ The `Object Nearby` condition triggers when the *first object* is within the spe
 
 ### Configuration
 
-- **First object**\
+- #### First object
+
     This field contains the `Training Scene Object` you want to measure distance from. 
 
-- **Second object**\
+- #### Second object
+
     This field contains the `Training Scene Object` you want to be in the radius of the *first object*. Make sure you added at least the `Training Scene Object` component to the target game object in the Unity Inspector.
 
-- **Range**\
+- #### Range
+
     In this field, you can set the maximum distance between the *first* and *second object* required to fulfill this condition.
 
-- **Required seconds inside**\
+- #### Required seconds inside
+
     In this field, you can set the time in seconds the *second object* should stay within the radius of the *first object*.
 
 ------
@@ -87,7 +96,8 @@ The `Release Object` condition is fulfilled once the *Grabbable object* is relea
 
 ### Configuration
 
-- **Grabbable object**\
+- #### Grabbable object
+
     This field contains the `Training Scene Object` that is required to be released. Make sure you added the `Grabbable Property` component to the game object in the Unity Inspector. Besides, the object must have a collider component in order to be grabbable.
 
     [![Grabbable Properties](../images/conditions/grabbable_properties.png "")](../images/conditions/grabbable_properties.png)
@@ -102,12 +112,14 @@ The `Snap Object` condition is fulfilled once the specified *Object to snap* is 
 
 ### Configuration**
 
-- **Object to snap**\
+- #### Object to snap
+
     This field contains the `Training Scene Object` that is required to be snapped. Make sure you added the `Snappable Property` component to the game object in the Unity Inspector. Besides, the object must have a collider component in order to be grabbed and snapped.
 
     [![Snappable Properties](../images/conditions/snappable_properties.png "")](../images/conditions/snappable_properties.png)
 
-- **Zone to snap into**\
+- #### Zone to snap into
+
     This field contains the `Training Scene Object` where the *Object to snap* is required to be snapped. Make sure you added the `Snap Zone Property` component to the snap zone game object in the Unity Inspector. Besides, the object must have a collider component with the `Is Trigger` property *enabled*.
 
     [![Snap Zone Properties](../images/conditions/snap_zone_properties.png "")](../images/conditions/snap_zone_properties.png)
@@ -124,7 +136,8 @@ The `Timeout` condition is fulfilled once the specified time is elapsed while th
 
 ### Configuration
 
-- **Wait for seconds**\
+- #### Wait for seconds
+
     In this field, you can set the time in seconds that should elapse before this condition is fulfilled.
 
 ------
@@ -137,7 +150,8 @@ The `Touch Object` condition is fulfilled when the *Touchable object* is touched
 
 ### Configuration
 
-- **Touchable object**\
+- #### Touchable object
+
     This field contains the `Training Scene Object` that is required to be touched. Make sure you added the `Touchable Property` component to the target game object in the Unity Inspector. Besides, the object must have a collider component in order to be touchable.
 
     [![Touchable Properties](../images/conditions/touchable_properties.png "")](../images/conditions/touchable_properties.png)
@@ -152,7 +166,8 @@ The `Use Object` condition is fulfilled as the *Usable object* is used by pressi
 
 ### Configuration
 
-- **Usable object**\
+- #### Usable object
+
     This field contains the `Training Scene Object` that is required to be used. Make sure you added the `Usable Property` component to the target game object in the Unity Inspector. Besides, the object must have a collider component, as it needs to be touched or grabbed.
 
     [![Usable Properties](../images/conditions/usable_properties.png "")](../images/conditions/usable_properties.png)
