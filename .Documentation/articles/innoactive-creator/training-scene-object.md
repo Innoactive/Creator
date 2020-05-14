@@ -36,7 +36,7 @@ Naturally, to be able to grab an object you must be able to touch it first. Prer
 
 Behaviors and conditions often require an object to have one or more specific properties. For example, a `Snap Object` condition will require a `Training Scene Object` with the `Snappable Property` component, and another one with the `Snap Zone Property`.
 
-The **Innoactive Base Template** has the following default properties:
+The Innoactive Base Template has the following default properties:
 
 * `Touchable Property`: The training course is aware of when the object is touched.
 * `Grabbable Property`: The training course knows whether the object is being grabbed or not. Requires a `Touchable Property` as well.
