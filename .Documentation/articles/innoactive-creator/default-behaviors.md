@@ -233,4 +233,4 @@ The `Unlock Object` behavior unlocks a previously locked object so that it can b
 - **Object to unlock**\
     This field contains the `Training Scene Object` to be unlocked.
 - **Unlock only during this step**\
-    If ticked, the object is only unlocked while the current step is being executed. It is locked again when moving to the next step.
+    If toggled on, the object unlocks only while the current step is being executed. It is locked again when moving to the next step.
