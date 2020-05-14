@@ -72,7 +72,7 @@ You can drag a step around the canvas with the left mouse button.
 You can copy a step by clicking on it with the right mouse button and choosing the `Copy` option. In addition to this, you can cut it by choosing the `Cut` option. To paste a step, click anywhere in the Workflow Editor with the right mouse button and choose the `Paste step` option.
 Alternatively, you can press `CTRL` + `C` to copy, `CTRL` + `X` to cut, and `CTRL` + `V` to paste steps.
 
-> It is possible to copy and paste steps in between various projects. You can even share steps with others. Copied steps are text snippets that can be pasted into any text file, chat message, or email. To paste one into your training course, simply copy the entire text snippet and paste it into the opened Workflow Editor.
+It is possible to copy and paste steps in between various projects. You can even share steps with others. Copied steps are text snippets that can be pasted into any text file, chat message, or email. To paste one into your training course, simply copy the entire text snippet and paste it into the opened Workflow Editor.
 
 ### Add Transitions
 
