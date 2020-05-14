@@ -14,7 +14,7 @@ Click the pen icon on the top of the chapter menu to rename the current training
 
 ## Saving
 
-Changes you make in the Workflow Editor and [Step Inspector](step-inspector.md) are automatically saved. They will be stored in the file of the currently opened training course.
+The Workflow Editor and [Step Inspector](step-inspector.md) automatically save all changes you make to the file of the currently opened training course.
 
 ## Hide and Show the Chapter Menu
 
@@ -69,8 +69,8 @@ You can drag a step around the canvas with the left mouse button.
 
 ### Copy, Cut, and Paste Steps
 
-A step can be copied by clicking on the step with the right mouse button and choosing the `Copy` option. In addition to this, it can be cut by choosing the `Cut` option. To paste a step, click anywhere in the Workflow Editor with the right mouse button and choose the `Paste step` option.
-Alternativley, you can press `CTRL` + `C` to copy, `CTRL` + `X` to cut, and `CTRL` + `V` to paste steps.
+You can copy a step by clicking on it with the right mouse button and choosing the `Copy` option. In addition to this, you can cut it by choosing the `Cut` option. To paste a step, click anywhere in the Workflow Editor with the right mouse button and choose the `Paste step` option.
+Alternatively, you can press `CTRL` + `C` to copy, `CTRL` + `X` to cut, and `CTRL` + `V` to paste steps.
 
 > It is possible to copy and paste steps in between various projects. You can even share steps with others. Copied steps are text snippets that can be pasted into any text file, chat message, or email. To paste one into your training course, simply copy the entire text snippet and paste it into the opened Workflow Editor.
 
@@ -82,4 +82,4 @@ To add a transition to a step, click on the white circle with the `+` sign right
 
 ### Remove Transitions
 
-You can remove a transition by clicking on the transition's origin (a white circle next to the origin object) and choosing the `Remove transition` option.
+You can remove a transition by clicking with the right mouse button on the origin of the transition (a white circle next to the original object) and choosing the 'Remove transition' option.

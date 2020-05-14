@@ -1,6 +1,6 @@
 # Default Behaviors
 
-**The following behaviors are part of the *Basic Conditions and Behaviors Component*. Make sure it is added to your project to be able to use them.**
+The following behaviors are part of the Basic Conditions and Behaviors Component. The Innoactive Base Template provides them by default.
 
 Take a look at the [Training Scene Object](training-scene-object.md) article if you have not read it yet. It will help you to understand how to handle training scene objects and training properties.
 
@@ -22,11 +22,11 @@ See [this article](step-inspector.md) to learn Step Inspector controls.
 
 ## Audio/Play Audio File
 
-**Description**
+### Description
 
 The `Play Audio File` behavior plays audio clips from any `Resources` folder in your project's asset folder.
 
-**Configuration**
+### Configuration
 
 - **Localization key**\
     If you use localization files for your project, you can write the localization key for the corresponding sound file that you want to play into this text field. For more information on how to use localization files and Text to speech, look into [Text to speech engine (TTS)](../miscellaneous/setup-text-to-speech.md).
@@ -55,11 +55,11 @@ The `Play Audio File` behavior plays audio clips from any `Resources` folder in 
     > *Path entered in the field:* `Sounds/teleport` 
 
 - **Execution stages**\
-    By default, the behavior is executed when it was activated. This can be changed with the `Execution stages` dropdown menu:
+    By default, the behavior is executed when a step was activated. This can be changed with the `Execution stages` dropdown menu:
 
-    - `Before Step Execution`: Execution at activation (e. g. when the step activates the behavior during its activation).
-    - `After Step Execution`: Execution at deactivation (e. g. a transition to another step was activated and the step is deactivating).
-    - `Before and After Step Execution`: Execution at activation and deactivation.
+    - `Before Step Execution`: The step invokes the behavior during its activation.
+    - `After Step Execution`: Once a transition to another step has been activated and the current step deactivates, the behavior is invoked.
+    - `Before and After Step Execution`: Execution at activation and deactivation of a step.
 
 - **Is blocking**\
     By default, a behavior is blocking the transition to another step while the behavior is executing. If you want to skip a behavior's execution when a transition to another step is happening (e. g. when all conditions of one transition are met), you can uncheck this option. 
@@ -69,15 +69,15 @@ The `Play Audio File` behavior plays audio clips from any `Resources` folder in 
 
 ## Audio/Play TextToSpeech Audio
 
-**This behavior is part of the *TextToSpeech Component*. Make sure it is added to your project to use it.**
+This behavior is part of the TextToSpeech Component. The Innoactive Base Template provides it by default.
 
-**Description**
+### Description
 
 The `Play TextToSpeech Audio` behavior plays speech audio clips generated from text. The behavior can convert localized text into speech by fetching values from `.json` files using the provided localization keys. If either the key in `Localization Key` does not exist or the text field is empty, the text entered into the `Default text` field will be used.
 
-**Configuration**
+### Configuration
 
-* **Localization key**\
+- **Localization key**\
     If you use localization files for your project, you can write the localization key for the corresponding text that you want to hear into this text field. For more information on how to use localization files and Text to speech, look into [Text to speech engine (TTS)](../miscellaneous/setup-text-to-speech.md).
     If you do not use localization files, leave this text field empty and use the `Default text` field.
 
@@ -100,11 +100,11 @@ The `Play TextToSpeech Audio` behavior plays speech audio clips generated from t
     The text entered into this text field is used, if either the `Localization key` text field is empty or the provided localization key is invalid (e. g. the key does not exist or the localization file is not loaded).
 
 - **Execution stages**\
-    By default, the behavior is executed when it was activated. This can be changed with the `Execution stages` dropdown menu:
+    By default, the behavior is executed when a step was activated. This can be changed with the `Execution stages` dropdown menu:
 
-    - `Before Step Execution`: Execution at activation (e. g. when the step activates the behavior during its activation).
-    - `After Step Execution`: Execution at deactivation (e. g. a transition to another step was activated and the step is deactivating).
-    - `Before and After Step Execution`: Execution at activation and deactivation.
+    - `Before Step Execution`: The step invokes the behavior during its activation.
+    - `After Step Execution`: Once a transition to another step has been activated and the current step deactivates, the behavior is invoked.
+    - `Before and After Step Execution`: Execution at activation and deactivation of a step.
 
 - **Is blocking**\
     By default, a behavior is blocking the transition to another step while the behavior is executing. If you want to skip a behavior's execution when a transition to another step is happening (e. g. when all conditions of one transition are met), you can uncheck this option. 
@@ -114,11 +114,11 @@ The `Play TextToSpeech Audio` behavior plays speech audio clips generated from t
 
 ## Behavior Sequence
 
-**Description**
+### Description
 
 The `Behavior Sequence` contains a list of child behaviors which will be activated one after the other. This means that the next child behavior in the list will not be activated until the previous child behavior has finished its life cycle.
 
-**Configuration**
+### Configuration
 
 - **Repeat**\
     If this option is checked, the behavior sequence will start from the top of the child behaviors list over and over again as soon as the life cycle of the last child behavior in the list is finished.
@@ -134,11 +134,11 @@ The `Behavior Sequence` contains a list of child behaviors which will be activat
 
 ## Delay
 
-**Description**
+### Description
 
 The activated `Delay` behavior completes after the specified amount of time. This behavior is especially useful for the `Behavior Sequence`, if you want to have time breaks in between its child behaviors. But you can also just delay the completion of a step with it.
 
-**Configuration**
+### Configuration
 
 - **Delay in seconds**\
     In this field you can set the behavior's delay duration in seconds.
@@ -147,11 +147,11 @@ The activated `Delay` behavior completes after the specified amount of time. Thi
 
 ## Disable Object
 
-**Description**
+### Description
 
 The `Disable Object` behavior **deactivates** the target's *GameObject* until it will be enabled again.
 
-**Configuration**
+### Configuration
 
 - **Object to disable**\
     This field contains the `Training Scene Object` to be disabled.
@@ -160,11 +160,11 @@ The `Disable Object` behavior **deactivates** the target's *GameObject* until it
 
 ## Enable Object
 
-**Description**
+### Description
 
 The `Enable Object` behavior **activates** the target's *GameObject* until it will be disabled again.
 
-**Configuration**
+### Configuration
 
 - **Object to enable**\
     This field contains the `Training Scene Object` to be enabled.
@@ -173,11 +173,11 @@ The `Enable Object` behavior **activates** the target's *GameObject* until it wi
 
 ## Hightlight Object
 
-**Description**
+### Description
 
 The `Highlight Object` behavior will highlight the target object in the specified color until the end of the step.
 
-**Configuration**
+### Configuration
 
 - **Hightlight color**\
     This field contains the color in which the target object will be colored.
@@ -189,11 +189,11 @@ The `Highlight Object` behavior will highlight the target object in the specifie
 
 ## Lock Object
 
-**Description**
+### Description
 
 The `Lock Object` behavior locks the target object so that you can no longer interact with this object in VR (like touching or grabbing).
 
-**Configuration**
+### Configuration
 
 - **Object to lock**\
     This field contains the `Training Scene Object` to be locked.
@@ -205,11 +205,11 @@ The `Lock Object` behavior locks the target object so that you can no longer int
 
 ## Move Object
 
-**Description**
+### Description
 
 The `Move Object` behavior moves and rotates the target game object to the position and rotation of the position provider game object within a specified time. Note that if the game object is affected by gravity before it moves, it will also be affected by gravity afterwards.
 
-**Configuration**
+### Configuration
 
 - **Object to move**\
     This field contains the `Training Scene Object` to be moved which should be moved and rotated.
@@ -224,11 +224,11 @@ The `Move Object` behavior moves and rotates the target game object to the posit
 
 ## Unlock Object
 
-**Description**
+### Description
 
 The `Unlock Object` behavior unlocks a previously locked object so that it can be interacted with in VR.
 
-**Configuration**
+### Configuration
 
 - **Object to unlock**\
     This field contains the `Training Scene Object` to be unlocked.
