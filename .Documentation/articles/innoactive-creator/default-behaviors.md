@@ -55,7 +55,7 @@ The `Play Audio File` behavior plays audio clips from any `Resources` folder in 
     > *Path entered in the field:* `Sounds/teleport` 
 
 - **Execution stages**\
-    By default, the behavior is executed when a step was activated. This can be changed with the `Execution stages` dropdown menu:
+    By default, steps execute behaviors in the beginning, in their activation stage. This can be changed with the `Execution stages` dropdown menu:
 
     - `Before Step Execution`: The step invokes the behavior during its activation.
     - `After Step Execution`: Once a transition to another step has been activated and the current step deactivates, the behavior is invoked.
