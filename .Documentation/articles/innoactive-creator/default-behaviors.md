@@ -58,7 +58,7 @@ The `Play Audio File` behavior plays audio clips from any `Resources` folder in 
     By default, steps execute behaviors in the beginning, in their activation stage. This can be changed with the `Execution stages` dropdown menu:
 
     - `Before Step Execution`: The step invokes the behavior during its activation.
-    - `After Step Execution`: Once a transition to another step has been activated and the current step deactivates, the behavior is invoked.
+    - `After Step Execution`: Once a transition to another step has been selected and the current step starts deactivating, the behavior is invoked.
     - `Before and After Step Execution`: Execution at activation and deactivation of a step.
 
 - **Is blocking**\
