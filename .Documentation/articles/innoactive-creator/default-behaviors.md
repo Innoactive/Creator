@@ -199,7 +199,7 @@ The `Lock Object` behavior locks the target object so that you can no longer int
     This field contains the `Training Scene Object` to be locked.
 
 - **Lock only during this step**\
-    If ticked, the object is only locked while the current step is being executed. It is unlocked again when moving to the next step.
+    If toggled on, the object locks only while the current step is being executed. It is unlocked again when moving to the next step.
 
 ------
 
