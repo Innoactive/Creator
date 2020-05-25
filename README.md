@@ -42,7 +42,7 @@ This component implements user interactions in VR by using the Unity XR framewor
 git submodule git@github.com:Innoactive/git@github.com:Innoactive/XR-Interaction-Component.git Innoactive/XR-Interaction-Component
 ```
 
-### [Text-To-Speech Component](git@github.com:Innoactive/TextToSpeech-Component.git)
+### [Text-To-Speech Component](https://github.com/Innoactive/TextToSpeech-Component)
 
 This component uses text-to-speech engines so designers could generate audio instructions for trainees.
 
