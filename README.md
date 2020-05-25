@@ -15,7 +15,7 @@ As a developer, you might want to [submodule](https://git-scm.com/book/en/v2/Git
 Every project in this lists depends on the Creator Core. It contains fundamental definitions, generally applicable logic, and the visual editor.
 
 ```
-git submodule git@github.com:Innoactive/Creator.git Innoactive/Creator
+git submodule add git@github.com:Innoactive/Creator.git Innoactive/Creator
 ```
 
 ### [Basic Conditions and Behaviors Component](https://github.com/Innoactive/Basic-Conditions-And-Behaviors)
@@ -23,7 +23,7 @@ git submodule git@github.com:Innoactive/Creator.git Innoactive/Creator
 This component contains very simple conditions and behaviors that involve no interaction with trainees. For example, a condition on a timer, or a behavior that moves its target object. 
 
 ```
-git submodule git@github.com:Innoactive/Basic-Conditions-And-Behaviors.git Innoactive/Basic-Conditions-And-Behaviors-Component
+git submodule add git@github.com:Innoactive/Basic-Conditions-And-Behaviors.git Innoactive/Basic-Conditions-And-Behaviors-Component
 ```
 
 ### [Basic Interaction Component](https://github.com/Innoactive/Basic-Interaction-Component)
@@ -31,7 +31,7 @@ git submodule git@github.com:Innoactive/Basic-Conditions-And-Behaviors.git Innoa
 This component is an abstraction layer between the Creator Core and a component that would implement user interactions.
 
 ```
-git submodule git@github.com:Innoactive/Basic-Interaction-Component.git Innoactive/Basic-Interaction 
+git submodule add git@github.com:Innoactive/Basic-Interaction-Component.git Innoactive/Basic-Interaction 
 ```
 
 ### [Unity XR Interaction Component](https://github.com/Innoactive/XR-Interaction-Component)
@@ -39,7 +39,7 @@ git submodule git@github.com:Innoactive/Basic-Interaction-Component.git Innoacti
 This component implements user interactions in VR by using the Unity XR framework. Include the Basic Interaction component along this repository to your project to let designers create training applications for VR.
 
 ```
-git submodule git@github.com:Innoactive/git@github.com:Innoactive/XR-Interaction-Component.git Innoactive/XR-Interaction-Component
+git submodule add git@github.com:Innoactive/XR-Interaction-Component.git Innoactive/XR-Interaction-Component
 ```
 
 ### [Text-To-Speech Component](https://github.com/Innoactive/TextToSpeech-Component)
@@ -47,15 +47,15 @@ git submodule git@github.com:Innoactive/git@github.com:Innoactive/XR-Interaction
 This component uses text-to-speech engines so designers could generate audio instructions for trainees.
 
 ```
-git submodule git@github.com:Innoactive/TextToSpeech-Component.git Innoactive/TextToSpeech-Component
+git submodule add git@github.com:Innoactive/TextToSpeech-Component.git Innoactive/TextToSpeech-Component
 ```
 
-### [Creator Examples](https://github.com/Innoactive/XR-Creator-Examples)
+## [Examples](https://github.com/Innoactive/XR-Creator-Examples)
 
-This repository includes example scenes for designers.
+This repository includes everything above, a configured template, and examples for training designers. Execute this command inside the `Assets` folder of an empty Unity project:
 
 ```
-git submodule git@github.com:Innoactive/XR-Creator-Examples.git Innoactive/Examples
+git clone --recurse-submodules -j8 git@github.com:Innoactive/XR-Creator-Examples.git Innoactive/Examples
 ```
 
 ## Documentation
@@ -68,7 +68,7 @@ See our [contributor's guide](.github/CONTRIBUTING.md).
 
 ## Maintainers
 
-You can find contacts of current maintainers in the [MAINTAINERS](.github/MAINTAINERS.md) files.
+You can find contacts of current maintainers in the [MAINTAINERS](.github/MAINTAINERS.md) file.
 
 ## License
 
