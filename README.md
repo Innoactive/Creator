@@ -72,10 +72,10 @@ You can find contacts of current maintainers in the [MAINTAINERS](.github/MAINTA
 
 ## License
 
-This repository is licensed under the Apache License, Version 2.0. See the [LICENSE](LICENSE.md) file for the full text.
+This repository is licensed under the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for the full text.
 
 ## Acknowledgements
 
-We have referenced every 3rd party work we use in this repository in the [NOTICE](NOTICE.md) file.
+We have referenced every 3rd party work we use in this repository in the [NOTICE](NOTICE) file.
 
 We list all contributors to this repository in the [CONTRIBUTORS](.github/CONTRIBUTORS.md) file.
