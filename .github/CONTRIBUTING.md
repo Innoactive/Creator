@@ -34,7 +34,7 @@ We are keen to listen to your feature requests.
 
 To request a feature, please go to the `Issues` section of this repository and create a new issue using the `Feature request` template. Be as detailed as possible, if possible, try to include references, and explain what is the benefit of the feature.
 
-Make sure that your idea is unique by using the search functionality. If a similar feature request already exists try to apport information to it instead of creating a new one. 
+Make sure your idea is unique using the search functionality. If a similar feature request already exists, try providing additional information instead of creating a new issue. 
 
 In the case that a similar feature request already exits but is closed without being resolved, you are welcome to create a new one if you think it makes sense.
 
