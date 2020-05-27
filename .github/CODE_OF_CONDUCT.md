@@ -13,7 +13,7 @@
 
 ## Summary
 
-In order to keep the Open Source Innoactive community warm, welcoming, and safe place we ask that all participates read and adhere to the following code of conduct.
+In order to keep the Open Source Innoactive community warm, welcoming, and a safe place we ask that all participates read and adhere to the following code of conduct.
 
 * **Be friendly and patient:** Remember you might not be communicating in someone else's primary spoken or programming language, and others may not have your level of understanding.
 
