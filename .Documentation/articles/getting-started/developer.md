@@ -4,7 +4,7 @@ Follow the [template developer's tutorial](../developer/index.md). It explains h
 
 This tutorial is intended for developers who already know C# and scripting in Unity. We have prepared a list of external resources where you can learn it.
 
-## Learning C#
+## Learning C\#
 
 Microsoft's documentation on C# is remarkably good. Read "Learn to program in C#" and "C# fundamentals" sections first, and then continue with articles about generics and iterators. It will take from one to two days.
 
