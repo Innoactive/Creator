@@ -83,7 +83,7 @@ By encouraging coding conventions we ensure:
 * Facilitating copying, changing, and maintaining the code.
 * Sticking to C# best practices.
 
-Please follow the our [Coding Conventions](#coding-conventions).
+Please follow our [Coding Conventions](#coding-conventions).
 
 ## Source Control Commit Guidelines
 
@@ -172,4 +172,3 @@ See more [Conventional Commits Examples](https://www.conventionalcommits.org/en/
 ## Contributors
 
 Thank you all for your help, we appreciate all your [contributions](https://github.com/Innoactive/Creator/graphs/contributors).
-
