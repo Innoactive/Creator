@@ -57,7 +57,7 @@ If you use Windows Mixed Reality, go to `Unity > Edit > Project Settings... > XR
 
 If you use an HTC Vive, Valve Index, or similar headsets, then there is no SteamVR/OpenVR XR Plugin yet. Unity Technologies works on it and will release it soon. For now, go to `Unity > Edit > Project Settings... > Player > XR Settings > Deprecated Settings`. Toggle `Enable Virtual Reality Supported`. Let Unity import assets. Click on the `+` button under the `Virtual Reality SDKs` and add `OpenVR` to the list.
 
-![XR Plugin Management](../images/xr-deprecated.png "XR Settings window (deprecated)")
+![XR Deprecated Settings](../images/xr-deprecated.png "XR Settings window (deprecated)")
 
 ### Launch the Training Application
 
