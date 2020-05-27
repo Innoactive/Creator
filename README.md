@@ -82,4 +82,4 @@ This repository is licensed under the Apache License, Version 2.0. See the [LICE
 
 We have referenced every 3rd party work we use in this repository in the [NOTICE](NOTICE) file.
 
-We list all contributors to this repository in the [Contributors](.github/CONTRIBUTING.md#contributors) section of of our contributing guidelines.
+We list all contributors to this repository in the [Contributors](.github/CONTRIBUTING.md#contributors) section of our contributing guidelines.
