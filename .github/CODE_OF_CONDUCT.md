@@ -37,7 +37,7 @@ In order to keep the Open Source Innoactive community warm, welcoming, and safe 
 
 We expect all contributors to uphold our standards of conduct. If any member of the community violates this code of conduct, the Innoactive team and project maintainers will take action. We reserve the right to remove issues, comments, and PRs that do not comply with our conduct standards. Repeated or significant offenses will result in blocked accounts and disassociation with our projects and the Innoactive community.
 
-If you are subject to or witness unacceptable behavior, or have any other concerns, please communicate with any of our [maintainers](MAINTAINERS.md).
+If you are subject to or witness unacceptable behavior, or have any other concerns, please communicate with any of our [maintainers](CONTRIBUTING.md#maintainers).
 
 ## Our Standards
 
@@ -73,7 +73,7 @@ This Code of Conduct applies both within project spaces and in public spaces whe
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise, unacceptable behavior may be reported by contacting any of our [maintainers](MAINTAINERS.md).
+Instances of abusive, harassing, or otherwise, unacceptable behavior may be reported by contacting any of our [maintainers](CONTRIBUTING.md#maintainers).
 
 
 All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. We are obligated to maintain confidentiality concerning the reporter of an incident. Further details of specific enforcement policies may be posted separately.

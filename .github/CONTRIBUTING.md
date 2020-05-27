@@ -57,9 +57,9 @@ Alternatively, customers can contact us directly using our [support channel](htt
 
 ## Submitting Changes
 
-By default, our `develop` and `master` branches are protected, the only way to commit changes to them is by merging via [Pull Requests](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests), this is only intending to provide the best quality and add a security layer, we could detect and prevent new bugs, breaking functionalities and avoid violations to our [code convention]((#coding-conventions)).
+By default, our `develop` and `master` branches are protected, the only way to commit changes to them is by merging via [Pull Requests](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests), this is only intending to provide the best quality and add a security layer, we could detect and prevent new bugs, breaking functionalities and avoid violations to our [code convention](#coding-conventions).
 
-Use the [pull request template](pull_request_template.md) for detail as much as possible all the changes included in the pull request, this way it is easier for everyone to review.
+Use the [pull request template](PULL_REQUEST_TEMPLATE.md) for detail as much as possible all the changes included in the pull request, this way it is easier for everyone to review.
 
 > Make sure to also follow the [Source Control Commit Guidelines](#source-control-commit-guidelines).
 
@@ -82,7 +82,7 @@ By encouraging coding conventions we ensure:
 * Facilitating copying, changing, and maintaining the code.
 * Sticking to C# best practices.
 
-Please follow the our [Coding Conventions](coding_conventions.md).
+Please follow the our [Coding Conventions](#coding-conventions).
 
 ## Source Control Commit Guidelines
 
