@@ -32,8 +32,7 @@ In order to keep the Open Source Innoactive community warm, welcoming, and safe 
 
 * **Understand disagreements:** Disagreements, both social and technical, are useful learning opportunities. Seek to understand the other viewpoints and resolve differences constructively.
 
-> This code is not exhaustive or complete. It serves to capture our common understanding of a productive, collaborative environment. We expect the code to be followed in spirit as much as in the letter.
-
+* **This code is not exhaustive or complete.** It serves to capture our common understanding of a productive, collaborative environment. We expect the code to be followed in spirit as much as in the letter.
 
 We expect all contributors to uphold our standards of conduct. If any member of the community violates this code of conduct, the Innoactive team and project maintainers will take action. We reserve the right to remove issues, comments, and PRs that do not comply with our conduct standards. Repeated or significant offenses will result in blocked accounts and disassociation with our projects and the Innoactive community.
 
@@ -74,7 +73,6 @@ This Code of Conduct applies both within project spaces and in public spaces whe
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise, unacceptable behavior may be reported by contacting any of our [maintainers](CONTRIBUTING.md#maintainers).
-
 
 All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. We are obligated to maintain confidentiality concerning the reporter of an incident. Further details of specific enforcement policies may be posted separately.
 
