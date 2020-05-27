@@ -13,8 +13,10 @@ In this guide, we summarize how you can do all those actions.
 1. [Feature Request](#feature-request)
 1. [Bug Report](#bug-report)
 1. [Submitting Changes](#submitting-changes)
+1. [Maintainers](#maintainers)
 1. [Coding Conventions](#coding-conventions)
 1. [Source Control Commit Guidelines](#source-control-commit-guidelines)
+1. [Contributors](#contributors)
 
 ## Getting Started
 
@@ -24,7 +26,7 @@ The easiest and simplest way to get started and try out the Creator is by downlo
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [Innoactive Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to support@innoactive.de.
+This project and everyone participating in it is governed by the [Innoactive Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to our [maintainers](#maintainers).
 
 
 ## Feature Request
@@ -49,7 +51,7 @@ To report a new bug, please go to the `Issues` section of this repository and cr
 
 Creating comprehensive bug reports helps the community to quickly understand the problem and the severity.
 
-> If you find a security vulnerability, do NOT open an issue. Email support@innoactive.de instead.
+> If you find a security vulnerability, do NOT open an issue. Contact a [maintainer](#maintainers) instead.
 
 Alternatively, customers can contact us directly using our [support channel](https://jira.innoactive.de/servicedesk/customer/portal/3).
 
@@ -60,6 +62,16 @@ By default, our `develop` and `master` branches are protected, the only way to c
 Use the [pull request template](pull_request_template.md) for detail as much as possible all the changes included in the pull request, this way it is easier for everyone to review.
 
 > Make sure to also follow the [Source Control Commit Guidelines](#source-control-commit-guidelines).
+
+## Maintainers
+
+Meet out maintainers:
+
+[<img alt="aleksei-korolev" src="https://github.com/aleksei-korolev.png" width="110">](https://github.com/aleksei-korolev) | [<img alt="SimonTheSourcerer" src="https://github.com/SimonTheSourcerer.png" width="110">](https://github.com/SimonTheSourcerer) | 
+:---: | :---: |
+[Aleksei Korolev](mailto:aleksei.korolev@innoactive.de) | [Simon L](mailto:simon.lerch@innoactive.de)
+
+Maintainers are resonsibles for this repository and its community.
 
 ## Coding Conventions
 
@@ -157,3 +169,8 @@ Refs #133
 ```
 
 > See more [Conventional Commits Examples](https://www.conventionalcommits.org/en/v1.0.0/#examples)
+
+## Contributors
+
+Thank you all for your help, we appreciate all your [contributions](https://github.com/Innoactive/Creator/graphs/contributors).
+
