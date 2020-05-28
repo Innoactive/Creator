@@ -110,7 +110,7 @@ stages:
       - task: PublishTestResults@2
         inputs:
             testResultsFormat: "NUnit"
-                  testResultsFiles: "TEST-*.xml"
+            testResultsFiles: "TEST-*.xml"
 
       - task: PowerShell@2
         displayName: Export Unity package
