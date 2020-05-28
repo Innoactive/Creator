@@ -2,9 +2,9 @@
 
 This guide explains how to set up a demo project which displays strengths and features of the Innoactive Creator. After finishing this guide, you could read the [designer's guide](designer.md) to learn how to use the Innoactive Creator in a professional capacity.
 
-## Innoactive Creator Examples
+## Innoactive Creator Package
 
-The `Innoactive Creator Examples` is a Unity project of a complete training application built with the `Innoactive Base Template`. It contains [multiple examples](../miscellaneous/example-descriptions.md) which highlight different features of the Tranining Creator.
+The `Innoactive Creator` package is a Unity project of a complete training application built with the `Innoactive Base Template`. It contains [multiple examples](../miscellaneous/example-descriptions.md) which highlight different features of the Innoactive Creator.
 
 ## Instructions
 
@@ -33,7 +33,7 @@ You can do this in `Windows Settings` > `Time & Language` > `Language`.
 
 ### Import the Examples
 
-Download the `Innoactive Creator` package at the [Innoactive Developer Portal](http://developers.innoactive.de/components/#training-module). Scroll down to the `Innoactive Creator` section, click `Download` button for the latest version and pick the `Innoactive-Creator-vX.Y.Z-Unity-XR.unitypackage`.
+Download the `Innoactive Creator` package at the [Innoactive Developer Portal](http://developers.innoactive.de/creator/releases/). Scroll down to the `Innoactive Creator` section, click `Download` button for the latest version and pick the `Innoactive-Creator-vX.Y.Z-Unity-XR.unitypackage`.
 
 Locate the downloaded `.unitypackage` with a file explorer and drag and drop it into the `Project` tab in the Unity Editor. The `Import Unity Package` window will pop up; click `All` and then `Import`.
 
@@ -47,17 +47,7 @@ The project contains multiple example scenes which you can find in the `Assets/I
 
 ### Connect a VR Headset
 
-Connect a VR headset to your computer.
-
-If you use a Oculus headset, go to `Unity > Edit > Project Settings... > XR Plug-in Management`. Press `Install XR Plug-in Management`. Let Unity import assets and click `Install Oculus XR Plugin`.
-
-If you use Windows Mixed Reality, go to `Unity > Edit > Project Settings... > XR Plug-in Management`. Press `Install XR Plug-in Management`. Let Unity import assets and click `Install Windows XR Plugin`.
-
-![XR Plugin Management](../images/xr-plugin-management.png "XR Plug-in Management settings window")
-
-If you use an HTC Vive, Valve Index, or similar headsets, then there is no SteamVR/OpenVR XR Plugin yet. Unity Technologies works on it and will release it soon. For now, go to `Unity > Edit > Project Settings... > Player > XR Settings > Deprecated Settings`. Toggle `Enable Virtual Reality Supported`. Let Unity import assets. Click on the `+` button under the `Virtual Reality SDKs` and add `OpenVR` to the list.
-
-![XR Deprecated Settings](../images/xr-deprecated.png "XR Settings window (deprecated)")
+Connect a VR headset to your computer and make sure you installed the correct SDK according to our [prerequisites](../miscellaneous/prerequisites.md).
 
 ### Launch the Training Application
 
