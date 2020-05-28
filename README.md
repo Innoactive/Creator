@@ -12,7 +12,7 @@ As a developer, you might want to [submodule](https://git-scm.com/book/en/v2/Git
 
 *You are here.*
 
-Every project in this lists depends on the Creator Core. It contains fundamental definitions, generally applicable logic, and the visual editor.
+Every project in this list depends on the Creator Core. It contains fundamental definitions, generally applicable logic, and the visual editor.
 
 ```
 git submodule add git@github.com:Innoactive/Creator.git Innoactive/Creator
@@ -50,6 +50,10 @@ This component uses text-to-speech engines so designers could generate audio ins
 git submodule add git@github.com:Innoactive/TextToSpeech-Component.git Innoactive/TextToSpeech-Component
 ```
 
+### [Base Template](https://github.com/Innoactive/IA-Training-Template)
+
+This template makes an initial setup of the Creator, and serves both as example and as a starting point for creating new templates. Every VR training application project includes one template.
+
 ## [Examples](https://github.com/Innoactive/XR-Creator-Examples)
 
 This repository includes everything above, a configured template, and examples for training designers. Execute this command inside the `Assets` folder of an empty Unity project:
@@ -68,7 +72,7 @@ See our [contributor's guide](.github/CONTRIBUTING.md).
 
 ## Maintainers
 
-You can find contacts of current maintainers in the [MAINTAINERS](.github/CONTRIBUTING.md#maintainers) section.
+You can find contacts of current maintainers in the [Maintainers](.github/CONTRIBUTING.md#maintainers) section of our contributing guidelines.
 
 ## License
 
@@ -78,4 +82,4 @@ This repository is licensed under the Apache License, Version 2.0. See the [LICE
 
 We have referenced every 3rd party work we use in this repository in the [NOTICE](NOTICE) file.
 
-We list all contributors to this repository in the [CONTRIBUTORS](.github/CONTRIBUTING.md#contributors) section.
+We list all contributors to this repository in the [Contributors](.github/CONTRIBUTING.md#contributors) section of our contributing guidelines.
