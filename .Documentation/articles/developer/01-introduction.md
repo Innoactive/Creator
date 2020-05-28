@@ -16,4 +16,6 @@ Tasks, processes, and use cases vary between companies, and the difference is ev
 
 You could create a template from scratch, or you could use the Innoactive's default template as a starting point.
 
+Naturally, you would want to reuse behaviors and conditions between templates, just like training designers would reuse a single template to create multiple training applications. A component is a package of such behaviors and conditions. A template could include any number of components. We provide our own components through our [Developer Resources](http://developers.innoactive.de/creator/releases) website and through our repositories on [GitHub](https://github.com/Innoactive).
+
 [To the next chapter!](02-using-innoactive-creator.md)
