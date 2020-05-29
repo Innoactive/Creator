@@ -56,10 +56,10 @@ This template makes an initial setup of the Creator, and serves both as example 
 
 ## [Examples](https://github.com/Innoactive/XR-Creator-Examples)
 
-This repository includes everything above, a configured template, and examples for training designers. Execute this command inside the `Assets` folder of an empty Unity project:
+This repository includes everything above, a configured template, and examples for training designers. Execute this command inside the folder you want to have the Unity project:
 
 ```
-git clone --recurse-submodules -j8 git@github.com:Innoactive/XR-Creator-Examples.git Innoactive/Examples
+git clone --recurse-submodules -j8 git@github.com:Innoactive/XR-Creator-Examples.git
 ```
 
 ## Documentation
