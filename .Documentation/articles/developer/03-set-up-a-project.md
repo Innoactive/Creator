@@ -5,8 +5,8 @@ Before you could start working on your custom template, you have to set up a new
 1. [Check your OS](#check-your-os)
 1. [Download Unity](#download-unity)
 1. [Create a new template project](#create-a-new-template-project)
-1. [Import dependencies](#import-dependencies)
 1. [Import the Innoactive Creator](#import-the-innoactive-creator)
+1. [Import dependencies](#import-dependencies)
 1. [Check your setup](#check-your-setup)
 
 ## Check Your OS
@@ -15,11 +15,11 @@ The Innoactive Creator supports only Windows 10. We use Microsoft Text-to-Speech
 
 ## Download Unity
 
-Now install Unity 2018.4.
+Now install Unity 2019.3.
 
-You can get it with the [Unity Hub](https://docs.unity3d.com/Manual/GettingStartedUnityHub.html), a standalone application that manages your Unity projects and editors' installations. Follow the [guide](https://docs.unity3d.com/Manual/GettingStartedInstallingHub.html) to install both the Unity Hub and the Unity Editor 2018.4.
+You can get it with the [Unity Hub](https://docs.unity3d.com/Manual/GettingStartedUnityHub.html), a standalone application that manages your Unity projects and editors' installations. Follow the [guide](https://docs.unity3d.com/Manual/GettingStartedInstallingHub.html) to install both the Unity Hub and the Unity Editor 2019.3.
 
-Alternatively, you can download Unity 2018.4 from the [LTS Releases page](https://unity3d.com/unity/qa/lts-releases?version=2018.4).
+Alternatively, you can download Unity 2019.3 from the [Releases page](https://unity.com/releases/2019-3).
 
 Either way, you will have to login into your Unity account or create a new one. You will need an appropriate Unity [license](https://store.unity.com/).
 
@@ -41,33 +41,36 @@ The Unity Hub will add the new project to the `Projects` section. You can always
 
 Now, open your project in the Unity Editor and proceed to the next section.
 
-## Import Dependencies
-
-The Innoactive Creator uses VRTK 3.3.0 for VR interactions. Depending on which VR headsets you use, you need to import appopriate SDKs. Use download links from the VRTK [documentation](https://vrtoolkit.readme.io/v3.3.0/docs/summary).
-
-Once you have got a required package, import it into your project. To do so, select `Assets > Import Package > Custom Package...` in the Unity Editor's menu bar.
-
-![Import Unity Package](../images/import-unity-package.png "How to import a custom package.")
-
-The file explorer window will appear. Locate the package you want to import. Once you select it, an `Import Unity Package` dialog will appear. Select `All` and then `Import`.
-
-![Import Unity Package dialog](../images/developer/steamvr-import.png "Import Unity Package dialog.")
-
-Some VR headsets require additional software. For example, if you use SteamVR SDK, you would need to install SteamVR itself, too. Refer to the headset's manufacturer instructions.
-
 ## Import the Innoactive Creator
 
-You can find the `Innoactive Creator` unity package at our [Developer's Portal](http://developers.innoactive.de/components/#training-module). Find the latest release in the `Innoactive Creator` section, click `Download`, and select the `innoactive-creator-vX.Y.Z.unitypackage` file, where the `vX.Y.Z` is the latest version. Import it in the same way as we have described in the previous [section](#import-dependencies).
+You can find the `Innoactive Creator` core and its components at our [Developer Resources](http://developers.innoactive.de/creator/releases/). You need the following packages:
 
-![Innoactive Creators](../images/training-modules.png "Innoactive Creator section.")
+1. Creator Core
+1. Text-To-Speech Component
+1. Basic Conditions and Behaviors Component
+1. Basic Interaction Component
+1. Unity XR Interaction component
 
-## Check Your Setup
+Alternatively, you can set up a Git repository for your project and submodule these packages. Go to the `Assets` folder and open Git BASH there. Run the following command to initialize the repository:
 
-Follow this checklist to make sure that everything is set as required:
+```
+git init
+```
 
-1. You use Windows 10;
-1. You use Unity of version 2018.4;
-1. You have your VR headset's SDK inside the `Assets` folder of the project. Its version is compatible with the VRTK v3.3.0.
-1. You have the `Assets\Extensions\Innoactive\Creator` folder inside your project.
+To submodule the packages, run the following commands:
+
+```
+git submodule add git@github.com:Innoactive/Creator.git Innoactive/Creator
+git submodule add git@github.com:Innoactive/TextToSpeech-Component.git Innoactive/TextToSpeech-Component
+git submodule add git@github.com:Innoactive/Basic-Conditions-And-Behaviors.git Innoactive/Basic-Conditions-And-Behaviors-Component
+git submodule add git@github.com:Innoactive/Basic-Interaction-Component.git Innoactive/Basic-Interaction
+git submodule add git@github.com:Innoactive/XR-Interaction-Component.git Innoactive/XR-Interaction-Component
+```
+
+## Import Dependencies
+
+The Innoactive Creator uses Unity XR for VR interactions. Depending on which VR headsets you use, you need to import appopriate SDKs. See instructions in our [Unity XR FAQ](../transition-to-v2.0/03-unity-xr-faq.md).
+
+Some VR headsets require additional software. For example, if you use SteamVR SDK, you would need to install SteamVR itself, too. Refer to the headset's manufacturer instructions.
 
 [To the next chapter!](04-general-concepts.md)

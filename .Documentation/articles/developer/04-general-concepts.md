@@ -97,13 +97,11 @@ The diagram below summarizes this section.
 
 ## Stage Processes
 
-An entity's process consists of four independent stage processes: one per stage, where the process for the Inactive stage is  empty. Together, they define the logic of the entity. For example, if you have a behavior that moves an object around the scene, a stage process will change the position of that object. If you have a condition, a stage process will check for its requirements every frame.
-
-Each stage process implements four methods: `Start()`, `Update()`, `Fast-Forward()`, and `End()`. All of them take the instance of the entity's data as an input parameter.
+When an entity enters a new stage it starts an associated stage process. Stage processes carry out various tasks and may take longer than one frame to complete. Together, they define the logic of the entity. For example, if you have a behavior that moves an object around the scene, a stage process will change the position of that object. If you have a condition, a stage process will check for its requirements every frame.
 
 Often, one or two stage processes of an entity are empty: they do not contain any logic and complete immediately. The stage process for Inactive stage is always empty.
 
-Every time an entity enters a new stage, its life cycle starts to invoke the stage process's methods, as we will describe below.
+Each stage process implements four methods: `Start()`, `Update()`, `Fast-Forward()`, and `End()`. Every time an entity enters a new stage, its life cycle starts to invoke the stage process's methods, as we will describe below.
 
 #### Start()
 
