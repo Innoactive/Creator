@@ -6,7 +6,7 @@ This tutorial is intended for developers who already know C# and scripting in Un
 
 ## Learning C\#
 
-Microsoft's documentation on C# is remarkably good. Read "Learn to program in C#" and "C# fundamentals" sections first, and then continue with articles about generics and iterators. It will take from one to two days.
+Microsoft's documentation on C# is remarkably good. Read "Learn to program in C#" and "C# fundamentals" sections first, and then continue with articles about generics and iterators. It could take a day or two.
 
 1. [C# Documentation](https://docs.microsoft.com/en-us/dotnet/csharp/)
 1. [Generics](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/)
