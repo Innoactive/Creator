@@ -60,11 +60,11 @@ git init
 To submodule the packages, run the following commands:
 
 ```
-git submodule add git@github.com:Innoactive/Creator.git Innoactive/Creator
-git submodule add git@github.com:Innoactive/TextToSpeech-Component.git Innoactive/TextToSpeech-Component
-git submodule add git@github.com:Innoactive/Basic-Conditions-And-Behaviors.git Innoactive/Basic-Conditions-And-Behaviors-Component
-git submodule add git@github.com:Innoactive/Basic-Interaction-Component.git Innoactive/Basic-Interaction
-git submodule add git@github.com:Innoactive/XR-Interaction-Component.git Innoactive/XR-Interaction-Component
+git submodule add git@github.com:Innoactive/Creator.git Innoactive/Creator/Core
+git submodule add git@github.com:Innoactive/TextToSpeech-Component.git Innoactive/Creator/Components/TextToSpeech-Component
+git submodule add git@github.com:Innoactive/Basic-Conditions-And-Behaviors.git Innoactive/Creator/Components/Basic-Conditions-And-Behaviors-Component
+git submodule add git@github.com:Innoactive/Basic-Interaction-Component.git Innoactive/Creator/Components/Basic-Interaction
+git submodule add git@github.com:Innoactive/XR-Interaction-Component.git Innoactive/Creator/Components/XR-Interaction-Component
 ```
 
 ## Import Dependencies
