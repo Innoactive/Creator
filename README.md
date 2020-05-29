@@ -15,7 +15,7 @@ As a developer, you might want to [submodule](https://git-scm.com/book/en/v2/Git
 Every project in this list depends on the Creator Core. It contains fundamental definitions, generally applicable logic, and the visual editor.
 
 ```
-git submodule add git@github.com:Innoactive/Creator.git Innoactive/Creator
+git submodule add git@github.com:Innoactive/Creator.git Innoactive/Creator/Core
 ```
 
 ### [Basic Conditions and Behaviors Component](https://github.com/Innoactive/Basic-Conditions-And-Behaviors)
@@ -23,7 +23,7 @@ git submodule add git@github.com:Innoactive/Creator.git Innoactive/Creator
 This component contains very simple conditions and behaviors that involve no interaction with trainees. For example, a condition on a timer, or a behavior that moves its target object. 
 
 ```
-git submodule add git@github.com:Innoactive/Basic-Conditions-And-Behaviors.git Innoactive/Basic-Conditions-And-Behaviors-Component
+git submodule add git@github.com:Innoactive/Basic-Conditions-And-Behaviors.git Innoactive/Creator/Components/Basic-Conditions-And-Behaviors-Component
 ```
 
 ### [Basic Interaction Component](https://github.com/Innoactive/Basic-Interaction-Component)
@@ -31,7 +31,7 @@ git submodule add git@github.com:Innoactive/Basic-Conditions-And-Behaviors.git I
 This component is an abstraction layer between the Creator Core and a component that would implement user interactions.
 
 ```
-git submodule add git@github.com:Innoactive/Basic-Interaction-Component.git Innoactive/Basic-Interaction 
+git submodule add git@github.com:Innoactive/Basic-Interaction-Component.git Innoactive/Creator/Components/Basic-Interaction 
 ```
 
 ### [Unity XR Interaction Component](https://github.com/Innoactive/XR-Interaction-Component)
@@ -39,7 +39,7 @@ git submodule add git@github.com:Innoactive/Basic-Interaction-Component.git Inno
 This component implements user interactions in VR by using the Unity XR framework. Include the Basic Interaction component along this repository to your project to let designers create training applications for VR.
 
 ```
-git submodule add git@github.com:Innoactive/XR-Interaction-Component.git Innoactive/XR-Interaction-Component
+git submodule add git@github.com:Innoactive/XR-Interaction-Component.git Innoactive/Creator/Components/XR-Interaction-Component
 ```
 
 ### [Text-To-Speech Component](https://github.com/Innoactive/TextToSpeech-Component)
@@ -47,7 +47,7 @@ git submodule add git@github.com:Innoactive/XR-Interaction-Component.git Innoact
 This component uses text-to-speech engines so designers could generate audio instructions for trainees.
 
 ```
-git submodule add git@github.com:Innoactive/TextToSpeech-Component.git Innoactive/TextToSpeech-Component
+git submodule add git@github.com:Innoactive/TextToSpeech-Component.git Innoactive/Creator/Components/TextToSpeech-Component
 ```
 
 ### [Base Template](https://github.com/Innoactive/IA-Training-Template)
