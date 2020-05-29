@@ -3,7 +3,7 @@
 The `Innoactive Creator` needs the following setup to work correctly:
 
 * One of the following officially supported **Unity** versions
-    * **Unity 2019.3** and up
+    * **Unity 2019.3** or later
 
     > We do not guarantee stability with other Unity versions and recommend using Unity 2019.3.
 
@@ -32,4 +32,4 @@ The `Innoactive Creator` needs the following setup to work correctly:
 * **Windows 10** (For **Microsoft Text to Speech (TTS)** service)
 * For every language that you want to use with `TTS`, install the appropriate `Windows 10 Language Package` (`Windows Settings` > `Time & Language` > `Language`).
 
-> Learn more about [TTS](setup-text-to-speech.md)
+Learn more about [TTS](setup-text-to-speech.md)
