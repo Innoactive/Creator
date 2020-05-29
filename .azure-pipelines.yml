@@ -120,7 +120,7 @@ stages:
             echo 'Exporting version $(Version)'
             ((Get-Content -path $(Path.ExportConfig)/$(ExportConfigName) -Raw) -replace '{version}','$(Version)') | Set-Content -Path $(Path.Project)/export-config.json
             u3d run -u $(UnityVersion) -- -logFile $(Build.ArtifactStagingDirectory)/logs/editor_export.log -batchmode -quit -executeMethod Innoactive.CreatorEditor.PackageExporter.Export --export-config export-config.json
-
+            Start-Sleep -s 5
 
       - task: PublishPipelineArtifact@1
         displayName: "Publish Unity Package"
