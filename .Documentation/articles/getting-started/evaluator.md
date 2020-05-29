@@ -43,11 +43,17 @@ If you never worked with the Unity Editor before, refer to [this page](https://d
 
 The project contains multiple example scenes which you can find in the `Assets/Innoactive/Examples/Scenes/Simple` and `Assets/Innoactive/Examples/Scenes/Advanced` subfolders. Open one of these folders in the `Project` view and double-click at a scene file to load it:
 
-![Open Scene](../images/open-scene.png "Project view in the Unity Editor")
+![Open Scene](../images/open-scene.png "Project view in the Unity Editor.")
 
 ### Connect a VR Headset
 
 Connect a VR headset to your computer and make sure you installed the correct SDK according to our [prerequisites](../miscellaneous/prerequisites.md).
+
+Take a look at the `[COURSE_CONTROLLER]` scene object. You will notice that `Course Mode` is set to `Default`. This prefab provides a trainer with real time controls for the training execution on the monitor. With it, a trainer is able to see the current training status, start, reset, and mute the training, pick a chapter and skip a step, choose a language and the training mode to use.
+
+If you set it to `Standalone`, this prefab provides the trainee with real time controls for the training execution in VR. This is convenient if you want to use a standalone VR headset like the Oculus Quest.
+
+![Course Controller](../images/course-controller.png "Inspector view of the Course Controller.")
 
 ### Launch the Training Application
 
