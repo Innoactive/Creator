@@ -49,7 +49,7 @@ The project contains multiple example scenes which you can find in the `Assets/I
 
 Connect a VR headset to your computer and make sure you installed the correct SDK according to our [prerequisites](../miscellaneous/prerequisites.md).
 
-If you open an advanced example, take a look at the `[COURSE_CONTROLLER]` scene object. You will notice that `Course Mode` is set to `Default`. This prefab provides a trainer with real time controls for the training execution on the monitor. With it, a trainer is able to see the current training status, start, reset, and mute the training, pick a chapter and skip a step, choose a language and the training mode to use.
+If you have opened an advanced example, take a look at the `[COURSE_CONTROLLER]` scene object. You will notice that `Course Mode` is set to `Default`. This prefab provides a trainer with real time controls for the training execution on the monitor. With it, a trainer is able to see the current training status, start, reset, and mute the training, pick a chapter and skip a step, choose a language and the training mode to use.
 
 If you set it to `Standalone`, this prefab provides the trainee with real time controls for the training execution in VR. This is convenient if you want to use a standalone VR headset like the Oculus Quest.
 
