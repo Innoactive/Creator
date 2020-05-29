@@ -2,9 +2,9 @@
 
 This guide explains how to set up a demo project which displays strengths and features of the Innoactive Creator. After finishing this guide, you could read the [designer's guide](designer.md) to learn how to use the Innoactive Creator in a professional capacity.
 
-## Innoactive Creator Examples
+## Innoactive Creator Package
 
-The `Innoactive Creator Examples` is a Unity project of a complete training application built with the `Innoactive Training Template`. It contains [multiple examples](../miscellaneous/example-descriptions.md) which highlight different features of the Tranining Creator.
+The `Innoactive Creator` package is a Unity project of a complete training application built with the `Innoactive Base Template`. It contains [multiple examples](../miscellaneous/example-descriptions.md) which highlight different features of the Innoactive Creator.
 
 ## Instructions
 
@@ -33,7 +33,7 @@ You can do this in `Windows Settings` > `Time & Language` > `Language`.
 
 ### Import the Examples
 
-Download the `Innoactive Creator Examples` package at the [Innoactive Developer Portal](http://developers.innoactive.de/components/#training-module). Scroll down to the `Innoactive Creator` section, click `Download` button for the latest version and pick the `innoactive-creator-examples-vX.Y.Z.unitypackage`.
+Download the `Innoactive Creator` package at the [Innoactive Developer Portal](http://developers.innoactive.de/creator/releases/). Scroll down to the `Innoactive Creator` section, click `Download` button for the latest version and pick the `Innoactive-Creator-vX.Y.Z-Unity-XR.unitypackage`.
 
 Locate the downloaded `.unitypackage` with a file explorer and drag and drop it into the `Project` tab in the Unity Editor. The `Import Unity Package` window will pop up; click `All` and then `Import`.
 
@@ -41,9 +41,19 @@ If you never worked with the Unity Editor before, refer to [this page](https://d
 
 ### Open a Scene
 
-The project contains multiple example scenes which you can find in the `Assets/Examples/Simple` and `Assets/Examples/Advanced` subfolders. Open one of these folders in the `Project` view and double-click at a scene file to load it:
+The project contains multiple example scenes which you can find in the `Assets/Innoactive/Examples/Scenes/Simple` and `Assets/Innoactive/Examples/Scenes/Advanced` subfolders. Open one of these folders in the `Project` view and double-click at a scene file to load it:
 
-![Open Scene](../images/open-scene.png "Project view in the Unity Editor")
+![Open Scene](../images/open-scene.png "Project view in the Unity Editor.")
+
+### Connect a VR Headset
+
+Connect a VR headset to your computer and make sure you installed the correct SDK according to our [prerequisites](../miscellaneous/prerequisites.md).
+
+If you have opened an advanced example, take a look at the `[COURSE_CONTROLLER]` scene object. You will notice that `Course Mode` is set to `Default`. This prefab provides a trainer with real time controls for the training execution on the monitor. With it, a trainer is able to see the current training status, start, reset, and mute the training, pick a chapter and skip a step, choose a language and the training mode to use.
+
+If you set it to `Standalone`, this prefab provides the trainee with real time controls for the training execution in VR. This is convenient if you want to use a standalone VR headset like the Oculus Quest.
+
+![Course Controller](../images/course-controller.png "Inspector view of the Course Controller.")
 
 ### Launch the Training Application
 
@@ -52,8 +62,6 @@ You can simply run the current scene inside the Unity Editor instead of building
 ![Play Button](../images/play-button.png "A screenshot of Unity Editor with a highlighted \"Play\" button.")
 
 To stop it, simply click the same button again.
-
-Connect a VR headset to your computer for the best experience; otherwise, the VRTK simulator will activate. It will lock the mouse cursor, and you would need to press `F4` to interact with the application's interface. Find the rest of VRTK Simulator controls [here](../miscellaneous/vrtk-keymap.md).
 
 All `Advanced` scenes use a custom trainer's overlay and wait for you to click at `Start Training` button before executing the training course:
 
