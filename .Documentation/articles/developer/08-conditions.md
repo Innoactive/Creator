@@ -21,11 +21,11 @@ There is a default condition that checks if an object is inside an area. We need
 Just like in the chapter about [behaviors](05-behaviors.md), create a new `UpsideDownConditionData.cs` file in the `Assets` folder and fill it with the following:
 
 ```csharp
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Attributes;
-using Innoactive.Hub.Training.Conditions;
-using Innoactive.Hub.Training.SceneObjects;
 using System.Runtime.Serialization;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.Conditions;
+using Innoactive.Creator.Core.SceneObjects;
 
 [DataContract(IsReference = true)]
 [DisplayName("Is Object Upside Down?")]
@@ -60,11 +60,7 @@ Also, we have introduced a constructor. You can initialize some of the propertie
 
 ### Stage Process
 
-Steps check for conditions in the Active stage. You need to implement only the Active stage process.
-
-You have to reset the `IsCompleted` property at the start of the stage process. Otherwise, workflows with loops will fail.
-
-Check if the target is upside down in the `Update()` method. Depending on the result, either set `IsCompleted` to true and stop iterating, or wait for a next frame.
+Steps check for conditions in the Active stage. You need to implement only the Active stage process. It will check if the target is upside down in the `Update()` method. Depending on the result, it will either set `IsCompleted` to true and stop iterating, or wait for the next frame.
 
 We will explain fast-forwarding of conditions in detail in the [next subsection](#fast-forwarding-and-automatic-completion).
 
@@ -72,23 +68,21 @@ Create a new `UpsideDownConditionActiveProcess.cs` file in the `Assets` folder a
 
 ```csharp
 using System.Collections;
-using Innoactive.Hub.Training;
+using Innoactive.Creator.Core;
 using UnityEngine;
 
-public class UpsideDownConditionActiveProcess : IStageProcess<UpsideDownConditionData>
+public class UpsideDownConditionActiveProcess : Process<UpsideDownConditionData>
 {
-    // Always reset the flag at the start of the process.
-    public void Start(UpsideDownConditionData data)
+    public override void Start()
     {
-        data.IsCompleted = false;
     }
 
-    public IEnumerator Update(UpsideDownConditionData data)
+    public override IEnumerator Update()
     {
         // Get the difference between vector pointing down,
         // And the vector that comes out of the "roof" of the target.
         // Then compare it with threshold from data.
-        while (Vector3.Angle(Vector3.down, data.Target.Value.GameObject.transform.up) > data.Threshold)
+        while (Vector3.Angle(Vector3.down, Data.Target.Value.GameObject.transform.up) > Data.Threshold)
         {
             //If the angle is more than threshold, wait for the next frame.
             yield return null;
@@ -98,14 +92,18 @@ public class UpsideDownConditionActiveProcess : IStageProcess<UpsideDownConditio
         data.IsCompleted = true;
     }
 
-    // Do not reset the flag at the end of the process.
-    public void End(UpsideDownConditionData data)
+    public override void End()
     {
     }
 
     // Nothing to fast-forward.
     // We will explain it soon.
-    public void FastForward(UpsideDownConditionData data)
+    public override void FastForward()
+    {
+    }
+
+    // Declare the constructor. It calls the base method to bind the data object with the process.
+    public UpsideDownConditionActiveProcess(UpsideDownConditionData data) : base(data)
     {
     }
 }
@@ -113,34 +111,26 @@ public class UpsideDownConditionActiveProcess : IStageProcess<UpsideDownConditio
 
 ### Fast-Forwarding and Automatic Completion
 
-As we have mentioned, the Innoactive Creator's fast-forwarding system does not skip anything. Instead, it fakes the natural execution in a single frame.
+As we have mentioned, the Innoactive Creator's fast-forwarding system does not skip anything. Instead, it fakes the natural execution in a single frame. It is straightforward with behaviors: they always execute in the same way. With conditions, it is more complex.
 
-With behaviors, it is straightforward: they always execute in the same way. With conditions, it is more complex. Consider a step with two transitions. During an actual training, a trainee would either complete one set of conditions, or the other one. Since all conditions were active, they all have to deactivate; but only some of them are complete.
-
-If we want to fake a natural execution, we should do the same: simulate circumstances in which certain conditions would complete, but fast-forward and deactivate all conditions.
+Consider a step with two transitions. During an actual training, a trainee would either complete one set of conditions, or the other one. Since all conditions were active, they all have to deactivate, but only some of them were completed. If we want to fake a natural execution, we should do the same: simulate circumstances in which certain conditions would complete, but fast-forward and deactivate all conditions.
 
 For example, if we have a step where a trainee has to put a ball either into a left or a right basket, we would fast-forward both conditions, but our code would move the ball only into one of the baskets.
 
-The Innoactive Creator always calls the `FastForward()` method. In majority of cases, you will leave this method empty for conditions. This is normal.
-
-To complete a condition in an artificial way, you have to create an autocompleter. It has only one method in which you have to set the `IsCompleted` flag and simulate the circumstances of the completion.
-
-Its class must inherit from `Innoactive.Hub.Training.IAutocompleter<UpsideDownConditionData>`.
+The Innoactive Creator always calls the `FastForward()` method. In majority of cases, you will leave this method empty for conditions. This is normal. To complete a condition in an artificial way, you have to create an autocompleter. It has only one method in which you have to set the `IsCompleted` flag and simulate the circumstances of the completion. Its class must inherit from `Innoactive.Hub.Training.IAutocompleter<UpsideDownConditionData>`.
 
 Create a new `UpsideDownConditionAutocompleter.cs` file within the `Assets` folder and copy the following:
 
 ```csharp
-using Innoactive.Hub.Training;
 using UnityEngine;
+using Innoactive.Creator.Core;
 
-public class UpsideDownConditionAutocompleter : IAutocompleter<UpsideDownConditionData>
+public class UpsideDownConditionAutocompleter : Autocompleter<UpsideDownConditionData>
 {
-    public void Complete(UpsideDownConditionData data)
+    public void Complete()
     {
         // Turn the target upside down, as it would normally happen.
-        data.Target.Value.GameObject.transform.rotation = Quaternion.Euler(0, 0, 180f);
-        // Mark the condition as complete.
-        data.IsCompleted = true;
+        Data.Target.Value.GameObject.transform.rotation = Quaternion.Euler(0, 0, 180f);
     }
 }
 ```
@@ -151,43 +141,27 @@ The code of the condition is very similar to the code of the behavior.
 
 ```csharp
 using System.Runtime.Serialization;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Conditions;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Conditions;
 
 [DataContract(IsReference = true)]
 public class UpsideDownCondition : Condition<UpsideDownConditionData>
 {
-    // ActiveOnlyProcess is a shortcut for a normal process
-    // where Activating and Deactivating stages are set to empty.
-    private readonly IProcess<UpsideDownConditionData> process = new ActiveOnlyProcess<UpsideDownConditionData>
-    (
-        active: new UpsideDownConditionActiveProcess()
-    );
-
-    protected override IProcess<UpsideDownConditionData> Process
+    public override IProcess GetActiveProcess()
     {
-        get
-        {
-            return process;
-        }
+        // Always return a new instance.
+        return new UpsideDownConditionActiveProcess(Data);
     }
 
-    private readonly IAutocompleter<UpsideDownConditionData> autocompleter = new UpsideDownConditionAutocompleter();
-
-    protected override IAutocompleter<UpsideDownConditionData> Autocompleter 
+    protected override IAutocompleter GetAutocompleter()
     {
-        get
-        {
-            return autocompleter;
-        }
+        // Always return a new instance.
+        return new UpsideDownConditionAutocompleter(Data);
     }
 
     public UpsideDownCondition()
     {
-        Data = new UpsideDownConditionData()
-        {
-            Name = "Upside Down",
-        };
+        Data.Name = "Upside Down";
     }
 }
 ```
