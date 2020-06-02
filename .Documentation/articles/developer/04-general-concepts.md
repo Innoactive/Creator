@@ -57,12 +57,6 @@ All entities use the same life cycle class with the same universal rules. We cou
 
 The rest of this section explains these rules.
 
-### Stage Processes
-
-When an entity enters a new stage it starts an associated stage process. Stage processes carry out various tasks and may take longer than one frame to complete.
-
-This information is sufficient for the rest of this chapter's section. The [section about processes](#process) will describe in detail how a life cycle can affect a stage process.
-
 ### Switching between Stages
 
 In essense, the Activating and Deactivating stages rely on the status of their processes, and Inactive and Active stages wait for you to call the respective public methods. 
@@ -101,19 +95,13 @@ The diagram below summarizes this section.
 
 [![Life cycle of an entity](../images/developer/life-cycle.png)](../images/developer/life-cycle.png "A diagram that describes an entity's life cycle and its expected behavior.")
 
-## Process
+## Stage Processes
 
-The process is a container for stage processes. Together, they define the logic of the entity. For example, if you have a behavior that moves an object around the scene, a stage process will change the position of that object. If you have a condition, a stage process will check for its requirements every frame.
+When an entity enters a new stage it starts an associated stage process. Stage processes carry out various tasks and may take longer than one frame to complete. Together, they define the logic of the entity. For example, if you have a behavior that moves an object around the scene, a stage process will change the position of that object. If you have a condition, a stage process will check for its requirements every frame.
 
 Often, one or two stage processes of an entity are empty: they do not contain any logic and complete immediately. The stage process for Inactive stage is always empty.
 
-### Stage Process
-
-An entity's process consists of four independent stage processes: one per stage, where the process for the Inactive stage is  empty. 
-
-Each stage process implements four methods: `Start()`, `Update()`, `Fast-Forward()`, and `End()`. All of them take the instance of the entity's data as an input parameter.
-
-Every time an entity enters a new stage, its life cycle starts to invoke the stage process's methods, as we will describe below.
+Each stage process implements four methods: `Start()`, `Update()`, `Fast-Forward()`, and `End()`. Every time an entity enters a new stage, its life cycle starts to invoke the stage process's methods, as we will describe below.
 
 #### Start()
 

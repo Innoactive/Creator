@@ -6,30 +6,30 @@ We have created a fully functional behavior in the previous chapter, but we stil
 
 ## Implementation for Behaviors
 
-A menu item is an instance of a class that inherits from `Menu.Item` in the `Innoactive.Hub.Training.Editors.Configuration` namespace. A menu item class is an Editor script, so you must create a file for it under the [Editor](https://docs.unity3d.com/Manual/SpecialFolders.html) subfolder of the `Assets` folder. 
+A menu item is an instance of a class that inherits from `MenuItem` inside the `Innoactive.CreatorEditor.UI.StepInspector.Menu` namespace. A menu item class is an Editor script, so you must create a file for it under the [Editor](https://docs.unity3d.com/Manual/SpecialFolders.html) subfolder of the `Assets` folder. 
 
-The `Menu.Item` class is generic. Use `IBehavior` as the generic parameter. Once the class compiles, the Step Inspector will find it on its own.
+The `MenuItem` class is generic. Use `IBehavior` as the generic parameter. Once the class compiles, the Step Inspector will find it on its own.
 
 The base class declares one property and one method that you have to implement. 
 
-The Step Inspector uses the `DisplayedName` property as a label. This property must return a `GUIContent` object with filled `Text`. If you use forward slashes ("`/`") in `Text`, it will split the label into submenus.
+The Step Inspector uses the `DisplayedName` property as a label. This property returns a `string`. If you use forward slashes ("`/`") in it, the Step Inspector will split it into submenus.
 
 When a user selects one of the items, the Step Inspector calls the `GetNewItem()` method and adds the result to the list of entities.
 
 Call the new file `ScalingBehaviorMenuItem.cs` and copy the following:
 
 ```csharp
-using Innoactive.Hub.Training.Behaviors;
-using Innoactive.Hub.Training.Editors.Configuration;
-using UnityEngine;
+using Innoactive.Creator.Core.Behaviors;
+using Innoactive.Creator.BasicTemplate.Behaviors;
+using Innoactive.CreatorEditor.UI.StepInspector.Menu;
 
-public class ScalingBehaviorMenuItem : Menu.Item<IBehavior>
+public class ScalingBehaviorMenuItem : MenuItem<IBehavior>
 {
-    public override GUIContent DisplayedName 
+    public override string DisplayedName 
     {
         get 
         { 
-            return new GUIContent("Scale Object"); 
+            return "Example Behaviors/Scale Object"; 
         } 
     }
 
@@ -48,9 +48,7 @@ You can create multiple menu items for a single behavior. If you modify the beha
 
 ## Implementation for Conditions
 
-If you want to create a menu item for a condition, you need to change the generic parameter of the class and the return type of the `GetNewItem()` method to `ICondition` type.
-
-Other than that, menu items for conditions work in the exact same way.
+If you want to create a menu item for a condition, you need to change the generic parameter of the class and the return type of the `GetNewItem()` method to `ICondition` type. Other than that, menu items for conditions work in the exact same way.
 
 Create a course with your behavior before you continue.
 
