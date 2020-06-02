@@ -86,8 +86,8 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         {
             PropertyInfo metadataProperty = ownerObject.GetType().GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(property => typeof(Metadata).IsAssignableFrom(property.PropertyType));
             FieldInfo metadataField = ownerObject.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(field => typeof(Metadata).IsAssignableFrom(field.FieldType));
-
             Metadata ownerObjectMetadata = null;
+
             if (metadataProperty != null)
             {
                 ownerObjectMetadata = (Metadata)metadataProperty.GetValue(ownerObject, null) ?? new Metadata();
@@ -98,7 +98,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             }
             else
             {
-                throw new MissingFieldException(string.Format("No metadata property on object {0}.", ownerObject));
+                throw new MissingFieldException($"No metadata property on object {ownerObject}.");
             }
 
             object memberValue = ReflectionUtils.GetValueFromPropertyOrField(ownerObject, drawnMemberInfo);

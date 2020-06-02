@@ -201,6 +201,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             Type drawerType = allDrawers.Keys.FirstOrDefault(key =>
             {
                 string[] splittedKey = key.FullName.Split('.').Reverse().ToArray();
+
                 if (splittedName.Length > splittedKey.Length)
                 {
                     return false;

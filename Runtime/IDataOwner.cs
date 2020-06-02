@@ -2,14 +2,26 @@ using System.Runtime.Serialization;
 
 namespace Innoactive.Creator.Core
 {
-    public interface IDataOwner<out TData> : IDataOwner
-    {
-        [DataMember]
-        new TData Data { get; }
-    }
-
+    /// <summary>
+    /// Abstract holder of data.
+    /// </summary>
     public interface IDataOwner
     {
+        /// <summary>
+        /// Abstract data.
+        /// </summary>
         IData Data { get; }
+    }
+
+    /// <summary>
+    /// Abstract holder of data.
+    /// </summary>
+    public interface IDataOwner<out TData> : IDataOwner
+    {
+        /// <summary>
+        /// Abstract data.
+        /// </summary>
+        [DataMember]
+        new TData Data { get; }
     }
 }

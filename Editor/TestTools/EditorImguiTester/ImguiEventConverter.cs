@@ -10,6 +10,7 @@ namespace Innoactive.CreatorEditor.TestTools
     /// </summary>
     internal class ImguiEventConverter : JsonConverter
     {
+        /// <inheritdoc />
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             Event imguiEvent = (Event)value;
@@ -44,6 +45,7 @@ namespace Innoactive.CreatorEditor.TestTools
             jObject.WriteTo(writer);
         }
 
+        /// <inheritdoc />
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null)
@@ -75,6 +77,7 @@ namespace Innoactive.CreatorEditor.TestTools
             };
         }
 
+        /// <inheritdoc />
         public override bool CanConvert(Type objectType)
         {
             return typeof(Event).IsAssignableFrom(objectType);

@@ -8,6 +8,6 @@ namespace Innoactive.CreatorEditor.TestTools
         Normal,
         Pending,
         Failed,
-        Passed,
+        Passed
     }
 }

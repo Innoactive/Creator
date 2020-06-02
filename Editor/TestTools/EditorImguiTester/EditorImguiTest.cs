@@ -17,7 +17,6 @@ namespace Innoactive.CreatorEditor.TestTools
     /// </summary>
     internal abstract class EditorImguiTest<T> : IEditorImguiTest where T : EditorWindow
     {
-
         private static JsonSerializerSettings JsonSerializerSettings
         {
             get

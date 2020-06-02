@@ -3,6 +3,9 @@ using UnityEditor;
 
 namespace Innoactive.CreatorEditor
 {
+    /// <summary>
+    /// Tracks when the project is going to be unloaded (when assemblies are unloaded, when user starts or stop runtime, when scripts were modified).
+    /// </summary>
     [InitializeOnLoad]
     internal static class AssemblyUnloadDetector
     {

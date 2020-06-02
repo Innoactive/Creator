@@ -14,10 +14,7 @@ namespace Innoactive.Creator.Core
         private IEnumerator update;
         private IProcess process;
 
-        private bool IsCurrentStageProcessFinished
-        {
-            get { return update == null; }
-        }
+        private bool IsCurrentStageProcessFinished => update == null;
 
         private readonly Dictionary<Stage, bool> fastForwardedStates = new Dictionary<Stage, bool>
         {

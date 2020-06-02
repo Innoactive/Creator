@@ -2,7 +2,6 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
-using Innoactive.CreatorEditor.ImguiTester;
 
 namespace Innoactive.CreatorEditor.TestTools
 {
@@ -11,9 +10,15 @@ namespace Innoactive.CreatorEditor.TestTools
     /// </summary>
     internal class EditorWindowTestPlayer : EditorWindow
     {
+        /// <summary>
+        /// Event args for event which is fired when <see cref="EditorWindowTestPlayer"/> finished playing a <see cref="IEditorImguiTest"/>.
+        /// </summary>
         public class FinishedEventArgs : EventArgs
         {
-            public EditorWindow Result { get; private set; }
+            /// <summary>
+            /// Reference to the <see cref="UI.Windows.CourseWindow"/> where the <see cref="IEditorImguiTest"/> was executed.
+            /// </summary>
+            public EditorWindow Result { get; }
 
             public FinishedEventArgs(EditorWindow result)
             {
@@ -23,8 +28,14 @@ namespace Innoactive.CreatorEditor.TestTools
 
         public delegate void FinishedHandler(object sender, FinishedEventArgs e);
 
+        /// <summary>
+        /// Event fired when <see cref="EditorWindowTestPlayer"/> finished playing a <see cref="IEditorImguiTest"/>.
+        /// </summary>
         public event FinishedHandler Finished;
 
+        /// <summary>
+        /// True if this <see cref="EditorWindowTestRecorder"/> is currently playing a <see cref="IEditorImguiTest"/>.
+        /// </summary>
         public static bool IsPlaying { get; private set; }
 
         private EditorWindow window;
@@ -74,10 +85,7 @@ namespace Innoactive.CreatorEditor.TestTools
                 return;
             }
 
-            if (Finished != null)
-            {
-                Finished(this, new FinishedEventArgs(window));
-            }
+            Finished?.Invoke(this, new FinishedEventArgs(window));
 
             window.Close();
             Close();

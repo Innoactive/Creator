@@ -9,12 +9,12 @@ namespace Innoactive.CreatorEditor
     internal interface IEditingStrategy
     {
         /// <summary>
-        /// Invoked when a new course window was just opened.
+        /// Invoked when a new <see cref="CourseWindow"/> was just opened.
         /// </summary>
         void HandleNewCourseWindow(CourseWindow window);
 
         /// <summary>
-        /// Invoked when a new step window was just opened.
+        /// Invoked when a new <see cref="StepWindow"/> was just opened.
         /// </summary>
         void HandleNewStepWindow(StepWindow window);
 
@@ -24,12 +24,12 @@ namespace Innoactive.CreatorEditor
         void HandleCurrentCourseModified();
 
         /// <summary>
-        /// Invoked when a course window was closed.
+        /// Invoked when a <see cref="CourseWindow"/> was closed.
         /// </summary>
         void HandleCourseWindowClosed(CourseWindow window);
 
         /// <summary>
-        /// Invoked when a step window was closed.
+        /// Invoked when a <see cref="StepWindow"/> was closed.
         /// </summary>
         void HandleStepWindowClosed(StepWindow window);
 
@@ -44,7 +44,7 @@ namespace Innoactive.CreatorEditor
         void HandleCurrentCourseChanged(string courseName);
 
         /// <summary>
-        /// Invoked when the currently edited step was modified.
+        /// Invoked when the currently edited <see cref="IStep"/> was modified.
         /// </summary>
         void HandleCurrentStepModified(IStep step);
 
@@ -55,7 +55,7 @@ namespace Innoactive.CreatorEditor
 
 
         /// <summary>
-        /// Invoked when a designer chooses a step to edit.
+        /// Invoked when a designer chooses a <see cref="IStep"/> to edit.
         /// </summary>
         void HandleCurrentStepChanged(IStep step);
 
@@ -65,7 +65,7 @@ namespace Innoactive.CreatorEditor
         void HandleProjectIsGoingToUnload();
 
         /// <summary>
-        /// Invoked just before Unity saves the project (either during the normal exit of the Editor application or when the designer clicks `Save Project`.
+        /// Invoked just before Unity saves the project (either during the normal exit of the Editor application or when the designer clicks `Save Project`).
         /// </summary>
         void HandleProjectIsGoingToSave();
     }

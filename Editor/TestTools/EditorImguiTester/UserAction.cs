@@ -10,9 +10,15 @@ namespace Innoactive.CreatorEditor.TestTools
     [DataContract(IsReference = false)]
     internal class UserAction
     {
+        /// <summary>
+        /// Recorded UnityGUI event.
+        /// </summary>
         [DataMember]
         public Event Event { get; set; }
 
+        /// <summary>
+        /// List of recorded selections.
+        /// </summary>
         [DataMember]
         public List<string> PrepickedSelections { get; set; }
 
