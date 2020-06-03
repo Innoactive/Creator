@@ -83,7 +83,7 @@ By encouraging coding conventions we ensure:
 * Facilitating copying, changing, and maintaining the code.
 * Sticking to C# best practices.
 
-Please follow our [Coding Conventions](#coding-conventions).
+Please follow our [Coding Conventions](CODING_CONVENTIONS.md).
 
 ## Source Control Commit Guidelines
 
