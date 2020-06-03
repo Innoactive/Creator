@@ -104,8 +104,8 @@ stages:
         inputs:
           targetType: 'inline'
           script: |
-            u3d run -u $(UnityVersion) -- -logFile $(Build.ArtifactStagingDirectory)/logs/editor_editmode_tests.log -batchmode -runTests -testPlatform editmode -testResults $(System.DefaultWorkingDirectory)\TEST-EditMode.xml
-            u3d run -u $(UnityVersion) -- -logFile $(Build.ArtifactStagingDirectory)/logs/editor_playmode_tests.log -batchmode -runTests -testPlatform playmode -testResults $(System.DefaultWorkingDirectory)\TEST-PlayMode.xml
+            u3d run -u $(UnityVersion) -- -projectPath '$(Path.Project)' -logFile $(Build.ArtifactStagingDirectory)/logs/editor_editmode_tests.log -batchmode -runTests -testPlatform editmode -testResults $(System.DefaultWorkingDirectory)\TEST-EditMode.xml
+            u3d run -u $(UnityVersion) -- -projectPath '$(Path.Project)' -logFile $(Build.ArtifactStagingDirectory)/logs/editor_playmode_tests.log -batchmode -runTests -testPlatform playmode -testResults $(System.DefaultWorkingDirectory)\TEST-PlayMode.xml
 
       - task: PublishTestResults@2
         inputs:
@@ -119,7 +119,7 @@ stages:
           script: |
             echo 'Exporting version $(Version)'
             ((Get-Content -path $(Path.ExportConfig)/$(ExportConfigName) -Raw) -replace '{version}','$(Version)') | Set-Content -Path $(Path.Project)/export-config.json
-            u3d run -u $(UnityVersion) -- -logFile $(Build.ArtifactStagingDirectory)/logs/editor_export.log -batchmode -quit -executeMethod Innoactive.CreatorEditor.PackageExporter.Export --export-config export-config.json
+            u3d run -u $(UnityVersion) -- -projectPath '$(Path.Project)' -logFile $(Build.ArtifactStagingDirectory)/logs/editor_export.log -batchmode -quit -executeMethod Innoactive.CreatorEditor.PackageExporter.Export --export-config export-config.json
             Start-Sleep -s 5
 
       - task: PublishPipelineArtifact@1
@@ -132,9 +132,10 @@ stages:
       - task: PublishPipelineArtifact@1
         displayName: "Publish Logs"
         condition: always()
+        continueOnError: true
         inputs:
             targetPath: "$(Build.ArtifactStagingDirectory)/logs/"
-            artifact: "creator-core-logs"
+            artifact: "creator-core-logs-$(System.JobId)"
             publishLocation: "pipeline"
 
   - stage: Release
@@ -142,7 +143,7 @@ stages:
     dependsOn: 
       - Lint
       - Build
-    condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))    
+    condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
     jobs:
       - job:
         workspace:
