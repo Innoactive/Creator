@@ -74,6 +74,8 @@ Alternatively, you can press `CTRL` + `C` to copy, `CTRL` + `X` to cut, and `CTR
 
 It is possible to copy and paste steps in between various projects. You can even share steps with others. Copied steps are text snippets that can be pasted into any text file, chat message, or email. To paste one into your training course, simply copy the entire text snippet and paste it into the opened Workflow Editor.
 
+[![Copy and paste steps](../images/workflow-editor/copy-paste-step.gif "")](../images/workflow-editor/copy-paste-step.gif)
+
 ### Add Transitions
 
 To add a transition to a step, click on the white circle with the `+` sign right of the step. To connect a step to another, drag the transition origin (a white circle next to the origin object) to the transition target object.
@@ -83,3 +85,5 @@ To add a transition to a step, click on the white circle with the `+` sign right
 ### Remove Transitions
 
 You can remove a transition by clicking with the right mouse button on the origin of the transition (a white circle next to the original object) and choosing the 'Remove transition' option.
+
+[![Remove transitions](../images/workflow-editor/remove-transitions.gif "")](../images/workflow-editor/remove-transitions.gif)
