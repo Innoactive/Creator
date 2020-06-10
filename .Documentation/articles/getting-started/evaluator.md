@@ -4,12 +4,11 @@ This guide explains how to set up a demo project which displays strengths and fe
 
 ## Innoactive Creator Package
 
-The `Innoactive Creator` package is a Unity project of a complete training application built with the `Innoactive Base Template`. It contains [multiple examples](../miscellaneous/example-descriptions.md) which highlight different features of the Innoactive Creator.
+The `Innoactive Creator` package is a Unity project of a complete training application built with the `Innoactive Base Template`. It contains [multiple examples](../innoactive-creator/examples.md) which highlight different features of the Innoactive Creator.
 
 ## Instructions
 
 1. [Create a New Unity Project](#create-a-new-unity-project)
-1. [Check Prerequisites](#prerequisites)
 1. [Import the Examples](#import-the-examples)
 1. [Open a Scene](#open-a-scene)
 1. [Launch the Training Application](#launch-the-training-application)
@@ -18,18 +17,7 @@ The `Innoactive Creator` package is a Unity project of a complete training appli
 
 ### Create a New Unity Project
 
-Follow [this guide](../miscellaneous/unity-setup.md) to setup Unity Editor and create a new project for it.
-
-### Prerequisites
-
-Make sure that your setup satisfies the [prerequisites](../miscellaneous/prerequisites.md).
-
-In addition, you need to install two `Windows 10 Language Packages`:
-
-* **English**
-* **German (Deutsch)**
-
-You can do this in `Windows Settings` > `Time & Language` > `Language`.
+Follow the guides in [this section](../setup-guides/index.md) to setup Unity Editor and create a new project for it.
 
 ### Import the Examples
 
@@ -47,7 +35,7 @@ The project contains multiple example scenes which you can find in the `Assets/I
 
 ### Connect a VR Headset
 
-Connect a VR headset to your computer and make sure you installed the correct SDK according to our [prerequisites](../miscellaneous/prerequisites.md).
+Connect a VR headset to your computer and make sure you installed the correct SDK as described in the [Project Setup](../setup-guides/03-project-setup.md) guide.
 
 If you have opened an advanced example, take a look at the `[COURSE_CONTROLLER]` scene object. You will notice that `Course Mode` is set to `Default`. This prefab provides a trainer with real time controls for the training execution on the monitor. With it, a trainer is able to see the current training status, start, reset, and mute the training, pick a chapter and skip a step, choose a language and the training mode to use.
 

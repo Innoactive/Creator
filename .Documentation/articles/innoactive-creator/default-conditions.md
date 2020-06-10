@@ -124,8 +124,6 @@ The `Snap Object` condition is fulfilled once the specified *Object to snap* is 
 
     [![Snap Zone Properties](../images/conditions/snap_zone_properties.png "")](../images/conditions/snap_zone_properties.png)
 
-> Learn more about the [setup of snap zones](../miscellaneous/snapzones.md).
-
 ------
 
 ## Timeout

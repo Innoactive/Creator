@@ -2,44 +2,13 @@
 
 Before you could start working on your custom template, you have to set up a new Unity project for it. This chapter guides you on how to do it. Follow the instructions:
 
-1. [Check your OS](#check-your-os)
-1. [Download Unity](#download-unity)
-1. [Create a new template project](#create-a-new-template-project)
+1. [Initial Setup](#initial-setup)
 1. [Import the Innoactive Creator](#import-the-innoactive-creator)
 1. [Import dependencies](#import-dependencies)
-1. [Check your setup](#check-your-setup)
 
-## Check Your OS
+## Initial Setup
 
-The Innoactive Creator supports only Windows 10. We use Microsoft Text-to-Speech, and you need to install a language package for every language you use. You can do it in the `Windows Settings > Time & Language > Language`.
-
-## Download Unity
-
-Now install Unity 2019.3.
-
-You can get it with the [Unity Hub](https://docs.unity3d.com/Manual/GettingStartedUnityHub.html), a standalone application that manages your Unity projects and editors' installations. Follow the [guide](https://docs.unity3d.com/Manual/GettingStartedInstallingHub.html) to install both the Unity Hub and the Unity Editor 2019.3.
-
-Alternatively, you can download Unity 2019.3 from the [Releases page](https://unity.com/releases/2019-3).
-
-Either way, you will have to login into your Unity account or create a new one. You will need an appropriate Unity [license](https://store.unity.com/).
-
-## Create a New Template Project
-
-To create a Unity project for your template, launch the Unity Hub, then go to the `Projects` tab and click the `New` button.
-
-![Unity Hub Projects](../images/unity-setup/unity-hub-projects-panel.png "An empty `Projects` section of the Unity Hub")
-
-A new window will appear. Choose a name for your project and the folder where Unity should create it. Choose `3D` as a project template and click `Create`. 
-
-Note that Unity project templates simply define the initial settings of the project and have nothing in common with Innoactive Creator templates.
-
-![Unity Project Settings](../images/unity-setup/setup-unity.project.png "Setting up a new project in the Unity Hub.")
-
-The Unity Hub will add the new project to the `Projects` section. You can always open your projects from there.
-
-![Unity Hub Project List](../images/unity-setup/unity-hub-list-of-projects.png "A populated `Projects` section of the Unity Hub.")
-
-Now, open your project in the Unity Editor and proceed to the next section.
+Follow the [Setup Guides](../setup-guides/index.md) to prepare a new Unity project. Open the new project in the Unity Editor and proceed to the next section.
 
 ## Import the Innoactive Creator
 

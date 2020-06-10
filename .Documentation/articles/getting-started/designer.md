@@ -15,11 +15,7 @@ You can look up examples as described in [the evaluator's guide](evaluator.md).
 
 ### Create a new Unity Project
 
-Create a [new project](../miscellaneous/unity-setup.md) in Unity.
-
-### Prerequisites
-
-Make sure that your setup satisfies the [prerequisites](../miscellaneous/prerequisites.md).
+ Follow the [instructions](../setup-guides/index.md) to create a new project in Unity.
 
 ### Import the Training Template
 
@@ -181,9 +177,6 @@ The `Default` template scene accepts `.json` files as a source of localization d
 
 The localization files must be named by the two-letter ISO code of the respective language (`en.json` or `de.json`). Save them to the `[YOUR_PROJECT_ROOT_FOLDER]/Assets/StreamingAssets/Training/[YOUR_COURSE_NAME]/Localization` folder. The script automatically loads all available localizations and displays them in the language dropdown menu. If there is no respective language pack, the localization file is ignored.
 
-> You can add language packs there: `Windows Settings > Time and Language > Language > Add a language`.
-> Learn more about [Text to Speech](../miscellaneous/setup-text-to-speech.md).
-
 ### Audio Behavior
 
 In the [Step Inspector](../innoactive-creator/step-inspector.md), you can add either `Play TTS Audio` or `Play Audio File` behavior to a step. It has two parameters:
@@ -199,8 +192,6 @@ Both types of audio behaviors use localized strings. With `Play Audio File`, it 
 2. In `Bring to cube` step, add a `Play TTS Audio` behavior with `Localization key` set to `put_sphere`.
 3. In `Move cube` step, add a `Play TTS Audio` behavior with `Localization key` set to `move_cube`.
 4. In `Move cube` step, add another `Play TTS Audio` behavior with `Execution stages` set to `After Step Execution` and `Localization key` set to `training_complete`. Mark it as a blocking behavior.
-
-> Don't forget to save the changes!
 
 ### Complete Example
 
