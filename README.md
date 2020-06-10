@@ -50,7 +50,7 @@ This component uses text-to-speech engines so designers could generate audio ins
 git submodule add git@github.com:Innoactive/TextToSpeech-Component.git Innoactive/Creator/Components/TextToSpeech-Component
 ```
 
-### [Base Template](https://github.com/Innoactive/IA-Training-Template)
+### [Base Template](https://github.com/Innoactive/Creator-Base-Template)
 
 This template makes an initial setup of the Creator, and serves both as example and as a starting point for creating new templates. Every VR training application project includes one template.
 
