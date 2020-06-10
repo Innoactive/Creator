@@ -1,7 +1,7 @@
 - name: Introduction
   href: index.md
 - name: Getting Started
-  href: getting-started
+  href: getting-started/index.md
   items:
     - name: Overview
       href: getting-started/index.md
@@ -11,6 +11,17 @@
       href: getting-started/designer.md
     - name: As a Developer
       href: getting-started/developer.md
+- name: Setup Guides
+  href: setup-guides/index.md
+  items:
+    - name: Overview
+      href: setup-guides/index.md
+    - name: System Setup
+      href: setup-guides/01-system-setup.md
+    - name: Unity Setup
+      href: setup-guides/02-unity-setup.md
+    - name: Project Setup
+      href: setup-guides/03-project-setup.md
 - name: Innoactive Creator for Designers
   href: innoactive-creator/index.md
   items:
@@ -30,6 +41,8 @@
       href: innoactive-creator/default-behaviors.md
     - name: Default Conditions
       href: innoactive-creator/default-conditions.md
+    - name: Examples
+      href: innoactive-creator/examples.md
 - name: Innoactive Creator for Developers
   href: developer/index.md
   items:
@@ -53,8 +66,12 @@
       href: developer/08-conditions.md
     - name: Properties
       href: developer/09-properties.md
+    - name: Text-To-Speech
+      href: developer/10-text-to-speech.md
+    - name: Dependency Manager
+      href: developer/11-dependency-manager.md
 - name: Transition Guide to v2.0 for Developers
-  href: transition-to-v2.0
+  href: transition-to-v2.0/index.md
   items:
     - name: Overview
       href: transition-to-v2.0/index.md
@@ -64,22 +81,3 @@
       href: transition-to-v2.0/02-update-behaviors-and-conditions.md
     - name: Unity XR FAQ
       href: transition-to-v2.0/03-unity-xr-faq.md
-- name: Miscellaneous
-  href: miscellaneous/index.md
-  items:
-    - name: Overview
-      href: miscellaneous/index.md
-    - name: Unity Setup Guide
-      href: miscellaneous/unity-setup.md
-    - name: Prerequisites
-      href: miscellaneous/prerequisites.md
-    - name: Advanced Examples
-      href: miscellaneous/example-descriptions.md
-    - name: Menu Items (Developer)
-      href: miscellaneous/menu-items.md
-    - name: Snap Zones (Training Designer)
-      href: miscellaneous/snapzones.md
-    - name: Text To Speech Engine (TTS) (Developer)
-      href: miscellaneous/setup-text-to-speech.md
-    - name: Dependency Manager
-      href: miscellaneous/dependency-manager.md

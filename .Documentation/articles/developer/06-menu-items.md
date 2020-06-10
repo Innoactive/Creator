@@ -50,6 +50,30 @@ You can create multiple menu items for a single behavior. If you modify the beha
 
 If you want to create a menu item for a condition, you need to change the generic parameter of the class and the return type of the `GetNewItem()` method to `ICondition` type. Other than that, menu items for conditions work in the exact same way.
 
-Create a course with your behavior before you continue.
+## Allowed Menu Items Settings
+
+Sometimes you would want to hide some of the menu items in the project: for example, if you have created a custom highlight behavior and you want training designers to use it instead of the default one. To do so, override the `AllowedMenuItemsSettingsAssetPath` property of the `DefaultEditorConfiguration` class. The value is a relative path from the project root folder to a file. The Innoactive Creator will create a JSON file at that path.
+
+```csharp
+public class CustomEditorConfiguration : DefaultEditorConfiguration
+{
+    public override string AllowedMenuItemsSettingsAssetPath
+    {
+        get { return "Assets/My Wanted Path/allowed-menu-items-config.json"; }
+    }
+}
+```
+
+This JSON file stores display settings for all menu items in the project. You can modify it through `Innoactive > Creator > Developer > Allowed Menu Items Settings`.
+                         
+![Open Allowed Menu Items Settings](../images/menu-items/open-allowed-menu-items-settings.png "Open Allowed Menu Items Settings")
+
+Toggle off a menu item to hide it from training designers. This setting will persist even if you remove the menu item from the project and add it later again. This window locates menu items by their full type name: if you rename the class or move it to another namespace, this setting will lose track of it.
+
+![Edit Allowed Menu Items Settings](../images/menu-items/edit-allowed-menu-items-settings.png "Edit Allowed Menu Items Settings")
+
+### Create Menu Content Manually
+
+If you need a higher level of control, you can override `BehaviorsMenuContent` or `ConditionsMenuContent` of the `DefaultEditorConfiguration`. There you can construct a list of available menu items manually.
 
 [To the next chapter!](07-run-a-course.md)

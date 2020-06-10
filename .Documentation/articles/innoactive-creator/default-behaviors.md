@@ -31,8 +31,7 @@ The `Play Audio File` behavior plays audio clips from any `Resources` folder in 
 
 - #### Localization key
 
-    If you use localization files for your project, you can write the localization key for the corresponding sound file that you want to play into this text field. For more information on how to use localization files and Text to speech, look into [Text to speech engine (TTS)](../miscellaneous/setup-text-to-speech.md).
-    If you do not use localization files, leave this text field empty and use the `Default resource path` field.
+    If you use localization files for your project, you can write the localization key for the corresponding sound file that you want to play into this text field. If you do not use localization files, leave this text field empty and use the `Default resource path` field.
 
     ##### Example
 
@@ -84,8 +83,7 @@ The `Play TextToSpeech Audio` behavior plays speech audio clips generated from t
 
 - #### Localization key
 
-    If you use localization files for your project, you can write the localization key for the corresponding text that you want to hear into this text field. For more information on how to use localization files and Text to speech, look into [Text to speech engine (TTS)](../miscellaneous/setup-text-to-speech.md).
-    If you do not use localization files, leave this text field empty and use the `Default text` field.
+    If you use localization files for your project, you can write the localization key for the corresponding text that you want to hear into this text field. If you do not use localization files, leave this text field empty and use the `Default text` field.
 
     ##### Example
 
