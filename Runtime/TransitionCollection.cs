@@ -10,13 +10,13 @@ using Innoactive.Creator.Core.EntityOwners.ParallelEntityCollection;
 namespace Innoactive.Creator.Core
 {
     /// <summary>
-    /// A collection of transitions.
+    /// A collection of <see cref="ITransition"/>s.
     /// </summary>
     [DataContract(IsReference = true)]
     public class TransitionCollection : Entity<TransitionCollection.EntityData>, ITransitionCollection
     {
         /// <summary>
-        /// The data class of the transitions' collection.
+        /// The data class of the <see cref="ITransition"/>s' collection.
         /// </summary>
         [DataContract(IsReference = true)]
         public class EntityData : EntityCollectionData<ITransition>, ITransitionCollectionData

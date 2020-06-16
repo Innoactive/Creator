@@ -13,6 +13,9 @@ namespace Innoactive.Creator.Core
     {
         private class CourseRunnerInstance : MonoBehaviour
         {
+            /// <summary>
+            /// Reference to the currently used <see cref="ICourse"/>.
+            /// </summary>
             public ICourse course = null;
 
             private void HandleModeChanged(object sender, ModeChangedEventArgs args)
@@ -52,6 +55,9 @@ namespace Innoactive.Creator.Core
                 }
             }
 
+            /// <summary>
+            /// Starts the <see cref="ICourse"/>.
+            /// </summary>
             public void Execute()
             {
                 RuntimeConfigurator.ModeChanged += HandleModeChanged;
@@ -127,7 +133,7 @@ namespace Innoactive.Creator.Core
         }
 
         /// <summary>
-        /// Starts the course.
+        /// Starts the <see cref="ICourse"/>.
         /// </summary>
         public static void Run()
         {

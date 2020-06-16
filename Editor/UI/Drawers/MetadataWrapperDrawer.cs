@@ -229,9 +229,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             }
 
             Type elementType = (wrapper.Metadata[extendableListName] as ExtendableListAttribute.SerializedTypeWrapper).Type;
-
             IList list = (IList) wrapper.Value;
-
             float currentY = 0;
 
             currentY += DrawRecursively(rect, wrapper, extendableListName, changeValueCallback, label).height;

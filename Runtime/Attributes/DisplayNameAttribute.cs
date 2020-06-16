@@ -8,6 +8,9 @@ namespace Innoactive.Creator.Core.Attributes
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Class)]
     public class DisplayNameAttribute : Attribute
     {
+        /// <summary>
+        /// Name of the training entity's property or field.
+        /// </summary>
         public string Name { get; private set; }
 
         public DisplayNameAttribute(string name)

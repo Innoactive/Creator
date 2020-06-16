@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Innoactive.CreatorEditor.ImguiTester;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEditor;
@@ -20,8 +19,14 @@ namespace Innoactive.CreatorEditor.TestTools
         private IEditorImguiTest test;
         private EditorWindow recordedWindow;
 
+        /// <summary>
+        /// True if this <see cref="EditorWindowTestRecorder"/> is currently recording a <see cref="IEditorImguiTest"/>.
+        /// </summary>
         public static bool IsRecording { get; private set; }
 
+        /// <summary>
+        /// Starts recording given <paramref name="test"/>.
+        /// </summary>
         public void StartRecording(IEditorImguiTest test)
         {
             IsRecording = true;

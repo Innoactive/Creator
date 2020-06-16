@@ -13,12 +13,21 @@ namespace Innoactive.Creator.Core.Attributes
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
     public class ListOfAttribute : MetadataAttribute
     {
+        /// <summary>
+        /// Reference to the child's attributes and metadata.
+        /// </summary>
         [DataContract(IsReference = true)]
         public class Metadata
         {
+            /// <summary>
+            /// Reference to the child's attributes.
+            /// </summary>
             [DataMember]
             public List<MetadataAttribute> ChildAttributes { get; set; }
 
+            /// <summary>
+            /// Reference to the child metadata.
+            /// </summary>
             [DataMember]
             public List<Dictionary<string, object>> ChildMetadata { get; set; }
         };

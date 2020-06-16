@@ -11,9 +11,15 @@ namespace Innoactive.Creator.Core.Attributes
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
     public class ExtendableListAttribute : MetadataAttribute
     {
+        /// <summary>
+        /// Holds a serialized reference to the metadata object's type.
+        /// </summary>
         [DataContract(IsReference = true)]
         public class SerializedTypeWrapper
         {
+            /// <summary>
+            /// Metadata object's type.
+            /// </summary>
             [DataMember]
             public Type Type { get; set; }
         }
@@ -26,7 +32,7 @@ namespace Innoactive.Creator.Core.Attributes
         /// <inheritdoc />
         public override object GetDefaultMetadata(MemberInfo owner)
         {
-            return new SerializedTypeWrapper()
+            return new SerializedTypeWrapper
             {
                 Type = ReflectionUtils.GetEntryType(ReflectionUtils.GetDeclaredTypeOfPropertyOrField(owner))
             };

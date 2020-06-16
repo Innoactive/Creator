@@ -3,7 +3,6 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Attributes;
-using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
 using Innoactive.Creator.Core.Exceptions;
