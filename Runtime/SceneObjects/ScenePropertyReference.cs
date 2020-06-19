@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Properties;
 

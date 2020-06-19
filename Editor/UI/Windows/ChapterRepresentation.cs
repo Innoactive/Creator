@@ -173,7 +173,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             node.CreateTransitionButton.GraphicalEventHandler.PointerClick += (sender, args) =>
             {
-                ITransition transition = new Transition();
+                ITransition transition = EntityFactory.CreateTransition();
 
                 RevertableChangesHandler.Do(new CourseCommand(
                     () =>
@@ -381,7 +381,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                                         closuredStep.Data.Transitions.Data.Transitions.Remove(closuredTransition);
                                         if (isLast)
                                         {
-                                            closuredStep.Data.Transitions.Data.Transitions.Add(new Transition());
+                                            closuredStep.Data.Transitions.Data.Transitions.Add(EntityFactory.CreateTransition());
                                         }
 
                                         MarkToRefresh();
@@ -480,10 +480,8 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             options.Add(new TestableEditorElements.MenuItem(new GUIContent("Add step"), false, () =>
             {
-                IStep step = new Step("New Step");
-                step.Data.Transitions.Data.Transitions.Add(new Transition());
+                IStep step = EntityFactory.CreateStep("New Step");
                 step.StepMetadata.Position = e.PointerPosition;
-
                 AddStepWithUndo(step);
             }));
 

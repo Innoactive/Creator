@@ -75,7 +75,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 if (CourseAssetUtils.CanCreate(courseName, out errorMessage))
                 {
-                    CourseAssetManager.Import(new Course(courseName, new Chapter("Chapter 1", null)));
+                    CourseAssetManager.Import(EntityFactory.CreateCourse(courseName));
                     RuntimeConfigurator.Instance.SetSelectedCourse(CourseAssetUtils.GetCourseStreamingAssetPath(courseName));
                     EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
                     GlobalEditorHandler.SetCurrentCourse(courseName);

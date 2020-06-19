@@ -16,7 +16,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         {
             if (EditorDrawingHelper.DrawAddButton(ref rect, "Add Transition"))
             {
-                ChangeValue(() => new Transition(), () => currentValue, changeValueCallback);
+                ChangeValue(() => EntityFactory.CreateTransition(), () => currentValue, changeValueCallback);
             }
 
             return rect;
