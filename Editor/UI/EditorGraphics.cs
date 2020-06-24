@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Innoactive.CreatorEditor.UI.Graphics;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Edge = UnityEngine.RectTransform.Edge;
 
 namespace Innoactive.CreatorEditor.UI
@@ -106,6 +107,8 @@ namespace Innoactive.CreatorEditor.UI
 
             initiallyPressedHandler = null;
             initiallyContextPressedHandler = null;
+
+            Canvas.Reset();
 
             Selected = null;
         }

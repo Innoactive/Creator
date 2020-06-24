@@ -2,7 +2,6 @@ using System;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Innoactive.Creator.Core.Configuration
 {
@@ -36,7 +35,7 @@ namespace Innoactive.Creator.Core.Configuration
         [SerializeField]
         private string selectedCourseStreamingAssetsPath = "";
 
-        private IRuntimeConfiguration runtimeConfiguration;
+        private BaseRuntimeConfiguration runtimeConfiguration;
 
         private static RuntimeConfigurator instance;
 
@@ -76,7 +75,7 @@ namespace Innoactive.Creator.Core.Configuration
         /// <summary>
         /// Shortcut to get the <see cref="IRuntimeConfiguration"/> of the instance.
         /// </summary>
-        public static IRuntimeConfiguration Configuration
+        public static BaseRuntimeConfiguration Configuration
         {
             get
             {
@@ -92,8 +91,18 @@ namespace Innoactive.Creator.Core.Configuration
                     Debug.LogErrorFormat("IRuntimeConfiguration type '{0}' cannot be found. Using '{1}' instead.", Instance.runtimeConfigurationName, typeof(DefaultRuntimeConfiguration).AssemblyQualifiedName);
                     type = typeof(DefaultRuntimeConfiguration);
                 }
-
-                Configuration = (IRuntimeConfiguration)ReflectionUtils.CreateInstanceOfType(type);
+#pragma warning disable 0618
+                IRuntimeConfiguration config = (IRuntimeConfiguration)ReflectionUtils.CreateInstanceOfType(type);
+                if (config is BaseRuntimeConfiguration configuration)
+                {
+                    Configuration = configuration;
+                }
+                else
+                {
+                    Debug.LogWarning("Your runtime configuration only extends the interface IRuntimeConfiguration, please consider moving to BaseRuntimeConfiguration as base class.");
+                    Configuration = new RuntimeConfigWrapper(config);
+                }
+#pragma warning restore 0618
                 return Instance.runtimeConfiguration;
             }
             set

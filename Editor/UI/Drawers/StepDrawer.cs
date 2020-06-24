@@ -35,6 +35,8 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 fontSize = 12
             };
 
+            rect.height = labelStyle.CalcHeight(new GUIContent("Step Name"), rect.width);
+
             EditorGUI.LabelField(typeRect, "Step Name", labelStyle);
 
             string oldName = step.Name;
