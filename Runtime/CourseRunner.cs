@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Configuration.Modes;
+using Innoactive.Creator.Core.Properties;
+using Innoactive.Creator.Unity;
 using UnityEngine;
 
 namespace Innoactive.Creator.Core
@@ -61,6 +63,14 @@ namespace Innoactive.Creator.Core
             public void Execute()
             {
                 RuntimeConfigurator.ModeChanged += HandleModeChanged;
+
+                if (RuntimeConfigurator.Instance.LockSceneObjectsOnStart)
+                {
+                    SceneUtils.GetActiveAndInactiveComponents<LockableProperty>().ToList().ForEach(obj =>
+                    {
+                        obj.SetLocked(true);
+                    });
+                }
 
                 course.LifeCycle.StageChanged += HandleCourseStageChanged;
                 course.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);

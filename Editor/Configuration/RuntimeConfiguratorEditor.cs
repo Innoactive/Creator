@@ -20,8 +20,6 @@ namespace Innoactive.CreatorEditor.Configuration
         private RuntimeConfigurator configurator;
         private SerializedProperty configuratorSelectedCourseProperty;
 
-
-
         private static readonly List<Type> configurationTypes;
         private static readonly string[] configurationTypeNames;
 
@@ -69,6 +67,8 @@ namespace Innoactive.CreatorEditor.Configuration
 
             // Courses can change without recompile so we have to check for them.
             UpdateAvailableCourses();
+
+            configurator.LockSceneObjectsOnStart = EditorGUILayout.Toggle("Lock all SceneObject on Start", configurator.LockSceneObjectsOnStart);
 
             DrawRuntimeConfigurationDropDown();
 

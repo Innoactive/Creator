@@ -38,6 +38,9 @@ namespace Innoactive.Creator.Core.Configuration
 
         private IRuntimeConfiguration runtimeConfiguration;
 
+        [SerializeField]
+        public bool LockSceneObjectsOnStart;
+
         private static RuntimeConfigurator instance;
 
         private static RuntimeConfigurator LookUpForGameObject()

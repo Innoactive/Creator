@@ -11,7 +11,6 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
             IEnumerable<LockablePropertyReference> unlockList = GetLockablePropertiesFrom(data);
             foreach (LockablePropertyReference lockable in unlockList)
             {
-                Debug.Log("unlock: " + lockable.Property.GetType());
                 lockable.Property.SetLocked(false);
             }
         }
@@ -42,7 +41,6 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
 
             foreach (LockablePropertyReference lockable in lockList)
             {
-                Debug.Log("lock: " + lockable.Property.GetType());
                 lockable.Property.SetLocked(true);
             }
         }

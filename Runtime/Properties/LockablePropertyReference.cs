@@ -8,12 +8,13 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
         
         public readonly bool EndStepLocked;
 
-        public LockablePropertyReference(LockableProperty property, bool endStepLocked = true)
+        public LockablePropertyReference(LockableProperty property) : this(property, property.EndStepLocked) { }
+        
+        public LockablePropertyReference(LockableProperty property, bool endStepLocked)
         {
             EndStepLocked = endStepLocked;
             Property = property;
         }
-
 
         protected bool Equals(LockablePropertyReference other)
         {
