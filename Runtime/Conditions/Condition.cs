@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using System.Runtime.Serialization;
-using Innoactive.Creator.Core.Configuration;
+using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.Utils.Logging;
 using Innoactive.Creator.Unity;
 
@@ -10,7 +11,7 @@ namespace Innoactive.Creator.Core.Conditions
     /// An implementation of <see cref="ICondition"/>. Use it as the base class for your custom conditions.
     /// </summary>
     [DataContract(IsReference = true)]
-    public abstract class Condition<TData> : CompletableEntity<TData>, ICondition where TData : class, IConditionData, new()
+    public abstract class Condition<TData> : CompletableEntity<TData>, ICondition, ILockableCondition where TData : class, IConditionData, new()
     {
         protected Condition()
         {
@@ -30,6 +31,11 @@ namespace Innoactive.Creator.Core.Conditions
             {
                 return Data;
             }
+        }
+
+        public virtual IEnumerable<LockablePropertyReference> GetLockableProperties()
+        {
+            return PropertyReflectionHelper.ExtractLockablePropertiesFromConditions(Data);
         }
     }
 }

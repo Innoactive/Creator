@@ -5,6 +5,8 @@ using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
+using Innoactive.Creator.Core.Properties;
+using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.Utils.Logging;
 using Innoactive.Creator.Unity;
 using UnityEngine;
@@ -15,7 +17,7 @@ namespace Innoactive.Creator.Core
     /// A class for a transition from one step to another.
     /// </summary>
     [DataContract(IsReference = true)]
-    public class Transition : CompletableEntity<Transition.EntityData>, ITransition
+    public class Transition : CompletableEntity<Transition.EntityData>, ITransition, ILockableTransition
     {
         /// <summary>
         /// The transition's data class.
@@ -138,6 +140,19 @@ namespace Innoactive.Creator.Core
                     Debug.LogFormat("{0}<b>Transition to</b> <i>{1}</i> is <b>{2}</b>.\n", ConsoleUtils.GetTabs(3), Data.TargetStep != null ? Data.TargetStep.Data.Name + " (Step)" : "chapter's end", LifeCycle.Stage);
                 };
             }
+        }
+
+        public IEnumerable<LockablePropertyReference> GetLockableProperties()
+        {
+            IEnumerable<LockablePropertyReference> lockable = new List<LockablePropertyReference>();
+            foreach (ICondition condition in Data.Conditions)
+            {
+                if (condition is ILockableCondition lockableCondition)
+                {
+                    lockable = lockable.Union(lockableCondition.GetLockableProperties());
+                }
+            }
+            return lockable;
         }
     }
 }

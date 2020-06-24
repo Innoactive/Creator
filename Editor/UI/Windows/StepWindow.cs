@@ -1,4 +1,5 @@
-﻿using Innoactive.Creator.Core;
+﻿using System;
+using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UI.Drawers;
 using UnityEditor;
 using UnityEngine;
@@ -11,6 +12,18 @@ namespace Innoactive.CreatorEditor.UI.Windows
     /// </summary>
     internal class StepWindow : EditorWindow
     {
+        internal class StepModifiedEventArgs : EventArgs
+        {
+            public readonly IStep CurrentStep;
+
+            public StepModifiedEventArgs(IStep currentStep)
+            {
+                CurrentStep = currentStep;
+            }
+        }
+
+        public static event EventHandler<StepModifiedEventArgs> StepChanged;
+
         private IStep step;
 
         [SerializeField]
@@ -78,6 +91,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
         {
             step = (IStep)newStep;
             GlobalEditorHandler.CurrentStepModified(step);
+            StepChanged?.Invoke(this, new StepModifiedEventArgs(step));
         }
 
         public void SetStep(IStep newStep)

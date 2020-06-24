@@ -7,6 +7,7 @@ using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
 using Innoactive.Creator.Core.EntityOwners.FoldedEntityCollection;
+using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.Utils.Logging;
 using Innoactive.Creator.Unity;
 
@@ -65,6 +66,7 @@ namespace Innoactive.Creator.Core
             ///<inheritdoc />
             public override void Start()
             {
+                LockableHandling.UnlockPropertiesForStepData(Data);
             }
 
             ///<inheritdoc />
@@ -79,6 +81,7 @@ namespace Innoactive.Creator.Core
             ///<inheritdoc />
             public override void End()
             {
+                LockableHandling.LockPropertiesForStepData(Data);
             }
 
             ///<inheritdoc />

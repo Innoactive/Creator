@@ -9,7 +9,7 @@ using Innoactive.CreatorEditor.UI.Drawers;
 using UnityEditor.Callbacks;
 
 namespace Innoactive.CreatorEditor
-{
+   {
     /// <summary>
     /// Helper class for reflection.
     /// </summary>
