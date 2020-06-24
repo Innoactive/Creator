@@ -5,6 +5,6 @@ namespace Innoactive.Creator.Core.Conditions
 {
     public interface ILockableCondition
     {
-        IEnumerable<LockablePropertyReference> GetLockableProperties();
+        IEnumerable<LockablePropertyData> GetLockableProperties();
     }
 }

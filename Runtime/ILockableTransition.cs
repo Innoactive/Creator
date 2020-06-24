@@ -5,6 +5,6 @@ namespace Innoactive.Creator.Core
 {
     public interface ILockableTransition
     {
-        IEnumerable<LockablePropertyReference> GetLockableProperties();
+        IEnumerable<LockablePropertyData> GetLockableProperties();
     }
 }

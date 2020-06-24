@@ -142,9 +142,9 @@ namespace Innoactive.Creator.Core
             }
         }
 
-        public IEnumerable<LockablePropertyReference> GetLockableProperties()
+        public IEnumerable<LockablePropertyData> GetLockableProperties()
         {
-            IEnumerable<LockablePropertyReference> lockable = new List<LockablePropertyReference>();
+            IEnumerable<LockablePropertyData> lockable = new List<LockablePropertyData>();
             foreach (ICondition condition in Data.Conditions)
             {
                 if (condition is ILockableCondition lockableCondition)

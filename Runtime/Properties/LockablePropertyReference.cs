@@ -1,37 +1,54 @@
-﻿using Innoactive.Creator.Core.Properties;
+﻿using System;
+using System.Runtime.Serialization;
+using Innoactive.Creator.Core.Properties;
+using Innoactive.Creator.Core.SceneObjects;
 
-namespace Innoactive.Creator.Core.RestrictiveEnvironment
+namespace Innoactive.Creator.Core.Behaviors
 {
+    [DataContract(IsReference = true)]
     public class LockablePropertyReference
     {
-        public readonly LockableProperty Property;
-        
-        public readonly bool EndStepLocked;
+        [DataMember]
+        public SceneObjectReference Target;
 
-        public LockablePropertyReference(LockableProperty property) : this(property, property.EndStepLocked) { }
-        
-        public LockablePropertyReference(LockableProperty property, bool endStepLocked)
+        [DataMember]
+        public string Type;
+
+        [IgnoreDataMember]
+        private LockableProperty property;
+
+        public LockablePropertyReference()
         {
-            EndStepLocked = endStepLocked;
-            Property = property;
+
         }
 
-        protected bool Equals(LockablePropertyReference other)
+        public LockablePropertyReference(LockableProperty property)
         {
-            return Equals(Property, other.Property);
+            Target = new SceneObjectReference(property.SceneObject.UniqueName);
+            Type = property.GetType().AssemblyQualifiedName;
         }
 
-        public override bool Equals(object obj)
+        public LockablePropertyReference(string sceneObjectName, Type type)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((LockablePropertyReference) obj);
+            Target = new SceneObjectReference(sceneObjectName);
+            Type = type.AssemblyQualifiedName;
         }
 
-        public override int GetHashCode()
+        public LockableProperty GetProperty()
         {
-            return (Property != null ? Property.GetHashCode() : 0);
+            if (property == null)
+            {
+                foreach (ISceneObjectProperty prop in Target.Value.Properties)
+                {
+                    if (prop.GetType().AssemblyQualifiedName.Equals(Type))
+                    {
+                        property = (LockableProperty)prop;
+                        break;
+                    }
+                }
+            }
+
+            return property;
         }
     }
 }

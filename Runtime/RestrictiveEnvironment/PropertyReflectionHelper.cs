@@ -15,9 +15,9 @@ namespace Innoactive.Creator.Core
     public static class PropertyReflectionHelper
     {
 
-        public static List<LockablePropertyReference> ExtractLockablesFromStep(IStep step)
+        public static List<LockablePropertyData> ExtractLockablesFromStep(IStep step)
         {
-            List<LockablePropertyReference> result = new List<LockablePropertyReference>();
+            List<LockablePropertyData> result = new List<LockablePropertyData>();
 
             foreach (ITransition transition in step.Data.Transitions.Data.Transitions)
             {
@@ -33,7 +33,7 @@ namespace Innoactive.Creator.Core
         /// <summary>
         /// Extracts all scene and property references which have extend a LockableProperty.
         /// </summary>
-        public static List<LockablePropertyReference> ExtractLockablePropertiesFromConditions(IConditionData data)
+        public static List<LockablePropertyData> ExtractLockablePropertiesFromConditions(IConditionData data)
         {
             List<MemberInfo> memberInfo = data.GetType()
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
@@ -48,7 +48,7 @@ namespace Innoactive.Creator.Core
                     info.FieldType.IsConstructedGenericType && info.FieldType.GetGenericTypeDefinition() ==
                     typeof(ScenePropertyReference<>)));
 
-            List<LockablePropertyReference> result = new List<LockablePropertyReference>();
+            List<LockablePropertyData> result = new List<LockablePropertyData>();
             memberInfo.ForEach(info =>
             {
                 UniqueNameReference reference =
@@ -62,7 +62,7 @@ namespace Innoactive.Creator.Core
 
                 if (refType != null)
                 {
-                    result.Add(new LockablePropertyReference(GetProperty(reference, refType)));
+                    result.Add(new LockablePropertyData(GetProperty(reference, refType)));
                 }
             });
 

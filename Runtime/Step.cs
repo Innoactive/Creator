@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.Behaviors;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
 using Innoactive.Creator.Core.EntityOwners.FoldedEntityCollection;
@@ -19,7 +20,7 @@ namespace Innoactive.Creator.Core
     [DataContract(IsReference = true)]
     public class Step : Entity<Step.EntityData>, IStep
     {
-        public class EntityData : EntityCollectionData<IStepChild>, IStepData
+        public class EntityData : EntityCollectionData<IStepChild>, IStepData, ILockableStepData
         {
             ///<inheritdoc />
             [DataMember]
@@ -55,18 +56,24 @@ namespace Innoactive.Creator.Core
 
             ///<inheritdoc />
             public IMode Mode { get; set; }
+
+            ///<inheritdoc />
+            public IEnumerable<LockablePropertyReference> ToUnlock { get; set; } = new List<LockablePropertyReference>();
         }
 
         private class ActiveProcess : Process<EntityData>
         {
+            private readonly IEnumerable<LockablePropertyData> toUnlock;
+
             public ActiveProcess(EntityData data) : base(data)
             {
+                toUnlock = Data.ToUnlock.Select(reference => new LockablePropertyData(reference.GetProperty())).ToList();
             }
 
             ///<inheritdoc />
             public override void Start()
             {
-                LockableHandling.UnlockPropertiesForStepData(Data);
+                LockableHandling.UnlockPropertiesForStepData(Data, toUnlock);
             }
 
             ///<inheritdoc />
@@ -81,7 +88,7 @@ namespace Innoactive.Creator.Core
             ///<inheritdoc />
             public override void End()
             {
-                LockableHandling.LockPropertiesForStepData(Data);
+                LockableHandling.LockPropertiesForStepData(Data, toUnlock);
             }
 
             ///<inheritdoc />
