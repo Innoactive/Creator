@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Innoactive.Creator.Core.RestrictiveEnvironment
 {
-    internal static class LockableHandling
+    public static class LockableHandling
     {
         public static void UnlockPropertiesForStepData(IStepData data)
         {
@@ -21,7 +21,7 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
             // All properties which should be locked
             IEnumerable<LockablePropertyReference> lockList = GetLockablePropertiesFrom(data);
 
-            ITransition completedTransition = data.Transitions.Data.Transitions.First(transition => transition.IsCompleted);
+            ITransition completedTransition = data.Transitions.Data.Transitions.FirstOrDefault(transition => transition.IsCompleted);
             if (completedTransition != null)
             {
                 IEnumerable<LockablePropertyReference> nextStepProperties = GetLockablePropertiesFrom(completedTransition.Data.TargetStep.Data);

@@ -1,4 +1,5 @@
-﻿﻿using System.Runtime.Serialization;
+﻿﻿using System;
+ using System.Runtime.Serialization;
 
 namespace Innoactive.Creator.Core.SceneObjects
 {
@@ -20,5 +21,7 @@ namespace Innoactive.Creator.Core.SceneObjects
         {
             UniqueName = uniqueName;
         }
+
+        internal abstract Type GetReferenceType();
     }
 }
