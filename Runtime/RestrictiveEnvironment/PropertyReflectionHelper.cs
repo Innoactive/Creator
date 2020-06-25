@@ -62,7 +62,7 @@ namespace Innoactive.Creator.Core
 
                 if (refType != null)
                 {
-                    result.Add(new LockablePropertyData(GetProperty(reference, refType)));
+                    result.AddRange(GetAllDependenciesFrom(refType).Select(type => new LockablePropertyData(GetProperty(reference, type))));
                 }
             });
 
@@ -81,6 +81,34 @@ namespace Innoactive.Creator.Core
             }
             Debug.LogWarningFormat("Could not find fitting {0} type in SceneObject {1}", type.Name, reference.UniqueName);
             return null;
+        }
+
+        private static HashSet<Type> GetAllDependenciesFrom(Type trainingProperty)
+        {
+            HashSet<Type> dependencies = new HashSet<Type>();
+            RequireComponent[] requireComponents = trainingProperty.GetCustomAttributes(typeof(RequireComponent), false) as RequireComponent[];
+
+            if (requireComponents.Any())
+            {
+                foreach (RequireComponent requireComponent in requireComponents)
+                {
+                    AddTypeToList(requireComponent.m_Type0, ref dependencies);
+                    AddTypeToList(requireComponent.m_Type1, ref dependencies);
+                    AddTypeToList(requireComponent.m_Type2, ref dependencies);
+                }
+            }
+
+            AddTypeToList(trainingProperty, ref dependencies);
+
+            return dependencies;
+        }
+
+        private static void AddTypeToList(Type type, ref HashSet<Type> dependencies)
+        {
+            if (type != null)
+            {
+                dependencies.Add(type);
+            }
         }
     }
 }

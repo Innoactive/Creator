@@ -11,17 +11,11 @@ namespace Innoactive.Creator.Core.Properties
 
         [SerializeField]
         private bool lockOnParentObjectLock = true;
-        
+
         public bool LockOnParentObjectLock
         {
-            get
-            {
-                return lockOnParentObjectLock;
-            }
-            set
-            {
-                lockOnParentObjectLock = value;
-            }
+            get => lockOnParentObjectLock;
+            set => lockOnParentObjectLock = value;
         }
 
         public bool IsLocked { get; private set; }
