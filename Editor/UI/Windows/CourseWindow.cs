@@ -122,7 +122,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             chapterMenu.Draw();
             DrawChapterWorkflow(scrollRect);
 
-            Repaint();
+            //Repaint();
         }
 
         private void OnDestroy()
