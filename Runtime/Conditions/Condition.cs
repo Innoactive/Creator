@@ -11,7 +11,7 @@ namespace Innoactive.Creator.Core.Conditions
     /// An implementation of <see cref="ICondition"/>. Use it as the base class for your custom conditions.
     /// </summary>
     [DataContract(IsReference = true)]
-    public abstract class Condition<TData> : CompletableEntity<TData>, ICondition, ILockableCondition where TData : class, IConditionData, new()
+    public abstract class Condition<TData> : CompletableEntity<TData>, ICondition, ILockablePropertiesProvider where TData : class, IConditionData, new()
     {
         protected Condition()
         {

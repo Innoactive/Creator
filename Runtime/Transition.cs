@@ -17,7 +17,7 @@ namespace Innoactive.Creator.Core
     /// A class for a transition from one step to another.
     /// </summary>
     [DataContract(IsReference = true)]
-    public class Transition : CompletableEntity<Transition.EntityData>, ITransition, ILockableTransition
+    public class Transition : CompletableEntity<Transition.EntityData>, ITransition, ILockablePropertiesProvider
     {
         /// <summary>
         /// The transition's data class.
@@ -147,7 +147,7 @@ namespace Innoactive.Creator.Core
             IEnumerable<LockablePropertyData> lockable = new List<LockablePropertyData>();
             foreach (ICondition condition in Data.Conditions)
             {
-                if (condition is ILockableCondition lockableCondition)
+                if (condition is ILockablePropertiesProvider lockableCondition)
                 {
                     lockable = lockable.Union(lockableCondition.GetLockableProperties());
                 }

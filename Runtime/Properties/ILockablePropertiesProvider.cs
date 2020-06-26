@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Innoactive.Creator.Core.RestrictiveEnvironment;
 
-namespace Innoactive.Creator.Core.Conditions
+namespace Innoactive.Creator.Core
 {
-    public interface ILockableCondition
+    public interface ILockablePropertiesProvider
     {
         IEnumerable<LockablePropertyData> GetLockableProperties();
     }

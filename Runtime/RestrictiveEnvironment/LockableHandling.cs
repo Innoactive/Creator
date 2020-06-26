@@ -24,7 +24,7 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
             lockList = lockList.Union(manualUnlocked);
 
             ITransition completedTransition = data.Transitions.Data.Transitions.FirstOrDefault(transition => transition.IsCompleted);
-            if (completedTransition != null)
+            if (completedTransition != null && completedTransition.Data.TargetStep != null)
             {
                 IEnumerable<LockablePropertyData> nextStepProperties = GetLockablePropertiesFrom(completedTransition.Data.TargetStep.Data);
 
@@ -34,7 +34,7 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
                     nextStepProperties = nextStepProperties.Union(toUnlock);
                 }
 
-                if (completedTransition is ILockableTransition completedLockableTransition)
+                if (completedTransition is ILockablePropertiesProvider completedLockableTransition)
                 {
                     IEnumerable<LockablePropertyData> transitionLockList = completedLockableTransition.GetLockableProperties();
                     foreach (LockablePropertyData lockable in transitionLockList)
@@ -60,7 +60,7 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
             IEnumerable<LockablePropertyData> result = new List<LockablePropertyData>();
             foreach (ITransition transition in data.Transitions.Data.Transitions)
             {
-                if (transition.IsCompleted == false && transition is ILockableTransition lockableTransition)
+                if (transition.IsCompleted == false && transition is ILockablePropertiesProvider lockableTransition)
                 {
                     result = result.Union(lockableTransition.GetLockableProperties());
                 }
