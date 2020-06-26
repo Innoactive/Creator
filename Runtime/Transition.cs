@@ -5,7 +5,6 @@ using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
-using Innoactive.Creator.Core.Properties;
 using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.Utils.Logging;
 using Innoactive.Creator.Unity;
@@ -27,7 +26,7 @@ namespace Innoactive.Creator.Core
         {
             ///<inheritdoc />
             [DataMember]
-            [DisplayName("Conditions"), Foldable, Separated, ListOf(typeof(FoldableAttribute), typeof(DeletableAttribute), typeof(SeparatedAttribute)), ExtendableList]
+            [DisplayName("Conditions"), Foldable, ListOf(typeof(FoldableAttribute), typeof(DeletableAttribute)), ExtendableList]
             public IList<ICondition> Conditions { get; set; }
 
             ///<inheritdoc />

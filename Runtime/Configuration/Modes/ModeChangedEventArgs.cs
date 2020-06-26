@@ -1,5 +1,4 @@
 ﻿using System;
-using Innoactive.Creator.Core.Configuration.Modes;
 
 namespace Innoactive.Creator.Core.Configuration.Modes
 {

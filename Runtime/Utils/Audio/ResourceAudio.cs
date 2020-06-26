@@ -1,4 +1,3 @@
-using System;
 using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Internationalization;

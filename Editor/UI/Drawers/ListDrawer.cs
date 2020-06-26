@@ -29,9 +29,12 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 fontSize = 12
             };
 
-            EditorGUI.LabelField(new Rect(rect.x, currentY, rect.width, EditorDrawingHelper.HeaderLineHeight), label, labelStyle);
+            if (label != null && label != GUIContent.none && (label.image != null || string.IsNullOrEmpty(label.text) == false))
+            {
+                EditorGUI.LabelField(new Rect(rect.x, currentY, rect.width, EditorDrawingHelper.HeaderLineHeight), label, labelStyle);
+                currentY += EditorDrawingHelper.HeaderLineHeight;
+            }
 
-            currentY += EditorDrawingHelper.HeaderLineHeight;
 
             object[] entries = new object[list.Count];
             list.CopyTo(entries, 0);

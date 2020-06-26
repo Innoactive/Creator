@@ -38,7 +38,8 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             float height = EditorStyles.toolbar.fixedHeight;
             nextPosition.position += new Vector2(0, height);
-            return DrawerLocator.GetDrawerForValue(tabsGroup.Tabs[tabsGroup.Selected].GetValue(), typeof(object))
+            rect.height = EditorStyles.toolbar.fixedHeight
+                + DrawerLocator.GetDrawerForValue(tabsGroup.Tabs[tabsGroup.Selected].GetValue(), typeof(object))
                 .Draw(nextPosition,
                     tabsGroup.Tabs[tabsGroup.Selected].GetValue(),
                     (newValue) =>
@@ -46,7 +47,9 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                         tabsGroup.Tabs[tabsGroup.Selected].SetValue(newValue);
                         changeValueCallback(tabsGroup);
                     },
-                    GUIContent.none);
+                    GUIContent.none).height;
+
+            return rect;
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.Exceptions;
 
 namespace Innoactive.Creator.Core.Configuration.Modes

@@ -23,7 +23,7 @@ namespace Innoactive.Creator.Core
         {
             ///<inheritdoc />
             [DataMember]
-            [DisplayName("Transitions"), KeepPopulated(typeof(Transition)), ListOf(typeof(FoldableAttribute), typeof(DeletableAttribute), typeof(SeparatedAttribute)), ExtendableList]
+            [DisplayName(""), KeepPopulated(typeof(Transition)), ListOf(typeof(FoldableAttribute), typeof(DeletableAttribute)), ExtendableList]
             public virtual IList<ITransition> Transitions { get; set; }
 
             ///<inheritdoc />
