@@ -5,11 +5,11 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
     public class LockablePropertyData
     {
         public readonly LockableProperty Property;
-        
-        public readonly bool EndStepLocked;
+
+        public bool EndStepLocked;
 
         public LockablePropertyData(LockableProperty property) : this(property, property.EndStepLocked) { }
-        
+
         public LockablePropertyData(LockableProperty property, bool endStepLocked)
         {
             EndStepLocked = endStepLocked;
