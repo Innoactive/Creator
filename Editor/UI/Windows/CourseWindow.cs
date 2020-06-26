@@ -121,8 +121,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
             HandleEditorCommands(centerViewpointOnCanvas);
             chapterMenu.Draw();
             DrawChapterWorkflow(scrollRect);
-
-            //Repaint();
         }
 
         private void OnDestroy()
@@ -181,6 +179,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 Rect controlRect = new Rect(currentScrollPosition, scrollRect.size);
                 chapterRepresentation.HandleEvent(Event.current, controlRect);
+
+                if (Event.current.type == EventType.Used)
+                {
+                    Repaint();
+                }
             }
             GUI.EndScrollView();
         }

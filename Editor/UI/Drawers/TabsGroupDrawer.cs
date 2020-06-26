@@ -13,13 +13,36 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         {
             ITabsGroup tabsGroup = (ITabsGroup)currentValue;
 
+            // Draw tabs selector.
+            float tabsHeight = DrawToolbox(rect, tabsGroup, changeValueCallback).height;
+
+
+            // Get drawer for the object under the tab.
+            ITrainingDrawer tabValueDrawer = DrawerLocator.GetDrawerForValue(tabsGroup.Tabs[tabsGroup.Selected].GetValue(), typeof(object));
+
+            void ChangeValueCallback(object newValue)
+            {
+                tabsGroup.Tabs[tabsGroup.Selected].SetValue(newValue);
+                changeValueCallback(tabsGroup);
+            }
+
+            Rect tabValueRect = new Rect(rect.x, rect.y + tabsHeight, rect.width, 0);
+
+            // Draw the object under the tab.
+            rect.height = tabsHeight + tabValueDrawer.Draw(tabValueRect, tabsGroup.Tabs[tabsGroup.Selected].GetValue(), ChangeValueCallback, GUIContent.none).height;
+
+            return rect;
+        }
+
+        private Rect DrawToolbox(Rect rect, ITabsGroup tabsGroup, Action<object> changeValueCallback)
+        {
+            rect.height = EditorStyles.toolbar.fixedHeight;
+
             GUIContent[] labels = tabsGroup.Tabs.Select(tab => tab.Label).ToArray();
 
             int oldSelected = tabsGroup.Selected;
 
-            Rect nextPosition = new Rect(rect.x, rect.y, rect.width, EditorStyles.toolbar.fixedHeight);
-
-            int selected = GUI.Toolbar(nextPosition, oldSelected, labels);
+            int selected = GUI.Toolbar(rect, oldSelected, labels);
 
             if (selected != oldSelected)
             {
@@ -35,19 +58,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                     },
                     changeValueCallback);
             }
-
-            float height = EditorStyles.toolbar.fixedHeight;
-            nextPosition.position += new Vector2(0, height);
-            rect.height = EditorStyles.toolbar.fixedHeight
-                + DrawerLocator.GetDrawerForValue(tabsGroup.Tabs[tabsGroup.Selected].GetValue(), typeof(object))
-                .Draw(nextPosition,
-                    tabsGroup.Tabs[tabsGroup.Selected].GetValue(),
-                    (newValue) =>
-                    {
-                        tabsGroup.Tabs[tabsGroup.Selected].SetValue(newValue);
-                        changeValueCallback(tabsGroup);
-                    },
-                    GUIContent.none).height;
 
             return rect;
         }
