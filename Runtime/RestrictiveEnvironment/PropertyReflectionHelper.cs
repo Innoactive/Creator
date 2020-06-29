@@ -9,6 +9,7 @@ using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Core.Utils;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Innoactive.Creator.Core
 {
@@ -62,7 +63,7 @@ namespace Innoactive.Creator.Core
 
                 if (refType != null)
                 {
-                    result.AddRange(GetAllDependenciesFrom(refType).Select(type => new LockablePropertyData(GetProperty(reference, type))));
+                    result.AddRange(GetLockableDependenciesFrom(refType).Select(type => new LockablePropertyData(GetProperty(reference, type))));
                 }
             });
 
@@ -83,32 +84,23 @@ namespace Innoactive.Creator.Core
             return null;
         }
 
-        private static HashSet<Type> GetAllDependenciesFrom(Type trainingProperty)
+        private static IEnumerable<Type> GetLockableDependenciesFrom(Type trainingProperty)
         {
-            HashSet<Type> dependencies = new HashSet<Type>();
-            RequireComponent[] requireComponents = trainingProperty.GetCustomAttributes(typeof(RequireComponent), false) as RequireComponent[];
+            List<Type> dependencies = new List<Type>();
+            IEnumerable<Type> requireComponents = trainingProperty.GetCustomAttributes(typeof(RequireComponent), false)
+                .Cast<RequireComponent>()
+                .SelectMany(rq => new []{rq.m_Type0, rq.m_Type1, rq.m_Type2});
 
-            if (requireComponents.Any())
+            foreach (Type requireComponent in requireComponents)
             {
-                foreach (RequireComponent requireComponent in requireComponents)
+                if (requireComponent != null && requireComponent.IsSubclassOf(typeof(LockableProperty)))
                 {
-                    AddTypeToList(requireComponent.m_Type0, ref dependencies);
-                    AddTypeToList(requireComponent.m_Type1, ref dependencies);
-                    AddTypeToList(requireComponent.m_Type2, ref dependencies);
+                    dependencies.AddRange(GetLockableDependenciesFrom(requireComponent));
                 }
             }
 
-            AddTypeToList(trainingProperty, ref dependencies);
-
-            return dependencies;
-        }
-
-        private static void AddTypeToList(Type type, ref HashSet<Type> dependencies)
-        {
-            if (type != null)
-            {
-                dependencies.Add(type);
-            }
+            dependencies.Add(trainingProperty);
+            return new HashSet<Type>(dependencies);
         }
     }
 }
