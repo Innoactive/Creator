@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Runtime.Serialization;
-using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Utils.Logging;
 using Innoactive.Creator.Unity;
 

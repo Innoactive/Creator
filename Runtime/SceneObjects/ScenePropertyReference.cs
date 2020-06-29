@@ -2,7 +2,6 @@
 using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Properties;
-using UnityEngine;
 
 namespace Innoactive.Creator.Core.SceneObjects
 {

@@ -2,7 +2,6 @@ using System;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Innoactive.Creator.Core.Configuration
 {

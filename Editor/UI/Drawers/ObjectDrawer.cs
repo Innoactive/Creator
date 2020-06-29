@@ -71,6 +71,11 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         /// </summary>
         protected virtual float DrawLabel(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
+            if (label == GUIContent.none || label == null || (label.image == null && string.IsNullOrEmpty(label.text)))
+            {
+                return 0;
+            }
+
             GUIStyle labelStyle = new GUIStyle(EditorStyles.label)
             {
                 fontStyle = FontStyle.Bold,

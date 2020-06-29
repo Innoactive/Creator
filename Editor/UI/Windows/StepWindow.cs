@@ -24,6 +24,8 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         public static event EventHandler<StepModifiedEventArgs> StepChanged;
 
+        private const int border = 4;
+
         private IStep step;
 
         [SerializeField]
@@ -75,14 +77,16 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             stepRect.width = position.width;
 
-            if (stepRect.height > position.height - EditorGUIUtility.singleLineHeight)
+            if (stepRect.height > position.height)
             {
                 stepRect.width -= GUI.skin.verticalScrollbar.fixedWidth;
             }
 
             scrollPosition = GUI.BeginScrollView(new Rect(0, 0, position.width, position.height), scrollPosition, stepRect, false, false);
             {
-                stepRect = drawer.Draw(stepRect, step, ModifyStep, "Step");
+                Rect stepDrawingRect = new Rect(stepRect.position + new Vector2(border, border), stepRect.size - new Vector2(border * 2f, border * 2f));
+                stepDrawingRect = drawer.Draw(stepDrawingRect, step, ModifyStep, "Step");
+                stepRect = new Rect(stepDrawingRect.position - new Vector2(border,border), stepDrawingRect.size + new Vector2(border * 2f, border * 2f));
             }
             GUI.EndScrollView();
         }

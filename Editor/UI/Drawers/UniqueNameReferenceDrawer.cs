@@ -44,7 +44,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             if (oldUniqueName != newUniqueName)
             {
-
                 RevertableChangesHandler.Do(
                     new CourseCommand(
                         () =>

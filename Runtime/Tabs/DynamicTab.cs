@@ -1,0 +1,36 @@
+using System;
+using UnityEngine;
+
+namespace Innoactive.Creator.Core.Tabs
+{
+    /// <summary>
+    /// This <inheritdoc cref="ITab"/> implementation defines <seealso cref="GetValue"/> and <seealso cref="SetValue"/> implementation with delegates through the constructor.
+    /// </summary>
+    internal class DynamicTab : ITab
+    {
+        public GUIContent Label { get; }
+
+        public object GetValue()
+        {
+            return getter();
+        }
+
+        public void SetValue(object value)
+        {
+            setter(value);
+        }
+
+        private readonly Func<object> getter;
+        private readonly Action<object> setter;
+
+        /// <param name="label">A label to display.</param>
+        /// <param name="getter"><seealso cref="GetValue"/> implementation.</param>
+        /// <param name="setter"><seealso cref="SetValue"/> implementation.</param>
+        public DynamicTab(GUIContent label, Func<object> getter, Action<object> setter)
+        {
+            Label = label;
+            this.getter = getter;
+            this.setter = setter;
+        }
+    }
+}
