@@ -9,7 +9,6 @@ using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Core.Utils;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Innoactive.Creator.Core
 {
