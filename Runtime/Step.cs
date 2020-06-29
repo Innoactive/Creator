@@ -76,11 +76,11 @@ namespace Innoactive.Creator.Core
             }
         }
 
-        private class ActiveProcess : Process<EntityData>
+        private class UnlockProcess : Process<EntityData>
         {
             private readonly IEnumerable<LockablePropertyData> toUnlock;
 
-            public ActiveProcess(EntityData data) : base(data)
+            public UnlockProcess(EntityData data) : base(data)
             {
                 toUnlock = Data.ToUnlock.Select(reference => new LockablePropertyData(reference.GetProperty())).ToList();
             }
@@ -89,6 +89,68 @@ namespace Innoactive.Creator.Core
             public override void Start()
             {
                 LockableHandling.UnlockPropertiesForStepData(Data, toUnlock);
+            }
+
+            ///<inheritdoc />
+            public override IEnumerator Update()
+            {
+                yield return null;
+            }
+
+            ///<inheritdoc />
+            public override void End()
+            {
+            }
+
+            ///<inheritdoc />
+            public override void FastForward()
+            {
+            }
+        }
+
+        private class LockProcess : Process<EntityData>
+        {
+            private readonly IEnumerable<LockablePropertyData> toUnlock;
+
+            public LockProcess(EntityData data) : base(data)
+            {
+                toUnlock = Data.ToUnlock.Select(reference => new LockablePropertyData(reference.GetProperty())).ToList();
+            }
+
+            ///<inheritdoc />
+            public override void Start()
+            {
+            }
+
+            ///<inheritdoc />
+            public override IEnumerator Update()
+            {
+                yield return null;
+            }
+
+            ///<inheritdoc />
+            public override void End()
+            {
+                LockableHandling.LockPropertiesForStepData(Data, toUnlock);
+            }
+
+            ///<inheritdoc />
+            public override void FastForward()
+            {
+            }
+        }
+
+        private class ActiveProcess : Process<EntityData>
+        {
+            private readonly IEnumerable<LockablePropertyData> toUnlock;
+
+            public ActiveProcess(EntityData data) : base(data)
+            {
+            }
+
+            ///<inheritdoc />
+            public override void Start()
+            {
             }
 
             ///<inheritdoc />
@@ -103,7 +165,6 @@ namespace Innoactive.Creator.Core
             ///<inheritdoc />
             public override void End()
             {
-                LockableHandling.LockPropertiesForStepData(Data, toUnlock);
             }
 
             ///<inheritdoc />
@@ -119,7 +180,7 @@ namespace Innoactive.Creator.Core
         ///<inheritdoc />
         public override IProcess GetActivatingProcess()
         {
-            return new FoldedActivatingProcess<IStepChild>(Data);
+            return new CompositeProcess(new FoldedActivatingProcess<IStepChild>(Data), new UnlockProcess(Data));
         }
 
         ///<inheritdoc />
@@ -131,7 +192,7 @@ namespace Innoactive.Creator.Core
         ///<inheritdoc />
         public override IProcess GetDeactivatingProcess()
         {
-            return new FoldedDeactivatingProcess<IStepChild>(Data);
+            return new CompositeProcess(new FoldedDeactivatingProcess<IStepChild>(Data), new LockProcess(Data));
         }
 
         ///<inheritdoc />
