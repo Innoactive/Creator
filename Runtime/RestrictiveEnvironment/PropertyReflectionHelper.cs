@@ -86,15 +86,15 @@ namespace Innoactive.Creator.Core
         private static IEnumerable<Type> GetLockableDependenciesFrom(Type trainingProperty)
         {
             List<Type> dependencies = new List<Type>();
-            IEnumerable<Type> requireComponents = trainingProperty.GetCustomAttributes(typeof(RequireComponent), false)
+            IEnumerable<Type> requiredComponents = trainingProperty.GetCustomAttributes(typeof(RequireComponent), false)
                 .Cast<RequireComponent>()
                 .SelectMany(rq => new []{rq.m_Type0, rq.m_Type1, rq.m_Type2});
 
-            foreach (Type requireComponent in requireComponents)
+            foreach (Type requiredComponent in requiredComponents)
             {
-                if (requireComponent != null && requireComponent.IsSubclassOf(typeof(LockableProperty)))
+                if (requiredComponent != null && requiredComponent.IsSubclassOf(typeof(LockableProperty)))
                 {
-                    dependencies.AddRange(GetLockableDependenciesFrom(requireComponent));
+                    dependencies.AddRange(GetLockableDependenciesFrom(requiredComponent));
                 }
             }
 
