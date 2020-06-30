@@ -3,7 +3,7 @@
         {
             "name": "Components\\VRTK-Interaction",
             "repository": "git@github.com:Innoactive/VRTK-Interaction-Component.git",
-            "branch": "develop"
+            "branch": "feature/autolocking-TRNG55"
         },
         {
             "name": "Components\\Text-To-Speech",
@@ -13,12 +13,12 @@
         {
             "name": "Components\\Basic-Interaction",
             "repository": "git@github.com:Innoactive/Basic-Interaction-Component.git",
-            "branch": "develop"
+            "branch": "feature/autolocking-TRNG55"
         },
         {
             "name": "Components\\Basic-Behaviors-And-Conditions",
             "repository": "git@github.com:Innoactive/Basic-Conditions-And-Behaviors.git",
-            "branch": "develop"
+            "branch": "feature/lockable-environment-TRNG55"
         }
     ]
 }
