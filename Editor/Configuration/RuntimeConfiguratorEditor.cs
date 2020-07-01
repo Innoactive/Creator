@@ -30,7 +30,9 @@ namespace Innoactive.CreatorEditor.Configuration
 
         static RuntimeConfiguratorEditor()
         {
-            configurationTypes = ReflectionUtils.GetConcreteImplementationsOf<IRuntimeConfiguration>().ToList();
+#pragma warning disable 0618
+            configurationTypes = ReflectionUtils.GetConcreteImplementationsOf<IRuntimeConfiguration>().Except(new[] {typeof(RuntimeConfigWrapper)}).ToList();
+#pragma warning restore 0618
             configurationTypes.Sort(((type1, type2) => string.Compare(type1.Name, type2.Name, StringComparison.Ordinal)));
             configurationTypeNames = configurationTypes.Select(t => t.Name).ToArray();
 
@@ -67,8 +69,6 @@ namespace Innoactive.CreatorEditor.Configuration
 
             // Courses can change without recompile so we have to check for them.
             UpdateAvailableCourses();
-
-            configurator.LockSceneObjectsOnStart = EditorGUILayout.Toggle("Lock all SceneObject on Start", configurator.LockSceneObjectsOnStart);
 
             DrawRuntimeConfigurationDropDown();
 

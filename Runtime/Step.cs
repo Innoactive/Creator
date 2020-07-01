@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Behaviors;
+using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
 using Innoactive.Creator.Core.EntityOwners.FoldedEntityCollection;
@@ -88,7 +89,7 @@ namespace Innoactive.Creator.Core
             ///<inheritdoc />
             public override void Start()
             {
-                LockableHandling.UnlockPropertiesForStepData(Data, toUnlock);
+                RuntimeConfigurator.Configuration.StepLockHandling.Unlock(Data, toUnlock);
             }
 
             ///<inheritdoc />
@@ -131,7 +132,7 @@ namespace Innoactive.Creator.Core
             ///<inheritdoc />
             public override void End()
             {
-                LockableHandling.LockPropertiesForStepData(Data, toUnlock);
+                RuntimeConfigurator.Configuration.StepLockHandling.Lock(Data, toUnlock);
             }
 
             ///<inheritdoc />

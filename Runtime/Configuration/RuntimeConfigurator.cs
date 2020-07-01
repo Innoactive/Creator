@@ -35,10 +35,7 @@ namespace Innoactive.Creator.Core.Configuration
         [SerializeField]
         private string selectedCourseStreamingAssetsPath = "";
 
-        private IRuntimeConfiguration runtimeConfiguration;
-
-        [SerializeField]
-        public bool LockSceneObjectsOnStart;
+        private BaseRuntimeConfiguration runtimeConfiguration;
 
         private static RuntimeConfigurator instance;
 
@@ -78,7 +75,7 @@ namespace Innoactive.Creator.Core.Configuration
         /// <summary>
         /// Shortcut to get the <see cref="IRuntimeConfiguration"/> of the instance.
         /// </summary>
-        public static IRuntimeConfiguration Configuration
+        public static BaseRuntimeConfiguration Configuration
         {
             get
             {
@@ -94,8 +91,19 @@ namespace Innoactive.Creator.Core.Configuration
                     Debug.LogErrorFormat("IRuntimeConfiguration type '{0}' cannot be found. Using '{1}' instead.", Instance.runtimeConfigurationName, typeof(DefaultRuntimeConfiguration).AssemblyQualifiedName);
                     type = typeof(DefaultRuntimeConfiguration);
                 }
+#pragma warning disable 0618
+                IRuntimeConfiguration config = (IRuntimeConfiguration)ReflectionUtils.CreateInstanceOfType(type);
+#pragma warning restore 0618
+                if (config is BaseRuntimeConfiguration configuration)
+                {
+                    Configuration = configuration;
+                }
+                else
+                {
+                    Debug.LogWarning("Your RuntimeConfiugration only extends the Interface IRuntimeConfiguration, please consider moving to BaseRuntimeConfiguration as base class.");
+                    Configuration = new RuntimeConfigWrapper(config);
+                }
 
-                Configuration = (IRuntimeConfiguration)ReflectionUtils.CreateInstanceOfType(type);
                 return Instance.runtimeConfiguration;
             }
             set

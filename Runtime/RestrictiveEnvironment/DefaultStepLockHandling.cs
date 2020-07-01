@@ -3,9 +3,12 @@ using System.Linq;
 
 namespace Innoactive.Creator.Core.RestrictiveEnvironment
 {
-    public static class LockableHandling
+    /// <summary>
+    /// Handles locking and unlocking
+    /// </summary>
+    public class DefaultStepLockHandling : StepLockHandlingStrategy
     {
-        public static void UnlockPropertiesForStepData(IStepData data, IEnumerable<LockablePropertyData> manualUnlocked)
+        public override void Unlock(IStepData data, IEnumerable<LockablePropertyData> manualUnlocked)
         {
             IEnumerable<LockablePropertyData> unlockList = GetLockablePropertiesFrom(data);
             unlockList = unlockList.Union(manualUnlocked);
@@ -16,7 +19,7 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
             }
         }
 
-        public static void LockPropertiesForStepData(IStepData data, IEnumerable<LockablePropertyData> manualUnlocked)
+        public override void Lock(IStepData data, IEnumerable<LockablePropertyData> manualUnlocked)
         {
             // All properties which should be locked
             IEnumerable<LockablePropertyData> lockList = GetLockablePropertiesFrom(data);
@@ -54,7 +57,7 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
             }
         }
 
-        private static IEnumerable<LockablePropertyData> GetLockablePropertiesFrom(IStepData data)
+        private IEnumerable<LockablePropertyData> GetLockablePropertiesFrom(IStepData data)
         {
             IEnumerable<LockablePropertyData> result = new List<LockablePropertyData>();
             foreach (ITransition transition in data.Transitions.Data.Transitions)
