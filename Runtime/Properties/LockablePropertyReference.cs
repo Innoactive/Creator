@@ -5,6 +5,9 @@ using Innoactive.Creator.Core.SceneObjects;
 
 namespace Innoactive.Creator.Core.Behaviors
 {
+    /// <summary>
+    /// Serializable reference to a <see cref="LockableProperty"/>
+    /// </summary>
     [DataContract(IsReference = true)]
     public class LockablePropertyReference
     {

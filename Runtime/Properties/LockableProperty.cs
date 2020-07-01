@@ -20,6 +20,9 @@ namespace Innoactive.Creator.Core.Properties
 
         public bool IsLocked { get; private set; }
 
+        /// <summary>
+        /// On default the lockable property will use this value to determine if its locked at the end of a step.
+        /// </summary>
         public virtual bool EndStepLocked { get; } = true;
 
         protected override void OnEnable()
@@ -35,7 +38,6 @@ namespace Innoactive.Creator.Core.Properties
             SceneObject.Locked -= HandleObjectLocked;
             SceneObject.Unlocked -= HandleObjectUnlocked;
         }
-
 
         public virtual void SetLocked(bool lockState)
         {

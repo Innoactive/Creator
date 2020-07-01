@@ -2,11 +2,21 @@
 
 namespace Innoactive.Creator.Core.RestrictiveEnvironment
 {
+    /// <summary>
+    /// Contains a target <see cref="LockableProperty"/> and additional information which define how the property is handled.
+    /// </summary>
     public class LockablePropertyData
     {
+
+        /// <summary>
+        /// Target lockable property.
+        /// </summary>
         public readonly LockableProperty Property;
 
-        public bool EndStepLocked;
+        /// <summary>
+        /// If true the property is locked in the end of a step.
+        /// </summary>
+        public bool EndStepLocked = true;
 
         public LockablePropertyData(LockableProperty property) : this(property, property.EndStepLocked) { }
 
