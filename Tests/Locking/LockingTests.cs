@@ -1,0 +1,560 @@
+﻿﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.RestrictiveEnvironment;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Tests.Builder;
+using Innoactive.Creator.Tests.Utils;
+using Innoactive.Creator.Tests.Utils.Mocks;
+using NUnit.Framework;
+using UnityEngine.TestTools;
+
+namespace Innoactive.Creator.Tests.Locking
+{
+    public class LockingTests : RuntimeTests
+    {
+        [UnityTest]
+        public IEnumerator LockAtEndPropertyIsLockedAfterFinishingStep()
+        {
+            // Given a transition with a condition referencing a scene object with a lockable property
+            // that should be locked in the end of a step.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock property = o1.GameObject.AddComponent<LockablePropertyMock>();
+
+            LockableReferencingConditionMock lockAtEndOfStepCondition = new LockableReferencingConditionMock();
+            lockAtEndOfStepCondition.Data.LockablePropertyMock = new ScenePropertyReference<ILockablePropertyMock>(o1.UniqueName);
+            lockAtEndOfStepCondition.LockableProperties = new[] { new LockablePropertyData(property, true) };
+
+            Step step2 = new BasicStepBuilder("step2").Build();
+
+            Step step = new BasicStepBuilder("step").AddCondition(lockAtEndOfStepCondition).Build();
+            step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
+
+            // When executing the locking routine and completing the step.
+            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            step.Data.Transitions.Data.Transitions.First().Autocomplete();
+            step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
+            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+
+            // Then the property is locked in the end.
+            Assert.IsTrue(property.IsLocked);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator KeepUnlockedAtEndPropertyIsUnlockedAfterFinishingStep()
+        {
+            // Given a transition with a condition referencing a scene object with a lockable property
+            // that should not be locked in the end of a step.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock property = o1.GameObject.AddComponent<LockablePropertyMock>();
+
+            LockableReferencingConditionMock doNotLockAtEndOfStepCondition = new LockableReferencingConditionMock();
+            doNotLockAtEndOfStepCondition.Data.LockablePropertyMock = new ScenePropertyReference<ILockablePropertyMock>(o1.UniqueName);
+            doNotLockAtEndOfStepCondition.LockableProperties = new[] { new LockablePropertyData(property, false) };
+
+            Step step2 = new BasicStepBuilder("step2").Build();
+
+            Step step = new BasicStepBuilder("step").AddCondition(doNotLockAtEndOfStepCondition).Build();
+            step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
+
+            // When executing the locking routine and completing the step.
+            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            step.Data.Transitions.Data.Transitions.First().Autocomplete();
+            step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
+            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+
+            // Then the property is not locked in the end.
+            Assert.IsFalse(property.IsLocked);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator SecondPropertyStaysLocked()
+        {
+            // Given two steps and two scene objects with each one lockable property
+            // where only the first property is referenced in the first step.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock property1 = o1.GameObject.AddComponent<LockablePropertyMock>();
+
+            ISceneObject o2 = TestingUtils.CreateSceneObject("o2");
+            LockablePropertyMock property2 = o2.GameObject.AddComponent<LockablePropertyMock>();
+
+            LockableReferencingConditionMock doNotLockAtEndOfStepCondition = new LockableReferencingConditionMock();
+            doNotLockAtEndOfStepCondition.Data.LockablePropertyMock = new ScenePropertyReference<ILockablePropertyMock>(o1.UniqueName);
+            doNotLockAtEndOfStepCondition.LockableProperties = new[] {new LockablePropertyData(property1, false)};
+
+            Step step2 = new BasicStepBuilder("step2").Build();
+            Step step = new BasicStepBuilder("step")
+                .AddCondition(doNotLockAtEndOfStepCondition)
+                .Build();
+
+            property1.SetLocked(true);
+            property2.SetLocked(true);
+
+            step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
+
+            // When executing the locking routine in the first step.
+            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+
+            // Then property 2 is locked during the first step.
+            Assert.IsTrue(property2.IsLocked);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator GetLockablePropertiesInTransition()
+        {
+            // Given a scene object with one lockable property and one non-lockable property used by a condition in a transition.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock property = o1.GameObject.AddComponent<LockablePropertyMock>();
+            o1.GameObject.AddComponent<PropertyMock>();
+
+            LockableReferencingConditionMock condition = new LockableReferencingConditionMock();
+            condition.Data.LockablePropertyMock = new ScenePropertyReference<ILockablePropertyMock>(o1.UniqueName);
+            condition.LockableProperties = new[] { new LockablePropertyData(property, true) };
+
+            Step step2 = new BasicStepBuilder("step2").Build();
+            Step step = new BasicStepBuilder("step").AddCondition(condition).Build();
+            Transition transition = (Transition)step.Data.Transitions.Data.Transitions[0];
+            transition.Data.TargetStep = step2;
+
+            // When counting the lockable properties in the transition.
+            // Then there is exactly one lockable property.
+            Assert.IsTrue(transition.GetLockableProperties().Count() == 1);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator GetLockablePropertiesZeroLockables()
+        {
+            // Given a scene object with one non-lockable property used by a condition in a transition.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            o1.GameObject.AddComponent<PropertyMock>();
+
+            ReferencingConditionMock condition = new ReferencingConditionMock();
+            condition.Data.PropertyMock = new ScenePropertyReference<PropertyMock>(o1.UniqueName);
+
+            Step step2 = new BasicStepBuilder("step2").Build();
+            Step step = new BasicStepBuilder("step").AddCondition(condition).Build();
+            Transition transition = (Transition)step.Data.Transitions.Data.Transitions[0];
+            transition.Data.TargetStep = step2;
+
+            // When counting the lockable properties in the transition.
+            // Then there is no lockable property.
+            Assert.IsFalse(transition.GetLockableProperties().Any());
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator GetLockablePropertiesObjectInMultipleConditions()
+        {
+            // Given a scene object with one lockable property and one non-lockable property used by two conditions in a transition.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock property = o1.GameObject.AddComponent<LockablePropertyMock>();
+            o1.GameObject.AddComponent<PropertyMock>();
+
+            LockableReferencingConditionMock condition1 = new LockableReferencingConditionMock();
+            condition1.Data.LockablePropertyMock = new ScenePropertyReference<ILockablePropertyMock>(o1.UniqueName);
+            condition1.LockableProperties = new[] { new LockablePropertyData(property, true) };
+
+            LockableReferencingConditionMock condition2 = new LockableReferencingConditionMock();
+            condition2.Data.LockablePropertyMock = new ScenePropertyReference<ILockablePropertyMock>(o1.UniqueName);
+            condition2.LockableProperties = new[] { new LockablePropertyData(property, false) };
+
+            Step step2 = new BasicStepBuilder("step2").Build();
+            Step step = new BasicStepBuilder("step").AddCondition(condition1).AddCondition(condition2).Build();
+
+            Transition transition = (Transition)step.Data.Transitions.Data.Transitions[0];
+            transition.Data.TargetStep = step2;
+
+            // When counting the lockable properties in the transition.
+            // Then there is exactly one lockable property.
+            Assert.IsTrue(transition.GetLockableProperties().Count() == 1);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator GetLockablePropertiesMultipleObjectsAndConditions()
+        {
+            // Given three scene objects,
+            // one of them with one lockable property and one non-lockable property,
+            // one of them with only one non-lockable property,
+            // and one of them with only one lockable property,
+            // used by three different conditions in a transition.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock property = o1.GameObject.AddComponent<LockablePropertyMock>();
+            o1.GameObject.AddComponent<PropertyMock>();
+
+            ISceneObject o2 = TestingUtils.CreateSceneObject("o2");
+            o2.GameObject.AddComponent<PropertyMock>();
+
+            ISceneObject o3 = TestingUtils.CreateSceneObject("o3");
+            LockablePropertyMock property2 = o2.GameObject.AddComponent<LockablePropertyMock>();
+
+            LockableReferencingConditionMock condition1 = new LockableReferencingConditionMock();
+            condition1.Data.LockablePropertyMock = new ScenePropertyReference<ILockablePropertyMock>(o1.UniqueName);
+            condition1.LockableProperties = new[] { new LockablePropertyData(property, true) };
+
+            ReferencingConditionMock condition2 = new ReferencingConditionMock();
+            condition2.Data.PropertyMock = new ScenePropertyReference<PropertyMock>(o2.UniqueName);
+
+            LockableReferencingConditionMock condition3 = new LockableReferencingConditionMock();
+            condition3.Data.LockablePropertyMock = new ScenePropertyReference<ILockablePropertyMock>(o3.UniqueName);
+            condition3.LockableProperties = new[] { new LockablePropertyData(property2, true) };
+
+            Step step2 = new BasicStepBuilder("step2").Build();
+            Step step = new BasicStepBuilder("step")
+                .AddCondition(condition1)
+                .AddCondition(condition2)
+                .AddCondition(condition3)
+                .Build();
+            Transition transition = (Transition)step.Data.Transitions.Data.Transitions[0];
+            transition.Data.TargetStep = step2;
+
+            // When counting the lockable properties in the transition.
+            // Then there are exactly two lockable properties.
+            Assert.IsTrue(transition.GetLockableProperties().Count() == 2);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator EmptyTransition()
+        {
+            // Given a transition from one step to another without any conditions.
+            Step step2 = new BasicStepBuilder("step2").Build();
+            Step step = new BasicStepBuilder("step").Build();
+            step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
+
+            // When executing the locking routine in the first step.
+            try
+            {
+                LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+                LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            }
+            // Then no exception is thrown.
+            catch (Exception exception)
+            {
+                Assert.Fail("Expected no exception, but got: " + exception.Message);
+            }
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator SamePropertyInSecondStepStaysUnlocked()
+        {
+            // Given a scene object with a lockable property which is referenced in the transitions of the first and second step
+            // and should normally lock at the end of a step.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock property = o1.GameObject.AddComponent<LockablePropertyMock>();
+
+            LockableReferencingConditionMock lockAtEndOfStepCondition = new LockableReferencingConditionMock();
+            lockAtEndOfStepCondition.Data.LockablePropertyMock = new ScenePropertyReference<ILockablePropertyMock>(o1.UniqueName);
+            lockAtEndOfStepCondition.LockableProperties = new[] { new LockablePropertyData(property, true) };
+
+            Step step2 = new BasicStepBuilder("step2").AddCondition(lockAtEndOfStepCondition).Build();
+
+            Step step = new BasicStepBuilder("step").AddCondition(lockAtEndOfStepCondition).Build();
+            step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
+
+            // When executing the locking routine in the first step.
+            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            step.Data.Transitions.Data.Transitions.First().Autocomplete();
+            step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
+            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+
+            // Then the property is not locked at the end of the first step because it is needed in the second step.
+            Assert.IsFalse(property.IsLocked);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator SamePropertyInSecondStepGetsLockedAfterSecondStep()
+        {
+            // Given three steps and
+            // a scene object with a lockable property that should normally lock at the end of a step.
+            // It is referenced in the transitions of the first and second step.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock property = o1.GameObject.AddComponent<LockablePropertyMock>();
+
+            LockableReferencingConditionMock lockAtEndOfStepCondition = new LockableReferencingConditionMock();
+            lockAtEndOfStepCondition.Data.LockablePropertyMock = new ScenePropertyReference<ILockablePropertyMock>(o1.UniqueName);
+            lockAtEndOfStepCondition.LockableProperties = new[] { new LockablePropertyData(property, true) };
+
+            Step step3 = new BasicStepBuilder("step3").AddCondition(new EndlessConditionMock()).Build();
+            Step step2 = new BasicStepBuilder("step2").AddCondition(lockAtEndOfStepCondition).Build();
+            step2.Data.Transitions.Data.Transitions[0].Data.TargetStep = step3;
+
+            Step step = new BasicStepBuilder("step").AddCondition(lockAtEndOfStepCondition).Build();
+            step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
+
+            // When executing the locking routine in the first and second step.
+            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            step.Data.Transitions.Data.Transitions.First().Autocomplete();
+            step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
+            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+
+            LockableHandling.UnlockPropertiesForStepData(step2.Data, new List<LockablePropertyData>());
+            step2.Data.Transitions.Data.Transitions.First().Autocomplete();
+            step2.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
+            LockableHandling.LockPropertiesForStepData(step2.Data, new List<LockablePropertyData>());
+
+            // Then the property is locked at the end of the second step because it is not needed any further.
+            Assert.IsTrue(property.IsLocked);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator SecondPropertyGetsLockedAfterNotBeingNeededAnymore()
+        {
+            // Given two steps and two scene objects with each one lockable property
+            // and property 2 (lock at the end of step = true) is referenced only in the first step,
+            // whereas property 1 (lock at the end of step = false) is referenced in both steps.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock DoNotLockAtEndOfStep = o1.GameObject.AddComponent<LockablePropertyMock>();
+
+            ISceneObject o2 = TestingUtils.CreateSceneObject("o2");
+            LockablePropertyMock lockAtEndOfStep = o2.GameObject.AddComponent<LockablePropertyMock>();
+
+            LockableReferencingConditionMock doNotLockAtEndOfStepCondition = new LockableReferencingConditionMock();
+            doNotLockAtEndOfStepCondition.Data.LockablePropertyMock = new ScenePropertyReference<ILockablePropertyMock>(o1.UniqueName);
+            doNotLockAtEndOfStepCondition.LockableProperties = new[] {new LockablePropertyData(DoNotLockAtEndOfStep, false)};
+
+            LockableReferencingConditionMock lockAtEndOfStepCondition = new LockableReferencingConditionMock();
+            lockAtEndOfStepCondition.Data.LockablePropertyMock = new ScenePropertyReference<ILockablePropertyMock>(o2.UniqueName);
+            lockAtEndOfStepCondition.LockableProperties = new[] {new LockablePropertyData(lockAtEndOfStep, true)};
+
+            Step step2 = new BasicStepBuilder("step2").AddCondition(doNotLockAtEndOfStepCondition).Build();
+            Step step = new BasicStepBuilder("step")
+                .AddCondition(doNotLockAtEndOfStepCondition)
+                .AddCondition(lockAtEndOfStepCondition)
+                .Build();
+
+            step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
+
+            // When executing the locking routine in the first step.
+            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            step.Data.Transitions.Data.Transitions.First().Autocomplete();
+            step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
+            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+
+            // Then property 2 is locked in the end of the first step.
+            Assert.IsTrue(lockAtEndOfStep.IsLocked);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator SecondTransitionIsLocked()
+        {
+            // Given a step with two different transitions,
+            // each of them having an own condition with a lockable property which should not be locked at the end of a step.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock property = o1.GameObject.AddComponent<LockablePropertyMock>();
+
+            ISceneObject o2 = TestingUtils.CreateSceneObject("o2");
+            LockablePropertyMock property2 = o2.GameObject.AddComponent<LockablePropertyMock>();
+
+            LockableReferencingConditionMock doNotLockAtEndOfStepCondition1 = new LockableReferencingConditionMock();
+            doNotLockAtEndOfStepCondition1.Data.LockablePropertyMock = new ScenePropertyReference<ILockablePropertyMock>(o1.UniqueName);
+            doNotLockAtEndOfStepCondition1.LockableProperties = new[] {new LockablePropertyData(property, false)};
+
+            LockableReferencingConditionMock doNotLockAtEndOfStepCondition2 = new LockableReferencingConditionMock();
+            doNotLockAtEndOfStepCondition2.Data.LockablePropertyMock = new ScenePropertyReference<ILockablePropertyMock>(o2.UniqueName);
+            doNotLockAtEndOfStepCondition2.LockableProperties = new[] {new LockablePropertyData(property2, false)};
+
+            Step step2 = new BasicStepBuilder("step2").AddCondition(doNotLockAtEndOfStepCondition1).Build();
+
+            Step step = new BasicStepBuilder("step").AddCondition(doNotLockAtEndOfStepCondition1).Build();
+            step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
+            step.Data.Transitions.Data.Transitions.Add(new Transition());
+            step.Data.Transitions.Data.Transitions[1].Data.Conditions.Add(doNotLockAtEndOfStepCondition2);
+
+            // When completing only the first transition.
+            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            step.Data.Transitions.Data.Transitions.First().Autocomplete();
+            step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
+            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+
+            // Then the lockable property of the second transition is locked,
+            // even though lock at the end of step is set to false.
+            Assert.IsTrue(property2.IsLocked);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator UnlockedAfterManualUnlockStarted()
+        {
+            // Given a scene object with a lockable property which is not referenced by any condition.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock property = o1.GameObject.AddComponent<LockablePropertyMock>();
+
+            EndlessConditionMock condition = new EndlessConditionMock();
+
+            Step step2 = new BasicStepBuilder("step").AddCondition(new EndlessConditionMock()).Build();
+            Step step = new BasicStepBuilder("step").AddCondition(condition).Build();
+
+            step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
+
+            property.SetLocked(true);
+
+            // When we include the property into the manualUnlocked list of the UnlockPropertiesForStepData method.
+            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData> {new LockablePropertyData(property)});
+
+            // Then the property is not locked.
+            Assert.IsFalse(property.IsLocked);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator OtherPropertyNotUnlockedAfterManualUnlockStarted()
+        {
+            // Given a scene object with two independent lockable properties which are not referenced by any condition.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock property = o1.GameObject.AddComponent<LockablePropertyMock>();
+            LockablePropertyMock property2 = o1.GameObject.AddComponent<LockablePropertyMock>();
+
+            EndlessConditionMock condition = new EndlessConditionMock();
+
+            Step step2 = new BasicStepBuilder("step").AddCondition(new EndlessConditionMock()).Build();
+            Step step = new BasicStepBuilder("step").AddCondition(condition).Build();
+
+            step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
+
+            property.SetLocked(true);
+            property2.SetLocked(true);
+
+            // When we manually unlock one property.
+            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData> {new LockablePropertyData(property)});
+
+            // Then the other stays is locked.
+            Assert.IsTrue(property2.IsLocked);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator LockedAfterManualUnlockFinished()
+        {
+            // Given a scene object with a lockable property which is not referenced by any condition.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock property = o1.GameObject.AddComponent<LockablePropertyMock>();
+
+            EndlessConditionMock condition = new EndlessConditionMock();
+
+            Step step2 = new BasicStepBuilder("step").AddCondition(new EndlessConditionMock()).Build();
+            Step step = new BasicStepBuilder("step").AddCondition(condition).Build();
+
+            property.SetLocked(true);
+            step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
+
+            // When we manually unlock the property for one step.
+            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            step.Data.Transitions.Data.Transitions.First().Autocomplete();
+            step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
+            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData> {new LockablePropertyData(property)});
+
+            // Then it is locked again after the step was completed.
+            Assert.IsTrue(property.IsLocked);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator OtherPropertyLockedAfterManualUnlockFinished()
+        {
+            // Given a scene object with two independent lockable properties which are not referenced by any condition.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock property = o1.GameObject.AddComponent<LockablePropertyMock>();
+            LockablePropertyMock property2 = o1.GameObject.AddComponent<LockablePropertyMock>();
+
+            EndlessConditionMock condition = new EndlessConditionMock();
+
+            Step step2 = new BasicStepBuilder("step").AddCondition(new EndlessConditionMock()).Build();
+            Step step = new BasicStepBuilder("step").AddCondition(condition).Build();
+
+            step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
+
+            property.SetLocked(true);
+            property2.SetLocked(true);
+
+            // When we manually unlock one property for one step.
+            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            step.Data.Transitions.Data.Transitions.First().Autocomplete();
+            step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
+            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData> {new LockablePropertyData(property)});
+
+            // Then the other property stays locked after the step was completed.
+            Assert.IsTrue(property2.IsLocked);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator DependencyGetsUnlocked()
+        {
+            // Given a scene object with one lockable property with dependency.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock dependency = o1.GameObject.AddComponent<LockablePropertyMock>();
+            LockablePropertyMockWithDependency propertyWithDependency = o1.GameObject.AddComponent<LockablePropertyMockWithDependency>();
+
+            Step step2 = new BasicStepBuilder("step").Build();
+            Step step = new BasicStepBuilder("step").AddCondition(new EndlessConditionMock()).Build();
+
+            step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
+
+            dependency.SetLocked(true);
+            propertyWithDependency.SetLocked(true);
+
+            // When we manually unlock the property for one step.
+            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData> {new LockablePropertyData(propertyWithDependency)});
+
+            // Then the dependent property is also unlocked.
+            Assert.IsFalse(dependency.IsLocked);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator DependencyGetsLocked()
+        {
+            // Given a scene object with one lockable property with dependency.
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock dependency = o1.GameObject.AddComponent<LockablePropertyMock>();
+            LockablePropertyMockWithDependency propertyWithDependency = o1.GameObject.AddComponent<LockablePropertyMockWithDependency>();
+
+            Step step2 = new BasicStepBuilder("step").Build();
+            Step step = new BasicStepBuilder("step").AddCondition(new EndlessConditionMock()).Build();
+
+            step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
+
+            dependency.SetLocked(true);
+            propertyWithDependency.SetLocked(true);
+
+            // When we manually unlock the property for one step.
+            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData> {new LockablePropertyData(propertyWithDependency)});
+            step.Data.Transitions.Data.Transitions.First().Autocomplete();
+            step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
+            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData> {new LockablePropertyData(propertyWithDependency)});
+
+            // Then after the step the dependent property is also locked again.
+            Assert.IsTrue(dependency.IsLocked);
+
+            yield return null;
+        }
+    }
+}
