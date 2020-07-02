@@ -16,7 +16,7 @@ namespace Innoactive.Creator.Tests.Locking
     public class LockingTests : RuntimeTests
     {
         [UnityTest]
-        public IEnumerator LockPropertyStaysIsLockedAfterFinished()
+        public IEnumerator LockAtEndPropertyIsLockedAfterFinishingStep()
         {
             // Given a transition with a condition referencing a scene object with a lockable property
             // that should be locked in the end of a step.
@@ -45,7 +45,7 @@ namespace Innoactive.Creator.Tests.Locking
         }
 
         [UnityTest]
-        public IEnumerator UnlockedPropertyStaysIsUnlockedAfterFinished()
+        public IEnumerator KeepUnlockedAtEndPropertyIsUnlockedAfterFinishingStep()
         {
             // Given a transition with a condition referencing a scene object with a lockable property
             // that should not be locked in the end of a step.
