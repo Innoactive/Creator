@@ -209,8 +209,7 @@ namespace Innoactive.CreatorEditor.Configuration
                 {
                     continue;
                 }
-
-                SerializedBehaviorSelections.Add(type.AssemblyQualifiedName, true);
+                SerializedBehaviorSelections.Add(type.AssemblyQualifiedName, ShouldBeEnabled(type));
             }
 
             IEnumerable<Type> implementedConditions = ReflectionUtils.GetConcreteImplementationsOf<MenuItem<ICondition>>();
@@ -222,8 +221,19 @@ namespace Innoactive.CreatorEditor.Configuration
                     continue;
                 }
 
-                SerializedConditionSelections.Add(type.AssemblyQualifiedName, true);
+                SerializedConditionSelections.Add(type.AssemblyQualifiedName, ShouldBeEnabled(type));
             }
+        }
+
+        private bool ShouldBeEnabled(Type type)
+        {
+            object instance = Activator.CreateInstance(type);
+            if (instance is IInternalTypeProvider typeProvider)
+            {
+                return typeProvider.GetItemType().GetAttribute<ObsoleteAttribute>() == null;
+            }
+
+            return true;
         }
     }
 }

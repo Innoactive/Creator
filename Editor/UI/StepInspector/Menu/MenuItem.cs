@@ -1,3 +1,5 @@
+using System;
+
 namespace Innoactive.CreatorEditor.UI.StepInspector.Menu
 {
     /// <summary>
@@ -7,7 +9,7 @@ namespace Innoactive.CreatorEditor.UI.StepInspector.Menu
     /// If clicked, it will use the result of <see cref="GetNewItem"/>.
     /// </summary>
     /// <typeparam name="T">A type of an object to create.</typeparam>
-    public abstract class MenuItem<T> : MenuOption<T>
+    public abstract class MenuItem<T> : MenuOption<T>, IInternalTypeProvider
     {
         /// <summary>
         /// Returns a new instance of an object (behavior or condition).
@@ -18,5 +20,13 @@ namespace Innoactive.CreatorEditor.UI.StepInspector.Menu
         /// A name displayed in the Step Inspector.
         /// </summary>
         public abstract string DisplayedName { get; }
+
+        /// <summary>
+        /// Returns the Type of the item created in <see cref="GetNewItem"/>
+        /// </summary>
+        public virtual Type GetItemType()
+        {
+            return GetNewItem().GetType();
+        }
     }
 }
