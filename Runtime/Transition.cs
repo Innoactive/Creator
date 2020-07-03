@@ -127,6 +127,7 @@ namespace Innoactive.Creator.Core
             return new EntityAutocompleter(Data);
         }
 
+        /// <inheritdoc />
         public Transition()
         {
             Data.Conditions = new List<ICondition>();

@@ -37,6 +37,9 @@ namespace Innoactive.Creator.Core.Behaviors
             Type = type.AssemblyQualifiedName;
         }
 
+        /// <summary>
+        /// Returns the referenced <see cref="LockableProperty"/>.
+        /// </summary>
         public LockableProperty GetProperty()
         {
             if (property == null)

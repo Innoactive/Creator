@@ -12,9 +12,14 @@ using UnityEngine;
 
 namespace Innoactive.Creator.Core
 {
+    /// <summary>
+    /// Helper class which provides methods to extract <see cref="LockablePropertyData"/> from different course entities.
+    /// </summary>
     public static class PropertyReflectionHelper
     {
-
+        /// <summary>
+        /// Extracts a list of <see cref="LockablePropertyData"/> from given Step.
+        /// </summary>
         public static List<LockablePropertyData> ExtractLockablesFromStep(IStep step)
         {
             List<LockablePropertyData> result = new List<LockablePropertyData>();
@@ -31,7 +36,7 @@ namespace Innoactive.Creator.Core
         }
 
         /// <summary>
-        /// Extracts all scene and property references which have extend a LockableProperty.
+        /// Extracts all <see cref="LockablePropertyData"/> from given Condition.
         /// </summary>
         public static List<LockablePropertyData> ExtractLockablePropertiesFromConditions(IConditionData data)
         {

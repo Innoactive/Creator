@@ -33,6 +33,7 @@ namespace Innoactive.Creator.Core.Conditions
             }
         }
 
+        /// <inheritdoc />
         public virtual IEnumerable<LockablePropertyData> GetLockableProperties()
         {
             return PropertyReflectionHelper.ExtractLockablePropertiesFromConditions(Data);

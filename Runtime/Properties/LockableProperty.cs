@@ -4,6 +4,10 @@
 
 namespace Innoactive.Creator.Core.Properties
 {
+    /// <summary>
+    /// TrainingSceneObjectProperty which is lockable, to allow the restrictive environment to handle
+    /// locking/unlocking your properties, extend this class.
+    /// </summary>
     public abstract class LockableProperty : TrainingSceneObjectProperty, ILockable
     {
         public event EventHandler<LockStateChangedEventArgs> Locked;
@@ -18,6 +22,7 @@ namespace Innoactive.Creator.Core.Properties
             set => lockOnParentObjectLock = value;
         }
 
+        /// <inheritdoc/>
         public bool IsLocked { get; private set; }
 
         /// <summary>
@@ -39,6 +44,7 @@ namespace Innoactive.Creator.Core.Properties
             SceneObject.Unlocked -= HandleObjectUnlocked;
         }
 
+        /// <inheritdoc/>
         public virtual void SetLocked(bool lockState)
         {
             if (IsLocked == lockState)
@@ -82,6 +88,9 @@ namespace Innoactive.Creator.Core.Properties
             }
         }
 
+        /// <summary>
+        /// Handle your internal locking affairs here.
+        /// </summary>
         protected abstract void InternalSetLocked(bool lockState);
     }
 }
