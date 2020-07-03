@@ -4,10 +4,12 @@ using System.Linq;
 namespace Innoactive.Creator.Core.RestrictiveEnvironment
 {
     /// <summary>
-    /// Handles locking and unlocking
+    /// Restricts interaction with scene objects by using LockableProperties, which are extracted from the <see cref="IStepData"/>.
     /// </summary>
     public class DefaultStepLockHandling : StepLockHandlingStrategy
     {
+
+        /// <inheritdoc />
         public override void Unlock(IStepData data, IEnumerable<LockablePropertyData> manualUnlocked)
         {
             IEnumerable<LockablePropertyData> unlockList = GetLockablePropertiesFrom(data);
@@ -19,6 +21,7 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
             }
         }
 
+        /// <inheritdoc />
         public override void Lock(IStepData data, IEnumerable<LockablePropertyData> manualUnlocked)
         {
             // All properties which should be locked
