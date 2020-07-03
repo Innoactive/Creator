@@ -93,17 +93,16 @@ namespace Innoactive.Creator.Core.Configuration
                 }
 #pragma warning disable 0618
                 IRuntimeConfiguration config = (IRuntimeConfiguration)ReflectionUtils.CreateInstanceOfType(type);
-#pragma warning restore 0618
                 if (config is BaseRuntimeConfiguration configuration)
                 {
                     Configuration = configuration;
                 }
                 else
                 {
-                    Debug.LogWarning("Your RuntimeConfiugration only extends the Interface IRuntimeConfiguration, please consider moving to BaseRuntimeConfiguration as base class.");
+                    Debug.LogWarning("Your runtime configuration only extends the interface IRuntimeConfiguration, please consider moving to BaseRuntimeConfiguration as base class.");
                     Configuration = new RuntimeConfigWrapper(config);
                 }
-
+#pragma warning restore 0618
                 return Instance.runtimeConfiguration;
             }
             set
