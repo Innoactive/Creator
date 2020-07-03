@@ -9,6 +9,9 @@ using UnityEngine;
 
 namespace Innoactive.Creator.Core.Configuration
 {
+    /// <summary>
+    /// Base class for your runtime course configuration. Extend it to create your own.
+    /// </summary>
 #pragma warning disable 0618
     public abstract class BaseRuntimeConfiguration : IRuntimeConfiguration
     {
@@ -35,9 +38,15 @@ namespace Innoactive.Creator.Core.Configuration
         /// <inheritdoc />
         public IModeHandler Modes { get; protected set; }
 
+        /// <inheritdoc />
         public abstract TrainingSceneObject Trainee { get; }
+
+        /// <inheritdoc />
         public abstract AudioSource InstructionPlayer { get; }
 
+        /// <summary>
+        /// Determines the property locking strategy used for this runtime configuration.
+        /// </summary>
         public StepLockHandlingStrategy StepLockHandling { get; set; } = new DefaultStepLockHandling();
 
         /// <inheritdoc />
