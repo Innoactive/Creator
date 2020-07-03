@@ -15,6 +15,8 @@ namespace Innoactive.Creator.Tests.Locking
 {
     public class LockingTests : RuntimeTests
     {
+        public readonly DefaultStepLockHandling LockHandling = new DefaultStepLockHandling();
+
         [UnityTest]
         public IEnumerator LockAtEndPropertyIsLockedAfterFinishingStep()
         {
@@ -33,10 +35,10 @@ namespace Innoactive.Creator.Tests.Locking
             step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
 
             // When executing the locking routine and completing the step.
-            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            LockHandling.Unlock(step.Data, new List<LockablePropertyData>());
             step.Data.Transitions.Data.Transitions.First().Autocomplete();
             step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
-            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            LockHandling.Lock(step.Data, new List<LockablePropertyData>());
 
             // Then the property is locked in the end.
             Assert.IsTrue(property.IsLocked);
@@ -62,10 +64,10 @@ namespace Innoactive.Creator.Tests.Locking
             step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
 
             // When executing the locking routine and completing the step.
-            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            LockHandling.Unlock(step.Data, new List<LockablePropertyData>());
             step.Data.Transitions.Data.Transitions.First().Autocomplete();
             step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
-            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            LockHandling.Lock(step.Data, new List<LockablePropertyData>());
 
             // Then the property is not locked in the end.
             Assert.IsFalse(property.IsLocked);
@@ -99,7 +101,7 @@ namespace Innoactive.Creator.Tests.Locking
             step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
 
             // When executing the locking routine in the first step.
-            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            LockHandling.Unlock(step.Data, new List<LockablePropertyData>());
 
             // Then property 2 is locked during the first step.
             Assert.IsTrue(property2.IsLocked);
@@ -238,8 +240,8 @@ namespace Innoactive.Creator.Tests.Locking
             // When executing the locking routine in the first step.
             try
             {
-                LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
-                LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+                LockHandling.Unlock(step.Data, new List<LockablePropertyData>());
+                LockHandling.Lock(step.Data, new List<LockablePropertyData>());
             }
             // Then no exception is thrown.
             catch (Exception exception)
@@ -268,10 +270,10 @@ namespace Innoactive.Creator.Tests.Locking
             step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
 
             // When executing the locking routine in the first step.
-            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            LockHandling.Unlock(step.Data, new List<LockablePropertyData>());
             step.Data.Transitions.Data.Transitions.First().Autocomplete();
             step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
-            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            LockHandling.Lock(step.Data, new List<LockablePropertyData>());
 
             // Then the property is not locked at the end of the first step because it is needed in the second step.
             Assert.IsFalse(property.IsLocked);
@@ -300,15 +302,15 @@ namespace Innoactive.Creator.Tests.Locking
             step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
 
             // When executing the locking routine in the first and second step.
-            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            LockHandling.Unlock(step.Data, new List<LockablePropertyData>());
             step.Data.Transitions.Data.Transitions.First().Autocomplete();
             step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
-            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            LockHandling.Lock(step.Data, new List<LockablePropertyData>());
 
-            LockableHandling.UnlockPropertiesForStepData(step2.Data, new List<LockablePropertyData>());
+            LockHandling.Unlock(step2.Data, new List<LockablePropertyData>());
             step2.Data.Transitions.Data.Transitions.First().Autocomplete();
             step2.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
-            LockableHandling.LockPropertiesForStepData(step2.Data, new List<LockablePropertyData>());
+            LockHandling.Lock(step2.Data, new List<LockablePropertyData>());
 
             // Then the property is locked at the end of the second step because it is not needed any further.
             Assert.IsTrue(property.IsLocked);
@@ -345,10 +347,10 @@ namespace Innoactive.Creator.Tests.Locking
             step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
 
             // When executing the locking routine in the first step.
-            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            LockHandling.Unlock(step.Data, new List<LockablePropertyData>());
             step.Data.Transitions.Data.Transitions.First().Autocomplete();
             step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
-            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            LockHandling.Lock(step.Data, new List<LockablePropertyData>());
 
             // Then property 2 is locked in the end of the first step.
             Assert.IsTrue(lockAtEndOfStep.IsLocked);
@@ -383,10 +385,10 @@ namespace Innoactive.Creator.Tests.Locking
             step.Data.Transitions.Data.Transitions[1].Data.Conditions.Add(doNotLockAtEndOfStepCondition2);
 
             // When completing only the first transition.
-            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            LockHandling.Unlock(step.Data, new List<LockablePropertyData>());
             step.Data.Transitions.Data.Transitions.First().Autocomplete();
             step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
-            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            LockHandling.Lock(step.Data, new List<LockablePropertyData>());
 
             // Then the lockable property of the second transition is locked,
             // even though lock at the end of step is set to false.
@@ -412,7 +414,7 @@ namespace Innoactive.Creator.Tests.Locking
             property.SetLocked(true);
 
             // When we include the property into the manualUnlocked list of the UnlockPropertiesForStepData method.
-            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData> {new LockablePropertyData(property)});
+            LockHandling.Unlock(step.Data, new List<LockablePropertyData> {new LockablePropertyData(property)});
 
             // Then the property is not locked.
             Assert.IsFalse(property.IsLocked);
@@ -439,7 +441,7 @@ namespace Innoactive.Creator.Tests.Locking
             property2.SetLocked(true);
 
             // When we manually unlock one property.
-            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData> {new LockablePropertyData(property)});
+            LockHandling.Unlock(step.Data, new List<LockablePropertyData> {new LockablePropertyData(property)});
 
             // Then the other stays is locked.
             Assert.IsTrue(property2.IsLocked);
@@ -463,10 +465,10 @@ namespace Innoactive.Creator.Tests.Locking
             step.Data.Transitions.Data.Transitions[0].Data.TargetStep = step2;
 
             // When we manually unlock the property for one step.
-            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            LockHandling.Unlock(step.Data, new List<LockablePropertyData>());
             step.Data.Transitions.Data.Transitions.First().Autocomplete();
             step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
-            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData> {new LockablePropertyData(property)});
+            LockHandling.Lock(step.Data, new List<LockablePropertyData> {new LockablePropertyData(property)});
 
             // Then it is locked again after the step was completed.
             Assert.IsTrue(property.IsLocked);
@@ -493,10 +495,10 @@ namespace Innoactive.Creator.Tests.Locking
             property2.SetLocked(true);
 
             // When we manually unlock one property for one step.
-            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData>());
+            LockHandling.Unlock(step.Data, new List<LockablePropertyData>());
             step.Data.Transitions.Data.Transitions.First().Autocomplete();
             step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
-            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData> {new LockablePropertyData(property)});
+            LockHandling.Lock(step.Data, new List<LockablePropertyData> {new LockablePropertyData(property)});
 
             // Then the other property stays locked after the step was completed.
             Assert.IsTrue(property2.IsLocked);
@@ -521,7 +523,7 @@ namespace Innoactive.Creator.Tests.Locking
             propertyWithDependency.SetLocked(true);
 
             // When we manually unlock the property for one step.
-            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData> {new LockablePropertyData(propertyWithDependency)});
+            LockHandling.Unlock(step.Data, new List<LockablePropertyData> {new LockablePropertyData(propertyWithDependency)});
 
             // Then the dependent property is also unlocked.
             Assert.IsFalse(dependency.IsLocked);
@@ -546,10 +548,10 @@ namespace Innoactive.Creator.Tests.Locking
             propertyWithDependency.SetLocked(true);
 
             // When we manually unlock the property for one step.
-            LockableHandling.UnlockPropertiesForStepData(step.Data, new List<LockablePropertyData> {new LockablePropertyData(propertyWithDependency)});
+            LockHandling.Unlock(step.Data, new List<LockablePropertyData> {new LockablePropertyData(propertyWithDependency)});
             step.Data.Transitions.Data.Transitions.First().Autocomplete();
             step.Data.Transitions.Data.Transitions.First().Data.IsCompleted = true;
-            LockableHandling.LockPropertiesForStepData(step.Data, new List<LockablePropertyData> {new LockablePropertyData(propertyWithDependency)});
+            LockHandling.Lock(step.Data, new List<LockablePropertyData> {new LockablePropertyData(propertyWithDependency)});
 
             // Then after the step the dependent property is also locked again.
             Assert.IsTrue(dependency.IsLocked);
