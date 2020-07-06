@@ -9,7 +9,7 @@ using Innoactive.Creator.Core.SceneObjects;
 namespace Innoactive.Creator.Core
 {
     [DataContract(IsReference = true)]
-    public class LockableObjectsCollection
+    internal class LockableObjectsCollection
     {
         public string Text = "LockableCollection";
 
