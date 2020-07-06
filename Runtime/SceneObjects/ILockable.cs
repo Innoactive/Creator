@@ -7,7 +7,14 @@ namespace Innoactive.Creator.Core.SceneObjects
     /// </summary>
     public interface ILockable
     {
+        /// <summary>
+        /// Will be called when the object containing this interface is locked.
+        /// </summary>
         event EventHandler<LockStateChangedEventArgs> Locked;
+
+        /// <summary>
+        /// Will be called when the object containing this interface is unlocked.
+        /// </summary>
         event EventHandler<LockStateChangedEventArgs> Unlocked;
 
         /// <summary>

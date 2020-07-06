@@ -7,7 +7,6 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
     /// </summary>
     public class LockablePropertyData
     {
-
         /// <summary>
         /// Target lockable property.
         /// </summary>
@@ -31,6 +30,7 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
             return Equals(Property, other.Property);
         }
 
+        ///  <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
@@ -39,6 +39,7 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
             return Equals((LockablePropertyData) obj);
         }
 
+        ///  <inheritdoc/>
         public override int GetHashCode()
         {
             return (Property != null ? Property.GetHashCode() : 0);

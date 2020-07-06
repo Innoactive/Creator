@@ -8,7 +8,6 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
     /// </summary>
     public class DefaultStepLockHandling : StepLockHandlingStrategy
     {
-
         /// <inheritdoc />
         public override void Unlock(IStepData data, IEnumerable<LockablePropertyData> manualUnlocked)
         {

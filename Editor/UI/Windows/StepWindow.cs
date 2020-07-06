@@ -12,18 +12,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
     /// </summary>
     internal class StepWindow : EditorWindow
     {
-        internal class StepModifiedEventArgs : EventArgs
-        {
-            public readonly IStep CurrentStep;
-
-            public StepModifiedEventArgs(IStep currentStep)
-            {
-                CurrentStep = currentStep;
-            }
-        }
-
-        public static event EventHandler<StepModifiedEventArgs> StepChanged;
-
         private const int border = 4;
 
         private IStep step;
@@ -95,7 +83,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
         {
             step = (IStep)newStep;
             GlobalEditorHandler.CurrentStepModified(step);
-            StepChanged?.Invoke(this, new StepModifiedEventArgs(step));
         }
 
         public void SetStep(IStep newStep)

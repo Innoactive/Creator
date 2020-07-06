@@ -142,6 +142,7 @@ namespace Innoactive.Creator.Core
             }
         }
 
+        /// <inheritdoc />
         public IEnumerable<LockablePropertyData> GetLockableProperties()
         {
             IEnumerable<LockablePropertyData> lockable = new List<LockablePropertyData>();

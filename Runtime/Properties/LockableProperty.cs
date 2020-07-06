@@ -5,17 +5,22 @@
 namespace Innoactive.Creator.Core.Properties
 {
     /// <summary>
-    /// TrainingSceneObjectProperty which is lockable, to allow the restrictive environment to handle
+    /// <see cref="TrainingSceneObjectProperty"/> which is lockable, to allow the restrictive environment to handle
     /// locking/unlocking your properties, extend this class.
     /// </summary>
     public abstract class LockableProperty : TrainingSceneObjectProperty, ILockable
     {
+        ///  <inheritdoc/>
         public event EventHandler<LockStateChangedEventArgs> Locked;
+        ///  <inheritdoc/>
         public event EventHandler<LockStateChangedEventArgs> Unlocked;
 
         [SerializeField]
         private bool lockOnParentObjectLock = true;
 
+        /// <summary>
+        /// Decides if the property will be locked when the parent scene object is locked.
+        /// </summary>
         public bool LockOnParentObjectLock
         {
             get => lockOnParentObjectLock;

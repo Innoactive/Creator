@@ -11,9 +11,15 @@ namespace Innoactive.Creator.Core.Behaviors
     [DataContract(IsReference = true)]
     public class LockablePropertyReference
     {
+        /// <summary>
+        /// Reference to the scene object the LockableProperty is attached to.
+        /// </summary>
         [DataMember]
         public SceneObjectReference Target;
 
+        /// <summary>
+        /// Type name of the LockableProperty.
+        /// </summary>
         [DataMember]
         public string Type;
 

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Innoactive.Creator.Core.Configuration
 {
     /// <summary>
-    /// This is wrapper used for <see cref="IRuntimeConfiguration"/> configurations, which
+    /// This wrapper is used for <see cref="IRuntimeConfiguration"/> configurations, which
     /// ensures that the old interface based configurations can still be used.
     /// </summary>
     [Obsolete("Helper class to ensure backwards compatibility.")]

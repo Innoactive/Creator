@@ -9,6 +9,9 @@ namespace Innoactive.Creator.Core
     /// </summary>
     public interface ILockablePropertiesProvider
     {
+        /// <summary>
+        /// Returns all LockableProperties this provider requires.
+        /// </summary>
         IEnumerable<LockablePropertyData> GetLockableProperties();
     }
 }

@@ -15,26 +15,8 @@ namespace Innoactive.Creator.Core
     /// <summary>
     /// Helper class which provides methods to extract <see cref="LockablePropertyData"/> from different course entities.
     /// </summary>
-    public static class PropertyReflectionHelper
+    internal static class PropertyReflectionHelper
     {
-        /// <summary>
-        /// Extracts a list of <see cref="LockablePropertyData"/> from given Step.
-        /// </summary>
-        public static List<LockablePropertyData> ExtractLockablesFromStep(IStep step)
-        {
-            List<LockablePropertyData> result = new List<LockablePropertyData>();
-
-            foreach (ITransition transition in step.Data.Transitions.Data.Transitions)
-            {
-                foreach (ICondition condition in transition.Data.Conditions)
-                {
-                    result.AddRange(ExtractLockablePropertiesFromConditions(condition.Data));
-                }
-            }
-
-            return result;
-        }
-
         /// <summary>
         /// Extracts all <see cref="LockablePropertyData"/> from given Condition.
         /// </summary>
