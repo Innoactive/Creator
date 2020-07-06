@@ -21,5 +21,15 @@ namespace Innoactive.Creator.Core.Tabs
         /// When user has modified the object under this tab, the Step Inspector invokes this method. It should assign the new value to the actual property.
         /// </summary>
         void SetValue(object value);
+
+        /// <summary>
+        /// Will be called when this tab is selected.
+        /// </summary>
+        void OnSelected();
+
+        /// <summary>
+        /// Will be called when this tab is unselected.
+        /// </summary>
+        void OnUnselect();
     }
 }

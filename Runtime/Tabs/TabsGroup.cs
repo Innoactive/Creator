@@ -9,7 +9,20 @@ namespace Innoactive.Creator.Core.Tabs
     {
         /// <inheritdoc />
         [DataMember]
-        public int Selected { get; set; }
+        public int Selected
+        {
+            get
+            {
+                return selected;
+            }
+            
+            set
+            {
+                selected = value;
+            }
+        }
+
+        private int selected;
 
         /// <inheritdoc />
         public IList<ITab> Tabs { get; }

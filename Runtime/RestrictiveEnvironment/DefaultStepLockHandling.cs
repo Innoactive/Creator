@@ -11,7 +11,7 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
         /// <inheritdoc />
         public override void Unlock(IStepData data, IEnumerable<LockablePropertyData> manualUnlocked)
         {
-            IEnumerable<LockablePropertyData> unlockList = GetLockablePropertiesFrom(data);
+            IEnumerable<LockablePropertyData> unlockList = PropertyReflectionHelper.ExtractLockablesFromStep(data);
             unlockList = unlockList.Union(manualUnlocked);
 
             foreach (LockablePropertyData lockable in unlockList)
@@ -24,13 +24,13 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
         public override void Lock(IStepData data, IEnumerable<LockablePropertyData> manualUnlocked)
         {
             // All properties which should be locked
-            IEnumerable<LockablePropertyData> lockList = GetLockablePropertiesFrom(data);
+            IEnumerable<LockablePropertyData> lockList = PropertyReflectionHelper.ExtractLockablesFromStep(data);
             lockList = lockList.Union(manualUnlocked);
 
             ITransition completedTransition = data.Transitions.Data.Transitions.FirstOrDefault(transition => transition.IsCompleted);
             if (completedTransition != null && completedTransition.Data.TargetStep != null)
             {
-                IEnumerable<LockablePropertyData> nextStepProperties = GetLockablePropertiesFrom(completedTransition.Data.TargetStep.Data);
+                IEnumerable<LockablePropertyData> nextStepProperties = PropertyReflectionHelper.ExtractLockablesFromStep(completedTransition.Data.TargetStep.Data);
 
                 if (completedTransition.Data.TargetStep.Data is ILockableStepData lockableStepData)
                 {
@@ -57,20 +57,6 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
             {
                 lockable.Property.SetLocked(true);
             }
-        }
-
-        private IEnumerable<LockablePropertyData> GetLockablePropertiesFrom(IStepData data)
-        {
-            IEnumerable<LockablePropertyData> result = new List<LockablePropertyData>();
-            foreach (ITransition transition in data.Transitions.Data.Transitions)
-            {
-                if (transition.IsCompleted == false && transition is ILockablePropertiesProvider lockableTransition)
-                {
-                    result = result.Union(lockableTransition.GetLockableProperties());
-                }
-            }
-
-            return result;
         }
     }
 }
