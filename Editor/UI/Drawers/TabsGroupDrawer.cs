@@ -45,16 +45,17 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             if (selected != oldSelected)
             {
-                tabsGroup.Tabs[oldSelected].OnUnselect();
-                tabsGroup.Tabs[selected].OnSelected();
-                
                 ChangeValue(() =>
                     {
+                        tabsGroup.Tabs[oldSelected].OnUnselect();
+                        tabsGroup.Tabs[selected].OnSelected();
                         tabsGroup.Selected = selected;
                         return tabsGroup;
                     },
                     () =>
                     {
+                        tabsGroup.Tabs[selected].OnUnselect();
+                        tabsGroup.Tabs[oldSelected].OnSelected();
                         tabsGroup.Selected = oldSelected;
                         return tabsGroup;
                     },
