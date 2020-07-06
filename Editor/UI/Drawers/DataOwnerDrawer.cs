@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Innoactive.CreatorEditor.UI.Drawers
 {
     [DefaultTrainingDrawer(typeof(IDataOwner))]
-    internal class DataOwnerDrawer : AbstractDrawer
+    public class DataOwnerDrawer : AbstractDrawer
     {
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {

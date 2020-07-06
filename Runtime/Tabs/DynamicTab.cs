@@ -20,6 +20,10 @@ namespace Innoactive.Creator.Core.Tabs
             setter(value);
         }
 
+        public void OnSelected() { }
+
+        public void OnUnselect() { }
+
         private readonly Func<object> getter;
         private readonly Action<object> setter;
 

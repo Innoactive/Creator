@@ -17,9 +17,21 @@ namespace Innoactive.Creator.Core
     /// </summary>
     internal static class PropertyReflectionHelper
     {
-        /// <summary>
-        /// Extracts all <see cref="LockablePropertyData"/> from given Condition.
-        /// </summary>
+        public static List<LockablePropertyData> ExtractLockablesFromStep(IStepData data)
+        {
+            List<LockablePropertyData> result = new List<LockablePropertyData>();
+
+            foreach (ITransition transition in data.Transitions.Data.Transitions)
+            {
+                foreach (ICondition condition in transition.Data.Conditions)
+                {
+                    result.AddRange(ExtractLockablePropertiesFromConditions(condition.Data));
+                }
+            }
+
+            return result;
+        }
+        
         public static List<LockablePropertyData> ExtractLockablePropertiesFromConditions(IConditionData data)
         {
             List<MemberInfo> memberInfo = data.GetType()

@@ -16,7 +16,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             // Draw tabs selector.
             float tabsHeight = DrawToolbox(rect, tabsGroup, changeValueCallback).height;
 
-
             // Get drawer for the object under the tab.
             ITrainingDrawer tabValueDrawer = DrawerLocator.GetDrawerForValue(tabsGroup.Tabs[tabsGroup.Selected].GetValue(), typeof(object));
 
@@ -46,6 +45,9 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             if (selected != oldSelected)
             {
+                tabsGroup.Tabs[oldSelected].OnUnselect();
+                tabsGroup.Tabs[selected].OnSelected();
+                
                 ChangeValue(() =>
                     {
                         tabsGroup.Selected = selected;

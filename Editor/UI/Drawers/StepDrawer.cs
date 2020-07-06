@@ -28,7 +28,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 fontSize = 12
             };
 
-
             GUIStyle labelStyle = new GUIStyle(EditorStyles.label)
             {
                 fontStyle = FontStyle.Bold,
