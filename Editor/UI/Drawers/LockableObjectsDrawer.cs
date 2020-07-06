@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Properties;
-using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.SceneObjects;
-using NAudio.Wave;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Innoactive.CreatorEditor.UI.Drawers
 {

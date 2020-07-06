@@ -31,7 +31,7 @@ namespace Innoactive.Creator.Core
 
             return result;
         }
-        
+
         public static List<LockablePropertyData> ExtractLockablePropertiesFromConditions(IConditionData data)
         {
             List<MemberInfo> memberInfo = data.GetType()

@@ -8,20 +8,25 @@ namespace Innoactive.Creator.Core.Tabs
     /// </summary>
     internal class DynamicTab : ITab
     {
+        /// <inheritdoc/>
         public GUIContent Label { get; }
 
+        /// <inheritdoc/>
         public object GetValue()
         {
             return getter();
         }
 
+        /// <inheritdoc/>
         public void SetValue(object value)
         {
             setter(value);
         }
 
+        /// <inheritdoc/>
         public void OnSelected() { }
 
+        /// <inheritdoc/>
         public void OnUnselect() { }
 
         private readonly Func<object> getter;
