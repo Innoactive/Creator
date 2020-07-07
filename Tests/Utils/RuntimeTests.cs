@@ -1,5 +1,4 @@
 using System.Linq;
-using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Serialization;
 using Innoactive.Creator.Core.Utils;
 using Innoactive.Creator.Unity;
@@ -40,6 +39,7 @@ namespace Innoactive.Creator.Tests.Utils
             }
 
             CoroutineDispatcher.Instance.StopAllCoroutines();
+            UnitTestChecker.IsUnitTesting = false;
         }
     }
 }
