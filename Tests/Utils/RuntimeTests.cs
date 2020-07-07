@@ -17,6 +17,7 @@ namespace Innoactive.Creator.Tests.Utils
         [SetUp]
         public virtual void SetUp()
         {
+            UnitTestChecker.IsUnitTesting = true;
             new RuntimeConfigurationSetup().Setup();
         }
 
