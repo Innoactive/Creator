@@ -51,8 +51,17 @@ namespace Innoactive.Creator.Core
             List<LockablePropertyData> result = new List<LockablePropertyData>();
             memberInfo.ForEach(info =>
             {
-                UniqueNameReference reference =
-                    (UniqueNameReference) ReflectionUtils.GetValueFromPropertyOrField(data, info);
+                UniqueNameReference reference = ReflectionUtils.GetValueFromPropertyOrField(data, info) as UniqueNameReference;
+
+                if (reference == null || string.IsNullOrEmpty(reference.UniqueName))
+                {
+                    return;
+                }
+
+                if (RuntimeConfigurator.Configuration.SceneObjectRegistry.ContainsName(reference.UniqueName) == false)
+                {
+                    return;
+                }
 
                 Type refType = ReflectionUtils
                     .GetConcreteImplementationsOf(reference.GetReferenceType())
@@ -76,7 +85,7 @@ namespace Innoactive.Creator.Core
             {
                 if (prop.GetType() == type)
                 {
-                    return (LockableProperty)prop;
+                    return prop as LockableProperty;
                 }
             }
             Debug.LogWarningFormat("Could not find fitting {0} type in SceneObject {1}", type.Name, reference.UniqueName);
