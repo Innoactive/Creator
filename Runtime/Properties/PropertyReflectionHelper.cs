@@ -71,7 +71,15 @@ namespace Innoactive.Creator.Core
 
                 if (refType != null)
                 {
-                    result.AddRange(GetLockableDependenciesFrom(refType).Select(type => new LockablePropertyData(GetProperty(reference, type))));
+                    IEnumerable<Type> types = GetLockableDependenciesFrom(refType);
+                    foreach (Type type in types)
+                    {
+                        LockableProperty property = GetProperty(reference, type);
+                        if (property != null)
+                        {
+                            result.Add(new LockablePropertyData(property));
+                        }
+                    }
                 }
             });
 
