@@ -38,8 +38,8 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             {
                 lockableCollection.AddSceneObject(newSceneObject);
             }
-
-            return rect;
+            // EditorDrawingHelper.HeaderLineHeight - 24f is just the magic number to make it properly fit...
+            return new Rect(rect.x, rect.y, rect.width, currentPosition.y - EditorDrawingHelper.HeaderLineHeight - 24f);
         }
 
         private Rect DrawSceneObject(Rect currentPosition, ISceneObject sceneObject)
