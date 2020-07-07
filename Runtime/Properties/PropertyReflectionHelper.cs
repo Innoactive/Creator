@@ -8,6 +8,7 @@ using Innoactive.Creator.Core.Properties;
 using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Core.Utils;
+using Innoactive.Creator.Unity;
 using UnityEngine;
 
 namespace Innoactive.Creator.Core
@@ -57,7 +58,7 @@ namespace Innoactive.Creator.Core
                     .GetConcreteImplementationsOf(reference.GetReferenceType())
                     .Where(typeof(LockableProperty).IsAssignableFrom)
                     .FirstOrDefault(type => Enumerable.All(type.Assembly.GetReferencedAssemblies(),
-                        assemblyName => assemblyName.Name != "UnityEditor" && assemblyName.Name != "nunit.framework"));
+                        assemblyName => UnitTestChecker.IsUnitTesting || (assemblyName.Name != "UnityEditor" && assemblyName.Name != "nunit.framework")));
 
                 if (refType != null)
                 {
