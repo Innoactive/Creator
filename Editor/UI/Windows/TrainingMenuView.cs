@@ -388,7 +388,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                         // ReSharper disable once ImplicitlyCapturedClosure
                         () =>
                         {
-                            Course.Data.Chapters.Add(new Chapter("Chapter " + (Course.Data.Chapters.Count + 1), null));
+                            Course.Data.Chapters.Add(EntityFactory.CreateChapter($"Chapter {(Course.Data.Chapters.Count + 1)}"));
                             activeChapter = Course.Data.Chapters.Count - 1;
                             EmitChapterChanged();
                         },
