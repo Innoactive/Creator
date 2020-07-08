@@ -1,7 +1,5 @@
 using System;
 using System.Reflection;
-using System.Runtime.Serialization;
-using Innoactive.Creator.Core.Utils;
 
 namespace Innoactive.Creator.Core.Attributes
 {

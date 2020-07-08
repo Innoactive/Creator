@@ -4,9 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.Behaviors;
+using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
 using Innoactive.Creator.Core.EntityOwners.FoldedEntityCollection;
+using Innoactive.Creator.Core.RestrictiveEnvironment;
+using Innoactive.Creator.Core.Tabs;
 using Innoactive.Creator.Core.Utils.Logging;
 using Innoactive.Creator.Unity;
 
@@ -18,7 +22,7 @@ namespace Innoactive.Creator.Core
     [DataContract(IsReference = true)]
     public class Step : Entity<Step.EntityData>, IStep
     {
-        public class EntityData : EntityCollectionData<IStepChild>, IStepData
+        public class EntityData : EntityCollectionData<IStepChild>, IStepData, ILockableStepData
         {
             ///<inheritdoc />
             [DataMember]
@@ -31,12 +35,17 @@ namespace Innoactive.Creator.Core
             [DrawingPriority(1)]
             public string Description { get; set; }
 
+            [DataMember]
+            private ITabsGroup Tabs { get; set; }
+
             ///<inheritdoc />
             [DataMember]
+            [HideInTrainingInspector]
             public IBehaviorCollection Behaviors { get; set; }
 
             ///<inheritdoc />
             [DataMember]
+            [HideInTrainingInspector]
             public ITransitionCollection Transitions { get; set; }
 
             ///<inheritdoc />
@@ -54,10 +63,89 @@ namespace Innoactive.Creator.Core
 
             ///<inheritdoc />
             public IMode Mode { get; set; }
+
+            ///<inheritdoc />
+            [HideInTrainingInspector]
+            public IEnumerable<LockablePropertyReference> ToUnlock { get; set; } = new List<LockablePropertyReference>();
+
+            public EntityData()
+            {
+                Tabs = new TabsGroup(
+                    new DynamicTab(new GUIContent("Behaviors"), () => Behaviors, value => Behaviors = (IBehaviorCollection)value),
+                    new DynamicTab(new GUIContent("Transitions"), () => Transitions, value => Transitions = (ITransitionCollection)value),
+                    new LockablePropertyTab(new GUIContent("Unlocked Objects"), this)
+                );
+            }
+        }
+
+        private class UnlockProcess : Process<EntityData>
+        {
+            private readonly IEnumerable<LockablePropertyData> toUnlock;
+
+            public UnlockProcess(EntityData data) : base(data)
+            {
+                toUnlock = Data.ToUnlock.Select(reference => new LockablePropertyData(reference.GetProperty())).ToList();
+            }
+
+            ///<inheritdoc />
+            public override void Start()
+            {
+                RuntimeConfigurator.Configuration.StepLockHandling.Unlock(Data, toUnlock);
+            }
+
+            ///<inheritdoc />
+            public override IEnumerator Update()
+            {
+                yield return null;
+            }
+
+            ///<inheritdoc />
+            public override void End()
+            {
+            }
+
+            ///<inheritdoc />
+            public override void FastForward()
+            {
+            }
+        }
+
+        private class LockProcess : Process<EntityData>
+        {
+            private readonly IEnumerable<LockablePropertyData> toUnlock;
+
+            public LockProcess(EntityData data) : base(data)
+            {
+                toUnlock = Data.ToUnlock.Select(reference => new LockablePropertyData(reference.GetProperty())).ToList();
+            }
+
+            ///<inheritdoc />
+            public override void Start()
+            {
+            }
+
+            ///<inheritdoc />
+            public override IEnumerator Update()
+            {
+                yield return null;
+            }
+
+            ///<inheritdoc />
+            public override void End()
+            {
+                RuntimeConfigurator.Configuration.StepLockHandling.Lock(Data, toUnlock);
+            }
+
+            ///<inheritdoc />
+            public override void FastForward()
+            {
+            }
         }
 
         private class ActiveProcess : Process<EntityData>
         {
+            private readonly IEnumerable<LockablePropertyData> toUnlock;
+
             public ActiveProcess(EntityData data) : base(data)
             {
             }
@@ -94,7 +182,7 @@ namespace Innoactive.Creator.Core
         ///<inheritdoc />
         public override IProcess GetActivatingProcess()
         {
-            return new FoldedActivatingProcess<IStepChild>(Data);
+            return new CompositeProcess(new FoldedActivatingProcess<IStepChild>(Data), new UnlockProcess(Data));
         }
 
         ///<inheritdoc />
@@ -106,7 +194,7 @@ namespace Innoactive.Creator.Core
         ///<inheritdoc />
         public override IProcess GetDeactivatingProcess()
         {
-            return new FoldedDeactivatingProcess<IStepChild>(Data);
+            return new CompositeProcess(new FoldedDeactivatingProcess<IStepChild>(Data), new LockProcess(Data));
         }
 
         ///<inheritdoc />

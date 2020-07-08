@@ -37,7 +37,14 @@ namespace Innoactive.CreatorEditor
 
             stepWindow = window;
 
-            HandleCurrentStepChanged(courseWindow.GetChapter().ChapterMetadata.LastSelectedStep);
+            if (courseWindow == null || courseWindow.Equals(null))
+            {
+                HandleCurrentStepChanged(null);
+            }
+            else
+            {
+                HandleCurrentStepChanged(courseWindow.GetChapter().ChapterMetadata.LastSelectedStep);
+            }
         }
 
         /// <inheritdoc/>
