@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Innoactive.Creator.Core.Configuration.Modes;
+using Innoactive.Creator.Core.Properties;
+using Innoactive.Creator.Unity;
 
 namespace Innoactive.Creator.Core.RestrictiveEnvironment
 {
@@ -8,6 +11,9 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
     /// </summary>
     public class DefaultStepLockHandling : StepLockHandlingStrategy
     {
+        private bool lockOnCourseStart = true;
+        private bool lockOnCourseFinished = true;
+
         /// <inheritdoc />
         public override void Unlock(IStepData data, IEnumerable<LockablePropertyData> manualUnlocked)
         {
@@ -56,6 +62,44 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
             foreach (LockablePropertyData lockable in lockList)
             {
                 lockable.Property.SetLocked(true);
+            }
+        }
+
+        /// <inheritdoc />
+        public override void Configure(IMode mode)
+        {
+            if (mode.ContainsParameter<bool>("LockOnCourseStart"))
+            {
+                lockOnCourseStart = mode.GetParameter<bool>("LockOnCourseStart");
+            }
+
+            if (mode.ContainsParameter<bool>("LockOnCourseFinished"))
+            {
+                lockOnCourseFinished = mode.GetParameter<bool>("LockOnCourseFinished");
+            }
+        }
+
+        /// <inheritdoc />
+        public override void OnCourseStarted(ICourse course)
+        {
+            if (lockOnCourseStart)
+            {
+                foreach (LockableProperty prop in SceneUtils.GetActiveAndInactiveComponents<LockableProperty>())
+                {
+                    prop.SetLocked(true);
+                }
+            }
+        }
+
+        /// <inheritdoc />
+        public override void OnCourseFinished(ICourse course)
+        {
+            if (lockOnCourseFinished)
+            {
+                foreach (LockableProperty prop in SceneUtils.GetActiveAndInactiveComponents<LockableProperty>())
+                {
+                    prop.SetLocked(true);
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Configuration;
+using UnityEngine;
 
 namespace Innoactive.Creator.Core.SceneObjects
 {
@@ -21,6 +22,7 @@ namespace Innoactive.Creator.Core.SceneObjects
         {
             if (string.IsNullOrEmpty(UniqueName))
             {
+                Debug.LogWarningFormat("Scene object for name {0} not found", UniqueName);
                 return null;
             }
 
