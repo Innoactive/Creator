@@ -8,6 +8,7 @@ namespace Innoactive.Creator.Core.SceneObjects
     /// <summary>
     /// Weak reference to a property of a training scene object with the same unique name.
     /// </summary>
+    [Serializable]
     [DataContract(IsReference = true)]
     public sealed class ScenePropertyReference<T> : ObjectReference<T> where T : class, ISceneObjectProperty
     {

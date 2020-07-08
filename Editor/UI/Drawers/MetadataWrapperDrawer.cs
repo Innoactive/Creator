@@ -30,7 +30,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
-            MetadataWrapper wrapper = (MetadataWrapper) currentValue;
+            MetadataWrapper wrapper = (MetadataWrapper)currentValue;
 
             if (wrapper.Metadata.ContainsKey(separatedName))
             {
@@ -141,7 +141,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 changeValueCallback(wrapper);
             }
 
-            bool oldIsFoldedOutValue = (bool) wrapper.Metadata[foldableName];
+            bool oldIsFoldedOutValue = (bool)wrapper.Metadata[foldableName];
 
             GUIStyle foldoutStyle = new GUIStyle(EditorStyles.foldout)
             {
@@ -229,7 +229,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             }
 
             Type elementType = (wrapper.Metadata[extendableListName] as ExtendableListAttribute.SerializedTypeWrapper).Type;
-            IList list = (IList) wrapper.Value;
+            IList list = (IList)wrapper.Value;
             float currentY = 0;
 
             currentY += DrawRecursively(rect, wrapper, extendableListName, changeValueCallback, label).height;
@@ -251,7 +251,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
                     if (wrapper.Metadata.ContainsKey(listOfName))
                     {
-                        ListOfAttribute.Metadata temp = (ListOfAttribute.Metadata) wrapper.Metadata[listOfName];
+                        ListOfAttribute.Metadata temp = (ListOfAttribute.Metadata)wrapper.Metadata[listOfName];
                         temp.ChildMetadata.Add(temp.ChildAttributes.ToDictionary(attribute => attribute.Name, attribute => attribute.GetDefaultMetadata(null)));
                         wrapper.Metadata[listOfName] = temp;
                     }
@@ -277,11 +277,11 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 return rect;
             }
 
-            IList list = (IList) wrapper.Value;
+            IList list = (IList)wrapper.Value;
 
             if (list.Count == 0)
             {
-                Type entryType = (Type) wrapper.Metadata[keepPopulatedName];
+                Type entryType = (Type)wrapper.Metadata[keepPopulatedName];
                 if (entryType != null)
                 {
                     Type listType = ReflectionUtils.GetEntryType(list);
@@ -303,34 +303,39 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             return DrawRecursively(rect, wrapper, keepPopulatedName, changeValueCallback, label);
         }
 
-        private Rect DrawListOf(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label)
+        private IList<MetadataWrapper> ConvertListOfMetadataToList(MetadataWrapper wrapper)
         {
             if (wrapper.Value == null || (wrapper.Value is IList == false))
             {
                 if (wrapper.Value != null)
                 {
-                    Debug.LogWarning("ListOfAttribute can be used only with IList members.");
+                    Debug.LogWarning($"ListOfAttribute can be used only with IList members.");
                 }
 
-                return rect;
+                return new List<MetadataWrapper>();
+            }
+
+            if (wrapper.Metadata.Count > 1)
+            {
+                throw new NotImplementedException($"ListOfAttribute attribute should have the lowest priority. Check MetadataWrapperDrawer.Draw method.");
             }
 
             ListOfAttribute.Metadata wrapperMetadata = (wrapper.Metadata[listOfName] as ListOfAttribute.Metadata);
-            List<Dictionary<string, object>> listOfMetadatas = wrapperMetadata.ChildMetadata;
+            List<Dictionary<string, object>> listOfMetadata = wrapperMetadata.ChildMetadata;
 
-            IList list = (IList) wrapper.Value;
+            IList list = (IList)wrapper.Value;
 
-            if (listOfMetadatas == null)
+            if (listOfMetadata == null)
             {
-                listOfMetadatas = new List<Dictionary<string, object>>(list.Count);
+                listOfMetadata = new List<Dictionary<string, object>>(list.Count);
             }
 
-            if (listOfMetadatas.Count != list.Count)
+            if (listOfMetadata.Count != list.Count)
             {
-                listOfMetadatas.Clear();
+                listOfMetadata.Clear();
                 for (int i = 0; i < list.Count; i++)
                 {
-                    listOfMetadatas.Add(wrapperMetadata.ChildAttributes.ToDictionary(attribute => attribute.Name, attribute => attribute.GetDefaultMetadata(null)));
+                    listOfMetadata.Add(wrapperMetadata.ChildAttributes.ToDictionary(attribute => attribute.Name, attribute => attribute.GetDefaultMetadata(null)));
                 }
             }
 
@@ -341,26 +346,29 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             {
                 listOfWrappers.Add(new MetadataWrapper()
                 {
-                    Metadata = listOfMetadatas[i],
+                    Metadata = listOfMetadata[i],
                     ValueDeclaredType = entryType,
                     Value = list[i],
                 });
             }
 
-            if (wrapper.Metadata.Count > 1)
-            {
-                throw new NotImplementedException("ListOf attribute should have the lowest priority. Check MetadataWrapperDrawer.Draw method.");
-            }
+            return listOfWrappers;
+        }
+
+        private Rect DrawListOf(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label)
+        {
+            IList<MetadataWrapper> listOfWrappers = ConvertListOfMetadataToList(wrapper);
 
             ITrainingDrawer valueDrawer = DrawerLocator.GetDrawerForValue(wrapper.Value, wrapper.ValueDeclaredType);
+            IList list = (IList)wrapper.Value;
 
             return valueDrawer.Draw(rect, listOfWrappers, (newValue) =>
             {
-                List<MetadataWrapper> newListOfWrappers = ((List<MetadataWrapper>) newValue).ToList();
+                List<MetadataWrapper> newListOfWrappers = ((List<MetadataWrapper>)newValue).ToList();
                 ReflectionUtils.ReplaceList(ref list, newListOfWrappers.Select(childWrapper => childWrapper.Value));
                 wrapper.Value = list;
 
-                (wrapper.Metadata[listOfName] as ListOfAttribute.Metadata).ChildMetadata = newListOfWrappers.Select(childWrapper => childWrapper.Metadata).ToList();
+                ((ListOfAttribute.Metadata)wrapper.Metadata[listOfName]).ChildMetadata = newListOfWrappers.Select(childWrapper => childWrapper.Metadata).ToList();
                 changeValueCallback(wrapper);
             }, label);
         }

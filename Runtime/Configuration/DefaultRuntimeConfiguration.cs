@@ -13,43 +13,22 @@ namespace Innoactive.Creator.Core.Configuration
     /// <summary>
     /// Training runtime configuration which is used if no other was implemented.
     /// </summary>
-    public class DefaultRuntimeConfiguration : IRuntimeConfiguration
+    public class DefaultRuntimeConfiguration : BaseRuntimeConfiguration
     {
         private AudioSource instructionPlayer;
-        private ISceneObjectRegistry sceneObjectRegistry;
 
         /// <summary>
         /// Default mode which white lists everything.
         /// </summary>
         public static readonly IMode DefaultMode = new Mode("Default", new WhitelistTypeRule<IOptional>());
 
-        /// <inheritdoc />
-        public ISceneObjectRegistry SceneObjectRegistry
-        {
-            get
-            {
-                if (sceneObjectRegistry == null)
-                {
-                    sceneObjectRegistry = new SceneObjectRegistry();
-                }
-
-                return sceneObjectRegistry;
-            }
-        }
-
-        protected DefaultRuntimeConfiguration()
+        public DefaultRuntimeConfiguration()
         {
             Modes = new BaseModeHandler(new List<IMode> {DefaultMode});
         }
 
         /// <inheritdoc />
-        public ICourseSerializer Serializer { get; set; } = new NewtonsoftJsonCourseSerializer();
-
-        /// <inheritdoc />
-        public IModeHandler Modes { get; protected set; }
-
-        /// <inheritdoc />
-        public virtual TrainingSceneObject Trainee
+        public override TrainingSceneObject Trainee
         {
             get
             {
@@ -65,7 +44,7 @@ namespace Innoactive.Creator.Core.Configuration
         }
 
         /// <inheritdoc />
-        public virtual AudioSource InstructionPlayer
+        public override AudioSource InstructionPlayer
         {
             get
             {
@@ -78,16 +57,5 @@ namespace Innoactive.Creator.Core.Configuration
             }
         }
 
-        /// <inheritdoc />
-        public virtual ICourse LoadCourse(string path)
-        {
-            if (string.IsNullOrEmpty(path))
-            {
-                throw new ArgumentException("Given path is null or empty!");
-            }
-
-            byte[] serialized = FileManager.Read(path);
-            return Serializer.CourseFromByteArray(serialized);
-        }
     }
 }
