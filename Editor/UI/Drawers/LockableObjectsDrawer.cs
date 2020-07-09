@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Properties;
 using Innoactive.Creator.Core.SceneObjects;
@@ -33,11 +34,17 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             EditorGUI.LabelField(currentPosition, "To add new TrainingSceneObject, drag it in here:");
             currentPosition.y += EditorDrawingHelper.SingleLineHeight + EditorDrawingHelper.VerticalSpacing;
 
-            TrainingSceneObject newSceneObject = (TrainingSceneObject) EditorGUI.ObjectField(currentPosition, null, typeof(TrainingSceneObject), true);
-            if (newSceneObject != null)
+            if (IsEditingAllowed())
             {
-                lockableCollection.AddSceneObject(newSceneObject);
+                TrainingSceneObject newSceneObject =
+                    (TrainingSceneObject) EditorGUI.ObjectField(currentPosition, null, typeof(TrainingSceneObject),
+                        true);
+                if (newSceneObject != null)
+                {
+                    lockableCollection.AddSceneObject(newSceneObject);
+                }
             }
+
             // EditorDrawingHelper.HeaderLineHeight - 24f is just the magic number to make it properly fit...
             return new Rect(rect.x, rect.y, rect.width, currentPosition.y - EditorDrawingHelper.HeaderLineHeight - 24f);
         }
@@ -50,8 +57,13 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             objectFieldPosition.width -= 24;
             GUI.enabled = false;
             EditorGUI.ObjectField(objectFieldPosition, (TrainingSceneObject) sceneObject, typeof(TrainingSceneObject), true);
-            // If scene object is used by a property, dont allow removing it.
-            GUI.enabled = lockableCollection.IsUsedInAutoUnlock(sceneObject) == false;
+
+            if (IsEditingAllowed())
+            {
+                // If scene object is used by a property, dont allow removing it.
+                GUI.enabled = lockableCollection.IsUsedInAutoUnlock(sceneObject) == false;
+            }
+
             objectFieldPosition.x = currentPosition.width - 24 + 6f;
             objectFieldPosition.width = 20;
             if (GUI.Button(objectFieldPosition,"x", new GUIStyle(GUI.skin.button) { fontStyle = FontStyle.Bold }))
@@ -75,7 +87,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             objectPosition.x += EditorDrawingHelper.IndentationWidth * 2f;
             objectPosition.width -= EditorDrawingHelper.IndentationWidth * 2f;
 
-            GUI.enabled = lockableCollection.IsInAutoUnlockList(property) == false;
+            GUI.enabled = lockableCollection.IsInAutoUnlockList(property) == false && IsEditingAllowed();
             bool isFlagged = GUI.enabled == false || lockableCollection.IsInManualUnlockList(property);
             if (EditorGUI.Toggle(currentPosition, isFlagged) != isFlagged)
             {
@@ -92,6 +104,11 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             GUI.enabled = true;
             EditorGUI.LabelField(objectPosition, property.GetType().Name);
             return currentPosition;
+        }
+
+        private bool IsEditingAllowed()
+        {
+            return Application.isPlaying == false;
         }
     }
 }
