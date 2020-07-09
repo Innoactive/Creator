@@ -8,11 +8,12 @@ using Innoactive.Creator.Core.SceneObjects;
 
 namespace Innoactive.Creator.Core
 {
-    [DataContract(IsReference = true)]
+    /// <summary>
+    /// Collection of <see cref="ISceneObject"/>s that can be locked and unlocked during a step.
+    /// Additionally, checks if objects are automatically or manually unlocked.
+    /// </summary>
     internal class LockableObjectsCollection
     {
-        public string Text = "LockableCollection";
-
         private List<LockablePropertyData> toUnlock;
 
         private Step.EntityData data;
