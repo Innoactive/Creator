@@ -117,4 +117,4 @@ Example:
 }
 ```
 
-[To the next chapter!](11-dependency-manager.md)
+[To the next chapter!](12-dependency-manager.md)
