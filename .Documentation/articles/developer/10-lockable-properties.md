@@ -1,6 +1,6 @@
 # Lockable Properties
 
-
+Some properties of the objects are lockable. This means that training designers can temporary disable user interactions for these properties to let trainees focus on the current task. You can read more [here](../innoactive-creator/suspending-interactions.md).
 
 ## Implementing Lockable Properties
 
