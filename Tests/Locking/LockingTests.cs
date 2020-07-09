@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Innoactive.Creator.Core;
- using Innoactive.Creator.Core.Properties;
- using Innoactive.Creator.Core.RestrictiveEnvironment;
+using Innoactive.Creator.Core.Properties;
+using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Tests.Builder;
 using Innoactive.Creator.Tests.Utils;
 using Innoactive.Creator.Tests.Utils.Mocks;
 using NUnit.Framework;
- using UnityEngine.TestTools;
+using UnityEngine.TestTools;
 
 namespace Innoactive.Creator.Tests.Locking
 {
