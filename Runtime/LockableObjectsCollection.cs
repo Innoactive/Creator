@@ -5,6 +5,9 @@ using Innoactive.Creator.Core.Behaviors;
 using Innoactive.Creator.Core.Properties;
 using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.SceneObjects;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Innoactive.Creator.Core
 {
@@ -26,6 +29,27 @@ namespace Innoactive.Creator.Core
             data = entityData;
 
             CreateSceneObjects();
+#if UNITY_EDITOR
+            EditorApplication.playModeStateChanged += PlayModeChanged;
+        }
+
+
+        ~LockableObjectsCollection()
+        {
+            EditorApplication.playModeStateChanged -= PlayModeChanged;
+        }
+
+        private void PlayModeChanged(PlayModeStateChange state)
+        {
+            if (state == PlayModeStateChange.EnteredEditMode || state == PlayModeStateChange.EnteredEditMode)
+            {
+                CreateSceneObjects();
+            }
+            else
+            {
+                SceneObjects.Clear();
+            }
+#endif
         }
 
         private void CreateSceneObjects()
