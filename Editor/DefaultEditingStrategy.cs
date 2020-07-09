@@ -1,4 +1,5 @@
 using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.Configuration;
 using Innoactive.CreatorEditor.UI.Windows;
 using UnityEditor;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace Innoactive.CreatorEditor
         private CourseWindow courseWindow;
         private StepWindow stepWindow;
         private ICourse course;
+
+        private byte[] cachedCourse;
 
         /// <inheritdoc/>
         public void HandleNewCourseWindow(CourseWindow window)
@@ -106,8 +109,12 @@ namespace Innoactive.CreatorEditor
             }
 
             PlayerPrefs.SetString(GlobalEditorHandler.LastEditedCourseNameKey, courseName);
-            course = CourseAssetManager.Load(courseName);
+            LoadCourse(CourseAssetManager.Load(courseName));
+        }
 
+        private void LoadCourse(ICourse newCourse)
+        {
+            course = newCourse;
             if (courseWindow != null)
             {
                 courseWindow.SetCourse(course);
@@ -160,6 +167,18 @@ namespace Innoactive.CreatorEditor
             {
                 CourseAssetManager.Save(course);
             }
+        }
+
+        /// <inheritdoc/>
+        public void HandleExitingPlayMode()
+        {
+            LoadCourse(EditorConfigurator.Instance.Serializer.CourseFromByteArray(cachedCourse));
+        }
+
+        /// <inheritdoc/>
+        public void HandleEnterPlayMode()
+        {
+            cachedCourse = EditorConfigurator.Instance.Serializer.CourseToByteArray(course);
         }
     }
 }

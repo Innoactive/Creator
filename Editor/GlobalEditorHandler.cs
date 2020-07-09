@@ -140,5 +140,15 @@ namespace Innoactive.CreatorEditor
         {
             strategy.HandleProjectIsGoingToSave();
         }
+
+        internal static void EnterPlayMode()
+        {
+            strategy.HandleEnterPlayMode();
+        }
+
+        internal static void ExitPlayMode()
+        {
+            strategy.HandleExitingPlayMode();
+        }
     }
 }
