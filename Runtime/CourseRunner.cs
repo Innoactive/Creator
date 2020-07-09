@@ -23,6 +23,7 @@ namespace Innoactive.Creator.Core
                 if (course != null)
                 {
                     course.Configure(args.Mode);
+                    RuntimeConfigurator.Configuration.StepLockHandling.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
                 }
             }
 
@@ -52,6 +53,7 @@ namespace Innoactive.Creator.Core
                 if (course.LifeCycle.Stage == Stage.Active)
                 {
                     course.LifeCycle.Deactivate();
+                    RuntimeConfigurator.Configuration.StepLockHandling.OnCourseFinished(course);
                 }
             }
 
@@ -65,6 +67,8 @@ namespace Innoactive.Creator.Core
                 course.LifeCycle.StageChanged += HandleCourseStageChanged;
                 course.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
 
+                RuntimeConfigurator.Configuration.StepLockHandling.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
+                RuntimeConfigurator.Configuration.StepLockHandling.OnCourseStarted(course);
                 course.LifeCycle.Activate();
             }
         }

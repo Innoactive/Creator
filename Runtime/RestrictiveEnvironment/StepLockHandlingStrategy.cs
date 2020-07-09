@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Innoactive.Creator.Core.Configuration.Modes;
 
 namespace Innoactive.Creator.Core.RestrictiveEnvironment
 {
@@ -20,5 +21,29 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
         /// <param name="data">IStepData of the current step</param>
         /// <param name="manualUnlocked">All LockableProperties which were unlocked in addition</param>
         public abstract void Lock(IStepData data, IEnumerable<LockablePropertyData> manualUnlocked);
+
+        /// <summary>
+        /// Will be called whenever the mode is changed, allows to adapt to lock handling to it.
+        /// </summary>
+        public virtual void Configure(IMode mode)
+        {
+
+        }
+
+        /// <summary>
+        /// Will be called once when a course is started.
+        /// </summary>
+        public virtual void OnCourseStarted(ICourse course)
+        {
+
+        }
+
+        /// <summary>
+        /// Will be called once when the currently running course finishes.
+        /// </summary>
+        public virtual void OnCourseFinished(ICourse course)
+        {
+
+        }
     }
 }

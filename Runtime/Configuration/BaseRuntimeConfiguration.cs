@@ -47,7 +47,16 @@ namespace Innoactive.Creator.Core.Configuration
         /// <summary>
         /// Determines the property locking strategy used for this runtime configuration.
         /// </summary>
-        public StepLockHandlingStrategy StepLockHandling { get; set; } = new DefaultStepLockHandling();
+        public StepLockHandlingStrategy StepLockHandling { get; set; }
+
+        protected BaseRuntimeConfiguration() : this (new DefaultStepLockHandling())
+        {
+        }
+
+        protected BaseRuntimeConfiguration(StepLockHandlingStrategy lockHandling)
+        {
+            StepLockHandling = lockHandling;
+        }
 
         /// <inheritdoc />
         public virtual ICourse LoadCourse(string path)
