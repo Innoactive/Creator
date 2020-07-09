@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Properties;
 using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Tests.Builder;
@@ -555,6 +556,126 @@ namespace Innoactive.Creator.Tests.Locking
 
             // Then after the step the dependent property is also locked again.
             Assert.IsTrue(dependency.IsLocked);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator ObjectInConditionIsInAutoUnlockList()
+        {
+            // Given a step with a condition with a LockableProperty
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockablePropertyMock lockableProperty = o1.GameObject.AddComponent<LockablePropertyMock>();
+            LockableReferencingConditionMock lockCondition = new LockableReferencingConditionMock();
+            lockCondition.Data.LockablePropertyMock = new ScenePropertyReference<ILockablePropertyMock>(o1.UniqueName);
+            Step step = new BasicStepBuilder("step").AddCondition(lockCondition).Build();
+
+            // When we create a collection referencing this step
+            LockableObjectsCollection collection = new LockableObjectsCollection(step.Data);
+
+            // Then the lockable property is in the AutoUnlockList of the collection
+            Assert.IsTrue(collection.IsInAutoUnlockList(lockableProperty));
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator ObjectInConditionIsNotInManualUnlockList()
+        {
+            // Given a step with a condition with a LockableProperty
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockableProperty lockableProperty = o1.GameObject.AddComponent<LockablePropertyMock>();
+            LockableReferencingConditionMock lockCondition = new LockableReferencingConditionMock();
+            lockCondition.Data.LockablePropertyMock = new ScenePropertyReference<ILockablePropertyMock>(o1.UniqueName);
+            Step step = new BasicStepBuilder("step").AddCondition(lockCondition).Build();
+
+            // When we create a collection referencing this step
+            LockableObjectsCollection collection = new LockableObjectsCollection(step.Data);
+
+            // Then the lockable property is not in the Manual Unlock List of the collection
+            Assert.IsFalse(collection.IsInManualUnlockList(lockableProperty));
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator ManuallyAddedSceneObjectIsInManualUnlockList()
+        {
+            // Given a step with a condition with a LockableProperty and a collection referencing this step
+            Step step = new BasicStepBuilder("step").Build();
+            LockableObjectsCollection collection = new LockableObjectsCollection(step.Data);
+
+            // When we create a SceneObject with a lockable property
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockableProperty lockableProperty = o1.GameObject.AddComponent<LockablePropertyMock>();
+            // ...and add the SceneObject and its property to the collection
+            collection.AddSceneObject(o1);
+            collection.Add(lockableProperty);
+
+            // Then the lockable property is in the Manual Unlock List of the collection
+            Assert.IsTrue(collection.IsInManualUnlockList(lockableProperty));
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator ManuallyAddedSceneObjectIsNotInAutoUnlockList()
+        {
+            // Given a step with a condition with a LockableProperty and a collection referencing this step
+            Step step = new BasicStepBuilder("step").Build();
+            LockableObjectsCollection collection = new LockableObjectsCollection(step.Data);
+
+            // When we create a SceneObject with a lockable property
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockableProperty lockableProperty = o1.GameObject.AddComponent<LockablePropertyMock>();
+            // ...and add the SceneObject and its property to the collection
+            collection.AddSceneObject(o1);
+            collection.Add(lockableProperty);
+
+            // Then the lockable property is not in the Auto Unlock List of the collection
+            Assert.IsFalse(collection.IsInAutoUnlockList(lockableProperty));
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator RemovedSceneObjectIsNotInManualUnlockList()
+        {
+            // Given a step with a condition with a LockableProperty
+            Step step = new BasicStepBuilder("step").Build();
+            // ...and a collection with a manually added SceneObject and an added lockable property
+            LockableObjectsCollection collection = new LockableObjectsCollection(step.Data);
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockableProperty lockableProperty = o1.GameObject.AddComponent<LockablePropertyMock>();
+            collection.AddSceneObject(o1);
+            collection.Add(lockableProperty);
+
+            // When we remove the SceneObject from the collection
+            collection.RemoveSceneObject(o1);
+
+            // Then the lockable property is not in the Auto Unlock List of the collection
+            Assert.IsFalse(collection.IsInAutoUnlockList(lockableProperty));
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator RemovedPropertyIsNotInManualUnlockList()
+        {
+            // Given a step with a condition with a LockableProperty
+            Step step = new BasicStepBuilder("step").Build();
+            // ...and a collection with a manually added SceneObject and an added lockable property
+            LockableObjectsCollection collection = new LockableObjectsCollection(step.Data);
+            ISceneObject o1 = TestingUtils.CreateSceneObject("o1");
+            LockableProperty lockableProperty = o1.GameObject.AddComponent<LockablePropertyMock>();
+            collection.AddSceneObject(o1);
+            collection.Add(lockableProperty);
+
+            // When we remove the property from the collection
+            collection.Remove(lockableProperty);
+
+            // Then the lockable property is not in the Auto Unlock List of the collection
+            Assert.IsFalse(collection.IsInAutoUnlockList(lockableProperty));
 
             yield return null;
         }
