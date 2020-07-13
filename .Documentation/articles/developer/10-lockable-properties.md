@@ -43,8 +43,33 @@ public class LightSwitchProperty : LockableProperty
 }
 ```
 
-## Disabling The Locking Feature
+## Step Lock Handling
+The logic of locking and unlocking LockableProperties is provided by the abstract class `StepLockHandlingStrategy`, which cares about locking LockableProperties per step. It also allows to be configured by the active mode. The default strategy is named `DefaultStepLockHandling`. To deactivate the locking feature, set the `StepLockHandling` property of your runtime configuration to an instance of the `NonLockingStepHandling` class.
 
-To disable the locking feature, set the `StepLockHandling` property of your runtime configuration to an instance of the `Innoactive.Creator.Core.RestrictiveEnvironment.NonLockingStepHandling` class.
+### DefaultStepLockHandling
+Locks & unlocks LockableProperties according to the usage in the step. It also looks up which of the properties are used in the following step and keeps them unlocked. Additionally it allows to be configured by the current active Mode, following parameters are allowed:
+
+Name | type | default value | comment
+|---|---|---|---|
+EnableLockHandling | `boolean` | `true` | *Decides if LockableProperties should get locked at all*
+LockOnCourseStart | `boolean` | `true` | *Decides if all LockableProperties should get locked when the course is started*
+LockOnCourseFinished | `boolean` | `false` | *Decides if all LockableProperties should get locked when the course is finished*
+
+## Extending Conditions
+All Conditions based on the abstract class `Condition` have an already existing implementation of the method provided by the interface `ILockablePropertiesProvider`, which extracts all `LockableProperty` from the Condition's data. If you want to manually intervene and change the value or the specific properties used, you are able to override the method.
+
+An example in `GrabbedCondition` which keeps the properties unlocked after finishing the step:
+```csharp
+public override IEnumerable<LockablePropertyData> GetLockableProperties()
+{
+    IEnumerable<LockablePropertyData> references = base.GetLockableProperties();
+    foreach (LockablePropertyData propertyData in references)
+    {
+        propertyData.EndStepLocked = !Data.KeepUnlocked;
+    }
+
+    return references;
+}
+```
 
 [To the next chapter!](11-text-to-speech.md)
