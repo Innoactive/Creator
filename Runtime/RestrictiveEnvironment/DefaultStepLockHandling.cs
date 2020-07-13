@@ -38,7 +38,7 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
                 return;
             }
 
-            IEnumerable<LockablePropertyData> unlockList = PropertyReflectionHelper.ExtractLockablesFromStep(data);
+            IEnumerable<LockablePropertyData> unlockList = PropertyReflectionHelper.ExtractLockablePropertiesFromStep(data);
             unlockList = unlockList.Union(manualUnlocked);
 
             foreach (LockablePropertyData lockable in unlockList)
