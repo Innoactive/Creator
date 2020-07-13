@@ -11,13 +11,34 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
     /// </summary>
     public class DefaultStepLockHandling : StepLockHandlingStrategy
     {
+        /// <summary>
+        /// If you want to disable lock handling set this parameter to false.
+        /// </summary>
+        public const string EnableLockHandlingParameterName = "EnableLockHandling";
+
+        /// <summary>
+        /// To stop locking every LockableProperty at the beginning of the training set this parameter to false.
+        /// </summary>
+        public const string LockCourseOnStartParameterName = "LockCourseOnStart";
+
+        /// <summary>
+        /// To lock every LockableProperty at the end of the training set this parameter to true.
+        /// </summary>
+        public const string LockOnCourseFinishedParameterName = "LockOnCourseFinished";
+
         private bool lockOnCourseStart = true;
         private bool lockOnCourseFinished = true;
+        private bool isEnabled = true;
 
         /// <inheritdoc />
         public override void Unlock(IStepData data, IEnumerable<LockablePropertyData> manualUnlocked)
         {
-            IEnumerable<LockablePropertyData> unlockList = PropertyReflectionHelper.ExtractLockablePropertiesFromStep(data);
+            if (isEnabled == false)
+            {
+                return;
+            }
+
+            IEnumerable<LockablePropertyData> unlockList = PropertyReflectionHelper.ExtractLockablesFromStep(data);
             unlockList = unlockList.Union(manualUnlocked);
 
             foreach (LockablePropertyData lockable in unlockList)
@@ -29,6 +50,11 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
         /// <inheritdoc />
         public override void Lock(IStepData data, IEnumerable<LockablePropertyData> manualUnlocked)
         {
+            if (isEnabled == false)
+            {
+                return;
+            }
+
             // All properties which should be locked
             IEnumerable<LockablePropertyData> lockList = PropertyReflectionHelper.ExtractLockablePropertiesFromStep(data);
             lockList = lockList.Union(manualUnlocked);
@@ -91,38 +117,45 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
         /// <inheritdoc />
         public override void Configure(IMode mode)
         {
-            if (mode.ContainsParameter<bool>("LockOnCourseStart"))
+            if (mode.ContainsParameter<bool>(EnableLockHandlingParameterName))
             {
-                lockOnCourseStart = mode.GetParameter<bool>("LockOnCourseStart");
+                isEnabled = mode.GetParameter<bool>(EnableLockHandlingParameterName);
             }
 
-            if (mode.ContainsParameter<bool>("LockOnCourseFinished"))
+            if (mode.ContainsParameter<bool>(LockCourseOnStartParameterName))
             {
-                lockOnCourseFinished = mode.GetParameter<bool>("LockOnCourseFinished");
+                lockOnCourseStart = mode.GetParameter<bool>(LockCourseOnStartParameterName);
+            }
+
+            if (mode.ContainsParameter<bool>(LockOnCourseFinishedParameterName))
+            {
+                lockOnCourseFinished = mode.GetParameter<bool>(LockOnCourseFinishedParameterName);
             }
         }
 
         /// <inheritdoc />
         public override void OnCourseStarted(ICourse course)
         {
-            if (lockOnCourseStart)
+            if (isEnabled && lockOnCourseStart)
             {
-                foreach (LockableProperty prop in SceneUtils.GetActiveAndInactiveComponents<LockableProperty>())
-                {
-                    prop.SetLocked(true);
-                }
+                EnforceAllProperties(true);
             }
         }
 
         /// <inheritdoc />
         public override void OnCourseFinished(ICourse course)
         {
-            if (lockOnCourseFinished)
+            if (isEnabled && lockOnCourseFinished)
             {
-                foreach (LockableProperty prop in SceneUtils.GetActiveAndInactiveComponents<LockableProperty>())
-                {
-                    prop.SetLocked(true);
-                }
+                EnforceAllProperties(true);
+            }
+        }
+
+        private void EnforceAllProperties(bool isLocked)
+        {
+            foreach (LockableProperty prop in SceneUtils.GetActiveAndInactiveComponents<LockableProperty>())
+            {
+                prop.SetLocked(isLocked);
             }
         }
     }
