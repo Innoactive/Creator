@@ -51,6 +51,7 @@ Locks & unlocks LockableProperties according to the usage in the step. It also l
 
 Name | type | default value | comment
 |---|---|---|---|
+EnableLockHandling | `boolean` | `true` | *Decides if LockableProperties should get locked at all*
 LockOnCourseStart | `boolean` | `true` | *Decides if all LockableProperties should get locked when the course is started*
 LockOnCourseFinished | `boolean` | `false` | *Decides if all LockableProperties should get locked when the course is finished*
 
