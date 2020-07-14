@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Editors.Windows;
+using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.UI.Windows;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Editor.Windows.TrainingWindowTests
+namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 {
-    public class LoopChapterTest : BaseTest
+    internal class LoopChapterTest : BaseTest
     {
         /// <inheritdoc />
         public override string WhenDescription
@@ -27,15 +27,15 @@ namespace Innoactive.Hub.Unity.Tests.Training.Editor.Windows.TrainingWindowTests
         }
 
         /// <inheritdoc />
-        protected override TrainingWindow Given()
+        protected override CourseWindow Given()
         {
-            TrainingWindow window = base.Given();
+            CourseWindow window = base.Given();
 
             return window;
         }
 
         /// <inheritdoc />
-        protected override void Then(TrainingWindow window)
+        protected override void Then(CourseWindow window)
         {
             ICourse result = ExtractTraining(window);
             IChapter firstChapter = result.Data.Chapters.First();

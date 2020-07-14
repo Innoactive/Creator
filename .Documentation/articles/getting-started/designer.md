@@ -15,15 +15,11 @@ You can look up examples as described in [the evaluator's guide](evaluator.md).
 
 ### Create a new Unity Project
 
-Create a [new project](../miscellaneous/unity-setup.md) in Unity.
-
-### Prerequisites
-
-Make sure that your setup satisfies the [prerequisites](../miscellaneous/prerequisites.md).
+ Follow the [instructions](../setup-guides/index.md) to create a new project in Unity.
 
 ### Import the Training Template
 
-A template is a copy of the `Innoactive Creator` adjusted to the needs of your company or project. Normally, you would receive a `.unitypackage` with it from a template developer; in this tutorial we will use `Innoactive Basic Template` instead. Download it from the [Innoactive Developer Portal](http://developers.innoactive.de/components/#training-module): scroll down to the `Innoactive Creator` section, click `Download` button for the latest version and pick the `innoactive-basic-template-vX.Y.Z.unitypackage`.
+A template is a copy of the `Innoactive Creator` adjusted to the needs of your company or project. Normally, you would receive a `.unitypackage` with it from a template developer; in this tutorial we will use `Innoactive Base Template` instead. Download it from the [Innoactive Developer Portal](http://developers.innoactive.de/creator/releases/): scroll down to the `Innoactive Creator` section, click `Download` button for the latest version and pick the `Innoactive-Creator-vX.Y.Z-Unity-XR.unitypackage`.
 
 Locate the downloaded `.unitypackage` with a file explorer and drag and drop it into the `Project` tab in the Unity Editor. The `Import Unity Package` window will pop up; click `All` and then `Import`.
 
@@ -31,7 +27,7 @@ Locate the downloaded `.unitypackage` with a file explorer and drag and drop it 
 
 The training template contains preconfigured scenes which you could copy and reuse.
 
-Copy the `Simplified` scene from the imported template folder (`Innoactive/Creator/Basic-Template`) to the `Assets` folder (`Ctrl` + `D` or `Edit` > `Duplicate`, then drag and drop it to the desired directory). If you put it into a subdirectory, it should not be inside the `Innoactive/Creator/Basic-Template` folder. Make sure to open the copied scene by double clicking it.
+Copy the `Simplified` scene from the imported template folder (`Innoactive/Creator/Base-Template`) to the `Assets` folder (`Ctrl` + `D` or `Edit` > `Duplicate`, then drag and drop it to the desired directory). If you put it into a subdirectory, it should not be inside the `Innoactive/Creator/Base-Template` folder. Make sure to open the copied scene by double clicking it.
 
 ## Create a Basic Training Application
 
@@ -43,7 +39,7 @@ In this section we will create an application for the following training course:
 
 ### Populate the Scene
 
-Add some floors and walls to the scene to prevent the trainee and the training scene objects from falling into the void. You need some colliders without rigidbodies: default Unity **planes** are good enough (`GameObject > 3D Object > Plane`). 
+Add some floors and walls to the scene to prevent the trainee and the training scene objects from falling into the void. You need some colliders without rigidbodies: default Unity **planes** are good enough (`GameObject > 3D Object > Plane`).
 
 Place a **sphere** and a **cube** in trainee's reach, and an **empty object** somewhere in the sky. Use default Unity objects: `GameObject > 3D Object > Sphere`, `GameObject > 3D Object > Cube`, and `Game Object > Create Empty`.
 
@@ -93,29 +89,29 @@ The created training course will be set as the selected one for the current scen
 
 #### Workflow Editor
 
-Now the Workflow Editor is open and you can view and modify your training course. On the left, the list of chapters is displayed. You can use as many as you want, but let us stick to a single one in this tutorial. You can see the chapter workflow on the right. An empty chapter has only a starting point.
+Now the [Workflow Editor](../innoactive-creator/workflow-editor.md) is open and you can view and modify your training course. On the left, the list of chapters is displayed. You can use as many as you want, but let us stick to a single one in this tutorial. You can see the chapter workflow on the right. An empty chapter has only a starting point.
 
-To add a step, click with the right mouse button anywhere on the empty area and choose the `Add Step` option. To remove a step, click on the step with the right mouse button and choose the `Delete Step` option. You can drag a step around the canvas with the left mouse button.
+To add a step, click with the right mouse button anywhere on the empty area and choose the `Add step` option. To remove a step, click on the step with the right mouse button and choose the `Delete` option. You can drag a step around the canvas with the left mouse button.
 
-> Learn more about the [Workflow Editor](../innoactive-creator/workflow-editor.md).
+Now, add three new steps to the training.
 
-Now, add three new steps to the training. 
+We need to connect them with transitions: Connect the starting point of the chapter to the first step by dragging the transition origin (a white circle) to the target step. Repeat to connect the first step to the second one, and the second one to the third one. Leave the outgoing transition of the third step as it is. It will automatically lead to the end of the chapter as it has no target step.
 
-We need to connect them with transitions: first, add an outgoing transition to each step by pressing the small white round buttons with a `+` sign on every step node. Then connect the starting point of the chapter to the first step by dragging the transition origin (a white circle) to the transition target (a white circle with a `>` sign) of the target step. Repeat to connect the first step to the second one, and the second one to the third one. Also add an outgoing transition to the third step but leave it as it is. It will automatically lead to the end of the chapter as it has no target step.
+If you want to add an outgoing transition to a step, press the small white round button with a `+` sign on right of the step node. Make sure to only have one outgoing transition per step in this tutorial.
 
-To delete a transition, right-click the transition's starting point and choose `Delete Transition`. Please note that the transition from the chapter's starting point cannot be deleted.
+To delete a transition, right-click the transition's starting point and choose `Delete transition`. Please note that a step will automatically create a new transition if you reduce the number of transitions to zero.
 
-Click on the first step to open it in the `Step Inspector`.
+Now, click on the first step to open it in the [Step Inspector](../innoactive-creator/step-inspector.md).
 
 #### Step Inspector
 
-The Step Inspector allows you to set a step name and description, as well as to create and edit behaviors, transitions, and conditions. The name and description of the step have no effect on the training course itself. Use them to keep notes for yourself and other trainers. To add a behavior, click on an `Add Behavior` button in the step's view. To delete a behavior, click on the `[x]` button next to it. The same applies to transitions and conditions.
+The [Step Inspector](../innoactive-creator/step-inspector.md) allows you to set a step name and description, as well as to create and edit behaviors, transitions, and conditions. The name and description of the step have no effect on the training course itself. Use them to keep notes for yourself and other trainers. To add a behavior, click on an `Add Behavior` button in the step's view. To delete a behavior, click on the `[x]` button next to it. The same applies to transitions and conditions.
 
 1. Now, rename the first step of the training course to `Grab sphere`. Add a single `Grab Object` condition to its transition to the second step. Drag the previously created `Sphere` into the object field named `Grabbable object`. Add a description:
 
     > This step will be completed when the trainee grabs the training scene object with the name `Sphere`, which has the `Grabbable Property` attached.
 
-2. Open the second step in the Step Inspector. Rename it to `Bring to cube`. Add an `Object Nearby` condition to its transition to the third step. Set the `Range` to `1.5`, drag `Cube` and `Sphere` into the `First object` and `Second object` fields. Add a description:
+2. Open the second step in the [Step Inspector](../innoactive-creator/step-inspector.md). Rename it to `Bring to cube`. Add an `Object Nearby` condition to its transition to the third step. Set the `Range` to `1.5`, drag `Cube` and `Sphere` into the `First object` and `Second object` fields. Add a description:
 
     > This step will be completed when the center point of the `Sphere` is 1.5 units away from the center point of the `Cube`, which has a `Transform In Range Detector Property`.
 
@@ -125,13 +121,9 @@ The Step Inspector allows you to set a step name and description, as well as to 
 
 #### Save and Load
 
-You can check if you have unsaved changes to your training course in the top right corner of the workflow editor. The corner will be either empty or display `Unsaved changes` in red letters.
+The [Workflow Editor](../innoactive-creator/workflow-editor.md) and [Step Inspector](../innoactive-creator/step-inspector.md) automatically save all changes you make.
 
-To save the current training course, you can click the `Save` button in the Workflow Editor.
-
-> In its current state, the Innoactive Creator could discard changes when scripts are modified or when Unity Editor is closed.
-
-You can open any selected training course by clicking the `Open in Workflow Editor` button on the `[TRAINING_CONFIGURATION]` game object.
+You can open any selected training course by clicking the `Open in Workflow Editor` button in the `Inspector` tab of the `[TRAINING_CONFIGURATION]` game object. You can find this game object in your scene.
 
 > Learn more about the [Training Configuration](../innoactive-creator/training-configuration.md).
 
@@ -143,17 +135,19 @@ Now try out the training course you created. Grab the sphere and move it near th
 
 ### Complete Example
 
-You can find our tutorial result alongside the other examples in the `Assets/Examples` directory of the `Innoactive Creator Examples` project ([see the evaluator's guide](evaluator.md)). Load the scene called `SimpleExample` in the `Assets/Examples/Simple` directory.
+You can find our tutorial result alongside the other examples in the `Assets/Innoactive/Examples` directory. Load the scene called `SimpleExample` in the `Assets/Innoactive/Examples/Scenes/Simple` directory.
 
 ## Advanced Localization Example
 
-Duplicate and move the `Default` scene from the imported template folder (`Innoactive/Creator/Basic-Template/Scenes`) into any other directory. Repopulate it with same training scene objects as in the first part of this guide.
+Duplicate and move the `Default` scene from the imported template folder (`Innoactive/Creator/Base-Template/Scenes`) into any other directory. Repopulate it with the same training scene objects as in the first part of this guide.
 
-Take a look at the `[CAMERA_CONFIGURATION]` scene object. You will notice that `Spectator Cam Prefab Overload` is overriden with a custom prefab. This prefab provides a trainer with real time controls for the training execution. With it, a trainer is able to see the current training status, start, reset, and mute the training, pick a chapter and skip a step, choose a language and the training mode to use.
+Take a look at the `[COURSE_CONTROLLER]` scene object. You will notice that `Course Mode` is set to `Default`. This prefab provides a trainer with real time controls for the training execution during runtime. With it, a trainer is able to see the current training status, start, reset, and mute the training, pick a chapter and skip a step, choose a language and the training mode to use.
 
-> The `[CAMERA_CONFIGURATION]` prefab is located in `Innoactive/Creator/Basic-Template/Resources/CustomCamera/Prefabs`, if you want to use it in your own scene.
+If you set it to `Standalone`, this prefab provides the trainee with real time controls for the training execution in VR. This is convenient if you want to use a standalone VR headset like the Oculus Quest.
 
-Note that there is no `TrainingLoader` game object on the scene. Instead, the training is managed by a controller script attached to the camera's overlay. It automatically loads the active training course. Just make sure that the correct training course is selected on the `[TRAINING_CONFIGURATION]` game object.
+> The `[COURSE_CONTROLLER]` prefab is located in `Innoactive/Creator/Base-Template/Resources/CourseController/Prefabs`, if you want to use it in your own scene.
+
+Note that there is no `TrainingLoader` game object in the scene. Instead, the training is managed by a controller script attached to the camera's overlay. It automatically loads the active training course. Just make sure that the correct training course is selected on the `[TRAINING_CONFIGURATION]` game object.
 
 ### Audio Hints and Localization
 
@@ -181,18 +175,15 @@ The `Default` template scene accepts `.json` files as a source of localization d
 }
 ```
 
-The localization files must be named by the two-letter ISO code of the respective language (`en.json` or `de.json`). Save them to the `[YOUR_PROJECT_ROOT_FOLDER]/Assets/StreamingAssets/Training/[YOUR_COURSE_NAME]/Localization` folder. The script automatically loads all available localizations and displays them in the language dropdown menu. If there is no respective language pack, the localization file is ignored. 
-
-> You can add language packs there: `Windows Settings > Time and Language > Language > Add a language`.
-> Learn more about [Text to Speech](../miscellaneous/setup-text-to-speech.md).
+The localization files must be named by the two-letter ISO code of the respective language (`en.json` or `de.json`). Save them to the `[YOUR_PROJECT_ROOT_FOLDER]/Assets/StreamingAssets/Training/[YOUR_COURSE_NAME]/Localization` folder. The script automatically loads all available localizations and displays them in the language dropdown menu. If there is no respective language pack, the localization file is ignored.
 
 ### Audio Behavior
 
-In the Step Inspector, you can add either `Play TTS Audio` or `Play Audio File` behavior to a step. It has two parameters:
+In the [Step Inspector](../innoactive-creator/step-inspector.md), you can add either `Play TTS Audio` or `Play Audio File` behavior to a step. It has two parameters:
 
 * `Localization key` is a path to a localized text. If `Play TTS Audio` is used, this localized text is used to generate audio. If `Play Audio File` is used, it uses the text as a [resource path](https://docs.unity3d.com/ScriptReference/Resources.Load.html).
 * `Default resource path` and `Default text` are used instead of localized text if `Localization key` is empty or the value is not found.
-* `Execution stages` specifies when the audio should be played: at the beginning of the step (`Before Step Execution `), at the end of the step (`After Step Execution `), or both.
+* `Execution stages` specifies when the audio should be played: at the beginning of the step (`Before Step Execution`), at the end of the step (`After Step Execution`), or both.
 * If `Is blocking` is toggled on, step will wait until this behavior is complete. Toggle it on for important information that a trainee has to hear, and toggle it off for optional voice lines, like hints or advices.
 
 Both types of audio behaviors use localized strings. With `Play Audio File`, it allows you to define audio clip resources independently for every supported language. With `Play TTS Audio`, you can provide different text for every language to generate audio from. Add the following to your training:
@@ -202,11 +193,9 @@ Both types of audio behaviors use localized strings. With `Play Audio File`, it 
 3. In `Move cube` step, add a `Play TTS Audio` behavior with `Localization key` set to `move_cube`.
 4. In `Move cube` step, add another `Play TTS Audio` behavior with `Execution stages` set to `After Step Execution` and `Localization key` set to `training_complete`. Mark it as a blocking behavior.
 
-> Don't forget to save the changes!
-
 ### Complete Example
 
-You can find our tutorial result alongside the other examples in the `Assets/Examples` directory of the `Innoactive Creator Examples` project ([see the evaluator's guide](evaluator.md)). Load the scene called `LocalizationExample` in the `Assets/Examples/Advanced` directory.
+You can find our tutorial result alongside the other examples in the `Assets/Innoactive/Examples` directory. Load the scene called `LocalizationExample` in the `Assets/Innoactive/Examples/Scenes/Advanced` directory.
 
 ## Default Behaviors
 

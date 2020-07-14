@@ -1,7 +1,7 @@
 - name: Introduction
   href: index.md
-- name: Getting started
-  href: getting-started
+- name: Getting Started
+  href: getting-started/index.md
   items:
     - name: Overview
       href: getting-started/index.md
@@ -11,7 +11,18 @@
       href: getting-started/designer.md
     - name: As a Developer
       href: getting-started/developer.md
-- name: Innoactive Creator for designers
+- name: Setup Guides
+  href: setup-guides/index.md
+  items:
+    - name: Overview
+      href: setup-guides/index.md
+    - name: System Setup
+      href: setup-guides/01-system-setup.md
+    - name: Unity Setup
+      href: setup-guides/02-unity-setup.md
+    - name: Project Setup
+      href: setup-guides/03-project-setup.md
+- name: Innoactive Creator for Designers
   href: innoactive-creator/index.md
   items:
     - name: Overview
@@ -30,7 +41,11 @@
       href: innoactive-creator/default-behaviors.md
     - name: Default Conditions
       href: innoactive-creator/default-conditions.md
-- name: Innoacitve Creator for developers
+    - name: Suspending Interactions
+      href: innoactive-creator/suspending-interactions.md
+    - name: Examples
+      href: innoactive-creator/examples.md
+- name: Innoactive Creator for Developers
   href: developer/index.md
   items:
     - name: Overview
@@ -39,34 +54,34 @@
       href: developer/01-introduction.md
     - name: Using Innoactive Creator
       href: developer/02-using-innoactive-creator.md
-    - name: Set up a project
+    - name: Set Up a Project
       href: developer/03-set-up-a-project.md
-    - name: General concepts
+    - name: General Concepts
       href: developer/04-general-concepts.md
     - name: Behaviors
       href: developer/05-behaviors.md
-    - name: Menu items
+    - name: Menu Items
       href: developer/06-menu-items.md
-    - name: Run a training course
+    - name: Run a Training Course
       href: developer/07-run-a-course.md
     - name: Conditions
       href: developer/08-conditions.md
     - name: Properties
       href: developer/09-properties.md
-- name: Miscellaneous
-  href: miscellaneous/index.md
+    - name: Lockable Propertiees
+      href: developer/10-lockable-properties.md
+    - name: Text-To-Speech
+      href: developer/11-text-to-speech.md
+    - name: Dependency Manager
+      href: developer/12-dependency-manager.md
+- name: Transition Guide to v2.0 for Developers
+  href: transition-to-v2.0/index.md
   items:
     - name: Overview
-      href: miscellaneous/index.md
-    - name: Unity Setup Guide
-      href: miscellaneous/unity-setup.md
-    - name: Prerequisites
-      href: miscellaneous/prerequisites.md
-    - name: Advanced Examples
-      href: miscellaneous/example-descriptions.md
-    - name: Menu Items (Developer)
-      href: miscellaneous/menu-items.md
-    - name: Snap Zones (Training Designer)
-      href: miscellaneous/snapzones.md
-    - name: Text To Speech Engine (TTS) (Developer)
-      href: miscellaneous/setup-text-to-speech.md
+      href: transition-to-v2.0/index.md
+    - name: Overview of the Changes
+      href: transition-to-v2.0/01-overview-of-the-changes.md
+    - name: Update Behaviors and Conditions
+      href: transition-to-v2.0/02-update-behaviors-and-conditions.md
+    - name: Unity XR FAQ
+      href: transition-to-v2.0/03-unity-xr-faq.md

@@ -18,11 +18,11 @@ For this, we would need to create a new property. It would provide a method that
 
 ### Create the Property
 
-Create a new `.cs` file in the `Assets` folder with the following content:
+Create a new `ScalableProperty.cs` file in the `Assets` folder with the following content:
 
 ```csharp
-using Innoactive.Hub.Training.SceneObjects.Properties;
 using UnityEngine;
+using Innoactive.Cretor.Core.Properties;
 
 public class ScalableProperty : TrainingSceneObjectProperty
 {
@@ -73,33 +73,33 @@ Note that this will break old training courses that use the scaling behavior.
 Replace the behavior's Activating stage process with the following:
 
 ```csharp
-public class ScalingBehaviorActivatingProcess : IStageProcess<ScalingBehaviorData>
+public class ScalingBehaviorActivatingProcess : Process<ScalingBehaviorData>
 {
     private float startedAt;
 
-    public void Start(ScalingBehaviorData data)
+    public void Start()
     {
         startedAt = Time.time;
     }
 
-    public IEnumerator Update(ScalingBehaviorData data)
+    public IEnumerator Update()
     {
-        while (Time.time - startedAt < data.Duration)
+        while (Time.time - startedAt < Data.Duration)
         {
-            float progress = (Time.time - startedAt) / data.Duration;
+            float progress = (Time.time - startedAt) / Data.Duration;
 
-            data.Target.Value.Scale(progress);
+            Data.Target.Value.Scale(progress);
             
             yield return null;
         }
     }
 
-    public void End(ScalingBehaviorData data)
+    public void End()
     {
-            data.Target.Value.Scale(1f);
+            Data.Target.Value.Scale(1f);
     }
 
-    public void FastForward(ScalingBehaviorData data)
+    public void FastForward()
     {
     }
 }
@@ -112,11 +112,8 @@ In the behavior's class itself, replace the behavior's constructor:
 ```csharp
 public ScalingBehavior()
 {
-    Data = new ScalingBehaviorData()
-    {
-        Target = new ScenePropertyReference<ScalableProperty>(""),
-        Duration = 0f,
-    };
+    Data.Target = new ScenePropertyReference<ScalableProperty>("");
+    Data.Duration = 0f;
 }
 ```
 
@@ -130,8 +127,8 @@ There are no strict rules whenever a code should belong to an entity or to a pro
 
 From the examples above, a `HighlightBehavior` knows when to highlight an object, but only a `HighlightProperty` knows if it is done with particles, or with a color change, or by showing a big glowing arrow.
 
-If you have to set up the scene object in runtime, set up it in the `Awake()`, `Start()`, or `OnEnable()` method of your property class.
+If you have to set up the scene object in runtime, do it in the `Awake()`, `Start()`, or `OnEnable()` method of your property class.
 
 If your custom entity works only with specific objects, you could use properties to prevent training designers from making mistakes.
 
-This concludes the core part of the template developer's documentation. Advanced topics are to be done.
+[To the next chapter!](10-lockable-properties.md)

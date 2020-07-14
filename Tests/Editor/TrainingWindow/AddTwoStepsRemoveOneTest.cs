@@ -1,20 +1,21 @@
 using NUnit.Framework;
 using System.Linq;
 using System.Collections.Generic;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Editors.Windows;
+using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.UI.Windows;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Editor.Windows.TrainingWindowTests
+namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 {
-    public class AddTwoStepsRemoveOneTest : BaseTest
+    internal class AddTwoStepsRemoveOneTest : BaseTest
     {
         /// <inheritdoc />
         public override string WhenDescription
         {
             get
             {
-                return "1. Add two new steps" + "\n" +
-                       "2. Delete one step.";
+                return "1. Add two new steps." + "\n" +
+                       "2. Delete one step." + "\n" +
+                       "3. Connect the step to the start of the chapter.";
             }
         }
 
@@ -28,7 +29,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Editor.Windows.TrainingWindowTests
         }
 
         /// <inheritdoc />
-        protected override void Then(TrainingWindow window)
+        protected override void Then(CourseWindow window)
         {
             ICourse result = ExtractTraining(window);
 

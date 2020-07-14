@@ -1,20 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using NUnit.Framework;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Editors.Windows;
+using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.UI.Windows;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Editor.Windows.TrainingWindowTests
+namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 {
-    public class BranchTest : BaseTest
+    internal class BranchTest : BaseTest
     {
         /// <inheritdoc />
         public override string WhenDescription
         {
             get
             {
-                return "User creates a step with two transitions, each goes to another step each with one transition to the end of the chapter.";
+                return "1. Create three steps.\n" +
+                    "2. Connect one of them to the beginning of the chapter.\n" +
+                    "3. Add a second transition to that step.\n" +
+                    "4. Connect first step to the other two steps.\n";
             }
         }
 
@@ -28,7 +30,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Editor.Windows.TrainingWindowTests
         }
 
         /// <inheritdoc />
-        protected override void Then(TrainingWindow window)
+        protected override void Then(CourseWindow window)
         {
             ICourse result = ExtractTraining(window);
 

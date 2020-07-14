@@ -14,15 +14,9 @@ Use behaviors to prepare the environment to conditions, or to clean it up afterw
 
 ## Making a "Scale Object" Behavior
 
-If you just spawn a new object in your virtual reality application, it may disorient your user. Instead, you could scale an object up: a brief animation is enough for a user to adjust.
+If you just spawn a new object in your virtual reality application, it may disorient your user. Instead, you could scale an object up: a brief animation is enough for a user to adjust. We could create a behavior that scales a given object to a given value. A training designer would be able to set the animation's duration.
 
-We could create a behavior that scales a given object to a given value. A training designer would be able to set the animation's duration.
-
-To do so, we need to define the behavior's data first. It would contain a target scale, an animation's duration, and a reference to a target object.
-
-We need to define the behavior's process, too. Assuming that we want to scale an object at the beginning of a step, we need to implement the stage process for the Activating stage.
-
-This stage process has to change the scale of the object every frame. When it has to fast-forward, then it must set the scale to the target value immediately.
+We need to define the behavior's data. It would contain a target scale, an animation's duration, and a reference to a target object. Assuming that we want to scale an object at the beginning of a step, we need to implement the stage process for the Activating stage, which would change the scale of the object every frame. When it has to fast-forward, then it must set the scale to the target value immediately.
 
 ### Data
 
@@ -33,12 +27,12 @@ The Unity Editor only recognizes files inside the project's `Assets` folder. Cre
 Open this file in your favorite IDE or text editor. Make sure that the file is empty. Insert the following:
 
 ```csharp
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Attributes;
-using Innoactive.Hub.Training.Behaviors;
-using Innoactive.Hub.Training.SceneObjects;
-using System.Runtime.Serialization;
 using UnityEngine;
+using System.Runtime.Serialization;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Behaviors;
+using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.SceneObjects;
 ```
 
 This way we declare which [namespaces](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/namespaces/) we use in this file. Leave this list untouched throughout this subsection.
@@ -138,33 +132,33 @@ As in the [previous](#data) section, prepare a new C# class file. Name it `Scali
 
 ```csharp
 // Declare namespaces to use, as in the previous subsection.
- using Innoactive.Hub.Training;
+ using Innoactive.Creator.Core;
  using System.Collections;
  using UnityEngine;
  
  // We have to declare the type of data which this process can modify.
  // We do it by implementing the generic IStageProcess<TData> interface.
-public class ScalingBehaviorActivatingProcess : IStageProcess<ScalingBehaviorData>
+public class ScalingBehaviorActivatingProcess : Process<ScalingBehaviorData>
 {
     // Always runs when we enter this stage.
-    public void Start(ScalingBehaviorData data)
+    public override void Start()
     {
     }
  
     // Starting from the next frame, 
     // the Innoactive Creator will call it every frame until it will complete it.
-    public IEnumerator Update(ScalingBehaviorData data)
+    public override IEnumerator Update()
     {
     }
  
     // Always runs whenever we have finished the Update or executed the FastForward.
-    public void End(ScalingBehaviorData data)
+    public override void End()
     {
     }
  
     // We call it when we had no time to complete Update,
     // so we have to fake it.
-    public void FastForward(ScalingBehaviorData data)
+    public override void FastForward()
     {
     }
 }
@@ -177,7 +171,7 @@ At the start of the stage process, we will record the current time and initial s
 In `Update()`, we will [linearly interpolate](https://en.wikipedia.org/wiki/Linear_interpolation) between the initial and target scale depending on the time passed: every frame, the object will shrink or grow towards the target scale. Afterwards, we will set the scale to the precise value in the `End()` method. If the stage process has to fast-forward, the `Update()` method will not iterate completely. We will handle it in the in the `FastForward()` method by assigning the target scale to the object.
 
 ```csharp
-public class ScalingBehaviorActivatingProcess : IStageProcess<ScalingBehaviorData>
+public class ScalingBehaviorActivatingProcess : Process<ScalingBehaviorData>
 {
     // Private fields which all methods in the class can access.
     private float startedAt;
@@ -187,27 +181,27 @@ public class ScalingBehaviorActivatingProcess : IStageProcess<ScalingBehaviorDat
     // Record the initial values.
     // The same instance of a stage process could be used multiple times,
     // so you have to make sure that you reset everything in this method.
-    public void Start(ScalingBehaviorData data)
+    public override void Start()
     {
-        // data.Target is a reference to a scene object.
-        // data.Target.Value is the actual scene object.
-        scaledTransform = data.Target.Value.GameObject.transform;
+        // Data.Target is a reference to a scene object.
+        // Data.Target.Value is the actual scene object.
+        scaledTransform = Data.Target.Value.GameObject.transform;
         startedAt = Time.time;
         initialScale = scaledTransform.localScale;
     }
 
-    public IEnumerator Update(ScalingBehaviorData data)
+    public override IEnumerator Update()
     {
         // Time.time returns the time elapsed 
         // since the start of the application.
-        while (Time.time - startedAt < data.Duration)
+        while (Time.time - startedAt < Data.Duration)
         {
             // Calculate the progress from 0 to 1.
-            float progress = (Time.time - startedAt) / data.Duration;
+            float progress = (Time.time - startedAt) / Data.Duration;
 
             // Linearly interpolate between the initial and target scale,
             // based on the progress.
-            scaledTransform.localScale = Vector3.Lerp(initialScale, data.TargetScale, progress);
+            scaledTransform.localScale = Vector3.Lerp(initialScale, Data.TargetScale, progress);
 
             // Wait for the next frame.
             yield return null;
@@ -217,15 +211,20 @@ public class ScalingBehaviorActivatingProcess : IStageProcess<ScalingBehaviorDat
     }
 
     // Vector3.Lerp is imprecise, so we manually set the scale to the target value after the required amount of time has passed.
-    public void End(ScalingBehaviorData data)
+    public override void End()
     {
-        scaledTransform.localScale = data.TargetScale;
+        scaledTransform.localScale = Data.TargetScale;
     }
 
     // To fast-forward the behavior, we should set the scale to the target value. But since the End() method is called immediately afterwards, we don't need to duplicate the code. 
-    public void FastForward(ScalingBehaviorData data)
+    public override void FastForward()
     {
         // scaledTransform.localScale = data.TargetScale;
+    }
+
+    // Declare the constructor. It calls the base method to bind the data object with the process.
+    public ScalingBehaviorActivatingProcess(ScalingBehaviorData data) : base(data)
+    {
     }
 }
 ```
@@ -235,20 +234,19 @@ public class ScalingBehaviorActivatingProcess : IStageProcess<ScalingBehaviorDat
 Prepare a new C# class file for the behavior class with  the following:
 
 ```csharp
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Behaviors;
-using Innoactive.Hub.Training.SceneObjects;
-using System.Runtime.Serialization;
 using UnityEngine;
+using System.Runtime.Serialization;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Behaviors;
+using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.SceneObjects;
 ```
 
 To create a behavior, we have to inherit from the `Behavior` abstract class and define the data and the process.
 
 The base class has the basic `Data` property already. Create an instance of your data class in the behavior's constructor and assign default values to its fields.
 
-To define the process, you have to implement the abstract `Process` property. The Innoactive Creator expects it to always return the same instance of a process. Declare a [backing](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/fields) field and assign a new instance of `IProcess` to it.
-
-Use the default `Process` class instead of making a new class that implements the `IProcess` interface. You will need only to pass your stage processes in its constructor. If a stage has no associated stage process, pass the `EmptyStageProcess` class instead of `null`.
+To define a process, you have to override a method that corresponds to the target stage: `GetActivatingProcess()`, `GetActiveProcess()`, or `GetDeactivatingProcess()`. An entity could contain multiple processes, up to one per stage. By default, these methods return `EmptyStageProcess` processes, which do nothing. An entity always expects a process instance from these calls: they should never return `null`.
 
 ```csharp
 // We have to declare the behavior as a data contract, too,
@@ -259,40 +257,25 @@ public class ScalingBehavior : Behavior<ScalingBehaviorData>
 {
     // Any serializable class must include a public parameterless constructor.
     // (Classes with no declared constructors have one by default).
-    // You must initialize the Data property here.
+    // Setup the Data property here.
     public ScalingBehavior()
     {
-        // The Data property is already declared in the abstract class,
-        // But we still need to create and setup its value.
-        Data = new ScalingBehaviorData()
-        {
-            // Make sure to always initialize scene object references.
-            Target = new SceneObjectReference(""),
-            TargetScale = Vector3.one,
-            Duration = 0f,
-        };
+        // The default base constructor has created the Data object already.
+        // Now we need to setup its values.
+        Data.Duration = 0f;
+        Data.TargetScale = Vector3.one;
+        // Make sure to always initialize scene object references.
+        Data.Target = new SceneObjectReference("");
     }
 
-    // This property should always return the same instance of a process.
-    // We can store this instance in a private field,
-    // And return this field's value through the getter of the property.
-    protected override IProcess<ScalingBehaviorData> Process
+    // Each entity has three virtual methods where you can declare the stage process
+    // that that entity should use.
+    // By default, these methods return empty processes that do nothing.
+    public override IProcess GetActivatingProcess()
     {
-        get
-        {
-            return process;
-        }
+        // Always return a new instance of a stage process.
+        return new ScalingBehaviorActivatingProcess(Data);
     }
-    
-    // You can use already existing Process class instead of implementing your own.
-    // It takes a stage process for every stage except for Inactive.
-    private readonly IProcess<ScalingBehaviorData> process = new Process<ScalingBehaviorData>(
-        activating: new ScalingBehaviorActivatingProcess(), 
-        // Processes cannot be null. 
-        //Use EmptyStageProcess<TData> instead. 
-        active: new EmptyStageProcess<ScalingBehaviorData>(), 
-        deactivating: new EmptyStageProcess<ScalingBehaviorData>()
-    );
 }
 ```
 
@@ -314,7 +297,7 @@ namespace My.Behaviors.Scaling
         // Implementation omitted.
     }
     
-    public class ActivatingProcess : IStageProcess<Data>
+    public class ActivatingProcess : Process<Data>
     {
         // Implementation omitted.
     }
@@ -340,7 +323,7 @@ public class ScalingBehavior : Behavior<ScalingBehavior.EntityData>
         // Implementation omitted.
     }
 
-    private class ActivatingProcess : IStageProcess<EntityData>
+    private class ActivatingProcess : Process<EntityData>
     {
         // Implementation omitted.
     }

@@ -15,29 +15,32 @@ We can create a [Unity script](https://docs.unity3d.com/Manual/CreatingAndUsingS
 Create a  `TrainingCourseLoader.cs` file in the `Assets` folder. Replace its contents, if any, with the following:
 
 ```csharp
-using System.Collections;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Configuration;
 using UnityEngine;
+using System.Collections;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Configuration;
 
-// Unity components's classes should have the same names as their files.
+// Unity components' classes should have the same names as their files.
 public class TrainingCourseLoader : MonoBehaviour
 {
-    private void Start()
+    private IEnumerator Start()
     {
-        // Load the selected training course.
-        ICourse trainingCourse = RuntimeConfigurator.Configuration.LoadCourse();
+        // Skip the first two frames to give VRTK time to initialize.
+        yield return null;
+        yield return null;
 
-        // Pass the course to the training runner.
-        TrainingRunner.Initialize(trainingCourse);
+        // Load the currently selected training course.
+        string coursePath = RuntimeConfigurator.Instance.GetSelectedCourse();
+        ICourse trainingCourse = RuntimeConfigurator.Configuration.LoadCourse(coursePath);
 
-        // Start the course.
-        TrainingRunner.Run();
+        // Start the training execution.
+        CourseRunner.Initialize(trainingCourse);
+        CourseRunner.Run();
     }
 }
 ```
 
-`RuntimeConfigurator.Configuration.LoadCourse()` creates a course from the file that the training designer has selected in the runtime configuration, in the `[TRAINING_CONFIGURATION]` game object.
+`RuntimeConfigurator.Instance.GetSelectedCourse()` returns the path to the course that the training designer has selected in the runtime configuration, in the `[TRAINING_CONFIGURATION]` game object. `RuntimeConfigurator.Configuration.LoadCourse(string)` creates a course from the file by that path.
 
 We have described the `[TRAINING_CONFIGURATION]` game object in the [designer's getting started guide](../getting-started/designer.md). You can refresh you memory [here](../innoactive-creator/training-configuration.md).
 

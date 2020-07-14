@@ -1,19 +1,19 @@
 using System.Linq;
 using NUnit.Framework;
-using Innoactive.Hub.Training;
+using Innoactive.Creator.Core;
 using System.Collections.Generic;
-using Innoactive.Hub.Training.Editors.Windows;
+using Innoactive.CreatorEditor.UI.Windows;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Editor.Windows.TrainingWindowTests
+namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 {
-    public class AddOneStepTest : BaseTest
+    internal class AddOneStepTest : BaseTest
     {
         /// <inheritdoc />
         public override string WhenDescription
         {
             get
             {
-                return "User clicks once at add button.";
+                return "Add one step to the workflow. Connect it to the start of the chapter.";
             }
         }
 
@@ -27,7 +27,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Editor.Windows.TrainingWindowTests
         }
 
         /// <inheritdoc />
-        protected override void Then(TrainingWindow window)
+        protected override void Then(CourseWindow window)
         {
             ICourse result = ExtractTraining(window);
 
@@ -40,9 +40,7 @@ namespace Innoactive.Hub.Unity.Tests.Training.Editor.Windows.TrainingWindowTests
             IList<ITransition> transitions = GetTransitionsFromStep(firstStep);
             Assert.That(transitions.Count == 1);
 
-            IStep nextStep;
-
-            if (TryToGetStepFromTransition(transitions.First(), out nextStep))
+            if (TryToGetStepFromTransition(transitions.First(), out IStep nextStep))
             {
                 Assert.Fail("First step is not the end of the chapter.");
             }
