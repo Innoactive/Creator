@@ -64,11 +64,6 @@ stages:
           TargetFolder: '$(Path.Creator)/Core'
         displayName: Copy Creator Core
 
-      - task: DeleteFiles@1
-        inputs:
-          Contents: '!(Project)'
-        displayName: Clean Up
-
       - task: PowerShell@2
         displayName: Build Project
         inputs:
