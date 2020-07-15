@@ -50,27 +50,6 @@ stages:
 
       - task: UseNode@1
 
-      - task: PowerShell@2
-        displayName: "Run Semantic release"
-        condition: eq(variables['Build.SourceBranchName'], 'master')
-        inputs:
-          targetType: 'inline'
-          script: |
-            npx -p semantic-release-ado semantic-release
-          workingDirectory: "Creator/"
-        env:
-          GH_TOKEN: "$(GITHUB_TOKEN)"
-
-      - task: PowerShell@2
-        displayName: Fetch version from git
-        condition: ne(variables['Build.SourceBranchName'], 'master')
-        inputs:
-          targetType: 'inline'
-          script: |
-            $TAG = (git describe --all --match "v*").Replace("tags/", "").TrimStart("v")
-            Write-Host "##vso[task.setvariable variable=Version]$TAG"
-          workingDirectory: "Creator/"
-
       - task: CopyFiles@2
         inputs:
           SourceFolder: 'Empty-Unity-Project-2019/'
@@ -113,8 +92,37 @@ stages:
             testResultsFiles: "TEST-*.xml"
 
       - task: PowerShell@2
+        displayName: "Run Semantic release"
+        condition: eq(variables['Build.SourceBranchName'], 'master')
+        inputs:
+          targetType: 'inline'
+          script: |
+            npx -p semantic-release-ado semantic-release
+          workingDirectory: "Creator/"
+        env:
+          GH_TOKEN: "$(GITHUB_TOKEN)"
+
+      - task: PowerShell@2
+        displayName: Fetch version from git
+        condition: ne(variables['Build.SourceBranchName'], 'master')
+        inputs:
+          targetType: 'inline'
+          script: |
+            $TAG = (git describe --all --match "v*").Replace("tags/", "").TrimStart("v")
+            Write-Host "##vso[task.setvariable variable=Version]$TAG"
+          workingDirectory: "Creator/"
+
+      - task: PowerShell@2
+        displayName: Publish variables
+        inputs:
+          targetType: 'inline'
+          script: |
+            echo "##vso[task.setvariable variable=Version;isOutput=true]v$(Version)"
+        name: ExportedVariables
+
+      - task: PowerShell@2
         displayName: Export Unity package
-        inputs:              
+        inputs:
           targetType: 'inline'
           script: |
             echo 'Exporting version $(Version)'
