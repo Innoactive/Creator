@@ -13,11 +13,11 @@ Supported text to speech engines:
 There is also an option to integrate additional text to speech engines.
 
 ## How to Setup a Text to Speech Engine (TTS)
-The configuration is stored in a scriptable object called TextToSpeechConfiguration which is accessible via the Innoactive menu `Innoactive > Creator > Windows > TextToSpeech Settings`. It is useable out of the box and configured to use the windows text to speech API which allows to create audio files on any windows 10 machines without connection to the internet.
+The configuration is stored in a scriptable object called TextToSpeechConfiguration which is accessible via the Innoactive menu `Innoactive > Creator > Windows > TextToSpeech Settings`. It is usable out of the box and configured by default to use the Windows text to speech API which allows to create audio files on any Windows 10 machine without internet connection.
  
 To play a text to speech audio use the `Play TextToSpeech Audio` behavior which is a behavior provided by the TextToSpeech component. Adding a text in the default text field is enough to get an audio line generated.
  
-Handling multiple languages can be done by using the `Localization` feature. The different translations are stored as key value pairs within a json file. The `Play TextToSpeech Audio` behavior will use the text matching the localization key. The translation files have to be place inside `StreamingAsset/YourCourse/Localization/` folder. When using the Innoactive Template the naming scheme for these files should be the first two letters of the iso country codes for example EN.json, DE.json or ES.json
+Handling multiple languages can be done by using the `Localization` feature. The different translations are stored as key value pairs within a json file. The `Play TextToSpeech Audio` behavior will use the text matching the localization key. The translation files have to be placed inside `StreamingAsset/YourCourse/Localization/`. When using the Innoactive Template the naming scheme for these files should be the first two letters of the iso country codes for example EN.json, DE.json or ES.json
 
 Example EN.json file:
 ```json
