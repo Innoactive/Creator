@@ -15,8 +15,6 @@ namespace Innoactive.CreatorEditor
         private StepWindow stepWindow;
         private ICourse course;
 
-        private byte[] cachedCourse;
-
         /// <inheritdoc/>
         public void HandleNewCourseWindow(CourseWindow window)
         {
@@ -108,7 +106,7 @@ namespace Innoactive.CreatorEditor
                 CourseAssetManager.Save(course);
             }
 
-            PlayerPrefs.SetString(GlobalEditorHandler.LastEditedCourseNameKey, courseName);
+            EditorPrefs.SetString(GlobalEditorHandler.LastEditedCourseNameKey, courseName);
             LoadCourse(CourseAssetManager.Load(courseName));
         }
 
@@ -172,13 +170,12 @@ namespace Innoactive.CreatorEditor
         /// <inheritdoc/>
         public void HandleExitingPlayMode()
         {
-            LoadCourse(EditorConfigurator.Instance.Serializer.CourseFromByteArray(cachedCourse));
+            stepWindow.ResetStepView();
         }
 
         /// <inheritdoc/>
         public void HandleEnterPlayMode()
         {
-            cachedCourse = EditorConfigurator.Instance.Serializer.CourseToByteArray(course);
         }
     }
 }

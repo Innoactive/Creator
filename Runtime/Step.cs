@@ -36,7 +36,7 @@ namespace Innoactive.Creator.Core
             public string Description { get; set; }
 
             [DataMember]
-            private ITabsGroup Tabs { get; set; }
+            internal ITabsGroup Tabs { get; set; }
 
             ///<inheritdoc />
             [DataMember]
