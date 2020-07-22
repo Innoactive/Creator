@@ -25,7 +25,7 @@ namespace Innoactive.Creator.Core
 
         public LockableObjectsCollection(Step.EntityData entityData)
         {
-            toUnlock = PropertyReflectionHelper.ExtractLockablesFromStep(entityData).ToList();
+            toUnlock = PropertyReflectionHelper.ExtractLockablePropertiesFromStep(entityData).ToList();
             data = entityData;
 
             CreateSceneObjects();
