@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -30,15 +31,15 @@ namespace Innoactive.CreatorEditor.Analytics
             }
 
             window.Show();
-            window.minSize = new Vector2(280f, 30f);
-            window.maxSize = new Vector2(280f, 30f);
+            window.minSize = new Vector2(280f, 50f);
+            window.maxSize = new Vector2(280f, 50f);
             window.Focus();
         }
 
 
         private void OnGUI()
         {
-            titleContent = new GUIContent("Analytic Settings");
+            titleContent = new GUIContent("Analytics Settings");
 
             GUILayout.Space(8);
 
@@ -46,11 +47,30 @@ namespace Innoactive.CreatorEditor.Analytics
             int state = (int)AnalyticsUtils.GetTrackingState() - 1;
             string[] labels = {"Disabled", "Minimum", "Enabled"};
 
-            int newState = EditorGUILayout.Popup("Analytic Tracking", state, labels);
+            int newState = EditorGUILayout.Popup("Analytics Tracking", state, labels);
             if (newState != state)
             {
                 AnalyticsUtils.SetTrackingTo((AnalyticsState)Enum.ToObject(typeof(AnalyticsState), newState + 1));
             }
+
+            GUIStyle hyperlink = new GUIStyle();
+            hyperlink.normal.textColor = new Color(0.122f, 0.435f, 0.949f);
+
+            GUILayout.BeginArea(new Rect(3, 30, 280, 50));
+
+            if (GUILayout.Button("Data Privacy Information", hyperlink, GUILayout.ExpandWidth(false)))
+            {
+                AnalyticsUtils.ShowDataPrivacyStatement();
+            }
+
+            GUILayout.EndArea();
+
+            // Unity Editor UI has no way to underline text, so this is a fun workaround.
+            GUILayout.BeginArea(new Rect(3, 31, 280, 50));
+
+            GUILayout.Label("____________________________", hyperlink);
+
+            GUILayout.EndArea();
         }
     }
 }
