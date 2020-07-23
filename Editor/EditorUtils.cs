@@ -104,20 +104,20 @@ namespace Innoactive.CreatorEditor
         [DidReloadScripts]
         private static void ResolveCoreFolder()
         {
-            string[] roots = Directory.GetFiles(Application.dataPath, typeof(EditorUtils).Name + ".cs", SearchOption.AllDirectories);
+            string[] roots = Directory.GetFiles(Application.dataPath, $"{nameof(EditorUtils)}.cs", SearchOption.AllDirectories);
 
             if (roots.Length == 0)
             {
                 throw new FileNotFoundException("Innoactive Creator Core folder not found!");
             }
 
-            coreFolder = Path.GetDirectoryName(roots[0]);
+            coreFolder = Path.GetDirectoryName(roots.First());
             coreFolder = coreFolder.Substring(Application.dataPath.Length);
-            coreFolder = coreFolder.Substring(0, coreFolder.LastIndexOf('\\'));
+            coreFolder = coreFolder.Substring(0, coreFolder.LastIndexOf(Path.DirectorySeparatorChar));
             // Assets folder was removed on previous step, put it back.
             coreFolder = "Assets" + coreFolder;
             // Replace backslashes with forward slashes.
-            coreFolder = coreFolder.Replace('/', Path.PathSeparator);
+            coreFolder = coreFolder.Replace('/', Path.AltDirectorySeparatorChar);
         }
     }
 }
