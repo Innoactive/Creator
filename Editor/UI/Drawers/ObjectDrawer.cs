@@ -123,6 +123,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                     wrapper.Metadata[key] = newWrapper.Metadata[key];
                 }
 
+                ownerObjectMetadata.Clear();
                 foreach (string key in newWrapper.Metadata.Keys)
                 {
                     ownerObjectMetadata.SetMetadata(drawnMemberInfo, key, newWrapper.Metadata[key]);
