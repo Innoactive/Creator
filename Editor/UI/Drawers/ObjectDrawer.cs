@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Utils;
 using UnityEditor;
@@ -89,17 +88,17 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
         private float CreateAndDrawMetadataWrapper(Rect rect, object ownerObject, MemberInfo drawnMemberInfo, Action<object> changeValueCallback)
         {
-            PropertyInfo metadataProperty = ownerObject.GetType().GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(property => typeof(Metadata).IsAssignableFrom(property.PropertyType));
-            FieldInfo metadataField = ownerObject.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(field => typeof(Metadata).IsAssignableFrom(field.FieldType));
-            Metadata ownerObjectMetadata = null;
+            PropertyInfo metadataProperty = ownerObject.GetType().GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(property => typeof(Creator.Core.Metadata).IsAssignableFrom(property.PropertyType));
+            FieldInfo metadataField = ownerObject.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(field => typeof(Creator.Core.Metadata).IsAssignableFrom(field.FieldType));
+            Creator.Core.Metadata ownerObjectMetadata = null;
 
             if (metadataProperty != null)
             {
-                ownerObjectMetadata = (Metadata)metadataProperty.GetValue(ownerObject, null) ?? new Metadata();
+                ownerObjectMetadata = (Creator.Core.Metadata)metadataProperty.GetValue(ownerObject, null) ?? new Creator.Core.Metadata();
             }
             else if (metadataField != null)
             {
-                ownerObjectMetadata = (Metadata)metadataField.GetValue(ownerObject) ?? new Metadata();
+                ownerObjectMetadata = (Creator.Core.Metadata)metadataField.GetValue(ownerObject) ?? new Creator.Core.Metadata();
             }
             else
             {

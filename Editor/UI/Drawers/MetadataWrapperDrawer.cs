@@ -6,6 +6,7 @@ using System.Reflection;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Utils;
+using Innoactive.CreatorEditor.UI.Drawers.Metadata;
 using UnityEditor;
 using UnityEngine;
 
@@ -19,18 +20,29 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     [DefaultTrainingDrawer(typeof(MetadataWrapper))]
     internal class MetadataWrapperDrawer : AbstractDrawer
     {
+        private readonly string reorderableName = "ReorderableElement";
         private readonly string separatedName = typeof(SeparatedAttribute).FullName;
         private readonly string deletableName = typeof(DeletableAttribute).FullName;
         private readonly string foldableName = typeof(FoldableAttribute).FullName;
         private readonly string drawIsBlockingToggleName = typeof(DrawIsBlockingToggleAttribute).FullName;
-        private readonly string listOfName = typeof(ListOfAttribute).FullName;
         private readonly string extendableListName = typeof(ExtendableListAttribute).FullName;
         private readonly string keepPopulatedName = typeof(KeepPopulatedAttribute).FullName;
+        private readonly string reorderableListOfName = typeof(ReorderableListOfAttribute).FullName;
+        private readonly string listOfName = typeof(ListOfAttribute).FullName;
+
+        private static readonly EditorIcon deleteIcon = new EditorIcon("icon_delete");
+        private static readonly EditorIcon arrowUpIcon = new EditorIcon("icon_arrow_up");
+        private static readonly EditorIcon arrowDownIcon = new EditorIcon("icon_arrow_down");
 
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
             MetadataWrapper wrapper = (MetadataWrapper)currentValue;
+
+            if (wrapper.Metadata.ContainsKey(reorderableName))
+            {
+                return DrawReorderable(rect, wrapper, changeValueCallback, label);
+            }
 
             if (wrapper.Metadata.ContainsKey(separatedName))
             {
@@ -62,6 +74,11 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 return HandleKeepPopulated(rect, wrapper, changeValueCallback, label);
             }
 
+            if (wrapper.Metadata.ContainsKey(reorderableListOfName))
+            {
+                return DrawReorderableListOf(rect, wrapper, changeValueCallback, label);
+            }
+
             if (wrapper.Metadata.ContainsKey(listOfName))
             {
                 return DrawListOf(rect, wrapper, changeValueCallback, label);
@@ -84,6 +101,57 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             ITrainingDrawer valueDrawer = DrawerLocator.GetDrawerForValue(wrapper.Value, wrapper.ValueDeclaredType);
 
             return valueDrawer.GetLabel(wrapper.Value, wrapper.ValueDeclaredType);
+        }
+
+        private Rect DrawReorderable(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label)
+        {
+            rect = DrawRecursively(rect, wrapper, reorderableName, changeValueCallback, label);
+
+            Vector2 buttonSize = new Vector2(EditorGUIUtility.singleLineHeight + 3f, EditorDrawingHelper.SingleLineHeight);
+
+            GUIStyle style = new GUIStyle(GUI.skin.button)
+            {
+                fontStyle = FontStyle.Bold
+            };
+
+            GUI.enabled = ((ReorderableElementMetadata)wrapper.Metadata[reorderableName]).IsLast == false;
+            if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 2 - 0.1f, rect.y, buttonSize.x, buttonSize.y), arrowDownIcon.Texture, style))
+            {
+                object oldValue = wrapper.Value;
+                ChangeValue(() =>
+                    {
+                        ((ReorderableElementMetadata)wrapper.Metadata[reorderableName]).MoveDown = true;
+                        return wrapper;
+                    },
+                    () =>
+                    {
+                        ((ReorderableElementMetadata)wrapper.Metadata[reorderableName]).MoveDown = false;
+                        wrapper.Value = oldValue;
+                        return wrapper;
+                    },
+                    changeValueCallback);
+            }
+
+            GUI.enabled = ((ReorderableElementMetadata)wrapper.Metadata[reorderableName]).IsFirst == false;
+            if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 3 - 0.1f, rect.y, buttonSize.x, buttonSize.y), arrowUpIcon.Texture, style))
+            {
+                object oldValue = wrapper.Value;
+                ChangeValue(() =>
+                    {
+                        ((ReorderableElementMetadata)wrapper.Metadata[reorderableName]).MoveUp = true;
+                        return wrapper;
+                    },
+                    () =>
+                    {
+                        ((ReorderableElementMetadata)wrapper.Metadata[reorderableName]).MoveUp = false;
+                        wrapper.Value = oldValue;
+                        return wrapper;
+                    },
+                    changeValueCallback);
+            }
+
+            GUI.enabled = true;
+            return rect;
         }
 
         private Rect DrawSeparated(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label)
@@ -114,7 +182,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 fontStyle = FontStyle.Bold
             };
 
-            if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x, rect.y, buttonSize.x, buttonSize.y), "x", style))
+            if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x, rect.y, buttonSize.x, buttonSize.y), deleteIcon.Texture, style))
             {
                 object oldValue = wrapper.Value;
                 ChangeValue(() =>
@@ -164,7 +232,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 wrapper.Metadata[foldableName] = newIsFoldedOutValue;
                 changeValueCallback(wrapper);
             }
-
 
             // Collapsed
             if (newIsFoldedOutValue == false)
@@ -228,7 +295,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 return rect;
             }
 
-            Type elementType = (wrapper.Metadata[extendableListName] as ExtendableListAttribute.SerializedTypeWrapper).Type;
+            Type elementType = (wrapper.Metadata[extendableListName] as ExtendableListAttribute.SerializedTypeWrapper)?.Type;
             IList list = (IList)wrapper.Value;
             float currentY = 0;
 
@@ -305,13 +372,8 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
         private IList<MetadataWrapper> ConvertListOfMetadataToList(MetadataWrapper wrapper)
         {
-            if (wrapper.Value == null || (wrapper.Value is IList == false))
+            if (CheckListOfMetadata(wrapper) == false)
             {
-                if (wrapper.Value != null)
-                {
-                    Debug.LogWarning($"ListOfAttribute can be used only with IList members.");
-                }
-
                 return new List<MetadataWrapper>();
             }
 
@@ -339,16 +401,72 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 }
             }
 
+            return GetListOfWrappers(wrapper, listOfMetadata);
+        }
+
+        private IList<MetadataWrapper> ConvertReorderableListOfMetadataToList(MetadataWrapper wrapper)
+        {
+            if (CheckListOfMetadata(wrapper) == false)
+            {
+                return new List<MetadataWrapper>();
+            }
+
+            if (wrapper.Metadata.Count > 1)
+            {
+                throw new NotImplementedException($"ReorderableListOfAttribute attribute should have the lowest priority. Check MetadataWrapperDrawer.Draw method.");
+            }
+
+            ListOfAttribute.Metadata wrapperMetadata = (wrapper.Metadata[reorderableListOfName] as ListOfAttribute.Metadata);
+            List<Dictionary<string, object>> listOfMetadata = wrapperMetadata.ChildMetadata;
+
+            int wrapperCount = ((IList)wrapper.Value).Count;
+
+            if (listOfMetadata == null)
+            {
+                listOfMetadata = new List<Dictionary<string, object>>(wrapperCount);
+            }
+
+            if (listOfMetadata.Count != wrapperCount)
+            {
+                listOfMetadata.Clear();
+                for (int i = 0; i < wrapperCount; i++)
+                {
+                    listOfMetadata.Add(wrapperMetadata.ChildAttributes.ToDictionary(attribute => attribute.Name, attribute => attribute.GetDefaultMetadata(null)));
+                    listOfMetadata[i].Add(reorderableName, new ReorderableElementMetadata());
+                }
+            }
+
+            return GetListOfWrappers(wrapper, listOfMetadata);
+        }
+
+        private bool CheckListOfMetadata(MetadataWrapper wrapper)
+        {
+            if (wrapper.Value == null || (wrapper.Value is IList == false))
+            {
+                if (wrapper.Value != null)
+                {
+                    Debug.LogWarning($"ListOfAttribute can be used only with IList members.");
+                }
+
+                return false;
+            }
+
+            return true;
+        }
+
+        private IList<MetadataWrapper> GetListOfWrappers(MetadataWrapper wrapper, List<Dictionary<string, object>> listOfMetadata)
+        {
             Type entryType = ReflectionUtils.GetEntryType(wrapper.Value);
+            IList wrapperValueList = (IList)wrapper.Value;
 
             List<MetadataWrapper> listOfWrappers = new List<MetadataWrapper>();
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < wrapperValueList.Count; i++)
             {
                 listOfWrappers.Add(new MetadataWrapper()
                 {
                     Metadata = listOfMetadata[i],
                     ValueDeclaredType = entryType,
-                    Value = list[i],
+                    Value = wrapperValueList[i],
                 });
             }
 
@@ -365,10 +483,72 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             return valueDrawer.Draw(rect, listOfWrappers, (newValue) =>
             {
                 List<MetadataWrapper> newListOfWrappers = ((List<MetadataWrapper>)newValue).ToList();
+
                 ReflectionUtils.ReplaceList(ref list, newListOfWrappers.Select(childWrapper => childWrapper.Value));
                 wrapper.Value = list;
 
                 ((ListOfAttribute.Metadata)wrapper.Metadata[listOfName]).ChildMetadata = newListOfWrappers.Select(childWrapper => childWrapper.Metadata).ToList();
+                changeValueCallback(wrapper);
+            }, label);
+        }
+
+        private Rect DrawReorderableListOf(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label)
+        {
+            IList<MetadataWrapper> listOfWrappers = ConvertReorderableListOfMetadataToList(wrapper);
+
+            ITrainingDrawer valueDrawer = DrawerLocator.GetDrawerForValue(wrapper.Value, wrapper.ValueDeclaredType);
+            IList list = (IList)wrapper.Value;
+
+            for (int i = 0; i < listOfWrappers.Count; i++)
+            {
+                ReorderableElementMetadata metadata = (ReorderableElementMetadata)listOfWrappers[i].Metadata[reorderableName];
+                metadata.IsFirst = i == 0;
+                metadata.IsLast = i == listOfWrappers.Count - 1;
+            }
+
+            return valueDrawer.Draw(rect, listOfWrappers, (newValue) =>
+            {
+                List<MetadataWrapper> newListOfWrappers = ((List<MetadataWrapper>)newValue).ToList();
+
+                for (int i = 0; i < newListOfWrappers.Count; i++)
+                {
+                    ReorderableElementMetadata metadata = (ReorderableElementMetadata)newListOfWrappers[i].Metadata[reorderableName];
+
+                    if (metadata.MoveDown && metadata.MoveUp == false)
+                    {
+                        metadata.MoveDown = false;
+                        if (i < newListOfWrappers.Count - 1)
+                        {
+                            MetadataWrapper oldElement = newListOfWrappers[i];
+                            newListOfWrappers[i] = newListOfWrappers[i + 1];
+                            newListOfWrappers[i + 1] = oldElement;
+                        }
+
+                        // Repeat at same index because unprocessed element switched position to i.
+                        i--;
+                    }
+                    else if (metadata.MoveDown == false && metadata.MoveUp)
+                    {
+                        metadata.MoveUp = false;
+                        if (i > 0)
+                        {
+                            MetadataWrapper oldElement = newListOfWrappers[i];
+                            newListOfWrappers[i] = newListOfWrappers[i - 1];
+                            newListOfWrappers[i - 1] = oldElement;
+                        }
+                    }
+                    else
+                    {
+                        // Reset, if both actions are true
+                        metadata.MoveDown = false;
+                        metadata.MoveUp = false;
+                    }
+                }
+
+                ReflectionUtils.ReplaceList(ref list, newListOfWrappers.Select(childWrapper => childWrapper.Value));
+                wrapper.Value = list;
+
+                ((ListOfAttribute.Metadata)wrapper.Metadata[reorderableListOfName]).ChildMetadata = newListOfWrappers.Select(childWrapper => childWrapper.Metadata).ToList();
                 changeValueCallback(wrapper);
             }, label);
         }
