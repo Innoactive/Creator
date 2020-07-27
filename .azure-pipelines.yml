@@ -67,7 +67,7 @@ stages:
         inputs:
           targetType: 'inline'
           script: |
-            $TAG = (git tag --sort=committerdate | Select -last 1)
+            $TAG = (git tag -l "v*" --sort=committerdate | Select -last 1)
             if(!$TAG) { $TAG = "v0.0.0" }
             $TAG = $TAG.TrimStart("v") + "-" + (git log -1 --pretty=format:%h)
             Write-Host "##vso[task.setvariable variable=Version]$TAG"
