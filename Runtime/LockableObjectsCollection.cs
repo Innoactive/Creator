@@ -29,27 +29,6 @@ namespace Innoactive.Creator.Core
             data = entityData;
 
             CreateSceneObjects();
-#if UNITY_EDITOR
-            EditorApplication.playModeStateChanged += PlayModeChanged;
-        }
-
-
-        ~LockableObjectsCollection()
-        {
-            EditorApplication.playModeStateChanged -= PlayModeChanged;
-        }
-
-        private void PlayModeChanged(PlayModeStateChange state)
-        {
-            if (state == PlayModeStateChange.EnteredEditMode || state == PlayModeStateChange.EnteredEditMode)
-            {
-                CreateSceneObjects();
-            }
-            else
-            {
-                SceneObjects.Clear();
-            }
-#endif
         }
 
         private void CreateSceneObjects()
