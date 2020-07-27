@@ -18,9 +18,15 @@ namespace Innoactive.Creator.Core
     /// </summary>
     internal static class PropertyReflectionHelper
     {
-        public static List<LockablePropertyData> ExtractLockablesFromStep(IStepData data)
+        public static List<LockablePropertyData> ExtractLockablePropertiesFromStep(IStepData data)
         {
+
             List<LockablePropertyData> result = new List<LockablePropertyData>();
+
+            if (data == null)
+            {
+                return result;
+            }
 
             foreach (ITransition transition in data.Transitions.Data.Transitions)
             {

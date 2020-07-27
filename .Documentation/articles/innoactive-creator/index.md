@@ -12,6 +12,7 @@
 - [Training Scene Objects and Training Properties](training-scene-object.md)
 - [Default Behaviors](default-behaviors.md)
 - [Default Conditions](default-conditions.md)
+- [Suspending Interactions](suspending-interactions.md)
 
 ## Examples
 

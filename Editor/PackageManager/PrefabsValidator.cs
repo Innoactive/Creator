@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.PackageManager
@@ -23,7 +24,7 @@ namespace Innoactive.CreatorEditor.PackageManager
         private static void ReimportCreatorPrefabs()
         {
             string filter = "t:Prefab";
-            string[] prefabsGUIDs = AssetDatabase.FindAssets(filter, new[] {"Assets/Innoactive"});
+            string[] prefabsGUIDs = AssetDatabase.FindAssets(filter, new[] { GetInnoactiveFolder() });
 
             foreach (var prefabGUID in prefabsGUIDs)
             {
@@ -31,6 +32,19 @@ namespace Innoactive.CreatorEditor.PackageManager
                 AssetDatabase.ImportAsset(assetPath);
                 Debug.LogFormat("The prefab '{0}' has been automatically reimported", assetPath);
             }
+        }
+
+        private static string GetInnoactiveFolder()
+        {
+            DirectoryInfo root = new DirectoryInfo("Assets");
+            DirectoryInfo lastDirectory = new DirectoryInfo(EditorUtils.GetCoreFolder());
+
+            while (root.FullName != Directory.GetParent(lastDirectory.ToString()).FullName)
+            {
+                lastDirectory = Directory.GetParent(lastDirectory.ToString());
+            }
+
+            return lastDirectory.ToString();
         }
     }
 }

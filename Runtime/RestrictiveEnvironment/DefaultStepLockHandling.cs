@@ -17,7 +17,7 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
         /// <inheritdoc />
         public override void Unlock(IStepData data, IEnumerable<LockablePropertyData> manualUnlocked)
         {
-            IEnumerable<LockablePropertyData> unlockList = PropertyReflectionHelper.ExtractLockablesFromStep(data);
+            IEnumerable<LockablePropertyData> unlockList = PropertyReflectionHelper.ExtractLockablePropertiesFromStep(data);
             unlockList = unlockList.Union(manualUnlocked);
 
             foreach (LockablePropertyData lockable in unlockList)
@@ -30,15 +30,15 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
         public override void Lock(IStepData data, IEnumerable<LockablePropertyData> manualUnlocked)
         {
             // All properties which should be locked
-            IEnumerable<LockablePropertyData> lockList = PropertyReflectionHelper.ExtractLockablesFromStep(data);
+            IEnumerable<LockablePropertyData> lockList = PropertyReflectionHelper.ExtractLockablePropertiesFromStep(data);
             lockList = lockList.Union(manualUnlocked);
 
             ITransition completedTransition = data.Transitions.Data.Transitions.FirstOrDefault(transition => transition.IsCompleted);
-            if (completedTransition != null && completedTransition.Data.TargetStep != null)
+            if (completedTransition != null)
             {
-                IEnumerable<LockablePropertyData> nextStepProperties = PropertyReflectionHelper.ExtractLockablesFromStep(completedTransition.Data.TargetStep.Data);
-
-                if (completedTransition.Data.TargetStep.Data is ILockableStepData lockableStepData)
+                IStepData nextStepData = GetNextStep(completedTransition);
+                IEnumerable<LockablePropertyData> nextStepProperties = PropertyReflectionHelper.ExtractLockablePropertiesFromStep(nextStepData);
+                if (nextStepData != null && nextStepData is ILockableStepData lockableStepData)
                 {
                     IEnumerable<LockablePropertyData> toUnlock = lockableStepData.ToUnlock.Select(reference => new LockablePropertyData(reference.GetProperty()));
                     nextStepProperties = nextStepProperties.Union(toUnlock);
@@ -63,6 +63,29 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
             {
                 lockable.Property.SetLocked(true);
             }
+        }
+
+        private IStepData GetNextStep(ITransition completedTransition)
+        {
+            if (completedTransition.Data.TargetStep != null)
+            {
+                return completedTransition.Data.TargetStep.Data;
+            }
+
+            if (CourseRunner.IsRunning)
+            {
+                ICourseData course = CourseRunner.Current.Data;
+                // Test all chapters, but the last.
+                for (int i = 0; i < course.Chapters.Count - 1; i++)
+                {
+                    if (course.Chapters[i] == course.Current)
+                    {
+                        return course.Chapters[i + 1].Data.FirstStep.Data;
+                    }
+                }
+            }
+            // No next step found, seems to be the last.
+            return null;
         }
 
         /// <inheritdoc />

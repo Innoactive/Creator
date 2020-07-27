@@ -74,7 +74,28 @@ namespace Innoactive.Creator.Core.Attributes
                 return false;
             }
 
-            return listOfMetadata.ChildMetadata.All(entryMetadata => listOfMetadata.ChildAttributes.All(childAttribute => childAttributes.Any(attribute => attribute.Name == childAttribute.Name) && entryMetadata.ContainsKey(childAttribute.Name) && childAttribute.IsMetadataValid(entryMetadata[childAttribute.Name])));
+            foreach (Dictionary<string, object> entryMetadata in listOfMetadata.ChildMetadata)
+            {
+                foreach (MetadataAttribute childAttribute in listOfMetadata.ChildAttributes)
+                {
+                    if (childAttributes.Any(attribute => attribute.Name == childAttribute.Name) == false)
+                    {
+                        return false;
+                    }
+
+                    if (entryMetadata.ContainsKey(childAttribute.Name) == false)
+                    {
+                        return false;
+                    }
+
+                    if (childAttribute.IsMetadataValid(entryMetadata[childAttribute.Name]) == false)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         private static bool AreSetsTheSame<T>(IEnumerable<T> first, IEnumerable<T> second, Func<T, IComparable> toComparable)
