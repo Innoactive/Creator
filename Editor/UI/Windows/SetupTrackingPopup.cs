@@ -1,12 +1,5 @@
-﻿using System;
-using System.IO;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.CreatorEditor.UI;
-using Innoactive.CreatorEditor.UI.Windows;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Innoactive.CreatorEditor.Analytics
 {
@@ -18,6 +11,7 @@ namespace Innoactive.CreatorEditor.Analytics
         {
             EditorApplication.update += ShowWindow;
         }
+
         private static void ShowWindow()
         {
             EditorApplication.update -= ShowWindow;
@@ -28,8 +22,8 @@ namespace Innoactive.CreatorEditor.Analytics
                 instance.ShowUtility();
             }
 
-            instance.minSize = new Vector2(280f, 224f);
-            instance.maxSize = new Vector2(280f, 224f);
+            instance.minSize = new Vector2(280f, 245f);
+            instance.maxSize = new Vector2(280f, 245f);
             instance.Focus();
         }
 
@@ -54,6 +48,27 @@ namespace Innoactive.CreatorEditor.Analytics
                 AnalyticsUtils.SetTrackingTo(AnalyticsState.Enabled);
                 Close();
             }
+
+            GUIStyle hyperlink = new GUIStyle();
+            hyperlink.normal.textColor = new Color(0.122f, 0.435f, 0.949f);
+            Rect positionRect = new Rect(3, 222, 280, 50);
+
+            GUILayout.BeginArea(positionRect);
+
+            if (GUILayout.Button("Data Privacy Information", hyperlink, GUILayout.ExpandWidth(false)))
+            {
+                AnalyticsUtils.ShowDataPrivacyStatement();
+            }
+
+            GUILayout.EndArea();
+
+            // Unity Editor UI has no way to underline text, so this is a fun workaround.
+            positionRect.y += 1;
+            GUILayout.BeginArea(positionRect);
+
+            GUILayout.Label("____________________________", hyperlink);
+
+            GUILayout.EndArea();
         }
     }
 

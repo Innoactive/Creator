@@ -25,5 +25,20 @@ namespace Innoactive.CreatorEditor.Analytics
         {
             EditorPrefExtensions.SetEnum(KeyTrackingState, state);
         }
+
+        internal static void ShowDataPrivacyStatement()
+        {
+            string pathToDataPrivacyStatement = "/.Documentation/articles/innoactive-creator/data-privacy-information.md";
+            if (EditorUtils.GetCoreVersion().Equals("unknown"))
+            {
+                string dataPrivacyStatementUrl = EditorUtils.GetCoreFolder() + pathToDataPrivacyStatement;
+                UnityEditorInternal.InternalEditorUtility.OpenFileAtLineExternal(dataPrivacyStatementUrl, 1);
+            }
+            else
+            {
+                string dataPrivacyStatementUrl = $"https://github.com/Innoactive/Creator/tree/{EditorUtils.GetCoreVersion()}{pathToDataPrivacyStatement}";
+                Application.OpenURL(dataPrivacyStatementUrl);
+            }
+        }
     }
 }

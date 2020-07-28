@@ -1,5 +1,4 @@
-﻿using System;
-using Innoactive.Creator.Core;
+﻿using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UI.Drawers;
 using UnityEditor;
 using UnityEngine;
@@ -88,6 +87,17 @@ namespace Innoactive.CreatorEditor.UI.Windows
         public void SetStep(IStep newStep)
         {
             step = newStep;
+        }
+
+        internal void ResetStepView()
+        {
+            if (EditorUtils.IsWindowOpened<StepWindow>() == false || step == null)
+            {
+                return;
+            }
+
+            Step currentStep = step as Step;
+            currentStep.Data.Tabs.Selected = default;
         }
     }
 }

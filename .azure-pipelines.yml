@@ -67,7 +67,9 @@ stages:
         inputs:
           targetType: 'inline'
           script: |
-            $TAG = (git describe --all --match "v*").Replace("tags/", "").TrimStart("v")
+            $TAG = (git tag -l "v*" --sort=committerdate | Select -last 1)
+            if(!$TAG) { $TAG = "v0.0.0" }
+            $TAG = $TAG.TrimStart("v") + "-" + (git log -1 --pretty=format:%h)
             Write-Host "##vso[task.setvariable variable=Version]$TAG"
           workingDirectory: "Creator/"
 
@@ -118,7 +120,7 @@ stages:
           targetType: 'inline'
           script: |
             echo 'Exporting version $(Version)'
-            ((Get-Content -path $(Path.ExportConfig)/$(ExportConfigName) -Raw) -replace '{version}','$(Version)') | Set-Content -Path $(Path.Project)/export-config.json
+            ((Get-Content -path $(Path.ExportConfig)/$(ExportConfigName) -Raw) -replace '{version}','v$(Version)') | Set-Content -Path $(Path.Project)/export-config.json
             u3d run -u $(UnityVersion) -- -projectPath '$(Path.Project)' -logFile $(Build.ArtifactStagingDirectory)/logs/editor_export.log -batchmode -quit -executeMethod Innoactive.CreatorEditor.PackageExporter.Export --export-config export-config.json
             Start-Sleep -s 5
 
