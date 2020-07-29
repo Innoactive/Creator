@@ -26,7 +26,7 @@ namespace Innoactive.Creator.Core
         {
             ///<inheritdoc />
             [DataMember]
-            [DisplayName("Conditions"), Foldable, ListOf(typeof(FoldableAttribute), typeof(DeletableAttribute)), ExtendableList]
+            [DisplayName("Conditions"), Foldable, ReorderableListOf(typeof(FoldableAttribute), typeof(DeletableAttribute)), ExtendableList]
             public IList<ICondition> Conditions { get; set; }
 
             ///<inheritdoc />

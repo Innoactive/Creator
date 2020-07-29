@@ -15,10 +15,7 @@ namespace Innoactive.Creator.Core.SceneObjects
         public event EventHandler<LockStateChangedEventArgs> Unlocked;
         public event EventHandler<SceneObjectNameChanged> UniqueNameChanged;
 
-        public GameObject GameObject
-        {
-            get { return gameObject; }
-        }
+        public GameObject GameObject => gameObject;
 
         [SerializeField]
         [Tooltip("Unique name which identifies an object in scene, can be null or empty, but has to be unique in the scene.")]

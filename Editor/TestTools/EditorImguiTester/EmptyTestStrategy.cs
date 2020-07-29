@@ -67,5 +67,15 @@ namespace Innoactive.CreatorEditor.TestTools
         public void HandleProjectIsGoingToSave()
         {
         }
+
+        /// <inheritdoc/>
+        public void HandleExitingPlayMode()
+        {
+        }
+
+        /// <inheritdoc/>
+        public void HandleEnterPlayMode()
+        {
+        }
     }
 }
