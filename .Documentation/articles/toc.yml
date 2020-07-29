@@ -64,16 +64,18 @@
       href: developer/06-menu-items.md
     - name: Run a Training Course
       href: developer/07-run-a-course.md
+    - name: Create a Course Programmatically
+      href: developer/08-create-a-course-programmatically.md
     - name: Conditions
-      href: developer/08-conditions.md
+      href: developer/09-conditions.md
     - name: Properties
-      href: developer/09-properties.md
+      href: developer/10-properties.md
     - name: Lockable Properties
-      href: developer/10-lockable-properties.md
+      href: developer/11-lockable-properties.md
     - name: Text-To-Speech
-      href: developer/11-text-to-speech.md
+      href: developer/12-text-to-speech.md
     - name: Dependency Manager
-      href: developer/12-dependency-manager.md
+      href: developer/13-dependency-manager.md
 - name: Transition Guide to v2.0 for Developers
   href: transition-to-v2.0/index.md
   items:

@@ -23,12 +23,8 @@ using Innoactive.Creator.Core.Configuration;
 // Unity components' classes should have the same names as their files.
 public class TrainingCourseLoader : MonoBehaviour
 {
-    private IEnumerator Start()
+    public void StartCourse()
     {
-        // Skip the first two frames to give VRTK time to initialize.
-        yield return null;
-        yield return null;
-
         // Load the currently selected training course.
         string coursePath = RuntimeConfigurator.Instance.GetSelectedCourse();
         ICourse trainingCourse = RuntimeConfigurator.Configuration.LoadCourse(coursePath);
@@ -60,4 +56,4 @@ Use the `SkipChapters(int)` method to skip next chapters. `SkipChapter(1)` will 
 
 You can skip current step with the `SkipStep(ITransition)` method, but you need to specify the transition to use.
 
-[To the next chapter!](08-conditions.md)
+[To the next chapter!](08-create-a-course-programmatically.md)
