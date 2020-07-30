@@ -131,4 +131,4 @@ If you have to set up the scene object in runtime, do it in the `Awake()`, `Star
 
 If your custom entity works only with specific objects, you could use properties to prevent training designers from making mistakes.
 
-[To the next chapter!](10-lockable-properties.md)
+[To the next chapter!](11-lockable-properties.md)
