@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Net.Http;
+﻿using System.Net.Http;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.Analytics
@@ -19,7 +17,8 @@ namespace Innoactive.CreatorEditor.Analytics
 
         private void PostData(string uri)
         {
-            webClient.GetAsync(uri);
+            //webClient.GetAsync(uri);
+            Debug.LogWarning(uri);
         }
 
         private string BuildEventUri(AnalyticsEvent data)
