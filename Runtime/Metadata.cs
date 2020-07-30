@@ -56,5 +56,10 @@ namespace Innoactive.Creator.Core
 
             return new Dictionary<string, object>();
         }
+
+        public void Clear()
+        {
+            values = new Dictionary<string, Dictionary<string, object>>();
+        }
     }
 }

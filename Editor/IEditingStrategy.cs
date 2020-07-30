@@ -53,7 +53,6 @@ namespace Innoactive.CreatorEditor
         /// </summary>
         void HandleStartEditingStep();
 
-
         /// <summary>
         /// Invoked when a designer chooses a <see cref="IStep"/> to edit.
         /// </summary>
@@ -68,5 +67,15 @@ namespace Innoactive.CreatorEditor
         /// Invoked just before Unity saves the project (either during the normal exit of the Editor application or when the designer clicks `Save Project`).
         /// </summary>
         void HandleProjectIsGoingToSave();
+
+        /// <summary>
+        /// Invoked when exiting play mode.
+        /// </summary>
+        void HandleExitingPlayMode();
+
+        /// <summary>
+        /// Invoked when entering play mode.
+        /// </summary>
+        void HandleEnterPlayMode();
     }
 }

@@ -19,7 +19,7 @@ namespace Innoactive.CreatorEditor
         {
             SetDefaultStrategy();
 
-            string lastEditedCourseName = PlayerPrefs.GetString(LastEditedCourseNameKey);
+            string lastEditedCourseName = EditorPrefs.GetString(LastEditedCourseNameKey);
             SetCurrentCourse(lastEditedCourseName);
         }
 
@@ -139,6 +139,16 @@ namespace Innoactive.CreatorEditor
         internal static void ProjectIsGoingToSave()
         {
             strategy.HandleProjectIsGoingToSave();
+        }
+
+        internal static void EnterPlayMode()
+        {
+            strategy.HandleEnterPlayMode();
+        }
+
+        internal static void ExitPlayMode()
+        {
+            strategy.HandleExitingPlayMode();
         }
     }
 }

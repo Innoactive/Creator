@@ -32,11 +32,13 @@ namespace Innoactive.CreatorEditor
                 case PlayModeStateChange.EnteredEditMode:
                     break;
                 case PlayModeStateChange.EnteredPlayMode:
+                    GlobalEditorHandler.EnterPlayMode();
                     break;
                 case PlayModeStateChange.ExitingEditMode:
                     OnExitingMode();
                     break;
                 case PlayModeStateChange.ExitingPlayMode:
+                    GlobalEditorHandler.ExitPlayMode();
                     OnExitingMode();
                     break;
                 default:
