@@ -170,7 +170,10 @@ namespace Innoactive.CreatorEditor
         /// <inheritdoc/>
         public void HandleExitingPlayMode()
         {
-            stepWindow.ResetStepView();
+            if (stepWindow != null)
+            {
+                stepWindow.ResetStepView();
+            }
         }
 
         /// <inheritdoc/>
