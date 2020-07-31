@@ -17,13 +17,12 @@ namespace Innoactive.CreatorEditor.Analytics
 
         static AnalyticsSetup()
         {
-            //SetupTrackingPopup.Open();
             AnalyticsState trackingState = AnalyticsUtils.GetTrackingState();
             if (trackingState == AnalyticsState.Disabled)
             {
                 return;
             }
-
+            // Can be used by ci to deactivate tracking.
             if (Environment.GetCommandLineArgs().Contains("-no-tracking"))
             {
                 AnalyticsUtils.SetTrackingTo(AnalyticsState.Disabled);
@@ -39,6 +38,7 @@ namespace Innoactive.CreatorEditor.Analytics
 
             if (trackingState == AnalyticsState.Minimal)
             {
+                // Without a stored session id a random one will be created every time.
                 if (EditorPrefs.HasKey(BaseAnalyticsTracker.KeySessionId))
                 {
                     EditorPrefs.DeleteKey(BaseAnalyticsTracker.KeySessionId);
@@ -47,15 +47,12 @@ namespace Innoactive.CreatorEditor.Analytics
 
             if (trackingState == AnalyticsState.Enabled)
             {
-                if (EditorPrefs.HasKey(BaseAnalyticsTracker.KeySessionId) == false)
+                string id = EditorPrefs.GetString(BaseAnalyticsTracker.KeySessionId, null);
+                if (string.IsNullOrEmpty(id) || id.StartsWith("IA") == false)
                 {
-                    // Create new session id starting with IA
+                    // Create new session id starting with IA, which allows better tracking
                     EditorPrefs.SetString(BaseAnalyticsTracker.KeySessionId,
                         "IA" + Guid.NewGuid().ToString().Substring(2));
-                }
-                else if (EditorPrefs.GetString(BaseAnalyticsTracker.KeySessionId).StartsWith("IA") == false)
-                {
-                    EditorPrefs.DeleteKey(BaseAnalyticsTracker.KeySessionId);
                 }
             }
 

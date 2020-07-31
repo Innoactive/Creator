@@ -17,8 +17,7 @@ namespace Innoactive.CreatorEditor.Analytics
 
         private void PostData(string uri)
         {
-            //webClient.GetAsync(uri);
-            Debug.LogWarning(uri);
+            webClient.GetAsync(uri);
         }
 
         private string BuildEventUri(AnalyticsEvent data)
