@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -35,7 +34,6 @@ namespace Innoactive.CreatorEditor.Analytics
             window.maxSize = new Vector2(280f, 50f);
             window.Focus();
         }
-
 
         private void OnGUI()
         {
