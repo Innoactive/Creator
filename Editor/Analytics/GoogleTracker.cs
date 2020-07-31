@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Net.Http;
+﻿using System.Net.Http;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.Analytics

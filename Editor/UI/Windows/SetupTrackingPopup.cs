@@ -22,8 +22,8 @@ namespace Innoactive.CreatorEditor.Analytics
                 instance.ShowUtility();
             }
 
-            instance.minSize = new Vector2(280f, 245f);
-            instance.maxSize = new Vector2(280f, 245f);
+            instance.minSize = new Vector2(440f, 360f);
+            instance.maxSize = new Vector2(440f, 360f);
             instance.Focus();
         }
 
@@ -40,7 +40,11 @@ namespace Innoactive.CreatorEditor.Analytics
             titleContent = new GUIContent("Usage statistics");
 
             EditorGUILayout.Space(4f);
-            EditorGUILayout.HelpBox(new GUIContent("To improve the Creator, we collect anonymous data about your software configuration. This data excludes any sensitive data like source code, file names, or your courses structure. Right now we are tracking:\n\n * The Creator version\n * The Unity version\n * The system language\n\nYou can check the source code of our analytics engine in the following folder: Core/Editor/Analytics\n\nIf you want to disable tracking, open Innoactive > Creator > Windows > Analytics Settings in the Unity's menu bar."));
+
+            GUIStyle style = GUI.skin.box;
+            style.alignment = TextAnchor.UpperLeft;
+            GUILayout.Box("To improve the Creator, Innoactive collects usage data. We are committed to protect our users' privacy and do not collect any sensitive information like source code, file names or your courses' structure. The data collected encompasses:\n\n- exact version of Innoactive Creator\n- exact version of Unity Editor\n- your system's language\n- information about usage of the Innoactive Creators' components\n\nIn order to track the above information we store a unique identifier within Unity's Editor Preferences. Since the Creator is an open-source project, you can check the source code of our analytics engine at any time in the following folder: Core/Editor/Analytics\n\nIf you want to completely opt-out of tracking, open Innoactive > Creator > Windows > Analytics Settings in the Unity's menu bar.\n\nBy clicking the \"Accept\" button below, you agree on the terms described above. To learn more about Innoactive's terms, also check:\n", style, GUILayout.Width(432f));
+
             EditorGUILayout.Space(4f);
 
             if (GUILayout.Button("Accept"))
@@ -51,7 +55,7 @@ namespace Innoactive.CreatorEditor.Analytics
 
             GUIStyle hyperlink = new GUIStyle();
             hyperlink.normal.textColor = new Color(0.122f, 0.435f, 0.949f);
-            Rect positionRect = new Rect(3, 222, 280, 50);
+            Rect positionRect = new Rect(6, 310, 280, 50);
 
             GUILayout.BeginArea(positionRect);
 
