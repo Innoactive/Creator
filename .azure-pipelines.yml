@@ -48,6 +48,42 @@ stages:
       - checkout: self
         lfs: true
 
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: 'Empty-Unity-Project-2019/'
+          Contents: '**'
+          TargetFolder: '$(Path.Project)'
+        displayName: Copy base Project
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: 'Creator/'
+          Contents: '**'
+          TargetFolder: '$(Path.Creator)/Core'
+        displayName: Copy Creator Core
+
+      - task: PowerShell@2
+        displayName: Build Project
+        inputs:
+          targetType: 'inline'
+          script: |
+            u3d available -f
+            u3d install $(UnityVersion)
+            u3d run -u $(UnityVersion) -- -projectPath '$(Path.Project)' -logFile $(Build.ArtifactStagingDirectory)/logs/editor-build.log -nographics -quit -batchmode -buildWindows64Player Build\\TestBuild\\TestBuild.exe
+
+      - task: PowerShell@2
+        displayName: Run Tests
+        inputs:
+          targetType: 'inline'
+          script: |
+            u3d run -u $(UnityVersion) -- -projectPath '$(Path.Project)' -logFile $(Build.ArtifactStagingDirectory)/logs/editor_editmode_tests.log -batchmode -runTests -testPlatform editmode -testResults $(System.DefaultWorkingDirectory)\TEST-EditMode.xml
+            u3d run -u $(UnityVersion) -- -projectPath '$(Path.Project)' -logFile $(Build.ArtifactStagingDirectory)/logs/editor_playmode_tests.log -batchmode -runTests -testPlatform playmode -testResults $(System.DefaultWorkingDirectory)\TEST-PlayMode.xml
+
+      - task: PublishTestResults@2
+        inputs:
+            testResultsFormat: "NUnit"
+            testResultsFiles: "TEST-*.xml"
+
       - task: UseNode@1
 
       - task: PowerShell@2
@@ -73,46 +109,13 @@ stages:
             Write-Host "##vso[task.setvariable variable=Version]$TAG"
           workingDirectory: "Creator/"
 
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: 'Empty-Unity-Project-2019/'
-          Contents: '**'
-          TargetFolder: '$(Path.Project)'
-        displayName: Copy base Project
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: 'Creator/'
-          Contents: '**'
-          TargetFolder: '$(Path.Creator)/Core'
-        displayName: Copy Creator Core
-
-      - task: DeleteFiles@1
-        inputs:
-          Contents: '!(Project)'
-        displayName: Clean Up
-
       - task: PowerShell@2
-        displayName: Build Project
+        displayName: Publish variables
         inputs:
           targetType: 'inline'
           script: |
-            u3d available -f
-            u3d install $(UnityVersion)
-            u3d run -u $(UnityVersion) -- -projectPath '$(Path.Project)' -logFile $(Build.ArtifactStagingDirectory)/logs/editor-build.log -nographics -quit -batchmode -buildWindows64Player Build\\TestBuild\\TestBuild.exe
-
-      - task: PowerShell@2
-        displayName: Run Tests
-        inputs:
-          targetType: 'inline'
-          script: |
-            u3d run -u $(UnityVersion) -- -projectPath '$(Path.Project)' -logFile $(Build.ArtifactStagingDirectory)/logs/editor_editmode_tests.log -batchmode -runTests -testPlatform editmode -testResults $(System.DefaultWorkingDirectory)\TEST-EditMode.xml
-            u3d run -u $(UnityVersion) -- -projectPath '$(Path.Project)' -logFile $(Build.ArtifactStagingDirectory)/logs/editor_playmode_tests.log -batchmode -runTests -testPlatform playmode -testResults $(System.DefaultWorkingDirectory)\TEST-PlayMode.xml
-
-      - task: PublishTestResults@2
-        inputs:
-            testResultsFormat: "NUnit"
-            testResultsFiles: "TEST-*.xml"
+            echo "##vso[task.setvariable variable=Version;isOutput=true]v$(Version)"
+        name: ExportedVariables
 
       - task: PowerShell@2
         displayName: Export Unity package
