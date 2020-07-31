@@ -172,4 +172,4 @@ See the chapter about [menu items](06-menu-items.md) to display this condition i
 
 Test the condition in the same way as you have tested the [behavior](05-behaviors.md).
 
-[To the next chapter!](09-properties.md)
+[To the next chapter!](10-properties.md)
