@@ -74,6 +74,10 @@ See our [contributor's guide](.github/CONTRIBUTING.md).
 
 You can find contacts of current maintainers in the [Maintainers](.github/CONTRIBUTING.md#maintainers) section of our contributing guidelines.
 
+## Community
+
+Join our [spectrum community](https://spectrum.chat/innoactive-creator?tab=posts)!
+
 ## License
 
 This repository is licensed under the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for the full text.
