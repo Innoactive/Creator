@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Innoactive.Creator.Core.Serialization
 {
-    internal class MetaDataRemover : JsonConverter
+    internal class MetaDataConverter : JsonConverter
     {
         /// <inheritDoc/>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

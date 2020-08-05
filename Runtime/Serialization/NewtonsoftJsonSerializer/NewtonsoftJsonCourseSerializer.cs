@@ -54,13 +54,11 @@ namespace Innoactive.Creator.Core.Serialization.NewtonsoftJson
         /// <returns>A list of all found JsonConverters.</returns>
         private static List<JsonConverter> GetJsonConverters()
         {
-            List<JsonConverter> result = ReflectionUtils.GetConcreteImplementationsOf<JsonConverter>()
+            return ReflectionUtils.GetConcreteImplementationsOf<JsonConverter>()
                 .WhichHaveAttribute<NewtonsoftConverterAttribute>()
                 .OrderBy(type => type.GetAttribute<NewtonsoftConverterAttribute>().Priority)
                 .Select(type => ReflectionUtils.CreateInstanceOfType(type) as JsonConverter)
                 .ToList();
-
-            return result;
         }
 
         /// <inheritdoc/>
@@ -98,7 +96,7 @@ namespace Innoactive.Creator.Core.Serialization.NewtonsoftJson
         public byte[] ConvertTrainingCourseForExport(ICourse course)
         {
             List<JsonConverter> converter = GetJsonConverters();
-            converter.Add(new MetaDataRemover());
+            converter.Add(new MetaDataConverter());
             JsonSerializerSettings settings = CreateSettings(converter);
 
             JObject jObject = JObject.FromObject(course, JsonSerializer.Create(settings));
