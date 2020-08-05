@@ -76,7 +76,7 @@ You can find contacts of current maintainers in the [Maintainers](.github/CONTRI
 
 ## Community
 
-Join our [spectrum community](https://spectrum.chat/innoactive-creator?tab=posts).
+Join our [spectrum community](https://spectrum.chat/innoactive-creator?tab=posts)!
 
 ## License
 
