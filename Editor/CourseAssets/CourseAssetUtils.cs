@@ -65,6 +65,17 @@ namespace Innoactive.CreatorEditor
         }
 
         /// <summary>
+        /// Returns a list of names of all possible course folder found in the project.
+        /// </summary>
+        internal static IEnumerable<string> GetAllPossibleCourseFolder()
+        {
+            DirectoryInfo coursesDirectory = new DirectoryInfo($"{Application.streamingAssetsPath}/{EditorConfigurator.Instance.CourseStreamingAssetsSubdirectory}");
+            return coursesDirectory.GetDirectories()
+                .Select(directory => directory.Name)
+                .ToList();
+        }
+
+        /// <summary>
         /// Checks if you can create a course with the given <paramref name="courseName"/>.
         /// </summary>
         /// <param name="errorMessage">Empty if you can create the course or must fail silently.</param>

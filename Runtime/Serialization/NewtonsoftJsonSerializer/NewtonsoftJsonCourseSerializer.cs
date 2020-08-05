@@ -4,13 +4,14 @@ using System.Text;
 using Innoactive.Creator.Core.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using UnityEditor;
 
 namespace Innoactive.Creator.Core.Serialization.NewtonsoftJson
 {
     /// <summary>
     /// This serializer uses NewtonsoftJson to serialize data, the outcome is a json file in the UTF-8 encoding.
     /// </summary>
-    public class NewtonsoftJsonCourseSerializer : ICourseSerializer
+    public class NewtonsoftJsonCourseSerializer : ICourseSerializer, IOnBuildExportSerialization
     {
         private static int Version { get; } = 1;
 
@@ -53,11 +54,13 @@ namespace Innoactive.Creator.Core.Serialization.NewtonsoftJson
         /// <returns>A list of all found JsonConverters.</returns>
         private static List<JsonConverter> GetJsonConverters()
         {
-            return ReflectionUtils.GetConcreteImplementationsOf<JsonConverter>()
+            List<JsonConverter> result = ReflectionUtils.GetConcreteImplementationsOf<JsonConverter>()
                 .WhichHaveAttribute<NewtonsoftConverterAttribute>()
                 .OrderBy(type => type.GetAttribute<NewtonsoftConverterAttribute>().Priority)
                 .Select(type => ReflectionUtils.CreateInstanceOfType(type) as JsonConverter)
                 .ToList();
+
+            return result;
         }
 
         /// <inheritdoc/>
@@ -89,6 +92,19 @@ namespace Innoactive.Creator.Core.Serialization.NewtonsoftJson
         public virtual ICourse CourseFromByteArray(byte[] data)
         {
             return Deserialize<ICourse>(data, CourseSerializerSettings);
+        }
+
+        /// <inheritdoc/>
+        public byte[] ConvertTrainingCourseForExport(ICourse course)
+        {
+            List<JsonConverter> converter = GetJsonConverters();
+            converter.Add(new MetaDataRemover());
+            JsonSerializerSettings settings = CreateSettings(converter);
+
+            JObject jObject = JObject.FromObject(course, JsonSerializer.Create(settings));
+            jObject.Add("$serializerVersion", Version);
+
+            return new UTF8Encoding().GetBytes(jObject.ToString());
         }
 
         /// <inheritdoc/>

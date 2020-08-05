@@ -83,14 +83,19 @@ namespace Innoactive.CreatorEditor
         /// </summary>
         internal static void Save(ICourse course)
         {
+            if (BuildPipeline.isBuildingPlayer)
+            {
+                return;
+            }
+
             string path = CourseAssetUtils.GetCourseAssetPath(course.Data.Name);
 
             Directory.CreateDirectory(CourseAssetUtils.GetCourseAssetDirectory(course.Data.Name));
-            StreamWriter stream = File.CreateText(path);
+            FileStream stream = File.Create(path);
 
             byte[] serialized = EditorConfigurator.Instance.Serializer.CourseToByteArray(course);
 
-            stream.Write(new UTF8Encoding().GetString(serialized));
+            stream.Write(serialized, 0, serialized.Length);
             stream.Close();
         }
 
