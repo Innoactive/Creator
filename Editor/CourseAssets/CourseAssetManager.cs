@@ -83,15 +83,41 @@ namespace Innoactive.CreatorEditor
         /// </summary>
         internal static void Save(ICourse course)
         {
-            string path = CourseAssetUtils.GetCourseAssetPath(course.Data.Name);
+            try
+            {
+                string path = CourseAssetUtils.GetCourseAssetPath(course.Data.Name);
+                byte[] courseData = EditorConfigurator.Instance.Serializer.CourseToByteArray(course);
+                WriteCourse(path, courseData);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(ex);
+            }
+        }
 
-            Directory.CreateDirectory(CourseAssetUtils.GetCourseAssetDirectory(course.Data.Name));
-            StreamWriter stream = File.CreateText(path);
+        private static void WriteCourse(string path, byte[] courseData)
+        {
+            FileStream stream = null;
+            try
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
 
-            byte[] serialized = EditorConfigurator.Instance.Serializer.CourseToByteArray(course);
-
-            stream.Write(new UTF8Encoding().GetString(serialized));
-            stream.Close();
+                stream = File.Create(path);
+                stream.Write(courseData, 0, courseData.Length);
+                stream.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(ex);
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                    stream.Dispose();
+                }
+            }
         }
 
         /// <summary>
@@ -103,12 +129,18 @@ namespace Innoactive.CreatorEditor
             {
                 string courseAssetPath = CourseAssetUtils.GetCourseAssetPath(courseName);
                 byte[] courseBytes = File.ReadAllBytes(courseAssetPath);
-                return EditorConfigurator.Instance.Serializer.CourseFromByteArray(courseBytes);
+
+                try
+                {
+                    return EditorConfigurator.Instance.Serializer.CourseFromByteArray(courseBytes);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Failed to load the course '{courseName}' from '{courseAssetPath}' because of: \n{ex.Message}");
+                    Debug.LogError(ex);
+                }
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         /// <summary>
