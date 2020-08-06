@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Innoactive.Creator.Core.UI.Drawers.Metadata;
 using Innoactive.Creator.Core.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 
 namespace Innoactive.Creator.Core.Serialization.NewtonsoftJson
 {
@@ -22,6 +25,7 @@ namespace Innoactive.Creator.Core.Serialization.NewtonsoftJson
                 PreserveReferencesHandling = PreserveReferencesHandling.All,
                 Formatting = Formatting.Indented,
                 ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
+                SerializationBinder = new CourseSerializationBinder(),
                 TypeNameHandling = TypeNameHandling.All
             };
         }
@@ -101,6 +105,19 @@ namespace Innoactive.Creator.Core.Serialization.NewtonsoftJson
         public virtual IStep StepFromByteArray(byte[] data)
         {
             return Deserialize<IStep>(data, StepSerializerSettings);
+        }
+
+        internal class CourseSerializationBinder : DefaultSerializationBinder
+        {
+            public override Type BindToType(string assemblyName, string typeName)
+            {
+                if (typeName == "Innoactive.CreatorEditor.UI.Drawers.Metadata.ReorderableElementMetadata")
+                {
+                    return typeof(ReorderableElementMetadata);
+                }
+
+                return base.BindToType(assemblyName, typeName);
+            }
         }
     }
 }

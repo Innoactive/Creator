@@ -5,8 +5,8 @@ using System.Linq;
 using System.Reflection;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.UI.Drawers.Metadata;
 using Innoactive.Creator.Core.Utils;
-using Innoactive.CreatorEditor.UI.Drawers.Metadata;
 using UnityEditor;
 using UnityEngine;
 
