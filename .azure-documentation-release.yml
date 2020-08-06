@@ -36,7 +36,9 @@ jobs:
         lfs: true
 
       - powershell: |
-          $TAG = (git describe --all --match "v*").Split("-")[0].Replace("tags/", "").TrimStart("v")
+          $TAG = (git tag -l "v*" --sort=committerdate | Select -last 1)
+          if(!$TAG) { $TAG = "v0.0.0" }
+          $TAG = $TAG.TrimStart("v") + "-" + (git log -1 --pretty=format:%h)
           Write-Host "##vso[task.setvariable variable=Version]$TAG"
         workingDirectory: 'Creator'
         displayName: 'Parse build Tag'
