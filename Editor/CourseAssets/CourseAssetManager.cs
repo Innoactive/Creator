@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Text;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Serialization;
 using Innoactive.CreatorEditor.Configuration;

@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Innoactive.Creator.Core.UI.Drawers.Metadata;
 using Innoactive.Creator.Core.Utils;
-using Innoactive.CreatorEditor.UI.Drawers.Metadata;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
-using UnityEngine;
 
 namespace Innoactive.Creator.Core.Serialization.NewtonsoftJson
 {
@@ -112,7 +111,7 @@ namespace Innoactive.Creator.Core.Serialization.NewtonsoftJson
         {
             public override Type BindToType(string assemblyName, string typeName)
             {
-                if (typeName == typeof(ReorderableElementMetadata).FullName)
+                if (typeName == "Innoactive.CreatorEditor.UI.Drawers.Metadata.ReorderableElementMetadata")
                 {
                     return typeof(ReorderableElementMetadata);
                 }

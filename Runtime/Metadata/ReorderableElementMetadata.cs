@@ -1,4 +1,4 @@
-namespace Innoactive.CreatorEditor.UI.Drawers.Metadata
+namespace Innoactive.Creator.Core.UI.Drawers.Metadata
 {
     /// <summary>
     /// Metadata to make <see cref="Innoactive.Creator.Core.Attributes.ReorderableListOfAttribute"/> reorderable.
