@@ -30,7 +30,7 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
                 entry.Draw(GetEntryRect(position, window.width));
             }
 
-            EditorGUI.DrawRect(new Rect(0, Entries.Count * EntryHeight, window.width, 1), WizardWindow.LineColor);
+            EditorGUI.DrawRect(new Rect(0, Entries.Count * EntryHeight + 1, window.width, window.height - 1 - Entries.Count * EntryHeight), WizardWindow.LineColor);
         }
 
         protected Rect GetEntryRect(int position, float width)
