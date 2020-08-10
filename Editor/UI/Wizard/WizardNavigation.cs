@@ -6,6 +6,8 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
 {
     internal class WizardNavigation
     {
+        private const float PaddingTop = 4f;
+
         private List<IWizardNavigationEntry> Entries { get; }
 
         public WizardNavigation(List<IWizardNavigationEntry> entries)
@@ -23,19 +25,22 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
 
         public void Draw(Rect window)
         {
-            EditorGUI.DrawRect(new Rect(window.x + (window.width - 1), window.y, 1f, window.height), WizardWindow.LineColor);
+            // Draw darker area at the bottom
+            EditorGUI.DrawRect(new Rect(0, 0, window.width, PaddingTop), WizardWindow.LineColor);
+
             for (int position = 0; position < Entries.Count; position++)
             {
                 IWizardNavigationEntry entry = Entries[position];
                 entry.Draw(GetEntryRect(position, window.width));
             }
 
-            EditorGUI.DrawRect(new Rect(0, Entries.Count * EntryHeight + 1, window.width, window.height - 1 - Entries.Count * EntryHeight), WizardWindow.LineColor);
+            // Draw darker area at the bottom
+            EditorGUI.DrawRect(new Rect(0, Entries.Count * EntryHeight + 1 + PaddingTop, window.width, window.height - 1 - Entries.Count * EntryHeight), WizardWindow.LineColor);
         }
 
         protected Rect GetEntryRect(int position, float width)
         {
-            return new Rect(0, position * EntryHeight, width, EntryHeight);
+            return new Rect(0, PaddingTop + (position * EntryHeight), width, EntryHeight);
         }
 
         internal class Entry : IWizardNavigationEntry

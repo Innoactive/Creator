@@ -67,14 +67,14 @@ internal class WizardWindow : EditorWindow
 
     protected void DrawBottomBar(Rect window)
     {
-        EditorGUI.DrawRect(new Rect(window.x, window.y, window.width, 1), LineColor);
+        EditorGUI.DrawRect(new Rect(0, window.y, window.width, 1), LineColor);
 
         Vector2 buttonPosition = new Vector2(window.width - (ButtonSize.x + 4), window.y + 4);
 
         buttonPosition = DrawFinishButton(buttonPosition);
         buttonPosition = DrawNextButton(buttonPosition);
-        buttonPosition = DrawSkipButton(buttonPosition);
         buttonPosition = DrawPreviousButton(buttonPosition);
+        buttonPosition = DrawSkipButton(buttonPosition);
         buttonPosition = DrawCloseButton(buttonPosition);
     }
 
@@ -114,11 +114,11 @@ internal class WizardWindow : EditorWindow
     {
         if (pagePosition < pages.Count - 1 && GetActivePage().AllowSkip)
         {
-            if (GUI.Button(new Rect(position, ButtonSize), "Skip this Step"))
+            position = new Vector2(position.x - ButtonPadding * 6, position.y);
+            if (GUI.Button(new Rect(new Vector2(GetNavigationRect().width + 4, position.y), ButtonSize), "Skip this Step"))
             {
                 SkipButtonPressed();
             }
-            return new Vector2(position.x - (ButtonSize.x + ButtonPadding), position.y);
         }
 
         return position;
@@ -187,7 +187,7 @@ internal class WizardWindow : EditorWindow
 
     protected Rect GetNavigationRect()
     {
-        return new Rect(0, 0, Size.x * NavigationBarRatio, Size.y - BottomBarHeight);
+        return new Rect(0, 0, Size.x * NavigationBarRatio, Size.y);
     }
 
     protected Rect GetContentRect()
@@ -197,6 +197,6 @@ internal class WizardWindow : EditorWindow
 
     protected Rect GetBottomBarRect()
     {
-        return new Rect(0, Size.y - BottomBarHeight, Size.x, BottomBarHeight);
+        return new Rect(Size.x * NavigationBarRatio, Size.y - BottomBarHeight, Size.x, BottomBarHeight);
     }
 }
