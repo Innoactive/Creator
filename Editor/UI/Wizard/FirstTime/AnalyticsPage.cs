@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         [SerializeField]
         private bool trackingEnabled = false;
 
-        public AnalyticsPage() : base("Step 3: Analytics", false, false)
+        public AnalyticsPage() : base("Analytics", false, false)
         {
 
         }

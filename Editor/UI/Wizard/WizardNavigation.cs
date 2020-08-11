@@ -64,9 +64,16 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
             public bool Selected { get; set; } = false;
 
-            public Entry(string name)
+            public Entry(string name, int position)
             {
-                Name = name;
+                if (position == 0)
+                {
+                    Name = name;
+                }
+                else
+                {
+                    Name = $"Step {position}: {name}";
+                }
             }
 
             public void Draw(Rect window)
