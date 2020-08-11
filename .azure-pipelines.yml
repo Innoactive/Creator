@@ -29,7 +29,9 @@ stages:
     jobs:
       - job: CommitMessageCheck
         displayName: Commit Message Check
-        steps:
+        steps:        
+          - task: UseNode@1
+
           - script: npm install @commitlint/cli commitlint-azure-pipelines-cli @commitlint/config-conventional
           - script: >
               npx
