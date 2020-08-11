@@ -18,7 +18,7 @@ pr:
 pool:
   name: Windows 10
   demands:
-    - Unity
+    - u3d
 
 variables:
     - group: basic-unity
