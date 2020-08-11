@@ -172,7 +172,7 @@ internal class WizardWindow : EditorWindow
         navigation.SetSelected(selectedPage);
     }
 
-    protected virtual  void NextButtonPressed()
+    protected virtual void NextButtonPressed()
     {
         GetActivePage().Apply();
         selectedPage++;

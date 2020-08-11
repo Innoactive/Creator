@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace Innoactive.Creator.Core.Editor.UI.Wizard
@@ -22,6 +23,9 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
         [SerializeField]
         public bool CanProceed = true;
 
+        protected int horizontalSpace = 30;
+        protected int verticalSpace = 30;
+
         public WizardPage()
         {
 
@@ -34,6 +38,23 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
         }
 
         public abstract void Draw(Rect window);
+
+        public virtual Rect DrawTitle(Rect window, string title)
+        {
+            GUILayout.BeginArea(window);
+            GUILayout.Space(verticalSpace);
+            GUILayout.BeginHorizontal();
+
+                GUILayout.Space(horizontalSpace);
+                GUILayout.Label(title, EditorStyles.largeLabel);
+
+            GUILayout.EndHorizontal();
+            GUILayout.EndArea();
+
+            Rect contentRect = new Rect(window.x, verticalSpace * 2, window.width, window.height - verticalSpace * 2);
+
+            return contentRect;
+        }
 
         public virtual void Apply()
         {
