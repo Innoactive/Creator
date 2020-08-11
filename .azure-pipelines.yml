@@ -15,7 +15,10 @@ pr:
     include:
       - develop
 
-pool: Unity
+pool:
+  name: Windows 10
+  demands:
+    - Unity
 
 variables:
     - group: basic-unity
