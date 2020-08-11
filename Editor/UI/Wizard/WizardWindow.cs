@@ -11,16 +11,16 @@ internal class WizardWindow : EditorWindow
     public static readonly Color LineColor = new Color(0, 0, 0, 0.25f);
 
     [SerializeField]
-    private int pagePosition = 0;
+    private int selectedPage = 0;
 
     [SerializeField]
     public Vector2 Size = new Vector2(800, 500);
 
-    protected float BottomBarHeight = 40f;
-    protected float NavigationBarRatio = 0.25f;
+    protected float bottomBarHeight = 40f;
+    protected float navigationBarRatio = 0.25f;
 
-    protected float ButtonPadding = 8f;
-    protected Vector2 ButtonSize;
+    protected float buttonPadding = 8f;
+    protected Vector2 buttonSize;
 
     [SerializeField]
     protected List<WizardPage> pages;
@@ -32,10 +32,10 @@ internal class WizardWindow : EditorWindow
         minSize = Size;
         maxSize = Size;
 
-        ButtonSize = new Vector2(BottomBarHeight * 2.5f, BottomBarHeight - 8);
+        buttonSize = new Vector2(bottomBarHeight * 2.5f, bottomBarHeight - 8);
     }
 
-    public void Setup(string name, List<WizardPage> pages)
+    public virtual void Setup(string name, List<WizardPage> pages)
     {
         titleContent = new GUIContent(name);
         this.pages = pages;
@@ -48,7 +48,7 @@ internal class WizardWindow : EditorWindow
         {
             entries.Add(new WizardNavigation.Entry(page.Name));
         }
-        entries[pagePosition].Selected = true;
+        entries[selectedPage].Selected = true;
         return new WizardNavigation(entries);
     }
 
@@ -59,7 +59,6 @@ internal class WizardWindow : EditorWindow
             navigation = CreateNavigation();
         }
 
-
         navigation.Draw(GetNavigationRect());
         GetActivePage().Draw(GetContentRect());
         DrawBottomBar(GetBottomBarRect());
@@ -69,7 +68,7 @@ internal class WizardWindow : EditorWindow
     {
         EditorGUI.DrawRect(new Rect(0, window.y, window.width, 1), LineColor);
 
-        Vector2 buttonPosition = new Vector2(window.width - (ButtonSize.x + 4), window.y + 4);
+        Vector2 buttonPosition = new Vector2(window.width - (buttonSize.x + 4), window.y + 4);
 
         buttonPosition = DrawFinishButton(buttonPosition);
         buttonPosition = DrawNextButton(buttonPosition);
@@ -80,15 +79,15 @@ internal class WizardWindow : EditorWindow
 
     private Vector2 DrawFinishButton(Vector2 position)
     {
-        if (pagePosition == pages.Count - 1)
+        if (selectedPage == pages.Count - 1)
         {
             EditorGUI.BeginDisabledGroup(GetActivePage().CanProceed == false);
-            if (GUI.Button(new Rect(position, ButtonSize), "Finish"))
+            if (GUI.Button(new Rect(position, buttonSize), "Finish"))
             {
                 FinishButtonPressed();
             }
             EditorGUI.EndDisabledGroup();
-            return new Vector2(position.x - (ButtonSize.x + ButtonPadding), position.y);
+            return new Vector2(position.x - (buttonSize.x + buttonPadding), position.y);
         }
 
         return position;
@@ -96,15 +95,15 @@ internal class WizardWindow : EditorWindow
 
     private Vector2 DrawNextButton(Vector2 position)
     {
-        if (pagePosition < pages.Count - 1)
+        if (selectedPage < pages.Count - 1)
         {
             EditorGUI.BeginDisabledGroup(GetActivePage().CanProceed == false);
-            if (GUI.Button(new Rect(position, ButtonSize), "Next"))
+            if (GUI.Button(new Rect(position, buttonSize), "Next"))
             {
                 NextButtonPressed();
             }
             EditorGUI.EndDisabledGroup();
-            return new Vector2(position.x - (ButtonSize.x + ButtonPadding), position.y);
+            return new Vector2(position.x - (buttonSize.x + buttonPadding), position.y);
         }
 
         return position;
@@ -112,10 +111,10 @@ internal class WizardWindow : EditorWindow
 
     private Vector2 DrawSkipButton(Vector2 position)
     {
-        if (pagePosition < pages.Count - 1 && GetActivePage().AllowSkip)
+        if (selectedPage < pages.Count - 1 && GetActivePage().AllowSkip)
         {
-            position = new Vector2(position.x - ButtonPadding * 6, position.y);
-            if (GUI.Button(new Rect(new Vector2(GetNavigationRect().width + 4, position.y), ButtonSize), "Skip this Step"))
+            position = new Vector2(position.x - buttonPadding * 6, position.y);
+            if (GUI.Button(new Rect(new Vector2(GetNavigationRect().width + 4, position.y), buttonSize), "Skip this Step"))
             {
                 SkipButtonPressed();
             }
@@ -126,14 +125,14 @@ internal class WizardWindow : EditorWindow
 
     private Vector2 DrawPreviousButton(Vector2 position)
     {
-        if (pagePosition > 0)
+        if (selectedPage > 0)
         {
-            if (GUI.Button(new Rect(position, ButtonSize), "Previous"))
+            if (GUI.Button(new Rect(position, buttonSize), "Previous"))
             {
                 BackButtonPressed();
             }
             EditorGUI.EndDisabledGroup();
-            return new Vector2(position.x - (ButtonSize.x + ButtonPadding), position.y);
+            return new Vector2(position.x - (buttonSize.x + buttonPadding), position.y);
         }
         return position;
     }
@@ -141,14 +140,14 @@ internal class WizardWindow : EditorWindow
 
     private Vector2 DrawCloseButton(Vector2 position)
     {
-        if (pagePosition == 0)
+        if (selectedPage == 0)
         {
-            if (GUI.Button(new Rect(position, ButtonSize), "Close Wizard"))
+            if (GUI.Button(new Rect(position, buttonSize), "Close Wizard"))
             {
                 Close();
             }
             EditorGUI.EndDisabledGroup();
-            return new Vector2(position.x - (ButtonSize.x + ButtonPadding), position.y);
+            return new Vector2(position.x - (buttonSize.x + buttonPadding), position.y);
         }
         return position;
     }
@@ -162,41 +161,41 @@ internal class WizardWindow : EditorWindow
     protected virtual void BackButtonPressed()
     {
         GetActivePage().Cancel();
-        pagePosition--;
-        navigation.SetSelected(pagePosition);
+        selectedPage--;
+        navigation.SetSelected(selectedPage);
     }
 
     protected virtual  void SkipButtonPressed()
     {
         GetActivePage().Skip();
-        pagePosition++;
-        navigation.SetSelected(pagePosition);
+        selectedPage++;
+        navigation.SetSelected(selectedPage);
     }
 
     protected virtual  void NextButtonPressed()
     {
         GetActivePage().Apply();
-        pagePosition++;
-        navigation.SetSelected(pagePosition);
+        selectedPage++;
+        navigation.SetSelected(selectedPage);
     }
 
     protected WizardPage GetActivePage()
     {
-        return pages[pagePosition];
+        return pages[selectedPage];
     }
 
     protected Rect GetNavigationRect()
     {
-        return new Rect(0, 0, Size.x * NavigationBarRatio, Size.y);
+        return new Rect(0, 0, Size.x * navigationBarRatio, Size.y);
     }
 
     protected Rect GetContentRect()
     {
-        return new Rect(Size.x * NavigationBarRatio, 0, Size.x - (Size.x * NavigationBarRatio), Size.y - BottomBarHeight);
+        return new Rect(Size.x * navigationBarRatio, 0, Size.x - (Size.x * navigationBarRatio), Size.y - bottomBarHeight);
     }
 
     protected Rect GetBottomBarRect()
     {
-        return new Rect(Size.x * NavigationBarRatio, Size.y - BottomBarHeight, Size.x, BottomBarHeight);
+        return new Rect(Size.x * navigationBarRatio, Size.y - bottomBarHeight, Size.x, bottomBarHeight);
     }
 }

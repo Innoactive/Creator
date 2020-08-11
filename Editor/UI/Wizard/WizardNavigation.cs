@@ -26,7 +26,7 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
         public void Draw(Rect window)
         {
             // Draw darker area at the bottom
-            EditorGUI.DrawRect(new Rect(0, 0, window.width, PaddingTop), WizardWindow.LineColor);
+            EditorGUI.DrawRect(new Rect(window.position, new Vector2(window.width, PaddingTop)), WizardWindow.LineColor);
 
             for (int position = 0; position < Entries.Count; position++)
             {
