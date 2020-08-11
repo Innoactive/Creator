@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.Graphs;
 using UnityEngine;
 
 namespace Innoactive.Creator.Core.Editor.UI.Wizard
@@ -45,6 +46,16 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
 
         internal class Entry : IWizardNavigationEntry
         {
+            private GUIStyle selectedStyle
+            {
+                get
+                {
+                    GUIStyle style = new GUIStyle(GUI.skin.label);
+                    style.normal.textColor = Color.white;
+                    return style;
+                }
+            }
+
             public string Name { get; }
 
             public bool Selected { get; set; } = false;
@@ -60,7 +71,7 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
                 {
                     EditorGUI.DrawRect(new Rect(0, window.y + 1, window.width, window.height - 1), WizardWindow.LineColor);
                 }
-                EditorGUI.LabelField(new Rect(4, window.y + 4, window.width - 8, window.height - 8), Name);
+                EditorGUI.LabelField(new Rect(4, window.y + 4, window.width - 8, window.height - 8), Name, Selected ? selectedStyle : GUI.skin.label);
             }
         }
     }
