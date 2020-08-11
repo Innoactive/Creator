@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Innoactive.CreatorEditor.UI.Wizard
 {
@@ -13,7 +13,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             List<WizardPage> pages = new List<WizardPage>()
             {
                 new TrainingSceneSetupPage(),
-                new VRHardwareSetupPage(),
+                new XRSDKSetupPage(),
                 new AnalyticsPage(),
                 new AllAboutPage()
             };
