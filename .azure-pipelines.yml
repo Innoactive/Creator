@@ -31,7 +31,6 @@ stages:
         displayName: Commit Message Check
         steps:        
           - task: UseNode@1
-
           - script: npm install @commitlint/cli commitlint-azure-pipelines-cli @commitlint/config-conventional
           - script: >
               npx
