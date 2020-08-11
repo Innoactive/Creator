@@ -26,9 +26,7 @@ The new recommended VR framework is Unity XR. We have updated the VRTK component
 
 ## Standalone Devices Support
 
-The Innoactive Creator supports standalone devices now. 
-
-*If you use the default course serializer, go to `Unity > Edit > Project Settings... > Player > Other Settings` and set API compitability settings to .NET 4.x.*
+The Innoactive Creator supports standalone devices now.
 
 ## Scene Setup
 
