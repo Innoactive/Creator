@@ -15,6 +15,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     public abstract class AbstractDrawer : ITrainingDrawer
     {
         /// <inheritdoc />
+        [Obsolete("Use the overload with GUIContent label instead.")]
         public Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, string label)
         {
             return Draw(rect, currentValue, changeValueCallback, new GUIContent(label));

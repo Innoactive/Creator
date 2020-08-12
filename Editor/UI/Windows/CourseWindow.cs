@@ -96,6 +96,8 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 titleIcon = new EditorIcon("icon_training_editor");
             }
 
+            SetTabName();
+
             GlobalEditorHandler.CourseWindowOpened(this);
         }
 
@@ -110,8 +112,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 return;
             }
-
-            SetTabName();
 
             float width = chapterMenu.IsExtended ? TrainingMenuView.ExtendedMenuWidth : TrainingMenuView.MinimizedMenuWidth;
             Rect scrollRect = new Rect(width, 0f, position.size.x - width, position.size.y);

@@ -72,7 +72,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             scrollPosition = GUI.BeginScrollView(new Rect(0, 0, position.width, position.height), scrollPosition, stepRect, false, false);
             {
                 Rect stepDrawingRect = new Rect(stepRect.position + new Vector2(border, border), stepRect.size - new Vector2(border * 2f, border * 2f));
-                stepDrawingRect = drawer.Draw(stepDrawingRect, step, ModifyStep, "Step");
+                stepDrawingRect = drawer.Draw(stepDrawingRect, step, ModifyStep, new GUIContent("Step"));
                 stepRect = new Rect(stepDrawingRect.position - new Vector2(border,border), stepDrawingRect.size + new Vector2(border * 2f, border * 2f));
             }
             GUI.EndScrollView();

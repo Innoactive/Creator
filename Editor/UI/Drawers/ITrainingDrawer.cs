@@ -12,6 +12,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         /// <summary>
         /// Draw editor view in given Rect.
         /// </summary>
+        /// Obsolete. Use the overload with GUIContent label instead.
         /// <param name="rect">A rectangle in which editor view should fit. The height value is ignored.</param>
         /// <param name="currentValue">Current value of a member.</param>
         /// <param name="changeValueCallback">
@@ -20,6 +21,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         /// </param>
         /// <param name="label">Label text to display.</param>
         /// <returns>The area that was taken by the property.</returns>
+        [Obsolete("Use the overload with GUIContent label instead.")]
         Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, string label);
 
         /// <summary>

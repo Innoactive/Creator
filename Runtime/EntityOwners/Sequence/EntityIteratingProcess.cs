@@ -93,7 +93,7 @@ namespace Innoactive.Creator.Core.EntityOwners
                     current.LifeCycle.Deactivate();
                 }
 
-                current = default(TEntity);
+                current = default;
             }
         }
 

@@ -19,9 +19,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             Rect nameRect = rect;
             nameRect.width = EditorGUIUtility.labelWidth;
-            Rect typeRect = rect;
-            typeRect.x += EditorGUIUtility.labelWidth;
-            typeRect.width -= EditorGUIUtility.labelWidth;
 
             GUIStyle textFieldStyle = new GUIStyle(EditorStyles.textField)
             {
@@ -38,7 +35,13 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 padding = new RectOffset(4, 0, 0, 0)
             };
 
-            EditorGUI.LabelField(typeRect, GetTypeNameLabel(nameable, nameable.GetType()), labelStyle);
+            GUIContent typeLabel = GetTypeNameLabel(nameable, nameable.GetType());
+
+            Rect typeRect = rect;
+            typeRect.x += EditorGUIUtility.labelWidth;
+            typeRect.width = labelStyle.CalcSize(typeLabel).x;
+
+            EditorGUI.LabelField(typeRect, typeLabel, labelStyle);
 
             if (newName != nameable.Name)
             {

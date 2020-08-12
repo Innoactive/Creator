@@ -31,7 +31,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             if (label != null && label != GUIContent.none && (label.image != null || string.IsNullOrEmpty(label.text) == false))
             {
-                EditorGUI.LabelField(new Rect(rect.x, currentY, rect.width, EditorDrawingHelper.HeaderLineHeight), label, labelStyle);
+                EditorGUI.LabelField(new Rect(rect.x, currentY, labelStyle.CalcSize(label).x, EditorDrawingHelper.HeaderLineHeight), label, labelStyle);
                 currentY += EditorDrawingHelper.HeaderLineHeight;
             }
 

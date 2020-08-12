@@ -9,7 +9,7 @@ using Innoactive.Creator.Core.UI.Drawers.Metadata;
 using Innoactive.Creator.Core.Utils;
 using UnityEditor;
 using UnityEngine;
-
+using TooltipAttribute = Innoactive.Creator.Core.Attributes.TooltipAttribute;
 namespace Innoactive.CreatorEditor.UI.Drawers
 {
     /// <summary>
@@ -20,6 +20,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     [DefaultTrainingDrawer(typeof(MetadataWrapper))]
     internal class MetadataWrapperDrawer : AbstractDrawer
     {
+        private readonly string tooltipName = typeof(TooltipAttribute).FullName;
         private readonly string reorderableName = "ReorderableElement";
         private readonly string separatedName = typeof(SeparatedAttribute).FullName;
         private readonly string deletableName = typeof(DeletableAttribute).FullName;
@@ -38,6 +39,11 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
             MetadataWrapper wrapper = (MetadataWrapper)currentValue;
+
+            if (wrapper.Metadata.ContainsKey(tooltipName))
+            {
+                return DrawTooltip(rect, wrapper, changeValueCallback, label);
+            }
 
             if (wrapper.Metadata.ContainsKey(reorderableName))
             {
@@ -101,6 +107,12 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             ITrainingDrawer valueDrawer = DrawerLocator.GetDrawerForValue(wrapper.Value, wrapper.ValueDeclaredType);
 
             return valueDrawer.GetLabel(wrapper.Value, wrapper.ValueDeclaredType);
+        }
+
+        private Rect DrawTooltip(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label)
+        {
+            label.tooltip = wrapper.Metadata[tooltipName].ToString();
+            return DrawRecursively(rect, wrapper, tooltipName, changeValueCallback, label);
         }
 
         private Rect DrawReorderable(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label)
@@ -278,7 +290,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             {
                 backgroundBehaviorData.IsBlocking = (bool)newValue;
                 changeValueCallback(wrapper);
-            }, "Is blocking").height;
+            }, new GUIContent("Is blocking")).height;
 
             return rect;
         }
@@ -325,7 +337,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
                     wrapper.Value = list;
                     changeValueCallback(wrapper);
-                }, "").height;
+                }, GUIContent.none).height;
             }
 
             rect.height = currentY;
