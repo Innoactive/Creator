@@ -41,12 +41,18 @@ namespace Innoactive.CreatorEditor.UI
 
             if (iconLight == null)
             {
-                Debug.LogWarningFormat("No texture found for path: {0}", path + LightTextureFileEnding);
+                if (EditorGUIUtility.isProSkin)
+                {
+                    Debug.LogWarningFormat("No texture found for path: {0}", path + LightTextureFileEnding);
+                }
                 iconLight = iconDark;
             }
             else if (iconDark == null)
             {
-                Debug.LogWarningFormat("No texture found for path: {0}", path + DarkTextureFileEnding);
+                if (!EditorGUIUtility.isProSkin)
+                {
+                    Debug.LogWarningFormat("No texture found for path: {0}", path + DarkTextureFileEnding);
+                }
                 iconDark = iconLight;
             }
         }
