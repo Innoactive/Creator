@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Innoactive.Creator.Core.Editor.UI.Wizard;
 using UnityEditor;
 using UnityEngine;
@@ -160,7 +162,7 @@ internal class WizardWindow : EditorWindow
 
     protected virtual void BackButtonPressed()
     {
-        GetActivePage().Cancel();
+        GetActivePage().Back();
         selectedPage--;
         navigation.SetSelected(selectedPage);
     }
@@ -177,6 +179,12 @@ internal class WizardWindow : EditorWindow
         GetActivePage().Apply();
         selectedPage++;
         navigation.SetSelected(selectedPage);
+    }
+
+    protected void OnDestroy()
+    {
+        bool cancelled = pages.GetRange(selectedPage + 1, pages.Count - selectedPage - 1).Any(page => page.Mandatory);
+        pages.ForEach(page => page.Closing(!cancelled));
     }
 
     protected WizardPage GetActivePage()

@@ -23,6 +23,9 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
         [SerializeField]
         public bool CanProceed = true;
 
+        [SerializeField]
+        public bool Mandatory = true;
+
         protected int horizontalSpace = 30;
         protected int verticalSpace = 30;
 
@@ -31,10 +34,11 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
 
         }
 
-        public WizardPage(string name, bool allowSkip = false)
+        public WizardPage(string name, bool allowSkip = false, bool mandatory = true)
         {
             Name = name;
             AllowSkip = allowSkip;
+            Mandatory = mandatory;
         }
 
         public abstract void Draw(Rect window);
@@ -49,7 +53,12 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
 
         }
 
-        public virtual void Cancel()
+        public virtual void Back()
+        {
+
+        }
+
+        public virtual void Closing(bool isCompleted)
         {
 
         }
