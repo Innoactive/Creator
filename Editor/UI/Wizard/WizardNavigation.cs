@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using Innoactive.CreatorEditor.UI;
 using UnityEditor;
-using UnityEditor.Graphs;
 using UnityEngine;
 
 namespace Innoactive.Creator.Core.Editor.UI.Wizard
@@ -9,7 +9,9 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
     {
         private const float PaddingTop = 4f;
 
-        private List<IWizardNavigationEntry> Entries { get; }
+        protected EditorIcon logo = new EditorIcon("logo_creator_icon");
+
+        protected List<IWizardNavigationEntry> Entries { get; }
 
         public WizardNavigation(List<IWizardNavigationEntry> entries)
         {
@@ -37,6 +39,8 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
 
             // Draw darker area at the bottom
             EditorGUI.DrawRect(new Rect(0, Entries.Count * EntryHeight + 1 + PaddingTop, window.width, window.height - 1 - Entries.Count * EntryHeight), WizardWindow.LineColor);
+
+            GUI.DrawTexture(new Rect(window.x + 16f, window.y + window.height - (window.width / 2) - 25, window.width - 32f, (window.width - 32) / 2), logo.Texture);
         }
 
         protected Rect GetEntryRect(int position, float width)
@@ -69,7 +73,7 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
             {
                 if (!Selected)
                 {
-                    EditorGUI.DrawRect(new Rect(0, window.y + 1, window.width, window.height - 1), WizardWindow.LineColor);
+                    EditorGUI.DrawRect(new Rect(window.x, window.y + 1, window.width, window.height - 1), WizardWindow.LineColor);
                 }
                 EditorGUI.LabelField(new Rect(4, window.y + 4, window.width - 8, window.height - 8), Name, Selected ? selectedStyle : GUI.skin.label);
             }

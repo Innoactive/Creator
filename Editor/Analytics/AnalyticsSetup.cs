@@ -36,33 +36,11 @@ namespace Innoactive.CreatorEditor.Analytics
                 return;
             }
 
-            if (trackingState == AnalyticsState.Minimal)
-            {
-                // Without a stored session id a random one will be created every time.
-                if (EditorPrefs.HasKey(BaseAnalyticsTracker.KeySessionId))
-                {
-                    EditorPrefs.DeleteKey(BaseAnalyticsTracker.KeySessionId);
-                }
-            }
-
-            if (trackingState == AnalyticsState.Enabled)
-            {
-                string id = EditorPrefs.GetString(BaseAnalyticsTracker.KeySessionId, null);
-                if (string.IsNullOrEmpty(id) || id.StartsWith("IA") == false)
-                {
-                    // Create new session id starting with IA, which allows better tracking
-                    EditorPrefs.SetString(BaseAnalyticsTracker.KeySessionId,
-                        "IA" + Guid.NewGuid().ToString().Substring(2));
-                }
-            }
-
             // Only run once a day.
             if (DateTime.Today.Ticks.ToString().Equals(EditorPrefs.GetString(KeyLastDayActive, null)) == false)
             {
                 EditorPrefs.SetString(KeyLastDayActive, DateTime.Today.Ticks.ToString());
                 IAnalyticsTracker tracker = AnalyticsUtils.CreateTracker();
-                // Send "hello".
-                tracker.Send(new AnalyticsEvent() {Category = "system", Action = "hello", Label = ""});
                 // Send the Unity Editor version.
                 tracker.Send(new AnalyticsEvent() {Category = "unity", Action = "version", Label = Application.unityVersion});
                 // Send the Creator Core version.
