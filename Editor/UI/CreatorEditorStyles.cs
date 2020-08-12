@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace Innoactive.Creator.Core.Editor.UI
@@ -98,6 +99,45 @@ namespace Innoactive.Creator.Core.Editor.UI
                 }
 
                 return subText;
+            }
+        }
+
+        private static GUIStyle label;
+        public static GUIStyle Label
+        {
+            get
+            {
+                if (label == null)
+                {
+                    label = new GUIStyle(GUI.skin.label);
+                    label.alignment = TextAnchor.MiddleLeft;
+                    label.fontSize = 13;
+                    label.richText = true;
+                    label.clipping = TextClipping.Clip;
+                    label.margin = new RectOffset(Indent, BaseMargin, BaseMargin, BaseMargin);
+                }
+
+                return label;
+            }
+        }
+
+
+        private static GUIStyle link;
+        public static GUIStyle Link
+        {
+            get
+            {
+                if (link == null)
+                {
+                    link = new GUIStyle(EditorStyles.linkLabel);
+                    link.alignment = TextAnchor.MiddleLeft;
+                    link.fontSize = 13;
+                    link.richText = true;
+                    link.clipping = TextClipping.Clip;
+                    link.margin = new RectOffset(Indent, BaseMargin, BaseMargin, BaseMargin);
+                }
+
+                return link;
             }
         }
 

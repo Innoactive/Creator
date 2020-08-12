@@ -34,10 +34,7 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
                 GUILayout.Label("We Are Transparent", CreatorEditorStyles.Header);
                 GUILayout.Box("The Innoactive Creator is open-source. Feel free to check our analytics code in <b>Core/Editor/Analytics</b>\n\nIf you want to opt-out of tracking, open <b>Innoactive > Creator > Windows > Analytics Settings</b> in the Unity's menu bar and choose <i>disabled</i> from the drop-down menu.", CreatorEditorStyles.Paragraph);
 
-                if (GUILayout.Button("Data Privacy Information", CreatorEditorStyles.ApplyIdent(EditorStyles.linkLabel), GUILayout.ExpandWidth(false)))
-                {
-                    AnalyticsUtils.ShowDataPrivacyStatement();
-                }
+                CreatorLayout.DrawLink("Data Privacy Information", AnalyticsUtils.ShowDataPrivacyStatement);
             GUILayout.EndArea();
         }
     }
