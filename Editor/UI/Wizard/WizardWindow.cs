@@ -165,7 +165,7 @@ internal class WizardWindow : EditorWindow
         navigation.SetSelected(selectedPage);
     }
 
-    protected virtual  void SkipButtonPressed()
+    protected virtual void SkipButtonPressed()
     {
         GetActivePage().Skip();
         selectedPage++;
