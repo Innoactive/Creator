@@ -30,7 +30,9 @@ namespace Innoactive.Creator.Core.Editor.UI
                 action.Invoke();
             }
 
-            EditorGUIUtility.AddCursorRect(GUILayoutUtility.GetLastRect(), MouseCursor.Link);
+            Rect buttonRect = GUILayoutUtility.GetLastRect();
+            GUI.Label(new Rect(buttonRect.x, buttonRect.y + 1, buttonRect.width, buttonRect.height), new String('_', 256), CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.Link, intend));
+            EditorGUIUtility.AddCursorRect(buttonRect, MouseCursor.Link);
         }
     }
 }
