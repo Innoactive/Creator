@@ -1,4 +1,5 @@
-﻿using Innoactive.Creator.Core.Configuration;
+﻿using System.IO;
+using Innoactive.Creator.Core.Configuration;
 using Innoactive.CreatorEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -18,6 +19,10 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
         /// <param name="directory">Directory to save scene in.</param>
         public static void CreateNewScene(string sceneName, string directory = "Assets/Scenes")
         {
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
             Scene newScene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
             EditorSceneManager.SaveScene(newScene, $"{directory}/{sceneName}.unity");
             EditorSceneManager.OpenScene($"{directory}/{sceneName}.unity");

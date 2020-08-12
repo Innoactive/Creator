@@ -24,11 +24,11 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
         /// <inheritdoc />
         public override void Draw(Rect window)
         {
-            Rect contentRect = DrawTitle(window, "Load a sample training");
-
             string spaceAfterRadioButton = "  ";
 
-            GUILayout.BeginArea(contentRect);
+            GUILayout.BeginArea(window);
+
+            GUILayout.Label("Load a sample training", CreatorEditorStyles.Title);
             GUILayout.Space(verticalSpace);
                 GUILayout.BeginHorizontal();
                 GUILayout.Space(horizontalSpace);
@@ -47,7 +47,7 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
                     GUILayout.BeginVertical();
 
                     GUILayout.Label("Name of your VR Training:");
-                    courseName = GUILayout.TextField(courseName, 30, GUILayout.Width(contentRect.width * 0.7f));
+                    courseName = GUILayout.TextField(courseName, 30, GUILayout.Width(window.width * 0.7f));
 
                     string subText;
 
