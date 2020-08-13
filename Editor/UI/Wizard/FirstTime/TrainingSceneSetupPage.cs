@@ -10,8 +10,9 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
     /// </summary>
     internal class TrainingSceneSetupPage : WizardPage
     {
-        private bool useCurrentScene;
-        private bool createNewTraining;
+        private bool useCurrentScene = true;
+        private bool createNewTraining = false;
+        private bool loadSample = true;
 
         private string courseName = "My first VR Training course";
         private string sceneDirectory = "Assets/Scenes";
@@ -24,58 +25,50 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
         /// <inheritdoc />
         public override void Draw(Rect window)
         {
-            string spaceAfterRadioButton = "  ";
-
             GUILayout.BeginArea(window);
 
             GUILayout.Label("Load a sample training", CreatorEditorStyles.Title);
-            GUILayout.Space(verticalSpace);
-                GUILayout.BeginHorizontal();
-                GUILayout.Space(horizontalSpace);
-                    GUILayout.BeginVertical();
 
-                    createNewTraining = GUILayout.Toggle(createNewTraining, spaceAfterRadioButton + "Load sample VR training (recommended)", EditorStyles.radioButton);
-                    createNewTraining = GUILayout.Toggle(!createNewTraining, spaceAfterRadioButton + "Start from scratch with an empty VR training", EditorStyles.radioButton);
+            loadSample = GUILayout.Toggle(!createNewTraining, "Load sample VR training (recommended)", CreatorEditorStyles.RadioButton);
+            createNewTraining = GUILayout.Toggle(!loadSample, "Start from scratch with an empty VR training", CreatorEditorStyles.RadioButton);
 
-                    GUILayout.Space(verticalSpace);
+            if (createNewTraining)
+            {
+                RectOffset margin = CreatorEditorStyles.Paragraph.margin;
+                margin.top = CreatorEditorStyles.BaseMargin + CreatorEditorStyles.Ident;
+                GUILayout.Label("Name of your VR Training:",
+                    CreatorEditorStyles.ApplyMargin(CreatorEditorStyles.Paragraph, margin));
+                courseName = GUILayout.TextField(courseName, 30,
+                    CreatorEditorStyles.ApplyIdent(EditorStyles.textField, CreatorEditorStyles.IdentLarge),
+                    GUILayout.Width(window.width * 0.7f));
 
-                    GUILayout.EndVertical();
-                GUILayout.EndHorizontal();
+                string subText;
 
-                GUILayout.BeginHorizontal();
-                GUILayout.Space(horizontalSpace * 2);
-                    GUILayout.BeginVertical();
+                if (SceneExists(courseName) && useCurrentScene)
+                {
+                    subText = "Scene already exists.";
+                    CanProceed = false;
+                }
+                else if (CourseAssetUtils.DoesCourseAssetExist(courseName))
+                {
+                    subText = "Course already exists and will be used.";
+                    CanProceed = true;
+                }
+                else
+                {
+                    subText = "";
+                    CanProceed = true;
+                }
 
-                    GUILayout.Label("Name of your VR Training:");
-                    courseName = GUILayout.TextField(courseName, 30, GUILayout.Width(window.width * 0.7f));
+                GUILayout.Label(subText, CreatorEditorStyles.SubText, GUILayout.MinHeight(25));
 
-                    string subText;
+                useCurrentScene = GUILayout.Toggle(useCurrentScene, "Take my current scene",
+                    CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.RadioButton, CreatorEditorStyles.IdentLarge));
 
-                    if (SceneExists(courseName) && useCurrentScene)
-                    {
-                        subText = "Scene already exists.";
-                        CanProceed = false;
-                    }
-                    else if (CourseAssetUtils.DoesCourseAssetExist(courseName))
-                    {
-                        subText = "Course already exists.";
-                        CanProceed = false;
-                    }
-                    else
-                    {
-                        subText = "";
-                        CanProceed = true;
-                    }
+                useCurrentScene = GUILayout.Toggle(!useCurrentScene, "Create a new scene",
+                    CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.RadioButton, CreatorEditorStyles.IdentLarge));
+            }
 
-                    GUILayout.Label(subText, EditorStyles.whiteMiniLabel, GUILayout.MinHeight(25));
-
-                    GUILayout.Space(verticalSpace);
-
-                    useCurrentScene = GUILayout.Toggle(useCurrentScene, spaceAfterRadioButton + "create a new scene", EditorStyles.radioButton);
-                    useCurrentScene = GUILayout.Toggle(!useCurrentScene, spaceAfterRadioButton + "take my current scene", EditorStyles.radioButton);
-
-                    GUILayout.EndVertical();
-                GUILayout.EndHorizontal();
             GUILayout.EndArea();
         }
 

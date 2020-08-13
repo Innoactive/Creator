@@ -6,7 +6,7 @@ namespace Innoactive.Creator.Core.Editor.UI
     public static class CreatorEditorStyles
     {
 
-        public const int BasePadding = 2;
+        public const int BaseMargin = 2;
 
         public const int Ident = 12;
         public const int IdentLarge = Ident * 3;
@@ -24,7 +24,7 @@ namespace Innoactive.Creator.Core.Editor.UI
                     title.fontSize = 24;
                     title.fontStyle = FontStyle.Bold;
                     title.normal.textColor = HighlightTextColor;
-                    title.padding = new RectOffset(Ident, BasePadding, Ident, Ident);
+                    title.margin = new RectOffset(Ident, BaseMargin, Ident, Ident);
                 }
 
                 return title;
@@ -42,7 +42,7 @@ namespace Innoactive.Creator.Core.Editor.UI
                     header.fontSize = 16;
                     header.fontStyle = FontStyle.Bold;
                     header.normal.textColor = HighlightTextColor;
-                    header.padding = new RectOffset(Ident, BasePadding, Ident, BasePadding);
+                    header.margin = new RectOffset(Ident, BaseMargin, Ident, BaseMargin);
                 }
 
                 return header;
@@ -62,21 +62,54 @@ namespace Innoactive.Creator.Core.Editor.UI
                     paragraph.richText = true;
                     paragraph.clipping = TextClipping.Clip;
                     paragraph.wordWrap = true;
-                    paragraph.padding = new RectOffset(IdentLarge, BasePadding, BasePadding, BasePadding);
+                    paragraph.margin = new RectOffset(IdentLarge, BaseMargin, BaseMargin, BaseMargin);
                 }
 
                 return paragraph;
             }
         }
 
-        public static GUIStyle ApplyIdent(GUIStyle style, int ident = Ident)
+        private static GUIStyle radioButton;
+        public static GUIStyle RadioButton
         {
-            return new GUIStyle(style) { padding = new RectOffset(ident, style.padding.right, style.padding.top, style.padding.bottom) };
+            get
+            {
+                if (radioButton == null)
+                {
+                    radioButton = new GUIStyle(EditorStyles.radioButton);
+                    radioButton.fontSize = Paragraph.fontSize;
+                    radioButton.padding = new RectOffset(Ident + BaseMargin + 6, BaseMargin, 0, 2); // this only affects the text
+                    radioButton.margin = new RectOffset(Ident + BaseMargin * 2, BaseMargin, 0, 1); // this affects the position
+                }
+
+                return radioButton;
+            }
         }
 
-        public static GUIStyle ApplyPadding(GUIStyle style, RectOffset padding)
+        private static GUIStyle subText;
+        public static GUIStyle SubText
         {
-            return new GUIStyle(style) { padding = padding };
+            get
+            {
+                if (subText == null)
+                {
+                    subText = new GUIStyle(EditorStyles.miniLabel);
+                    subText.padding = new RectOffset(0, 0, 0, 0);
+                    subText.margin = new RectOffset(IdentLarge, BaseMargin, 0, 0);
+                }
+
+                return subText;
+            }
+        }
+
+        public static GUIStyle ApplyIdent(GUIStyle style, int ident = Ident)
+        {
+            return new GUIStyle(style) { margin = new RectOffset(ident, style.margin.right, style.margin.top, style.margin.bottom) };
+        }
+
+        public static GUIStyle ApplyMargin(GUIStyle style, RectOffset margin)
+        {
+            return new GUIStyle(style) { margin = margin };
         }
     }
 }
