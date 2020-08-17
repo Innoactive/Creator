@@ -7,8 +7,8 @@ namespace Innoactive.Creator.Core.Editor.UI
     {
         public const int BaseMargin = 2;
 
-        public const int Ident = 12;
-        public const int IdentLarge = Ident * 3;
+        public const int Indent = 12;
+        public const int IndentLarge = Indent * 3;
 
         public static Color HighlightTextColor = EditorGUIUtility.isProSkin ? Color.white : Color.black;
 
@@ -23,7 +23,7 @@ namespace Innoactive.Creator.Core.Editor.UI
                     title.fontSize = 24;
                     title.fontStyle = FontStyle.Bold;
                     title.normal.textColor = HighlightTextColor;
-                    title.margin = new RectOffset(Ident, BaseMargin, Ident, Ident);
+                    title.margin = new RectOffset(Indent, BaseMargin, Indent, Indent);
                 }
 
                 return title;
@@ -41,7 +41,7 @@ namespace Innoactive.Creator.Core.Editor.UI
                     header.fontSize = 16;
                     header.fontStyle = FontStyle.Bold;
                     header.normal.textColor = HighlightTextColor;
-                    header.margin = new RectOffset(Ident, BaseMargin, Ident, BaseMargin);
+                    header.margin = new RectOffset(Indent, BaseMargin, Indent, BaseMargin);
                 }
 
                 return header;
@@ -61,7 +61,7 @@ namespace Innoactive.Creator.Core.Editor.UI
                     paragraph.richText = true;
                     paragraph.clipping = TextClipping.Clip;
                     paragraph.wordWrap = true;
-                    paragraph.margin = new RectOffset(IdentLarge, BaseMargin, BaseMargin, BaseMargin);
+                    paragraph.margin = new RectOffset(IndentLarge, BaseMargin, BaseMargin, BaseMargin);
                 }
 
                 return paragraph;
@@ -77,8 +77,8 @@ namespace Innoactive.Creator.Core.Editor.UI
                 {
                     toggle = new GUIStyle(EditorStyles.toggle);
                     toggle.fontSize = Paragraph.fontSize;
-                    toggle.padding = new RectOffset(Ident + BaseMargin + 6, BaseMargin, 0, 2); // this only affects the text
-                    toggle.margin = new RectOffset(Ident + BaseMargin * 2, BaseMargin, 0, 1); // this affects the position
+                    toggle.padding = new RectOffset(Indent + BaseMargin + 6, BaseMargin, 0, 2); // this only affects the text
+                    toggle.margin = new RectOffset(Indent + BaseMargin * 2, BaseMargin, 0, 1); // this affects the position
                 }
 
                 return toggle;
@@ -94,14 +94,14 @@ namespace Innoactive.Creator.Core.Editor.UI
                 {
                     subText = new GUIStyle(EditorStyles.miniLabel);
                     subText.padding = new RectOffset(0, 0, 0, 0);
-                    subText.margin = new RectOffset(Ident, BaseMargin, 0, 0);
+                    subText.margin = new RectOffset(Indent, BaseMargin, 0, 0);
                 }
 
                 return subText;
             }
         }
 
-        public static GUIStyle ApplyIdent(GUIStyle style, int ident = Ident)
+        public static GUIStyle ApplyIdent(GUIStyle style, int ident = Indent)
         {
             return new GUIStyle(style) { margin = new RectOffset(ident, style.margin.right, style.margin.top, style.margin.bottom) };
         }

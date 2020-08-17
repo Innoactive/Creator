@@ -36,11 +36,11 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
             if (loadSample == false)
             {
                 RectOffset margin = CreatorEditorStyles.Paragraph.margin;
-                margin.top = CreatorEditorStyles.BaseMargin + CreatorEditorStyles.Ident;
+                margin.top = CreatorEditorStyles.BaseMargin + CreatorEditorStyles.Indent;
                 GUILayout.Label("Name of your VR Training:",
                     CreatorEditorStyles.ApplyMargin(CreatorEditorStyles.Paragraph, margin));
                 courseName = GUILayout.TextField(courseName, 30,
-                    CreatorEditorStyles.ApplyIdent(EditorStyles.textField, CreatorEditorStyles.IdentLarge),
+                    CreatorEditorStyles.ApplyIdent(EditorStyles.textField, CreatorEditorStyles.IndentLarge),
                     GUILayout.Width(window.width * 0.7f));
 
                 string courseInfoText = "";
@@ -49,10 +49,10 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
                     courseInfoText = "Course already exists and will be used.";
                 }
 
-                GUILayout.Label(courseInfoText, CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.SubText, CreatorEditorStyles.IdentLarge), GUILayout.MinHeight(20));
+                GUILayout.Label(courseInfoText, CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.SubText, CreatorEditorStyles.IndentLarge), GUILayout.MinHeight(20));
 
-                if (GUILayout.Toggle(useCurrentScene, "Take my current scene", CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.Toggle, CreatorEditorStyles.IdentLarge))) useCurrentScene = true;
-                if (GUILayout.Toggle(!useCurrentScene, "Create a new scene", CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.Toggle, CreatorEditorStyles.IdentLarge))) useCurrentScene = false;
+                if (GUILayout.Toggle(useCurrentScene, "Take my current scene", CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.Toggle, CreatorEditorStyles.IndentLarge))) useCurrentScene = true;
+                if (GUILayout.Toggle(!useCurrentScene, "Create a new scene", CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.Toggle, CreatorEditorStyles.IndentLarge))) useCurrentScene = false;
 
                 if (useCurrentScene == false)
                 {
@@ -67,7 +67,7 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
                         CanProceed = true;
                     }
 
-                    GUILayout.Label(sceneInfoText, CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.SubText, CreatorEditorStyles.IdentLarge), GUILayout.MinHeight(20));
+                    GUILayout.Label(sceneInfoText, CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.SubText, CreatorEditorStyles.IndentLarge), GUILayout.MinHeight(20));
                 }
             }
 
