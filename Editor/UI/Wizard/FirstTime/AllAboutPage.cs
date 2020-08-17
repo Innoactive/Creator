@@ -13,7 +13,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         {
             GUILayout.BeginArea(window);
                 GUILayout.Label("Hit Play to Preview", CreatorEditorStyles.Title);
-                GUILayout.Label("Have a look at How-Tos and an in-depth Webinar for further information.", CreatorEditorStyles.Paragraph);
+                GUILayout.Label("Have a look at How-To's and an in-depth Webinar for further information.", CreatorEditorStyles.Paragraph);
                 GUILayout.Label("How-To's", CreatorEditorStyles.Header);
 
                 CreatorGUILayout.DrawLink("How to build your VR Training application", "https://developers.innoactive.de/documentation/creator/latest/articles/getting-started/designer.html");
@@ -27,7 +27,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
                 GUILayout.Space(CreatorEditorStyles.Indent);
 
-                GUILayout.Label("Also, if you are facing any issues, don't hesitate to reach out to use for support", CreatorEditorStyles.Label);
+                GUILayout.Label("Also, if you are facing any issues, don't hesitate to reach out to us for support", CreatorEditorStyles.Label);
             GUILayout.EndArea();
         }
     }
