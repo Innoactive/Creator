@@ -1,9 +1,6 @@
-﻿using Innoactive.CreatorEditor.Analytics;
-using Innoactive.CreatorEditor.UI;
-using Innoactive.EditorCreator.UI;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Editor.UI.Wizard
+namespace Innoactive.CreatorEditor.UI.Wizard
 {
     public class AllAboutPage : WizardPage
     {
@@ -32,17 +29,6 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
 
                 GUILayout.Label("Also, if you are facing any issues, don't hesitate to reach out to use for support", CreatorEditorStyles.Label);
             GUILayout.EndArea();
-        }
-
-        public override void Apply()
-        {
-            AnalyticsEvent finishedWizardEvent = new AnalyticsEvent()
-            {
-                Category = "creator",
-                Action = "wizard_exited",
-                Label = "all_about",
-            };
-            AnalyticsUtils.CreateTracker().Send(finishedWizardEvent);
         }
     }
 }

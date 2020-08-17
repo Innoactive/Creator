@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Editor.UI.Wizard
+namespace Innoactive.CreatorEditor.UI.Wizard
 {
     /// <summary>
     /// Wizard pages which allows you to implement your content.

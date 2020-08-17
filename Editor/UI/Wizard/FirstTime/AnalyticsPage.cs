@@ -1,8 +1,7 @@
 ﻿using Innoactive.CreatorEditor.Analytics;
-using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Editor.UI.Wizard
+namespace Innoactive.CreatorEditor.UI.Wizard
 {
     public class AnalyticsPage : WizardPage
     {
@@ -34,7 +33,7 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
                 GUILayout.Label("We Are Transparent", CreatorEditorStyles.Header);
                 GUILayout.Box("The Innoactive Creator is open-source. Feel free to check our analytics code in <b>Core/Editor/Analytics</b>\n\nIf you want to opt-out of tracking, open <b>Innoactive > Creator > Windows > Analytics Settings</b> in the Unity's menu bar and choose <i>disabled</i> from the drop-down menu.", CreatorEditorStyles.Paragraph);
 
-                CreatorLayout.DrawLink("Data Privacy Information", AnalyticsUtils.ShowDataPrivacyStatement);
+                CreatorGUILayout.DrawLink("Data Privacy Information", AnalyticsUtils.ShowDataPrivacyStatement);
             GUILayout.EndArea();
         }
     }

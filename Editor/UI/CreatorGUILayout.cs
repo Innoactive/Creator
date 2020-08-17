@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace Innoactive.EditorCreator.UI
+namespace Innoactive.CreatorEditor.UI
 {
     /// <summary>
     /// Layout extension for the creator. This class might

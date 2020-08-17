@@ -3,7 +3,7 @@ using Innoactive.CreatorEditor.UI;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Editor.UI.Wizard
+namespace Innoactive.CreatorEditor.UI.Wizard
 {
     internal class WizardNavigation
     {

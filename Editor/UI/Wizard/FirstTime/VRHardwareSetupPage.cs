@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Innoactive.Creator.Core.Editor.UI.Wizard
+namespace Innoactive.CreatorEditor.UI.Wizard
 {
     public class VRHardwareSetupPage : WizardPage
     {

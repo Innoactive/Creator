@@ -1,11 +1,9 @@
-﻿using System;
 using System.IO;
-using Innoactive.CreatorEditor;
 using Innoactive.CreatorEditor.Setup;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Editor.UI.Wizard
+namespace Innoactive.CreatorEditor.UI.Wizard
 {
     /// <summary>
     /// Wizard page which handles the training scene setup.
