@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEditor;
 using UnityEngine;
 
 namespace Innoactive.Creator.Core.Editor.UI.Wizard
@@ -11,19 +10,12 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
     [Serializable]
     public abstract class WizardPage
     {
-        [SerializeField]
-        protected Vector2 currentScrollPosition;
-
-        [SerializeField]
         public string Name;
 
-        [SerializeField]
         public bool AllowSkip;
 
-        [SerializeField]
         public bool CanProceed = true;
 
-        [SerializeField]
         public bool Mandatory = true;
 
         protected int horizontalSpace = 30;
