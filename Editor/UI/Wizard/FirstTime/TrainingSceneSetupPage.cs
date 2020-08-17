@@ -28,8 +28,10 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
 
             GUILayout.Label("Load a sample training", CreatorEditorStyles.Title);
 
-            if (GUILayout.Toggle(loadSample, "Load sample VR training (recommended)", CreatorEditorStyles.Toggle)) loadSample = true;
-            if (GUILayout.Toggle(!loadSample, "Start from scratch with an empty VR training", CreatorEditorStyles.Toggle)) loadSample = false;
+            // Use the next two lines and remove the "loadSample = false" line as soon as loading samples is supported
+            // if (GUILayout.Toggle(loadSample, "Load sample VR training (recommended)", CreatorEditorStyles.Toggle)) loadSample = true;
+            // if (GUILayout.Toggle(!loadSample, "Start from scratch with an empty VR training", CreatorEditorStyles.Toggle)) loadSample = false;
+            loadSample = false;
 
             if (loadSample == false)
             {
