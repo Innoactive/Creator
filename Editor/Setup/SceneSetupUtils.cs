@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Configuration;
+using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -39,22 +40,20 @@ namespace Innoactive.CreatorEditor.Setup
             string errorMessage = null;
             if (CourseAssetUtils.DoesCourseAssetExist(courseName) || CourseAssetUtils.CanCreate(courseName, out errorMessage))
             {
-                ICourse course;
                 if (CourseAssetUtils.DoesCourseAssetExist(courseName))
                 {
-                     course = CourseAssetManager.Load(courseName);
+                     CourseAssetManager.Load(courseName);
                 }
                 else
                 {
-                    course = EntityFactory.CreateCourse(courseName);
+                    CourseAssetManager.Import(EntityFactory.CreateCourse(courseName));
+                    AssetDatabase.Refresh();
                 }
 
-                CourseAssetManager.Import(course);
                 RuntimeConfigurator.Instance.SetSelectedCourse(CourseAssetUtils.GetCourseStreamingAssetPath(courseName));
                 EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
                 GlobalEditorHandler.SetCurrentCourse(courseName);
                 GlobalEditorHandler.StartEditingCourse();
-
             }
 
             if (string.IsNullOrEmpty(errorMessage) == false)
