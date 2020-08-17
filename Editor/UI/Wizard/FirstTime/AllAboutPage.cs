@@ -1,5 +1,6 @@
 ﻿using Innoactive.CreatorEditor.Analytics;
-using UnityEditor;
+using Innoactive.CreatorEditor.UI;
+using Innoactive.EditorCreator.UI;
 using UnityEngine;
 
 namespace Innoactive.Creator.Core.Editor.UI.Wizard
@@ -18,14 +19,14 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
                 GUILayout.Label("Have a look at How-Tos and an in-depth Webinar for further information.", CreatorEditorStyles.Paragraph);
                 GUILayout.Label("How-To's", CreatorEditorStyles.Header);
 
-                CreatorLayout.DrawLink("How to build your VR Training application", "https://developers.innoactive.de/documentation/creator/latest/articles/getting-started/designer.html");
-                CreatorLayout.DrawLink("How to extend the Creator using a training template", "https://developers.innoactive.de/documentation/creator/latest/articles/developer/01-introduction.html");
+                CreatorGUILayout.DrawLink("How to build your VR Training application", "https://developers.innoactive.de/documentation/creator/latest/articles/getting-started/designer.html");
+                CreatorGUILayout.DrawLink("How to extend the Creator using a training template", "https://developers.innoactive.de/documentation/creator/latest/articles/developer/01-introduction.html");
 
                 GUILayout.Label("Need Help?", CreatorEditorStyles.Header);
 
-                CreatorLayout.DrawLink("In-depth webinar on how the Creator works", "https://vimeo.com/417328541/93a752e72c");
-                CreatorLayout.DrawLink("Visit our developer community", "https://spectrum.chat/innoactive-creator");
-                CreatorLayout.DrawLink("Contact Us for Support", "https://www.innoactive.io/support");
+                CreatorGUILayout.DrawLink("In-depth webinar on how the Creator works", "https://vimeo.com/417328541/93a752e72c");
+                CreatorGUILayout.DrawLink("Visit our developer community", "https://spectrum.chat/innoactive-creator");
+                CreatorGUILayout.DrawLink("Contact Us for Support", "https://www.innoactive.io/support");
 
                 GUILayout.Space(CreatorEditorStyles.Indent);
 

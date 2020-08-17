@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Editor.UI
+namespace Innoactive.CreatorEditor.UI
 {
     public static class CreatorEditorStyles
     {
