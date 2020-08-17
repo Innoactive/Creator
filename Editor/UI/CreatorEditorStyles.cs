@@ -5,7 +5,6 @@ namespace Innoactive.Creator.Core.Editor.UI
 {
     public static class CreatorEditorStyles
     {
-
         public const int BaseMargin = 2;
 
         public const int Ident = 12;
@@ -69,20 +68,20 @@ namespace Innoactive.Creator.Core.Editor.UI
             }
         }
 
-        private static GUIStyle radioButton;
-        public static GUIStyle RadioButton
+        private static GUIStyle toggle;
+        public static GUIStyle Toggle
         {
             get
             {
-                if (radioButton == null)
+                if (toggle == null)
                 {
-                    radioButton = new GUIStyle(EditorStyles.radioButton);
-                    radioButton.fontSize = Paragraph.fontSize;
-                    radioButton.padding = new RectOffset(Ident + BaseMargin + 6, BaseMargin, 0, 2); // this only affects the text
-                    radioButton.margin = new RectOffset(Ident + BaseMargin * 2, BaseMargin, 0, 1); // this affects the position
+                    toggle = new GUIStyle(EditorStyles.toggle);
+                    toggle.fontSize = Paragraph.fontSize;
+                    toggle.padding = new RectOffset(Ident + BaseMargin + 6, BaseMargin, 0, 2); // this only affects the text
+                    toggle.margin = new RectOffset(Ident + BaseMargin * 2, BaseMargin, 0, 1); // this affects the position
                 }
 
-                return radioButton;
+                return toggle;
             }
         }
 
@@ -95,7 +94,7 @@ namespace Innoactive.Creator.Core.Editor.UI
                 {
                     subText = new GUIStyle(EditorStyles.miniLabel);
                     subText.padding = new RectOffset(0, 0, 0, 0);
-                    subText.margin = new RectOffset(IdentLarge, BaseMargin, 0, 0);
+                    subText.margin = new RectOffset(Ident, BaseMargin, 0, 0);
                 }
 
                 return subText;

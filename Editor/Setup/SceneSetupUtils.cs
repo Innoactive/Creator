@@ -5,12 +5,12 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Innoactive.Creator.Core.Editor.UI.Wizard
+namespace Innoactive.Creator.Core.Editor
 {
     /// <summary>
     /// Helper class to setup scenes and trainings.
     /// </summary>
-    public class SceneSetupLogic
+    public class SceneSetupUtils
     {
         /// <summary>
         /// Creates and saves a new scene with given <paramref name="sceneName"/>.
@@ -36,13 +36,25 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
         {
             TrainingSceneSetup.Run();
 
-            if (CourseAssetUtils.CanCreate(courseName, out string errorMessage))
+            string errorMessage = null;
+            if (CourseAssetUtils.DoesCourseAssetExist(courseName) || CourseAssetUtils.CanCreate(courseName, out errorMessage))
             {
-                CourseAssetManager.Import(EntityFactory.CreateCourse(courseName));
+                ICourse course;
+                if (CourseAssetUtils.DoesCourseAssetExist(courseName))
+                {
+                     course = CourseAssetManager.Load(courseName);
+                }
+                else
+                {
+                    course = EntityFactory.CreateCourse(courseName);
+                }
+
+                CourseAssetManager.Import(course);
                 RuntimeConfigurator.Instance.SetSelectedCourse(CourseAssetUtils.GetCourseStreamingAssetPath(courseName));
                 EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
                 GlobalEditorHandler.SetCurrentCourse(courseName);
                 GlobalEditorHandler.StartEditingCourse();
+
             }
 
             if (string.IsNullOrEmpty(errorMessage) == false)

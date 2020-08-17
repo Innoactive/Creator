@@ -11,7 +11,6 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
     internal class TrainingSceneSetupPage : WizardPage
     {
         private bool useCurrentScene = true;
-        private bool createNewTraining = false;
         private bool loadSample = true;
 
         private string courseName = "My first VR Training course";
@@ -29,10 +28,10 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
 
             GUILayout.Label("Load a sample training", CreatorEditorStyles.Title);
 
-            loadSample = GUILayout.Toggle(!createNewTraining, "Load sample VR training (recommended)", CreatorEditorStyles.RadioButton);
-            createNewTraining = GUILayout.Toggle(!loadSample, "Start from scratch with an empty VR training", CreatorEditorStyles.RadioButton);
+            if (GUILayout.Toggle(loadSample, "Load sample VR training (recommended)", CreatorEditorStyles.Toggle)) loadSample = true;
+            if (GUILayout.Toggle(!loadSample, "Start from scratch with an empty VR training", CreatorEditorStyles.Toggle)) loadSample = false;
 
-            if (createNewTraining)
+            if (loadSample == false)
             {
                 RectOffset margin = CreatorEditorStyles.Paragraph.margin;
                 margin.top = CreatorEditorStyles.BaseMargin + CreatorEditorStyles.Ident;
@@ -42,31 +41,32 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
                     CreatorEditorStyles.ApplyIdent(EditorStyles.textField, CreatorEditorStyles.IdentLarge),
                     GUILayout.Width(window.width * 0.7f));
 
-                string subText;
-
-                if (SceneExists(courseName) && useCurrentScene)
+                string courseInfoText = "";
+                if (CourseAssetUtils.DoesCourseAssetExist(courseName))
                 {
-                    subText = "Scene already exists.";
-                    CanProceed = false;
-                }
-                else if (CourseAssetUtils.DoesCourseAssetExist(courseName))
-                {
-                    subText = "Course already exists and will be used.";
-                    CanProceed = true;
-                }
-                else
-                {
-                    subText = "";
-                    CanProceed = true;
+                    courseInfoText = "Course already exists and will be used.";
                 }
 
-                GUILayout.Label(subText, CreatorEditorStyles.SubText, GUILayout.MinHeight(25));
+                GUILayout.Label(courseInfoText, CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.SubText, CreatorEditorStyles.IdentLarge), GUILayout.MinHeight(20));
 
-                useCurrentScene = GUILayout.Toggle(useCurrentScene, "Take my current scene",
-                    CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.RadioButton, CreatorEditorStyles.IdentLarge));
+                if (GUILayout.Toggle(useCurrentScene, "Take my current scene", CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.Toggle, CreatorEditorStyles.IdentLarge))) useCurrentScene = true;
+                if (GUILayout.Toggle(!useCurrentScene, "Create a new scene", CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.Toggle, CreatorEditorStyles.IdentLarge))) useCurrentScene = false;
 
-                useCurrentScene = GUILayout.Toggle(!useCurrentScene, "Create a new scene",
-                    CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.RadioButton, CreatorEditorStyles.IdentLarge));
+                if (useCurrentScene == false)
+                {
+                    string sceneInfoText = "Scene will have the same name as the training course.";
+                    if (SceneExists(courseName))
+                    {
+                        sceneInfoText += " Scene already exists";
+                        CanProceed = false;
+                    }
+                    else
+                    {
+                        CanProceed = true;
+                    }
+
+                    GUILayout.Label(sceneInfoText, CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.SubText, CreatorEditorStyles.IdentLarge), GUILayout.MinHeight(20));
+                }
             }
 
             GUILayout.EndArea();
@@ -79,10 +79,10 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
 
             if (useCurrentScene == false)
             {
-                SceneSetupLogic.CreateNewScene(courseName, sceneDirectory);
+                SceneSetupUtils.CreateNewScene(courseName, sceneDirectory);
             }
 
-            SceneSetupLogic.SetupSceneAndTraining(courseName);
+            SceneSetupUtils.SetupSceneAndTraining(courseName);
             EditorWindow.FocusWindowIfItsOpen<WizardWindow>();
         }
 
