@@ -89,7 +89,7 @@ public class UpsideDownConditionActiveProcess : Process<UpsideDownConditionData>
         }
 
         // If the angle is less or equal to threshold, mark the condition as complete.
-        data.IsCompleted = true;
+        Data.IsCompleted = true;
     }
 
     public override void End()
@@ -127,7 +127,11 @@ using Innoactive.Creator.Core;
 
 public class UpsideDownConditionAutocompleter : Autocompleter<UpsideDownConditionData>
 {
-    public void Complete()
+    public UpsideDownConditionAutocompleter(UpsideDownConditionData data) : base(data)
+    {
+    }
+
+    public override void Complete()
     {
         // Turn the target upside down, as it would normally happen.
         Data.Target.Value.GameObject.transform.rotation = Quaternion.Euler(0, 0, 180f);
