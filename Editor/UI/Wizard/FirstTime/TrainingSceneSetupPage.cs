@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Innoactive.CreatorEditor;
+using Innoactive.CreatorEditor.Setup;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,11 +12,17 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
     /// </summary>
     internal class TrainingSceneSetupPage : WizardPage
     {
-        private bool useCurrentScene;
-        private bool createNewTraining;
+        [SerializeField]
+        private bool useCurrentScene = true;
+        [SerializeField]
+        private bool loadSample = true;
 
+        [SerializeField]
         private string courseName = "My first VR Training course";
         private string sceneDirectory = "Assets/Scenes";
+
+        private const int MaxCourseNameLength = 40;
+        private const int MinHeightOfInfoText = 20;
 
         public TrainingSceneSetupPage() : base("Step 1: Sample Training")
         {
@@ -24,58 +32,58 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
         /// <inheritdoc />
         public override void Draw(Rect window)
         {
-            string spaceAfterRadioButton = "  ";
-
             GUILayout.BeginArea(window);
 
             GUILayout.Label("Load a sample training", CreatorEditorStyles.Title);
-            GUILayout.Space(verticalSpace);
+
+            // Use the next two lines and remove the "loadSample = false" line as soon as loading samples is supported
+            // if (GUILayout.Toggle(loadSample, "Load sample VR training (recommended)", CreatorEditorStyles.Toggle)) loadSample = true;
+            // if (GUILayout.Toggle(!loadSample, "Start from scratch with an empty VR training", CreatorEditorStyles.Toggle)) loadSample = false;
+            loadSample = false;
+
+            if (loadSample == false)
+            {
+                RectOffset margin = CreatorEditorStyles.Paragraph.margin;
+                margin.top = CreatorEditorStyles.BaseMargin + CreatorEditorStyles.Indent;
+                GUILayout.Label("Name of your VR Training:", CreatorEditorStyles.ApplyMargin(CreatorEditorStyles.Paragraph, margin));
+
                 GUILayout.BeginHorizontal();
-                GUILayout.Space(horizontalSpace);
-                    GUILayout.BeginVertical();
-
-                    createNewTraining = GUILayout.Toggle(createNewTraining, spaceAfterRadioButton + "Load sample VR training (recommended)", EditorStyles.radioButton);
-                    createNewTraining = GUILayout.Toggle(!createNewTraining, spaceAfterRadioButton + "Start from scratch with an empty VR training", EditorStyles.radioButton);
-
-                    GUILayout.Space(verticalSpace);
-
-                    GUILayout.EndVertical();
+                    courseName = GUILayout.TextField(courseName, MaxCourseNameLength, CreatorEditorStyles.ApplyIdent(EditorStyles.textField, CreatorEditorStyles.IndentLarge), GUILayout.Width(window.width * 0.7f));
+                    GUILayout.Label($"{courseName.Length}/{MaxCourseNameLength}");
                 GUILayout.EndHorizontal();
 
-                GUILayout.BeginHorizontal();
-                GUILayout.Space(horizontalSpace * 2);
-                    GUILayout.BeginVertical();
+                string courseInfoText = "";
+                if (CourseAssetUtils.DoesCourseAssetExist(courseName))
+                {
+                    courseInfoText = "Course already exists and will be used.";
+                }
 
-                    GUILayout.Label("Name of your VR Training:");
-                    courseName = GUILayout.TextField(courseName, 30, GUILayout.Width(window.width * 0.7f));
+                GUILayout.Label(courseInfoText, CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.SubText, CreatorEditorStyles.IndentLarge), GUILayout.MinHeight(MinHeightOfInfoText));
 
-                    string subText;
+                if (GUILayout.Toggle(useCurrentScene, "Take my current scene", CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.Toggle, CreatorEditorStyles.IndentLarge))) useCurrentScene = true;
+                if (GUILayout.Toggle(!useCurrentScene, "Create a new scene", CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.Toggle, CreatorEditorStyles.IndentLarge))) useCurrentScene = false;
 
-                    if (SceneExists(courseName) && useCurrentScene)
+                if (useCurrentScene == false)
+                {
+                    string sceneInfoText = "Scene will have the same name as the training course.";
+                    if (SceneExists(courseName))
                     {
-                        subText = "Scene already exists.";
-                        CanProceed = false;
-                    }
-                    else if (CourseAssetUtils.DoesCourseAssetExist(courseName))
-                    {
-                        subText = "Course already exists.";
+                        sceneInfoText += " Scene already exists";
                         CanProceed = false;
                     }
                     else
                     {
-                        subText = "";
                         CanProceed = true;
                     }
 
-                    GUILayout.Label(subText, EditorStyles.whiteMiniLabel, GUILayout.MinHeight(25));
+                    GUILayout.Label(sceneInfoText, CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.SubText, CreatorEditorStyles.IndentLarge), GUILayout.MinHeight(MinHeightOfInfoText));
+                }
+                else
+                {
+                    CanProceed = true;
+                }
+            }
 
-                    GUILayout.Space(verticalSpace);
-
-                    useCurrentScene = GUILayout.Toggle(useCurrentScene, spaceAfterRadioButton + "create a new scene", EditorStyles.radioButton);
-                    useCurrentScene = GUILayout.Toggle(!useCurrentScene, spaceAfterRadioButton + "take my current scene", EditorStyles.radioButton);
-
-                    GUILayout.EndVertical();
-                GUILayout.EndHorizontal();
             GUILayout.EndArea();
         }
 
@@ -86,10 +94,10 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
 
             if (useCurrentScene == false)
             {
-                SceneSetupLogic.CreateNewScene(courseName, sceneDirectory);
+                SceneSetupUtils.CreateNewScene(courseName, sceneDirectory);
             }
 
-            SceneSetupLogic.SetupSceneAndTraining(courseName);
+            SceneSetupUtils.SetupSceneAndTraining(courseName);
             EditorWindow.FocusWindowIfItsOpen<WizardWindow>();
         }
 

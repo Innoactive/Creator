@@ -1,16 +1,17 @@
 ﻿using System.IO;
+using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Configuration;
-using Innoactive.CreatorEditor;
+using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Innoactive.Creator.Core.Editor.UI.Wizard
+namespace Innoactive.CreatorEditor.Setup
 {
     /// <summary>
     /// Helper class to setup scenes and trainings.
     /// </summary>
-    public class SceneSetupLogic
+    public class SceneSetupUtils
     {
         /// <summary>
         /// Creates and saves a new scene with given <paramref name="sceneName"/>.
@@ -36,9 +37,19 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
         {
             TrainingSceneSetup.Run();
 
-            if (CourseAssetUtils.CanCreate(courseName, out string errorMessage))
+            string errorMessage = null;
+            if (CourseAssetUtils.DoesCourseAssetExist(courseName) || CourseAssetUtils.CanCreate(courseName, out errorMessage))
             {
-                CourseAssetManager.Import(EntityFactory.CreateCourse(courseName));
+                if (CourseAssetUtils.DoesCourseAssetExist(courseName))
+                {
+                     CourseAssetManager.Load(courseName);
+                }
+                else
+                {
+                    CourseAssetManager.Import(EntityFactory.CreateCourse(courseName));
+                    AssetDatabase.Refresh();
+                }
+
                 RuntimeConfigurator.Instance.SetSelectedCourse(CourseAssetUtils.GetCourseStreamingAssetPath(courseName));
                 EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
                 GlobalEditorHandler.SetCurrentCourse(courseName);
