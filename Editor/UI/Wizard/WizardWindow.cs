@@ -199,7 +199,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         protected Rect GetContentRect()
         {
-            return new Rect(Size.x * navigationBarRatio, 0, Size.x - (Size.x * navigationBarRatio), Size.y - bottomBarHeight);
+            return new Rect(Size.x * navigationBarRatio + CreatorEditorStyles.Indent, CreatorEditorStyles.Indent / 2, Size.x - (Size.x * navigationBarRatio) - (2 * CreatorEditorStyles.Indent), Size.y - bottomBarHeight - CreatorEditorStyles.Indent);
         }
 
         protected Rect GetBottomBarRect()

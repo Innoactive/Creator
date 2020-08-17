@@ -30,7 +30,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         /// <inheritdoc />
         public override void Draw(Rect window)
         {
-            GUILayout.BeginArea(new Rect(window.x + CreatorEditorStyles.Indent, window.y + CreatorEditorStyles.Indent / 2, window.width - (2 * CreatorEditorStyles.Indent), window.height - (CreatorEditorStyles.Indent)));
+            GUILayout.BeginArea(window);
 
             GUILayout.Label("Setup Training", CreatorEditorStyles.Title);
 

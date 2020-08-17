@@ -11,7 +11,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         public override void Draw(Rect window)
         {
-            GUILayout.BeginArea(new Rect(window.x + CreatorEditorStyles.Indent, window.y + CreatorEditorStyles.Indent / 2, window.width - (2 * CreatorEditorStyles.Indent), window.height - (CreatorEditorStyles.Indent)));
+            GUILayout.BeginArea(window);
             GUILayout.Label("Hit Play to Preview", CreatorEditorStyles.Title);
                 GUILayout.Label("Have a look at How-To's and an in-depth Webinar for further information.", CreatorEditorStyles.Paragraph);
                 GUILayout.Label("How-To's", CreatorEditorStyles.Header);

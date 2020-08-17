@@ -23,7 +23,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         public override void Draw(Rect window)
         {
-            GUILayout.BeginArea(new Rect(window.x + CreatorEditorStyles.Indent, window.y + CreatorEditorStyles.Indent / 2, window.width - (2 * CreatorEditorStyles.Indent), window.height - (CreatorEditorStyles.Indent)));
+            GUILayout.BeginArea(window);
                 GUILayout.Label("Help Us! Contribute to Improvements!", CreatorEditorStyles.Title);
                 GUILayout.Box("Innoactive Creator is actively evolving. Please, help us with your feedback. Provide us your <b>anonymous</b> usage data and contribute to improvements.", CreatorEditorStyles.Paragraph);
 
