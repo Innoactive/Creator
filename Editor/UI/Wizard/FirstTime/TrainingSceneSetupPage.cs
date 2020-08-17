@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Innoactive.CreatorEditor;
 using Innoactive.CreatorEditor.Setup;
 using UnityEditor;
@@ -11,9 +12,12 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
     /// </summary>
     internal class TrainingSceneSetupPage : WizardPage
     {
+        [SerializeField]
         private bool useCurrentScene = true;
+        [SerializeField]
         private bool loadSample = true;
 
+        [SerializeField]
         private string courseName = "My first VR Training course";
         private string sceneDirectory = "Assets/Scenes";
 
