@@ -1,11 +1,11 @@
 ﻿using System.IO;
+using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Configuration;
-using Innoactive.CreatorEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Innoactive.Creator.Core.Editor
+namespace Innoactive.CreatorEditor.Setup
 {
     /// <summary>
     /// Helper class to setup scenes and trainings.
