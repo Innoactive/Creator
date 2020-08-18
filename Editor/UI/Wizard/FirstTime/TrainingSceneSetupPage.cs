@@ -1,11 +1,9 @@
-﻿using System;
 using System.IO;
-using Innoactive.CreatorEditor;
 using Innoactive.CreatorEditor.Setup;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Editor.UI.Wizard
+namespace Innoactive.CreatorEditor.UI.Wizard
 {
     /// <summary>
     /// Wizard page which handles the training scene setup.
@@ -24,7 +22,7 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
         private const int MaxCourseNameLength = 40;
         private const int MinHeightOfInfoText = 20;
 
-        public TrainingSceneSetupPage() : base("Step 1: Sample Training")
+        public TrainingSceneSetupPage() : base("Step 1: Setup Training")
         {
 
         }
@@ -34,7 +32,7 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
         {
             GUILayout.BeginArea(window);
 
-            GUILayout.Label("Load a sample training", CreatorEditorStyles.Title);
+            GUILayout.Label("Setup Training", CreatorEditorStyles.Title);
 
             // Use the next two lines and remove the "loadSample = false" line as soon as loading samples is supported
             // if (GUILayout.Toggle(loadSample, "Load sample VR training (recommended)", CreatorEditorStyles.Toggle)) loadSample = true;
@@ -43,12 +41,14 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
 
             if (loadSample == false)
             {
-                RectOffset margin = CreatorEditorStyles.Paragraph.margin;
-                margin.top = CreatorEditorStyles.BaseMargin + CreatorEditorStyles.Indent;
-                GUILayout.Label("Name of your VR Training:", CreatorEditorStyles.ApplyMargin(CreatorEditorStyles.Paragraph, margin));
+                GUILayout.Label("Name of your VR Training", CreatorEditorStyles.Header);
 
                 GUILayout.BeginHorizontal();
-                    courseName = GUILayout.TextField(courseName, MaxCourseNameLength, CreatorEditorStyles.ApplyIdent(EditorStyles.textField, CreatorEditorStyles.IndentLarge), GUILayout.Width(window.width * 0.7f));
+                    courseName = GUILayout.TextField(courseName, MaxCourseNameLength, CreatorEditorStyles.TextField, GUILayout.Width(window.width * 0.7f));
+
+                    Rect textFieldRect = GUILayoutUtility.GetLastRect();
+                    EditorGUIUtility.AddCursorRect(textFieldRect, MouseCursor.Text);
+
                     GUILayout.Label($"{courseName.Length}/{MaxCourseNameLength}");
                 GUILayout.EndHorizontal();
 
@@ -58,10 +58,10 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
                     courseInfoText = "Course already exists and will be used.";
                 }
 
-                GUILayout.Label(courseInfoText, CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.SubText, CreatorEditorStyles.IndentLarge), GUILayout.MinHeight(MinHeightOfInfoText));
+                GUILayout.Label(courseInfoText, CreatorEditorStyles.SubText, GUILayout.MinHeight(MinHeightOfInfoText));
 
-                if (GUILayout.Toggle(useCurrentScene, "Take my current scene", CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.Toggle, CreatorEditorStyles.IndentLarge))) useCurrentScene = true;
-                if (GUILayout.Toggle(!useCurrentScene, "Create a new scene", CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.Toggle, CreatorEditorStyles.IndentLarge))) useCurrentScene = false;
+                if (GUILayout.Toggle(useCurrentScene, "Take my current scene", CreatorEditorStyles.Toggle)) useCurrentScene = true;
+                if (GUILayout.Toggle(!useCurrentScene, "Create a new scene", CreatorEditorStyles.Toggle)) useCurrentScene = false;
 
                 if (useCurrentScene == false)
                 {
@@ -76,7 +76,7 @@ namespace Innoactive.Creator.Core.Editor.UI.Wizard
                         CanProceed = true;
                     }
 
-                    GUILayout.Label(sceneInfoText, CreatorEditorStyles.ApplyIdent(CreatorEditorStyles.SubText, CreatorEditorStyles.IndentLarge), GUILayout.MinHeight(MinHeightOfInfoText));
+                    GUILayout.Label(sceneInfoText, CreatorEditorStyles.SubText, GUILayout.MinHeight(MinHeightOfInfoText));
                 }
                 else
                 {

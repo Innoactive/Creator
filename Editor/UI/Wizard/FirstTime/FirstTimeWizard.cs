@@ -2,9 +2,9 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Editor.UI.Wizard
+namespace Innoactive.CreatorEditor.UI.Wizard
 {
-    public static class FirstTimeWizard
+    internal static class FirstTimeWizard
     {
         [MenuItem("Innoactive/Wizard")]
         public static void Show()

@@ -1,14 +1,14 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Editor.UI.Wizard
+namespace Innoactive.CreatorEditor.UI.Wizard
 {
     /// <summary>
     /// Wizard pages which allows you to implement your content.
     /// Care about implementing your state serializable.
     /// </summary>
     [Serializable]
-    public abstract class WizardPage
+    internal abstract class WizardPage
     {
         public string Name;
 

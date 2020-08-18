@@ -1,11 +1,12 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Editor.UI
+namespace Innoactive.CreatorEditor.UI
 {
     public static class CreatorEditorStyles
     {
-        public const int BaseMargin = 2;
+        public const int BaseIndent = 2;
 
         public const int Indent = 12;
         public const int IndentLarge = Indent * 3;
@@ -20,10 +21,10 @@ namespace Innoactive.Creator.Core.Editor.UI
                 if (title == null)
                 {
                     title = new GUIStyle(EditorStyles.largeLabel);
-                    title.fontSize = 24;
+                    title.fontSize = 22;
                     title.fontStyle = FontStyle.Bold;
                     title.normal.textColor = HighlightTextColor;
-                    title.margin = new RectOffset(Indent, BaseMargin, Indent, Indent);
+                    title.padding = new RectOffset(BaseIndent, BaseIndent, Indent, Indent);
                 }
 
                 return title;
@@ -38,10 +39,11 @@ namespace Innoactive.Creator.Core.Editor.UI
                 if (header == null)
                 {
                     header = new GUIStyle(EditorStyles.largeLabel);
-                    header.fontSize = 16;
+                    header.fontSize = 15;
                     header.fontStyle = FontStyle.Bold;
+                    header.alignment = TextAnchor.UpperLeft;
                     header.normal.textColor = HighlightTextColor;
-                    header.margin = new RectOffset(Indent, BaseMargin, Indent, BaseMargin);
+                    header.padding = new RectOffset(BaseIndent, BaseIndent, BaseIndent, BaseIndent);
                 }
 
                 return header;
@@ -61,10 +63,26 @@ namespace Innoactive.Creator.Core.Editor.UI
                     paragraph.richText = true;
                     paragraph.clipping = TextClipping.Clip;
                     paragraph.wordWrap = true;
-                    paragraph.margin = new RectOffset(IndentLarge, BaseMargin, BaseMargin, BaseMargin);
+                    paragraph.padding = new RectOffset(Indent, BaseIndent, BaseIndent, BaseIndent);
                 }
 
                 return paragraph;
+            }
+        }
+
+        private static GUIStyle textField;
+        public static GUIStyle TextField
+        {
+            get
+            {
+                if (textField == null)
+                {
+                    textField = new GUIStyle(EditorStyles.textField);
+                    textField.padding = new RectOffset(BaseIndent, BaseIndent, BaseIndent, BaseIndent);
+                    textField.margin = new RectOffset(Indent, BaseIndent, BaseIndent, BaseIndent);
+                }
+
+                return textField;
             }
         }
 
@@ -77,8 +95,8 @@ namespace Innoactive.Creator.Core.Editor.UI
                 {
                     toggle = new GUIStyle(EditorStyles.toggle);
                     toggle.fontSize = Paragraph.fontSize;
-                    toggle.padding = new RectOffset(Indent + BaseMargin + 6, BaseMargin, 0, 2); // this only affects the text
-                    toggle.margin = new RectOffset(Indent + BaseMargin * 2, BaseMargin, 0, 1); // this affects the position
+                    toggle.padding = new RectOffset(Indent + Indent / 2, BaseIndent, BaseIndent, BaseIndent); // this only affects the text
+                    toggle.margin = new RectOffset(Indent, BaseIndent, BaseIndent, BaseIndent); // this affects the position
                 }
 
                 return toggle;
@@ -93,22 +111,71 @@ namespace Innoactive.Creator.Core.Editor.UI
                 if (subText == null)
                 {
                     subText = new GUIStyle(EditorStyles.miniLabel);
-                    subText.padding = new RectOffset(0, 0, 0, 0);
-                    subText.margin = new RectOffset(Indent, BaseMargin, 0, 0);
+                    subText.normal.textColor = HighlightTextColor;
+                    subText.margin = new RectOffset(2 * Indent, 0, 0, 0);
                 }
 
                 return subText;
             }
         }
 
-        public static GUIStyle ApplyIdent(GUIStyle style, int ident = Indent)
+        private static GUIStyle label;
+        public static GUIStyle Label
+        {
+            get
+            {
+                if (label == null)
+                {
+                    label = new GUIStyle(GUI.skin.label);
+                    label.alignment = TextAnchor.MiddleLeft;
+                    label.fontSize = 13;
+                    label.richText = true;
+                    label.clipping = TextClipping.Clip;
+                    label.margin = new RectOffset(Indent, BaseIndent, BaseIndent, BaseIndent);
+                }
+
+                return label;
+            }
+        }
+
+
+        private static GUIStyle link;
+        public static GUIStyle Link
+        {
+            get
+            {
+                if (link == null)
+                {
+                    link = new GUIStyle(EditorStyles.linkLabel);
+                    link.alignment = TextAnchor.MiddleLeft;
+                    link.fontSize = 13;
+                    link.richText = true;
+                    link.clipping = TextClipping.Clip;
+                    link.padding = new RectOffset(Indent, BaseIndent, BaseIndent, BaseIndent);
+                }
+
+                return link;
+            }
+        }
+
+        public static GUIStyle ApplyPadding(GUIStyle style, int ident = Indent)
+        {
+            return new GUIStyle(style) { padding = new RectOffset(ident, style.margin.right, style.margin.top, style.margin.bottom) };
+        }
+
+        public static GUIStyle ApplyPadding(GUIStyle style, RectOffset indent)
+        {
+            return new GUIStyle(style) { padding = indent };
+        }
+
+        public static GUIStyle ApplyMargin(GUIStyle style, int ident = Indent)
         {
             return new GUIStyle(style) { margin = new RectOffset(ident, style.margin.right, style.margin.top, style.margin.bottom) };
         }
 
-        public static GUIStyle ApplyMargin(GUIStyle style, RectOffset margin)
+        public static GUIStyle ApplyMargin(GUIStyle style, RectOffset indent)
         {
-            return new GUIStyle(style) { margin = margin };
+            return new GUIStyle(style) { margin = indent };
         }
     }
 }
