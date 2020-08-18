@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Wizard
 {
-    public class AllAboutPage : WizardPage
+    internal class AllAboutPage : WizardPage
     {
         public AllAboutPage() : base("Step 4: Help & Documentation", false ,false )
         {

@@ -2,7 +2,7 @@
 
 namespace Innoactive.CreatorEditor.UI.Wizard
 {
-    public class VRHardwareSetupPage : WizardPage
+    internal class VRHardwareSetupPage : WizardPage
     {
         public VRHardwareSetupPage() : base("Step 2: VR Hardware", true)
         {

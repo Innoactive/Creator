@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
     /// Care about implementing your state serializable.
     /// </summary>
     [Serializable]
-    public abstract class WizardPage
+    internal abstract class WizardPage
     {
         public string Name;
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Wizard
 {
-    public class AnalyticsPage : WizardPage
+    internal class AnalyticsPage : WizardPage
     {
         [SerializeField]
         private bool trackingEnabled = false;
