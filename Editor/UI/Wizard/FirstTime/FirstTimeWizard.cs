@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
     internal static class FirstTimeWizard
     {
         public const string skipWizardKey = "SkipWizard";
-        
+
         static FirstTimeWizard()
         {
             EditorApplication.update += ShowOnLoad;
