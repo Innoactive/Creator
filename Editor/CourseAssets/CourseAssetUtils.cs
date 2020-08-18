@@ -65,6 +65,20 @@ namespace Innoactive.CreatorEditor
         }
 
         /// <summary>
+        /// Checks if any course exists.
+        /// </summary>
+        internal static bool DoesAnyCourseExist()
+        {
+            DirectoryInfo coursesDirectory = new DirectoryInfo($"{Application.streamingAssetsPath}/{EditorConfigurator.Instance.CourseStreamingAssetsSubdirectory}");
+            if (coursesDirectory.Exists == false)
+            {
+                return false;
+            }
+
+            return GetAllCourses().Any();
+        }
+
+        /// <summary>
         /// Checks if you can create a course with the given <paramref name="courseName"/>.
         /// </summary>
         /// <param name="errorMessage">Empty if you can create the course or must fail silently.</param>

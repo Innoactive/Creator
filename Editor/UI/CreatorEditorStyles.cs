@@ -95,7 +95,7 @@ namespace Innoactive.CreatorEditor.UI
                 {
                     toggle = new GUIStyle(EditorStyles.toggle);
                     toggle.fontSize = Paragraph.fontSize;
-                    toggle.padding = new RectOffset(Indent + Indent / 2, BaseIndent, BaseIndent, BaseIndent); // this only affects the text
+                    toggle.padding = new RectOffset(Indent + Indent / 2, BaseIndent, BaseIndent, BaseIndent + 1); // this only affects the text
                     toggle.margin = new RectOffset(Indent, BaseIndent, BaseIndent, BaseIndent); // this affects the position
                 }
 
