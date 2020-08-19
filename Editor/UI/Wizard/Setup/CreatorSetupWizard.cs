@@ -27,7 +27,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             }
         }
 
-        [MenuItem("Innoactive/Run Training Setup Wizard...")]
+        [MenuItem("Innoactive/Creator/Create New Course...")]
         public static void Show()
         {
             WizardWindow wizard = ScriptableObject.CreateInstance<WizardWindow>();

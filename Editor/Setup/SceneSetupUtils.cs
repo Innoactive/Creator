@@ -50,10 +50,7 @@ namespace Innoactive.CreatorEditor.Setup
                     AssetDatabase.Refresh();
                 }
 
-                RuntimeConfigurator.Instance.SetSelectedCourse(CourseAssetUtils.GetCourseStreamingAssetPath(courseName));
-                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-                GlobalEditorHandler.SetCurrentCourse(courseName);
-                GlobalEditorHandler.StartEditingCourse();
+                SetCourseInCurrentScene(courseName);
             }
 
             if (string.IsNullOrEmpty(errorMessage) == false)
@@ -62,6 +59,18 @@ namespace Innoactive.CreatorEditor.Setup
             }
 
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
+        }
+
+        /// <summary>
+        /// Sets the course with given <paramref name="courseName"/> for the current scene.
+        /// </summary>
+        /// <param name="courseName"></param>
+        public static void SetCourseInCurrentScene(string courseName)
+        {
+            RuntimeConfigurator.Instance.SetSelectedCourse(CourseAssetUtils.GetCourseStreamingAssetPath(courseName));
+            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+            GlobalEditorHandler.SetCurrentCourse(courseName);
+            GlobalEditorHandler.StartEditingCourse();
         }
     }
 }

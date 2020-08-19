@@ -158,6 +158,38 @@ namespace Innoactive.CreatorEditor.UI
             }
         }
 
+        private static GUIStyle popup;
+        public static GUIStyle Popup
+        {
+            get
+            {
+                if (popup == null)
+                {
+                    popup = new GUIStyle(EditorStyles.popup);
+                    popup.fontSize = 13;
+                    popup.margin = new RectOffset((int)(Indent * 1.25), (int)(Indent * 1.25), BaseIndent, BaseIndent);
+                }
+
+                return popup;
+            }
+        }
+
+        private static GUIStyle helpBox;
+        public static GUIStyle HelpBox
+        {
+            get
+            {
+                if (helpBox == null)
+                {
+                    helpBox = new GUIStyle(EditorStyles.helpBox);
+                    helpBox.fontSize = 10;
+                    helpBox.margin = new RectOffset((int)(Indent * 1.25), (int)(Indent * 1.25), BaseIndent, BaseIndent);
+                }
+
+                return helpBox;
+            }
+        }
+
         public static GUIStyle ApplyPadding(GUIStyle style, int ident = Indent)
         {
             return new GUIStyle(style) { padding = new RectOffset(ident, style.margin.right, style.margin.top, style.margin.bottom) };
