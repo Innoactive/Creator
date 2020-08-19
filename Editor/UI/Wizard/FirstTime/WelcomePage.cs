@@ -10,7 +10,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         public WelcomePage() : base("Welcome")
         {
-            skipWizard = EditorPrefs.GetBool(FirstTimeWizard.skipWizardKey, false);
+            EditorPrefs.SetBool(FirstTimeWizard.shownOnCreatorImport, true);
         }
 
         public override void Draw(Rect window)
@@ -19,25 +19,6 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 GUILayout.Label("Welcome to Innoactive Creator", CreatorEditorStyles.Title);
                 GUILayout.Label("We want to get you started with Innoactive Creator as fast as possible.\nThis Wizard guides you through the process.", CreatorEditorStyles.Paragraph);
             GUILayout.EndArea();
-
-            GUILayout.BeginArea(new Rect(window.x + CreatorEditorStyles.Indent, window.y + window.height * 0.9f, window.width, window.height * 0.1f));
-                skipWizard = GUILayout.Toggle(skipWizard, "Skip the Wizard in the future.", CreatorEditorStyles.Toggle);
-            GUILayout.EndArea();
-        }
-
-        /// <inheritdoc />
-        public override void Apply()
-        {
-            base.Apply();
-
-            EditorPrefs.SetBool(FirstTimeWizard.skipWizardKey, skipWizard);
-        }
-
-        public override void Closing(bool isCompleted)
-        {
-            base.Closing(isCompleted);
-
-            EditorPrefs.SetBool(FirstTimeWizard.skipWizardKey, skipWizard);
         }
     }
 }

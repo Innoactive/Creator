@@ -7,7 +7,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
     [InitializeOnLoad]
     internal static class FirstTimeWizard
     {
-        public const string skipWizardKey = "SkipWizard";
+        public const string shownOnCreatorImport = "ShownOnCreatorImport";
 
         static FirstTimeWizard()
         {
@@ -16,7 +16,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         private static void ShowOnLoad()
         {
-            if (EditorPrefs.GetBool(skipWizardKey) == false && CourseAssetUtils.DoesAnyCourseExist() == false)
+            if (EditorPrefs.GetBool(shownOnCreatorImport) == false)
             {
                 Show();
             }
