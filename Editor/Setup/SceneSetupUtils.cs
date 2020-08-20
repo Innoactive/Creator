@@ -64,7 +64,7 @@ namespace Innoactive.CreatorEditor.Setup
         /// <summary>
         /// Sets the course with given <paramref name="courseName"/> for the current scene.
         /// </summary>
-        /// <param name="courseName"></param>
+        /// <param name="courseName">Name of the course.</param>
         public static void SetCourseInCurrentScene(string courseName)
         {
             RuntimeConfigurator.Instance.SetSelectedCourse(CourseAssetUtils.GetCourseStreamingAssetPath(courseName));
