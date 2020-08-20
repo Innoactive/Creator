@@ -16,15 +16,19 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         private bool loadSample = true;
 
         [SerializeField]
-        private string courseName = "My first VR Training course";
+        private string courseName = "My VR Training course";
         private string sceneDirectory = "Assets/Scenes";
 
         private const int MaxCourseNameLength = 40;
-        private const int MinHeightOfInfoText = 20;
+        private const int MinHeightOfInfoText = 30;
+
+        GUIContent infoContent;
+        GUIContent warningContent;
 
         public TrainingSceneSetupPage() : base("Setup Training")
         {
-
+            infoContent = EditorGUIUtility.IconContent("console.infoicon.inactive.sml");
+            warningContent = EditorGUIUtility.IconContent("console.warnicon.sml");
         }
 
         /// <inheritdoc />
@@ -44,35 +48,53 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 GUILayout.Label("Name of your VR Training", CreatorEditorStyles.Header);
                 courseName = CreatorGUILayout.DrawTextField(courseName, MaxCourseNameLength, GUILayout.Width(window.width * 0.7f));
 
-                string courseInfoText = "";
+
+                GUILayout.BeginHorizontal();
+                GUILayout.Space(CreatorEditorStyles.Indent);
                 if (CourseAssetUtils.DoesCourseAssetExist(courseName))
                 {
-                    courseInfoText = "Course already exists and will be used.";
+                    GUIContent courseWarningContent = warningContent;
+                    courseWarningContent.text = "Course already exists.";
+                    EditorGUILayout.LabelField(courseWarningContent, CreatorEditorStyles.Label,GUILayout.MinHeight(MinHeightOfInfoText));
+                    CanProceed = false;
                 }
+                else
+                {
+                    GUILayoutUtility.GetRect(0, window.width, MinHeightOfInfoText, MinHeightOfInfoText);
+                    CanProceed = true;
+                }
+                GUILayout.EndHorizontal();
 
-                GUILayout.Label(courseInfoText, CreatorEditorStyles.SubText, GUILayout.MinHeight(MinHeightOfInfoText));
+                GUILayout.Space(CreatorEditorStyles.Indent);
 
                 if (GUILayout.Toggle(useCurrentScene, "Take my current scene", CreatorEditorStyles.Toggle)) useCurrentScene = true;
                 if (GUILayout.Toggle(!useCurrentScene, "Create a new scene", CreatorEditorStyles.Toggle)) useCurrentScene = false;
 
                 if (useCurrentScene == false)
                 {
+                    GUIContent helpContent;
                     string sceneInfoText = "Scene will have the same name as the training course.";
                     if (SceneExists(courseName))
                     {
                         sceneInfoText += " Scene already exists";
                         CanProceed = false;
+                        helpContent = warningContent;
                     }
                     else
                     {
-                        CanProceed = true;
+                        CanProceed = CanProceed != false;
+                        helpContent = infoContent;
                     }
 
-                    GUILayout.Label(sceneInfoText, CreatorEditorStyles.SubText, GUILayout.MinHeight(MinHeightOfInfoText));
+                    helpContent.text = sceneInfoText;
+                    GUILayout.BeginHorizontal();
+                    GUILayout.Space(CreatorEditorStyles.Indent);
+                    EditorGUILayout.LabelField(helpContent, CreatorEditorStyles.Label, GUILayout.MinHeight(MinHeightOfInfoText));
+                    GUILayout.EndHorizontal();
                 }
                 else
                 {
-                    CanProceed = true;
+                    CanProceed = CanProceed != false;
                 }
             }
 

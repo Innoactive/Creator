@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Innoactive.Creator.Core;
+﻿using System.Linq;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.CreatorEditor.Setup;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
+
 namespace Innoactive.CreatorEditor.UI.Windows
 {
     /// <summary>
@@ -17,7 +14,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
         private static CourseCreationWizard window;
         private const string menuPath = "Innoactive/Creator/Open Course...";
 
-        protected EditorIcon logo; // = new EditorIcon("logo_creator_icon");
+        protected EditorIcon logo;
 
         private int selectedCourseIndex = 0;
 
@@ -35,7 +32,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                         openedTrainingWizards[i].Close();
                     }
 
-                    Debug.LogWarning("There were more than one create course windows open. This should not happen. The redundant windows were closed.");
+                    Debug.LogWarning("There were more than one open course windows open. This should not happen. The redundant windows were closed.");
                 }
 
                 window = openedTrainingWizards.Length > 0 ? openedTrainingWizards[0] : GetWindow<CourseCreationWizard>();
