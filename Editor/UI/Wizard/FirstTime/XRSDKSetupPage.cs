@@ -18,8 +18,8 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             OpenVR,
             Oculus,
             WindowsMR,
-            Other,
-            None
+            None,
+            Other
         }
 
         private readonly List<XRLoader> options = new List<XRLoader>(Enum.GetValues(typeof(XRLoader)).Cast<XRLoader>());
@@ -29,8 +29,8 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             "HTC Vive / Valve Index (OpenVR)",
             "Oculus Quest/Rift",
             "Windows MR",
-            "Other",
-            "None"
+            "None",
+            "Other"
         };
 
         private IDictionary<XRLoader, string> infos = new Dictionary<XRLoader, string>
@@ -62,18 +62,17 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             GUILayout.BeginArea(window);
             {
                 GUILayout.Label("Select VR Hardware", CreatorEditorStyles.Title);
-
+                GUILayout.Space(CreatorEditorStyles.Indent);
                 infoContent.text = infos[selectedLoader];
                 EditorGUILayout.LabelField(infoContent, CreatorEditorStyles.ApplyMargin(CreatorEditorStyles.Label));
-
+                GUILayout.Space(2 * CreatorEditorStyles.BaseIndent);
                 selectedLoader = CreatorGUILayout.DrawToggleGroup(selectedLoader, options, nameplates);
 
                 if (selectedLoader == XRLoader.Other)
                 {
-                    GUILayout.Label("Which VR Hardware are you using?");
-                    otherHardwareText = CreatorGUILayout.DrawTextField(otherHardwareText, -1, GUILayout.Width(window.width * 0.7f));
+                    GUILayout.Label("Which VR Hardware are you using?", CreatorEditorStyles.Label);
+                    otherHardwareText = CreatorGUILayout.DrawTextField(otherHardwareText, -1,GUILayout.Width(window.width * 0.7f));
                 }
-
                 CanProceed = selectedLoader != XRLoader.None;
             }
             GUILayout.EndArea();
@@ -93,12 +92,6 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         public override void Skip()
         {
             ResetSettings();
-        }
-
-        /// <inheritdoc/>
-        public override void Back()
-        {
-
         }
 
         /// <inheritdoc/>

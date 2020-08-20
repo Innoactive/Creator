@@ -56,9 +56,20 @@ namespace Innoactive.CreatorEditor.UI
 
         public static string DrawTextField(string content, int charLimit = -1, params GUILayoutOption[] options)
         {
+            return DrawTextField(content, charLimit, 0, options);
+        }
+
+        public static string DrawTextField(string content, int charLimit = -1, int indent = 0, params GUILayoutOption[] options)
+        {
             GUILayout.BeginHorizontal();
             {
-                content = GUILayout.TextField(content, charLimit, CreatorEditorStyles.TextField, options);
+                GUIStyle style = CreatorEditorStyles.TextField;
+                if (indent != 0)
+                {
+                    style = CreatorEditorStyles.ApplyPadding(style, indent);
+                }
+
+                content = GUILayout.TextField(content, charLimit, style, options);
 
                 Rect textFieldRect = GUILayoutUtility.GetLastRect();
                 EditorGUIUtility.AddCursorRect(textFieldRect, MouseCursor.Text);

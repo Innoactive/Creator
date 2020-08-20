@@ -6,7 +6,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 {
     internal static class FirstTimeWizard
     {
-        public const string XRAssemblyName = "Innoactive.Creator.XRInteraction";
+        private const string XRAssemblyName = "Innoactive.Creator.XRInteraction";
 
         [MenuItem("Innoactive/Wizard")]
         public static void Show()
