@@ -4,16 +4,35 @@ using System.Collections.Generic;
 
 namespace Innoactive.CreatorEditor.UI.Wizard
 {
+    [InitializeOnLoad]
     internal static class FirstTimeWizard
     {
         private const string XRAssemblyName = "Innoactive.Creator.XRInteraction";
 
-        [MenuItem("Innoactive/Wizard")]
+        public const string shownOnCreatorImport = "ShownOnCreatorImport";
+
+        static FirstTimeWizard()
+        {
+            EditorApplication.update += ShowOnLoad;
+        }
+
+        private static void ShowOnLoad()
+        {
+            if (EditorPrefs.GetBool(shownOnCreatorImport) == false)
+            {
+                Show();
+            }
+
+            EditorApplication.update -= ShowOnLoad;
+        }
+
+        [MenuItem("Innoactive/Run Training Setup Wizard...")]
         public static void Show()
         {
             WizardWindow wizard = ScriptableObject.CreateInstance<WizardWindow>();
             List<WizardPage> pages = new List<WizardPage>()
             {
+                new WelcomePage(),
                 new TrainingSceneSetupPage(),
                 new AnalyticsPage(),
                 new AllAboutPage()
