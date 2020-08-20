@@ -5,7 +5,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 {
     internal class AllAboutPage : WizardPage
     {
-        public AllAboutPage() : base("Step 4: Help & Documentation", false ,false )
+        public AllAboutPage() : base("Help & Documentation", false ,false )
         {
 
         }

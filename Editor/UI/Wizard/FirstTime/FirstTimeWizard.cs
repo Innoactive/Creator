@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Innoactive.CreatorEditor.UI.Wizard
 {
     [InitializeOnLoad]
     internal static class FirstTimeWizard
     {
+        private const string XRAssemblyName = "Innoactive.Creator.XRInteraction";
+
         public const string shownOnCreatorImport = "ShownOnCreatorImport";
 
         static FirstTimeWizard()
@@ -32,10 +34,14 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             {
                 new WelcomePage(),
                 new TrainingSceneSetupPage(),
-                new VRHardwareSetupPage(),
                 new AnalyticsPage(),
                 new AllAboutPage()
             };
+
+            if (EditorReflectionUtils.AssemblyExists(XRAssemblyName))
+            {
+                pages.Insert(1, new XRSDKSetupPage());
+            }
             wizard.Setup("Innoactive Creator - My first VR Training - Wizard", pages);
             wizard.ShowModal();
         }
