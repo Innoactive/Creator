@@ -5,12 +5,9 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 {
     internal class WelcomePage : WizardPage
     {
-        [SerializeField]
-        private bool skipWizard;
-
         public WelcomePage() : base("Welcome")
         {
-            EditorPrefs.SetBool(FirstTimeWizard.shownOnCreatorImport, true);
+
         }
 
         public override void Draw(Rect window)

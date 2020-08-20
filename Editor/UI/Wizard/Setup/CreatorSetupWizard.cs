@@ -5,25 +5,26 @@ using System.Collections.Generic;
 namespace Innoactive.CreatorEditor.UI.Wizard
 {
     [InitializeOnLoad]
-    internal static class FirstTimeWizard
+    internal static class CreatorSetupWizard
     {
         private const string XRAssemblyName = "Innoactive.Creator.XRInteraction";
 
-        public const string shownOnCreatorImport = "ShownOnCreatorImport";
-
-        static FirstTimeWizard()
+        static CreatorSetupWizard()
         {
             EditorApplication.update += ShowOnLoad;
         }
 
         private static void ShowOnLoad()
         {
-            if (EditorPrefs.GetBool(shownOnCreatorImport) == false)
+            EditorApplication.update -= ShowOnLoad;
+            CreatorProjectSettings settings = CreatorProjectSettings.Load();
+
+            if (settings.IsFirstTimeStarted)
             {
                 Show();
+                settings.IsFirstTimeStarted = false;
+                settings.Save();
             }
-
-            EditorApplication.update -= ShowOnLoad;
         }
 
         [MenuItem("Innoactive/Run Training Setup Wizard...")]
@@ -40,9 +41,9 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
             if (EditorReflectionUtils.AssemblyExists(XRAssemblyName))
             {
-                pages.Insert(1, new XRSDKSetupPage());
+                pages.Insert(2, new XRSDKSetupPage());
             }
-            wizard.Setup("Innoactive Creator - My first VR Training - Wizard", pages);
+            wizard.Setup("Innoactive Creator - VR Training Setup Wizard", pages);
             wizard.ShowModal();
         }
     }
