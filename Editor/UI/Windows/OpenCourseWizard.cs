@@ -104,6 +104,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                     if (GUILayout.Button("Open Course", GUILayout.Width(128), GUILayout.Height(32)))
                     {
                         SceneSetupUtils.SetCourseInCurrentScene(courseNames[selectedCourseIndex]);
+                        Close();
                     }
 
                     GUILayout.FlexibleSpace();
