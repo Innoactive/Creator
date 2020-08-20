@@ -15,31 +15,44 @@ namespace Innoactive.CreatorEditor.UI.Wizard
     {
         private enum XRLoader
         {
-            None,
             OpenVR,
             Oculus,
             WindowsMR,
+            None,
             Other
         }
 
-        private const string OpenVRInfo = "OpenVR XR Plugin will be imported into the project.";
-        private const string OculusInfo = "Oculus XR Plugin will be imported into the project.";
-        private const string WindowsMRInfo = "Windows XR Plugin will be imported into the project.";
+        private readonly List<XRLoader> options = new List<XRLoader>(Enum.GetValues(typeof(XRLoader)).Cast<XRLoader>());
+
+        private readonly List<string> nameplates = new List<string>()
+        {
+            "HTC Vive / Valve Index (OpenVR)",
+            "Oculus Quest/Rift",
+            "Windows MR",
+            "None",
+            "Other"
+        };
+
+        private IDictionary<XRLoader, string> infos = new Dictionary<XRLoader, string>
+        {
+            { XRLoader.OpenVR, "OpenVR XR Plugin will be imported into the project." },
+            { XRLoader.Oculus, "Oculus XR Plugin will be imported into the project." },
+            { XRLoader.WindowsMR, "Windows XR Plugin will be imported into the project." },
+            { XRLoader.Other, "Right now we do not support other than the listed plugins." },
+            { XRLoader.None, "If you dont want to import any XR related plugins, press the skip button." }
+        };
 
         private GUIContent infoContent;
-        private string otherHardwareText;
-        private XRLoader selectedLoader = XRLoader.None;
-        private Dictionary<XRLoader, bool> settings = new Dictionary<XRLoader, bool>();
 
-        public XRSDKSetupPage() : base("Step 2: XR Hardware", true)
+        [SerializeField]
+        private XRLoader selectedLoader = XRLoader.None;
+
+        [SerializeField]
+        private string otherHardwareText = null;
+
+        public XRSDKSetupPage() : base("XR Hardware", true)
         {
             CanProceed = false;
-
-            foreach (XRLoader loader in Enum.GetValues(typeof(XRLoader)))
-            {
-                settings.Add(loader, false);
-            }
-
             infoContent = EditorGUIUtility.IconContent("console.infoicon.inactive.sml");
         }
 
@@ -48,58 +61,19 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         {
             GUILayout.BeginArea(window);
             {
-                // Title
                 GUILayout.Label("Select VR Hardware", CreatorEditorStyles.Title);
+                GUILayout.Space(CreatorEditorStyles.Indent);
+                infoContent.text = infos[selectedLoader];
+                EditorGUILayout.LabelField(infoContent, CreatorEditorStyles.ApplyMargin(CreatorEditorStyles.Label));
+                GUILayout.Space(2 * CreatorEditorStyles.BaseIndent);
+                selectedLoader = CreatorGUILayout.DrawToggleGroup(selectedLoader, options, nameplates);
 
-                // OpenVR
-                GUILayout.BeginHorizontal(CreatorEditorStyles.Paragraph);
+                if (selectedLoader == XRLoader.Other)
                 {
-                    if (DrawLoaderOption("HTC", XRLoader.OpenVR))
-                    {
-                        infoContent.text = OpenVRInfo;
-                        EditorGUILayout.LabelField(infoContent);
-                    }
+                    GUILayout.Label("Which VR Hardware are you using?", CreatorEditorStyles.Label);
+                    otherHardwareText = CreatorGUILayout.DrawTextField(otherHardwareText, -1,GUILayout.Width(window.width * 0.7f));
                 }
-                GUILayout.EndHorizontal();
-
-                // Oculus
-                GUILayout.BeginHorizontal(CreatorEditorStyles.Paragraph);
-                {
-                    if (DrawLoaderOption("Oculus", XRLoader.Oculus))
-                    {
-                        infoContent.text = OculusInfo;
-                        EditorGUILayout.LabelField(infoContent);
-                    }
-                }
-                GUILayout.EndHorizontal();
-
-                // Windows MR
-                GUILayout.BeginHorizontal(CreatorEditorStyles.Paragraph);
-                {
-                    if (DrawLoaderOption("Windows", XRLoader.WindowsMR))
-                    {
-                        infoContent.text = WindowsMRInfo;
-                        EditorGUILayout.LabelField(infoContent);
-                    }
-                }
-                GUILayout.EndHorizontal();
-
-                // Other
-                GUILayout.BeginHorizontal(CreatorEditorStyles.Paragraph);
-                {
-                    DrawLoaderOption("Other", XRLoader.Other);
-                }
-                GUILayout.EndHorizontal();
-
-                if (settings[XRLoader.Other])
-                {
-                    GUILayout.BeginVertical(CreatorEditorStyles.Paragraph);
-                    {
-                        GUILayout.Label("Which VR Hardware are you using?");
-                        otherHardwareText = GUILayout.TextField(otherHardwareText);
-                    }
-                    GUILayout.EndVertical();
-                }
+                CanProceed = selectedLoader != XRLoader.None;
             }
             GUILayout.EndArea();
         }
@@ -121,12 +95,6 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         }
 
         /// <inheritdoc/>
-        public override void Back()
-        {
-            ResetSettings();
-        }
-
-        /// <inheritdoc/>
         public override void Closing(bool isCompleted)
         {
             if (isCompleted)
@@ -138,7 +106,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                     Label = selectedLoader == XRLoader.Other ? otherHardwareText : selectedLoader.ToString()
                 };
 
-                //AnalyticsUtils.CreateTracker().Send(hardwareSelectedEvent);
+                AnalyticsUtils.CreateTracker().Send(hardwareSelectedEvent);
 
                 switch (selectedLoader)
                 {
@@ -155,24 +123,11 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             }
         }
 
-        private bool DrawLoaderOption(string label, XRLoader targetLoader)
-        {
-            if (GUILayout.Toggle(settings[targetLoader], label))
-            {
-                settings.Keys.ToList().ForEach(loader => settings[loader] = loader == targetLoader);
-                selectedLoader = targetLoader;
-                CanProceed = true;
-            }
-
-            return selectedLoader == targetLoader;
-        }
-
         private void ResetSettings()
         {
             CanProceed = false;
             selectedLoader = XRLoader.None;
             otherHardwareText = string.Empty;
-            settings.Keys.ToList().ForEach(loader => settings[loader] = default);
         }
     }
 }

@@ -6,6 +6,8 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 {
     internal static class FirstTimeWizard
     {
+        private const string XRAssemblyName = "Innoactive.Creator.XRInteraction";
+
         [MenuItem("Innoactive/Wizard")]
         public static void Show()
         {
@@ -13,10 +15,14 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             List<WizardPage> pages = new List<WizardPage>()
             {
                 new TrainingSceneSetupPage(),
-                new XRSDKSetupPage(),
                 new AnalyticsPage(),
                 new AllAboutPage()
             };
+
+            if (EditorReflectionUtils.AssemblyExists(XRAssemblyName))
+            {
+                pages.Insert(1, new XRSDKSetupPage());
+            }
             wizard.Setup("Innoactive Creator - My first VR Training - Wizard", pages);
             wizard.ShowModal();
         }

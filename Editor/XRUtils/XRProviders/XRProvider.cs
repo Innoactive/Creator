@@ -25,7 +25,7 @@ namespace Innoactive.CreatorEditor.XRUtils
         {
             foreach (Type loader in ReflectionUtils.GetConcreteImplementationsOf<XRLoader>())
             {
-                if (loader.Name == XRLoaderName)
+                if (loader.Name == XRLoaderName && XRGeneralSettings.Instance != null)
                 {
                     XRGeneralSettings.Instance.Manager.loaders.Clear();
                     XRGeneralSettings.Instance.Manager.loaders.Add(ScriptableObject.CreateInstance(loader) as XRLoader);

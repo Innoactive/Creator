@@ -22,7 +22,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         private const int MaxCourseNameLength = 40;
         private const int MinHeightOfInfoText = 20;
 
-        public TrainingSceneSetupPage() : base("Step 1: Setup Training")
+        public TrainingSceneSetupPage() : base("Setup Training")
         {
 
         }
@@ -42,15 +42,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             if (loadSample == false)
             {
                 GUILayout.Label("Name of your VR Training", CreatorEditorStyles.Header);
-
-                GUILayout.BeginHorizontal();
-                    courseName = GUILayout.TextField(courseName, MaxCourseNameLength, CreatorEditorStyles.TextField, GUILayout.Width(window.width * 0.7f));
-
-                    Rect textFieldRect = GUILayoutUtility.GetLastRect();
-                    EditorGUIUtility.AddCursorRect(textFieldRect, MouseCursor.Text);
-
-                    GUILayout.Label($"{courseName.Length}/{MaxCourseNameLength}");
-                GUILayout.EndHorizontal();
+                courseName = CreatorGUILayout.DrawTextField(courseName, MaxCourseNameLength, GUILayout.Width(window.width * 0.7f));
 
                 string courseInfoText = "";
                 if (CourseAssetUtils.DoesCourseAssetExist(courseName))

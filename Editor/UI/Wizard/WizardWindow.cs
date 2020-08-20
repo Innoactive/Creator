@@ -48,7 +48,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             List<IWizardNavigationEntry> entries = new List<IWizardNavigationEntry>();
             foreach (WizardPage page in pages)
             {
-                entries.Add(new WizardNavigation.Entry(page.Name));
+                entries.Add(new WizardNavigation.Entry(page.Name, entries.Count));
             }
             entries[selectedPage].Selected = true;
             return new WizardNavigation(entries);
