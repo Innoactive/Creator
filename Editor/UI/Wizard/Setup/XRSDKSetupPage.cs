@@ -38,7 +38,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             { XRLoader.OpenVR, "OpenVR XR Plugin will be imported into the project." },
             { XRLoader.Oculus, "Oculus XR Plugin will be imported into the project." },
             { XRLoader.WindowsMR, "Windows XR Plugin will be imported into the project." },
-            { XRLoader.Other, "Right now we only support the listed plugins above." },
+            { XRLoader.Other, "The Creator does not provide an automated setup for your device. You need to refer to your device's vendor documentation in order to enable a compatible loader in the Unity's XR Plugin Management." },
             { XRLoader.None, "If you do not want to import any XR related plugins, press the skip button." }
         };
 
@@ -63,8 +63,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             {
                 GUILayout.Label("Select VR Hardware", CreatorEditorStyles.Title);
                 GUILayout.Space(CreatorEditorStyles.Indent);
-                infoContent.text = infos[selectedLoader];
-                EditorGUILayout.LabelField(infoContent, CreatorEditorStyles.ApplyMargin(CreatorEditorStyles.Label));
+
                 GUILayout.Space(2 * CreatorEditorStyles.BaseIndent);
                 selectedLoader = CreatorGUILayout.DrawToggleGroup(selectedLoader, options, nameplates);
 
@@ -73,6 +72,16 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                     GUILayout.Label("Which VR Hardware are you using?", CreatorEditorStyles.Label);
                     otherHardwareText = CreatorGUILayout.DrawTextField(otherHardwareText, -1,GUILayout.Width(window.width * 0.7f));
                 }
+
+                GUILayout.BeginArea(new Rect(CreatorEditorStyles.Indent, window.height * 0.8f, window.width - CreatorEditorStyles.Indent * 2, window.height * 0.2f));
+                {
+                    infoContent.text = infos[selectedLoader];
+                    GUIStyle infoFieldStyle = CreatorEditorStyles.Label;
+                    infoFieldStyle.wordWrap = true;
+                    EditorGUILayout.LabelField(infoContent, CreatorEditorStyles.ApplyMargin(CreatorEditorStyles.Label), GUILayout.MaxWidth(window.width - CreatorEditorStyles.Indent * 2));
+                }
+                GUILayout.EndArea();
+
                 CanProceed = selectedLoader != XRLoader.None;
             }
             GUILayout.EndArea();
