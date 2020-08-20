@@ -38,8 +38,8 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             { XRLoader.OpenVR, "OpenVR XR Plugin will be imported into the project." },
             { XRLoader.Oculus, "Oculus XR Plugin will be imported into the project." },
             { XRLoader.WindowsMR, "Windows XR Plugin will be imported into the project." },
-            { XRLoader.Other, "Right now we do not support other than the listed plugins." },
-            { XRLoader.None, "If you dont want to import any XR related plugins, press the skip button." }
+            { XRLoader.Other, "Right now we only support the listed plugins above." },
+            { XRLoader.None, "If you do not want to import any XR related plugins, press the skip button." }
         };
 
         private GUIContent infoContent;

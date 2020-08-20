@@ -48,14 +48,15 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 GUILayout.Label("Name of your VR Training", CreatorEditorStyles.Header);
                 courseName = CreatorGUILayout.DrawTextField(courseName, MaxCourseNameLength, GUILayout.Width(window.width * 0.7f));
 
-
-                GUILayout.BeginHorizontal();
-                GUILayout.Space(CreatorEditorStyles.Indent);
                 if (CourseAssetUtils.DoesCourseAssetExist(courseName))
                 {
+                    GUILayout.BeginHorizontal();
+                    GUILayout.Space(CreatorEditorStyles.Indent);
                     GUIContent courseWarningContent = warningContent;
                     courseWarningContent.text = "Course already exists.";
                     EditorGUILayout.LabelField(courseWarningContent, CreatorEditorStyles.Label,GUILayout.MinHeight(MinHeightOfInfoText));
+                    GUILayout.EndHorizontal();
+
                     CanProceed = false;
                 }
                 else
@@ -63,7 +64,6 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                     GUILayoutUtility.GetRect(0, window.width, MinHeightOfInfoText, MinHeightOfInfoText);
                     CanProceed = true;
                 }
-                GUILayout.EndHorizontal();
 
                 GUILayout.Space(CreatorEditorStyles.Indent);
 

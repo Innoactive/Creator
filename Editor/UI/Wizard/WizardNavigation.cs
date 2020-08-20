@@ -55,7 +55,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 get
                 {
                     GUIStyle style = new GUIStyle(GUI.skin.label);
-                    style.normal.textColor = UnityEditorInternal.InternalEditorUtility.HasPro() ? Color.white : Color.black;
+                    style.normal.textColor = CreatorEditorStyles.HighlightTextColor;
                     return style;
                 }
             }
