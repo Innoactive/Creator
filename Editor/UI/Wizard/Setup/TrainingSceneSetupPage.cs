@@ -51,10 +51,12 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 if (CourseAssetUtils.DoesCourseAssetExist(courseName))
                 {
                     GUILayout.BeginHorizontal();
-                    GUILayout.Space(CreatorEditorStyles.Indent);
-                    GUIContent courseWarningContent = warningContent;
-                    courseWarningContent.text = "Course already exists.";
-                    EditorGUILayout.LabelField(courseWarningContent, CreatorEditorStyles.Label,GUILayout.MinHeight(MinHeightOfInfoText));
+                    {
+                        GUILayout.Space(CreatorEditorStyles.Indent);
+                        GUIContent courseWarningContent = warningContent;
+                        courseWarningContent.text = "Course already exists.";
+                        EditorGUILayout.LabelField(courseWarningContent, CreatorEditorStyles.Label, GUILayout.MinHeight(MinHeightOfInfoText));
+                    }
                     GUILayout.EndHorizontal();
 
                     CanProceed = false;
@@ -88,13 +90,11 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
                     helpContent.text = sceneInfoText;
                     GUILayout.BeginHorizontal();
-                    GUILayout.Space(CreatorEditorStyles.Indent);
-                    EditorGUILayout.LabelField(helpContent, CreatorEditorStyles.Label, GUILayout.MinHeight(MinHeightOfInfoText));
+                    {
+                        GUILayout.Space(CreatorEditorStyles.Indent);
+                        EditorGUILayout.LabelField(helpContent, CreatorEditorStyles.Label, GUILayout.MinHeight(MinHeightOfInfoText));
+                    }
                     GUILayout.EndHorizontal();
-                }
-                else
-                {
-                    CanProceed = CanProceed != false;
                 }
             }
 
