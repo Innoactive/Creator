@@ -1,10 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using Innoactive.CreatorEditor;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// Settings for an Innoactive Creator Unity project.

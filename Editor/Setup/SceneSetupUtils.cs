@@ -11,14 +11,16 @@ namespace Innoactive.CreatorEditor.Setup
     /// <summary>
     /// Helper class to setup scenes and trainings.
     /// </summary>
-    public class SceneSetupUtils
+    internal class SceneSetupUtils
     {
+        public const string SceneDirectory = "Assets/Scenes";
+
         /// <summary>
         /// Creates and saves a new scene with given <paramref name="sceneName"/>.
         /// </summary>
         /// <param name="sceneName">Name of the scene.</param>
         /// <param name="directory">Directory to save scene in.</param>
-        public static void CreateNewScene(string sceneName, string directory = "Assets/Scenes")
+        public static void CreateNewScene(string sceneName, string directory = SceneDirectory)
         {
             if (!Directory.Exists(directory))
             {
@@ -27,6 +29,11 @@ namespace Innoactive.CreatorEditor.Setup
             Scene newScene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
             EditorSceneManager.SaveScene(newScene, $"{directory}/{sceneName}.unity");
             EditorSceneManager.OpenScene($"{directory}/{sceneName}.unity");
+        }
+
+        public static bool SceneExists(string sceneName, string directory = SceneDirectory)
+        {
+            return File.Exists($"{directory}/{sceneName}.unity");
         }
 
         /// <summary>
@@ -50,10 +57,7 @@ namespace Innoactive.CreatorEditor.Setup
                     AssetDatabase.Refresh();
                 }
 
-                RuntimeConfigurator.Instance.SetSelectedCourse(CourseAssetUtils.GetCourseStreamingAssetPath(courseName));
-                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-                GlobalEditorHandler.SetCurrentCourse(courseName);
-                GlobalEditorHandler.StartEditingCourse();
+                SetCourseInCurrentScene(courseName);
             }
 
             if (string.IsNullOrEmpty(errorMessage) == false)
@@ -62,6 +66,18 @@ namespace Innoactive.CreatorEditor.Setup
             }
 
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
+        }
+
+        /// <summary>
+        /// Sets the course with given <paramref name="courseName"/> for the current scene.
+        /// </summary>
+        /// <param name="courseName">Name of the course.</param>
+        public static void SetCourseInCurrentScene(string courseName)
+        {
+            RuntimeConfigurator.Instance.SetSelectedCourse(CourseAssetUtils.GetCourseStreamingAssetPath(courseName));
+            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+            GlobalEditorHandler.SetCurrentCourse(courseName);
+            GlobalEditorHandler.StartEditingCourse();
         }
     }
 }

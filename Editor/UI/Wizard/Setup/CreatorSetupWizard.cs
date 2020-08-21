@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace Innoactive.CreatorEditor.UI.Wizard
 {
+    /// <summary>
+    /// Wizard which guides the user through setting up a new training project,
+    /// including a training course, scene and XR hardware.
+    /// </summary>
     [InitializeOnLoad]
     internal static class CreatorSetupWizard
     {
@@ -27,7 +31,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             }
         }
 
-        [MenuItem("Innoactive/Run Training Setup Wizard...")]
+        [MenuItem("Innoactive/Creator/Create New Course...")]
         public static void Show()
         {
             WizardWindow wizard = ScriptableObject.CreateInstance<WizardWindow>();

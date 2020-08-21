@@ -131,7 +131,7 @@ namespace Innoactive.CreatorEditor.UI
                     label.fontSize = 13;
                     label.richText = true;
                     label.clipping = TextClipping.Clip;
-                    label.margin = new RectOffset(Indent, BaseIndent, BaseIndent, BaseIndent);
+                    label.padding = new RectOffset(Indent, BaseIndent, BaseIndent, BaseIndent);
                 }
 
                 return label;
@@ -155,6 +155,38 @@ namespace Innoactive.CreatorEditor.UI
                 }
 
                 return link;
+            }
+        }
+
+        private static GUIStyle popup;
+        public static GUIStyle Popup
+        {
+            get
+            {
+                if (popup == null)
+                {
+                    popup = new GUIStyle(EditorStyles.popup);
+                    popup.fontSize = 13;
+                    popup.margin = new RectOffset((int)(Indent * 1.25), (int)(Indent * 1.25), BaseIndent, BaseIndent);
+                }
+
+                return popup;
+            }
+        }
+
+        private static GUIStyle helpBox;
+        public static GUIStyle HelpBox
+        {
+            get
+            {
+                if (helpBox == null)
+                {
+                    helpBox = new GUIStyle(EditorStyles.helpBox);
+                    helpBox.fontSize = 10;
+                    helpBox.margin = new RectOffset((int)(Indent * 1.25), (int)(Indent * 1.25), BaseIndent, BaseIndent);
+                }
+
+                return helpBox;
             }
         }
 

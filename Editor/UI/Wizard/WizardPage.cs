@@ -18,9 +18,6 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         public bool Mandatory = true;
 
-        protected int horizontalSpace = 30;
-        protected int verticalSpace = 30;
-
         public WizardPage()
         {
 

@@ -40,7 +40,8 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             // Draw darker area at the bottom
             EditorGUI.DrawRect(new Rect(0, Entries.Count * EntryHeight + 1 + PaddingTop, window.width, window.height - 1 - Entries.Count * EntryHeight), WizardWindow.LineColor);
 
-            GUI.DrawTexture(new Rect(window.x + 16f, window.y + window.height - (window.width / 2) - 25, window.width - 32f, (window.width - 32) / 2), logo.Texture);
+            Rect logoRect = new Rect(window.x + 16f, window.y + window.height - (window.width / 2) - 5, window.width - 32f, (window.width - 32) * 0.34f);
+            GUI.DrawTexture(logoRect, logo.Texture);
         }
 
         protected Rect GetEntryRect(int position, float width)
@@ -55,7 +56,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 get
                 {
                     GUIStyle style = new GUIStyle(GUI.skin.label);
-                    style.normal.textColor = UnityEditorInternal.InternalEditorUtility.HasPro() ? Color.white : Color.black;
+                    style.normal.textColor = CreatorEditorStyles.HighlightTextColor;
                     return style;
                 }
             }

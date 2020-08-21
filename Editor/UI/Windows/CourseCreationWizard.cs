@@ -1,9 +1,9 @@
-﻿using System.IO;
-using Innoactive.Creator.Core;
+﻿using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Configuration;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+
 namespace Innoactive.CreatorEditor.UI.Windows
 {
     /// <summary>
@@ -12,9 +12,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
     internal class CourseCreationWizard : EditorWindow
     {
         private static CourseCreationWizard window;
-        private const string menuPath = "Innoactive/Creator/Create New Course...";
+        // CourseCreationWizard is obsolete and was replaced by CreatorSetupWizard
+        // private const string menuPath = "Innoactive/Creator/Create New Course...";
 
-        [MenuItem(menuPath, false, 12)]
         private static void ShowWizard()
         {
             if (window == null)
