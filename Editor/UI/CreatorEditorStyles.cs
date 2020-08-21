@@ -131,7 +131,7 @@ namespace Innoactive.CreatorEditor.UI
                     label.fontSize = 13;
                     label.richText = true;
                     label.clipping = TextClipping.Clip;
-                    label.margin = new RectOffset(Indent, BaseIndent, BaseIndent, BaseIndent);
+                    label.padding = new RectOffset(Indent, BaseIndent, BaseIndent, BaseIndent);
                 }
 
                 return label;

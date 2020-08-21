@@ -11,14 +11,16 @@ namespace Innoactive.CreatorEditor.Setup
     /// <summary>
     /// Helper class to setup scenes and trainings.
     /// </summary>
-    public class SceneSetupUtils
+    internal class SceneSetupUtils
     {
+        public const string SceneDirectory = "Assets/Scenes";
+
         /// <summary>
         /// Creates and saves a new scene with given <paramref name="sceneName"/>.
         /// </summary>
         /// <param name="sceneName">Name of the scene.</param>
         /// <param name="directory">Directory to save scene in.</param>
-        public static void CreateNewScene(string sceneName, string directory = "Assets/Scenes")
+        public static void CreateNewScene(string sceneName, string directory = SceneDirectory)
         {
             if (!Directory.Exists(directory))
             {
@@ -27,6 +29,11 @@ namespace Innoactive.CreatorEditor.Setup
             Scene newScene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
             EditorSceneManager.SaveScene(newScene, $"{directory}/{sceneName}.unity");
             EditorSceneManager.OpenScene($"{directory}/{sceneName}.unity");
+        }
+
+        public static bool SceneExists(string sceneName, string directory = SceneDirectory)
+        {
+            return File.Exists($"{directory}/{sceneName}.unity");
         }
 
         /// <summary>

@@ -15,10 +15,10 @@ namespace Innoactive.CreatorEditor.UI.Wizard
     {
         private enum XRLoader
         {
+            None,
             OpenVR,
             Oculus,
             WindowsMR,
-            None,
             Other
         }
 
@@ -26,23 +26,12 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         private readonly List<string> nameplates = new List<string>()
         {
+            "None",
             "HTC Vive / Valve Index (OpenVR)",
             "Oculus Quest/Rift",
             "Windows MR",
-            "None",
             "Other"
         };
-
-        private IDictionary<XRLoader, string> infos = new Dictionary<XRLoader, string>
-        {
-            { XRLoader.OpenVR, "OpenVR XR Plugin will be imported into the project." },
-            { XRLoader.Oculus, "Oculus XR Plugin will be imported into the project." },
-            { XRLoader.WindowsMR, "Windows XR Plugin will be imported into the project." },
-            { XRLoader.Other, "The Creator does not provide an automated setup for your device. You need to refer to your device's vendor documentation in order to enable a compatible loader in the Unity's XR Plugin Management." },
-            { XRLoader.None, "If you do not want to import any XR related plugins, press the skip button." }
-        };
-
-        private GUIContent infoContent;
 
         [SerializeField]
         private XRLoader selectedLoader = XRLoader.None;
@@ -50,10 +39,9 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         [SerializeField]
         private string otherHardwareText = null;
 
-        public XRSDKSetupPage() : base("XR Hardware", true)
+        public XRSDKSetupPage() : base("XR Hardware")
         {
-            CanProceed = false;
-            infoContent = EditorGUIUtility.IconContent("console.infoicon.inactive.sml");
+
         }
 
         /// <inheritdoc/>
@@ -61,28 +49,19 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         {
             GUILayout.BeginArea(window);
             {
-                GUILayout.Label("Select VR Hardware", CreatorEditorStyles.Title);
-                GUILayout.Space(CreatorEditorStyles.Indent);
-
-                GUILayout.Space(2 * CreatorEditorStyles.BaseIndent);
+                GUILayout.Label("VR Hardware Setup", CreatorEditorStyles.Title);
+                GUILayout.Label("Select the VR hardware you are working with:", CreatorEditorStyles.Header);
                 selectedLoader = CreatorGUILayout.DrawToggleGroup(selectedLoader, options, nameplates);
 
                 if (selectedLoader == XRLoader.Other)
                 {
-                    GUILayout.Label("Which VR Hardware are you using?", CreatorEditorStyles.Label);
-                    otherHardwareText = CreatorGUILayout.DrawTextField(otherHardwareText, -1,GUILayout.Width(window.width * 0.7f));
-                }
+                    GUILayout.Label("The Creator does not provide an automated setup for your device. You need to refer to your device's vendor documentation in order to enable a compatible loader in the Unity's XR Plugin Management.", CreatorEditorStyles.Paragraph);
 
-                GUILayout.BeginArea(new Rect(CreatorEditorStyles.Indent, window.height * 0.8f, window.width - CreatorEditorStyles.Indent * 2, window.height * 0.2f));
-                {
-                    infoContent.text = infos[selectedLoader];
-                    GUIStyle infoFieldStyle = CreatorEditorStyles.Label;
-                    infoFieldStyle.wordWrap = true;
-                    EditorGUILayout.LabelField(infoContent, CreatorEditorStyles.ApplyMargin(CreatorEditorStyles.Label), GUILayout.MaxWidth(window.width - CreatorEditorStyles.Indent * 2));
+                    GUILayout.BeginHorizontal();
+                        GUILayout.Label("Please tell us which VR Hardware you are using:", CreatorEditorStyles.Label);
+                        otherHardwareText = CreatorGUILayout.DrawTextField(otherHardwareText, -1,GUILayout.Width(window.width * 0.4f));
+                    GUILayout.EndHorizontal();
                 }
-                GUILayout.EndArea();
-
-                CanProceed = selectedLoader != XRLoader.None;
             }
             GUILayout.EndArea();
         }
@@ -90,11 +69,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         /// <inheritdoc/>
         public override void Apply()
         {
-            if (selectedLoader == XRLoader.Other)
-            {
-                string message = "The Creator does not provide an automated setup for your device. You need to refer to your device's vendor documentation in order to enable a compatible loader in the Unity's XR Plugin Management.";
-                EditorUtility.DisplayDialog("Device not loaded.", message, "Understood");
-            }
+
         }
 
         /// <inheritdoc/>
