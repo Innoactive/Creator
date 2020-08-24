@@ -12,7 +12,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
     internal static class CreatorSetupWizard
     {
         private const string XRAssemblyName = "Innoactive.Creator.XRInteraction";
-#if UNITY_2019_4_OR_NEWER
+#if UNITY_2019_4_OR_NEWER && !UNITY_EDITOR_OSX
         static CreatorSetupWizard()
         {
             if (!Application.isBatchMode)
