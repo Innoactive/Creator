@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Configuration;
 using UnityEditor;
@@ -65,7 +66,14 @@ namespace Innoactive.CreatorEditor.Setup
                 Debug.LogError(errorMessage);
             }
 
-            EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
+            try
+            {
+                EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(ex);
+            }
         }
 
         /// <summary>

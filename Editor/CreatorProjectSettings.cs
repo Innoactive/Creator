@@ -29,9 +29,11 @@ public class CreatorProjectSettings : ScriptableObject
             }
             // Create an instance
             settings = CreateInstance<CreatorProjectSettings>();
-            AssetDatabase.CreateAsset (settings, "Assets/Resources/CreatorProjectSettings.asset");
-            AssetDatabase.SaveAssets ();
+            AssetDatabase.CreateAsset(settings, "Assets/Resources/CreatorProjectSettings.asset");
+            AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+
+            return Resources.Load<CreatorProjectSettings>("CreatorProjectSettings");
         }
         return settings;
     }
