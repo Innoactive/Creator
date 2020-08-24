@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
@@ -33,7 +33,8 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         [SerializeField]
         protected XRSDKSetupPage xrSdkSetupPage = new XRSDKSetupPage();
 
-        private void OnEnable()
+        [MenuItem("Innoactive/Creator/Create New Course...")]
+        public static void Show()
         {
             Pages = new List<WizardPage>()
             {

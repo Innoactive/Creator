@@ -27,7 +27,8 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         public TrainingSceneSetupPage() : base("Setup Training")
         {
-
+            infoContent = EditorGUIUtility.IconContent("console.infoicon.inactive.sml");
+            warningContent = EditorGUIUtility.IconContent("console.warnicon.sml");
         }
 
         /// <inheritdoc />
