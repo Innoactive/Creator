@@ -12,9 +12,12 @@ namespace Innoactive.CreatorEditor.UI.Windows
     internal class CourseCreationWizard : EditorWindow
     {
         private static CourseCreationWizard window;
+
         // CourseCreationWizard is obsolete and was replaced by CreatorSetupWizard
         // private const string menuPath = "Innoactive/Creator/Create New Course...";
-
+#if !UNITY_2019_4_OR_NEWER
+        [MenuItem("Innoactive/Creator/Create New Course...")]
+#endif
         private static void ShowWizard()
         {
             if (window == null)

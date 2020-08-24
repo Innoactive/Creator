@@ -12,7 +12,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
     internal static class CreatorSetupWizard
     {
         private const string XRAssemblyName = "Innoactive.Creator.XRInteraction";
-
+#if UNITY_2019_4_OR_NEWER
         static CreatorSetupWizard()
         {
             EditorApplication.update += ShowOnLoad;
@@ -46,5 +46,6 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             wizard.Setup("Innoactive Creator - VR Training Setup Wizard", pages);
             wizard.ShowModal();
         }
+#endif
     }
 }
