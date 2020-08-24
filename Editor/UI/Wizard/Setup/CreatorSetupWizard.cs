@@ -43,10 +43,6 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 new AllAboutPage()
             };
 
-            if (EditorReflectionUtils.AssemblyExists(XRAssemblyName))
-            {
-                pages.Insert(2, new XRSDKSetupPage());
-            }
             wizard.Setup("Innoactive Creator - VR Training Setup Wizard", pages);
             wizard.ShowModal();
         }
