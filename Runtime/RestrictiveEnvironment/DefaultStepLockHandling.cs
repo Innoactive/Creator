@@ -72,16 +72,22 @@ namespace Innoactive.Creator.Core.RestrictiveEnvironment
                 return completedTransition.Data.TargetStep.Data;
             }
 
-            if (CourseRunner.IsRunning)
+            if (CourseRunner.IsRunning == false)
             {
-                ICourseData course = CourseRunner.Current.Data;
-                // Test all chapters, but the last.
-                for (int i = 0; i < course.Chapters.Count - 1; i++)
+                return null;
+            }
+
+            ICourseData course = CourseRunner.Current.Data;
+            // Test all chapters, but the last.
+            for (int i = 0; i < course.Chapters.Count - 1; i++)
+            {
+                if (course.Chapters[i] == course.Current)
                 {
-                    if (course.Chapters[i] == course.Current)
+                    if (course.Chapters[i + 1].Data.FirstStep != null)
                     {
                         return course.Chapters[i + 1].Data.FirstStep.Data;
                     }
+                    break;
                 }
             }
             // No next step found, seems to be the last.
