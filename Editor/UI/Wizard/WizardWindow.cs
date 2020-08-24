@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
     /// <summary>
     /// Wizard base class which allows you to implement a new, awesome wizard!
     /// </summary>
-    internal class WizardWindow : EditorWindow
+    internal abstract class WizardWindow : EditorWindow
     {
         public static readonly Color LineColor = new Color(0, 0, 0, 0.25f);
 
@@ -24,29 +24,26 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         protected float buttonPadding = 8f;
         protected Vector2 buttonSize;
 
-        [SerializeField]
-        protected List<WizardPage> pages;
-
         protected WizardNavigation navigation;
+
+        protected abstract List<WizardPage> Pages { get; set; }
+
+        protected abstract string Title { get; }
 
         public WizardWindow()
         {
             minSize = Size;
             maxSize = Size;
 
-            buttonSize = new Vector2(bottomBarHeight * 2.5f, bottomBarHeight - 8);
-        }
+            titleContent = new GUIContent(Title);
 
-        public virtual void Setup(string name, List<WizardPage> pages)
-        {
-            titleContent = new GUIContent(name);
-            this.pages = pages;
+            buttonSize = new Vector2(bottomBarHeight * 2.5f, bottomBarHeight - 8);
         }
 
         protected virtual WizardNavigation CreateNavigation()
         {
             List<IWizardNavigationEntry> entries = new List<IWizardNavigationEntry>();
-            foreach (WizardPage page in pages)
+            foreach (WizardPage page in Pages)
             {
                 entries.Add(new WizardNavigation.Entry(page.Name, entries.Count));
             }
@@ -81,7 +78,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         private Vector2 DrawFinishButton(Vector2 position)
         {
-            if (selectedPage == pages.Count - 1)
+            if (selectedPage == Pages.Count - 1)
             {
                 EditorGUI.BeginDisabledGroup(GetActivePage().CanProceed == false);
                 if (GUI.Button(new Rect(position, buttonSize), "Finish"))
@@ -97,7 +94,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         private Vector2 DrawNextButton(Vector2 position)
         {
-            if (selectedPage < pages.Count - 1)
+            if (selectedPage < Pages.Count - 1)
             {
                 EditorGUI.BeginDisabledGroup(GetActivePage().CanProceed == false);
                 if (GUI.Button(new Rect(position, buttonSize), "Next"))
@@ -113,7 +110,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         private Vector2 DrawSkipButton(Vector2 position)
         {
-            if (selectedPage < pages.Count - 1 && GetActivePage().AllowSkip)
+            if (selectedPage < Pages.Count - 1 && GetActivePage().AllowSkip)
             {
                 position = new Vector2(position.x - buttonPadding * 6, position.y);
                 if (GUI.Button(new Rect(new Vector2(GetNavigationRect().width + 4, position.y), buttonSize), "Skip this Step"))
@@ -183,13 +180,13 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         protected void OnDestroy()
         {
-            bool cancelled = pages.GetRange(selectedPage + 1, pages.Count - selectedPage - 1).Any(page => page.Mandatory);
-            pages.ForEach(page => page.Closing(!cancelled));
+            bool cancelled = Pages.GetRange(selectedPage + 1, Pages.Count - selectedPage - 1).Any(page => page.Mandatory);
+            Pages.ForEach(page => page.Closing(!cancelled));
         }
 
         protected WizardPage GetActivePage()
         {
-            return pages[selectedPage];
+            return Pages[selectedPage];
         }
 
         protected Rect GetNavigationRect()

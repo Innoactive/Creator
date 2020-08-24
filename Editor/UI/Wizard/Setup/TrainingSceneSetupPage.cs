@@ -22,18 +22,27 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         [SerializeField]
         private string lastCreatedCourse = null;
 
-        private readonly GUIContent infoContent;
-        private readonly GUIContent warningContent;
+        private GUIContent infoContent;
+        private GUIContent warningContent;
 
         public TrainingSceneSetupPage() : base("Setup Training")
         {
-            infoContent = EditorGUIUtility.IconContent("console.infoicon.inactive.sml");
-            warningContent = EditorGUIUtility.IconContent("console.warnicon.sml");
+
         }
 
         /// <inheritdoc />
         public override void Draw(Rect window)
         {
+            if (infoContent == null)
+            {
+                infoContent = EditorGUIUtility.IconContent("console.infoicon.inactive.sml");
+            }
+
+            if (warningContent == null)
+            {
+                warningContent = EditorGUIUtility.IconContent("console.warnicon.sml");
+            }
+
             GUILayout.BeginArea(window);
 
             GUILayout.Label("Setup Training", CreatorEditorStyles.Title);

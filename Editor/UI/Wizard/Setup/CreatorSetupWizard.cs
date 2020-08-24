@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -9,46 +10,45 @@ namespace Innoactive.CreatorEditor.UI.Wizard
     /// including a training course, scene and XR hardware.
     /// </summary>
     [InitializeOnLoad]
-    internal static class CreatorSetupWizard
+    internal class CreatorSetupWizard : WizardWindow
     {
         private const string XRAssemblyName = "Innoactive.Creator.XRInteraction";
 
-        static CreatorSetupWizard()
-        {
-            EditorApplication.update += ShowOnLoad;
-        }
+        protected override List<WizardPage> Pages { get; set; }
 
-        private static void ShowOnLoad()
-        {
-            EditorApplication.update -= ShowOnLoad;
-            CreatorProjectSettings settings = CreatorProjectSettings.Load();
+        protected override string Title => "Innoactive Creator - VR Training Setup Wizard";
 
-            if (settings.IsFirstTimeStarted)
+        [SerializeField]
+        protected WelcomePage welcomePage = new WelcomePage();
+
+        [SerializeField]
+        protected TrainingSceneSetupPage trainingSceneSetupPage = new TrainingSceneSetupPage();
+
+        [SerializeField]
+        protected AnalyticsPage analyticsPage = new AnalyticsPage();
+
+        [SerializeField]
+        protected AllAboutPage allAboutPage = new AllAboutPage();
+
+        [SerializeField]
+        protected XRSDKSetupPage xrSdkSetupPage = new XRSDKSetupPage();
+
+        private void OnEnable()
+        {
+            Pages = new List<WizardPage>()
             {
-                Show();
-                settings.IsFirstTimeStarted = false;
-                settings.Save();
-            }
-        }
-
-        [MenuItem("Innoactive/Creator/Create New Course...")]
-        public static void Show()
-        {
-            WizardWindow wizard = ScriptableObject.CreateInstance<WizardWindow>();
-            List<WizardPage> pages = new List<WizardPage>()
-            {
-                new WelcomePage(),
-                new TrainingSceneSetupPage(),
-                new AnalyticsPage(),
-                new AllAboutPage()
+                welcomePage,
+                trainingSceneSetupPage,
+                analyticsPage,
+                allAboutPage
             };
 
+            /*
             if (EditorReflectionUtils.AssemblyExists(XRAssemblyName))
             {
-                pages.Insert(2, new XRSDKSetupPage());
+                Pages.Insert(2, xrSdkSetupPage);
             }
-            wizard.Setup("Innoactive Creator - VR Training Setup Wizard", pages);
-            wizard.ShowModal();
+            */
         }
     }
 }
