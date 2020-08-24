@@ -1,0 +1,19 @@
+{
+    "name": "Innoactive.CreatorEditor.XRProviders",
+    "references": [
+        "GUID:c8561f9de838ac04d8feeda695bc572d",
+        "GUID:e476a81b6ef7b824686666349a591a9a",
+        "GUID:e40ba710768534012815d3193fa296cb"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
