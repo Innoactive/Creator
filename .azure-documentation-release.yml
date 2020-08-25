@@ -77,17 +77,3 @@ jobs:
           artifact: 'documentation'
           publishLocation: 'pipeline'
         displayName: Store Documentation
-
-      - task: FtpUpload@2
-        displayName: "Uploading to server and publish"
-        condition: or(eq(variables['Build.SourceBranchName'], 'master'), ${{ parameters.release }})
-        inputs:
-          credentialsOption: 'serviceEndpoint'
-          serverEndpoint: 'FTP Documentation Server'
-          rootDirectory: 'Creator/.Documentation/_site'
-          filePatterns: '**'
-          remoteDirectory: 'training.hub.innoactive.de/docs/v$(Version)/'
-          clean: false
-          cleanContents: false
-          preservePaths: true
-          trustSSL: false 
