@@ -22,32 +22,29 @@ namespace Innoactive.CreatorEditor.Analytics
             {
                 return;
             }
-
-            List<string> args = Environment.GetCommandLineArgs().ToList();
-            if (args.Contains("-no-tracking"))
+            // Can be used by ci to deactivate tracking.
+            if (Environment.GetCommandLineArgs().Contains("-no-tracking"))
             {
                 AnalyticsUtils.SetTrackingTo(AnalyticsState.Disabled);
+                return;
             }
-            else if (trackingState == AnalyticsState.Unknown)
+
+            if (trackingState == AnalyticsState.Unknown)
             {
                 SetupTrackingPopup.Open();
+                AnalyticsUtils.SetTrackingTo(AnalyticsState.Minimal);
+                return;
             }
-            else if (trackingState >= AnalyticsState.Minimal)
+
+            // Only run once a day.
+            if (DateTime.Today.Ticks.ToString().Equals(EditorPrefs.GetString(KeyLastDayActive, null)) == false)
             {
-                // Only run once a day.
-                if (DateTime.Today.Ticks.ToString().Equals(EditorPrefs.GetString(KeyLastDayActive, null)) == false)
-                {
-                    EditorPrefs.SetString(KeyLastDayActive, DateTime.Today.Ticks.ToString());
-                    // Create a new session ID.
-                    EditorPrefs.SetString(BaseAnalyticsTracker.KeySessionId, Guid.NewGuid().ToString());
-                    IAnalyticsTracker tracker = AnalyticsUtils.CreateTracker();
-                    // Send "hello".
-                    tracker.Send(new AnalyticsEvent() {Category = "system", Action = "hello", Label = ""});
-                    // Send the Unity Editor version.
-                    tracker.Send(new AnalyticsEvent() {Category = "unity", Action = "version", Label = Application.unityVersion});
-                    // Send the Creator Core version.
-                    tracker.Send(new AnalyticsEvent() {Category = "creator", Action = "version", Label = EditorUtils.GetCoreVersion()});
-                }
+                EditorPrefs.SetString(KeyLastDayActive, DateTime.Today.Ticks.ToString());
+                IAnalyticsTracker tracker = AnalyticsUtils.CreateTracker();
+                // Send the Unity Editor version.
+                tracker.Send(new AnalyticsEvent() {Category = "unity", Action = "version", Label = Application.unityVersion});
+                // Send the Creator Core version.
+                tracker.Send(new AnalyticsEvent() {Category = "creator", Action = "version", Label = EditorUtils.GetCoreVersion()});
             }
         }
     }

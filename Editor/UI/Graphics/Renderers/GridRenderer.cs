@@ -40,8 +40,11 @@ namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
             float yPosTop = 0;
             float yPosBot = 0;
 
+            float width = BoundingBox.x + BoundingBox.width;
+            float height = BoundingBox.y + BoundingBox.height;
+
             // Draw horizontal lines starting from (0, 0).
-            while (yPosTop > BoundingBox.y || yPosBot <= BoundingBox.height)
+            while (yPosTop > BoundingBox.y || yPosBot <= height)
             {
                 drawColor = lineCount % 10 == 0 ? SecondaryColor : MainColor;
                 lineCount++;
@@ -52,7 +55,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
                     yPosTop -= CellSize;
                 }
 
-                if (yPosBot <= BoundingBox.height)
+                if (yPosBot <= height)
                 {
                     EditorDrawingHelper.DrawHorizontalLine(new Vector3(BoundingBox.x, yPosBot), BoundingBox.width, drawColor);
                     yPosBot += CellSize;
@@ -64,18 +67,17 @@ namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
             float xPosRight = 0;
 
             // Draw vertical lines starting from (0, 0).
-            while (xPosLeft > BoundingBox.x || xPosRight <= BoundingBox.width)
+            while (xPosLeft > BoundingBox.x || xPosRight <= width)
             {
                 drawColor = lineCount % 10 == 0 ? SecondaryColor : MainColor;
                 lineCount++;
-
                 if (xPosLeft > BoundingBox.x)
                 {
                     EditorDrawingHelper.DrawVerticalLine(new Vector3(xPosLeft, BoundingBox.y), BoundingBox.height, drawColor);
                     xPosLeft -= CellSize;
                 }
 
-                if (xPosRight <= BoundingBox.width)
+                if (xPosRight <= width)
                 {
                     EditorDrawingHelper.DrawVerticalLine(new Vector3(xPosRight, BoundingBox.y), BoundingBox.height, drawColor);
                     xPosRight += CellSize;

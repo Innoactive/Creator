@@ -61,6 +61,11 @@ namespace Innoactive.CreatorEditor
             return membersAttributesCache[memberInfo].OfType<T>();
         }
 
+        public static bool AssemblyExists(string name)
+        {
+            return AppDomain.CurrentDomain.GetAssemblies().Any(assembly => assembly.GetName().Name == name);
+        }
+
         /// <summary>
         /// Returns all properties and fields of the object that have to be drawn by training drawers.
         /// </summary>

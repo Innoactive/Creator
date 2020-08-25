@@ -88,7 +88,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
             Step = step;
             renderer = new StepNodeRenderer(this, graphics.ColorPalette);
 
-            EntryJoints.Add(new EntryJoint(graphics, this) { RelativePosition = new Vector2(-size.x / 2f, 0f) });
+            EntryJoints.Add(new EntryJoint(graphics, this) { RelativePosition = new Vector2(-size.x / 2f, -1f) });
 
             CreateTransitionButton = new CreateTransitionButton(graphics, this) { RelativePosition = new Vector2(size.x / 2f, 0) };
         }

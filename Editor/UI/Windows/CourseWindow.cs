@@ -114,7 +114,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             SetTabName();
 
             float width = chapterMenu.IsExtended ? TrainingMenuView.ExtendedMenuWidth : TrainingMenuView.MinimizedMenuWidth;
-            Rect scrollRect = EditorDrawingHelper.GetNextLineRect(new Rect(width, 0f, position.size.x - width, position.size.y));
+            Rect scrollRect = new Rect(width, 0f, position.size.x - width, position.size.y);
 
             Vector2 centerViewpointOnCanvas = currentScrollPosition + scrollRect.size / 2f;
 

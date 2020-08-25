@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Net.Http;
+﻿using System.Net.Http;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.Analytics
@@ -10,7 +8,7 @@ namespace Innoactive.CreatorEditor.Analytics
     /// </summary>
     internal class GoogleTracker : BaseAnalyticsTracker
     {
-        private readonly HttpClient webClient = new HttpClient();
+        private readonly HttpClient client = new HttpClient();
 
         public override void Send(AnalyticsEvent data)
         {
@@ -19,7 +17,10 @@ namespace Innoactive.CreatorEditor.Analytics
 
         private void PostData(string uri)
         {
-            webClient.GetAsync(uri);
+            if (AnalyticsUtils.GetTrackingState() >= AnalyticsState.Minimal)
+            {
+                client.GetAsync(uri);
+            }
         }
 
         private string BuildEventUri(AnalyticsEvent data)
