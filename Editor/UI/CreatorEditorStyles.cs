@@ -103,6 +103,23 @@ namespace Innoactive.CreatorEditor.UI
             }
         }
 
+        private static GUIStyle radioButton;
+        public static GUIStyle RadioButton
+        {
+            get
+            {
+                if (radioButton == null)
+                {
+                    radioButton = new GUIStyle(EditorStyles.radioButton);
+                    radioButton.fontSize = Paragraph.fontSize;
+                    radioButton.padding = new RectOffset((int)(Indent + Indent * 0.75f), BaseIndent, 0, 0); // this only affects the text
+                    radioButton.margin = new RectOffset(Indent, BaseIndent, BaseIndent, BaseIndent); // this affects the position
+                }
+
+                return radioButton;
+            }
+        }
+
         private static GUIStyle subText;
         public static GUIStyle SubText
         {

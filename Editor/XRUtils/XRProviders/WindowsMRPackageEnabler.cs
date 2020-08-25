@@ -1,4 +1,4 @@
-﻿#if CREATOR_WINDOWS_MR
+﻿#if UNITY_XR_MANAGEMENT && WINDOWS_XR
 namespace Innoactive.CreatorEditor.XRUtils
 {
     /// <summary>
@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.XRUtils
     {
         /// <inheritdoc/>
         public override string Package { get; } = "com.unity.xr.windowsmr";
-
+        
         /// <inheritdoc/>
         public override int Priority { get; } = 2;
 

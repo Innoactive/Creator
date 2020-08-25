@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Innoactive.Creator.Core.Utils;
 using UnityEditor;
 using Debug = UnityEngine.Debug;
@@ -11,7 +12,7 @@ namespace Innoactive.CreatorEditor.PackageManager
     /// Automatically retrieves all dependencies from the Unity's Package Manager at the startup.
     /// </summary>
     [InitializeOnLoad]
-    public static class DependencyManager
+    public class DependencyManager
     {
         public class DependenciesEnabledEventArgs : EventArgs
         {
@@ -33,52 +34,16 @@ namespace Innoactive.CreatorEditor.PackageManager
 
         static DependencyManager()
         {
-            GatherDependencyList();
-            if (dependencies != null && dependencies.Any())
-            {
-                EditorApplication.update += EditorUpdate;
-            }
+            GatherDependencies();
         }
 
-        private static void EditorUpdate()
+        private static void GatherDependencies()
         {
-            if (EditorApplication.isCompiling || EditorApplication.isPlaying || PackageOperationsManager.Packages == null || PackageOperationsManager.Packages.Any() == false)
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
             {
                 return;
             }
 
-            Dependency dependency = dependencies.Peek();
-
-            if (PackageOperationsManager.IsPackageLoaded(dependency.Package))
-            {
-                dependency.IsEnabled = true;
-                dependencies.Dequeue();
-            }
-            else
-            {
-                EditorPrefs.SetBool(dependency.GetType().Name, true);
-                PackageOperationsManager.LoadPackage(dependency.Package);
-                EditorApplication.update -= EditorUpdate;
-            }
-
-            if (dependencies.Any() == false)
-            {
-                EditorApplication.update -= EditorUpdate;
-
-                if (dependenciesList.Any(loadedDependency => EditorPrefs.GetBool(loadedDependency.GetType().Name)))
-                {
-                    foreach (Dependency loadedDependency in dependenciesList)
-                    {
-                        EditorPrefs.DeleteKey(loadedDependency.GetType().Name);
-                    }
-
-                    OnPostProcess?.Invoke(null, new DependenciesEnabledEventArgs(dependenciesList));
-                }
-            }
-        }
-
-        private static void GatherDependencyList()
-        {
             IEnumerable<Type> dependenciesTypes = ReflectionUtils.GetConcreteImplementationsOf<Dependency>();
             dependenciesList = new List<Dependency>();
 
@@ -86,9 +51,7 @@ namespace Innoactive.CreatorEditor.PackageManager
             {
                 try
                 {
-                    Dependency dependencyInstance = ReflectionUtils.CreateInstanceOfType(dependencyType) as Dependency;
-
-                    if (dependencyInstance != null && string.IsNullOrEmpty(dependencyInstance.Package) == false)
+                    if (ReflectionUtils.CreateInstanceOfType(dependencyType) is Dependency dependencyInstance && string.IsNullOrEmpty(dependencyInstance.Package) == false)
                     {
                         dependenciesList.Add(dependencyInstance);
                     }
@@ -99,11 +62,38 @@ namespace Innoactive.CreatorEditor.PackageManager
                 }
             }
 
-            if (dependenciesList.Count > 0)
+            if (dependenciesList.Any())
             {
                 dependenciesList = dependenciesList.OrderBy(setup => setup.Priority).ToList();
                 dependencies = new Queue<Dependency>(dependenciesList);
+                ProcessDependencies();
             }
+        }
+
+        private static async void ProcessDependencies()
+        {
+            while (PackageOperationsManager.Packages == null || PackageOperationsManager.Packages.Any() == false || EditorApplication.isCompiling)
+            {
+                await Task.Delay(100);
+            }
+
+            while (dependencies.Any())
+            {
+                Dependency dependency = dependencies.Peek();
+
+                if (PackageOperationsManager.IsPackageLoaded(dependency.Package))
+                {
+                    dependency.IsEnabled = true;
+                    dependencies.Dequeue();
+                }
+                else
+                {
+                    PackageOperationsManager.LoadPackage(dependency.Package);
+                    return;
+                }
+            }
+
+            OnPostProcess?.Invoke(null, new DependenciesEnabledEventArgs(dependenciesList));
         }
     }
 }
