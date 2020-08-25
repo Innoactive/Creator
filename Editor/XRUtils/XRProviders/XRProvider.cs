@@ -1,8 +1,5 @@
-﻿#if CREATOR_OCULUS || CREATOR_OPEN_VR || CREATOR_WINDOWS_MR
+﻿#if UNITY_XR_MANAGEMENT && (OCULUS_XR || WINDOWS_XR)
 using System;
-using UnityEngine;
-using UnityEngine.XR.Management;
-using Innoactive.Creator.Core.Utils;
 using Innoactive.CreatorEditor.PackageManager;
 
 namespace Innoactive.CreatorEditor.XRUtils
@@ -21,17 +18,9 @@ namespace Innoactive.CreatorEditor.XRUtils
             OnPackageEnabled -= InitializeXRLoader;
         }
 
-        private void InitializeXRLoader(object sender, EventArgs e)
+        protected virtual void InitializeXRLoader(object sender, EventArgs e)
         {
-            foreach (Type loader in ReflectionUtils.GetConcreteImplementationsOf<XRLoader>())
-            {
-                if (loader.Name == XRLoaderName && XRGeneralSettings.Instance != null)
-                {
-                    XRGeneralSettings.Instance.Manager.loaders.Clear();
-                    XRGeneralSettings.Instance.Manager.loaders.Add(ScriptableObject.CreateInstance(loader) as XRLoader);
-                }
-            }
-
+            XRLoaderHelper.EnableLoader(Package, XRLoaderName);
             OnPackageEnabled -= InitializeXRLoader;
         }
     }

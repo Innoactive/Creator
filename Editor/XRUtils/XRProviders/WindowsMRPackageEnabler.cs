@@ -1,4 +1,4 @@
-﻿#if CREATOR_WINDOWS_MR
+﻿#if UNITY_XR_MANAGEMENT && WINDOWS_XR
 namespace Innoactive.CreatorEditor.XRUtils
 {
     /// <summary>

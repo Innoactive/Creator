@@ -1,23 +1,25 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using Innoactive.CreatorEditor.PackageManager;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Networking;
+
+#if UNITY_XR_MANAGEMENT
+using UnityEditor.XR.Management.Metadata;
+using UnityEngine.XR.Management;
+using System.Reflection;
+#endif
 
 namespace Innoactive.CreatorEditor.XRUtils
 {
     /// <summary>
     /// Utility class that allows to load XR packages.
     /// </summary>
-    internal static class XRLoaderHelper
+    internal class XRLoaderHelper
     {
-        private const string OpenVRXRReleaseURL = "https://api.github.com/repos/ValveSoftware/unity-xr-plugin/releases/latest";
-        internal const string OculusDefineSymbol = "CREATOR_OCULUS";
-        internal const string WindowsMRDefineSymbol = "CREATOR_WINDOWS_MR";
-        internal const string OpenVRDefineSymbol = "CREATOR_OPEN_VR";
-        internal const string XRManagementDefineSymbol = "CREATOR_XR_MANAGEMENT";
+        private const string OculusXRPackage = "com.unity.xr.oculus";
+        private const string WindowsXRPackage = "com.unity.xr.windowsmr";
+        private const string XRManagementPackage = "com.unity.xr.management";
 
         public enum XRSDK
         {
@@ -27,18 +29,39 @@ namespace Innoactive.CreatorEditor.XRUtils
             WindowsMR
         }
 
+        public enum XRConfiguration
+        {
+            None,
+            XRManagement,
+            OpenVRLegacy,
+            OculusLegacy,
+            OpenVRXR,
+            OculusXR,
+            WindowsMR
+        }
+
         /// <summary>
         /// Retrieves and loads the OpenVR XR package.
         /// </summary>
         public static void LoadOpenVR()
         {
-#if UNITY_2020_1_OR_NEWER && !CREATOR_XR_MANAGEMENT
-            EditorPrefs.SetInt(nameof(XRSDK), (int)XRSDK.OpenVR);
-            AddScriptingDefineSymbol(XRManagementDefineSymbol);
-#elif UNITY_2020_1_OR_NEWER && CREATOR_XR_MANAGEMENT
-            ListLatestOpenVRRelease();
-#elif UNITY_2019_1_OR_NEWER && !UNITY_2020_1_OR_NEWER
-            LoadOpenVRLegacy();
+            if (GetCurrentXRConfiguration().Any(loader => loader == XRConfiguration.OpenVRXR || loader == XRConfiguration.OpenVRLegacy))
+            {
+                Debug.LogWarning("OpenVR is already loaded.");
+                return;
+            }
+
+#if UNITY_2020_1_OR_NEWER
+            // This will be integrated as soon as there is an OpenVR XR SDK compatible with the XR interaction framework.
+#elif UNITY_2019_1_OR_NEWER
+            if (EditorReflectionUtils.AssemblyExists("Unity.XR.Management") == false)
+            {
+                LoadOpenVRLegacy();
+            }
+            else
+            {
+                Debug.LogWarning("OpenVR could not be loaded. XR Plug-in Management must be disabled before start using OpenVR.");
+            }
 #endif
         }
 
@@ -47,11 +70,19 @@ namespace Innoactive.CreatorEditor.XRUtils
         /// </summary>
         public static void LoadOculus()
         {
-#if CREATOR_XR_MANAGEMENT
-            AddScriptingDefineSymbol(OculusDefineSymbol, new [] {BuildTarget.StandaloneWindows, BuildTarget.Android});
+            if (GetCurrentXRConfiguration().Any(loader => loader == XRConfiguration.OculusXR))
+            {
+                Debug.LogWarning("Oculus XR is already loaded.");
+                return;
+            }
+
+#if UNITY_XR_MANAGEMENT
+            DisplayDialog("Oculus XR");
+            PackageOperationsManager.LoadPackage(OculusXRPackage);
 #else
+            DisplayDialog("XR Plug-in Management");
             EditorPrefs.SetInt(nameof(XRSDK), (int)XRSDK.Oculus);
-            AddScriptingDefineSymbol(XRManagementDefineSymbol);
+            PackageOperationsManager.LoadPackage(XRManagementPackage);
 #endif
         }
 
@@ -60,17 +91,111 @@ namespace Innoactive.CreatorEditor.XRUtils
         /// </summary>
         public static void LoadWindowsMR()
         {
-#if CREATOR_XR_MANAGEMENT
-            AddScriptingDefineSymbol(WindowsMRDefineSymbol);
+            if (GetCurrentXRConfiguration().Any(loader => loader == XRConfiguration.WindowsMR))
+            {
+                Debug.LogWarning("Windows MR is already loaded.");
+                return;
+            }
+
+#if UNITY_XR_MANAGEMENT
+            DisplayDialog("Windows MR");
+            PackageOperationsManager.LoadPackage(WindowsXRPackage);
 #else
+            DisplayDialog("XR Plug-in Management");
             EditorPrefs.SetInt(nameof(XRSDK), (int)XRSDK.WindowsMR);
-            AddScriptingDefineSymbol(XRManagementDefineSymbol);
+            PackageOperationsManager.LoadPackage(XRManagementPackage);
 #endif
         }
 
-#if UNITY_2019_1_OR_NEWER && !UNITY_2020_1_OR_NEWER
-        private async static void LoadOpenVRLegacy ()
+        /// <summary>
+        /// Returns a list with all XR SDKs enabled in this project.
+        /// </summary>
+        public static IEnumerable<XRConfiguration> GetCurrentXRConfiguration()
         {
+            List<XRConfiguration> enabledSDKs = new List<XRConfiguration>();
+
+            if (EditorReflectionUtils.AssemblyExists("Unity.XR.Management"))
+            {
+#if UNITY_XR_MANAGEMENT
+                if (XRGeneralSettings.Instance != null)
+                {
+                    foreach (XRLoader loader in XRGeneralSettings.Instance.Manager.loaders)
+                    {
+                        if (loader.name == "Oculus Loader")
+                        {
+                            enabledSDKs.Add(XRConfiguration.OculusXR);
+                        }
+
+                        if (loader.name == "Windows MR Loader")
+                        {
+                            enabledSDKs.Add(XRConfiguration.WindowsMR);
+                        }
+                    }
+
+                    enabledSDKs.Add(XRConfiguration.XRManagement);
+                }
+#endif
+            }
+#if UNITY_2019_1_OR_NEWER && !UNITY_2020_1_OR_NEWER
+#pragma warning disable CS0618
+            else if (PlayerSettings.virtualRealitySupported)
+            {
+                foreach (string device in UnityEngine.XR.XRSettings.supportedDevices)
+                {
+                    if (device == "OpenVR")
+                    {
+                        enabledSDKs.Add(XRConfiguration.OpenVRLegacy);
+                    }
+
+                    if (device == "Oculus")
+                    {
+                        enabledSDKs.Add(XRConfiguration.OculusLegacy);
+                    }
+                }
+            }
+#pragma warning restore CS0618
+#endif
+
+            if (enabledSDKs.Any() == false)
+            {
+                enabledSDKs.Add(XRConfiguration.None);
+            }
+
+            return enabledSDKs;
+        }
+
+#if UNITY_XR_MANAGEMENT
+        internal static void EnableLoader(string package, string loader, BuildTargetGroup buildTargetGroup = BuildTargetGroup.Standalone)
+        {
+            if (XRGeneralSettings.Instance == null)
+            {
+                Debug.LogWarning($"{loader} was not enabled since XRGeneralSettings could not be found. Try to enable manually:\nEdit > Project Settings... > XR Plug-in Management and select the provider for {loader}");
+                return;
+            }
+
+            foreach (XRLoader xrLoader in XRGeneralSettings.Instance.Manager.loaders)
+            {
+                if (xrLoader.GetType().Name == loader)
+                {
+                    return;
+                }
+            }
+
+            typeof(XRPackageMetadataStore)
+                .GetMethod("InstallPackageAndAssignLoaderForBuildTarget", BindingFlags.Static | BindingFlags.NonPublic)?
+                .Invoke(null, new object[] { package, loader, buildTargetGroup });
+        }
+#endif
+
+        private static void DisplayDialog(string loader)
+        {
+            EditorUtility.DisplayDialog($"Enabling {loader}", "Wait until the setup is done.", "Continue");
+        }
+
+#if UNITY_2019_1_OR_NEWER && !UNITY_2020_1_OR_NEWER
+        private static async void LoadOpenVRLegacy ()
+        {
+            DisplayDialog("OpenVR");
 #pragma warning disable CS0618
             PlayerSettings.virtualRealitySupported = true;
             UnityEngine.XR.XRSettings.LoadDeviceByName("OpenVR");
@@ -79,83 +204,5 @@ namespace Innoactive.CreatorEditor.XRUtils
 #pragma warning restore CS0618
         }
 #endif
-
-        private static void AddScriptingDefineSymbol(string scriptingDefineSymbol)
-        {
-            BuildTarget buildTarget = BuildTarget.StandaloneWindows;
-            BuildTargetGroup buildTargetGroup = BuildPipeline.GetBuildTargetGroup(buildTarget);
-            List<string> symbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';').ToList();
-
-            if (symbols.Contains(scriptingDefineSymbol) == false)
-            {
-                symbols.Add(scriptingDefineSymbol);
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, string.Join(";", symbols.ToArray()));
-            }
-        }
-
-        private static void AddScriptingDefineSymbol(string scriptingDefineSymbol, IEnumerable<BuildTarget> buildTargets)
-        {
-            foreach (BuildTarget buildTarget in buildTargets)
-            {
-                BuildTargetGroup buildTargetGroup = BuildPipeline.GetBuildTargetGroup(buildTarget);
-                List<string> symbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';').ToList();
-
-                if (symbols.Contains(scriptingDefineSymbol) == false)
-                {
-                    symbols.Add(scriptingDefineSymbol);
-                    PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, string.Join(";", symbols.ToArray()));
-                }
-            }
-        }
-
-        private static void ListLatestOpenVRRelease()
-        {
-            UnityWebRequest lastReleaseRequest = UnityWebRequest.Get(OpenVRXRReleaseURL);
-            lastReleaseRequest.SendWebRequest().completed += asyncOperation =>
-            {
-                if (lastReleaseRequest.isNetworkError)
-                {
-                    Debug.LogErrorFormat("OpenVR could not be retrieved:\n{0}", lastReleaseRequest.error);
-                }
-                else
-                {
-                    string downloadHandlerText = lastReleaseRequest.downloadHandler.text;
-                    dynamic data = JsonConvert.DeserializeObject<dynamic>(downloadHandlerText);
-                    dynamic archive = data.assets[0];
-                    string packageName = archive.name;
-                    string packageURL = archive.browser_download_url;
-
-                    RetrieveAndSaveOpenVR(packageName, packageURL);
-                    lastReleaseRequest.Dispose();
-                }
-            };
-        }
-
-        private static void RetrieveAndSaveOpenVR(string packageName, string packageURL)
-        {
-            UnityWebRequest releaseDownloadRequest = UnityWebRequest.Get(packageURL);
-            releaseDownloadRequest.SendWebRequest().completed += asyncOperation =>
-            {
-                if (releaseDownloadRequest.isNetworkError)
-                {
-                    Debug.LogErrorFormat("OpenVR could not be downloaded:\n{0}", releaseDownloadRequest.error);
-                }
-                else
-                {
-                    string packagePath = Path.Combine(Application.persistentDataPath, packageName);
-                    byte[] downloadHandlerData = releaseDownloadRequest.downloadHandler.data;
-
-                    File.WriteAllBytes(packagePath, downloadHandlerData);
-                    ImportOpenVR(packagePath);
-                    releaseDownloadRequest.Dispose();
-                }
-            };
-        }
-
-        private static void ImportOpenVR(string packagePath)
-        {
-            AssetDatabase.ImportPackage(packagePath, false);
-            AddScriptingDefineSymbol(OpenVRDefineSymbol);
-        }
     }
 }

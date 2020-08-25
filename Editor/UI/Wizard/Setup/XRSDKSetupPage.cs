@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -64,12 +63,6 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 }
             }
             GUILayout.EndArea();
-        }
-
-        /// <inheritdoc/>
-        public override void Apply()
-        {
-
         }
 
         /// <inheritdoc/>

@@ -1,6 +1,9 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
+using Innoactive.CreatorEditor.PackageManager;
+using Innoactive.CreatorEditor.XRUtils;
 
 namespace Innoactive.CreatorEditor.UI.Wizard
 {
@@ -15,23 +18,24 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 #if UNITY_2019_4_OR_NEWER && !UNITY_EDITOR_OSX
         static CreatorSetupWizard()
         {
-            if (!Application.isBatchMode)
+            if (Application.isBatchMode == false)
             {
-                EditorApplication.update += ShowOnLoad;
+                DependencyManager.OnPostProcess += OnDependenciesRetrieved;
             }
         }
 
-        private static void ShowOnLoad()
+        private static void OnDependenciesRetrieved(object sender, DependencyManager.DependenciesEnabledEventArgs e)
         {
-            EditorApplication.update -= ShowOnLoad;
             CreatorProjectSettings settings = CreatorProjectSettings.Load();
 
             if (settings.IsFirstTimeStarted)
             {
-                Show();
                 settings.IsFirstTimeStarted = false;
                 settings.Save();
+                Show();
             }
+
+            DependencyManager.OnPostProcess -= OnDependenciesRetrieved;
         }
 
         [MenuItem("Innoactive/Creator/Create New Course...")]
@@ -45,6 +49,12 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 new AnalyticsPage(),
                 new AllAboutPage()
             };
+
+            if (EditorReflectionUtils.AssemblyExists(XRAssemblyName) && XRLoaderHelper.GetCurrentXRConfiguration()
+                .Any(loader => loader == XRLoaderHelper.XRConfiguration.XRManagement || loader == XRLoaderHelper.XRConfiguration.None))
+            {
+                pages.Insert(2, new XRSDKSetupPage());
+            }
 
             wizard.Setup("Innoactive Creator - VR Training Setup Wizard", pages);
             wizard.ShowModal();
