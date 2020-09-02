@@ -84,7 +84,7 @@ namespace Innoactive.CreatorEditor.TestTools
             };
         }
 
-        [MenuItem("Innoactive/Creator/Developer/Editor IMGUI Tests Explorer", false, 81)]
+        [MenuItem("Innoactive/Developer/Editor IMGUI Tests Explorer", false, 81)]
         private static void ShowFromMenu()
         {
             GetWindow<EditorImguiTestsExplorer>();
