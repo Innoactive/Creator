@@ -50,8 +50,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 new AllAboutPage()
             };
 
-            if (EditorReflectionUtils.AssemblyExists(XRAssemblyName) && XRLoaderHelper.GetCurrentXRConfiguration()
-                .Any(loader => loader == XRLoaderHelper.XRConfiguration.XRManagement || loader == XRLoaderHelper.XRConfiguration.None))
+            if (EditorReflectionUtils.AssemblyExists(XRAssemblyName) && XRLoaderHelper.GetCurrentXRConfiguration().Any(loader => loader == XRLoaderHelper.XRConfiguration.None))
             {
                 pages.Insert(2, new XRSDKSetupPage());
             }
