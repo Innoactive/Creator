@@ -53,8 +53,13 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 CanProceed = true;
             }
 
-            useCurrentScene = GUILayout.Toggle(useCurrentScene, "Take my current scene", CreatorEditorStyles.Toggle);
-            useCurrentScene = GUILayout.Toggle(!useCurrentScene, "Create a new scene", CreatorEditorStyles.Toggle) == false;
+            GUILayout.BeginHorizontal();
+                GUILayout.Space(CreatorEditorStyles.Indent);
+                GUILayout.BeginVertical();
+                useCurrentScene = GUILayout.Toggle(useCurrentScene, "Take my current scene", CreatorEditorStyles.RadioButton);
+                useCurrentScene = GUILayout.Toggle(!useCurrentScene, "Create a new scene", CreatorEditorStyles.RadioButton) == false;
+                GUILayout.EndVertical();
+            GUILayout.EndHorizontal();
 
             if (useCurrentScene == false)
             {
