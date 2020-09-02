@@ -12,13 +12,13 @@ namespace Innoactive.CreatorEditor.UI.Windows
     internal class OpenCourseWizard : EditorWindow
     {
         private static OpenCourseWizard window;
-        private const string menuPath = "Innoactive/Creator/Open Course...";
+        private const string menuPath = "Innoactive/Open Course...";
         protected EditorIcon logo;
         private string errorMessage;
 
         private int selectedCourseIndex = 0;
 
-        [MenuItem(menuPath, false, 13)]
+        [MenuItem(menuPath, false, 1)]
         private static void ShowWizard()
         {
             if (window == null)
@@ -91,7 +91,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 EditorGUI.BeginDisabledGroup(disableCourseSelection);
 
-                GUILayout.Label("Choose course to use in current scene:", CreatorEditorStyles.Paragraph);
+                GUILayout.Label("Choose training course to use in your current scene:", CreatorEditorStyles.Paragraph);
 
                 string[] courseNames = CourseAssetUtils.DoesAnyCourseExist() ? CourseAssetUtils.GetAllCourses().ToArray() : new[] {""};
                 selectedCourseIndex = EditorGUILayout.Popup(selectedCourseIndex, courseNames, CreatorEditorStyles.Popup);
