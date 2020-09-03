@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using Innoactive.CreatorEditor.PackageManager;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 #if UNITY_XR_MANAGEMENT
+using System.IO;
 using UnityEditor.XR.Management.Metadata;
 using UnityEngine.XR.Management;
 using System.Reflection;
@@ -37,7 +39,8 @@ namespace Innoactive.CreatorEditor.XRUtils
             OculusLegacy,
             OpenVRXR,
             OculusXR,
-            WindowsMR
+            WindowsMR,
+            XRLegacy
         }
 
         /// <summary>
@@ -152,6 +155,7 @@ namespace Innoactive.CreatorEditor.XRUtils
                         enabledSDKs.Add(XRConfiguration.OculusLegacy);
                     }
                 }
+                enabledSDKs.Add(XRConfiguration.XRLegacy);
             }
 #pragma warning restore CS0618
 #endif
@@ -169,7 +173,7 @@ namespace Innoactive.CreatorEditor.XRUtils
         {
             if (XRGeneralSettings.Instance == null)
             {
-                Debug.LogWarning($"{loader} was not enabled since XRGeneralSettings could not be found. Try to enable manually:\nEdit > Project Settings... > XR Plug-in Management and select the provider for {loader}");
+                EditorUtility.DisplayDialog($"Can't enable {loader}!", $"Can't enable {loader} because general settings for XR are missing. Enable them manually here:\nEdit > Project Settings... > XR Plug-in Management\nand then select the provider for your VR headset.", "Continue");
                 return;
             }
 

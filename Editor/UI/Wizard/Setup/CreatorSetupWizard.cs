@@ -14,7 +14,8 @@ namespace Innoactive.CreatorEditor.UI.Wizard
     [InitializeOnLoad]
     internal static class CreatorSetupWizard
     {
-        private const string XRAssemblyName = "Innoactive.Creator.XRInteraction";
+        private const string XRInnoactiveAssemblyName = "Innoactive.Creator.XRInteraction";
+        private const string XRAssemblyName = "Unity.XR.Management";
 #if UNITY_2019_4_OR_NEWER && !UNITY_EDITOR_OSX
         static CreatorSetupWizard()
         {
@@ -50,7 +51,12 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 new AllAboutPage()
             };
 
-            if (EditorReflectionUtils.AssemblyExists(XRAssemblyName) && XRLoaderHelper.GetCurrentXRConfiguration().Any(loader => loader == XRLoaderHelper.XRConfiguration.None))
+            bool isShowingXRSetupPage = EditorReflectionUtils.AssemblyExists(XRInnoactiveAssemblyName);
+            isShowingXRSetupPage &= EditorReflectionUtils.AssemblyExists(XRAssemblyName) == false;
+            isShowingXRSetupPage &= XRLoaderHelper.GetCurrentXRConfiguration()
+                .Contains(XRLoaderHelper.XRConfiguration.XRLegacy);
+
+            if (isShowingXRSetupPage)
             {
                 pages.Insert(2, new XRSDKSetupPage());
             }

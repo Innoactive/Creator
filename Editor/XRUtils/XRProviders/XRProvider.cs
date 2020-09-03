@@ -20,8 +20,8 @@ namespace Innoactive.CreatorEditor.XRUtils
 
         protected virtual void InitializeXRLoader(object sender, EventArgs e)
         {
-            XRLoaderHelper.EnableLoader(Package, XRLoaderName);
             OnPackageEnabled -= InitializeXRLoader;
+            XRLoaderHelper.EnableLoader(Package, XRLoaderName);
         }
     }
 }

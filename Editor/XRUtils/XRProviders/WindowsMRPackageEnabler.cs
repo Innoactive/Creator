@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.XRUtils
     {
         /// <inheritdoc/>
         public override string Package { get; } = "com.unity.xr.windowsmr";
-
+        
         /// <inheritdoc/>
         public override int Priority { get; } = 2;
 
