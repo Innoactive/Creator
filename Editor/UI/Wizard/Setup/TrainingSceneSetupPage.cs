@@ -17,6 +17,9 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         private bool useCurrentScene = true;
 
         [SerializeField]
+        private bool createNewScene = false;
+
+        [SerializeField]
         private string courseName = "My VR Training course";
 
         [SerializeField]
@@ -56,8 +59,19 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             GUILayout.BeginHorizontal();
                 GUILayout.Space(CreatorEditorStyles.Indent);
                 GUILayout.BeginVertical();
-                useCurrentScene = GUILayout.Toggle(useCurrentScene, "Take my current scene", CreatorEditorStyles.RadioButton);
-                useCurrentScene = GUILayout.Toggle(!useCurrentScene, "Create a new scene", CreatorEditorStyles.RadioButton) == false;
+                bool isUseCurrentScene = GUILayout.Toggle(useCurrentScene, "Take my current scene", CreatorEditorStyles.RadioButton);
+                if (useCurrentScene == false && isUseCurrentScene)
+                {
+                    useCurrentScene = true;
+                    createNewScene = false;
+                }
+
+                bool isCreateNewScene = GUILayout.Toggle(createNewScene, "Create a new scene", CreatorEditorStyles.RadioButton);
+                if (createNewScene == false && isCreateNewScene)
+                {
+                    createNewScene = true;
+                    useCurrentScene = false;
+                }
                 GUILayout.EndVertical();
             GUILayout.EndHorizontal();
 
