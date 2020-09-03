@@ -61,7 +61,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             if (RuntimeConfigurator.Exists == false)
             {
-                EditorGUILayout.HelpBox("The current scene is not a training scene. No course can be created. To automatically setup the scene, select \"Innoactive > Training > Setup Current Scene as Training Scene\".", MessageType.Error);
+                EditorGUILayout.HelpBox("The current scene is not a training scene. No course can be created. To automatically setup the scene, select \"Innoactive > Setup Training Scene\".", MessageType.Error);
             }
 
             EditorGUI.BeginDisabledGroup(RuntimeConfigurator.Exists == false);
