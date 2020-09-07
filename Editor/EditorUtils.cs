@@ -96,6 +96,16 @@ namespace Innoactive.CreatorEditor
             return "unknown";
         }
 
+        /// <summary>
+        /// Gets .NET API compatibility level for current BuildTargetGroup.
+        /// </summary>
+        internal static ApiCompatibilityLevel GetCurrentCompatibilityLevel()
+        {
+            BuildTarget buildTarget = EditorUserBuildSettings.activeBuildTarget;
+            BuildTargetGroup buildTargetGroup = BuildPipeline.GetBuildTargetGroup(buildTarget);
+            return PlayerSettings.GetApiCompatibilityLevel(buildTargetGroup);
+        }
+
         private static void ResolveCoreFolder(PlayModeStateChange state)
         {
             ResolveCoreFolder();

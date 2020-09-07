@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Configuration.Modes;
@@ -11,6 +10,11 @@ namespace Innoactive.Creator.Tests.Utils
     /// </summary>
     public class DynamicRuntimeConfiguration : DefaultRuntimeConfiguration
     {
+        public DynamicRuntimeConfiguration()
+        {
+            Modes = new BaseModeHandler(new List<IMode> {DefaultMode});
+        }
+
         public void SetAvailableModes(IList<IMode> modes)
         {
             Modes = new BaseModeHandler(modes.ToList());
