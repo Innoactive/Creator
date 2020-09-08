@@ -96,6 +96,25 @@ namespace Innoactive.CreatorEditor
             return "unknown";
         }
 
+        /// <summary>
+        /// Gets .NET API compatibility level for current BuildTargetGroup.
+        /// </summary>
+        internal static ApiCompatibilityLevel GetCurrentCompatibilityLevel()
+        {
+            BuildTarget buildTarget = EditorUserBuildSettings.activeBuildTarget;
+            BuildTargetGroup buildTargetGroup = BuildPipeline.GetBuildTargetGroup(buildTarget);
+            return PlayerSettings.GetApiCompatibilityLevel(buildTargetGroup);
+        }
+      
+        /// <summary>
+        /// Returns a list of scriptable objects from provided type;
+        /// </summary>
+        internal static IEnumerable<T> GetAllScriptableObjects<T>() where T : ScriptableObject
+        {
+            string[] guids = AssetDatabase.FindAssets("t:"+ typeof(T).Name);
+            return guids.Select(AssetDatabase.GUIDToAssetPath).Select(AssetDatabase.LoadAssetAtPath<T>);
+        }
+
         private static void ResolveCoreFolder(PlayModeStateChange state)
         {
             ResolveCoreFolder();

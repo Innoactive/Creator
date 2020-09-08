@@ -1,62 +1,138 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEditor.PackageManager.Requests;
 using Debug = UnityEngine.Debug;
+using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 namespace Innoactive.CreatorEditor.PackageManager
 {
     /// <summary>
-    /// Handles differnt Unity's Package Manager requests.
+    /// Handles different Unity's Package Manager requests.
     /// </summary>
     [InitializeOnLoad]
-    internal static class PackageOperationsManager
+    internal class PackageOperationsManager
     {
-        private enum PackageRequestStatus
+        public class PackageEnabledEventArgs : EventArgs
         {
-            None,
-            Init,
-            Listing,
-            Adding,
-            WaitingForPackage,
-            Failure
+            public readonly PackageInfo PackageInfo;
+
+            public PackageEnabledEventArgs(PackageInfo packageInfo)
+            {
+                PackageInfo = packageInfo;
+            }
         }
 
-        private static string currentPackage;
-        private static ListRequest listRequest;
-        private static AddRequest addRequest;
-        private static PackageCollection packageCollection;
+        public class PackageDisabledEventArgs : EventArgs
+        {
+            public readonly string Package;
+
+            public PackageDisabledEventArgs(string package)
+            {
+                Package = package;
+            }
+        }
 
         /// <summary>
-        /// List of currently loaded packages in the Unity's Package Manager.
+        /// Emitted when a package was successfully installed.
         /// </summary>
-        public static PackageCollection Packages { get { return packageCollection; } }
+        public static event EventHandler<PackageEnabledEventArgs> OnPackageEnabled;
 
-        private static PackageRequestStatus packageRequestStatus;
+        /// <summary>
+        /// Emitted when a package was successfully removed.
+        /// </summary>
+        public static event EventHandler<PackageDisabledEventArgs> OnPackageDisabled;
+
+        /// <summary>
+        /// List of currently loaded packages in the Package Manager.
+        /// </summary>
+        public static PackageCollection Packages { get; private set; }
 
         static PackageOperationsManager()
         {
-            packageRequestStatus = PackageRequestStatus.Init;
-            EditorApplication.update += EditorUpdate;
+            FetchPackageList();
         }
 
-        /// <summary>
-        /// Adds a package dependency to the Project.
-        /// </summary>
-        /// <param name="package">A string representing the package to be added.</param>
-        public static void LoadPackage(string package)
+        private static async void FetchPackageList()
         {
-            if (string.IsNullOrEmpty(currentPackage))
-            {
-                currentPackage = package;
-                packageRequestStatus = PackageRequestStatus.Adding;
+            ListRequest listRequest2 = Client.List();
 
-                Debug.LogFormat("Enabling {0}.", package);
-                EditorApplication.update += EditorUpdate;
+            while (listRequest2.IsCompleted == false)
+            {
+                await Task.Delay(100);
+            }
+
+            if (listRequest2.Status == StatusCode.Failure)
+            {
+                Debug.LogErrorFormat("There was an error trying to retrieve a package list from the Package Manager - Error Code: [{0}] .\n{1}", listRequest2.Error.errorCode, listRequest2.Error.message);
             }
             else
             {
-                Debug.LogErrorFormat("Package {0} cant be loaded while {1} is being loaded.", package, currentPackage);
+                Packages = listRequest2.Result;
+            }
+        }
+
+        /// <summary>
+        /// Adds a package to the Package Manager.
+        /// </summary>
+        /// <param name="package">A string representing the package to be added.</param>
+        public static async void LoadPackage(string package)
+        {
+            if (string.IsNullOrEmpty(package) || IsPackageLoaded(package) || EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                return;
+            }
+
+            AddRequest addRequest = Client.Add(package);
+            Debug.LogFormat("Enabling {0}.", package);
+
+            while (addRequest.IsCompleted == false)
+            {
+                await Task.Delay(100);
+            }
+
+            if (addRequest.Status == StatusCode.Failure)
+            {
+                Debug.LogErrorFormat("There was an error trying to enable '{0}' - Error Code: [{1}] .\n{2}", package, addRequest.Error.errorCode, addRequest.Error.message);
+            }
+            else
+            {
+                OnPackageEnabled?.Invoke(null, new PackageEnabledEventArgs(addRequest.Result));
+                Debug.LogFormat("The package '{0} version {1}' has been automatically added", addRequest.Result.displayName, addRequest.Result.version);
+            }
+        }
+
+        /// <summary>
+        /// Removes a package from the Package Manager.
+        /// </summary>
+        /// <param name="package">A string representing the package to be removed.</param>
+        public static async void RemovePackage(string package)
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode == false)
+            {
+                if (IsPackageLoaded(package))
+                {
+                    RemoveRequest removeRequest = Client.Remove(package);
+                    Debug.LogFormat("Removing {0}.", package);
+
+                    while (removeRequest.IsCompleted == false)
+                    {
+                        await Task.Delay(100);
+                    }
+
+                    if (removeRequest.Status >= StatusCode.Failure)
+                    {
+                        Debug.LogErrorFormat("There was an error trying to enable '{0}' - Error Code: [{1}] .\n{2}",
+                            package, removeRequest.Error.errorCode, removeRequest.Error.message);
+                    }
+                    else
+                    {
+                        OnPackageDisabled?.Invoke(null, new PackageDisabledEventArgs(removeRequest.PackageIdOrName));
+                        Debug.LogFormat("The package '{0} has been removed", removeRequest.PackageIdOrName);
+                    }
+                }
             }
         }
 
@@ -69,98 +145,10 @@ namespace Innoactive.CreatorEditor.PackageManager
             if (package.Contains('@'))
             {
                 string[] packageData = package.Split('@');
-                return packageCollection != null && packageCollection.Any(packageInfo => packageInfo.name == packageData.First() && packageInfo.version == packageData.Last());
+                return Packages != null && Packages.Any(packageInfo => packageInfo.name == packageData.First() && packageInfo.version == packageData.Last());
             }
 
-            return packageCollection != null && packageCollection.Any(packageInfo => packageInfo.name == package);
-        }
-
-        private static void EditorUpdate()
-        {
-            if (EditorApplication.isCompiling || EditorApplication.isPlaying)
-            {
-                return;
-            }
-
-            switch (packageRequestStatus)
-            {
-                case PackageRequestStatus.Init:
-                    RequestPackageList();
-                    break;
-                case PackageRequestStatus.Listing:
-                    RetrievePackageListResult();
-                    break;
-                case PackageRequestStatus.Adding:
-                    RequestAddPackage();
-                    break;
-                case PackageRequestStatus.WaitingForPackage:
-                    WaitForPackageStatus();
-                    break;
-                default:
-                    StopListeningEditorUpdate();
-                    break;
-            }
-        }
-
-        private static void RequestPackageList()
-        {
-            listRequest = Client.List();
-            packageRequestStatus = PackageRequestStatus.Listing;
-        }
-
-        private static void RetrievePackageListResult()
-        {
-            if (listRequest == null || listRequest.IsCompleted == false)
-            {
-                return;
-            }
-
-            if (listRequest.Status == StatusCode.Failure)
-            {
-                packageRequestStatus = PackageRequestStatus.Failure;
-                Debug.LogErrorFormat("There was an error trying to retrieve a package list from the Package Manager - Error Code: [{0}] .\n{1}", listRequest.Error.errorCode, listRequest.Error.message);
-            }
-            else
-            {
-                packageRequestStatus = PackageRequestStatus.None;
-                packageCollection = listRequest.Result;
-            }
-
-            listRequest = null;
-        }
-
-        private static void RequestAddPackage()
-        {
-            packageRequestStatus = PackageRequestStatus.WaitingForPackage;
-            addRequest = Client.Add(currentPackage);
-        }
-
-        private static void WaitForPackageStatus()
-        {
-            if (addRequest == null || addRequest.IsCompleted == false)
-            {
-                return;
-            }
-
-            if (addRequest.Status >= StatusCode.Failure)
-            {
-                packageRequestStatus = PackageRequestStatus.Failure;
-                Debug.LogErrorFormat("There was an error trying to enable '{0}' - Error Code: [{1}] .\n{2}", currentPackage, addRequest.Error.errorCode, addRequest.Error.message);
-            }
-            else
-            {
-                packageRequestStatus = PackageRequestStatus.None;
-                Debug.LogFormat("The package '{0} version {1}' has been automatically added", addRequest.Result.displayName, addRequest.Result.version);
-            }
-
-            addRequest = null;
-            currentPackage = null;
-        }
-
-        private static void StopListeningEditorUpdate()
-        {
-            packageRequestStatus = PackageRequestStatus.None;
-            EditorApplication.update -= EditorUpdate;
+            return Packages != null && Packages.Any(packageInfo => packageInfo.name == package);
         }
     }
 }

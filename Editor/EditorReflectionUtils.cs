@@ -66,6 +66,19 @@ namespace Innoactive.CreatorEditor
             return AppDomain.CurrentDomain.GetAssemblies().Any(assembly => assembly.GetName().Name == name);
         }
 
+        public static bool ClassExists(string assemblyName, string className)
+        {
+            Assembly assembly = AppDomain.CurrentDomain.GetAssemblies()
+                .FirstOrDefault(a => a.GetName().Name == assemblyName);
+
+            if (assembly == null)
+            {
+                return false;
+            }
+
+            return assembly.GetType(className) != null;
+        }
+
         /// <summary>
         /// Returns all properties and fields of the object that have to be drawn by training drawers.
         /// </summary>

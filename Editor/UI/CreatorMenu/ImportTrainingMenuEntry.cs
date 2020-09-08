@@ -14,7 +14,7 @@ namespace Innoactive.CreatorEditor.CreatorMenu
         /// <summary>
         /// Allows to import trainings.
         /// </summary>
-        [MenuItem("Innoactive/Creator/Import Training Course", false, 14)]
+        [MenuItem("Innoactive/Import Training Course", false, 14)]
         private static void ImportTraining()
         {
             string path = EditorUtility.OpenFilePanel("Select your training", ".", String.Empty);

@@ -7,7 +7,7 @@ namespace Innoactive.CreatorEditor.Analytics
 {
     internal class TrackingSettingsWindow : EditorWindow
     {
-        private const string menuPath = "Innoactive/Creator/Windows/Analytics Settings";
+        private const string menuPath = "Innoactive/Settings/Analytics Settings";
 
         private static TrackingSettingsWindow window;
 
