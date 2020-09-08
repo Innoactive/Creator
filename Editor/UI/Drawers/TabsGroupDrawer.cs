@@ -27,20 +27,8 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             Rect tabValueRect = new Rect(rect.x, rect.y + tabsHeight, rect.width, 0);
 
-            for (int i = 0; i < tabsGroup.Tabs.Count; i++)
-            {
-                EditorGUILayout.BeginHorizontal();
-                {
-                    if (i == tabsGroup.Selected)
-                    {
-                        // Draw the object under the tab.
-                        rect.height = tabsHeight + tabValueDrawer.Draw(tabValueRect, tabsGroup.Tabs[tabsGroup.Selected].GetValue(), ChangeValueCallback, GUIContent.none).height;
-
-                    }
-                }
-                EditorGUILayout.EndHorizontal();
-            }
-
+            // Draw the object under the tab.
+            rect.height = tabsHeight + tabValueDrawer.Draw(tabValueRect, tabsGroup.Tabs[tabsGroup.Selected].GetValue(), ChangeValueCallback, GUIContent.none).height;
 
             return rect;
         }
@@ -62,6 +50,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                         tabsGroup.Tabs[oldSelected].OnUnselect();
                         tabsGroup.Tabs[selected].OnSelected();
                         tabsGroup.Selected = selected;
+                        GUIUtility.keyboardControl = 0;
                         return tabsGroup;
                     },
                     () =>
@@ -69,6 +58,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                         tabsGroup.Tabs[selected].OnUnselect();
                         tabsGroup.Tabs[oldSelected].OnSelected();
                         tabsGroup.Selected = oldSelected;
+                        GUIUtility.keyboardControl = 0;
                         return tabsGroup;
                     },
                     changeValueCallback);
