@@ -16,7 +16,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             rect.height = EditorDrawingHelper.SingleLineHeight;
 
             float value = (float)currentValue;
-            float newValue = EditorGUI.DelayedFloatField(rect, label, value);
+            float newValue = EditorGUI.FloatField(rect, label, value);
 
             // Rounding error can't take place here.
             // ReSharper disable once CompareOfFloatsByEqualityOperator

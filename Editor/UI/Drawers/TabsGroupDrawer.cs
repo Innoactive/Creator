@@ -27,8 +27,20 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             Rect tabValueRect = new Rect(rect.x, rect.y + tabsHeight, rect.width, 0);
 
-            // Draw the object under the tab.
-            rect.height = tabsHeight + tabValueDrawer.Draw(tabValueRect, tabsGroup.Tabs[tabsGroup.Selected].GetValue(), ChangeValueCallback, GUIContent.none).height;
+            for (int i = 0; i < tabsGroup.Tabs.Count; i++)
+            {
+                EditorGUILayout.BeginHorizontal();
+                {
+                    if (i == tabsGroup.Selected)
+                    {
+                        // Draw the object under the tab.
+                        rect.height = tabsHeight + tabValueDrawer.Draw(tabValueRect, tabsGroup.Tabs[tabsGroup.Selected].GetValue(), ChangeValueCallback, GUIContent.none).height;
+
+                    }
+                }
+                EditorGUILayout.EndHorizontal();
+            }
+
 
             return rect;
         }
