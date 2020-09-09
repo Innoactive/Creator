@@ -3,16 +3,17 @@ using UnityEngine;
 using System.IO;
 using System.Linq;
 using System.IO.Compression;
+using System.Collections.Generic;
 
 namespace Innoactive.Creator.Core.IO
 {
     /// <summary>
     /// Android implementation of <see cref="IPlatformFileSystem"/>.
     /// </summary>
-    public class AndroidFileSystem : DefaultFileSystem, IPlatformFileSystem
+    public class AndroidFileSystem : DefaultFileSystem
     {
         private readonly string rootFolder;
-        private readonly string[] streamingAssetsFilesPath;
+        private readonly IEnumerable<string> cachedStreamingAssetsFilesPath;
 
         private const string StreamingAssetsArchivePath = "assets/";
         private const string ExcludedArchivePath = "assets/bin/";
@@ -23,11 +24,21 @@ namespace Innoactive.Creator.Core.IO
 
             using (ZipArchive archive = ZipFile.OpenRead(rootFolder))
             {
-                streamingAssetsFilesPath = archive.Entries.Select(entry => entry.FullName)
+                cachedStreamingAssetsFilesPath = archive.Entries.Select(entry => entry.FullName)
                     .Where(name => name.StartsWith(StreamingAssetsArchivePath))
-                    .Where(name => name.StartsWith(ExcludedArchivePath) == false)
-                    .ToArray();
+                    .Where(name => name.StartsWith(ExcludedArchivePath) == false);
             }
+        }
+
+        /// <inheritdoc />
+        /// <remarks>In Android, <paramref name="searchPattern"/> does not support wildcard characters.</remarks>
+        public override IEnumerable<string> FetchStreamingAssetsFilesAt(string path, string searchPattern)
+        {
+            string relativePath = Path.Combine("assets", path);
+            string[] wildCardChars = { "?", "_", "*", "%", "#" };
+            searchPattern = wildCardChars.Aggregate(searchPattern, (current, wildCardChar) => current.Replace(wildCardChar, string.Empty));
+
+            return cachedStreamingAssetsFilesPath.Where(filePath => filePath.StartsWith(relativePath) && filePath.Contains(searchPattern));
         }
 
         /// <inheritdoc />
@@ -58,7 +69,7 @@ namespace Innoactive.Creator.Core.IO
         /// <inheritdoc />
         protected override bool FileExistsInStreamingAssets(string filePath)
         {
-            return streamingAssetsFilesPath.Any(path => path == filePath);
+            return cachedStreamingAssetsFilesPath.Any(path => path == filePath);
         }
 
         /// <inheritdoc />

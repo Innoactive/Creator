@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Innoactive.Creator.Core.IO
@@ -80,6 +81,19 @@ namespace Innoactive.Creator.Core.IO
             }
 
             return platformFileSystem.Exists(filePath);
+        }
+
+        /// <summary>
+        /// Returns the names of files (including their paths) that match the specified search pattern in the specified directory relative to the Streaming Assets folder.
+        /// </summary>
+        /// <param name="path">The relative path to the Streaming Assets folder. This string is not case-sensitive.</param>
+        /// <param name="searchPattern">
+        /// The search string to match against the names of files in <paramref name="path" />.
+        /// Depending on the platform, this parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see implementations of <see cref="IPlatformFileSystem"/>), but doesn't support regular expressions.
+        /// </param>
+        public static IEnumerable<string> FetchStreamingAssetsFilesAt(string path, string searchPattern)
+        {
+            return platformFileSystem.FetchStreamingAssetsFilesAt(path, searchPattern);
         }
 
         private static IPlatformFileSystem CreatePlatformFileSystem()

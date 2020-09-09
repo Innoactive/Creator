@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Innoactive.Creator.Core.IO
@@ -67,6 +68,19 @@ namespace Innoactive.Creator.Core.IO
         {
             filePath = NormalizePath(filePath);
             return FileExistsInStreamingAssets(filePath) || FileExistsInPersistentData(filePath);
+        }
+
+        /// <inheritdoc />
+        /// <remarks>
+        /// The following wildcard specifiers are permitted in <paramref name="searchPattern"/>:
+        /// Wildcard specifier	    Matches
+        /// * (asterisk)	        Zero or more characters in that position.
+        /// ? (question mark)	    Zero or one character in that position.
+        /// </remarks>
+        public virtual IEnumerable<string> FetchStreamingAssetsFilesAt(string path, string searchPattern)
+        {
+            string relativePath = Path.Combine(StreamingAssetsPath, path);
+            return Directory.GetFiles(relativePath, searchPattern);
         }
 
         /// <summary>
