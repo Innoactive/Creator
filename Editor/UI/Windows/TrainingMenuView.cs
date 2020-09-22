@@ -1,5 +1,7 @@
 using System;
 using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Validation;
+using Innoactive.CreatorEditor.CourseValidation;
 using Innoactive.CreatorEditor.UndoRedo;
 using UnityEditor;
 using UnityEngine;
@@ -88,6 +90,8 @@ namespace Innoactive.CreatorEditor.UI.Windows
         private ChangeNamePopup changeNamePopup;
         private RenameCoursePopup renameCoursePopup;
 
+        private ValidationHandler validation = new ValidationHandler();
+
         /// <summary>
         /// Initialises the windows with the correct training and TrainingWindow (parent).
         /// This has to be done after every time the editor reloaded the assembly (recompile).
@@ -131,9 +135,30 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
                 GUILayout.BeginVertical("box");
                 {
-                    DrawExtendToggle();
-
                     EditorColorUtils.ResetBackgroundColor();
+
+                    if (GUI.Button(new Rect(ChapterPaddingTop, ChapterPaddingTop, 120, 28), "Validate Course"))
+                    {
+                        ValidationReport report = validation.Validate(Course, Course);
+                        report.Entries.ForEach(entry =>
+                        {
+                            if (entry.ErrorLevel == ValidationErrorLevel.HINT)
+                            {
+                                Debug.Log(entry.ToString());
+                            }
+                            else if (entry.ErrorLevel == ValidationErrorLevel.WARNING)
+                            {
+                                Debug.LogWarning(entry.ToString());
+                            }
+                            else if (entry.ErrorLevel == ValidationErrorLevel.ERROR || entry.ErrorLevel == ValidationErrorLevel.FATAL)
+                            {
+                                Debug.LogError(entry.ToString());
+                            }
+                        });
+                        Debug.Log($"Validation completed in {report.GenerationTime}ms");
+                    }
+
+                    DrawExtendToggle();
 
                     Vector2 deltaPosition = GUILayout.BeginScrollView(scrollPosition);
                     {

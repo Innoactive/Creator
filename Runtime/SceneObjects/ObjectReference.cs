@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Innoactive.Creator.Core.Exceptions;
+using Innoactive.Creator.Core.Runtime.Properties;
 
 namespace Innoactive.Creator.Core.SceneObjects
 {
@@ -7,7 +9,7 @@ namespace Innoactive.Creator.Core.SceneObjects
     /// Base class for references to training scene objects and their properties.
     /// </summary>
     [DataContract(IsReference = true)]
-    public abstract class ObjectReference<T> : UniqueNameReference where T : class
+    public abstract class ObjectReference<T> : UniqueNameReference, ICanBeEmpty where T : class
     {
         public override string UniqueName
         {
@@ -56,5 +58,17 @@ namespace Innoactive.Creator.Core.SceneObjects
         }
 
         protected abstract T DetermineValue(T cachedValue);
+
+        public bool IsEmpty()
+        {
+            try
+            {
+                return string.IsNullOrEmpty(UniqueName) || Value == null;
+            }
+            catch (MissingEntityException ex)
+            {
+                return true;
+            }
+        }
     }
 }
