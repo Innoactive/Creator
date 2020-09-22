@@ -1,5 +1,8 @@
 using System;
 using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Validation;
+using Innoactive.CreatorEditor.Configuration;
+using Innoactive.CreatorEditor.CourseValidation;
 using Innoactive.CreatorEditor.UndoRedo;
 using UnityEditor;
 using UnityEngine;
@@ -131,9 +134,8 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
                 GUILayout.BeginVertical("box");
                 {
-                    DrawExtendToggle();
-
                     EditorColorUtils.ResetBackgroundColor();
+                    DrawExtendToggle();
 
                     Vector2 deltaPosition = GUILayout.BeginScrollView(scrollPosition);
                     {
@@ -255,6 +257,18 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 EditorColorUtils.SetTransparency(isActiveChapter ? 0.8f : 0.25f);
                 GUILayout.Label(folderIcon.Texture, GUILayout.Width(ButtonSize), GUILayout.Height(ButtonSize));
                 EditorColorUtils.ResetColor();
+
+                if (EditorConfigurator.Instance.Validation.IsAllowedToValidate())
+                {
+                    IContext context = EditorConfigurator.Instance.Validation.ContextResolver.FindContext(Course.Data.Chapters[position].Data, Course);
+                    if (EditorConfigurator.Instance.Validation.LastReport.GetEntriesFor(context).Count > 0)
+                    {
+                        EditorColorUtils.SetBackgroundColor(Color.white);
+                        Rect rect = GUILayoutUtility.GetLastRect();
+                        GUI.DrawTexture(new Rect(rect.x - 4, rect.y + 8, 16, 16), EditorGUIUtility.IconContent("Warning").image);
+                        EditorColorUtils.ResetBackgroundColor();
+                    }
+                }
 
                 GUIStyle style = new GUIStyle(GUI.skin.label);
                 style.alignment = TextAnchor.UpperLeft;

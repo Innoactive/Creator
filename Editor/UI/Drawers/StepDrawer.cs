@@ -1,5 +1,6 @@
 using System;
 using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.Configuration;
 using Innoactive.CreatorEditor.Tabs;
 using UnityEditor;
 using UnityEngine;
@@ -40,7 +41,16 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             if (activeTab == null || lastStep != step)
             {
                 GUIContent behaviorLabel = new GUIContent("Behaviors");
+                if (EditorConfigurator.Instance.Validation.LastReport != null && EditorConfigurator.Instance.Validation.LastReport.GetBehaviorEntriesFor(step).Count > 0)
+                {
+                    behaviorLabel.image = EditorGUIUtility.IconContent("Warning").image;
+                }
+
                 GUIContent transitionLabel = new GUIContent("Transitions");
+                if (EditorConfigurator.Instance.Validation.LastReport != null && EditorConfigurator.Instance.Validation.LastReport.GetConditionEntriesFor(step).Count > 0)
+                {
+                    transitionLabel.image = EditorGUIUtility.IconContent("Warning").image;
+                }
 
                 activeTab = new TabsGroup(
                     step.Metadata,

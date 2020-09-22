@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.Tabs;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.CreatorEditor.Configuration;
+using Innoactive.CreatorEditor.CourseValidation;
 using Innoactive.CreatorEditor.UI.Drawers;
 using UnityEditor;
 using UnityEngine;
@@ -51,6 +54,14 @@ namespace Innoactive.CreatorEditor.UI.Windows
         private void OnInspectorUpdate()
         {
             Repaint();
+        }
+
+        void OnFocus()
+        {
+            if (EditorConfigurator.Instance.Validation.IsAllowedToValidate())
+            {
+                EditorConfigurator.Instance.Validation.Validate(step.Data, GlobalEditorHandler.GetCurrentCourse());
+            }
         }
 
         private void OnGUI()

@@ -79,6 +79,36 @@ namespace Innoactive.CreatorEditor
             return assembly.GetType(className) != null;
         }
 
+        public static IEnumerable<MemberInfo> GetAllFieldsAndProperties(object value)
+        {
+            IEnumerable<MemberInfo> result = new List<MemberInfo>();
+
+            if (value == null)
+            {
+                return result;
+            }
+
+            Type type = value.GetType();
+            while (type != null)
+            {
+                result = result.Concat(type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                    .Where(propertyInfo => propertyInfo.FieldType.GetInterfaces().Contains(typeof(IMetadata)) == false));
+
+                type = type.BaseType;
+            }
+
+            type = value.GetType();
+            while (type != null)
+            {
+                result = result.Concat(type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                    .Where(propertyInfo => propertyInfo.PropertyType.GetInterfaces().Contains(typeof(IMetadata)) == false));
+
+                type = type.BaseType;
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Returns all properties and fields of the object that have to be drawn by training drawers.
         /// </summary>
