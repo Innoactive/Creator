@@ -4,23 +4,23 @@ The Step Inspector is a window where you can view and modify steps of your train
 
 ## Undo and Redo
 
-You can undo and redo all changes in the [Workflow Editor](workflow-editor.md) and Step Inspector by pressing `CTRL` + `Z` and `CTRL` + `Y` on the keyboard.
+You can undo and redo all changes in the [Workflow window](workflow-window.md) and Step Inspector by pressing `CTRL` + `Z` and `CTRL` + `Y` on the keyboard.
 
 ## Open the Step Inspector
 
-To open the Step Inspector, click on any step in the [Workflow Editor](workflow-editor.md).
+To open the Step Inspector, click on any step in the [Workflow window](workflow-window.md).
 
 [![Open the Step Inspector](../images/step-inspector/open-inspector.gif "How to open the Step Inspector.")](../images/step-inspector/open-inspector.gif)
 
 ## Change Name of a Step
 
-To rename a step, click on it in the [Workflow Editor](workflow-editor.md) and change the name in the `Step Name` field at the top of the Step Inspector.
+To rename a step, click on it in the [Workflow window](workflow-window.md) and change the name in the `Step Name` field at the top of the Step Inspector.
 
 [![Change name of a step](../images/step-inspector/rename-step.gif "How to change the name of a step.")](../images/step-inspector/rename-step.gif)
 
 ## Change Description of a Step
 
-To change the description of a step, click on the step in the [Workflow Editor](workflow-editor.md) and change the description in the `Description` field at the top of the Step Inspector.
+To change the description of a step, click on the step in the [Workflow window](workflow-window.md) and change the description in the `Description` field at the top of the Step Inspector.
 
 [![Change description of a step](../images/step-inspector/change-description.gif "How to change the description of a step.")](../images/step-inspector/change-description.gif)
 
@@ -34,8 +34,8 @@ Learn more about the [default behaviors](default-behaviors.md).
 
 ## Add and Remove Transitions
 
-To add a transition in the Step Inspector, click on the `Transitions` tab and the `Add Transition` button. It will point to the end of the chapter by default. To choose another destination, see [the article about Workflow Editor](workflow-editor.md#add-transitions).  
-You can remove a transition by clicking on the <img src="../images/step-inspector/icon_delete_dark.png" alt="Trash Can Icon" height="16px"/> button in the upper right corner of it.
+To add a transition in the Step Inspector, click on the `Transitions` tab and the `Add Transition` button. It will point to the end of the chapter by default. To choose another destination see the [Workflow window](workflow-window.md#add-transitions). 
+You can remove a transition by clicking on the <img src="../images/step-inspector/icon_delete_dark.png" alt="Trash Can Icon" height="16px"/> button in the upper right corner.
 
 [![Add a transition to a step](../images/step-inspector/add-transition.gif "How to add a transition to a step.")](../images/step-inspector/add-transition.gif)
 

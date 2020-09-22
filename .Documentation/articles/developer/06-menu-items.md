@@ -64,7 +64,7 @@ public class CustomEditorConfiguration : DefaultEditorConfiguration
 }
 ```
 
-This JSON file stores display settings for all menu items in the project. You can modify it through `Innoactive > Creator > Developer > Allowed Menu Items Settings`.
+This JSON file stores display settings for all menu items in the project. You can modify it through `Innoactive > Developer > Allowed Menu Items Settings`.
                          
 ![Open Allowed Menu Items Settings](../images/menu-items/open-allowed-menu-items-settings.png "Open Allowed Menu Items Settings")
 
