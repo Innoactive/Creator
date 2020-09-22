@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Innoactive.Creator.Core.Tabs;
+using Innoactive.CreatorEditor.Tabs;
 using UnityEditor;
 using UnityEngine;
 
@@ -40,7 +40,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             GUIContent[] labels = tabsGroup.Tabs.Select(tab => tab.Label).ToArray();
 
             int oldSelected = tabsGroup.Selected;
-
             int selected = GUI.Toolbar(rect, oldSelected, labels);
 
             if (selected != oldSelected)
