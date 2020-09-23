@@ -89,6 +89,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
             step = newStep;
         }
 
+        public IStep GetStep()
+        {
+            return step;
+        }
+
         internal void ResetStepView()
         {
             if (EditorUtils.IsWindowOpened<StepWindow>() == false || step == null)

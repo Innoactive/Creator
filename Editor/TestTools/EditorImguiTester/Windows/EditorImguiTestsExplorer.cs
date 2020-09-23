@@ -24,12 +24,7 @@ namespace Innoactive.CreatorEditor.TestTools
         {
             get
             {
-                if (EditorWindowTestRecorder.IsRecording)
-                {
-                    return true;
-                }
-
-                return EditorUtils.IsWindowOpened<EditorWindowTestPlayer>() && EditorWindowTestPlayer.IsPlaying;
+                return EditorWindowTestRecorder.IsRecording;
             }
         }
 
@@ -268,7 +263,7 @@ namespace Innoactive.CreatorEditor.TestTools
             EditorGUILayout.EndHorizontal();
         }
 
-        private void DrawTestStateIndicator(Vector2 position, TestState state)
+        private static void DrawTestStateIndicator(Vector2 position, TestState state)
         {
             GUI.DrawTexture(new Rect(position, new Vector2(EditorGUIUtility.singleLineHeight, EditorGUIUtility.singleLineHeight)), iconsForStates[state]);
         }
