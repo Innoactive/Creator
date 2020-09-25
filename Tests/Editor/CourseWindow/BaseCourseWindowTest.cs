@@ -11,7 +11,7 @@ namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
     /// <summary>
     /// Base class for all training window tests.
     /// </summary>
-    internal abstract class BaseTest : EditorImguiTest<CourseWindow>
+    internal abstract class BaseCourseWindowTest : EditorImguiTest<CourseWindow>
     {
         /// <summary>
         /// Returns all <see cref="ITransition"/>s contained in given <see cref="IStep"/>.
@@ -49,16 +49,10 @@ namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
         }
 
         /// <inheritdoc />
-        public override string GivenDescription
-        {
-            get { return "A training window with empty training and fixed size of 1024x512 pixels."; }
-        }
+        public override string GivenDescription => "A training window with empty training and fixed size of 1024x512 pixels.";
 
         /// <inheritdoc />
-        protected override string AssetFolderForRecordedActions
-        {
-            get { return EditorUtils.GetCoreFolder() + "/Tests/Editor/TrainingWindow/Records"; }
-        }
+        protected override string AssetFolderForRecordedActions => EditorUtils.GetCoreFolder() + "/Tests/Editor/CourseWindow/Records";
 
         /// <inheritdoc />
         protected override CourseWindow Given()
@@ -70,11 +64,13 @@ namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 
             GlobalEditorHandler.SetStrategy(new EmptyTestStrategy());
 
+            EditorUtils.ResetKeyboardElementFocus();
             CourseWindow window = ScriptableObject.CreateInstance<CourseWindow>();
             window.ShowUtility();
             window.position = new Rect(Vector2.zero, window.position.size);
             window.minSize = window.maxSize = new Vector2(1024f, 512f);
             window.SetCourse(new Course("Test", new Chapter("Test", null)));
+            window.Focus();
 
             return window;
         }

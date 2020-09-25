@@ -9,25 +9,13 @@ namespace Innoactive.CreatorEditor.Tests.CourseWizardTests
     {
         private const string courseName = "very_unique_test_course_name_which_you_should_never_use_1534";
 
-        public override string GivenDescription
-        {
-            get { return "Opened training wizard window."; }
-        }
+        public override string GivenDescription => "Opened training wizard window.";
 
-        public override string WhenDescription
-        {
-            get { return $"Type in \"{courseName}\". Click 'Create training' button."; }
-        }
+        public override string WhenDescription => $"Type in \"{courseName}\". Click 'Create training' button.";
 
-        public override string ThenDescription
-        {
-            get { return "Training window is opened."; }
-        }
+        public override string ThenDescription => "Training window is opened.";
 
-        protected override string AssetFolderForRecordedActions
-        {
-            get { return EditorUtils.GetCoreFolder() + "/Tests/Editor/TrainingWizard/Records"; }
-        }
+        protected override string AssetFolderForRecordedActions => EditorUtils.GetCoreFolder() + "/Tests/Editor/CourseCreationWizard/Records";
 
         protected override CourseCreationWizard Given()
         {

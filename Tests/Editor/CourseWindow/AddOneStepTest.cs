@@ -6,25 +6,13 @@ using Innoactive.CreatorEditor.UI.Windows;
 
 namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
 {
-    internal class AddOneStepTest : BaseTest
+    internal class AddOneStepTest : BaseCourseWindowTest
     {
         /// <inheritdoc />
-        public override string WhenDescription
-        {
-            get
-            {
-                return "Add one step to the workflow. Connect it to the start of the chapter.";
-            }
-        }
+        public override string WhenDescription => "Add one step to the workflow. Connect it to the start of the chapter.";
 
         /// <inheritdoc />
-        public override string ThenDescription
-        {
-            get
-            {
-                return "There is a training with exactly one step created.";
-            }
-        }
+        public override string ThenDescription => "There is a training with exactly one step created.";
 
         /// <inheritdoc />
         protected override void Then(CourseWindow window)
