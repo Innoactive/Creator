@@ -7,7 +7,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 {
     /// <inheritdoc />
     /// <summary>
-    /// Step Inspector window of Workflow window.
+    /// This class draws the Step Inspector.
     /// </summary>
     internal class StepWindow : EditorWindow
     {

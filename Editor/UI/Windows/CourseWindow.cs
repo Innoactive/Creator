@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Innoactive.CreatorEditor.UI.Windows
 {
     /// <summary>
-    /// Workflow window.
+    /// This class draws the Workflow window..
     /// </summary>
     public class CourseWindow : EditorWindow
     {
