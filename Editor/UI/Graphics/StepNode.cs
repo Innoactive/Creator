@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
     /// <summary>
-    /// Represents step node of the workflow editor.
+    /// Represents step node of the Workflow window.
     /// </summary>
     internal class StepNode : EditorNode
     {
