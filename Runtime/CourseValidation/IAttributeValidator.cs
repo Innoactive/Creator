@@ -14,7 +14,7 @@
         /// Runs the validation and returns true if there is a problem.
         /// </summary>
         /// <param name="value">Object which will be validated.</param>
-        /// <param name="message">Message which will be used if there is an problem.</param>
+        /// <param name="message">Message which will be used if there is a problem.</param>
         /// <returns>Return true if there is a miss fit with validated object.</returns>
         bool Validate(object value, out string message);
     }
