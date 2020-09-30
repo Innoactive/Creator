@@ -21,7 +21,7 @@ namespace Innoactive.Creator.Core.Validation
         protected string message = "One Component of {0} is missing";
 
         /// <summary>
-        /// List of required components types.
+        /// List of required components.
         /// </summary>
         protected List<Type> components;
 
