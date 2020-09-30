@@ -16,7 +16,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
         public List<ValidationReportEntry> Entries { get; }
 
         /// <summary>
-        /// Time spend on generation of this report in milliseconds.
+        /// Time spent on generation of this report in milliseconds.
         /// </summary>
         public long GenerationTime { get; }
 
