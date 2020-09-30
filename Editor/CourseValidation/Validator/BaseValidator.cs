@@ -36,7 +36,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
         {
             try
             {
-                if (!(context is TContext))
+                if ((context is TContext) == false)
                 {
                     Debug.LogWarning(
                         $"Context given to this validation scope is wrong it is {context.GetType()} but should be {typeof(TContext).Name}");

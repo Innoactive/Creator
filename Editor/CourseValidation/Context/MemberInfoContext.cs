@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using Innoactive.Creator.Core.Attributes;
 
 namespace Innoactive.CreatorEditor.CourseValidation
@@ -13,7 +12,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// <inheritdoc/>
         public IContext Parent { get; }
 
-        public MemberInfo MemberInfo { get; }
+        internal MemberInfo MemberInfo { get; }
 
         public MemberInfoContext(MemberInfo info, IContext parent)
         {

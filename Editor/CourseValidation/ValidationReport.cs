@@ -4,8 +4,15 @@ using Innoactive.Creator.Core;
 
 namespace Innoactive.CreatorEditor.CourseValidation
 {
+    /// <summary>
+    /// Report generated from validations of <see cref="IValidationScope"/> objects.
+    /// </summary>
+    /// <remarks>It contains a list of <see cref="ValidationReportEntry"/>.</remarks>
     public class ValidationReport
     {
+        /// <summary>
+        /// List of <see cref="ValidationReportEntry"/> generated from the <see cref="IValidationScope"/>'s validation.
+        /// </summary>
         public List<ValidationReportEntry> Entries { get; }
 
         /// <summary>

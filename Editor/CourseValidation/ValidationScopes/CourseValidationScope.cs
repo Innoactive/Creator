@@ -11,6 +11,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
     {
         protected ChapterValidationScope ChapterValidationScope { get; } = new ChapterValidationScope();
 
+        /// <inheritdoc />
         protected override List<ValidationReportEntry> InternalValidate(ICourse course)
         {
             List<ValidationReportEntry> report = new List<ValidationReportEntry>();

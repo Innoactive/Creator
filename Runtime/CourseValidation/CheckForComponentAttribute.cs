@@ -15,8 +15,14 @@ namespace Innoactive.Creator.Core.Validation
         /// <inheritdoc/>
         public virtual ValidationErrorLevel ErrorLevel { get; }
 
+        /// <summary>
+        /// Detailed description of the issue.
+        /// </summary>
         protected string message = "One Component of {0} is missing";
 
+        /// <summary>
+        /// List of required components types.
+        /// </summary>
         protected List<Type> components;
 
         public CheckForComponentAttribute(ValidationErrorLevel errorLevel, params Type[] components)
@@ -40,6 +46,11 @@ namespace Innoactive.Creator.Core.Validation
             return false;
         }
 
+        /// <summary>
+        /// Returns true if required component is missing.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        /// <returns></returns>
         protected virtual bool IsMissingComponent(GameObject gameObject)
         {
             if (gameObject == null)
@@ -50,9 +61,12 @@ namespace Innoactive.Creator.Core.Validation
             return components.All(component => gameObject.GetComponent(component) == null);
         }
 
+        /// <summary>
+        /// Retrieves GameObject from provided reference value.
+        /// </summary>
         protected virtual GameObject FetchGameObject(object value)
         {
-            if (value == null || !(value is UniqueNameReference reference))
+            if (value == null || (value is UniqueNameReference reference) == false)
             {
                 return null;
             }

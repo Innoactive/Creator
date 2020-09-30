@@ -5,8 +5,10 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.CourseValidation
 {
+    /// <inheritdoc/>
     public class ContextResolver : IContextResolver
     {
+        /// <inheritdoc/>
         public IContext FindContext(IEntity entity, ICourse course)
         {
             if (entity is ICourse)
@@ -45,6 +47,26 @@ namespace Innoactive.CreatorEditor.CourseValidation
                                 new StepContext(step,
                                     new ChapterContext(chapter,
                                         new CourseContext(course))));
+                        }
+                    }
+                }
+            }
+
+            if (entity is ITransition)
+            {
+                foreach (IChapter chapter in course.Data.Chapters)
+                {
+                    foreach (IStep step in chapter.Data.Steps)
+                    {
+                        foreach (ITransition transition in step.Data.Transitions.Data.Transitions)
+                        {
+                            if (step.Data.Transitions.Data.Transitions.Contains(entity as ITransition))
+                            {
+                                return new TransitionContext(transition,
+                                    new StepContext(step,
+                                        new ChapterContext(chapter,
+                                            new CourseContext(course))));
+                            }
                         }
                     }
                 }

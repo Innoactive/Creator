@@ -10,12 +10,15 @@ using Innoactive.Creator.Core.Validation;
 namespace Innoactive.CreatorEditor.CourseValidation
 {
     /// <summary>
-    /// Checks a Steps data for attributes which implement <see cref="IAttributeValidator"/> and runs there valiation.
+    /// Checks a Step data for attributes which implement <see cref="IAttributeValidator"/> and runs there valiation.
     /// </summary>
     internal class StepAttributeValidator : BaseValidator<IStep, StepContext>
     {
         protected List<ValidationReportEntry> result;
 
+
+        /// <inheritdoc/>
+        /// <inheritdoc/>
         protected override List<ValidationReportEntry> InternalValidate(IStep step)
         {
             result = new List<ValidationReportEntry>();
@@ -51,7 +54,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
                     string message;
                     if (validator.Validate(value, out message))
                     {
-                        result.Add(new ValidationReportEntry()
+                        result.Add(new ValidationReportEntry
                         {
                             ErrorLevel = validator.ErrorLevel,
                             Message = $"{message}",

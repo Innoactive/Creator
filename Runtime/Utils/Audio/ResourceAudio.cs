@@ -70,6 +70,7 @@ namespace Innoactive.Creator.Core.Audio
             }
         }
 
+        /// <inheritdoc/>
         public bool IsEmpty()
         {
             return path == null || string.IsNullOrEmpty(path.Value);

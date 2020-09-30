@@ -9,11 +9,13 @@ namespace Innoactive.CreatorEditor.CourseValidation
 
         public TransitionContext(ITransition transition, StepContext parent) : base(transition, parent) { }
 
+        /// <inheritdoc/>
         public override void Select()
         {
             throw new System.NotImplementedException();
         }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             if (Parent != null)

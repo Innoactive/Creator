@@ -59,6 +59,7 @@ namespace Innoactive.Creator.Core.SceneObjects
 
         protected abstract T DetermineValue(T cachedValue);
 
+        /// <inheritdoc/>
         public bool IsEmpty()
         {
             try

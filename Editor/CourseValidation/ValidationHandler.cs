@@ -6,10 +6,16 @@ using Innoactive.Creator.Core.Utils;
 
 namespace Innoactive.CreatorEditor.CourseValidation
 {
+    /// <summary>
+    /// Helper class for triggering validations of <see cref="IValidationScope"/> objects.
+    /// </summary>
     internal class ValidationHandler
     {
         private List<IValidationScope> activeValidations { get; } = new List<IValidationScope>();
 
+        /// <summary>
+        /// <see cref="IContextResolver"/> for resolving known context types.
+        /// </summary>
         public IContextResolver ContextResolver { get; set; } = new ContextResolver();
 
         public ValidationHandler()
@@ -20,6 +26,13 @@ namespace Innoactive.CreatorEditor.CourseValidation
             }
         }
 
+        /// <summary>
+        /// Validates the given object.
+        /// </summary>
+        /// <param name="obj">Object, which will be validated.</param>
+        /// <param name="course">Course where given <paramref name="obj"/> belongs.</param>
+        /// <param name="context">Context of the validation.</param>
+        /// <returns>List of miss fits found while validating.</returns>
         public ValidationReport Validate(IEntity obj, ICourse course, IContext context = null)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();

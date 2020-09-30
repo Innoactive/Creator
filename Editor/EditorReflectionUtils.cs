@@ -6,9 +6,7 @@ using System.Runtime.Serialization;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Attributes;
 using Innoactive.CreatorEditor.UI.Drawers;
-using JetBrains.Annotations;
 using UnityEditor.Callbacks;
-using UnityEngine;
 
 namespace Innoactive.CreatorEditor
 {

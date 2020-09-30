@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Collections.Generic;
 using Innoactive.Creator.Core;
 
 namespace Innoactive.CreatorEditor.CourseValidation
@@ -9,6 +9,8 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// </summary>
     internal class StepValidationScope : BaseValidationScope<IStep, StepContext>
     {
+        /// <inheritdoc/>
+        /// <inheritdoc />
         protected override List<ValidationReportEntry> InternalValidate(IStep step)
         {
             List<ValidationReportEntry> report = new List<ValidationReportEntry>();

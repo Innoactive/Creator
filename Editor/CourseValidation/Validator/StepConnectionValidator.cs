@@ -10,6 +10,8 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// </summary>
     internal class StepConnectionValidator : BaseValidator<IChapter, ChapterContext>
     {
+        /// <inheritdoc/>
+        /// <inheritdoc/>
         protected override List<ValidationReportEntry> InternalValidate(IChapter chapter)
         {
             HashSet<IStep> connectedSteps = FindAllConnectedSteps(chapter);
@@ -22,7 +24,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
 
             foreach (IStep missedStep in chapter.Data.Steps.Except(connectedSteps))
             {
-                result.Add(new ValidationReportEntry()
+                result.Add(new ValidationReportEntry
                 {
                     ErrorLevel = ValidationErrorLevel.WARNING,
                     Context = new StepContext(missedStep, Context),

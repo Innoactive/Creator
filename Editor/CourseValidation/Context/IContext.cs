@@ -23,7 +23,6 @@
         /// <summary>
         /// Produces a readable string which allows us to find the context in editor.
         /// </summary>
-        /// <returns></returns>
         string ToString();
     }
 }
