@@ -28,7 +28,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
             foreach (ITransition transition in step.Data.Transitions.Data.Transitions)
             {
                 TransitionContext transitionContext = new TransitionContext(transition, Context);
-                foreach (ICondition condition in  transition.Data.Conditions)
+                foreach (ICondition condition in transition.Data.Conditions)
                 {
                     Check(condition.Data, new ConditionContext(condition, transitionContext));
                 }
