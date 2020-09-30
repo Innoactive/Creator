@@ -2,7 +2,9 @@
 
 namespace Innoactive.CreatorEditor.CourseValidation
 {
-    /// <inheritdoc/>
+    /// <summary>
+    /// Base context for objects of type <see cref="ITransition"/>.
+    /// </summary>
     public class TransitionContext : EntityContext<ITransition>
     {
         public override bool IsSelectable { get; } = false;

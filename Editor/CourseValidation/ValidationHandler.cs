@@ -47,6 +47,12 @@ namespace Innoactive.CreatorEditor.CourseValidation
             return new ValidationReport(entries, stopwatch.ElapsedMilliseconds);
         }
 
+        /// <summary>
+        /// Calls internal validation process for given <paramref name="obj"/>.
+        /// </summary>
+        /// <param name="obj">Object which is the target of the validation.</param>
+        /// <param name="context">Context this validation runs in, has to be the correct one.</param>
+        /// <returns>List of miss fits found while validating.</returns>
         protected List<ValidationReportEntry> InternalValidate(object obj, IContext context)
         {
             List<ValidationReportEntry> entries = new List<ValidationReportEntry>();

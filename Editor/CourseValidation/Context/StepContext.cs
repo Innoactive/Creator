@@ -2,7 +2,9 @@
 
 namespace Innoactive.CreatorEditor.CourseValidation
 {
-    /// <inheritdoc/>
+    /// <summary>
+    /// Base context for objects of type <see cref="IStep"/>.
+    /// </summary>
     public class StepContext : EntityContext<IStep>
     {
         /// <inheritdoc/>

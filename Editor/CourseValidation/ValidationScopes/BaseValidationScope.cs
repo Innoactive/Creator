@@ -13,8 +13,14 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <typeparam name="TContext">Context this validation scope is working in.</typeparam>
     public abstract class BaseValidationScope<T, TContext> : IValidationScope where TContext : IContext
     {
+        /// <summary>
+        /// <see cref="TContext"/> used for this <see cref="IValidationScope"/>.
+        /// </summary>
         protected TContext Context { get; private set; }
 
+        /// <summary>
+        /// List of <see cref="IValidator"/> used in this <see cref="IValidationScope"/>.
+        /// </summary>
         protected List<IValidator> Validators { get; }
 
         protected BaseValidationScope()

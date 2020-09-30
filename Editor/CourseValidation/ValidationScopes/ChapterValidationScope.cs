@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Collections.Generic;
 using Innoactive.Creator.Core;
 
 namespace Innoactive.CreatorEditor.CourseValidation
@@ -11,7 +11,6 @@ namespace Innoactive.CreatorEditor.CourseValidation
     {
         protected StepValidationScope StepValidationScope { get; } = new StepValidationScope();
 
-        /// <inheritdoc/>
         /// <inheritdoc />
         protected override List<ValidationReportEntry> InternalValidate(IChapter chapter)
         {

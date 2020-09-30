@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Collections.Generic;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Validation;
 
@@ -10,7 +10,6 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// </summary>
     internal class StepConnectionValidator : BaseValidator<IChapter, ChapterContext>
     {
-        /// <inheritdoc/>
         /// <inheritdoc/>
         protected override List<ValidationReportEntry> InternalValidate(IChapter chapter)
         {

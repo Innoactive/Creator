@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
+using System.Collections.Generic;
 using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Utils;
 using Innoactive.Creator.Core.Behaviors;
 using Innoactive.Creator.Core.Conditions;
-using Innoactive.Creator.Core.Utils;
 using Innoactive.Creator.Core.Validation;
 
 namespace Innoactive.CreatorEditor.CourseValidation
@@ -16,8 +16,6 @@ namespace Innoactive.CreatorEditor.CourseValidation
     {
         protected List<ValidationReportEntry> result;
 
-
-        /// <inheritdoc/>
         /// <inheritdoc/>
         protected override List<ValidationReportEntry> InternalValidate(IStep step)
         {

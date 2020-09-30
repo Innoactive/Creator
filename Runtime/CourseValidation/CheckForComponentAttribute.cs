@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.Core.Configuration;
+using System.Collections.Generic;
 using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Core.Configuration;
 using UnityEngine;
 
 namespace Innoactive.Creator.Core.Validation
@@ -49,8 +49,6 @@ namespace Innoactive.Creator.Core.Validation
         /// <summary>
         /// Returns true if required component is missing.
         /// </summary>
-        /// <param name="gameObject"></param>
-        /// <returns></returns>
         protected virtual bool IsMissingComponent(GameObject gameObject)
         {
             if (gameObject == null)
@@ -66,17 +64,15 @@ namespace Innoactive.Creator.Core.Validation
         /// </summary>
         protected virtual GameObject FetchGameObject(object value)
         {
-            if (value == null || (value is UniqueNameReference reference) == false)
+            if (value != null && value is UniqueNameReference reference)
             {
-                return null;
+                if (RuntimeConfigurator.Configuration.SceneObjectRegistry.ContainsName(reference.UniqueName))
+                {
+                    return RuntimeConfigurator.Configuration.SceneObjectRegistry.GetByName(reference.UniqueName).GameObject;
+                }
             }
 
-            if (RuntimeConfigurator.Configuration.SceneObjectRegistry.ContainsName(reference.UniqueName) == false)
-            {
-                return null;
-            }
-
-            return RuntimeConfigurator.Configuration.SceneObjectRegistry.GetByName(reference.UniqueName).GameObject;
+            return null;
         }
     }
 }

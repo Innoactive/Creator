@@ -66,7 +66,9 @@ namespace Innoactive.Creator.Core.SceneObjects
             {
                 return string.IsNullOrEmpty(UniqueName) || Value == null;
             }
+#pragma warning disable CS0168
             catch (MissingEntityException ex)
+#pragma warning restore CS0168
             {
                 return true;
             }

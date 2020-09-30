@@ -2,7 +2,9 @@
 
 namespace Innoactive.CreatorEditor.CourseValidation
 {
-    /// <inheritdoc/>
+    /// <summary>
+    /// Base context for objects of type <see cref="ICondition"/>.
+    /// </summary>
     public class ConditionContext : EntityContext<ICondition>
     {
         /// <inheritdoc/>
