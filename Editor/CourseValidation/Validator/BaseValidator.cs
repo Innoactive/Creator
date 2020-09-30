@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Innoactive.CreatorEditor.CourseValidation
 {
     /// <summary>
-    /// Base validator class, use this one to create a new validator.
+    /// Base validator class to create a new validator.
     /// </summary>
     /// <typeparam name="T">Type of the objects which will be validated by this validator.</typeparam>
     /// <typeparam name="TContext">Context Type the objects will be validated in.</typeparam>
