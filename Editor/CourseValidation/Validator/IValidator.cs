@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Innoactive.CreatorEditor.CourseValidation
 {
     /// <summary>
-    /// Validator provide validation for an specific Type.
+    /// Validator provides validation for a specific Type.
     /// </summary>
     public interface IValidator
     {
