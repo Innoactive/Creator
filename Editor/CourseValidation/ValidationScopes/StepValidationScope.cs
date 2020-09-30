@@ -5,7 +5,7 @@ using Innoactive.Creator.Core;
 namespace Innoactive.CreatorEditor.CourseValidation
 {
     /// <summary>
-    /// Validation scope for steps.
+    /// Validation scope for objects of type <see cref="IStep"/>.
     /// </summary>
     internal class StepValidationScope : BaseValidationScope<IStep, StepContext>
     {
