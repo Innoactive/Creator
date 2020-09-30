@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// Base validator class to create a new validator.
     /// </summary>
     /// <typeparam name="T">Type of the objects which will be validated by this validator.</typeparam>
-    /// <typeparam name="TContext">Context Type the objects will be validated in.</typeparam>
+    /// <typeparam name="TContext">Context type the objects will be validated in.</typeparam>
     public abstract class BaseValidator<T, TContext> : IValidator where TContext : IContext
     {
         /// <inheritdoc/>
