@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Innoactive.Creator.Core.Validation
 {
     /// <summary>
-    /// Checks if the referenced GameObject has at least one of the listed Type added as Component.
+    /// Checks if the referenced GameObject has at least one of the listed Types added as Component.
     /// </summary>
     public class CheckForComponentAttribute : Attribute, IAttributeValidator
     {
