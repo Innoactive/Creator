@@ -6,7 +6,7 @@ using Innoactive.Creator.Core.Validation;
 namespace Innoactive.CreatorEditor.CourseValidation
 {
     /// <summary>
-    /// Goes through a chapter and checks if every step is connected to the chapter entrypoint.
+    /// Goes through a chapter and checks if every step is connected to the chapter entry point.
     /// </summary>
     internal class StepConnectionValidator : BaseValidator<IChapter, ChapterContext>
     {

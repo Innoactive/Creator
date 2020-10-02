@@ -29,39 +29,39 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// <summary>
         /// Validates the given object.
         /// </summary>
-        /// <param name="obj">Object, which will be validated.</param>
-        /// <param name="course">Course where given <paramref name="obj"/> belongs.</param>
+        /// <param name="entity">Object, which will be validated.</param>
+        /// <param name="course">Course where given <paramref name="entity"/> belongs.</param>
         /// <param name="context">Context of the validation.</param>
-        /// <returns>List of miss fits found while validating.</returns>
-        public ValidationReport Validate(IEntity obj, ICourse course, IContext context = null)
+        /// <returns>List of reports regarding invalid objects related to the <paramref name="entity"/>.</returns>
+        public ValidationReport Validate(IEntity entity, ICourse course, IContext context = null)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
 
             if (context == null)
             {
-                context = ContextResolver.FindContext(obj, course);
+                context = ContextResolver.FindContext(entity, course);
             }
-            List<ValidationReportEntry> entries = InternalValidate(obj, context);
+            List<ValidationReportEntry> entries = InternalValidate(entity, context);
 
             stopwatch.Stop();
             return new ValidationReport(entries, stopwatch.ElapsedMilliseconds);
         }
 
         /// <summary>
-        /// Calls internal validation process for given <paramref name="obj"/>.
+        /// Calls internal validation process for given <paramref name="entityObject"/>.
         /// </summary>
-        /// <param name="obj">Object which is the target of the validation.</param>
+        /// <param name="entityObject">Object which is the target of the validation.</param>
         /// <param name="context">Context this validation runs in, has to be the correct one.</param>
-        /// <returns>List of miss fits found while validating.</returns>
-        protected List<ValidationReportEntry> InternalValidate(object obj, IContext context)
+        /// <returns>List of reports regarding invalid objects related to the <paramref name="entityObject"/>.</returns>
+        protected List<ValidationReportEntry> InternalValidate(object entityObject, IContext context)
         {
             List<ValidationReportEntry> entries = new List<ValidationReportEntry>();
 
             foreach (IValidationScope validation in activeValidations)
             {
-                if (validation.CanValidate(obj))
+                if (validation.CanValidate(entityObject))
                 {
-                    entries.AddRange(validation.Validate(obj, context));
+                    entries.AddRange(validation.Validate(entityObject, context));
                 }
             }
 

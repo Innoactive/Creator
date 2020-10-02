@@ -5,7 +5,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Base context for objects of type <see cref="IEntity"/>.
     /// </summary>
-    /// <typeparam name="T"><see cref="IEntity"/>which is the context scope.</typeparam>
+    /// <typeparam name="T"><see cref="IEntity"/> which is the context scope.</typeparam>
     public abstract class EntityContext<T> : IContext where T : IEntity
     {
         /// <inheritdoc/>

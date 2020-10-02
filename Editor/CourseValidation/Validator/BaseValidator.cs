@@ -20,26 +20,25 @@ namespace Innoactive.CreatorEditor.CourseValidation
         protected TContext Context { get; private set; }
 
         /// <inheritdoc/>
-        public bool CanValidate(object obj)
+        public bool CanValidate(object entityObject)
         {
-            return ValidatedType.IsInstanceOfType(obj);
+            return ValidatedType.IsInstanceOfType(entityObject);
         }
 
         /// <summary>
         /// Prepares the validation, sets the context and calls InternalValidate.
         /// </summary>
-        /// <param name="obj">Object which will be validated, has to be Type T.</param>
+        /// <param name="entityObject">Object which will be validated, has to be Type T.</param>
         /// <param name="context">Context we are working in, has to be TContext.</param>
-        /// <returns>All found miss fits for the given objects.</returns>
+        /// <returns>List of reports regarding invalid objects related to the <paramref name="entityObject"/>.</returns>
         /// <exception cref="InvalidCastException">Will be thrown when the object is not of Type T</exception>
-        public List<ValidationReportEntry> Validate(object obj, IContext context)
+        public List<ValidationReportEntry> Validate(object entityObject, IContext context)
         {
             try
             {
                 if ((context is TContext) == false)
                 {
-                    Debug.LogWarning(
-                        $"Context given to this validation scope is wrong it is {context.GetType()} but should be {typeof(TContext).Name}");
+                    Debug.LogWarning($"Context given to this validation scope is wrong it is {context.GetType()} but should be {typeof(TContext).Name}");
                     Context = default(TContext);
                 }
                 else
@@ -47,9 +46,9 @@ namespace Innoactive.CreatorEditor.CourseValidation
                     Context = (TContext) context;
                 }
 
-                if (ValidatedType.IsInstanceOfType(obj))
+                if (ValidatedType.IsInstanceOfType(entityObject))
                 {
-                    return InternalValidate((T) obj);
+                    return InternalValidate((T) entityObject);
                 }
 
                 throw new InvalidOperationException();
@@ -64,8 +63,8 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// <summary>
         /// Implement your validation here.
         /// </summary>
-        /// <param name="obj">Object which will be validated, has to be Type T.</param>
-        /// <returns>All found miss fits for the given objects.</returns>
-        protected abstract List<ValidationReportEntry> InternalValidate(T obj);
+        /// <param name="entityObject">Object which will be validated, has to be Type T.</param>
+        /// <returns>List of reports regarding invalid objects related to the <paramref name="entityObject"/>.</returns>
+        protected abstract List<ValidationReportEntry> InternalValidate(T entityObject);
     }
 }

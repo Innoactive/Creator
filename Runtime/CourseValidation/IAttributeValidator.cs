@@ -6,7 +6,7 @@
     public interface IAttributeValidator
     {
         /// <summary>
-        /// ValidationState which will used if the validation finds a miss fit.
+        /// ValidationState which will be used if the validation fails.
         /// </summary>
         ValidationErrorLevel ErrorLevel { get; }
 
@@ -15,7 +15,7 @@
         /// </summary>
         /// <param name="value">Object which will be validated.</param>
         /// <param name="message">Message which will be used if there is a problem.</param>
-        /// <returns>Return true if there is a miss fit with validated object.</returns>
+        /// <returns>Return true if the validation fails for the given object.</returns>
         bool Validate(object value, out string message);
     }
 }

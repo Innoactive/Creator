@@ -41,19 +41,19 @@ namespace Innoactive.CreatorEditor.CourseValidation
         }
 
         /// <inheritdoc />
-        public bool CanValidate(object obj)
+        public bool CanValidate(object entityObject)
         {
-            return obj is T;
+            return entityObject is T;
         }
 
         /// <summary>
         /// Prepares the validation, sets the context and calls InternalValidate.
         /// </summary>
-        /// <param name="obj">Object which will be validated, has to be Type T.</param>
+        /// <param name="entityObject">Object which will be validated, has to be Type T.</param>
         /// <param name="context">Context we are working in, has to be TContext.</param>
-        /// <returns>All found miss fits for the given objects.</returns>
+        /// <returns>List of reports regarding invalid objects related to the <paramref name="entityObject"/>.</returns>
         /// <exception cref="InvalidCastException">Will be thrown when the object is not of Type T</exception>
-        public List<ValidationReportEntry> Validate(object obj, IContext context)
+        public List<ValidationReportEntry> Validate(object entityObject, IContext context)
         {
             if (context is TContext == false)
             {
@@ -65,9 +65,9 @@ namespace Innoactive.CreatorEditor.CourseValidation
                 Context = (TContext) context;
             }
 
-            if (CanValidate(obj))
+            if (CanValidate(entityObject))
             {
-                return InternalValidate((T) obj);
+                return InternalValidate((T) entityObject);
             }
 
             throw new InvalidCastException();
@@ -77,8 +77,8 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// Validates given object.
         /// </summary>
         /// <remarks>Run your validators here.</remarks>
-        /// <param name="obj">Object which will be validated, has to be Type T.</param>
-        /// <returns>All found miss fits for the given objects.</returns>
-        protected abstract List<ValidationReportEntry> InternalValidate(T obj);
+        /// <param name="entityObject">Object which will be validated, has to be Type T.</param>
+        /// <returns>List of reports regarding invalid objects related to the <paramref name="entityObject"/>.</returns>
+        protected abstract List<ValidationReportEntry> InternalValidate(T entityObject);
     }
 }
