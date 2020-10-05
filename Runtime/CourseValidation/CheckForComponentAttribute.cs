@@ -33,17 +33,22 @@ namespace Innoactive.Creator.Core.Validation
 
         public CheckForComponentAttribute(params Type[] components) : this (ValidationErrorLevel.ERROR, components) { }
 
-        /// <inheritdoc/>
-        public virtual bool Validate(object value, out string message)
+        public List<ReportEntry> Validate(object value)
         {
-            message = "";
             if (IsMissingComponent(FetchGameObject(value)))
             {
-                message = String.Format(this.message, string.Join(", ", components));
-                return true;
+                return new List<ReportEntry>()
+                {
+                    new ReportEntry()
+                    {
+                        ErrorLevel = ErrorLevel,
+                        Code = 3004,
+                        Message = String.Format(message, string.Join(", ", components))
+                    }
+                };
             }
 
-            return false;
+            return new List<ReportEntry>();
         }
 
         /// <summary>

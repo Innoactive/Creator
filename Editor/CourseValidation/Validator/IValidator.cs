@@ -16,16 +16,16 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// <summary>
         /// Will return true when the object can be validated by this validator.
         /// </summary>
-        /// <param name="entityObject">Object to validate.</param>
+        /// <param name="validatableObject">Object to validate.</param>
         /// <returns>True if object can be validated.</returns>
-        bool CanValidate(object entityObject);
+        bool CanValidate(object validatableObject);
 
         /// <summary>
         /// Validates the given object.
         /// </summary>
-        /// <param name="entityObject">Object, which will be validated.</param>
+        /// <param name="validatableObject">Object, which will be validated.</param>
         /// <param name="context">Context of the validation.</param>
-        /// <returns>List of reports regarding invalid objects related to the <paramref name="entityObject"/>.</returns>
-        List<ValidationReportEntry> Validate(object entityObject, IContext context);
+        /// <returns>List of reports regarding invalid objects related to the <paramref name="validatableObject"/>.</returns>
+        List<EditorReportEntry> Validate(object validatableObject, IContext context);
     }
 }

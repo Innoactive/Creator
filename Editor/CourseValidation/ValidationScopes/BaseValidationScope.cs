@@ -53,7 +53,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// <param name="context">Context we are working in, has to be TContext.</param>
         /// <returns>List of reports regarding invalid objects related to the <paramref name="entityObject"/>.</returns>
         /// <exception cref="InvalidCastException">Will be thrown when the object is not of Type T</exception>
-        public List<ValidationReportEntry> Validate(object entityObject, IContext context)
+        public List<EditorReportEntry> Validate(object entityObject, IContext context)
         {
             if (context is TContext == false)
             {
@@ -79,6 +79,6 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// <remarks>Run your validators here.</remarks>
         /// <param name="entityObject">Object which will be validated, has to be Type T.</param>
         /// <returns>List of reports regarding invalid objects related to the <paramref name="entityObject"/>.</returns>
-        protected abstract List<ValidationReportEntry> InternalValidate(T entityObject);
+        protected abstract List<EditorReportEntry> InternalValidate(T entityObject);
     }
 }

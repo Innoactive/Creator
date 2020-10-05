@@ -7,29 +7,29 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Report generated from validations of <see cref="IValidationScope"/> objects.
     /// </summary>
-    /// <remarks>Contains a list of <see cref="ValidationReportEntry"/>.</remarks>
-    public class ValidationReport
+    /// <remarks>Contains a list of <see cref="EditorReportEntry"/>.</remarks>
+    internal class ValidationReport
     {
         /// <summary>
-        /// List of <see cref="ValidationReportEntry"/> generated from the <see cref="IValidationScope"/>'s validation.
+        /// List of <see cref="EditorReportEntry"/> generated from the <see cref="IValidationScope"/>'s validation.
         /// </summary>
-        public List<ValidationReportEntry> Entries { get; }
+        public List<EditorReportEntry> Entries { get; }
 
         /// <summary>
         /// Time spent on generation of this report in milliseconds.
         /// </summary>
         public long GenerationTime { get; }
 
-        public ValidationReport(List<ValidationReportEntry> entries, long generationTime)
+        public ValidationReport(List<EditorReportEntry> entries, long generationTime)
         {
             Entries = entries;
             GenerationTime = generationTime;
         }
 
         /// <summary>
-        /// Returns all <see cref="ValidationReportEntry"/> found for given step.
+        /// Returns all <see cref="EditorReportEntry"/> found for given step.
         /// </summary>
-        public List<ValidationReportEntry> GetEntriesFor(IStep step)
+        public List<EditorReportEntry> GetEntriesFor(IStep step)
         {
             return Entries.Where(entry =>
             {

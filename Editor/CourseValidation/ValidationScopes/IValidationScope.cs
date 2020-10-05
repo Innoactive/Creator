@@ -21,6 +21,6 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// <param name="entityObject">Object which is the target of the validation.</param>
         /// <param name="context">Context this validation runs in, has to be the correct one.</param>
         /// <returns>List of reports regarding invalid objects related to the <paramref name="entityObject"/>.</returns>
-        List<ValidationReportEntry> Validate(object entityObject, IContext context);
+        List<EditorReportEntry> Validate(object entityObject, IContext context);
     }
 }

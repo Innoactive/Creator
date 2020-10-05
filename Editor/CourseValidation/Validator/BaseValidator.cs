@@ -20,19 +20,19 @@ namespace Innoactive.CreatorEditor.CourseValidation
         protected TContext Context { get; private set; }
 
         /// <inheritdoc/>
-        public bool CanValidate(object entityObject)
+        public bool CanValidate(object validatableObject)
         {
-            return ValidatedType.IsInstanceOfType(entityObject);
+            return ValidatedType.IsInstanceOfType(validatableObject);
         }
 
         /// <summary>
         /// Prepares the validation, sets the context and calls InternalValidate.
         /// </summary>
-        /// <param name="entityObject">Object which will be validated, has to be Type T.</param>
+        /// <param name="validatableObject">Object which will be validated, has to be Type T.</param>
         /// <param name="context">Context we are working in, has to be TContext.</param>
-        /// <returns>List of reports regarding invalid objects related to the <paramref name="entityObject"/>.</returns>
+        /// <returns>List of reports regarding invalid objects related to the <paramref name="validatableObject"/>.</returns>
         /// <exception cref="InvalidCastException">Will be thrown when the object is not of Type T</exception>
-        public List<ValidationReportEntry> Validate(object entityObject, IContext context)
+        public List<EditorReportEntry> Validate(object validatableObject, IContext context)
         {
             try
             {
@@ -46,9 +46,9 @@ namespace Innoactive.CreatorEditor.CourseValidation
                     Context = (TContext) context;
                 }
 
-                if (ValidatedType.IsInstanceOfType(entityObject))
+                if (ValidatedType.IsInstanceOfType(validatableObject))
                 {
-                    return InternalValidate((T) entityObject);
+                    return InternalValidate((T) validatableObject);
                 }
 
                 throw new InvalidOperationException();
@@ -56,7 +56,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
             catch (Exception ex)
             {
                 Debug.LogError($"{ex.GetType().Name} while trying to validate: \n{ex.StackTrace}");
-                return new List<ValidationReportEntry>();
+                return new List<EditorReportEntry>();
             }
         }
 
@@ -65,6 +65,6 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// </summary>
         /// <param name="entityObject">Object which will be validated, has to be Type T.</param>
         /// <returns>List of reports regarding invalid objects related to the <paramref name="entityObject"/>.</returns>
-        protected abstract List<ValidationReportEntry> InternalValidate(T entityObject);
+        protected abstract List<EditorReportEntry> InternalValidate(T entityObject);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Innoactive.Creator.Core.Runtime.Properties;
 
@@ -12,42 +13,51 @@ namespace Innoactive.Creator.Core.Validation
         /// <inheritdoc/>
         public ValidationErrorLevel ErrorLevel { get; }
 
+
         public RequiredAttribute(ValidationErrorLevel errorLevel = ValidationErrorLevel.ERROR)
         {
             ErrorLevel = errorLevel;
         }
 
-        /// <inheritdoc/>
-        public bool Validate(object value, out string message)
+        public List<ReportEntry> Validate(object value)
         {
-            message = "";
-
-            if (value == null)
+            if (IsEmpty(value))
             {
-                message = "This variable is required";
-                return true;
+                return new List<ReportEntry>() { new ReportEntry()
+                {
+                    Code = 3003,
+                    Message = "This variable is required",
+                    ErrorLevel = ErrorLevel,
+                }};
             }
 
-            if (value is Boolean)
+            if (IsNumeric(value.GetType()) && value.Equals(GetDefault(value.GetType())))
             {
-                return false;
+                return new List<ReportEntry>() { new ReportEntry()
+                {
+                    Code = 3003,
+                    Message = "This number should not be zero.",
+                    ErrorLevel = ErrorLevel,
+                }};
+            }
+
+            return new List<ReportEntry>();
+        }
+
+        private bool IsEmpty(object value)
+        {
+            if (value == null)
+            {
+                return true;
             }
 
             if (value is string && string.IsNullOrEmpty((string) value))
             {
-                message = "This variable is required";
-                return true;
-            }
-
-            if (value.Equals(GetDefault(value.GetType())) && IsNumeric(value.GetType()))
-            {
-                message = "This number should not be zero.";
                 return true;
             }
 
             if (value.GetType().GetInterfaces().Contains(typeof(ICanBeEmpty)) && ((ICanBeEmpty)value).IsEmpty())
             {
-                message = "This variable is required";
                 return true;
             }
 

@@ -11,23 +11,24 @@ namespace Innoactive.CreatorEditor.CourseValidation
     internal class StepConnectionValidator : BaseValidator<IChapter, ChapterContext>
     {
         /// <inheritdoc/>
-        protected override List<ValidationReportEntry> InternalValidate(IChapter chapter)
+        protected override List<EditorReportEntry> InternalValidate(IChapter chapter)
         {
             HashSet<IStep> connectedSteps = FindAllConnectedSteps(chapter);
             return ReportMissedSteps(chapter, connectedSteps);
         }
 
-        private List<ValidationReportEntry> ReportMissedSteps(IChapter chapter, HashSet<IStep> connectedSteps)
+        private List<EditorReportEntry> ReportMissedSteps(IChapter chapter, HashSet<IStep> connectedSteps)
         {
-            List<ValidationReportEntry> result = new List<ValidationReportEntry>();
+            List<EditorReportEntry> result = new List<EditorReportEntry>();
 
             foreach (IStep missedStep in chapter.Data.Steps.Except(connectedSteps))
             {
-                result.Add(new ValidationReportEntry
+                result.Add(new EditorReportEntry
                 {
                     ErrorLevel = ValidationErrorLevel.WARNING,
+                    Code = 2001,
                     Context = new StepContext(missedStep, Context),
-                    Message = "Step is not reachable!",
+                    Message = $"Step {missedStep.Data.Name} is not reachable!",
                     Validator = this,
                 });
             }

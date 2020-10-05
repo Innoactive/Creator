@@ -5,25 +5,15 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Report generated from validations of <see cref="IValidator"/> objects.
     /// </summary>
-    public class ValidationReportEntry
+    public class EditorReportEntry : ReportEntry
     {
-        /// <summary>
-        /// Priority level for this <see cref="ValidationReportEntry"/>.
-        /// </summary>
-        public ValidationErrorLevel ErrorLevel;
-
-        /// <summary>
-        /// Detailed description of the issue.
-        /// </summary>
-        public string Message;
-
         /// <summary>
         /// <see cref="IContext"/> where the issue is present.
         /// </summary>
         public IContext Context;
 
         /// <summary>
-        /// <see cref="IValidator"/> used to generate this <see cref="ValidationReportEntry"/>.
+        /// <see cref="IValidator"/> used to generate this <see cref="EditorReportEntry"/>.
         /// </summary>
         public IValidator Validator;
 

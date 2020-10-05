@@ -41,7 +41,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
             {
                 context = ContextResolver.FindContext(entity, course);
             }
-            List<ValidationReportEntry> entries = InternalValidate(entity, context);
+            List<EditorReportEntry> entries = InternalValidate(entity, context);
 
             stopwatch.Stop();
             return new ValidationReport(entries, stopwatch.ElapsedMilliseconds);
@@ -53,9 +53,9 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// <param name="entityObject">Object which is the target of the validation.</param>
         /// <param name="context">Context this validation runs in, has to be the correct one.</param>
         /// <returns>List of reports regarding invalid objects related to the <paramref name="entityObject"/>.</returns>
-        protected List<ValidationReportEntry> InternalValidate(object entityObject, IContext context)
+        protected List<EditorReportEntry> InternalValidate(object entityObject, IContext context)
         {
-            List<ValidationReportEntry> entries = new List<ValidationReportEntry>();
+            List<EditorReportEntry> entries = new List<EditorReportEntry>();
 
             foreach (IValidationScope validation in activeValidations)
             {

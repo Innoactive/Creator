@@ -14,12 +14,12 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// </summary>
     internal class StepAttributeValidator : BaseValidator<IStep, StepContext>
     {
-        protected List<ValidationReportEntry> result;
+        protected List<EditorReportEntry> result;
 
         /// <inheritdoc/>
-        protected override List<ValidationReportEntry> InternalValidate(IStep step)
+        protected override List<EditorReportEntry> InternalValidate(IStep step)
         {
-            result = new List<ValidationReportEntry>();
+            result = new List<EditorReportEntry>();
             foreach (IBehavior behavior in step.Data.Behaviors.Data.Behaviors)
             {
                 Check(behavior.Data, new BehaviorContext(behavior, Context));
@@ -49,17 +49,17 @@ namespace Innoactive.CreatorEditor.CourseValidation
                 foreach (IAttributeValidator validator in validators)
                 {
                     object value = ReflectionUtils.GetValueFromPropertyOrField(data, memberInfo);
-                    string message;
-                    if (validator.Validate(value, out message))
+                    validator.Validate(value).ForEach(report =>
                     {
-                        result.Add(new ValidationReportEntry
+                        result.Add(new EditorReportEntry
                         {
-                            ErrorLevel = validator.ErrorLevel,
-                            Message = $"{message}",
+                            ErrorLevel = report.ErrorLevel,
+                            Code = report.Code,
+                            Message = report.Message,
                             Validator = this,
                             Context = new MemberInfoContext(memberInfo, context),
                         });
-                    }
+                    });
                 }
             }
         }

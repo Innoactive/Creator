@@ -14,7 +14,7 @@ namespace Innoactive.CreatorEditor.Tests.CourseValidation
             string message;
 
             TrainingSceneObject obj = TestingUtils.CreateSceneObject("test");
-            Assert.True(new CheckForComponentAttribute(typeof(BoxCollider)).Validate((object) new SceneObjectReference("test"), out message));
+            Assert.AreEqual(1, new CheckForComponentAttribute(typeof(BoxCollider)).Validate((object) new SceneObjectReference("test")).Count);
         }
 
         [Test]
@@ -25,7 +25,7 @@ namespace Innoactive.CreatorEditor.Tests.CourseValidation
             TrainingSceneObject obj = TestingUtils.CreateSceneObject("test");
             obj.gameObject.AddComponent<BoxCollider>();
 
-            Assert.False(new CheckForComponentAttribute(typeof(BoxCollider)).Validate((object) new SceneObjectReference("test"), out message));
+            Assert.AreEqual(0, new CheckForComponentAttribute(typeof(BoxCollider)).Validate((object) new SceneObjectReference("test")).Count);
         }
     }
 }

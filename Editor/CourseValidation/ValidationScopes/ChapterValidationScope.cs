@@ -12,9 +12,9 @@ namespace Innoactive.CreatorEditor.CourseValidation
         protected StepValidationScope StepValidationScope { get; } = new StepValidationScope();
 
         /// <inheritdoc />
-        protected override List<ValidationReportEntry> InternalValidate(IChapter chapter)
+        protected override List<EditorReportEntry> InternalValidate(IChapter chapter)
         {
-            List<ValidationReportEntry> report = new List<ValidationReportEntry>();
+            List<EditorReportEntry> report = new List<EditorReportEntry>();
             foreach (IValidator validator in Validators.Where(validator => validator.CanValidate(chapter)))
             {
                 report.AddRange(validator.Validate(chapter, Context));
