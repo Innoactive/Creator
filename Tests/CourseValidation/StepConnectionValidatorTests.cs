@@ -19,7 +19,7 @@ namespace Innoactive.CreatorEditor.Tests.CourseValidation
 
             IChapter chapter = builder.Build();
 
-            Assert.AreEqual(0, new StepConnectionValidator().Validate(chapter, new ChapterContext(chapter, null)).Count);
+            Assert.AreEqual(0, new StepConnectionValidator().Validate(chapter.Data, new ChapterContext(chapter.Data, null)).Count);
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace Innoactive.CreatorEditor.Tests.CourseValidation
 
             IChapter chapter = builder.Build();
 
-            Assert.AreEqual(0, new StepConnectionValidator().Validate(chapter, new ChapterContext(chapter, null)).Count);
+            Assert.AreEqual(0, new StepConnectionValidator().Validate(chapter.Data, new ChapterContext(chapter.Data, null)).Count);
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace Innoactive.CreatorEditor.Tests.CourseValidation
             TestLinearChapterBuilder builder = TestLinearChapterBuilder.SetupChapterBuilder();
             IChapter chapter = builder.Build();
 
-            Assert.AreEqual(0, new StepConnectionValidator().Validate(chapter, new ChapterContext(chapter, null)).Count);
+            Assert.AreEqual(0, new StepConnectionValidator().Validate(chapter.Data, new ChapterContext(chapter.Data, null)).Count);
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace Innoactive.CreatorEditor.Tests.CourseValidation
             chapter.Data.Steps[0].Data.Transitions.Data.Transitions[0].Data.TargetStep = null;
 
 
-            Assert.AreEqual(1, new StepConnectionValidator().Validate(chapter, new ChapterContext(chapter, null)).Count);
+            Assert.AreEqual(1, new StepConnectionValidator().Validate(chapter.Data, new ChapterContext(chapter.Data, null)).Count);
         }
     }
 }

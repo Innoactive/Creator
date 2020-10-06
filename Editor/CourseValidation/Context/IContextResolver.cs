@@ -8,8 +8,8 @@ namespace Innoactive.CreatorEditor.CourseValidation
     public interface IContextResolver
     {
         /// <summary>
-        /// Resolves the fitting <see cref="IContext"/> for the given <see cref="IEntity"/>.
+        /// Resolves the fitting <see cref="IContext"/> for the given <see cref="IData"/>.
         /// </summary>
-        IContext FindContext(IEntity entity, ICourse course);
+        IContext FindContext(IData data, ICourse course);
     }
 }

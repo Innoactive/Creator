@@ -10,7 +10,6 @@ using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.EntityOwners;
 using Innoactive.Creator.Core.EntityOwners.FoldedEntityCollection;
 using Innoactive.Creator.Core.RestrictiveEnvironment;
-using Innoactive.Creator.Core.Tabs;
 using Innoactive.Creator.Core.Utils.Logging;
 using Innoactive.Creator.Unity;
 
@@ -34,9 +33,6 @@ namespace Innoactive.Creator.Core
             [DataMember]
             [DrawingPriority(1)]
             public string Description { get; set; }
-
-            [DataMember]
-            internal ITabsGroup Tabs { get; set; }
 
             ///<inheritdoc />
             [DataMember]
@@ -70,11 +66,7 @@ namespace Innoactive.Creator.Core
 
             public EntityData()
             {
-                Tabs = new TabsGroup(
-                    new DynamicTab(new GUIContent("Behaviors"), () => Behaviors, value => Behaviors = (IBehaviorCollection)value),
-                    new DynamicTab(new GUIContent("Transitions"), () => Transitions, value => Transitions = (ITransitionCollection)value),
-                    new LockablePropertyTab(new GUIContent("Unlocked Objects"), this)
-                );
+
             }
         }
 

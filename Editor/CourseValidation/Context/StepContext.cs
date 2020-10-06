@@ -5,12 +5,12 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Base context for objects of type <see cref="IStep"/>.
     /// </summary>
-    public class StepContext : EntityContext<IStep>
+    public class StepContext : EntityContext<IStepData>
     {
         /// <inheritdoc/>
         public override bool IsSelectable { get; } = false;
 
-        public StepContext(IStep step, ChapterContext parent) : base(step, parent) { }
+        public StepContext(IStepData step, ChapterContext parent) : base(step, parent) { }
 
         /// <inheritdoc/>
         public override void Select()
@@ -23,9 +23,9 @@ namespace Innoactive.CreatorEditor.CourseValidation
         {
             if (Parent != null)
             {
-                return $"{Parent.ToString()} > [{Entity.Data.Name}]";
+                return $"{Parent.ToString()} > [{Entity.Name}]";
             }
-            return $"[{Entity.Data.Name}]";
+            return $"[{Entity.Name}]";
         }
     }
 }

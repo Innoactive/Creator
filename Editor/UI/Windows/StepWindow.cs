@@ -1,4 +1,5 @@
 ﻿using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.CourseValidation;
 using Innoactive.CreatorEditor.UI.Drawers;
 using UnityEditor;
 using UnityEngine;
@@ -51,6 +52,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
             Repaint();
         }
 
+        void OnFocus()
+        {
+            ValidationHandler.Instance.Validate(step.Data, GlobalEditorHandler.GetCurrentCourse());
+        }
+
         private void OnGUI()
         {
             titleContent = new GUIContent("Step Editor");
@@ -97,7 +103,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             }
 
             Step currentStep = step as Step;
-            currentStep.Data.Tabs.Selected = default;
+            //currentStep.Data.Tabs.Selected = default;
         }
     }
 }

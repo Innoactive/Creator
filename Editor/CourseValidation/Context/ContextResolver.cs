@@ -1,6 +1,5 @@
-﻿using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.Conditions;
+﻿using System.Linq;
+using Innoactive.Creator.Core;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.CourseValidation
@@ -9,91 +8,34 @@ namespace Innoactive.CreatorEditor.CourseValidation
     public class ContextResolver : IContextResolver
     {
         /// <inheritdoc/>
-        public IContext FindContext(IEntity entity, ICourse course)
+        public IContext FindContext(IData data, ICourse course)
         {
-            if (entity is ICourse)
+            if (data is ICourseData)
             {
-                return new CourseContext(course);
+                return new CourseContext(course.Data);
             }
 
-            if (entity is IChapter)
+            if (data is IChapterData)
             {
-                return new ChapterContext((IChapter)entity, new CourseContext(course));
+                return new ChapterContext((IChapterData)data, new CourseContext(course.Data));
             }
 
-            if (entity is IStep)
+            if (data is IStepData)
             {
-                IStep step = (IStep) entity;
+                IStepData stepData = (IStepData) data;
                 foreach (IChapter chapter in course.Data.Chapters)
                 {
-                    if (chapter.Data.Steps.Contains(step))
+                    IStep parentStep = chapter.Data.Steps.FirstOrDefault(step => step.Data == stepData);
+                    if (parentStep != null)
                     {
-                        return new StepContext(step,
-                            new ChapterContext(chapter,
-                                new CourseContext(course)));
+                        return new StepContext(stepData,
+                            new ChapterContext(chapter.Data,
+                                new CourseContext(course.Data)));
                     }
                 }
             }
 
-            if (entity is IBehavior behavior)
-            {
-                foreach (IChapter chapter in course.Data.Chapters)
-                {
-                    foreach (IStep step in chapter.Data.Steps)
-                    {
-                        if (step.Data.Behaviors.Data.Behaviors.Contains(behavior))
-                        {
-                            return new BehaviorContext(behavior,
-                                new StepContext(step,
-                                    new ChapterContext(chapter,
-                                        new CourseContext(course))));
-                        }
-                    }
-                }
-            }
-
-            if (entity is ITransition)
-            {
-                foreach (IChapter chapter in course.Data.Chapters)
-                {
-                    foreach (IStep step in chapter.Data.Steps)
-                    {
-                        foreach (ITransition transition in step.Data.Transitions.Data.Transitions)
-                        {
-                            if (step.Data.Transitions.Data.Transitions.Contains(entity as ITransition))
-                            {
-                                return new TransitionContext(transition,
-                                    new StepContext(step,
-                                        new ChapterContext(chapter,
-                                            new CourseContext(course))));
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (entity is ICondition condition)
-            {
-                foreach (IChapter chapter in course.Data.Chapters)
-                {
-                    foreach (IStep step in chapter.Data.Steps)
-                    {
-                        foreach (ITransition transition in step.Data.Transitions.Data.Transitions)
-                        {
-                            if (transition.Data.Conditions.Contains(condition))
-                            {
-                                return new ConditionContext(condition,
-                                    new TransitionContext(transition,
-                                        new StepContext(step,
-                                            new ChapterContext(chapter,
-                                                new CourseContext(course)))));
-                            }
-                        }
-                    }
-                }
-            }
-
-            Debug.LogError($"Could not resolve the context of Entity: {entity.GetType().Name}");
+            Debug.LogError($"Could not resolve the context of Entity: {data.GetType().Name}");
             return null;
         }
     }

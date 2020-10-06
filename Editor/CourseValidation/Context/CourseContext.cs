@@ -5,12 +5,12 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Base context for objects of type <see cref="ICourse"/>.
     /// </summary>
-    public class CourseContext : EntityContext<ICourse>
+    public class CourseContext : EntityContext<ICourseData>
     {
         /// <inheritdoc/>
         public override bool IsSelectable { get; } = false;
 
-        public CourseContext(ICourse course) : base(course, null) { }
+        public CourseContext(ICourseData course) : base(course, null) { }
 
         /// <inheritdoc/>
         public override void Select()
@@ -21,7 +21,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// <inheritdoc/>
         public override string ToString()
         {
-            return $"[{Entity.Data.Name}]";
+            return $"[{Entity.Name}]";
         }
     }
 }

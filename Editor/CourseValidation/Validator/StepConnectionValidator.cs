@@ -8,26 +8,26 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Goes through a chapter and checks if every step is connected to the chapter entry point.
     /// </summary>
-    internal class StepConnectionValidator : BaseValidator<IChapter, ChapterContext>
+    internal class StepConnectionValidator : BaseValidator<IChapterData, ChapterContext>
     {
         /// <inheritdoc/>
-        protected override List<EditorReportEntry> InternalValidate(IChapter chapter)
+        protected override List<EditorReportEntry> InternalValidate(IChapterData step)
         {
-            HashSet<IStep> connectedSteps = FindAllConnectedSteps(chapter);
-            return ReportMissedSteps(chapter, connectedSteps);
+            HashSet<IStep> connectedSteps = FindAllConnectedSteps(step);
+            return ReportMissedSteps(step, connectedSteps);
         }
 
-        private List<EditorReportEntry> ReportMissedSteps(IChapter chapter, HashSet<IStep> connectedSteps)
+        private List<EditorReportEntry> ReportMissedSteps(IChapterData chapter, HashSet<IStep> connectedSteps)
         {
             List<EditorReportEntry> result = new List<EditorReportEntry>();
 
-            foreach (IStep missedStep in chapter.Data.Steps.Except(connectedSteps))
+            foreach (IStep missedStep in chapter.Steps.Except(connectedSteps))
             {
                 result.Add(new EditorReportEntry
                 {
                     ErrorLevel = ValidationErrorLevel.WARNING,
                     Code = 2001,
-                    Context = new StepContext(missedStep, Context),
+                    Context = new StepContext(missedStep.Data, Context),
                     Message = $"Step {missedStep.Data.Name} is not reachable!",
                     Validator = this,
                 });
@@ -36,12 +36,12 @@ namespace Innoactive.CreatorEditor.CourseValidation
             return result;
         }
 
-        private HashSet<IStep> FindAllConnectedSteps(IChapter chapter)
+        private HashSet<IStep> FindAllConnectedSteps(IChapterData chapter)
         {
             HashSet<IStep> connectedSteps = new HashSet<IStep>();
-            connectedSteps.Add(chapter.Data.FirstStep);
+            connectedSteps.Add(chapter.FirstStep);
 
-            foreach (IStep step in chapter.Data.Steps)
+            foreach (IStep step in chapter.Steps)
             {
                 foreach (ITransition transition in step.Data.Transitions.Data.Transitions)
                 {

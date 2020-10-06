@@ -12,25 +12,25 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Checks a Step data for attributes which implement <see cref="IAttributeValidator"/> and runs their valiation.
     /// </summary>
-    internal class StepAttributeValidator : BaseValidator<IStep, StepContext>
+    internal class StepAttributeValidator : BaseValidator<IStepData, StepContext>
     {
         protected List<EditorReportEntry> result;
 
         /// <inheritdoc/>
-        protected override List<EditorReportEntry> InternalValidate(IStep step)
+        protected override List<EditorReportEntry> InternalValidate(IStepData step)
         {
             result = new List<EditorReportEntry>();
-            foreach (IBehavior behavior in step.Data.Behaviors.Data.Behaviors)
+            foreach (IBehavior behavior in step.Behaviors.Data.Behaviors)
             {
-                Check(behavior.Data, new BehaviorContext(behavior, Context));
+                Check(behavior.Data, new BehaviorContext(behavior.Data, Context));
             }
 
-            foreach (ITransition transition in step.Data.Transitions.Data.Transitions)
+            foreach (ITransition transition in step.Transitions.Data.Transitions)
             {
-                TransitionContext transitionContext = new TransitionContext(transition, Context);
+                TransitionContext transitionContext = new TransitionContext(transition.Data, Context);
                 foreach (ICondition condition in transition.Data.Conditions)
                 {
-                    Check(condition.Data, new ConditionContext(condition, transitionContext));
+                    Check(condition.Data, new ConditionContext(condition.Data, transitionContext));
                 }
             }
 
@@ -57,7 +57,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
                             Code = report.Code,
                             Message = report.Message,
                             Validator = this,
-                            Context = new MemberInfoContext(memberInfo, context),
+                            Context = new MemberInfoContext(memberInfo, data, context),
                         });
                     });
                 }

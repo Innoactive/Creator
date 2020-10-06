@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.CourseValidation;
 using Innoactive.CreatorEditor.UI.Graphics;
 using Innoactive.CreatorEditor.UndoRedo;
 using Innoactive.CreatorEditor.Utils;
@@ -503,6 +504,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
         public void SetChapter(IChapter chapter)
         {
             currentChapter = chapter;
+            ValidationHandler.Instance.Validate(currentChapter.Data, GlobalEditorHandler.GetCurrentCourse(), null);
 
             Graphics.Reset();
 

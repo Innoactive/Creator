@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Utils;
+using Innoactive.CreatorEditor.CourseValidation;
 using UnityEditor;
 using UnityEngine;
 
@@ -53,6 +55,15 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
                     GUIContent displayName = memberDrawer.GetLabel(closuredMemberInfo, currentValue);
 
+                    if (currentValue is IData data)
+                    {
+                        List<EditorReportEntry> entries = GetValidationReportsFor(data, closuredMemberInfo);
+                        if (entries.Count > 0)
+                        {
+                            AddValidationInformation(displayName, entries);
+                        }
+                    }
+
                     height += memberDrawer.Draw(nextPosition, memberValue, (value) =>
                     {
                         ReflectionUtils.SetValueToPropertyOrField(currentValue, closuredMemberInfo, value);
@@ -63,6 +74,36 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             rect.height = height;
             return rect;
+        }
+
+        protected virtual void AddValidationInformation(GUIContent displayName, List<EditorReportEntry> entries)
+        {
+            displayName.image = EditorGUIUtility.IconContent("Warning").image;
+
+            if (entries.Count > 1)
+            {
+                entries.Sort((entry1, entry2) => entry1.ErrorLevel.CompareTo(entry2.ErrorLevel));
+            }
+
+            string tooltip = "";
+            entries.ForEach(entry =>
+            {
+                if (string.IsNullOrEmpty(tooltip) == false)
+                {
+                    tooltip += "\n\n";
+                }
+                tooltip += $"* {entry.Message}";
+            });
+            displayName.tooltip = tooltip;
+        }
+
+        protected virtual List<EditorReportEntry> GetValidationReportsFor(IData data, MemberInfo memberInfo)
+        {
+            if (ValidationHandler.Instance.LastReport != null)
+            {
+                return ValidationHandler.Instance.LastReport.GetEntriesFor(data, memberInfo);
+            }
+            return new List<EditorReportEntry>();
         }
 
         /// <summary>
@@ -178,6 +219,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             ITrainingDrawer wrapperDrawer = DrawerLocator.GetDrawerForValue(wrapper, typeof(MetadataWrapper));
 
             GUIContent displayName = memberDrawer.GetLabel(drawnMemberInfo, ownerObject);
+
             return wrapperDrawer.Draw(rect, wrapper, wrapperChangedCallback, displayName).height;
         }
 

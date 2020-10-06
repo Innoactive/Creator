@@ -5,12 +5,12 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Base context for objects of type <see cref="ICondition"/>.
     /// </summary>
-    public class ConditionContext : EntityContext<ICondition>
+    public class ConditionContext : EntityContext<IConditionData>
     {
         /// <inheritdoc/>
         public override bool IsSelectable { get; } = false;
 
-        public ConditionContext(ICondition condition, TransitionContext parent) : base(condition, parent) { }
+        public ConditionContext(IConditionData condition, TransitionContext parent) : base(condition, parent) { }
 
         /// <inheritdoc/>
         public override void Select()
@@ -30,11 +30,11 @@ namespace Innoactive.CreatorEditor.CourseValidation
 
         private string GetName()
         {
-            if (string.IsNullOrEmpty(Entity.Data.Name))
+            if (string.IsNullOrEmpty(Entity.Name))
             {
                 return Entity.GetType().Name;
             }
-            return Entity.Data.Name;
+            return Entity.Name;
         }
     }
 }

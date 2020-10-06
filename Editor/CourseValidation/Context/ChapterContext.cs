@@ -5,12 +5,12 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Base context for objects of type <see cref="IChapter"/>.
     /// </summary>
-    public class ChapterContext : EntityContext<IChapter>
+    public class ChapterContext : EntityContext<IChapterData>
     {
         /// <inheritdoc/>
         public override bool IsSelectable { get; } = false;
 
-        public ChapterContext(IChapter chapter, CourseContext parent) : base(chapter, parent) { }
+        public ChapterContext(IChapterData chapter, CourseContext parent) : base(chapter, parent) { }
 
         /// <inheritdoc/>
         public override void Select()
@@ -23,9 +23,9 @@ namespace Innoactive.CreatorEditor.CourseValidation
         {
             if (Parent != null)
             {
-                return $"{Parent.ToString()} > [{Entity.Data.Name}]";
+                return $"{Parent.ToString()} > [{Entity.Name}]";
             }
-            return $"[{Entity.Data.Name}]";
+            return $"[{Entity.Name}]";
         }
     }
 }

@@ -5,12 +5,12 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Base context for objects of type <see cref="IBehavior"/>.
     /// </summary>
-    public class BehaviorContext : EntityContext<IBehavior>
+    public class BehaviorContext : EntityContext<IBehaviorData>
     {
         /// <inheritdoc/>
         public override bool IsSelectable { get; } = false;
 
-        public BehaviorContext(IBehavior behavior, StepContext parent) : base(behavior, parent) { }
+        public BehaviorContext(IBehaviorData behavior, StepContext parent) : base(behavior, parent) { }
 
         /// <inheritdoc/>
         public override void Select()
@@ -30,11 +30,11 @@ namespace Innoactive.CreatorEditor.CourseValidation
 
         private string GetName()
         {
-            if (string.IsNullOrEmpty(Entity.Data.Name))
+            if (string.IsNullOrEmpty(Entity.Name))
             {
                 return Entity.ToString();
             }
-            return Entity.Data.Name;
+            return Entity.Name;
         }
     }
 }

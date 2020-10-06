@@ -136,28 +136,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 GUILayout.BeginVertical("box");
                 {
                     EditorColorUtils.ResetBackgroundColor();
-
-                    if (GUI.Button(new Rect(ChapterPaddingTop, ChapterPaddingTop, 120, 28), "Validate Course"))
-                    {
-                        ValidationReport report = validation.Validate(Course, Course);
-                        report.Entries.ForEach(entry =>
-                        {
-                            if (entry.ErrorLevel == ValidationErrorLevel.HINT)
-                            {
-                                Debug.Log(entry.ToString());
-                            }
-                            else if (entry.ErrorLevel == ValidationErrorLevel.WARNING)
-                            {
-                                Debug.LogWarning(entry.ToString());
-                            }
-                            else if (entry.ErrorLevel == ValidationErrorLevel.ERROR || entry.ErrorLevel == ValidationErrorLevel.FATAL)
-                            {
-                                Debug.LogError(entry.ToString());
-                            }
-                        });
-                        Debug.Log($"Validation completed in {report.GenerationTime}ms");
-                    }
-
                     DrawExtendToggle();
 
                     Vector2 deltaPosition = GUILayout.BeginScrollView(scrollPosition);
@@ -280,6 +258,15 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 EditorColorUtils.SetTransparency(isActiveChapter ? 0.8f : 0.25f);
                 GUILayout.Label(folderIcon.Texture, GUILayout.Width(ButtonSize), GUILayout.Height(ButtonSize));
                 EditorColorUtils.ResetColor();
+
+                ChapterContext chapterContext = new ChapterContext(Course.Data.Chapters[position].Data, null);
+                if (ValidationHandler.Instance.LastReport.GetEntriesFor(chapterContext).Count > 0)
+                {
+                    EditorColorUtils.SetBackgroundColor(Color.white);
+                    Rect rect = GUILayoutUtility.GetLastRect();
+                    GUI.DrawTexture(new Rect(rect.x - 4, rect.y + 8, 16, 16), EditorGUIUtility.IconContent("Warning").image);
+                    EditorColorUtils.ResetBackgroundColor();
+                }
 
                 GUIStyle style = new GUIStyle(GUI.skin.label);
                 style.alignment = TextAnchor.UpperLeft;

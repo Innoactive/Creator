@@ -5,12 +5,12 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Base context for objects of type <see cref="ITransition"/>.
     /// </summary>
-    public class TransitionContext : EntityContext<ITransition>
+    public class TransitionContext : EntityContext<ITransitionData>
     {
         /// <inheritdoc />
         public override bool IsSelectable { get; } = false;
 
-        public TransitionContext(ITransition transition, StepContext parent) : base(transition, parent) { }
+        public TransitionContext(ITransitionData transition, StepContext parent) : base(transition, parent) { }
 
         /// <inheritdoc/>
         public override void Select()
@@ -30,7 +30,16 @@ namespace Innoactive.CreatorEditor.CourseValidation
 
         private int FindTransitionPosition()
         {
-            return ((StepContext) Parent).Entity.Data.Transitions.Data.Transitions.IndexOf(Entity);
+            int index = 0;
+            foreach (ITransition transition in ((StepContext) Parent).Entity.Transitions.Data.Transitions)
+            {
+                if (transition.Data == Entity)
+                {
+                    return index;
+                }
+                index++;
+            }
+            return -1;
         }
     }
 }

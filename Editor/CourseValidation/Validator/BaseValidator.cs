@@ -63,8 +63,8 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// <summary>
         /// Implement your validation here.
         /// </summary>
-        /// <param name="entityObject">Object which will be validated, has to be Type T.</param>
-        /// <returns>List of reports regarding invalid objects related to the <paramref name="entityObject"/>.</returns>
-        protected abstract List<EditorReportEntry> InternalValidate(T entityObject);
+        /// <param name="step">Object which will be validated, has to be Type T.</param>
+        /// <returns>List of reports regarding invalid objects related to the <paramref name="step"/>.</returns>
+        protected abstract List<EditorReportEntry> InternalValidate(T step);
     }
 }

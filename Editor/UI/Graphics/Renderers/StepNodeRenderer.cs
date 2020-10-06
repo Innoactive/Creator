@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
 {
@@ -62,6 +63,11 @@ namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
         public override void Draw()
         {
             EditorDrawingHelper.DrawRoundedRect(Owner.BoundingBox, CurrentColor, 10f);
+
+            if (Owner.HasErrors)
+            {
+                GUI.DrawTexture(new Rect(Owner.BoundingBox.x + Owner.BoundingBox.width * 0.75f, Owner.BoundingBox.y - 8, 16, 16), EditorGUIUtility.IconContent("Warning").image);
+            }
 
             float labelX = Owner.BoundingBox.x + labelBorderOffsetInwards;
             float labelY = Owner.BoundingBox.y + labelBorderOffsetInwards;

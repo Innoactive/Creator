@@ -1,7 +1,7 @@
-﻿using Innoactive.Creator.Core.Tabs;
+﻿using Innoactive.Creator.Core;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Tabs
+namespace Innoactive.CreatorEditor.Tabs
 {
     internal class LockablePropertyTab : ITab
     {

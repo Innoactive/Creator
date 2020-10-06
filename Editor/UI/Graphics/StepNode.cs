@@ -1,5 +1,6 @@
 using System;
 using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.CourseValidation;
 using Innoactive.CreatorEditor.UI.Graphics.Renderers;
 using UnityEngine;
 
@@ -18,6 +19,14 @@ namespace Innoactive.CreatorEditor.UI.Graphics
 
         //The last step that was clicked on is selected.
         private readonly GraphicalElementRenderer renderer;
+
+        public bool HasErrors
+        {
+            get
+            {
+                return ValidationHandler.Instance.LastReport.GetEntriesFor(new StepContext(step.Data, null)).Count > 0;
+            }
+        }
 
         public CreateTransitionButton CreateTransitionButton { get; private set; }
 
