@@ -70,9 +70,10 @@ namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
 
             if (errors.Count > 0)
             {
-                GUIContent content = new GUIContent("", EditorGUIUtility.IconContent("Warning").image, ValidationUtils.CreateStepTooltip(errors, new ChapterContext(Owner.ActiveChapter.Data, null)));
-                Rect rect = new Rect(Owner.BoundingBox.x + Owner.BoundingBox.width * 0.75f, Owner.BoundingBox.y - 8, 16, 16);
+                GUIContent content = new GUIContent("", null, ValidationUtils.CreateStepTooltip(errors, new ChapterContext(Owner.ActiveChapter.Data, null)));
+                Rect rect = new Rect(Owner.BoundingBox.x + Owner.BoundingBox.width * 0.70f, Owner.BoundingBox.y - 8, 16, 16);
                 GUI.Label(rect, content);
+                GUI.DrawTexture(rect, EditorGUIUtility.IconContent("Warning").image);
             }
 
             float labelX = Owner.BoundingBox.x + labelBorderOffsetInwards;
