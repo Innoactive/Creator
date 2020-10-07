@@ -79,22 +79,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         protected virtual void AddValidationInformation(GUIContent displayName, List<EditorReportEntry> entries)
         {
             displayName.image = EditorGUIUtility.IconContent("Warning").image;
-
-            if (entries.Count > 1)
-            {
-                entries.Sort((entry1, entry2) => entry1.ErrorLevel.CompareTo(entry2.ErrorLevel));
-            }
-
-            string tooltip = "";
-            entries.ForEach(entry =>
-            {
-                if (string.IsNullOrEmpty(tooltip) == false)
-                {
-                    tooltip += "\n\n";
-                }
-                tooltip += $"* {entry.Message}";
-            });
-            displayName.tooltip = tooltip;
+            displayName.tooltip = ValidationUtils.CreateTooltip(entries);
         }
 
         protected virtual List<EditorReportEntry> GetValidationReportsFor(IData data, MemberInfo memberInfo)

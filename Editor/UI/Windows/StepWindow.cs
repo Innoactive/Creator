@@ -1,4 +1,5 @@
 ﻿using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Configuration;
 using Innoactive.CreatorEditor.CourseValidation;
 using Innoactive.CreatorEditor.UI.Drawers;
 using UnityEditor;
@@ -54,7 +55,10 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         void OnFocus()
         {
-            ValidationHandler.Instance.Validate(step.Data, GlobalEditorHandler.GetCurrentCourse());
+            if (RuntimeConfigurator.Exists)
+            {
+                ValidationHandler.Instance.Validate(step.Data, GlobalEditorHandler.GetCurrentCourse());
+            }
         }
 
         private void OnGUI()

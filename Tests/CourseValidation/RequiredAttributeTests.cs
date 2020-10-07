@@ -13,7 +13,6 @@ namespace Innoactive.CreatorEditor.Tests.CourseValidation
         [Test]
         public void Boolean()
         {
-            string message;
             Assert.AreEqual(0, new RequiredAttribute().Validate((object) false).Count, "boolean values should never trigger an error");
             Assert.AreEqual(0, new RequiredAttribute().Validate((object) true).Count, "boolean values should never trigger an error");
         }
@@ -21,7 +20,6 @@ namespace Innoactive.CreatorEditor.Tests.CourseValidation
         [Test]
         public void Float()
         {
-            string message;
             Assert.AreEqual(0, new RequiredAttribute().Validate((object) -1).Count, "negative numbers should work");
             Assert.AreEqual(0, new RequiredAttribute().Validate((object) 1).Count, "positive numbers should work");
             Assert.AreEqual(1, new RequiredAttribute().Validate((object) 0).Count, "default value of the number should trigger an error");
@@ -30,7 +28,6 @@ namespace Innoactive.CreatorEditor.Tests.CourseValidation
         [Test]
         public void String()
         {
-            string message;
             Assert.AreEqual(0, new RequiredAttribute().Validate((object) "text").Count);
             Assert.AreEqual(1, new RequiredAttribute().Validate((object) null).Count, "Null should trigger an error");
             Assert.AreEqual(1, new RequiredAttribute().Validate((object) "").Count, "Empty text should trigger an error");
@@ -39,8 +36,6 @@ namespace Innoactive.CreatorEditor.Tests.CourseValidation
         [Test]
         public void ResourceAudioData()
         {
-            string message;
-
             Localization.entries.Add("key", "key");
             ResourceAudio source = new ResourceAudio(new LocalizedString());
             Assert.AreEqual(1, new RequiredAttribute().Validate((object) new ResourceAudio(new LocalizedString())).Count, "Empty audio resources should throw an error");
@@ -52,8 +47,6 @@ namespace Innoactive.CreatorEditor.Tests.CourseValidation
         [Test]
         public void SceneObjectReference()
         {
-            string message;
-
             TestingUtils.CreateSceneObject("test");
             Assert.AreEqual(0, new RequiredAttribute().Validate((object) new SceneObjectReference("test")).Count);
             Assert.AreEqual(1, new RequiredAttribute().Validate((object) new SceneObjectReference()).Count, "Not set reference should be an error");
@@ -63,8 +56,6 @@ namespace Innoactive.CreatorEditor.Tests.CourseValidation
         [Test]
         public void ScenePropertyReference()
         {
-            string message;
-
             TrainingSceneObject obj = TestingUtils.CreateSceneObject("test");
             obj.gameObject.AddComponent<PropertyMock>();
 

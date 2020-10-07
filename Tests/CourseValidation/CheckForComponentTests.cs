@@ -11,8 +11,6 @@ namespace Innoactive.CreatorEditor.Tests.CourseValidation
         [Test]
         public void MissingColliderTriggersError()
         {
-            string message;
-
             TrainingSceneObject obj = TestingUtils.CreateSceneObject("test");
             Assert.AreEqual(1, new CheckForComponentAttribute(typeof(BoxCollider)).Validate((object) new SceneObjectReference("test")).Count);
         }
@@ -20,8 +18,6 @@ namespace Innoactive.CreatorEditor.Tests.CourseValidation
         [Test]
         public void NoErrorWhenColliderExists()
         {
-            string message;
-
             TrainingSceneObject obj = TestingUtils.CreateSceneObject("test");
             obj.gameObject.AddComponent<BoxCollider>();
 

@@ -14,6 +14,11 @@ namespace Innoactive.CreatorEditor.CourseValidation
         Type ValidatedType { get; }
 
         /// <summary>
+        /// Type of Context which is this is this validators scope.
+        /// </summary>
+        Type ValidatedContext { get; }
+
+        /// <summary>
         /// Will return true when the object can be validated by this validator.
         /// </summary>
         /// <param name="validatableObject">Object to validate.</param>

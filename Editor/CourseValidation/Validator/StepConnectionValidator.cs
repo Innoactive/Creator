@@ -28,7 +28,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
                     ErrorLevel = ValidationErrorLevel.WARNING,
                     Code = 2001,
                     Context = new StepContext(missedStep.Data, Context),
-                    Message = $"Step {missedStep.Data.Name} is not reachable!",
+                    Message = $"This Step: '{missedStep.Data.Name}' is not reachable!",
                     Validator = this,
                 });
             }

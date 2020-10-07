@@ -48,22 +48,20 @@ namespace Innoactive.CreatorEditor.CourseValidation
 
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((MemberInfoContext) obj);
+        }
 
-            if (obj is MemberInfoContext context)
-            {
-                if (Parent != null && Parent.Equals(context.Parent) == false)
-                {
-                    return false;
-                }
+        protected bool Equals(MemberInfoContext other)
+        {
+            return Equals(MemberInfo, other.MemberInfo);
+        }
 
-                return MemberInfo.Equals(context.MemberInfo);
-            }
-
-            return false;
+        public override int GetHashCode()
+        {
+            return (MemberInfo != null ? MemberInfo.GetHashCode() : 0);
         }
     }
 }

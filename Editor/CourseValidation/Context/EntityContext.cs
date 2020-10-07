@@ -1,4 +1,5 @@
-﻿using Innoactive.Creator.Core;
+﻿using System.Collections.Generic;
+using Innoactive.Creator.Core;
 
 namespace Innoactive.CreatorEditor.CourseValidation
 {
@@ -30,16 +31,20 @@ namespace Innoactive.CreatorEditor.CourseValidation
 
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((EntityContext<T>) obj);
+        }
 
-            if (obj is EntityContext<T> context)
-            {
-                return Entity.Equals(context.Entity);
-            }
-            return false;
+        protected bool Equals(EntityContext<T> other)
+        {
+            return EqualityComparer<T>.Default.Equals(Entity, other.Entity);
+        }
+
+        public override int GetHashCode()
+        {
+            return EqualityComparer<T>.Default.GetHashCode(Entity);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using Innoactive.CreatorEditor.CourseValidation;
+using UnityEditor;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
@@ -64,9 +66,13 @@ namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
         {
             EditorDrawingHelper.DrawRoundedRect(Owner.BoundingBox, CurrentColor, 10f);
 
-            if (Owner.HasErrors)
+            List<EditorReportEntry> errors = ValidationHandler.Instance.LastReport.GetEntriesFor(new StepContext(Owner.Step.Data, null));
+
+            if (errors.Count > 0)
             {
-                GUI.DrawTexture(new Rect(Owner.BoundingBox.x + Owner.BoundingBox.width * 0.75f, Owner.BoundingBox.y - 8, 16, 16), EditorGUIUtility.IconContent("Warning").image);
+                GUIContent content = new GUIContent("", EditorGUIUtility.IconContent("Warning").image, ValidationUtils.CreateStepTooltip(errors, new ChapterContext(Owner.ActiveChapter.Data, null)));
+                Rect rect = new Rect(Owner.BoundingBox.x + Owner.BoundingBox.width * 0.75f, Owner.BoundingBox.y - 8, 16, 16);
+                GUI.Label(rect, content);
             }
 
             float labelX = Owner.BoundingBox.x + labelBorderOffsetInwards;

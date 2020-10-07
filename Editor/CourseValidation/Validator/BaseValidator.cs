@@ -14,6 +14,9 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// <inheritdoc/>
         public Type ValidatedType => typeof(T);
 
+        /// <inheritdoc/>
+        public Type ValidatedContext => typeof(TContext);
+
         /// <summary>
         /// Current Context we are in.
         /// </summary>

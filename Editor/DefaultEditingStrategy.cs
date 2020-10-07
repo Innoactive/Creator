@@ -1,4 +1,5 @@
 using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Configuration;
 using Innoactive.CreatorEditor.Configuration;
 using Innoactive.CreatorEditor.CourseValidation;
 using Innoactive.CreatorEditor.UI.Windows;
@@ -115,7 +116,12 @@ namespace Innoactive.CreatorEditor
         private void LoadCourse(ICourse newCourse)
         {
             CurrentCourse = newCourse;
-            ValidationHandler.Instance.Validate(newCourse.Data, newCourse);
+
+            if (newCourse != null && RuntimeConfigurator.Exists)
+            {
+                ValidationHandler.Instance.Validate(newCourse.Data, newCourse);
+            }
+
             if (courseWindow != null)
             {
                 courseWindow.SetCourse(CurrentCourse);
@@ -131,7 +137,12 @@ namespace Innoactive.CreatorEditor
         public void HandleCurrentStepModified(IStep step)
         {
             courseWindow.GetChapter().ChapterMetadata.LastSelectedStep = step;
-            ValidationHandler.Instance.Validate(step.Data, CurrentCourse);
+
+            if (RuntimeConfigurator.Exists)
+            {
+                ValidationHandler.Instance.Validate(step.Data, CurrentCourse);
+            }
+
             courseWindow.RefreshChapterRepresentation();
         }
 
@@ -140,7 +151,7 @@ namespace Innoactive.CreatorEditor
         {
             if (stepWindow != null)
             {
-                if (step != null)
+                if (step != null && RuntimeConfigurator.Exists)
                 {
                     ValidationHandler.Instance.Validate(step.Data, CurrentCourse);
                 }

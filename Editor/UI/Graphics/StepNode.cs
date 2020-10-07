@@ -15,20 +15,15 @@ namespace Innoactive.CreatorEditor.UI.Graphics
         private Vector2 size = initialSize;
 
         private bool isLastSelectedStep;
+
         private IStep step;
 
         //The last step that was clicked on is selected.
         private readonly GraphicalElementRenderer renderer;
 
-        public bool HasErrors
-        {
-            get
-            {
-                return ValidationHandler.Instance.LastReport.GetEntriesFor(new StepContext(step.Data, null)).Count > 0;
-            }
-        }
-
         public CreateTransitionButton CreateTransitionButton { get; private set; }
+
+        public IChapter ActiveChapter { get; }
 
         /// <summary>
         /// Currently displayed step instance. If this step node is selected, the same step instance is used by a Step Inspector as well.
@@ -92,8 +87,9 @@ namespace Innoactive.CreatorEditor.UI.Graphics
         }
 
         /// <inheritdoc />
-        public StepNode(EditorGraphics graphics, IStep step) : base(graphics, true)
+        public StepNode(EditorGraphics graphics, IChapter chapter, IStep step) : base(graphics, true)
         {
+            ActiveChapter = chapter;
             Step = step;
             renderer = new StepNodeRenderer(this, graphics.ColorPalette);
 
