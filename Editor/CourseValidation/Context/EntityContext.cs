@@ -4,9 +4,9 @@ using Innoactive.Creator.Core;
 namespace Innoactive.CreatorEditor.CourseValidation
 {
     /// <summary>
-    /// Base context for objects of type <see cref="IEntity"/>.
+    /// Base context for objects of type <see cref="IData"/>.
     /// </summary>
-    /// <typeparam name="T"><see cref="IEntity"/> which is the context scope.</typeparam>
+    /// <typeparam name="T"><see cref="IData"/> which is the context scope.</typeparam>
     public abstract class EntityContext<T> : IContext where T : IData
     {
         /// <inheritdoc/>

@@ -3,7 +3,7 @@
 namespace Innoactive.CreatorEditor.CourseValidation
 {
     /// <summary>
-    /// Base context for objects of type <see cref="ICondition"/>.
+    /// Base context for objects of type <see cref="IConditionData"/>.
     /// </summary>
     public class ConditionContext : EntityContext<IConditionData>
     {

@@ -38,10 +38,10 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// <summary>
         /// Validates the given object.
         /// </summary>
-        /// <param name="entity">Object, which will be validated.</param>
-        /// <param name="course">Course where given <paramref name="entity"/> belongs.</param>
+        /// <param name="data">Data object, which will be validated.</param>
+        /// <param name="course">Course where given <paramref name="data"/> belongs.</param>
         /// <param name="context">Context of the validation.</param>
-        /// <returns>List of reports regarding invalid objects related to the <paramref name="entity"/>.</returns>
+        /// <returns>List of reports regarding invalid objects related to the <paramref name="data"/>.</returns>
         public ValidationReport Validate(IData data, ICourse course, IContext context = null)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
