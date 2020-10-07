@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Utils;
 using Innoactive.CreatorEditor.CourseValidation;
 using UnityEditor;
@@ -55,7 +56,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
                     GUIContent displayName = memberDrawer.GetLabel(closuredMemberInfo, currentValue);
 
-                    if (currentValue is IData data)
+                    if (currentValue is IData data && RuntimeConfigurator.Exists)
                     {
                         List<EditorReportEntry> entries = GetValidationReportsFor(data, closuredMemberInfo);
                         if (entries.Count > 0)
