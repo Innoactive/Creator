@@ -1,7 +1,6 @@
-using System.IO;
-using Innoactive.CreatorEditor.Setup;
 using UnityEditor;
 using UnityEngine;
+using Innoactive.CreatorEditor.Setup;
 
 namespace Innoactive.CreatorEditor.UI.Wizard
 {
@@ -18,6 +17,9 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         [SerializeField]
         private bool createNewScene = false;
+
+        [SerializeField]
+        private bool loadSampleScene = false;
 
         [SerializeField]
         private string courseName = "My VR Training course";
@@ -40,8 +42,11 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             GUILayout.BeginArea(window);
 
             GUILayout.Label("Setup Training", CreatorEditorStyles.Title);
+
+            GUI.enabled = loadSampleScene == false;
             GUILayout.Label("Name of your VR Training", CreatorEditorStyles.Header);
             courseName = CreatorGUILayout.DrawTextField(courseName, MaxCourseNameLength, GUILayout.Width(window.width * 0.7f));
+            GUI.enabled = true;
 
             if (CourseAssetUtils.CanCreate(courseName, out string errorMessage) == false && lastCreatedCourse != courseName)
             {
@@ -64,6 +69,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 {
                     useCurrentScene = true;
                     createNewScene = false;
+                    loadSampleScene = false;
                 }
 
                 bool isCreateNewScene = GUILayout.Toggle(createNewScene, "Create a new scene", CreatorEditorStyles.RadioButton);
@@ -71,11 +77,28 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 {
                     createNewScene = true;
                     useCurrentScene = false;
+                    loadSampleScene = false;
+                }
+
+                EditorGUILayout.Space();
+
+                loadSampleScene = GUILayout.Toggle(loadSampleScene, "Load Step by Step Guide Scene", CreatorEditorStyles.RadioButton);
+                if (loadSampleScene)
+                {
+                    createNewScene = false;
+                    useCurrentScene = false;
+
+                    GUILayout.BeginHorizontal();
+                    {
+                        GUILayout.Space(CreatorEditorStyles.Indent);
+                        CreatorGUILayout.DrawLink("Hello Creator – a 5-step guide to a basic training application", "https://developers.innoactive.de/documentation/creator/latest/articles/step-by-step-guides/hello-creator.html");
+                    }
+                    GUILayout.EndHorizontal();
                 }
                 GUILayout.EndVertical();
             GUILayout.EndHorizontal();
 
-            if (useCurrentScene == false)
+            if (createNewScene)
             {
                 GUIContent helpContent;
                 string sceneInfoText = "Scene will have the same name as the training course.";
@@ -94,8 +117,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 GUILayout.BeginHorizontal();
                 {
                     GUILayout.Space(CreatorEditorStyles.Indent);
-                    EditorGUILayout.LabelField(helpContent, CreatorEditorStyles.Label,
-                        GUILayout.MinHeight(MinHeightOfInfoText));
+                    EditorGUILayout.LabelField(helpContent, CreatorEditorStyles.Label, GUILayout.MinHeight(MinHeightOfInfoText));
                 }
                 GUILayout.EndHorizontal();
             }
@@ -108,6 +130,12 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         {
             if (courseName == lastCreatedCourse)
             {
+                return;
+            }
+
+            if (loadSampleScene)
+            {
+                SceneSetupUtils.CreateNewSimpleExampleScene();
                 return;
             }
 
