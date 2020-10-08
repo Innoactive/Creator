@@ -63,6 +63,9 @@ namespace Innoactive.CreatorEditor.CourseValidation
             }).ToList();
         }
 
+        /// <summary>
+        /// Updates this report by replacing the context given and all childs of it with the new list.
+        /// </summary>
         public void Update(List<EditorReportEntry> entries, IContext context, long generationTime)
         {
             Entries = Entries.Where(entry => entry.Context.IsChildOf(context) == false).ToList();

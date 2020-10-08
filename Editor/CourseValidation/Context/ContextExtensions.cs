@@ -1,7 +1,10 @@
 ﻿namespace Innoactive.CreatorEditor.CourseValidation
 {
-    public static class ContextExtensions
+    internal static class ContextExtensions
     {
+        /// <summary>
+        /// Looks up if any parent of child is the given context.
+        /// </summary>
         public static bool IsChildOf(this IContext child, IContext context)
         {
             IContext parent = child;
@@ -16,6 +19,9 @@
             return false;
         }
 
+        /// <summary>
+        /// Checks if any parent is a specific context type.
+        /// </summary>
         public static bool ContainsContext<T>(this IContext child) where T : IContext
         {
             if (child.GetType() == typeof(T))

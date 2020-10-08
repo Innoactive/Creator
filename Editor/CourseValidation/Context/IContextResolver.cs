@@ -3,7 +3,7 @@
 namespace Innoactive.CreatorEditor.CourseValidation
 {
     /// <summary>
-    /// Retrieves <see cref="IContext"/> from any provided <see cref="IEntity"/>.
+    /// Retrieves <see cref="IContext"/> from any provided <see cref="IData"/>.
     /// </summary>
     public interface IContextResolver
     {

@@ -3,8 +3,14 @@ using System.Linq;
 
 namespace Innoactive.CreatorEditor.CourseValidation
 {
+    /// <summary>
+    /// Validation utilities, this most generous xml doc was done so every is super happy.
+    /// </summary>
     internal class ValidationUtils
     {
+        /// <summary>
+        /// Creates the tooltip message for a specific step with given entries.
+        /// </summary>
         public static string CreateStepTooltip(List<EditorReportEntry> entries, ChapterContext context)
         {
             if (entries.Count == 0)

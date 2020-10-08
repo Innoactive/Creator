@@ -9,7 +9,7 @@ using Innoactive.Creator.Unity;
 namespace Innoactive.CreatorEditor.CourseValidation
 {
     /// <summary>
-    /// Helper class for triggering validations of <see cref="IValidationScope"/> objects.
+    /// Handles the continuous validation of given parts of a training course.
     /// </summary>
     internal class ValidationHandler : Singleton<ValidationHandler>
     {
@@ -20,6 +20,9 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// </summary>
         public IContextResolver ContextResolver { get; set; } = new ContextResolver();
 
+        /// <summary>
+        /// Last report generated.
+        /// </summary>
         public ValidationReport LastReport { get; protected set; }
 
         public ValidationHandler()
@@ -28,11 +31,6 @@ namespace Innoactive.CreatorEditor.CourseValidation
             {
                 activeValidations.Add((IValidationScope)ReflectionUtils.CreateInstanceOfType(validatorType));
             }
-        }
-
-        public void ClearReport()
-        {
-            LastReport = null;
         }
 
         /// <summary>

@@ -72,6 +72,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
             {
                 GUIContent content = new GUIContent("", null, ValidationUtils.CreateStepTooltip(errors, new ChapterContext(Owner.ActiveChapter.Data, null)));
                 Rect rect = new Rect(Owner.BoundingBox.x + Owner.BoundingBox.width * 0.70f, Owner.BoundingBox.y - 8, 16, 16);
+                // Label icons are too small so we draw a label for the tool tip and icon separated.
                 GUI.Label(rect, content);
                 GUI.DrawTexture(rect, EditorGUIUtility.IconContent("Warning").image);
             }

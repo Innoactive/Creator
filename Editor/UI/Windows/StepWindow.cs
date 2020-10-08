@@ -105,9 +105,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 return;
             }
-
-            Step currentStep = step as Step;
-            //currentStep.Data.Tabs.Selected = default;
         }
     }
 }
