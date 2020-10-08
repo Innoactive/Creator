@@ -18,6 +18,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     [DefaultTrainingDrawer(typeof(object))]
     public class ObjectDrawer : AbstractDrawer
     {
+
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
@@ -56,14 +57,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
                     GUIContent displayName = memberDrawer.GetLabel(closuredMemberInfo, currentValue);
 
-                    if (currentValue is IData data && RuntimeConfigurator.Exists)
-                    {
-                        List<EditorReportEntry> entries = GetValidationReportsFor(data, closuredMemberInfo);
-                        if (entries.Count > 0)
-                        {
-                            AddValidationInformation(displayName, entries);
-                        }
-                    }
+                    CheckValidation(currentValue, closuredMemberInfo, displayName);
 
                     height += memberDrawer.Draw(nextPosition, memberValue, (value) =>
                     {
@@ -75,6 +69,18 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             rect.height = height;
             return rect;
+        }
+
+        protected virtual void CheckValidation(object currentValue, MemberInfo info, GUIContent label)
+        {
+            if (currentValue is IData data && RuntimeConfigurator.Exists)
+            {
+                List<EditorReportEntry> entries = GetValidationReportsFor(data, info);
+                if (entries.Count > 0)
+                {
+                    AddValidationInformation(label, entries);
+                }
+            }
         }
 
         protected virtual void AddValidationInformation(GUIContent displayName, List<EditorReportEntry> entries)

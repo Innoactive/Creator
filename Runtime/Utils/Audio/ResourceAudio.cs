@@ -1,6 +1,7 @@
 using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Internationalization;
+using Innoactive.Creator.Core.Validation;
 using UnityEngine;
 
 namespace Innoactive.Creator.Core.Audio
@@ -73,7 +74,7 @@ namespace Innoactive.Creator.Core.Audio
         /// <inheritdoc/>
         public bool IsEmpty()
         {
-            return path == null || string.IsNullOrEmpty(path.Value);
+            return path == null || (string.IsNullOrEmpty(path.Key) && string.IsNullOrEmpty(path.DefaultText));
         }
     }
 }
