@@ -5,7 +5,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Base context for objects of type <see cref="IStep"/>.
     /// </summary>
-    public class StepContext : EntityContext<IStepData>
+    public class StepContext : EntityDataContext<IStepData>
     {
         public StepContext(IStepData step, ChapterContext parent) : base(step, parent) { }
 
@@ -14,9 +14,9 @@ namespace Innoactive.CreatorEditor.CourseValidation
         {
             if (Parent != null)
             {
-                return $"{Parent.ToString()} > [{Entity.Name}]";
+                return $"{Parent.ToString()} > [{EntityData.Name}]";
             }
-            return $"[{Entity.Name}]";
+            return $"[{EntityData.Name}]";
         }
     }
 }

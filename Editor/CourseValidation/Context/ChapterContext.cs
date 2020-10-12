@@ -5,7 +5,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Base context for objects of type <see cref="IChapterData"/>.
     /// </summary>
-    public class ChapterContext : EntityContext<IChapterData>
+    public class ChapterContext : EntityDataContext<IChapterData>
     {
         public ChapterContext(IChapterData chapter, CourseContext parent) : base(chapter, parent) { }
 
@@ -14,9 +14,9 @@ namespace Innoactive.CreatorEditor.CourseValidation
         {
             if (Parent != null)
             {
-                return $"{Parent.ToString()} > [{Entity.Name}]";
+                return $"{Parent.ToString()} > [{EntityData.Name}]";
             }
-            return $"[{Entity.Name}]";
+            return $"[{EntityData.Name}]";
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Base context for objects of type <see cref="ITransition"/>.
     /// </summary>
-    public class TransitionContext : EntityContext<ITransitionData>
+    public class TransitionContext : EntityDataContext<ITransitionData>
     {
         public TransitionContext(ITransitionData transition, StepContext parent) : base(transition, parent) { }
 
@@ -22,9 +22,9 @@ namespace Innoactive.CreatorEditor.CourseValidation
         private int FindTransitionPosition()
         {
             int index = 0;
-            foreach (ITransition transition in ((StepContext) Parent).Entity.Transitions.Data.Transitions)
+            foreach (ITransition transition in ((StepContext) Parent).EntityData.Transitions.Data.Transitions)
             {
-                if (transition.Data == Entity)
+                if (transition.Data == EntityData)
                 {
                     return index;
                 }

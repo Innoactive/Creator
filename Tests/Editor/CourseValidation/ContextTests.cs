@@ -41,7 +41,7 @@ namespace Innoactive.Creator.Core.Tests.Editor.CourseValidation
             Course course = new Course("", new Chapter("", new Step("")));
             CourseContext courseContext = new CourseContext(course.Data);
             ChapterContext chapterContext = new ChapterContext(course.Data.Chapters[0].Data, courseContext);
-            StepContext stepContext = new StepContext(chapterContext.Entity.FirstStep.Data, chapterContext);
+            StepContext stepContext = new StepContext(chapterContext.EntityData.FirstStep.Data, chapterContext);
 
             Assert.IsTrue(chapterContext.IsChildOf(courseContext));
             Assert.IsTrue(stepContext.IsChildOf(chapterContext));

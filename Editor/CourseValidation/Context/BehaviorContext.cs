@@ -5,7 +5,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Base context for objects of type <see cref="IBehaviorData"/>.
     /// </summary>
-    public class BehaviorContext : EntityContext<IBehaviorData>
+    public class BehaviorContext : EntityDataContext<IBehaviorData>
     {
         public BehaviorContext(IBehaviorData behavior, StepContext parent) : base(behavior, parent) { }
 
@@ -21,11 +21,11 @@ namespace Innoactive.CreatorEditor.CourseValidation
 
         private string GetName()
         {
-            if (string.IsNullOrEmpty(Entity.Name))
+            if (string.IsNullOrEmpty(EntityData.Name))
             {
-                return Entity.ToString();
+                return EntityData.ToString();
             }
-            return Entity.Name;
+            return EntityData.Name;
         }
     }
 }

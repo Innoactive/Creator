@@ -5,7 +5,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Base context for objects of type <see cref="IConditionData"/>.
     /// </summary>
-    public class ConditionContext : EntityContext<IConditionData>
+    public class ConditionContext : EntityDataContext<IConditionData>
     {
         public ConditionContext(IConditionData condition, TransitionContext parent) : base(condition, parent) { }
 
@@ -21,11 +21,11 @@ namespace Innoactive.CreatorEditor.CourseValidation
 
         private string GetName()
         {
-            if (string.IsNullOrEmpty(Entity.Name))
+            if (string.IsNullOrEmpty(EntityData.Name))
             {
-                return Entity.GetType().Name;
+                return EntityData.GetType().Name;
             }
-            return Entity.Name;
+            return EntityData.Name;
         }
     }
 }
