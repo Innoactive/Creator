@@ -26,13 +26,13 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             }
 
             GUIContent behaviorLabel = new GUIContent("Behaviors");
-            if (ValidationHandler.Instance.LastReport.GetContextEntriesFor<BehaviorContext>(step).Count > 0)
+            if (ValidationHandler.Instance.LastReport != null && ValidationHandler.Instance.LastReport.GetContextEntriesFor<BehaviorContext>(step).Count > 0)
             {
                 behaviorLabel.image = EditorGUIUtility.IconContent("Warning").image;
             }
 
             GUIContent transitionLabel = new GUIContent("Transitions");
-            if (ValidationHandler.Instance.LastReport.GetContextEntriesFor<ConditionContext>(step).Count > 0)
+            if (ValidationHandler.Instance.LastReport != null && ValidationHandler.Instance.LastReport.GetContextEntriesFor<ConditionContext>(step).Count > 0)
             {
                 transitionLabel.image = EditorGUIUtility.IconContent("Warning").image;
             }

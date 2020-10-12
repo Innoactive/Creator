@@ -10,7 +10,7 @@ using Innoactive.Creator.Core.Validation;
 namespace Innoactive.CreatorEditor.CourseValidation
 {
     /// <summary>
-    /// Checks a Step data for attributes which implement <see cref="IAttributeValidator"/> and runs their valiation.
+    /// Checks a Step data for attributes which implement <see cref="IAttributeValidator"/> and runs their validation.
     /// </summary>
     internal class StepAttributeValidator : BaseValidator<IStepData, StepContext>
     {
