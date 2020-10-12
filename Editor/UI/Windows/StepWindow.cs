@@ -55,7 +55,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         void OnFocus()
         {
-            if (RuntimeConfigurator.Exists)
+            if (ValidationHandler.Instance.IsAllowedToValidate())
             {
                 ValidationHandler.Instance.Validate(step.Data, GlobalEditorHandler.GetCurrentCourse());
             }

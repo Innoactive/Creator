@@ -518,7 +518,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             Graphics.CalculateBoundingBox();
 
-            if (RuntimeConfigurator.Exists)
+            if (ValidationHandler.Instance.IsAllowedToValidate())
             {
                 ValidationHandler.Instance.Validate(currentChapter.Data, GlobalEditorHandler.GetCurrentCourse(), null);
             }

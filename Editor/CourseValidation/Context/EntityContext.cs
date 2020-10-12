@@ -17,24 +17,19 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// </summary>
         public T Entity { get; }
 
-        /// <inheritdoc />
-        public abstract bool IsSelectable { get; }
-
         public EntityContext(T entity, IContext parent)
         {
             Entity = entity;
             Parent = parent;
         }
 
-        /// <inheritdoc />
-        public abstract void Select();
-
-        public override bool Equals(object obj)
+        /// <inheritdoc/>
+        public override bool Equals(object otherObject)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((EntityContext<T>) obj);
+            if (ReferenceEquals(null, otherObject)) return false;
+            if (ReferenceEquals(this, otherObject)) return true;
+            if (otherObject.GetType() != this.GetType()) return false;
+            return Equals((EntityContext<T>) otherObject);
         }
 
         protected bool Equals(EntityContext<T> other)
@@ -42,6 +37,8 @@ namespace Innoactive.CreatorEditor.CourseValidation
             return EqualityComparer<T>.Default.Equals(Entity, other.Entity);
         }
 
+
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             return EqualityComparer<T>.Default.GetHashCode(Entity);

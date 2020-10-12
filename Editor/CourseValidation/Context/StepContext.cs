@@ -7,16 +7,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// </summary>
     public class StepContext : EntityContext<IStepData>
     {
-        /// <inheritdoc/>
-        public override bool IsSelectable { get; } = false;
-
         public StepContext(IStepData step, ChapterContext parent) : base(step, parent) { }
-
-        /// <inheritdoc/>
-        public override void Select()
-        {
-            throw new System.NotImplementedException();
-        }
 
         /// <inheritdoc/>
         public override string ToString()

@@ -7,16 +7,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// </summary>
     public class ConditionContext : EntityContext<IConditionData>
     {
-        /// <inheritdoc/>
-        public override bool IsSelectable { get; } = false;
-
         public ConditionContext(IConditionData condition, TransitionContext parent) : base(condition, parent) { }
-
-        /// <inheritdoc/>
-        public override void Select()
-        {
-            throw new System.NotImplementedException();
-        }
 
         /// <inheritdoc/>
         public override string ToString()

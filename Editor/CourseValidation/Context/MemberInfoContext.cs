@@ -8,26 +8,23 @@ namespace Innoactive.CreatorEditor.CourseValidation
     public class MemberInfoContext : IContext
     {
         /// <inheritdoc/>
-        public bool IsSelectable { get; } = false;
-
-        /// <inheritdoc/>
         public IContext Parent { get; }
 
+        /// <summary>
+        /// Parent IData object.
+        /// </summary>
         public IData ParentData { get; }
 
-        internal MemberInfo MemberInfo { get; }
+        /// <summary>
+        /// MemberInfo of the field/property pointed out by this context.
+        /// </summary>
+        public MemberInfo MemberInfo { get; }
 
         public MemberInfoContext(MemberInfo info, IData parentData, IContext parent)
         {
             MemberInfo = info;
             ParentData = parentData;
             Parent = parent;
-        }
-
-        /// <inheritdoc/>
-        public void Select()
-        {
-            throw new System.NotImplementedException();
         }
 
         /// <inheritdoc/>
@@ -46,6 +43,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
             return nameAttribute != null ? nameAttribute.Name : MemberInfo.Name;
         }
 
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
@@ -59,6 +57,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
             return Equals(MemberInfo, other.MemberInfo);
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             return (MemberInfo != null ? MemberInfo.GetHashCode() : 0);

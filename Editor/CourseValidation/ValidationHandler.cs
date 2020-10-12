@@ -63,6 +63,14 @@ namespace Innoactive.CreatorEditor.CourseValidation
         }
 
         /// <summary>
+        /// Checks if validation is currently allowed.
+        /// </summary>
+        public bool IsAllowedToValidate()
+        {
+            return CreatorProjectSettings.Load().IsValidationEnabled && RuntimeConfigurator.Exists;
+        }
+
+        /// <summary>
         /// Calls internal validation process for given <paramref name="validateableObject"/>.
         /// </summary>
         /// <param name="validateableObject">Object which is the target of the validation.</param>

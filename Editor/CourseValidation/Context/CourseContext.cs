@@ -7,16 +7,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// </summary>
     public class CourseContext : EntityContext<ICourseData>
     {
-        /// <inheritdoc/>
-        public override bool IsSelectable { get; } = false;
-
         public CourseContext(ICourseData course) : base(course, null) { }
-
-        /// <inheritdoc/>
-        public override void Select()
-        {
-            throw new System.NotImplementedException();
-        }
 
         /// <inheritdoc/>
         public override string ToString()

@@ -7,16 +7,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// </summary>
     public class BehaviorContext : EntityContext<IBehaviorData>
     {
-        /// <inheritdoc/>
-        public override bool IsSelectable { get; } = false;
-
         public BehaviorContext(IBehaviorData behavior, StepContext parent) : base(behavior, parent) { }
-
-        /// <inheritdoc/>
-        public override void Select()
-        {
-            throw new System.NotImplementedException();
-        }
 
         /// <inheritdoc/>
         public override string ToString()

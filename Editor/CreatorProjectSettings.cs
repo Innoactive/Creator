@@ -14,6 +14,12 @@ public class CreatorProjectSettings : ScriptableObject
     public bool IsFirstTimeStarted = true;
 
     /// <summary>
+    /// Enables the validation system.
+    /// </summary>
+    [SerializeField]
+    public bool IsValidationEnabled = true;
+
+    /// <summary>
     /// Loads the Creator settings for this Unity project from Resources.
     /// </summary>
     /// <returns>Creator Settings</returns>

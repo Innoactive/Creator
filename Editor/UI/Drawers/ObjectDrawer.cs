@@ -73,7 +73,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
         protected virtual void CheckValidation(object currentValue, MemberInfo info, GUIContent label)
         {
-            if (currentValue is IData data && RuntimeConfigurator.Exists)
+            if (currentValue is IData data && ValidationHandler.Instance.IsAllowedToValidate())
             {
                 List<EditorReportEntry> entries = GetValidationReportsFor(data, info);
                 if (entries.Count > 0)

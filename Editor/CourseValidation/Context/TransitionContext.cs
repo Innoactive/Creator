@@ -7,16 +7,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// </summary>
     public class TransitionContext : EntityContext<ITransitionData>
     {
-        /// <inheritdoc />
-        public override bool IsSelectable { get; } = false;
-
         public TransitionContext(ITransitionData transition, StepContext parent) : base(transition, parent) { }
-
-        /// <inheritdoc/>
-        public override void Select()
-        {
-            throw new System.NotImplementedException();
-        }
 
         /// <inheritdoc/>
         public override string ToString()
