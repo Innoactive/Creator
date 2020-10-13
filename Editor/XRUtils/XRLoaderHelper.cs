@@ -1,15 +1,14 @@
-﻿using System.Linq;
+﻿using UnityEditor;
+using UnityEngine;
+using System.Linq;
 using System.Collections.Generic;
 using Innoactive.CreatorEditor.PackageManager;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
 
 #if UNITY_XR_MANAGEMENT
-using System.IO;
-using UnityEditor.XR.Management.Metadata;
-using UnityEngine.XR.Management;
 using System.Reflection;
+using System.Threading.Tasks;
+using UnityEngine.XR.Management;
+using UnityEditor.XR.Management.Metadata;
 #endif
 
 namespace Innoactive.CreatorEditor.XRUtils
@@ -19,6 +18,7 @@ namespace Innoactive.CreatorEditor.XRUtils
     /// </summary>
     internal class XRLoaderHelper
     {
+        internal const string AttemptedToInitialized = "IsXRLoaderInitialized";
         private const string OculusXRPackage = "com.unity.xr.oculus";
         private const string WindowsXRPackage = "com.unity.xr.windowsmr";
         private const string XRManagementPackage = "com.unity.xr.management";
@@ -54,6 +54,8 @@ namespace Innoactive.CreatorEditor.XRUtils
                 return;
             }
 
+            EditorPrefs.DeleteKey(AttemptedToInitialized);
+
 #if UNITY_2020_1_OR_NEWER
             // This will be integrated as soon as there is an OpenVR XR SDK compatible with the XR interaction framework.
 #elif UNITY_2019_1_OR_NEWER
@@ -79,6 +81,8 @@ namespace Innoactive.CreatorEditor.XRUtils
                 return;
             }
 
+            EditorPrefs.DeleteKey(AttemptedToInitialized);
+
 #if UNITY_XR_MANAGEMENT
             DisplayDialog("Oculus XR");
             PackageOperationsManager.LoadPackage(OculusXRPackage);
@@ -99,6 +103,8 @@ namespace Innoactive.CreatorEditor.XRUtils
                 Debug.LogWarning("Windows MR is already loaded.");
                 return;
             }
+
+            EditorPrefs.DeleteKey(AttemptedToInitialized);
 
 #if UNITY_XR_MANAGEMENT
             DisplayDialog("Windows MR");
@@ -169,20 +175,22 @@ namespace Innoactive.CreatorEditor.XRUtils
         }
 
 #if UNITY_XR_MANAGEMENT
-        internal static void EnableLoader(string package, string loader, BuildTargetGroup buildTargetGroup = BuildTargetGroup.Standalone)
+        internal static async void EnableLoader(string package, string loader, BuildTargetGroup buildTargetGroup = BuildTargetGroup.Standalone)
         {
+            EditorPrefs.SetBool(AttemptedToInitialized, true);
+            SettingsService.OpenProjectSettings("Project/XR Plug-in Management");
+
+            await Task.Delay(500);
+
             if (XRGeneralSettings.Instance == null)
             {
                 EditorUtility.DisplayDialog($"Can't enable {loader}!", $"Can't enable {loader} because general settings for XR are missing. Enable them manually here:\nEdit > Project Settings... > XR Plug-in Management\nand then select the provider for your VR headset.", "Continue");
                 return;
             }
 
-            foreach (XRLoader xrLoader in XRGeneralSettings.Instance.Manager.loaders)
+            if (XRGeneralSettings.Instance.Manager.loaders.Any(xrLoader => xrLoader.GetType().Name == loader))
             {
-                if (xrLoader.GetType().Name == loader)
-                {
-                    return;
-                }
+                return;
             }
 
             typeof(XRPackageMetadataStore)
@@ -197,7 +205,7 @@ namespace Innoactive.CreatorEditor.XRUtils
         }
 
 #if UNITY_2019_1_OR_NEWER && !UNITY_2020_1_OR_NEWER
-        private static async void LoadOpenVRLegacy ()
+        private static async void LoadOpenVRLegacy()
         {
             DisplayDialog("OpenVR");
 #pragma warning disable CS0618
