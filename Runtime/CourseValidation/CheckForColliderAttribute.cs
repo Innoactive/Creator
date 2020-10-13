@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Innoactive.Creator.Core.Validation
 {
@@ -9,7 +11,12 @@ namespace Innoactive.Creator.Core.Validation
     {
         public CheckForColliderAttribute() : base(typeof(BoxCollider), typeof(SphereCollider), typeof(CapsuleCollider), typeof(MeshCollider), typeof(Collider))
         {
-            message = "Target TrainingSceneObject is missing a collider!";
+
+        }
+
+        protected override ReportEntry CreateErrorMessage(GameObject gameObject, List<Type> components)
+        {
+            return ReportEntryGenerator.MissingCollider(gameObject);
         }
     }
 }

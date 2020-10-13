@@ -64,26 +64,14 @@ namespace Innoactive.CreatorEditor.CourseValidation
             object value = ReflectionUtils.GetValueFromPropertyOrField(data, info);
             if (ReflectionUtils.IsEmpty(value))
             {
-                result.Add(new EditorReportEntry()
-                {
-                    Code = 3003,
-                    Message = $"This variable {info.Name} is required",
-                    Context = new MemberInfoContext(info, data, context),
-                    ErrorLevel = ValidationErrorLevel.ERROR,
-                    Validator = this,
-                });
+                ReportEntry entry = ReportEntryGenerator.VariableNotSet(info.Name);
+                result.Add(new EditorReportEntry(new MemberInfoContext(info, data, context), this, entry));
             }
 
             if (ReflectionUtils.IsNumeric(value.GetType()) && value.Equals(ReflectionUtils.GetDefault(value.GetType())))
             {
-                result.Add(new EditorReportEntry()
-                {
-                    Code = 3003,
-                    Message = $"This variable {info.Name} should not be zero.",
-                    Context = new MemberInfoContext(info, data, context),
-                    ErrorLevel = ValidationErrorLevel.ERROR,
-                    Validator = this,
-                });
+                ReportEntry entry = ReportEntryGenerator.NumericVariableNotSet(info.Name);
+                result.Add(new EditorReportEntry(new MemberInfoContext(info, data, context), this, entry));
             }
         }
 

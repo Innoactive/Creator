@@ -16,11 +16,6 @@ namespace Innoactive.Creator.Core.Validation
         public virtual ValidationErrorLevel ErrorLevel { get; }
 
         /// <summary>
-        /// Detailed description of the issue.
-        /// </summary>
-        protected string message = "One Component of {0} is missing";
-
-        /// <summary>
         /// List of required components.
         /// </summary>
         protected List<Type> components;
@@ -35,20 +30,21 @@ namespace Innoactive.Creator.Core.Validation
 
         public List<ReportEntry> Validate(object value)
         {
-            if (IsMissingComponent(FetchGameObject(value)))
+            GameObject gameObject = FetchGameObject(value);
+            if (IsMissingComponent(gameObject))
             {
                 return new List<ReportEntry>()
                 {
-                    new ReportEntry()
-                    {
-                        ErrorLevel = ErrorLevel,
-                        Code = 3004,
-                        Message = String.Format(message, string.Join(", ", components))
-                    }
+                    CreateErrorMessage(gameObject, components)
                 };
             }
 
             return new List<ReportEntry>();
+        }
+
+        protected virtual ReportEntry CreateErrorMessage(GameObject gameObject, List<Type> components)
+        {
+            return ReportEntryGenerator.MissingComponent(gameObject, string.Join(", ", components));
         }
 
         /// <summary>

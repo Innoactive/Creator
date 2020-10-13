@@ -51,14 +51,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
                     object value = ReflectionUtils.GetValueFromPropertyOrField(data, memberInfo);
                     validator.Validate(value).ForEach(report =>
                     {
-                        result.Add(new EditorReportEntry
-                        {
-                            ErrorLevel = report.ErrorLevel,
-                            Code = report.Code,
-                            Message = report.Message,
-                            Validator = this,
-                            Context = new MemberInfoContext(memberInfo, data, context),
-                        });
+                        result.Add(new EditorReportEntry(Context, this, report));
                     });
                 }
             }

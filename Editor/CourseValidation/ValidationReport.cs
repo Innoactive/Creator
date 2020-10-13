@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Reflection;
 using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Behaviors;
+using Innoactive.Creator.Core.Conditions;
 
 namespace Innoactive.CreatorEditor.CourseValidation
 {
@@ -61,6 +63,18 @@ namespace Innoactive.CreatorEditor.CourseValidation
 
                 return false;
             }).ToList();
+        }
+
+        public List<EditorReportEntry> GetEntriesFor(IBehaviorData data)
+        {
+            BehaviorContext context = new BehaviorContext(data, null);
+            return Entries.Where(entry => entry.Context.Equals(context)).ToList();
+        }
+
+        public List<EditorReportEntry> GetEntriesFor(IConditionData data)
+        {
+            ConditionContext context = new ConditionContext(data, null);
+            return Entries.Where(entry => entry.Context.Equals(context)).ToList();
         }
 
         /// <summary>

@@ -8,16 +8,30 @@
         /// <summary>
         /// Priority level for this <see cref="ValidationReportEntry"/>.
         /// </summary>
-        public ValidationErrorLevel ErrorLevel;
+        public readonly ValidationErrorLevel ErrorLevel;
 
         /// <summary>
         /// ErrorCode to easily identifying the error.
         /// </summary>
-        public int Code;
+        public readonly int Code;
 
         /// <summary>
         /// Detailed description of the issue.
         /// </summary>
-        public string Message;
+        public readonly string Message;
+
+        public ReportEntry(int code, string message, ValidationErrorLevel errorLevel)
+        {
+            Code = code;
+            Message = message;
+            ErrorLevel = errorLevel;
+        }
+
+        protected ReportEntry(ReportEntry entry)
+        {
+            Code = entry.Code;
+            Message = entry.Message;
+            ErrorLevel = entry.ErrorLevel;
+        }
     }
 }

@@ -23,14 +23,8 @@ namespace Innoactive.CreatorEditor.CourseValidation
 
             foreach (IStep missedStep in chapter.Steps.Except(connectedSteps))
             {
-                result.Add(new EditorReportEntry
-                {
-                    ErrorLevel = ValidationErrorLevel.WARNING,
-                    Code = 2001,
-                    Context = new StepContext(missedStep.Data, Context),
-                    Message = $"This Step: '{missedStep.Data.Name}' is not reachable!",
-                    Validator = this,
-                });
+                ReportEntry entry = ReportEntryGenerator.StepNotReachable(missedStep.Data);
+                result.Add(new EditorReportEntry(Context, this, entry));
             }
 
             return result;

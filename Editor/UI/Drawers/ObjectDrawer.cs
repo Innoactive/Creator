@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.Behaviors;
+using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Utils;
 using Innoactive.CreatorEditor.CourseValidation;
@@ -18,7 +20,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     [DefaultTrainingDrawer(typeof(object))]
     public class ObjectDrawer : AbstractDrawer
     {
-
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
@@ -57,7 +58,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
                     GUIContent displayName = memberDrawer.GetLabel(closuredMemberInfo, currentValue);
 
-                    CheckValidation(currentValue, closuredMemberInfo, displayName);
+                    CheckValidationForValue(currentValue, closuredMemberInfo, displayName);
 
                     height += memberDrawer.Draw(nextPosition, memberValue, (value) =>
                     {
@@ -71,7 +72,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             return rect;
         }
 
-        protected virtual void CheckValidation(object currentValue, MemberInfo info, GUIContent label)
+        protected virtual void CheckValidationForValue(object currentValue, MemberInfo info, GUIContent label)
         {
             if (currentValue is IData data && ValidationHandler.Instance.IsAllowedToValidate())
             {
@@ -83,10 +84,29 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             }
         }
 
-        protected virtual void AddValidationInformation(GUIContent displayName, List<EditorReportEntry> entries)
+        protected virtual GUIContent AddValidationInformation(GUIContent guiContent, List<EditorReportEntry> entries)
         {
-            displayName.image = EditorGUIUtility.IconContent("Warning").image;
-            displayName.tooltip = ValidationUtils.CreateTooltip(entries);
+            guiContent.image = EditorGUIUtility.IconContent("Warning").image;
+            guiContent.tooltip = ValidationUtils.CreateTooltip(entries);
+            return guiContent;
+        }
+
+        protected virtual List<EditorReportEntry> GetValidationReports(object value)
+        {
+            if (ValidationHandler.Instance.LastReport != null)
+            {
+                if (value is IConditionData conditionData)
+                {
+                    return ValidationHandler.Instance.LastReport.GetEntriesFor(conditionData);
+                }
+
+                if (value is IBehaviorData behaviorData)
+                {
+                    return ValidationHandler.Instance.LastReport.GetEntriesFor(behaviorData);
+                }
+            }
+
+            return new List<EditorReportEntry>();
         }
 
         protected virtual List<EditorReportEntry> GetValidationReportsFor(IData data, MemberInfo memberInfo)
@@ -121,17 +141,17 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
         private float CreateAndDrawMetadataWrapper(Rect rect, object ownerObject, MemberInfo drawnMemberInfo, Action<object> changeValueCallback)
         {
-            PropertyInfo metadataProperty = ownerObject.GetType().GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(property => typeof(Creator.Core.Metadata).IsAssignableFrom(property.PropertyType));
-            FieldInfo metadataField = ownerObject.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(field => typeof(Creator.Core.Metadata).IsAssignableFrom(field.FieldType));
-            Creator.Core.Metadata ownerObjectMetadata = null;
+            PropertyInfo metadataProperty = ownerObject.GetType().GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(property => typeof(Metadata).IsAssignableFrom(property.PropertyType));
+            FieldInfo metadataField = ownerObject.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(field => typeof(Metadata).IsAssignableFrom(field.FieldType));
+            Metadata ownerObjectMetadata = null;
 
             if (metadataProperty != null)
             {
-                ownerObjectMetadata = (Creator.Core.Metadata)metadataProperty.GetValue(ownerObject, null) ?? new Creator.Core.Metadata();
+                ownerObjectMetadata = (Metadata)metadataProperty.GetValue(ownerObject, null) ?? new Metadata();
             }
             else if (metadataField != null)
             {
-                ownerObjectMetadata = (Creator.Core.Metadata)metadataField.GetValue(ownerObject) ?? new Creator.Core.Metadata();
+                ownerObjectMetadata = (Metadata)metadataField.GetValue(ownerObject) ?? new Metadata();
             }
             else
             {
