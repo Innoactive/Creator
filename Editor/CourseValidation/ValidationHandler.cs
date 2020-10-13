@@ -71,20 +71,20 @@ namespace Innoactive.CreatorEditor.CourseValidation
         }
 
         /// <summary>
-        /// Calls internal validation process for given <paramref name="validateableObject"/>.
+        /// Calls internal validation process for given <paramref name="validatableObject"/>.
         /// </summary>
-        /// <param name="validateableObject">Object which is the target of the validation.</param>
+        /// <param name="validatableObject">Object which is the target of the validation.</param>
         /// <param name="context">Context this validation runs in, has to be the correct one.</param>
-        /// <returns>List of reports regarding invalid objects related to the <paramref name="validateableObject"/>.</returns>
-        protected List<EditorReportEntry> InternalValidate(object validateableObject, IContext context)
+        /// <returns>List of reports regarding invalid objects related to the <paramref name="validatableObject"/>.</returns>
+        protected List<EditorReportEntry> InternalValidate(object validatableObject, IContext context)
         {
             List<EditorReportEntry> entries = new List<EditorReportEntry>();
 
             foreach (IValidationScope validation in activeValidations)
             {
-                if (validation.CanValidate(validateableObject))
+                if (validation.CanValidate(validatableObject))
                 {
-                    entries.AddRange(validation.Validate(validateableObject, context));
+                    entries.AddRange(validation.Validate(validatableObject, context));
                 }
             }
 
