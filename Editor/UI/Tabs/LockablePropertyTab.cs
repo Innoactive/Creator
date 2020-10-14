@@ -1,4 +1,5 @@
-﻿using Innoactive.Creator.Core;
+﻿using System.Runtime.Serialization;
+using Innoactive.Creator.Core;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.Tabs
@@ -7,7 +8,7 @@ namespace Innoactive.CreatorEditor.Tabs
     {
         private readonly Step.EntityData data;
 
-        private static LockableObjectsCollection collection;
+        private LockableObjectsCollection collection;
 
         public GUIContent Label { get; private set; }
 
@@ -19,12 +20,15 @@ namespace Innoactive.CreatorEditor.Tabs
 
         public object GetValue()
         {
+            if (collection == null)
+            {
+                collection = new LockableObjectsCollection(data);
+            }
             return collection;
         }
 
         public void SetValue(object value)
         {
-
         }
 
         public void OnSelected()
