@@ -7,14 +7,13 @@ namespace Innoactive.CreatorEditor.Tabs
     {
         private readonly Step.EntityData data;
 
-        private LockableObjectsCollection collection;
+        private static LockableObjectsCollection collection;
 
         public GUIContent Label { get; private set; }
 
         public LockablePropertyTab(GUIContent label, Step.EntityData data)
         {
             Label = label;
-
             this.data = data;
         }
 
