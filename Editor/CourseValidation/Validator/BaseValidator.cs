@@ -58,7 +58,10 @@ namespace Innoactive.CreatorEditor.CourseValidation
             }
             catch (Exception ex)
             {
-                Debug.LogError($"{ex.GetType().Name} while trying to validate: \n{ex.StackTrace}");
+                if (CreatorProjectSettings.Load().DebugValidationSystem)
+                {
+                    Debug.LogError($"{ex.GetType().Name} while trying to validate: \n{ex.StackTrace}");
+                }
                 return new List<EditorReportEntry>();
             }
         }

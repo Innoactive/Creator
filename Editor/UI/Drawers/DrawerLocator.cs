@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Utils;
+using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Drawers
 {

@@ -20,7 +20,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         {
             INamedData nameable = currentValue as INamedData;
 
-
             List<EditorReportEntry> reports = GetValidationReports(currentValue);
             if (reports.Count > 0)
             {

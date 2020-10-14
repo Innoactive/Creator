@@ -9,11 +9,13 @@ namespace Innoactive.Creator.Core.Validation
     /// </summary>
     public class CheckForColliderAttribute : CheckForComponentAttribute
     {
+        /// <inheritdoc />
         public CheckForColliderAttribute() : base(typeof(BoxCollider), typeof(SphereCollider), typeof(CapsuleCollider), typeof(MeshCollider), typeof(Collider))
         {
 
         }
 
+        /// <inheritdoc />
         protected override ReportEntry CreateErrorMessage(GameObject gameObject, List<Type> components)
         {
             return ReportEntryGenerator.MissingCollider(gameObject);

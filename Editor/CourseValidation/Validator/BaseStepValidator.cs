@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Behaviors;
 using Innoactive.Creator.Core.Conditions;
@@ -12,6 +13,33 @@ namespace Innoactive.CreatorEditor.CourseValidation
     public abstract class BaseStepValidator : BaseValidator<IStepData, StepContext>
     {
         /// <summary>
+        /// Get all behaviors used in this step, including behaviors in BehaviorSequences.
+        /// </summary>
+        protected List<IBehavior> GetAllBehaviors(IStepData step)
+        {
+            List<IBehavior> behaviors = step.Behaviors.Data.Behaviors.ToList();
+            while (behaviors.Any(behavior => behavior is BehaviorSequence))
+            {
+                behaviors = ExtractBehaviorsFromBehaviorSequence(behaviors);
+            }
+
+            return behaviors;
+        }
+
+        private List<IBehavior> ExtractBehaviorsFromBehaviorSequence(List<IBehavior> behaviors)
+        {
+            List<IBehavior> newBehaviors = new List<IBehavior>();
+            foreach (BehaviorSequence sequence in behaviors.Where(behavior => behavior is BehaviorSequence).Cast<BehaviorSequence>())
+            {
+                newBehaviors.AddRange(sequence.Data.Behaviors);
+            }
+
+            behaviors.RemoveAll(behavior => behavior is BehaviorSequence);
+            behaviors.AddRange(newBehaviors);
+            return behaviors;
+        }
+
+        /// <summary>
         /// Retrieves a list of <see cref="IBehavior"/> of requested type from given <paramref name="step"/>.
         /// </summary>
         /// <param name="step">The <see cref="IStep"/> where to retrieve the list of <see cref="IBehavior"/>.</param>
@@ -19,7 +47,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
         protected List<T> GetBehavior<T>(IStepData step) where T : IBehavior
         {
             List<T> result = new List<T>();
-            foreach (IBehavior behavior in step.Behaviors.Data.Behaviors)
+            foreach (IBehavior behavior in GetAllBehaviors(step))
             {
                 if (behavior is T)
                 {

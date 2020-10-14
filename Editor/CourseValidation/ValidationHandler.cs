@@ -5,6 +5,8 @@ using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Utils;
 using Innoactive.Creator.Unity;
+using UnityEditor;
+using UnityEngine;
 
 namespace Innoactive.CreatorEditor.CourseValidation
 {
@@ -65,9 +67,12 @@ namespace Innoactive.CreatorEditor.CourseValidation
         /// <summary>
         /// Checks if validation is currently allowed.
         /// </summary>
-        public bool IsAllowedToValidate()
+        public static bool IsAllowedToValidate()
         {
-            return CreatorProjectSettings.Load().IsValidationEnabled && RuntimeConfigurator.Exists;
+            return CreatorProjectSettings.Load().IsValidationEnabled
+                   && RuntimeConfigurator.Exists
+                   && Application.isPlaying == false
+                   && EditorApplication.isCompiling == false;
         }
 
         /// <summary>

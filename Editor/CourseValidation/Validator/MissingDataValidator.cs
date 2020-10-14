@@ -14,7 +14,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
     /// <summary>
     /// Checks a Step data for empty variables.
     /// </summary>
-    internal class MissingDataValidator : BaseValidator<IStepData, StepContext>
+    internal class MissingDataValidator : BaseStepValidator
     {
         protected List<EditorReportEntry> result;
 
@@ -23,7 +23,7 @@ namespace Innoactive.CreatorEditor.CourseValidation
         {
             result = new List<EditorReportEntry>();
 
-            foreach (IBehavior behavior in step.Behaviors.Data.Behaviors)
+            foreach (IBehavior behavior in GetAllBehaviors(step))
             {
                 Check(behavior.Data, new BehaviorContext(behavior.Data, Context));
             }

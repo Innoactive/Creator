@@ -117,7 +117,7 @@ namespace Innoactive.CreatorEditor
         {
             CurrentCourse = newCourse;
 
-            if (newCourse != null && ValidationHandler.Instance.IsAllowedToValidate())
+            if (newCourse != null && ValidationHandler.IsAllowedToValidate())
             {
                 ValidationHandler.Instance.Validate(newCourse.Data, newCourse);
             }
@@ -138,7 +138,7 @@ namespace Innoactive.CreatorEditor
         {
             courseWindow.GetChapter().ChapterMetadata.LastSelectedStep = step;
 
-            if (ValidationHandler.Instance.IsAllowedToValidate())
+            if (ValidationHandler.IsAllowedToValidate())
             {
                 ValidationHandler.Instance.Validate(step.Data, CurrentCourse);
             }
@@ -151,7 +151,7 @@ namespace Innoactive.CreatorEditor
         {
             if (stepWindow != null)
             {
-                if (step != null &&  ValidationHandler.Instance.IsAllowedToValidate())
+                if (step != null &&  ValidationHandler.IsAllowedToValidate())
                 {
                     ValidationHandler.Instance.Validate(step.Data, CurrentCourse);
                 }
