@@ -29,7 +29,7 @@ namespace Innoactive.CreatorEditor.UI
         public Rect BoundingBox { get; private set; }
 
         /// <summary>
-        /// Defines colors used in Workflow Editor.
+        /// Defines colors used in the Workflow window.
         /// </summary>
         public WorkflowEditorColorPalette ColorPalette { get; set; }
 

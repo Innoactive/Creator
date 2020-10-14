@@ -50,6 +50,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                         tabsGroup.Tabs[oldSelected].OnUnselect();
                         tabsGroup.Tabs[selected].OnSelected();
                         tabsGroup.Selected = selected;
+                        EditorUtils.ResetKeyboardElementFocus();
                         return tabsGroup;
                     },
                     () =>
@@ -57,6 +58,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                         tabsGroup.Tabs[selected].OnUnselect();
                         tabsGroup.Tabs[oldSelected].OnSelected();
                         tabsGroup.Selected = oldSelected;
+                        EditorUtils.ResetKeyboardElementFocus();
                         return tabsGroup;
                     },
                     changeValueCallback);

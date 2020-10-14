@@ -16,7 +16,7 @@ namespace Innoactive.Creator.Core
         public IStep LastSelectedStep { get; set; }
 
         /// <summary>
-        /// Reference to the entry node's position in the 'Workflow Editor'.
+        /// Reference to the entry node's position in the Workflow window.
         /// </summary>
         [DataMember]
         public Vector2 EntryNodePosition { get; set; }
