@@ -67,7 +67,18 @@ namespace Innoactive.CreatorEditor.CourseValidation
 
             if (CanValidate(entityObject))
             {
-                return InternalValidate((T) entityObject);
+                try
+                {
+                    return InternalValidate((T) entityObject);
+                }
+                catch (Exception ex)
+                {
+                    if (CreatorProjectSettings.Load().DebugValidationSystem)
+                    {
+                        Debug.LogError(ex);
+                    }
+                    return new List<EditorReportEntry>();
+                }
             }
 
             throw new InvalidCastException();
