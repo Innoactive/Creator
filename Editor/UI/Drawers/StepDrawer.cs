@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.CourseValidation;
 using Innoactive.CreatorEditor.Tabs;
@@ -14,6 +15,9 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     [DefaultTrainingDrawer(typeof(Step.EntityData))]
     internal class StepDrawer : ObjectDrawer
     {
+        private IStepData lastStep;
+        private TabsGroup activeTab;
+
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
             rect = base.Draw(rect, currentValue, changeValueCallback, label);
@@ -37,14 +41,18 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 transitionLabel.image = EditorGUIUtility.IconContent("Warning").image;
             }
 
-            TabsGroup Tabs = new TabsGroup(
-                step.Metadata,
-                new DynamicTab(behaviorLabel, () => step.Behaviors, value => step.Behaviors = (IBehaviorCollection)value),
-                new DynamicTab(transitionLabel, () => step.Transitions, value => step.Transitions = (ITransitionCollection)value),
-                new LockablePropertyTab(new GUIContent("Unlocked Objects"), step)
-            );
+            if (activeTab == null || lastStep != step)
+            {
+                activeTab = new TabsGroup(
+                    step.Metadata,
+                    new DynamicTab(behaviorLabel, () => step.Behaviors, value => step.Behaviors = (IBehaviorCollection)value),
+                    new DynamicTab(transitionLabel, () => step.Transitions, value => step.Transitions = (ITransitionCollection)value),
+                    new LockablePropertyTab(new GUIContent("Unlocked Objects"), step)
+                );
+                lastStep = step;
+            }
 
-            Rect tabRect = new TabsGroupDrawer().Draw(new Rect(rect.x, rect.y + rect.height + 4f, rect.width, 0), Tabs, changeValueCallback, label);
+            Rect tabRect = new TabsGroupDrawer().Draw(new Rect(rect.x, rect.y + rect.height + 4f, rect.width, 0), activeTab, changeValueCallback, label);
             rect.height += tabRect.height;
             return rect;
         }

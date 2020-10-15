@@ -16,14 +16,11 @@ namespace Innoactive.CreatorEditor.Tabs
         {
             Label = label;
             this.data = data;
+            collection = new LockableObjectsCollection(data);
         }
 
         public object GetValue()
         {
-            if (collection == null)
-            {
-                collection = new LockableObjectsCollection(data);
-            }
             return collection;
         }
 
@@ -33,7 +30,6 @@ namespace Innoactive.CreatorEditor.Tabs
 
         public void OnSelected()
         {
-            collection = new LockableObjectsCollection(data);
         }
 
         public void OnUnselect()
