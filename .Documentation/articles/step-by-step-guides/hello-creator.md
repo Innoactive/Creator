@@ -9,13 +9,13 @@ In case you are new to Unity, you see an empty Unity project, which usually incl
 ![Unity Layout](../images/step-by-step-guides/unityWindows.jpg "Getting Familiar with Unity - The Unity Layout")
 *Figure 1: Get familiar with Unity windows: hierachy, scene, inspector and project hierachy and console.*
 
-By importing Innoactive Creator, you will have a new element in the top menu (‘File’, ’Edit’, …), called `Innoactive` (see Fig. 2).
+By importing Innoactive Creator, you will have a new element in the top menu (‘File’, ’Edit’, …), called `Innoactive` (see Fig. 2). An `Create New Course` Wizard is open.
 
-> select `Create New Course` from the top menu `Innoactive`.
+  > After Importing, the `Create New Course` Wizard should open. In case it is not open, select `Create New Course` from the top menu `Innoactive`.
 
 ## Step 2: Select Demo Scene
 
-A **Wizard** window opens.
+The Wizard helps you to setup your project. You can start from an empty scene, but for the sake of this guide, we start with a simple demo scene.
 
 > select `Import step-by-step demo scene` in `Step 1: Setup Training`
 
@@ -28,7 +28,11 @@ A **Wizard** window opens.
 ![Creator Windows](../images/step-by-step-guides/creatorWindows.jpg "Getting Familiar with Unity - The Creator Layout")
 *Figure 2: The basic Innoactive Creator Windows for Training Creation.*
 
-You see a new Scene was loaded: In the Scene window you see a `sphere`. New is the ***Innoactive Workflow Editor*** window and the ***Step Inspector*** window (see figure 2, This window opens when you create and select a new step by double-click). We recommend you place both windows as illustrated in the image above.
+You see a new Scene was loaded: In the Scene window you see a `sphere`. New is the ***Innoactive Workflow Editor*** window and the ***Step Inspector*** window (see figure 2). 
+
+(note: The ***Step Inspector*** window opens when you create and select a new step by double-click). 
+
+We recommend you place both windows as illustrated in the image above.
 The ***Innoactive Workflow Editor*** contains two circles, the large one represents the initial state of a workflow (see Fig. 2) and the small one is an outgoing connection currently not connected to anything.
 
 ## Step 4: Create a Simple Training Application
@@ -115,6 +119,6 @@ Congratulation! You successfully built a minimal training application using the 
 ## Troubleshoot
 
 - I can not find `Innoactive` in the top menu ('file', 'edit', …)
-  - Download the `Innoactive Creator` package at the [Innoactive Developer Portal](http://developers.innoactive.de/creator/releases/).
+  - Download the `Innoactive Creator` package at the [Innoactive Developer Portal](http://developers.innoactive.de/creator/releases/) and double-click the downloaded package to import it into Unity. 
 - I cannot play the training application with my hardware.
-  - Please enure you have correctly setup your hardware within Unity. Take a look in our [XR Setup Guide](../setup-guides/03-xr-setup.md)
+  - Please enure your hardware is correctly configured within Unity. Take a look in our [XR Setup Guide](../setup-guides/03-xr-setup.md).
