@@ -20,7 +20,7 @@ public class CreatorProjectSettings : ScriptableObject
     public bool IsValidationEnabled = true;
 
     /// <summary>
-    /// Enables the validation system.
+    /// Enables the validation system debugging output.
     /// </summary>
     [SerializeField]
     public bool DebugValidationSystem = false;

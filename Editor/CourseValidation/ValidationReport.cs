@@ -65,12 +65,20 @@ namespace Innoactive.CreatorEditor.CourseValidation
             }).ToList();
         }
 
+        /// <summary>
+        /// Get Entries For IBehaviorData.
+        /// </summary>
         public List<EditorReportEntry> GetEntriesFor(IBehaviorData data)
         {
             BehaviorContext context = new BehaviorContext(data, null);
             return Entries.Where(entry => entry.Context.Equals(context)).ToList();
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public List<EditorReportEntry> GetEntriesFor(IConditionData data)
         {
             ConditionContext context = new ConditionContext(data, null);
