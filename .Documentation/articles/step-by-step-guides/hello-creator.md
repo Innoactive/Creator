@@ -122,3 +122,8 @@ Congratulation! You successfully built a minimal training application using the 
   - Download the `Innoactive Creator` package at the [Innoactive Developer Portal](http://developers.innoactive.de/creator/releases/) and double-click the downloaded package to import it into Unity. 
 - I cannot play the training application with my hardware.
   - Please ensure your hardware is correctly configured within Unity. Take a look in our [XR Setup Guide](../setup-guides/03-xr-setup.md).
+  
+## Next Steps
+
+As a training designer: [A more complex example of building a training course](../getting-started/designer.md)
+As a developer: [Create custom templates and conditions & behaviors for the Innoactive Creator](../getting-started/developer.md)
