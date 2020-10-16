@@ -93,7 +93,7 @@ One `step` can have multiple `transitions` to other `steps`. Since your `step` d
 
 The Snap Condition requires two objects ‘Object to snap’ and ‘Zone to snap into’.
 
-> drag the Sphere object from the hierarchy into the ‘Object to snap’ and click the ‘fix it’ button.
+> drag the Sphere object from the hierarchy into the `Object to snap` and click the `Fix it` button.
 
 Let’s inspect the `sphere` object: Select the `sphere` object in the ***Hierachy*** window and open the ***Inspector*** window (see Fig. 1). You see a list of properties and scripts attached to this object, e.g. 'Box Collider' etc.
 
