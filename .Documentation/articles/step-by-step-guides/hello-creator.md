@@ -110,7 +110,7 @@ A new object `Sphere_SnapZone` appeared in the ***Hierarchy*** window.
 Go back to the ***Step inspector*** window.
 > drag-and-drop the sphere_SnapZone object into the ‘Zone to snap into’ property of the ‘snap object’ condition.
 
-## Step 5: Start course
+## Step 5: Start Course
 
 Connect your Head-Mounted Device and start the training application by hitting the play button in the top-center of the Unity window. Grab your controllers, move the controllers in VR into the solid Sphere object and press the 'select' button which varies for every controller. Please read the manual of your hardware to find the correct controller button. When you have successfully grabbed the sphere, move it over to the 'snap zone' and release the button.
 
