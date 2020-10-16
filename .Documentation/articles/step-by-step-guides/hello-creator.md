@@ -81,7 +81,7 @@ The Innoactive Creator will take care of configuring the underlying Unity Object
 
  *Figure 3: The configured Highlight object behavior.*
 
-#### Transition – Grab-and-place the sphere
+#### Transition – Grab-and-place the Sphere
 
 Placing an object implies you 'grabbed' it before. Thus, we integrated both actions into a single condition called `Snap Object`. It’s called 'snap' because when trainees approach the target position with the object, they can release the object and it will position and rotate itself into the target position. Imagine an electrical component that has to be precisely placed on to a circuit board. 
 
