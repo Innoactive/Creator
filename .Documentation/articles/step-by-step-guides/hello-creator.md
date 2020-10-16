@@ -125,5 +125,5 @@ Congratulation! You successfully built a minimal training application using the 
   
 ## Next Steps
 
-As a training designer: [A more complex example of building a training course](../getting-started/designer.md)
-As a developer: [Create custom templates and conditions & behaviors for the Innoactive Creator](../getting-started/developer.md)
+- As a training designer: [A more complex example of building a training course](../getting-started/designer.md)
+- As a developer: [Create custom templates and conditions & behaviors for the Innoactive Creator](../getting-started/developer.md)
