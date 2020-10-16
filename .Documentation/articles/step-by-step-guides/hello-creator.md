@@ -56,7 +56,7 @@ A `new step` appeared on the Scene. The selected step can be configured in the *
 ### Configuring Steps
 
 A `step` can be configured using `behaviors` and `conditions`. The list of `behaviors` and `conditions` can be extended with little developer effort to meet the needs of your company's training applications. 
-`Behaviors` prepare a scene for trainees. `Conditions` are actions expected from the trainee to move to the next step. We expect the trainee to grab the sphere (`condition`), which is visually highlighted (`behavior`), and we expect the trainee to place the sphere (`condition`) at a specific position.
+`Behaviors` prepare a scene for trainees. `Conditions` are actions expected from the trainee to move to the next step. We expect the trainee to grab the sphere (`condition`), which is visually highlighted (`behavior`), and we expect the trainee to place the sphere at a specific position (`condition`).
 
 #### Behavior - Highlight the Sphere
 
