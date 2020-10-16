@@ -91,7 +91,7 @@ One `step` can have multiple `transitions` to other `steps`. Since your `step` d
 
 > click ‘Add Condition’ and select ‘Snap Object’ from the list of conditions.
 
-The Snap Condition requires two objects ‘Object to snap’ and ‘Zone to snap into’.
+The Snap Condition requires two objects `Object to snap` and `Zone to snap into`.
 
 > drag the Sphere object from the hierarchy into the `Object to snap` and click the `Fix it` button.
 
