@@ -9,7 +9,7 @@ In case you are new to Unity, you see an empty Unity project, which usually incl
 ![Unity Layout](../images/step-by-step-guides/unityWindows.jpg "Getting Familiar with Unity - The Unity Layout")
 *Figure 1: Get familiar with Unity windows: hierachy, scene, inspector and project hierachy and console.*
 
-By importing Innoactive Creator, you will have a new element in the top menu (‘File’, ’Edit’, …), called `Innoactive` (see Fig. 2). An `Create New Course` Wizard is open.
+By importing Innoactive Creator, you will have a new element in the top menu ('File', 'Edit', …), called `Innoactive` (see Fig. 2). A `Create New Course` Wizard is open.
 
   > After Importing, the `Create New Course` Wizard should open. In case it is not open, select `Create New Course` from the top menu `Innoactive`.
 
@@ -112,7 +112,7 @@ Go back to the ***Step inspector*** window.
 
 ## Step 5: Start course
 
-Connect your Head-Mounted Device and start the training application by hitting the play button in the top-center of the Unity window. Grab your controllers, move the controllers in VR into the solid Sphere object and press the ‘select’ button which varies for every controller. Please read the manual of your hardware to find the correct controller button. When you have successfully grabbed the cube, move it over to the 'snap zone' and release the button.
+Connect your Head-Mounted Device and start the training application by hitting the play button in the top-center of the Unity window. Grab your controllers, move the controllers in VR into the solid Sphere object and press the 'select' button which varies for every controller. Please read the manual of your hardware to find the correct controller button. When you have successfully grabbed the sphere, move it over to the 'snap zone' and release the button.
 
 Congratulation! You successfully built a minimal training application using the Innoactive Creator.
 
@@ -121,4 +121,4 @@ Congratulation! You successfully built a minimal training application using the 
 - I can not find `Innoactive` in the top menu ('file', 'edit', …)
   - Download the `Innoactive Creator` package at the [Innoactive Developer Portal](http://developers.innoactive.de/creator/releases/) and double-click the downloaded package to import it into Unity. 
 - I cannot play the training application with my hardware.
-  - Please enure your hardware is correctly configured within Unity. Take a look in our [XR Setup Guide](../setup-guides/03-xr-setup.md).
+  - Please ensure your hardware is correctly configured within Unity. Take a look in our [XR Setup Guide](../setup-guides/03-xr-setup.md).
