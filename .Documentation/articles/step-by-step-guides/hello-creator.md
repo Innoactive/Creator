@@ -118,7 +118,7 @@ Congratulation! You successfully built a minimal training application using the 
 
 ## Troubleshoot
 
-- I can not find `Innoactive` in the top menu ('file', 'edit', …)
+- I can not find `Innoactive` in the top menu ('File', 'Edit', …)
   - Download the `Innoactive Creator` package at the [Innoactive Developer Portal](http://developers.innoactive.de/creator/releases/) and double-click the downloaded package to import it into Unity. 
 - I cannot play the training application with my hardware.
   - Please ensure your hardware is correctly configured within Unity. Take a look in our [XR Setup Guide](../setup-guides/03-xr-setup.md).
