@@ -11,6 +11,11 @@
       href: getting-started/designer.md
     - name: As a Developer
       href: getting-started/developer.md
+- name: Step by Step Guides
+  href: step-by-step-guides/index.md
+  items:
+    - name: Hello Creator
+      href: step-by-step-guides/hello-creator.md
 - name: Setup Guides
   href: setup-guides/index.md
   items:
