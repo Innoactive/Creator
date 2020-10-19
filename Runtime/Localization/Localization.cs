@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using Newtonsoft.Json;
 using System;
-using System.Text;
 using System.Collections.Generic;
 using Innoactive.Creator.Core.IO;
 
@@ -33,8 +32,7 @@ namespace Innoactive.Creator.Core.Internationalization
 
             try
             {
-                byte[] buffer = FileManager.Read(path);
-                string jsonValue = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+                string jsonValue = FileManager.ReadAllText(path);
                 entries = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonValue);
                 return true;
             }

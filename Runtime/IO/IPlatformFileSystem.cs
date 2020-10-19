@@ -10,11 +10,19 @@ namespace Innoactive.Creator.Core.IO
     {
         /// <summary>
         /// Loads a file stored at <paramref name="filePath"/>.
-        /// Returns a `FileNotFoundException` if file does not exist.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets or the persistent data folder.</remarks>
         /// <returns>The contents of the file into a byte array.</returns>
+        /// <exception cref="FileNotFoundException">Exception thrown if the file does not exist.</exception>
         byte[] Read(string filePath);
+
+        /// <summary>
+        /// Loads a file stored at <paramref name="filePath"/>.
+        /// </summary>
+        /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets or the persistent data folder.</remarks>
+        /// <returns>Returns a `string` with the content of the file.</returns>
+        /// <exception cref="FileNotFoundException">Exception thrown if the file does not exist.</exception>
+        string ReadAllText(string filePath);
 
         /// <summary>
         /// Saves given <paramref name="fileData"/> in provided <paramref name="filePath"/>.

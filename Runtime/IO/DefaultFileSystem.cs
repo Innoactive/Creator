@@ -46,6 +46,21 @@ namespace Innoactive.Creator.Core.IO
         }
 
         /// <inheritdoc />
+        public virtual string ReadAllText(string filePath)
+        {
+            filePath = NormalizePath(filePath);
+
+            if (Exists(filePath))
+            {
+                string rootPath = FileExistsInStreamingAssets(filePath) ? Application.streamingAssetsPath : Application.persistentDataPath;
+                string absolutePath = Path.Combine(rootPath, filePath);
+                return File.ReadAllText(absolutePath);
+            }
+
+            throw new FileNotFoundException(filePath);
+        }
+
+        /// <inheritdoc />
         public virtual bool Write(string filePath, byte[] fileData)
         {
             filePath = NormalizePath(filePath);

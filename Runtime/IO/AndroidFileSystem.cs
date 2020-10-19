@@ -31,6 +31,29 @@ namespace Innoactive.Creator.Core.IO
         }
 
         /// <inheritdoc />
+        public override string ReadAllText(string filePath)
+        {
+            using (ZipArchive archive = ZipFile.OpenRead(rootFolder))
+            {
+                string relativePath = filePath.StartsWith(StreamingAssetsArchivePath) ? filePath : Path.Combine("assets", filePath);
+                ZipArchiveEntry file = archive.Entries.First(entry => entry.FullName == relativePath);
+
+                if (file == null)
+                {
+                    throw new FileNotFoundException(relativePath);
+                }
+
+                using (Stream fileStream = file.Open())
+                {
+                    using (StreamReader streamReader = new StreamReader(fileStream))
+                    {
+                        return streamReader.ReadToEnd();
+                    }
+                }
+            }
+        }
+
+        /// <inheritdoc />
         /// <remarks>In Android, <paramref name="searchPattern"/> does not support wildcard characters.</remarks>
         public override IEnumerable<string> FetchStreamingAssetsFilesAt(string path, string searchPattern)
         {
@@ -49,19 +72,21 @@ namespace Innoactive.Creator.Core.IO
         {
             using (ZipArchive archive = ZipFile.OpenRead(rootFolder))
             {
-                ZipArchiveEntry file = archive.Entries.First(entry => entry.FullName == filePath);
+                string relativePath = filePath.StartsWith(StreamingAssetsArchivePath) ? filePath : Path.Combine("assets", filePath);
+                ZipArchiveEntry file = archive.Entries.First(entry => entry.FullName == relativePath);
 
                 if (file == null)
                 {
-                    throw new FileNotFoundException(filePath);
+                    throw new FileNotFoundException(relativePath);
                 }
 
-                using (MemoryStream memoryStream = new MemoryStream())
+                using (Stream fileStream = file.Open())
                 {
-                    Stream fileStream = file.Open();
-                    fileStream.CopyTo(memoryStream);
-
-                    return memoryStream.ToArray();
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        fileStream.CopyTo(memoryStream);
+                        return memoryStream.ToArray();
+                    }
                 }
             }
         }

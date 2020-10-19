@@ -20,10 +20,11 @@ namespace Innoactive.Creator.Core.IO
 
         /// <summary>
         /// Loads a file stored at <paramref name="filePath"/>.
-        /// Returns a `FileNotFoundException` if file does not exist.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets or the persistent data folder.</remarks>
         /// <returns>The contents of the file into a byte array.</returns>
+        /// <exception cref="ArgumentException">Exception thrown if <paramref name="filePath"/> is invalid.</exception>
+        /// <exception cref="FileNotFoundException">Exception thrown if the file does not exist.</exception>
         public static byte[] Read(string filePath)
         {
             if (string.IsNullOrEmpty(filePath))
@@ -37,6 +38,28 @@ namespace Innoactive.Creator.Core.IO
             }
 
             return platformFileSystem.Read(filePath);
+        }
+
+        /// <summary>
+        /// Loads a file stored at <paramref name="filePath"/>.
+        /// </summary>
+        /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets or the persistent data folder.</remarks>
+        /// <returns>Returns a `string` with the content of the file.</returns>
+        /// <exception cref="ArgumentException">Exception thrown if <paramref name="filePath"/> is invalid.</exception>
+        /// <exception cref="FileNotFoundException">Exception thrown if the file does not exist.</exception>
+        public static string ReadAllText(string filePath)
+        {
+            if (string.IsNullOrEmpty(filePath))
+            {
+                throw new ArgumentException("Invalid 'filePath'");
+            }
+
+            if (Path.IsPathRooted(filePath))
+            {
+                throw new ArgumentException($"Method only accepts relative paths.\n'filePath': {filePath}");
+            }
+
+            return platformFileSystem.ReadAllText(filePath);
         }
 
         /// <summary>
