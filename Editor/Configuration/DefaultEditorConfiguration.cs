@@ -11,7 +11,7 @@ namespace Innoactive.CreatorEditor.Configuration
     /// <summary>
     /// Default editor configuration definition which is used if no other was implemented.
     /// </summary>
-    public class BaseEditorConfiguration : IEditorConfiguration
+    public class DefaultEditorConfiguration : IEditorConfiguration
     {
         private AllowedMenuItemsSettings allowedMenuItemsSettings;
 

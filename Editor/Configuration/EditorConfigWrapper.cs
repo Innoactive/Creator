@@ -6,7 +6,7 @@ using Innoactive.CreatorEditor.UI.StepInspector.Menu;
 
 namespace Innoactive.CreatorEditor.Configuration
 {
-    internal class EditorConfigWrapper : BaseEditorConfiguration
+    internal class EditorConfigWrapper : DefaultEditorConfiguration
     {
         private IEditorConfiguration config;
 
