@@ -21,11 +21,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
         }
 
-        private void OnPlayModeStateChanged(PlayModeStateChange mode)
-        {
-            activeTab = null;
-        }
-
         ~StepDrawer()
         {
             EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
@@ -106,6 +101,11 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             }
 
             return rect.height;
+        }
+
+        private void OnPlayModeStateChanged(PlayModeStateChange mode)
+        {
+            activeTab = null;
         }
     }
 }
