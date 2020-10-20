@@ -18,7 +18,7 @@ namespace Innoactive.CreatorEditor.XRUtils
     /// </summary>
     internal class XRLoaderHelper
     {
-        internal const string AttemptedToInitialized = "IsXRLoaderInitialized";
+        internal const string IsXRLoaderInitialized = "IsXRLoaderInitialized";
         private const string OculusXRPackage = "com.unity.xr.oculus";
         private const string WindowsXRPackage = "com.unity.xr.windowsmr";
         private const string XRManagementPackage = "com.unity.xr.management";
@@ -54,7 +54,7 @@ namespace Innoactive.CreatorEditor.XRUtils
                 return;
             }
 
-            EditorPrefs.DeleteKey(AttemptedToInitialized);
+            EditorPrefs.DeleteKey(IsXRLoaderInitialized);
 
 #if UNITY_2020_1_OR_NEWER
             // This will be integrated as soon as there is an OpenVR XR SDK compatible with the XR interaction framework.
@@ -81,7 +81,7 @@ namespace Innoactive.CreatorEditor.XRUtils
                 return;
             }
 
-            EditorPrefs.DeleteKey(AttemptedToInitialized);
+            EditorPrefs.DeleteKey(IsXRLoaderInitialized);
 
 #if UNITY_XR_MANAGEMENT
             DisplayDialog("Oculus XR");
@@ -104,7 +104,7 @@ namespace Innoactive.CreatorEditor.XRUtils
                 return;
             }
 
-            EditorPrefs.DeleteKey(AttemptedToInitialized);
+            EditorPrefs.DeleteKey(IsXRLoaderInitialized);
 
 #if UNITY_XR_MANAGEMENT
             DisplayDialog("Windows MR");
@@ -177,7 +177,7 @@ namespace Innoactive.CreatorEditor.XRUtils
 #if UNITY_XR_MANAGEMENT
         internal static async void EnableLoader(string package, string loader, BuildTargetGroup buildTargetGroup = BuildTargetGroup.Standalone)
         {
-            EditorPrefs.SetBool(AttemptedToInitialized, true);
+            EditorPrefs.SetBool(IsXRLoaderInitialized, true);
             SettingsService.OpenProjectSettings("Project/XR Plug-in Management");
 
             await Task.Delay(500);

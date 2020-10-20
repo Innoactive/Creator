@@ -11,7 +11,7 @@ namespace Innoactive.CreatorEditor.XRUtils
 
         protected XRProvider()
         {
-            if (EditorPrefs.GetBool(XRLoaderHelper.AttemptedToInitialized) == false)
+            if (EditorPrefs.GetBool(XRLoaderHelper.IsXRLoaderInitialized) == false)
             {
                 OnPackageEnabled += InitializeXRLoader;
             }
