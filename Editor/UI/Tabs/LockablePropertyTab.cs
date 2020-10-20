@@ -1,7 +1,8 @@
-﻿using Innoactive.Creator.Core.Tabs;
+﻿using System.Runtime.Serialization;
+using Innoactive.Creator.Core;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Tabs
+namespace Innoactive.CreatorEditor.Tabs
 {
     internal class LockablePropertyTab : ITab
     {
@@ -14,8 +15,8 @@ namespace Innoactive.Creator.Core.Tabs
         public LockablePropertyTab(GUIContent label, Step.EntityData data)
         {
             Label = label;
-
             this.data = data;
+            collection = new LockableObjectsCollection(data);
         }
 
         public object GetValue()
@@ -25,7 +26,6 @@ namespace Innoactive.Creator.Core.Tabs
 
         public void SetValue(object value)
         {
-
         }
 
         public void OnSelected()
