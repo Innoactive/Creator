@@ -11,16 +11,16 @@ namespace Innoactive.CreatorEditor.Configuration
     /// </summary>
     public static class EditorConfigurator
     {
-        private static readonly IEditorConfiguration editorConfiguration;
+        private static readonly BaseEditorConfiguration editorConfiguration;
 
-        public static IEditorConfiguration Instance
+        public static BaseEditorConfiguration Instance
         {
             get { return editorConfiguration; }
         }
 
         static EditorConfigurator()
         {
-            Type[] lowestPriorityTypes = { typeof(DefaultEditorConfiguration) };
+            Type[] lowestPriorityTypes = { typeof(BaseEditorConfiguration) };
             Type[] definitions = ReflectionUtils.GetFinalImplementationsOf<IEditorConfiguration>(lowestPriorityTypes).ToArray();
 
             if (definitions.Except(lowestPriorityTypes).Count() > 1)
@@ -31,12 +31,20 @@ namespace Innoactive.CreatorEditor.Configuration
                     + " Remove all editor configurations except for '{1}' and the one you want to use."
                     + " '{2}' was selected as current editor configuration.",
                     listOfDefinitions,
-                    typeof(DefaultEditorConfiguration).FullName,
+                    typeof(BaseEditorConfiguration).FullName,
                     definitions.First().FullName
                 );
             }
 
-            editorConfiguration = (IEditorConfiguration)ReflectionUtils.CreateInstanceOfType(definitions.First());
+            IEditorConfiguration config = (IEditorConfiguration)ReflectionUtils.CreateInstanceOfType(definitions.First());
+            if (config is BaseEditorConfiguration configuration)
+            {
+                editorConfiguration = configuration;
+            }
+            else
+            {
+                editorConfiguration = new EditorConfigWrapper(config);
+            }
 
             LoadAllowedMenuItems();
         }
