@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using Innoactive.Creator.Core.IO;
 
 namespace Innoactive.Creator.Core.Internationalization
 {
@@ -21,17 +21,19 @@ namespace Innoactive.Creator.Core.Internationalization
         /// <summary>
         /// Loads a localization file from given <paramref name="path"/>.
         /// </summary>
+        /// <param name="path">File path, relative to the StreamingAssets or the platform persistent data folder.</param>
         /// <returns>True if the localization file was loaded successfully.</returns>
         public static bool LoadLocalization(string path)
         {
-            if (File.Exists(path) == false)
+            if (FileManager.Exists(path) == false)
             {
                 return false;
             }
 
             try
             {
-                entries = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(path));
+                string jsonValue = FileManager.ReadAllText(path);
+                entries = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonValue);
                 return true;
             }
             catch (Exception ex)
