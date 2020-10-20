@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Tabs
+namespace Innoactive.CreatorEditor.Tabs
 {
     /// <summary>
     /// This <inheritdoc cref="ITab"/> implementation defines <seealso cref="GetValue"/> and <seealso cref="SetValue"/> implementation with delegates through the constructor.
@@ -9,7 +9,7 @@ namespace Innoactive.Creator.Core.Tabs
     internal class DynamicTab : ITab
     {
         /// <inheritdoc/>
-        public GUIContent Label { get; }
+        public virtual GUIContent Label { get; }
 
         /// <inheritdoc/>
         public object GetValue()
