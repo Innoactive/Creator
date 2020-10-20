@@ -1,3 +1,4 @@
+using Innoactive.Creator.Core.Runtime.Properties;
 using UnityEngine;
 
 namespace Innoactive.Creator.Core.Audio
@@ -6,7 +7,7 @@ namespace Innoactive.Creator.Core.Audio
     /// This class provides audio data in form of an AudioClip. Which also might not be loaded at the time needed,
     /// check first if there can be one provided.
     /// </summary>
-    public interface IAudioData
+    public interface IAudioData : ICanBeEmpty
     {
         /// <summary>
         /// Determs if the AudioSource has an AudioClip which can be played.
