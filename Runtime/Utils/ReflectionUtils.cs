@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Innoactive.Creator.Core.Runtime.Properties;
 
 namespace Innoactive.Creator.Core.Utils
 {
@@ -374,6 +375,58 @@ namespace Innoactive.Creator.Core.Utils
             }
 
             return typeToCheck.GetInterfaces().Any(inferfaceType => inferfaceType.IsGenericType && genericDefinition == inferfaceType.GetGenericTypeDefinition());
+        }
+
+        /// <summary>
+        /// Determines if the given object is empty.
+        /// </summary>
+        public static bool IsEmpty(object value)
+        {
+            if (value == null)
+            {
+                return true;
+            }
+
+            if (value is string && string.IsNullOrEmpty((string) value))
+            {
+                return true;
+            }
+
+            if (value.GetType().GetInterfaces().Contains(typeof(ICanBeEmpty)) && ((ICanBeEmpty)value).IsEmpty())
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Checks if the given type is a number.
+        /// </summary>
+        public static bool IsNumeric(Type type)
+        {
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                type = type.GetGenericArguments()[0];
+            }
+
+            switch (Type.GetTypeCode(type))
+            {
+                case TypeCode.Byte:
+                case TypeCode.SByte:
+                case TypeCode.UInt16:
+                case TypeCode.UInt32:
+                case TypeCode.UInt64:
+                case TypeCode.Int16:
+                case TypeCode.Int32:
+                case TypeCode.Int64:
+                case TypeCode.Decimal:
+                case TypeCode.Double:
+                case TypeCode.Single:
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }
