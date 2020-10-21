@@ -11,9 +11,9 @@ namespace Innoactive.CreatorEditor.Configuration
     /// </summary>
     public static class EditorConfigurator
     {
-        private static readonly IEditorConfiguration editorConfiguration;
+        private static readonly DefaultEditorConfiguration editorConfiguration;
 
-        public static IEditorConfiguration Instance
+        public static DefaultEditorConfiguration Instance
         {
             get { return editorConfiguration; }
         }
@@ -36,7 +36,15 @@ namespace Innoactive.CreatorEditor.Configuration
                 );
             }
 
-            editorConfiguration = (IEditorConfiguration)ReflectionUtils.CreateInstanceOfType(definitions.First());
+            IEditorConfiguration config = (IEditorConfiguration)ReflectionUtils.CreateInstanceOfType(definitions.First());
+            if (config is DefaultEditorConfiguration configuration)
+            {
+                editorConfiguration = configuration;
+            }
+            else
+            {
+                editorConfiguration = new EditorConfigWrapper(config);
+            }
 
             LoadAllowedMenuItems();
         }

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
-namespace Innoactive.Creator.Core.Tabs
+namespace Innoactive.CreatorEditor.Tabs
 {
     /// <summary>
     /// Draws a view with multiple tabs.
@@ -11,7 +10,6 @@ namespace Innoactive.Creator.Core.Tabs
         /// <summary>
         /// Index of the currently selected tab.
         /// </summary>
-        [DataMember]
         int Selected { get; set; }
 
         /// <summary>

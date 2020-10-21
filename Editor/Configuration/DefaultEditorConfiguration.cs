@@ -59,9 +59,5 @@ namespace Innoactive.CreatorEditor.Configuration
             }
             set { allowedMenuItemsSettings = value; }
         }
-
-        protected DefaultEditorConfiguration()
-        {
-        }
     }
 }
