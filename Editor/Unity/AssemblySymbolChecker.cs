@@ -30,7 +30,6 @@ internal class AssemblySymbolChecker
         {
             RemoveSymbol(symbol);
         }
-
     }
 
     /// <summary>
@@ -51,7 +50,7 @@ internal class AssemblySymbolChecker
         }
     }
 
-    public static void AddSymbol(string symbol)
+    private static void AddSymbol(string symbol)
     {
         BuildTarget buildTarget = EditorUserBuildSettings.activeBuildTarget;
         BuildTargetGroup buildTargetGroup = BuildPipeline.GetBuildTargetGroup(buildTarget);
@@ -64,7 +63,7 @@ internal class AssemblySymbolChecker
         }
     }
 
-    public static void RemoveSymbol(string symbol)
+    private static void RemoveSymbol(string symbol)
     {
         BuildTarget buildTarget = EditorUserBuildSettings.activeBuildTarget;
         BuildTargetGroup buildTargetGroup = BuildPipeline.GetBuildTargetGroup(buildTarget);
