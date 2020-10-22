@@ -75,7 +75,9 @@ namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
                 List<EditorReportEntry> errors = validation.LastReport.GetEntriesFor(resolver.FindContext(Owner.Step.Data, GlobalEditorHandler.GetCurrentCourse()));
                 if (errors.Count > 0)
                 {
-                    GUIContent content = new GUIContent("", null, ValidationUtils.CreateStepTooltip(errors, resolver.FindContext(Owner.ActiveChapter.Data, GlobalEditorHandler.GetCurrentCourse())));
+                    string tooltip = ValidationTooltipGenerator.CreateStepTooltip(errors,
+                        resolver.FindContext(Owner.ActiveChapter.Data, GlobalEditorHandler.GetCurrentCourse()));
+                    GUIContent content = new GUIContent("", null, tooltip);
                     Rect rect = new Rect(Owner.BoundingBox.x + Owner.BoundingBox.width * 0.70f, Owner.BoundingBox.y - 8, 16, 16);
                     // Label icons are too small so we draw a label for the tool tip and icon separated.
                     GUI.Label(rect, content);

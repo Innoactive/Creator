@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
-using Innoactive.Creator.Core;
+﻿using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.CourseValidation;
 
+/// <summary>
+/// Used to disable validation overall.
+/// </summary>
 internal class NoValidationHandler : IValidationHandler
 {
     public IContextResolver ContextResolver { get; set; } = null;

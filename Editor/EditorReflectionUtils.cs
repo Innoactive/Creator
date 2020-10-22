@@ -61,11 +61,17 @@ namespace Innoactive.CreatorEditor
             return membersAttributesCache[memberInfo].OfType<T>();
         }
 
+        /// <summary>
+        /// Checks if assembly exists in current domain space.
+        /// </summary>
         public static bool AssemblyExists(string name)
         {
             return AppDomain.CurrentDomain.GetAssemblies().Any(assembly => assembly.GetName().Name == name);
         }
 
+        /// <summary>
+        /// Checks if class exists in given assembly.
+        /// </summary>
         public static bool ClassExists(string assemblyName, string className)
         {
             Assembly assembly = AppDomain.CurrentDomain.GetAssemblies()
@@ -79,6 +85,9 @@ namespace Innoactive.CreatorEditor
             return assembly.GetType(className) != null;
         }
 
+        /// <summary>
+        /// Returns all fields and properties of given object as <see cref="MemberInfo"/>.
+        /// </summary>
         public static IEnumerable<MemberInfo> GetAllFieldsAndProperties(object value)
         {
             IEnumerable<MemberInfo> result = new List<MemberInfo>();

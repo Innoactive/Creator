@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Innoactive.CreatorEditor.CourseValidation
 {
-    internal class ValidationUtils
+    internal class ValidationTooltipGenerator
     {
         /// <summary>
         /// Creates the tooltip message for a specific step with given entries.

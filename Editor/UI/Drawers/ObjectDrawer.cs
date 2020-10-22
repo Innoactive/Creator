@@ -87,7 +87,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         protected virtual GUIContent AddValidationInformation(GUIContent guiContent, List<EditorReportEntry> entries)
         {
             guiContent.image = EditorGUIUtility.IconContent("Warning").image;
-            guiContent.tooltip = ValidationUtils.CreateTooltip(entries);
+            guiContent.tooltip = ValidationTooltipGenerator.CreateTooltip(entries);
             return guiContent;
         }
 

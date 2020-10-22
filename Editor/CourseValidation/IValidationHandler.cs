@@ -3,6 +3,9 @@ using Innoactive.Creator.Core;
 
 namespace Innoactive.CreatorEditor.CourseValidation
 {
+    /// <summary>
+    /// ValidationHandler handles the validation of course the context.
+    /// </summary>
     internal interface IValidationHandler
     {
         /// <summary>
