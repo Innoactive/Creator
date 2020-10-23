@@ -72,7 +72,8 @@ namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
             {
                 IContextResolver resolver = validation.ContextResolver;
 
-                List<EditorReportEntry> errors = validation.LastReport.GetEntriesFor(resolver.FindContext(Owner.Step.Data, GlobalEditorHandler.GetCurrentCourse()));
+                IContext context = resolver.FindContext(Owner.Step.Data, GlobalEditorHandler.GetCurrentCourse());
+                List<EditorReportEntry> errors = validation.LastReport.GetEntriesFor(context);
                 if (errors.Count > 0)
                 {
                     string tooltip = ValidationTooltipGenerator.CreateStepTooltip(errors,
