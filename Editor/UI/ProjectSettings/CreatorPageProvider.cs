@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public class CreatorPageProvider : SettingsProvider
+internal class CreatorPageProvider : SettingsProvider
 {
     const string Path = "Project/Creator";
 

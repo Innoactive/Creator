@@ -3,9 +3,8 @@ using Innoactive.CreatorEditor.Analytics;
 using Innoactive.CreatorEditor.UI;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class AnalyticsSettingsProvider : SettingsProvider
+internal class AnalyticsSettingsProvider : SettingsProvider
 {
     const string Path = "Project/Creator/Analytics";
 

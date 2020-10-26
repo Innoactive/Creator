@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class CreatorSettingProvider : SettingsProvider
+internal class CreatorSettingProvider : SettingsProvider
 {
     const string Path = "Project/Creator/Settings";
 

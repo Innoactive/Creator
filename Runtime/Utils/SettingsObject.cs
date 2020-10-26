@@ -1,9 +1,15 @@
 ﻿using System.IO;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Innoactive.Creator.Core.Runtime.Utils
 {
+    /// <summary>
+    /// ScriptableObject with additional load and save mechanic to make it a singleton.
+    /// </summary>
+    /// <typeparam name="T">The class itself</typeparam>
     public class SettingsObject<T> : ScriptableObject where T : ScriptableObject, new()
     {
         private static T instance;
@@ -12,11 +18,13 @@ namespace Innoactive.Creator.Core.Runtime.Utils
         {
             get
             {
+
+#if UNITY_EDITOR
                 if (EditorUtility.IsDirty(instance))
                 {
                     instance = null;
                 }
-
+#endif
                 if (instance == null)
                 {
                     instance = Load();
@@ -29,31 +37,34 @@ namespace Innoactive.Creator.Core.Runtime.Utils
         private static T Load()
         {
             T settings = Resources.Load<T>(typeof(T).Name);
+
             if (settings == null)
             {
+                // Create an instance
+                settings = CreateInstance<T>();
+#if UNITY_EDITOR
                 if (!Directory.Exists("Assets/Resources"))
                 {
                     Directory.CreateDirectory("Assets/Resources");
                 }
-                // Create an instance
-                settings = ScriptableObject.CreateInstance<T>();
                 AssetDatabase.CreateAsset(settings, $"Assets/Resources/{typeof(T).Name}.asset");
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
-
-                return Resources.Load<T>(typeof(T).Name);
+#endif
             }
             return settings;
         }
 
         /// <summary>
-        /// Saves the Creator settings.
+        /// Saves the Creator settings, only works in editor.
         /// </summary>
         public void Save()
         {
+#if UNITY_EDITOR
             EditorUtility.SetDirty(this);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+#endif
         }
     }
 }
