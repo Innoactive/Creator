@@ -2,9 +2,9 @@
 using Innoactive.CreatorEditor.CourseValidation;
 
 /// <summary>
-/// Used to disable validation overall.
+/// Does not validate, used to disabled the validation system.
 /// </summary>
-internal class NoValidationHandler : IValidationHandler
+internal class DisabledValidationHandler : IValidationHandler
 {
     public IContextResolver ContextResolver { get; set; } = null;
 

@@ -85,6 +85,7 @@
       href: developer/13-dependency-manager.md
 - name: Innoactive Creator Pro
   href: pro/index.md  
+  items:
     - name: Overview
       href: pro/index.md
     - name: Introduction

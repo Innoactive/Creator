@@ -66,9 +66,9 @@ namespace Innoactive.CreatorEditor.Configuration
         protected DefaultEditorConfiguration()
         {
 #if CREATOR_PRO
-            Validation = new ValidationHandler();
+            Validation = new DefaultValidationHandler();
 #else
-            Validation = new NoValidationHandler();
+            Validation = new DisabledValidationHandler();
 #endif
         }
     }
