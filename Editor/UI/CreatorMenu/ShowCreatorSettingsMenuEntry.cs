@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace Innoactive.CreatorEditor.CreatorMenu
 {
-    internal static class ShowSettings
+    internal static class ShowCreatorSettingsMenuEntry
     {
         /// <summary>
         /// Setup the current unity scene to be a functioning training scene.

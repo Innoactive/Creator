@@ -10,11 +10,6 @@ internal class CreatorPageProvider : SettingsProvider
 
     public CreatorPageProvider() : base(Path, SettingsScope.Project) {}
 
-    public static bool IsSettingsAvailable()
-    {
-        return true;
-    }
-
     public override void OnGUI(string searchContext)
     {
         GUILayout.Label("Have a look at How-To's and an in-depth Webinar for further information.", CreatorEditorStyles.Paragraph);
@@ -39,16 +34,7 @@ internal class CreatorPageProvider : SettingsProvider
     [SettingsProvider]
     public static SettingsProvider GetCreatorSettingsProvider()
     {
-        if (IsSettingsAvailable())
-        {
-            SettingsProvider provider = new CreatorPageProvider();
-
-            // Automatically extract all keywords from the Styles.
-            //provider.keywords = GetSearchKeywordsFromGUIContentProperties<Styles>();
-            return provider;
-        }
-
-        // Settings Asset doesn't exist yet; no need to display anything in the Settings window.
-        return null;
+        SettingsProvider provider = new CreatorPageProvider();
+        return provider;
     }
 }

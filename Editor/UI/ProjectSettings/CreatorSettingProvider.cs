@@ -2,18 +2,12 @@
 using Innoactive.CreatorEditor.UI;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 internal class CreatorSettingProvider : SettingsProvider
 {
     const string Path = "Project/Creator/Settings";
 
     public CreatorSettingProvider() : base(Path, SettingsScope.Project) {}
-
-    public static bool IsSettingsAvailable()
-    {
-        return true;
-    }
 
     public override void OnGUI(string searchContext)
     {
@@ -29,13 +23,7 @@ internal class CreatorSettingProvider : SettingsProvider
     [SettingsProvider]
     public static SettingsProvider Provider()
     {
-        if (IsSettingsAvailable())
-        {
-            SettingsProvider provider = new CreatorSettingProvider();
-
-            return provider;
-        }
-
-        return null;
+        SettingsProvider provider = new CreatorSettingProvider();
+        return provider;
     }
 }

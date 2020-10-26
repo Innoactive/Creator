@@ -8,14 +8,7 @@ internal class AnalyticsSettingsProvider : SettingsProvider
 {
     const string Path = "Project/Creator/Analytics";
 
-    private CreatorProjectSettings data;
-
     public AnalyticsSettingsProvider() : base(Path, SettingsScope.Project) {}
-
-    public static bool IsSettingsAvailable()
-    {
-        return true;
-    }
 
     public override void OnGUI(string searchContext)
     {
@@ -46,12 +39,7 @@ internal class AnalyticsSettingsProvider : SettingsProvider
     [SettingsProvider]
     public static SettingsProvider Provider()
     {
-        if (IsSettingsAvailable())
-        {
-            SettingsProvider provider = new AnalyticsSettingsProvider();
-            return provider;
-        }
-
-        return null;
+        SettingsProvider provider = new AnalyticsSettingsProvider();
+        return provider;
     }
 }
