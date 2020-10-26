@@ -4,7 +4,8 @@ using Innoactive.Creator.Core;
 namespace Innoactive.CreatorEditor.CourseValidation
 {
     /// <summary>
-    /// ValidationHandler handles the validation of course the context.
+    /// ValidationHandler validates data objects, e.g. steps or conditions, of a given course and reports whether
+    /// the object causes issues or is faulty, e.g. empty fields or invalid values in a behavior.
     /// </summary>
     internal interface IValidationHandler
     {

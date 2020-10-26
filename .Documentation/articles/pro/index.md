@@ -1,7 +1,5 @@
 # Overview
 
-This section will teach you how to use the Innoactive Creator as a template developer.
+This section will teach you how to use the Innoactive Creator Pro features.
 
-We have split this tutorial in nine chapters. Read them in order and do not skip them. This is the fastest way to learn our SDK. 
-
-[To the first chapter!](01-introduction.md)
+[Valiation System](01-validation.md)
