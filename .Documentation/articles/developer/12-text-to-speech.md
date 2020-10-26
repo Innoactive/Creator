@@ -13,7 +13,7 @@ Supported text to speech engines:
 There is also an option to integrate additional text to speech engines.
 
 ## How to Setup a Text to Speech Engine (TTS)
-The configuration is stored in a scriptable object called TextToSpeechConfiguration which is accessible via the ProjectSettings or the Innoactive menu `Innoactive > Settings` (which will open the ProjectSettings). Here you can find the Text to speech entry under `Creator > Text to Speech`. It is usable out of the box and configured by default to use the Windows text to speech API which allows to create audio files on any Windows 10 machine without internet connection.
+The configuration is stored in a scriptable object called TextToSpeechConfiguration which is accessible via the ProjectSettings or the Innoactive menu `Innoactive > Settings` (which will open the `ProjectSettings`). Here you can find the Text to speech entry under `Creator > Text to Speech`. It is usable out of the box and configured by default to use the Windows text to speech API which allows to create audio files on any Windows 10 machine without internet connection.
  
 To play a text to speech audio use the `Play TextToSpeech Audio` behavior which is a behavior provided by the TextToSpeech component. Adding a text in the default text field is enough to get an audio line generated.
  
