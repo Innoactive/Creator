@@ -5,25 +5,13 @@ using UnityEngine;
 /// <summary>
 /// Settings for an Innoactive Creator Unity project.
 /// </summary>
-public class CreatorProjectSettings : ScriptableObject
+public partial class CreatorProjectSettings : ScriptableObject
 {
     /// <summary>
     /// Was the Creator imported and therefore started for the first time.
     /// </summary>
     [SerializeField]
     public bool IsFirstTimeStarted = true;
-
-    /// <summary>
-    /// Enables the validation system.
-    /// </summary>
-    [SerializeField]
-    public bool IsValidationEnabled = true;
-
-    /// <summary>
-    /// Enables the validation system debugging output.
-    /// </summary>
-    [SerializeField]
-    public bool DebugValidationSystem = false;
 
     /// <summary>
     /// Loads the Creator settings for this Unity project from Resources.
