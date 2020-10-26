@@ -47,12 +47,12 @@ namespace Innoactive.CreatorEditor.CourseValidation
         List<EditorReportEntry> GetEntriesFor(IData data, MemberInfo info);
 
         /// <summary>
-        /// Get Entries for IBehaviorData.
+        /// Get Entries for <see cref="IBehaviorData"/>.
         /// </summary>
         List<EditorReportEntry> GetEntriesFor(IBehaviorData data);
 
         /// <summary>
-        /// Get Entries for IConditionData
+        /// Get Entries for <see cref="IConditionData"/>
         /// </summary>
         List<EditorReportEntry> GetEntriesFor(IConditionData data);
     }
