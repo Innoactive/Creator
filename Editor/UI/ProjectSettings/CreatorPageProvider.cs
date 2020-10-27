@@ -6,8 +6,6 @@ internal class CreatorPageProvider : SettingsProvider
 {
     const string Path = "Project/Creator";
 
-    private CreatorProjectSettings data;
-
     public CreatorPageProvider() : base(Path, SettingsScope.Project) {}
 
     public override void OnGUI(string searchContext)
