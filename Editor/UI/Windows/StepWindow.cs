@@ -58,6 +58,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         void OnFocus()
         {
+            if (step?.Data == null)
+            {
+                return;
+            }
+
             if (EditorConfigurator.Instance.Validation.IsAllowedToValidate())
             {
                 EditorConfigurator.Instance.Validation.Validate(step.Data, GlobalEditorHandler.GetCurrentCourse());
