@@ -46,6 +46,14 @@ namespace Innoactive.CreatorEditor
         }
 
         /// <summary>
+        /// Returns the current active course, can be null.
+        /// </summary>
+        internal static ICourse GetCurrentCourse()
+        {
+            return strategy.CurrentCourse;
+        }
+
+        /// <summary>
         /// Notifies selected <see cref="IEditingStrategy"/> when a new <see cref="CourseWindow"/> was just opened.
         /// </summary>
         internal static void CourseWindowOpened(CourseWindow window)

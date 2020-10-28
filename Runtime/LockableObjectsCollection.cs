@@ -58,8 +58,15 @@ namespace Innoactive.Creator.Core
         {
             if (SceneObjects.Remove(sceneObject))
             {
-                data.ToUnlock = data.ToUnlock.Where(property => property.GetProperty().SceneObject != sceneObject).ToList();
-                SortSceneObjectList();
+                data.ToUnlock = data.ToUnlock.Where(property =>
+                {
+                    if (property.GetProperty() == null)
+                    {
+                        return false;
+                    }
+
+                    return property.GetProperty().SceneObject != sceneObject;
+                }).ToList();
             }
         }
 
