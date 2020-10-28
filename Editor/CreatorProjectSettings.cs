@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Settings for an Innoactive Creator Unity project.
 /// </summary>
-public class CreatorProjectSettings : ScriptableObject
+public partial class CreatorProjectSettings : ScriptableObject
 {
     /// <summary>
     /// Was the Creator imported and therefore started for the first time.

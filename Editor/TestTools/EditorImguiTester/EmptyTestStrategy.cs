@@ -8,6 +8,8 @@ namespace Innoactive.CreatorEditor.TestTools
     /// </summary>
     internal class EmptyTestStrategy : IEditingStrategy
     {
+        public ICourse CurrentCourse { get; }
+
         /// <inheritdoc/>
         public void HandleNewCourseWindow(CourseWindow window)
         {

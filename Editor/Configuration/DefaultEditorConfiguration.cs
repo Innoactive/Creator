@@ -4,6 +4,7 @@ using Innoactive.Creator.Core.Behaviors;
 using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Serialization;
 using Innoactive.Creator.Core.Serialization.NewtonsoftJson;
+using Innoactive.CreatorEditor.CourseValidation;
 using Innoactive.CreatorEditor.UI.StepInspector.Menu;
 
 namespace Innoactive.CreatorEditor.Configuration
@@ -58,6 +59,17 @@ namespace Innoactive.CreatorEditor.Configuration
                 return allowedMenuItemsSettings;
             }
             set { allowedMenuItemsSettings = value; }
+        }
+
+        internal virtual IValidationHandler Validation { get; }
+
+        protected DefaultEditorConfiguration()
+        {
+#if CREATOR_PRO
+            Validation = new DefaultValidationHandler();
+#else
+            Validation = new DisabledValidationHandler();
+#endif
         }
     }
 }

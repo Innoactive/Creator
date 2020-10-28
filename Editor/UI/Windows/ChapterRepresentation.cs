@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.CreatorEditor.Configuration;
+using Innoactive.CreatorEditor.CourseValidation;
 using Innoactive.CreatorEditor.UI.Graphics;
 using Innoactive.CreatorEditor.UndoRedo;
 using Innoactive.CreatorEditor.Utils;
@@ -132,7 +135,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private StepNode CreateNewStepNode(IStep step)
         {
-            StepNode node = new StepNode(Graphics, step);
+            StepNode node = new StepNode(Graphics, currentChapter, step);
 
             node.GraphicalEventHandler.ContextClick += (sender, args) =>
             {
@@ -515,6 +518,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
             SetupTransitions(chapter, entryNode, stepNodes);
 
             Graphics.CalculateBoundingBox();
+
+            if (EditorConfigurator.Instance.Validation.IsAllowedToValidate())
+            {
+                EditorConfigurator.Instance.Validation.Validate(currentChapter.Data, GlobalEditorHandler.GetCurrentCourse(), null);
+            }
         }
 
         public void HandleEvent(Event current, Rect controlRect)
