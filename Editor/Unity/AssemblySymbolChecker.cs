@@ -11,7 +11,7 @@ internal class AssemblySymbolChecker
 {
     static AssemblySymbolChecker()
     {
-        CheckForClass("Innoactive.CreatorEditor", "Innoactive.CreatorEditor.CourseValidation.ValidationHandler", "CREATOR_PRO");
+        CheckForClass("Innoactive.CreatorEditor", "Innoactive.CreatorEditor.CourseValidation.DefaultValidationHandler", "CREATOR_PRO");
         CheckForAssembly("Innoactive.Creator.BasicInteraction", "BASIC_INTERACTION");
     }
 

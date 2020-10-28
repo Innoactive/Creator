@@ -83,6 +83,14 @@
       href: developer/12-text-to-speech.md
     - name: Dependency Manager
       href: developer/13-dependency-manager.md
+- name: Innoactive Creator Pro
+  href: pro/index.md  
+  items:
+    - name: Overview
+      href: pro/index.md
+    - name: Introduction
+      href: pro/01-validation.md
+
 - name: Transition Guide to v2.0 for Developers
   href: transition-to-v2.0/index.md
   items:

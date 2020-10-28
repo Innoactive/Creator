@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Conditions;
+using Innoactive.CreatorEditor.CourseValidation;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,6 +19,15 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         protected override float DrawLabel(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
             INamedData nameable = currentValue as INamedData;
+
+            List<EditorReportEntry> reports = GetValidationReports(currentValue);
+            if (reports.Count > 0)
+            {
+                Rect warningRect = rect;
+                warningRect.width = 20;
+                rect.x += 20;
+                GUI.Label(warningRect, AddValidationInformation(new GUIContent(), reports));
+            }
 
             Rect nameRect = rect;
             nameRect.width = EditorGUIUtility.labelWidth;
@@ -37,7 +49,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 fontSize = 12,
                 padding = new RectOffset(4, 0, 0, 0)
             };
-
             EditorGUI.LabelField(typeRect, GetTypeNameLabel(nameable, nameable.GetType()), labelStyle);
 
             if (newName != nameable.Name)

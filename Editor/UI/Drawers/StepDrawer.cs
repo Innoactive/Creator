@@ -1,5 +1,6 @@
 using System;
 using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.Configuration;
 using Innoactive.CreatorEditor.Tabs;
 using UnityEditor;
 using UnityEngine;
@@ -14,7 +15,8 @@ namespace Innoactive.CreatorEditor.UI.Drawers
     internal class StepDrawer : ObjectDrawer
     {
         private IStepData lastStep;
-        private TabsGroup activeTab;
+        private LockablePropertyTab lockablePropertyTab;
+
 
         protected StepDrawer()
         {
@@ -37,19 +39,30 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 step.Metadata = new Metadata();
             }
 
-            if (activeTab == null || lastStep != step)
+            if (lastStep != step)
             {
-                GUIContent behaviorLabel = new GUIContent("Behaviors");
-                GUIContent transitionLabel = new GUIContent("Transitions");
-
-                activeTab = new TabsGroup(
-                    step.Metadata,
-                    new DynamicTab(behaviorLabel, () => step.Behaviors, value => step.Behaviors = (IBehaviorCollection)value),
-                    new DynamicTab(transitionLabel, () => step.Transitions, value => step.Transitions = (ITransitionCollection)value),
-                    new LockablePropertyTab(new GUIContent("Unlocked Objects"), step)
-                );
+                lockablePropertyTab = new LockablePropertyTab(new GUIContent("Unlocked Objects"), step);
                 lastStep = step;
             }
+
+            GUIContent behaviorLabel = new GUIContent("Behaviors");
+            if (EditorConfigurator.Instance.Validation.LastReport != null && EditorConfigurator.Instance.Validation.LastReport.GetBehaviorEntriesFor(step).Count > 0)
+            {
+                behaviorLabel.image = EditorGUIUtility.IconContent("Warning").image;
+            }
+
+            GUIContent transitionLabel = new GUIContent("Transitions");
+            if (EditorConfigurator.Instance.Validation.LastReport != null && EditorConfigurator.Instance.Validation.LastReport.GetConditionEntriesFor(step).Count > 0)
+            {
+                transitionLabel.image = EditorGUIUtility.IconContent("Warning").image;
+            }
+
+            TabsGroup activeTab = new TabsGroup(
+                step.Metadata,
+                new DynamicTab(behaviorLabel, () => step.Behaviors, value => step.Behaviors = (IBehaviorCollection)value),
+                new DynamicTab(transitionLabel, () => step.Transitions, value => step.Transitions = (ITransitionCollection)value),
+                lockablePropertyTab
+            );
 
             Rect tabRect = new TabsGroupDrawer().Draw(new Rect(rect.x, rect.y + rect.height + 4f, rect.width, 0), activeTab, changeValueCallback, label);
             rect.height += tabRect.height;
@@ -105,7 +118,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
         private void OnPlayModeStateChanged(PlayModeStateChange mode)
         {
-            activeTab = null;
+            
         }
     }
 }
