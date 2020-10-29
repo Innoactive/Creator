@@ -32,7 +32,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 GUILayout.Box("We DO NOT collect any sensitive information such as source code, file names or your courses' structure.\n\nHere is what we collect:\n- exact version of Innoactive Creator\n- exact version of Unity\n- your system's language\n- information about usage of the Innoactive Creator's components\n\nIn order to collect the information above, we store a unique identifier within Unity's Editor Preferences. Your data is anonymized.", CreatorEditorStyles.Paragraph);
 
                 GUILayout.Label("We Are Transparent", CreatorEditorStyles.Header);
-                GUILayout.Box("The Innoactive Creator is open-source. Feel free to check our analytics code in <b>Core/Editor/Analytics</b>\n\nIf you want to opt-out of tracking, open <b>Innoactive > Settings > Analytics Settings</b> in the Unity's menu bar and choose <i>disabled</i> from the drop-down menu.", CreatorEditorStyles.Paragraph);
+                GUILayout.Box("The Innoactive Creator is open-source. Feel free to check our analytics code in <b>Core/Editor/Analytics</b>\n\nIf you want to opt-out of tracking, open the 'ProjectSettings' by navigating to <b>Innoactive > Settings</b>, find <b>Creator > Analytics</b>, and choose <i>disabled</i> from the drop-down menu.", CreatorEditorStyles.Paragraph);
 
                 CreatorGUILayout.DrawLink("Data Privacy Information", AnalyticsUtils.ShowDataPrivacyStatement);
             GUILayout.EndArea();

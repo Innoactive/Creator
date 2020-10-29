@@ -10,6 +10,7 @@ public partial class CreatorProjectSettings : ScriptableObject
     /// <summary>
     /// Was the Creator imported and therefore started for the first time.
     /// </summary>
+    [HideInInspector]
     [SerializeField]
     public bool IsFirstTimeStarted = true;
 
