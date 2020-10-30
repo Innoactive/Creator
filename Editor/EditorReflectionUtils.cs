@@ -61,6 +61,12 @@ namespace Innoactive.CreatorEditor
             return membersAttributesCache[memberInfo].OfType<T>();
         }
 
+        public static string GetDisplayName(this MemberInfo memberInfo)
+        {
+            DisplayNameAttribute nameAttribute = memberInfo.GetCustomAttribute<DisplayNameAttribute>();
+            return nameAttribute != null ? nameAttribute.Name : memberInfo.Name;
+        }
+
         /// <summary>
         /// Checks if assembly exists in current domain space.
         /// </summary>
