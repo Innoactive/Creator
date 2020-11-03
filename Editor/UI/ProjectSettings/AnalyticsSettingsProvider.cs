@@ -27,7 +27,7 @@ internal class AnalyticsSettingsProvider : SettingsProvider
 
         // Unknown should not be shown, so we have to remove it.
         int state = (int)AnalyticsUtils.GetTrackingState() - 1;
-        string[] labels = {"Disabled", "Minimum", "Enabled"};
+        string[] labels = {"Disabled", "Enabled"};
 
         int newState = EditorGUILayout.Popup("Analytics Tracking", state, labels, CreatorEditorStyles.Popup);
         if (newState != state)

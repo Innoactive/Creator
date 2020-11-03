@@ -1,5 +1,4 @@
 ﻿using System.Net.Http;
-using UnityEngine;
 
 namespace Innoactive.CreatorEditor.Analytics
 {
@@ -17,7 +16,7 @@ namespace Innoactive.CreatorEditor.Analytics
 
         private void PostData(string uri)
         {
-            if (AnalyticsUtils.GetTrackingState() >= AnalyticsState.Minimal)
+            if (AnalyticsUtils.GetTrackingState() == AnalyticsState.Enabled)
             {
                 client.GetAsync(uri);
             }
@@ -31,7 +30,7 @@ namespace Innoactive.CreatorEditor.Analytics
 
         private string GetBaseUri()
         {
-            string baseUri = "https://www.google-analytics.com/collect?v=1&tid=UA-109665637-8&cid={0}&aip=1&npa=1&ul={1}&an=Creator&av={2}";
+            string baseUri = "https://www.google-analytics.com/collect?v=1&tid=UA-109665637-9&cid={0}&aip=1&npa=1&ul={1}&an=Creator&av={2}";
             return string.Format(baseUri, SessionId, GetLanguage(), EditorUtils.GetCoreVersion());
         }
     }

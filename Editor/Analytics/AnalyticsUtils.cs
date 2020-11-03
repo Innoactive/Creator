@@ -20,32 +20,52 @@ namespace Innoactive.CreatorEditor.Analytics
             {
                 return AnalyticsState.Disabled;
             }
-            return EditorPrefExtensions.GetEnum(KeyTrackingState, AnalyticsState.Unknown);
+
+            try
+            {
+                return EditorPrefExtensions.GetEnum(KeyTrackingState, AnalyticsState.Unknown);
+            }
+            catch (ArgumentException)
+            {
+                EditorPrefExtensions.SetEnum(KeyTrackingState, AnalyticsState.Unknown);
+                return AnalyticsState.Unknown;
+            }
         }
 
         internal static void SetTrackingTo(AnalyticsState state)
         {
-            if (state == AnalyticsState.Minimal)
-            {
-                // Without a stored session id a random one will be created every time.
-                if (EditorPrefs.HasKey(BaseAnalyticsTracker.KeySessionId))
-                {
-                    EditorPrefs.DeleteKey(BaseAnalyticsTracker.KeySessionId);
-                }
-            }
-
-            if (state == AnalyticsState.Enabled)
+            AnalyticsState currentState = GetTrackingState();
+            if (state == AnalyticsState.Enabled && currentState != AnalyticsState.Enabled)
             {
                 string id = EditorPrefs.GetString(BaseAnalyticsTracker.KeySessionId, null);
-                if (string.IsNullOrEmpty(id) || id.StartsWith("IA") == false)
+                if (string.IsNullOrEmpty(id))
                 {
-                    // Create new session id starting with IA, which allows better tracking
-                    EditorPrefs.SetString(BaseAnalyticsTracker.KeySessionId,
-                        "IA" + Guid.NewGuid().ToString().Substring(2));
+                    // Create new session id, which allows better tracking
+                    EditorPrefs.SetString(BaseAnalyticsTracker.KeySessionId, Guid.NewGuid().ToString());
                 }
-            }
 
-            EditorPrefExtensions.SetEnum(KeyTrackingState, state);
+                EditorPrefExtensions.SetEnum(KeyTrackingState, AnalyticsState.Enabled);
+                SendTrackingEvent(AnalyticsState.Enabled);
+            }
+            else if (state == AnalyticsState.Disabled && currentState != AnalyticsState.Disabled)
+            {
+                SendTrackingEvent(AnalyticsState.Disabled);
+                EditorPrefExtensions.SetEnum(KeyTrackingState, AnalyticsState.Disabled);
+            }
+            else
+            {
+                EditorPrefExtensions.SetEnum(KeyTrackingState, state);
+            }
+        }
+
+        private static void SendTrackingEvent(AnalyticsState state)
+        {
+            CreateTracker().Send(new AnalyticsEvent()
+            {
+                Action = "creator",
+                Category = "tracking",
+                Label = state.ToString().ToLower()
+            });
         }
 
         internal static void ShowDataPrivacyStatement()

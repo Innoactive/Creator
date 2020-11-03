@@ -5,9 +5,6 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 {
     internal class AnalyticsPage : WizardPage
     {
-        [SerializeField]
-        private bool trackingEnabled = false;
-
         public AnalyticsPage() : base("Analytics", false, false)
         {
 
@@ -17,7 +14,6 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         {
             if (AnalyticsUtils.GetTrackingState() == AnalyticsState.Unknown)
             {
-                trackingEnabled = true;
                 AnalyticsUtils.SetTrackingTo(AnalyticsState.Enabled);
             }
         }
@@ -36,19 +32,6 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
                 CreatorGUILayout.DrawLink("Data Privacy Information", AnalyticsUtils.ShowDataPrivacyStatement);
             GUILayout.EndArea();
-        }
-
-        public override void Closing(bool isCompleted)
-        {
-            if (trackingEnabled)
-            {
-                AnalyticsUtils.CreateTracker().Send(new AnalyticsEvent()
-                {
-                    Category = "creator",
-                    Action = "tracking",
-                    Label = "enabled"
-                });
-            }
         }
     }
 }
