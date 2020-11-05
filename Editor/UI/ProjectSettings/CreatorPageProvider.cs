@@ -1,38 +1,26 @@
-﻿using Innoactive.CreatorEditor.UI;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
-internal class CreatorPageProvider : SettingsProvider
+namespace Innoactive.CreatorEditor.UI
 {
-    const string Path = "Project/Creator";
-
-    public CreatorPageProvider() : base(Path, SettingsScope.Project) {}
-
-    public override void OnGUI(string searchContext)
+    internal class CreatorPageProvider : BaseSettingsProvider
     {
-        GUILayout.Label("Have a look at How-To's and an in-depth Webinar for further information.", CreatorEditorStyles.Paragraph);
-        GUILayout.Label("How-To's", CreatorEditorStyles.Header);
+        const string Path = "Project/Creator";
 
-        CreatorGUILayout.DrawLink("How to build your VR Training application", "https://developers.innoactive.de/documentation/creator/latest/articles/getting-started/designer.html", CreatorEditorStyles.IndentLarge);
-        CreatorGUILayout.DrawLink("How to extend the Creator using a training template", "https://developers.innoactive.de/documentation/creator/latest/articles/developer/01-introduction.html", CreatorEditorStyles.IndentLarge);
+        public CreatorPageProvider() : base(Path, SettingsScope.Project)
+        {
+        }
 
-        GUILayout.Label("Need Help?", CreatorEditorStyles.Header);
+        protected override void InternalDraw(string searchContext)
+        {
 
-        CreatorGUILayout.DrawLink("In-depth webinar on how the Creator works", "https://vimeo.com/417328541/93a752e72c", CreatorEditorStyles.IndentLarge);
-        CreatorGUILayout.DrawLink("Visit our developer community", "https://innoactive.io/creator/community", CreatorEditorStyles.IndentLarge);
-        CreatorGUILayout.DrawLink("Contact Us for Support", "https://www.innoactive.io/support", CreatorEditorStyles.IndentLarge);
+        }
 
-        GUILayout.Space(CreatorEditorStyles.Indent);
-
-        GUILayout.Label("Also, if you are facing any issues, don't hesitate to reach out to us for support", CreatorEditorStyles.Label);
-
-        GUILayout.Space(24);
-    }
-
-    [SettingsProvider]
-    public static SettingsProvider GetCreatorSettingsProvider()
-    {
-        SettingsProvider provider = new CreatorPageProvider();
-        return provider;
+        [SettingsProvider]
+        public static SettingsProvider GetCreatorSettingsProvider()
+        {
+            SettingsProvider provider = new CreatorPageProvider();
+            return provider;
+        }
     }
 }

@@ -11,24 +11,68 @@ namespace Innoactive.CreatorEditor.UI
     ///
     /// DO NOT ADD FILE ENDINGS TO THE PATH!
     /// </summary>
+    [Serializable]
     internal class EditorIcon
     {
         private const string LightTextureFileEnding = "_light";
         private const string DarkTextureFileEnding = "_dark";
 
-        private readonly Texture2D iconLight;
-        private readonly Texture2D iconDark;
+        [SerializeField]
+        private string path;
+
+        private Texture2D iconLight;
+        public Texture2D IconLight
+        {
+            get
+            {
+                if (iconLight == null)
+                {
+                    LoadIcons();
+                }
+
+                return iconLight;
+            }
+        }
+
+        private Texture2D iconDark;
+        public Texture2D IconDark
+        {
+            get
+            {
+                if (iconDark == null)
+                {
+                    LoadIcons();
+                }
+
+                return iconDark;
+            }
+        }
 
         /// <summary>
         /// Returns the texture of the icon, depending on the skin used.
         /// </summary>
         public Texture Texture
         {
-            get { return EditorGUIUtility.isProSkin ? iconLight : iconDark; }
+            get { return EditorGUIUtility.isProSkin ? IconLight : IconDark; }
+        }
+
+        public EditorIcon()
+        {
+            // Used in serialization, dont use this.
         }
 
         public EditorIcon(string path)
         {
+            this.path = path;
+        }
+
+        private void LoadIcons()
+        {
+            if (string.IsNullOrEmpty(path))
+            {
+                throw new NullReferenceException("Given Path for EditorIcon is empty.");
+            }
+
             iconLight = Resources.Load<Texture2D>(path + LightTextureFileEnding);
             iconDark = Resources.Load<Texture2D>(path + DarkTextureFileEnding);
 
