@@ -261,8 +261,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 if (EditorConfigurator.Instance.Validation.IsAllowedToValidate())
                 {
                     IContext context = EditorConfigurator.Instance.Validation.ContextResolver.FindContext(Course.Data.Chapters[position].Data, Course);
-                    if (EditorConfigurator.Instance.Validation.LastReport.GetEntriesFor(context).Count > 0)
+                    if (EditorConfigurator.Instance.Validation.LastReport != null && EditorConfigurator.Instance.Validation.LastReport.GetEntriesFor(context).Count > 0)
                     {
+
                         EditorColorUtils.SetBackgroundColor(Color.white);
                         Rect rect = GUILayoutUtility.GetLastRect();
                         GUI.DrawTexture(new Rect(rect.x - 4, rect.y + 8, 16, 16), EditorGUIUtility.IconContent("Warning").image);

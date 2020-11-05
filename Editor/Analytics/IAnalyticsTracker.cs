@@ -11,5 +11,10 @@
         /// Sends given data.
         /// </summary>
         void Send(AnalyticsEvent data);
+
+        /// <summary>
+        /// Send a start event.
+        /// </summary>
+        void SendSessionStart();
     }
 }

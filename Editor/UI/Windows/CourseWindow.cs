@@ -87,7 +87,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             if (chapterRepresentation == null)
             {
+ #if CREATOR_PRO
+                chapterRepresentation = new ProChapterRepresentation();
+ #else
                 chapterRepresentation = new ChapterRepresentation();
+ #endif
                 chapterRepresentation.Graphics.Canvas.PointerDrag += (o, eventArgs) => currentScrollPosition -= eventArgs.PointerDelta;
             }
 

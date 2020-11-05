@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Innoactive.CreatorEditor.UI;
-using Innoactive.CreatorEditor.UI.Graphics;
-using Innoactive.CreatorEditor.UI.Graphics.Renderers;
+﻿using Innoactive.CreatorEditor.UI.Graphics.Renderers;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
