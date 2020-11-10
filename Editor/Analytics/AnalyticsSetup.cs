@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -32,7 +31,7 @@ namespace Innoactive.CreatorEditor.Analytics
             if (trackingState == AnalyticsState.Unknown)
             {
                 SetupTrackingPopup.Open();
-                AnalyticsUtils.SetTrackingTo(AnalyticsState.Minimal);
+                AnalyticsUtils.SetTrackingTo(AnalyticsState.Enabled);
                 return;
             }
 
