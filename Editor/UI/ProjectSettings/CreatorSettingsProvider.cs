@@ -2,11 +2,11 @@
 
 namespace Innoactive.CreatorEditor.UI
 {
-    internal class CreatorSettingProvider : BaseSettingsProvider
+    internal class CreatorSettingsProvider : BaseSettingsProvider
     {
         const string Path = "Project/Creator/Settings";
 
-        public CreatorSettingProvider() : base(Path, SettingsScope.Project)
+        public CreatorSettingsProvider() : base(Path, SettingsScope.Project)
         {
         }
 
@@ -18,7 +18,7 @@ namespace Innoactive.CreatorEditor.UI
         [SettingsProvider]
         public static SettingsProvider Provider()
         {
-            SettingsProvider provider = new CreatorSettingProvider();
+            SettingsProvider provider = new CreatorSettingsProvider();
             return provider;
         }
     }

@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI
     internal class LoggingSettingsSection : IProjectSettingsSection
     {
         public string Title { get; } = "Course LifeCycle Logging";
-        public Type TargetPageProvider { get; } = typeof(CreatorSettingProvider);
+        public Type TargetPageProvider { get; } = typeof(CreatorSettingsProvider);
         public int Priority { get; } = 1000;
 
         public void OnGUI(string searchContext)
