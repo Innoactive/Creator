@@ -6,7 +6,7 @@ namespace Innoactive.CreatorEditor.CreatorMenu
     internal static class WebinarMenuEntry
     {
         /// <summary>
-        /// Allows to open the URL to webinar
+        /// Allows to open the URL to webinar.
         /// </summary>
         [MenuItem("Innoactive/Help/Webinar", false, 80)]
         private static void OpenWebinar()

@@ -1,9 +1,3 @@
-/* Copyright (C) Innoactive GmbH - All Rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- * Innoactive GmbH, November 2020
- */
-
 using UnityEditor;
 using UnityEngine;
 

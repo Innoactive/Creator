@@ -6,7 +6,7 @@ namespace Innoactive.CreatorEditor.CreatorMenu
     internal static class CommunityMenuEntry
     {
         /// <summary>
-        /// Allows to open the URL to Innoactive community
+        /// Allows to open the URL to Innoactive community.
         /// </summary>
         [MenuItem("Innoactive/Help/Community", false, 80)]
         private static void OpenCommunityPage()
