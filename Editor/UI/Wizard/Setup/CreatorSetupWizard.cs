@@ -11,12 +11,14 @@ namespace Innoactive.CreatorEditor.UI.Wizard
     /// Wizard which guides the user through setting up a new training project,
     /// including a training course, scene and XR hardware.
     /// </summary>
+    ///
+#if UNITY_2019_4_OR_NEWER && !UNITY_EDITOR_OSX
     [InitializeOnLoad]
+#endif
     internal static class CreatorSetupWizard
     {
         private const string XRInnoactiveAssemblyName = "Innoactive.Creator.XRInteraction";
         private const string XRAssemblyName = "Unity.XR.Management";
-#if UNITY_2019_4_OR_NEWER && !UNITY_EDITOR_OSX
         static CreatorSetupWizard()
         {
             if (Application.isBatchMode == false)
@@ -39,10 +41,12 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             DependencyManager.OnPostProcess -= OnDependenciesRetrieved;
         }
 
+#if UNITY_2019_4_OR_NEWER && !UNITY_EDITOR_OSX
         [MenuItem("Innoactive/Create New Course...", false, 0)]
+#endif
         public static void Show()
         {
-            WizardWindow wizard = ScriptableObject.CreateInstance<WizardWindow>();
+            WizardWindow wizard = EditorWindow.CreateInstance<WizardWindow>();
             List<WizardPage> pages = new List<WizardPage>()
             {
                 new WelcomePage(),
@@ -51,6 +55,14 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 new AllAboutPage()
             };
 
+            int xrSetupIndex = 2;
+#if CREATOR_PRO
+            if (CreatorPro.Account.UserAccount.IsAllowedToUsePro() == false)
+            {
+                pages.Insert(1, new CreatorPro.Core.CreatorLoginPage());
+                xrSetupIndex++;
+            }
+#endif
             bool isShowingXRSetupPage = EditorReflectionUtils.AssemblyExists(XRInnoactiveAssemblyName);
             isShowingXRSetupPage &= EditorReflectionUtils.AssemblyExists(XRAssemblyName) == false;
             isShowingXRSetupPage &= XRLoaderHelper.GetCurrentXRConfiguration()
@@ -58,12 +70,11 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
             if (isShowingXRSetupPage)
             {
-                pages.Insert(2, new XRSDKSetupPage());
+                pages.Insert(xrSetupIndex, new XRSDKSetupPage());
             }
 
             wizard.Setup("Innoactive Creator - VR Training Setup Wizard", pages);
-            wizard.ShowModal();
+            wizard.ShowModalUtility();
         }
-#endif
     }
 }
