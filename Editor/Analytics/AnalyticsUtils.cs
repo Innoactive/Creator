@@ -54,7 +54,7 @@ namespace Innoactive.CreatorEditor.Analytics
             if (currentState != state)
             {
                 SendTrackingEvent(state);
-                EditorPrefExtensions.SetEnum(KeyTrackingState, AnalyticsState.Disabled);
+                EditorPrefExtensions.SetEnum(KeyTrackingState, state);
             }
         }
 
