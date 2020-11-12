@@ -5,6 +5,11 @@ resources:
     endpoint: Innoactive
     name: Innoactive/Empty-Unity-Project-2019
     ref: develop
+  - repository: Templates
+    type: github
+    endpoint: Innoactive
+    name: Innoactive/Creator-Azure-Templates
+    ref: master
 
 trigger:
     - master
@@ -96,6 +101,13 @@ stages:
           workingDirectory: "Creator/"
         env:
           GH_TOKEN: "$(GITHUB_TOKEN)"
+  
+      - template: replace-string.yml@Templates
+        parameters:
+          FilePathInCreator: 'Core/Editor/Analytics/GoogleTracker.cs'
+          OldString: '$(DEV_TRACKING_ID)'
+          NewString: '$(LIVE_TRACKING_ID)'
+          Condition: eq(variables['Build.SourceBranchName'], 'master')
 
       - task: PowerShell@2
         displayName: Fetch version from git
