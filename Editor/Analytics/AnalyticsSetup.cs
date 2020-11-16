@@ -40,6 +40,8 @@ namespace Innoactive.CreatorEditor.Analytics
             {
                 EditorPrefs.SetString(KeyLastDayActive, DateTime.Today.Ticks.ToString());
                 IAnalyticsTracker tracker = AnalyticsUtils.CreateTracker();
+
+                tracker.SendSessionStart();
                 // Send the Unity Editor version.
                 tracker.Send(new AnalyticsEvent() {Category = "unity", Action = "version", Label = Application.unityVersion});
                 // Send the Creator Core version.

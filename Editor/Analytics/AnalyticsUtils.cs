@@ -34,6 +34,12 @@ namespace Innoactive.CreatorEditor.Analytics
 
         internal static void SetTrackingTo(AnalyticsState state)
         {
+            // No tracking for CI
+            if (Application.isBatchMode)
+            {
+                return;
+            }
+
             AnalyticsState currentState = GetTrackingState();
             if (state == AnalyticsState.Enabled && currentState != AnalyticsState.Enabled)
             {
@@ -43,17 +49,11 @@ namespace Innoactive.CreatorEditor.Analytics
                     // Create new session id, which allows better tracking
                     EditorPrefs.SetString(BaseAnalyticsTracker.KeySessionId, Guid.NewGuid().ToString());
                 }
+            }
 
-                EditorPrefExtensions.SetEnum(KeyTrackingState, AnalyticsState.Enabled);
-                SendTrackingEvent(AnalyticsState.Enabled);
-            }
-            else if (state == AnalyticsState.Disabled && currentState != AnalyticsState.Disabled)
+            if (currentState != state)
             {
-                SendTrackingEvent(AnalyticsState.Disabled);
-                EditorPrefExtensions.SetEnum(KeyTrackingState, AnalyticsState.Disabled);
-            }
-            else
-            {
+                SendTrackingEvent(state);
                 EditorPrefExtensions.SetEnum(KeyTrackingState, state);
             }
         }
