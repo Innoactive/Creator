@@ -3,7 +3,7 @@
 ## User Interface
 
 - [Training Course Creation Wizard](course-creation-wizard.md)
-- [Workflow Editor](workflow-editor.md)
+- [Workflow Window](workflow-window.md)
 - [Step Inspector](step-inspector.md)
 
 ## Components

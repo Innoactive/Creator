@@ -153,18 +153,6 @@ namespace Innoactive.CreatorEditor
 
             GenericMenu menu = new GenericMenu();
 
-            if (Mode == DisplayMode.Recording)
-            {
-                // DisplayDropdownMenu gets called several times according to the graphic elements
-                // resulting in multiples enqueues for the same action. That is why is necessary to limit enqueues
-                // to only 1 per selected DropDownItem.
-                string value = "-1";
-                if (recordedSelections.Contains(value) == false)
-                {
-                    recordedSelections.Enqueue("-1");
-                }
-            }
-
             for (int i = 0; i < options.Count; i++)
             {
                 MenuOption closuredOption = options[i];

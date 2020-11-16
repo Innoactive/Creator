@@ -4,7 +4,6 @@
     {
         Unknown = 0,
         Disabled = 1,
-        Minimal = 2,
-        Enabled = 3
+        Enabled = 2
     }
 }

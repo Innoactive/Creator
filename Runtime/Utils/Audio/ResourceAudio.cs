@@ -56,7 +56,7 @@ namespace Innoactive.Creator.Core.Audio
                 return;
             }
 
-            if (path == null || path.Value == null)
+            if (path == null || string.IsNullOrEmpty(path.Value))
             {
                 Debug.LogWarningFormat("Path to audio file is not defined.");
                 return;
@@ -68,6 +68,12 @@ namespace Innoactive.Creator.Core.Audio
             {
                 Debug.LogWarningFormat("Given path '{0}' to resource has returned no audio clip", path);
             }
+        }
+
+        /// <inheritdoc/>
+        public bool IsEmpty()
+        {
+            return path == null || (string.IsNullOrEmpty(path.Key) && string.IsNullOrEmpty(path.DefaultText));
         }
     }
 }

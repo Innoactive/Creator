@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
     internal abstract class ColoredGraphicalElementRenderer<TOwner> : GraphicalElementRenderer<TOwner> where TOwner : GraphicalElement
     {
         /// <summary>
-        /// Color palette which is used in current Workflow Editor window. Use colors from it to keep your elements in the same style.
+        /// Color palette which is used in current Workflow window. Use colors from it to keep your elements in the same style.
         /// </summary>
         protected WorkflowEditorColorPalette ColorPalette
         {

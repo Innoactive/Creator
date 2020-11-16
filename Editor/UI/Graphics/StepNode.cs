@@ -1,12 +1,13 @@
 using System;
 using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.CourseValidation;
 using Innoactive.CreatorEditor.UI.Graphics.Renderers;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
     /// <summary>
-    /// Represents step node of the workflow editor.
+    /// Represents step node of the Workflow window.
     /// </summary>
     internal class StepNode : EditorNode
     {
@@ -14,12 +15,15 @@ namespace Innoactive.CreatorEditor.UI.Graphics
         private Vector2 size = initialSize;
 
         private bool isLastSelectedStep;
+
         private IStep step;
 
         //The last step that was clicked on is selected.
         private readonly GraphicalElementRenderer renderer;
 
         public CreateTransitionButton CreateTransitionButton { get; private set; }
+
+        public IChapter ActiveChapter { get; }
 
         /// <summary>
         /// Currently displayed step instance. If this step node is selected, the same step instance is used by a Step Inspector as well.
@@ -83,8 +87,9 @@ namespace Innoactive.CreatorEditor.UI.Graphics
         }
 
         /// <inheritdoc />
-        public StepNode(EditorGraphics graphics, IStep step) : base(graphics, true)
+        public StepNode(EditorGraphics graphics, IChapter chapter, IStep step) : base(graphics, true)
         {
+            ActiveChapter = chapter;
             Step = step;
             renderer = new StepNodeRenderer(this, graphics.ColorPalette);
 

@@ -61,11 +61,23 @@ namespace Innoactive.CreatorEditor
             return membersAttributesCache[memberInfo].OfType<T>();
         }
 
+        public static string GetDisplayName(this MemberInfo memberInfo)
+        {
+            DisplayNameAttribute nameAttribute = memberInfo.GetCustomAttribute<DisplayNameAttribute>();
+            return nameAttribute != null ? nameAttribute.Name : memberInfo.Name;
+        }
+
+        /// <summary>
+        /// Checks if assembly exists in current domain space.
+        /// </summary>
         public static bool AssemblyExists(string name)
         {
             return AppDomain.CurrentDomain.GetAssemblies().Any(assembly => assembly.GetName().Name == name);
         }
 
+        /// <summary>
+        /// Checks if class exists in given assembly.
+        /// </summary>
         public static bool ClassExists(string assemblyName, string className)
         {
             Assembly assembly = AppDomain.CurrentDomain.GetAssemblies()
@@ -77,6 +89,39 @@ namespace Innoactive.CreatorEditor
             }
 
             return assembly.GetType(className) != null;
+        }
+
+        /// <summary>
+        /// Returns all fields and properties of given object as <see cref="MemberInfo"/>.
+        /// </summary>
+        public static IEnumerable<MemberInfo> GetAllFieldsAndProperties(object value)
+        {
+            IEnumerable<MemberInfo> result = new List<MemberInfo>();
+
+            if (value == null)
+            {
+                return result;
+            }
+
+            Type type = value.GetType();
+            while (type != null)
+            {
+                result = result.Concat(type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                    .Where(propertyInfo => propertyInfo.FieldType.GetInterfaces().Contains(typeof(IMetadata)) == false));
+
+                type = type.BaseType;
+            }
+
+            type = value.GetType();
+            while (type != null)
+            {
+                result = result.Concat(type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                    .Where(propertyInfo => propertyInfo.PropertyType.GetInterfaces().Contains(typeof(IMetadata)) == false));
+
+                type = type.BaseType;
+            }
+
+            return result;
         }
 
         /// <summary>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -32,7 +31,7 @@ namespace Innoactive.CreatorEditor.Analytics
             if (trackingState == AnalyticsState.Unknown)
             {
                 SetupTrackingPopup.Open();
-                AnalyticsUtils.SetTrackingTo(AnalyticsState.Minimal);
+                AnalyticsUtils.SetTrackingTo(AnalyticsState.Enabled);
                 return;
             }
 
@@ -41,6 +40,8 @@ namespace Innoactive.CreatorEditor.Analytics
             {
                 EditorPrefs.SetString(KeyLastDayActive, DateTime.Today.Ticks.ToString());
                 IAnalyticsTracker tracker = AnalyticsUtils.CreateTracker();
+
+                tracker.SendSessionStart();
                 // Send the Unity Editor version.
                 tracker.Send(new AnalyticsEvent() {Category = "unity", Action = "version", Label = Application.unityVersion});
                 // Send the Creator Core version.

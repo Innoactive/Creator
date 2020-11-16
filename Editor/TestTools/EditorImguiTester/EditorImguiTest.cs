@@ -21,7 +21,13 @@ namespace Innoactive.CreatorEditor.TestTools
         {
             get
             {
-                return new JsonSerializerSettings {Converters = new List<JsonConverter> {new ImguiEventConverter()}};
+                return new JsonSerializerSettings
+                {
+                    Converters = new List<JsonConverter>
+                    {
+                        new ImguiEventConverter()
+                    }
+                };
             }
         }
 
@@ -103,36 +109,35 @@ namespace Innoactive.CreatorEditor.TestTools
             try
             {
                 result = BaseGiven();
-
-                BaseWhen(result, (sender, args) =>
-                {
-                    try
-                    {
-                        BaseThen(args.Result);
-                        state = TestState.Passed;
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.LogErrorFormat("Test {0} failed: {1}", GetType().GetNameWithNesting(), e.Message);
-                        state = TestState.Failed;
-                    }
-                });
             }
             catch (Exception e)
             {
-                Debug.LogErrorFormat("Test {0} failed: {1}", GetType().GetNameWithNesting(), e.Message);
+                Debug.LogErrorFormat("Test {0} failed during initialization: {1}", GetType().GetNameWithNesting(), e);
                 state = TestState.Failed;
             }
+
+            //Make sure that we call when/then outside of the OnGUI call so RepaintImmediately would not throw an error.
+            EditorApplication.delayCall += () =>
+            {
+                try
+                {
+                    BaseWhen(result);
+                    BaseThen(result);
+                    state = TestState.Passed;
+                }
+                catch (Exception e)
+                {
+                    Debug.LogErrorFormat("Test {0} failed: {1}", GetType().GetNameWithNesting(), e);
+                    state = TestState.Failed;
+                }
+            };
 
             while (state == TestState.Pending)
             {
                 yield return null;
             }
 
-            if (Finished != null)
-            {
-                Finished(this, new EditorImguiTestFinishedEventArgs(state));
-            }
+            Finished?.Invoke(this, new EditorImguiTestFinishedEventArgs(state));
         }
 
         /// <summary>
@@ -142,14 +147,6 @@ namespace Innoactive.CreatorEditor.TestTools
         [TearDown]
         public void Teardown()
         {
-            if (EditorUtils.IsWindowOpened<EditorWindowTestPlayer>())
-            {
-                foreach (EditorWindowTestPlayer window in Resources.FindObjectsOfTypeAll<EditorWindowTestPlayer>())
-                {
-                    window.Close();
-                }
-            }
-
             if (result != null)
             {
                 result.Close();
@@ -173,7 +170,7 @@ namespace Innoactive.CreatorEditor.TestTools
         /// <summary>
         /// Apply recorded user actions to the given <paramref name="window"/>.
         /// </summary>
-        private void BaseWhen(EditorWindow window, EditorWindowTestPlayer.FinishedHandler onFinishedCallback)
+        private void BaseWhen(EditorWindow window)
         {
             TextAsset recordedActionsAsset = AssetDatabase.LoadAssetAtPath<TextAsset>(PathToRecordedActions);
             if (recordedActionsAsset == null)
@@ -182,7 +179,7 @@ namespace Innoactive.CreatorEditor.TestTools
             }
 
             List<UserAction> userActions = JsonConvert.DeserializeObject<List<UserAction>>(recordedActionsAsset.text, JsonSerializerSettings);
-            EditorWindowTestPlayer.StartPlayback(window, userActions, onFinishedCallback);
+            EditorWindowTestPlayer.StartPlayback(window, userActions);
         }
     }
 }

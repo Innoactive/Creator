@@ -1,4 +1,9 @@
-﻿using Innoactive.Creator.Core;
+using System.Collections.Generic;
+using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.Tabs;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.CreatorEditor.Configuration;
+using Innoactive.CreatorEditor.CourseValidation;
 using Innoactive.CreatorEditor.UI.Drawers;
 using UnityEditor;
 using UnityEngine;
@@ -7,7 +12,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 {
     /// <inheritdoc />
     /// <summary>
-    /// Step Inspector window of workflow editor.
+    /// This class draws the Step Inspector.
     /// </summary>
     internal class StepWindow : EditorWindow
     {
@@ -51,9 +56,22 @@ namespace Innoactive.CreatorEditor.UI.Windows
             Repaint();
         }
 
+        void OnFocus()
+        {
+            if (step?.Data == null)
+            {
+                return;
+            }
+
+            if (EditorConfigurator.Instance.Validation.IsAllowedToValidate())
+            {
+                EditorConfigurator.Instance.Validation.Validate(step.Data, GlobalEditorHandler.GetCurrentCourse());
+            }
+        }
+
         private void OnGUI()
         {
-            titleContent = new GUIContent("Step Editor");
+            titleContent = new GUIContent("Step Inspector");
 
             if (step == null)
             {
@@ -89,6 +107,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
             step = newStep;
         }
 
+        public IStep GetStep()
+        {
+            return step;
+        }
+
         internal void ResetStepView()
         {
             if (EditorUtils.IsWindowOpened<StepWindow>() == false || step == null)
@@ -96,8 +119,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 return;
             }
 
-            Step currentStep = step as Step;
-            currentStep.Data.Tabs.Selected = default;
+            Dictionary<string, object> dict = step.Data.Metadata.GetMetadata(typeof(TabsGroup));
+            if (dict.ContainsKey(TabsGroup.SelectedKey))
+            {
+                dict[TabsGroup.SelectedKey] = 0;
+            }
         }
     }
 }

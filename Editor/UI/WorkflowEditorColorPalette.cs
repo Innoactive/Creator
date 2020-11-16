@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Innoactive.CreatorEditor.UI
 {
     /// <summary>
-    /// Class to provide convenient access to all colors used in the workflow editor.
+    /// Class to provide convenient access to all colors used in the Workflow window.
     /// </summary>
     [DataContract]
     public class WorkflowEditorColorPalette

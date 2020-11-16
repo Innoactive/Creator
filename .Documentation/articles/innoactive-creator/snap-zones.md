@@ -50,7 +50,7 @@ To automatically create a matching snap zone, click the `Create Snap Zone` butto
 
 ### III. Modify Default Snap Zone Settings (optional)
 
-You can either change the settings directly in the new snap zone object or change the default settings in the `Snap Zone Settings` window. In order to open the default snap zone settings, **go to the Unity's toolbar** and select: `Innoactive` > `Creator` > `Windows` > `Snap Zone Settings`. All changes are saved automatically, and every snap zone that will be created via the `Create Snap Zone` button afterwards will get the new settings by default.
+You can either change the settings directly in the new snap zone object or change the default settings in the `Snap Zone Settings`. In order to open the default snap zone settings, **go to the Unity's toolbar** and select: `Innoactive` > `Settings` to open the Creator part of the `ProjectSettings`. There you will find an entry for the `Snap Zone` to configure the default values. All changes are saved automatically, and every snap zone that will be created via the `Create Snap Zone` button afterwards will get the new settings by default.
 
 [![Create Snap Zone](../images/snap-zones/change-settings.gif "Create Snap Zone")](../images/snap-zones/change-settings.gif)
 

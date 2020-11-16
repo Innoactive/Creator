@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Innoactive.CreatorEditor.UI.Windows
 {
     /// <summary>
-    /// Workflow Editor window.
+    /// This class draws the Workflow window..
     /// </summary>
     public class CourseWindow : EditorWindow
     {
@@ -87,7 +87,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             if (chapterRepresentation == null)
             {
+ #if CREATOR_PRO
+                chapterRepresentation = new ProChapterRepresentation();
+ #else
                 chapterRepresentation = new ChapterRepresentation();
+ #endif
                 chapterRepresentation.Graphics.Canvas.PointerDrag += (o, eventArgs) => currentScrollPosition -= eventArgs.PointerDelta;
             }
 
@@ -101,7 +105,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void SetTabName()
         {
-            titleContent = new GUIContent("Course Editor", titleIcon.Texture);
+            titleContent = new GUIContent("Workflow", titleIcon.Texture);
         }
 
         private void OnGUI()

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEditor;
+using UnityEditor.Graphs;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI
@@ -28,6 +29,24 @@ namespace Innoactive.CreatorEditor.UI
                 }
 
                 return title;
+            }
+        }
+
+        private static GUIStyle titleNoPadding;
+        public static GUIStyle TitleNoPadding
+        {
+            get
+            {
+                if (titleNoPadding == null)
+                {
+                    titleNoPadding = new GUIStyle(EditorStyles.largeLabel);
+                    titleNoPadding.fontSize = 22;
+                    titleNoPadding.fontStyle = FontStyle.Bold;
+                    titleNoPadding.normal.textColor = HighlightTextColor;
+                    titleNoPadding.padding = new RectOffset(BaseIndent, BaseIndent, BaseIndent, BaseIndent);
+                }
+
+                return titleNoPadding;
             }
         }
 
@@ -67,6 +86,26 @@ namespace Innoactive.CreatorEditor.UI
                 }
 
                 return paragraph;
+            }
+        }
+
+        private static GUIStyle paragraphNoPadding;
+        public static GUIStyle ParagraphNoPadding
+        {
+            get
+            {
+                if (paragraphNoPadding == null)
+                {
+                    paragraphNoPadding = new GUIStyle(GUI.skin.label);
+                    paragraphNoPadding.alignment = TextAnchor.UpperLeft;
+                    paragraphNoPadding.fontSize = 13;
+                    paragraphNoPadding.richText = true;
+                    paragraphNoPadding.clipping = TextClipping.Clip;
+                    paragraphNoPadding.wordWrap = true;
+                    paragraphNoPadding.padding = new RectOffset(BaseIndent, BaseIndent, BaseIndent, BaseIndent);
+                }
+
+                return paragraphNoPadding;
             }
         }
 
@@ -204,6 +243,21 @@ namespace Innoactive.CreatorEditor.UI
                 }
 
                 return helpBox;
+            }
+        }
+
+        private static GUIStyle button;
+        public static GUIStyle Button
+        {
+            get
+            {
+                if (button == null)
+                {
+                    button = new GUIStyle(GUI.skin.button);
+                    button.margin = new RectOffset(Indent, BaseIndent, BaseIndent, BaseIndent);
+                }
+
+                return button;
             }
         }
 

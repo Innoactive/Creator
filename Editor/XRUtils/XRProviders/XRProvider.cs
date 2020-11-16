@@ -1,5 +1,6 @@
 ﻿#if UNITY_XR_MANAGEMENT && (OCULUS_XR || WINDOWS_XR)
 using System;
+using UnityEditor;
 using Innoactive.CreatorEditor.PackageManager;
 
 namespace Innoactive.CreatorEditor.XRUtils
@@ -8,9 +9,12 @@ namespace Innoactive.CreatorEditor.XRUtils
     {
         protected virtual string XRLoaderName { get; } = "";
 
-        public XRProvider()
+        protected XRProvider()
         {
-            OnPackageEnabled += InitializeXRLoader;
+            if (EditorPrefs.GetBool(XRLoaderHelper.IsXRLoaderInitialized) == false)
+            {
+                OnPackageEnabled += InitializeXRLoader;
+            }
         }
 
         public void Dispose()

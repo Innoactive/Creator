@@ -23,7 +23,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 GUILayout.Label("Need Help?", CreatorEditorStyles.Header);
 
                 CreatorGUILayout.DrawLink("In-depth webinar on how the Creator works", "https://vimeo.com/417328541/93a752e72c", CreatorEditorStyles.IndentLarge);
-                CreatorGUILayout.DrawLink("Visit our developer community", "https://spectrum.chat/innoactive-creator", CreatorEditorStyles.IndentLarge);
+                CreatorGUILayout.DrawLink("Visit our developer community", "https://innoactive.io/creator/community", CreatorEditorStyles.IndentLarge);
                 CreatorGUILayout.DrawLink("Contact Us for Support", "https://www.innoactive.io/support", CreatorEditorStyles.IndentLarge);
 
                 GUILayout.Space(CreatorEditorStyles.Indent);

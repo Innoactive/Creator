@@ -77,7 +77,7 @@ namespace Innoactive.CreatorEditor.Configuration
                 DrawCourseSelectionDropDown();
                 GUILayout.BeginHorizontal();
                 {
-                    if (GUILayout.Button("Open Course in Workflow Editor"))
+                    if (GUILayout.Button("Open Course in Workflow window"))
                     {
                         GlobalEditorHandler.SetCurrentCourse(CourseAssetUtils.GetCourseNameFromPath(configurator.GetSelectedCourse()));
                         GlobalEditorHandler.StartEditingCourse();

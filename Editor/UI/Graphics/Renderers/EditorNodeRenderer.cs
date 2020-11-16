@@ -3,7 +3,7 @@
 namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
 {
     /// <summary>
-    /// Base class for rendering nodes of the workflow editor (entry node, exit node, and step node).
+    /// Base class for rendering nodes of the Workflow window (entry node, exit node, and step node).
     /// </summary>
     internal abstract class EditorNodeRenderer<TOwner> : ColoredGraphicalElementRenderer<TOwner> where TOwner : EditorNode
     {

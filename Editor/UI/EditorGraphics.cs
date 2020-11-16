@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Innoactive.Creator.Core.Utils;
 using Innoactive.CreatorEditor.UI.Graphics;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -29,7 +30,7 @@ namespace Innoactive.CreatorEditor.UI
         public Rect BoundingBox { get; private set; }
 
         /// <summary>
-        /// Defines colors used in Workflow Editor.
+        /// Defines colors used in the Workflow window.
         /// </summary>
         public WorkflowEditorColorPalette ColorPalette { get; set; }
 
@@ -39,6 +40,8 @@ namespace Innoactive.CreatorEditor.UI
         public GraphicalEventHandler Selected { get; private set; }
 
         public GraphicalEventHandler Canvas { get; private set; }
+
+        private List<IEditorGraphicDrawer> additionalDrawer = new List<IEditorGraphicDrawer>();
 
         public EditorGraphics(WorkflowEditorColorPalette workflowEditorColorPalette)
         {
@@ -53,6 +56,13 @@ namespace Innoactive.CreatorEditor.UI
             }
 
             Canvas = new GraphicalEventHandler();
+
+            additionalDrawer.Clear();
+            ReflectionUtils.GetConcreteImplementationsOf<IEditorGraphicDrawer>().ToList().ForEach(type =>
+            {
+                additionalDrawer.Add((IEditorGraphicDrawer)ReflectionUtils.CreateInstanceOfType(type));
+            });
+            additionalDrawer.Sort((drawer1, drawer2) => drawer1.Priority.CompareTo(drawer2.Priority));
 
             Reset();
         }
@@ -125,15 +135,17 @@ namespace Innoactive.CreatorEditor.UI
             return ordered.SelectMany(layer => layer);
         }
 
-        private void Draw(Rect window)
+        private void Draw(Rect windowRect)
         {
             foreach (GraphicalElement element in GetOrderedElements())
             {
-                if (element.CanBeDrawn && element.IsVisibleInRect(window))
+                if (element.CanBeDrawn && element.IsVisibleInRect(windowRect))
                 {
                     element.Renderer.Draw();
                 }
             }
+
+            additionalDrawer.ForEach(drawer => drawer.Draw(windowRect));
         }
 
         private void InsertElement(GraphicalElement element, ref IList<IList<GraphicalElement>> collection)
@@ -322,8 +334,8 @@ namespace Innoactive.CreatorEditor.UI
         /// Process current event.
         /// </summary>
         /// <param name="currentEvent">Event that is currently being processed.</param>
-        /// <param name="window">Current window rect. Elements outside the window rect are ignored.</param>
-        public void HandleEvent(Event currentEvent, Rect window)
+        /// <param name="windowRect">Current window rect. Elements outside the window rect are ignored.</param>
+        public void HandleEvent(Event currentEvent, Rect windowRect)
         {
             if (currentEvent.type == EventType.Layout)
             {
@@ -333,7 +345,7 @@ namespace Innoactive.CreatorEditor.UI
 
             if (currentEvent.isMouse)
             {
-                if (window.Contains(currentEvent.mousePosition) == false)
+                if (windowRect.Contains(currentEvent.mousePosition) == false)
                 {
                     if (initiallyPressedHandler != null)
                     {
@@ -375,7 +387,7 @@ namespace Innoactive.CreatorEditor.UI
 
             if (currentEvent.type == EventType.Repaint)
             {
-                Draw(window);
+                Draw(windowRect);
             }
         }
 

@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework.Constraints;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,31 +17,43 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         private int selectedPage = 0;
 
         [SerializeField]
-        public Vector2 Size = new Vector2(800, 500);
+        protected WizardSettings Settings = new WizardSettings()
+        {
+            DrawCloseButton = true,
+            DrawPreviousButton = true,
+            DrawSkipButton = true,
 
-        protected float bottomBarHeight = 40f;
-        protected float navigationBarRatio = 0.25f;
+            BottomBarHeight = 40f,
+            NavigationBarRatio = 0.25f,
+            ButtonPadding = 8f,
 
-        protected float buttonPadding = 8f;
+            Size = new Vector2(800, 600),
+        };
+
         protected Vector2 buttonSize;
 
         [SerializeField]
-        protected List<WizardPage> pages;
+        protected List<WizardPage> pages = new List<WizardPage>();
 
         protected WizardNavigation navigation;
 
         public WizardWindow()
         {
-            minSize = Size;
-            maxSize = Size;
+            minSize = Settings.Size;
+            maxSize = Settings.Size;
 
-            buttonSize = new Vector2(bottomBarHeight * 2.5f, bottomBarHeight - 8);
+            buttonSize = new Vector2(Settings.BottomBarHeight * 2.5f, Settings.BottomBarHeight - 8);
         }
 
-        public virtual void Setup(string name, List<WizardPage> pages)
+        public virtual void Setup(string title, List<WizardPage> pageList)
         {
-            titleContent = new GUIContent(name);
-            this.pages = pages;
+            pages = pageList;
+            Settings.Title = title;
+        }
+
+        protected void OnEnable()
+        {
+            titleContent = new GUIContent(Settings.Title);
         }
 
         protected virtual WizardNavigation CreateNavigation()
@@ -51,6 +63,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             {
                 entries.Add(new WizardNavigation.Entry(page.Name, entries.Count));
             }
+
             entries[selectedPage].Selected = true;
             return new WizardNavigation(entries);
         }
@@ -90,7 +103,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                     FinishButtonPressed();
                 }
                 EditorGUI.EndDisabledGroup();
-                return new Vector2(position.x - (buttonSize.x + buttonPadding), position.y);
+                return new Vector2(position.x - (buttonSize.x + Settings.ButtonPadding), position.y);
             }
 
             return position;
@@ -106,7 +119,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                     NextButtonPressed();
                 }
                 EditorGUI.EndDisabledGroup();
-                return new Vector2(position.x - (buttonSize.x + buttonPadding), position.y);
+                return new Vector2(position.x - (buttonSize.x + Settings.ButtonPadding), position.y);
             }
 
             return position;
@@ -114,9 +127,14 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         private Vector2 DrawSkipButton(Vector2 position)
         {
+            if (Settings.DrawSkipButton == false)
+            {
+                return position;
+            }
+
             if (selectedPage < pages.Count - 1 && GetActivePage().AllowSkip)
             {
-                position = new Vector2(position.x - buttonPadding * 6, position.y);
+                position = new Vector2(position.x - Settings.ButtonPadding * 6, position.y);
                 if (GUI.Button(new Rect(new Vector2(GetNavigationRect().width + 4, position.y), buttonSize), "Skip this Step"))
                 {
                     SkipButtonPressed();
@@ -128,6 +146,11 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         private Vector2 DrawPreviousButton(Vector2 position)
         {
+            if (Settings.DrawPreviousButton == false)
+            {
+                return position;
+            }
+
             if (selectedPage > 0)
             {
                 if (GUI.Button(new Rect(position, buttonSize), "Previous"))
@@ -135,14 +158,18 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                     BackButtonPressed();
                 }
                 EditorGUI.EndDisabledGroup();
-                return new Vector2(position.x - (buttonSize.x + buttonPadding), position.y);
+                return new Vector2(position.x - (buttonSize.x + Settings.ButtonPadding), position.y);
             }
             return position;
         }
 
-
         private Vector2 DrawCloseButton(Vector2 position)
         {
+            if (Settings.DrawCloseButton == false)
+            {
+                return position;
+            }
+
             if (selectedPage == 0)
             {
                 if (GUI.Button(new Rect(position, buttonSize), "Close Wizard"))
@@ -150,7 +177,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                     Close();
                 }
                 EditorGUI.EndDisabledGroup();
-                return new Vector2(position.x - (buttonSize.x + buttonPadding), position.y);
+                return new Vector2(position.x - (buttonSize.x + Settings.ButtonPadding), position.y);
             }
             return position;
         }
@@ -182,10 +209,13 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             navigation.SetSelected(selectedPage);
         }
 
-        protected void OnDestroy()
+        protected virtual void OnDestroy()
         {
-            bool cancelled = pages.GetRange(selectedPage + 1, pages.Count - selectedPage - 1).Any(page => page.Mandatory);
-            pages.ForEach(page => page.Closing(!cancelled));
+            if (selectedPage != pages.Count - 1)
+            {
+                bool cancelled = pages.GetRange(selectedPage + 1, pages.Count - selectedPage - 1).Any(page => page.Mandatory);
+                pages.ForEach(page => page.Closing(!cancelled));
+            }
         }
 
         protected WizardPage GetActivePage()
@@ -195,17 +225,34 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         protected Rect GetNavigationRect()
         {
-            return new Rect(0, 0, Size.x * navigationBarRatio, Size.y);
+            return new Rect(0, 0, Settings.Size.x * Settings.NavigationBarRatio, Settings.Size.y);
         }
 
         protected Rect GetContentRect()
         {
-            return new Rect(Size.x * navigationBarRatio + CreatorEditorStyles.Indent, CreatorEditorStyles.Indent / 2, Size.x - (Size.x * navigationBarRatio) - (2 * CreatorEditorStyles.Indent), Size.y - bottomBarHeight - CreatorEditorStyles.Indent);
+            return new Rect(Settings.Size.x * Settings.NavigationBarRatio + CreatorEditorStyles.Indent, CreatorEditorStyles.Indent / 2, Settings.Size.x - (Settings.Size.x * Settings.NavigationBarRatio) - (2 * CreatorEditorStyles.Indent), Settings.Size.y - Settings.BottomBarHeight - CreatorEditorStyles.Indent);
         }
 
         protected Rect GetBottomBarRect()
         {
-            return new Rect(Size.x * navigationBarRatio, Size.y - bottomBarHeight, Size.x, bottomBarHeight);
+            return new Rect(Settings.Size.x * Settings.NavigationBarRatio, Settings.Size.y - Settings.BottomBarHeight, Settings.Size.x, Settings.BottomBarHeight);
+        }
+
+        [Serializable]
+        protected struct WizardSettings
+        {
+            public bool DrawPreviousButton;
+            public bool DrawSkipButton;
+            public bool DrawCloseButton;
+
+            public Vector2 Size;
+
+            public float BottomBarHeight;
+            public float ButtonPadding;
+
+            public float NavigationBarRatio;
+
+            public string Title;
         }
     }
 }
