@@ -29,6 +29,8 @@ namespace Innoactive.Creator.Core
 
         private void CreateSceneObjects()
         {
+            CleanProperties();
+
             foreach (LockablePropertyReference propertyReference in data.ToUnlock)
             {
                 AddSceneObject(propertyReference.Target.Value);
@@ -109,6 +111,11 @@ namespace Innoactive.Creator.Core
         public void Add(LockableProperty property)
         {
             data.ToUnlock = data.ToUnlock.Union(new [] {new LockablePropertyReference(property), }).ToList();
+        }
+
+        private void CleanProperties()
+        {
+            data.ToUnlock = data.ToUnlock.Where(reference => reference.Target.IsEmpty() == false).ToList();
         }
     }
 }
