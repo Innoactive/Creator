@@ -15,7 +15,7 @@ namespace Innoactive.Creator.Core.Serialization.NewtonsoftJson
     /// </summary>
     public class NewtonsoftJsonCourseSerializer : ICourseSerializer
     {
-        private static int Version { get; } = 1;
+        protected virtual int Version { get; } = 1;
 
         private static JsonSerializerSettings CreateSettings(IList<JsonConverter> converters)
         {
@@ -65,19 +65,19 @@ namespace Innoactive.Creator.Core.Serialization.NewtonsoftJson
         }
 
         /// <inheritdoc/>
-        public string Name { get; } = "Newtonsoft Json Importer";
+        public virtual string Name { get; } = "Newtonsoft Json Importer";
 
         /// <inheritdoc/>
-        public string FileFormat { get; } = "json";
+        public virtual string FileFormat { get; } = "json";
 
-        private static byte[] Serialize(IEntity entity, JsonSerializerSettings settings)
+        protected  byte[] Serialize(IEntity entity, JsonSerializerSettings settings)
         {
             JObject jObject = JObject.FromObject(entity, JsonSerializer.Create(settings));
             jObject.Add("$serializerVersion", Version);
             return new UTF8Encoding().GetBytes(jObject.ToString());
         }
 
-        private static T Deserialize<T>(byte[] data, JsonSerializerSettings settings)
+        protected T Deserialize<T>(byte[] data, JsonSerializerSettings settings)
         {
             string stringData = new UTF8Encoding().GetString(data);
             return (T)JsonConvert.DeserializeObject(stringData, settings);
