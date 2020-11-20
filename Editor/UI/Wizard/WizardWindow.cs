@@ -13,6 +13,11 @@ namespace Innoactive.CreatorEditor.UI.Wizard
     {
         public static readonly Color LineColor = new Color(0, 0, 0, 0.25f);
 
+        /// <summary>
+        /// Will be called when the wizard is closing.
+        /// </summary>
+        public event EventHandler<EventArgs> WizardClosing;
+
         [SerializeField]
         private int selectedPage = 0;
 
@@ -216,6 +221,8 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 bool cancelled = pages.GetRange(selectedPage + 1, pages.Count - selectedPage - 1).Any(page => page.Mandatory);
                 pages.ForEach(page => page.Closing(!cancelled));
             }
+
+            WizardClosing?.Invoke(this, EventArgs.Empty);
         }
 
         protected WizardPage GetActivePage()
