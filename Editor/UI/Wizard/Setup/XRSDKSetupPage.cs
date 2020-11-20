@@ -67,6 +67,11 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                         otherHardwareText = CreatorGUILayout.DrawTextField(otherHardwareText, -1,GUILayout.Width(window.width * 0.4f));
                     GUILayout.EndHorizontal();
                 }
+
+                if (selectedLoader == XRLoader.Oculus || selectedLoader == XRLoader.WindowsMR)
+                {
+                    EditorGUILayout.HelpBox("This selection will install Unity XR Toolkit, which includes Unity's new InputSystem. By installing this, the event handling will be switched, which disables UIs created with IMGUI.\n\nTo fix this go to 'ProjectSettings/Player/Other Settings' and set 'Active Input Handling' to 'Both'", MessageType.Warning);
+                }
             }
             GUILayout.EndArea();
         }
@@ -110,7 +115,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 }
             }
         }
-        
+
         private void ResetSettings()
         {
             CanProceed = false;
