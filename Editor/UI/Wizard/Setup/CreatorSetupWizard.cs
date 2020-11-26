@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,13 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 #if UNITY_2019_4_OR_NEWER && !UNITY_EDITOR_OSX
     [InitializeOnLoad]
 #endif
-    internal static class CreatorSetupWizard
+    public static class CreatorSetupWizard
     {
+        /// <summary>
+        /// Will be called when the creator Setup wizard is closed.
+        /// </summary>
+        public static event EventHandler<EventArgs> SetupFinished;
+
         private const string XRInnoactiveAssemblyName = "Innoactive.Creator.XRInteraction";
         private const string XRAssemblyName = "Unity.XR.Management";
         static CreatorSetupWizard()
@@ -44,7 +50,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 #if UNITY_2019_4_OR_NEWER && !UNITY_EDITOR_OSX
         [MenuItem("Innoactive/Create New Course...", false, 0)]
 #endif
-        public static void Show()
+        internal static void Show()
         {
             WizardWindow wizard = EditorWindow.CreateInstance<WizardWindow>();
             List<WizardPage> pages = new List<WizardPage>()
@@ -73,8 +79,16 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 pages.Insert(xrSetupIndex, new XRSDKSetupPage());
             }
 
+            wizard.WizardClosing += OnWizardClosing;
+
             wizard.Setup("Innoactive Creator - VR Training Setup Wizard", pages);
             wizard.ShowModalUtility();
+        }
+
+        private static void OnWizardClosing(object sender, EventArgs args)
+        {
+            ((WizardWindow)sender).WizardClosing -= OnWizardClosing;
+            SetupFinished?.Invoke(sender, args);
         }
     }
 }
