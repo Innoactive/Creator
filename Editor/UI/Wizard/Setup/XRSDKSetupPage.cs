@@ -110,7 +110,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 }
             }
         }
-        
+
         private void ResetSettings()
         {
             CanProceed = false;
