@@ -216,7 +216,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
         protected virtual void OnDestroy()
         {
-            if (selectedPage != pages.Count - 1)
+            if (selectedPage == pages.Count - 1)
             {
                 bool cancelled = pages.GetRange(selectedPage + 1, pages.Count - selectedPage - 1).Any(page => page.Mandatory);
                 pages.ForEach(page => page.Closing(!cancelled));
