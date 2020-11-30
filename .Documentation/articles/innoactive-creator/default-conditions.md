@@ -66,25 +66,25 @@ The `Move Object into Collider` condition is fulfilled if the target object is w
 
 ### Description
 
-The `Object Nearby` condition triggers when the *first object* is within the specified *range* from the *second object* for the required amount of time while this condition is active.
+The `Object Nearby` condition triggers when the *tracked object* is within the specified *range* from the *reference object* for the required amount of time while this condition is active.
 
 ### Configuration
 
-- #### First object
+- #### Reference Object
 
-    This field contains the `Training Scene Object` you want to measure distance from. 
+    This field contains the `Training Scene Object` you want to measure the distance from.
 
-- #### Second object
+- #### Tracked Object
 
-    This field contains the `Training Scene Object` you want to be in the radius of the *first object*. Make sure you added at least the `Training Scene Object` component to the target game object in the Unity Inspector.
+    This field contains the `Training Scene Object` that should be in the radius of the *reference object*. Make sure you add at least the `Training Scene Object` component to this game object in the Unity Inspector. You would usually move this object close to the reference object.
 
 - #### Range
 
-    In this field, you can set the maximum distance between the *first* and *second object* required to fulfill this condition.
+    In this field, you can set the maximum distance between the *tracked object* and the *reference object* required to fulfill this condition.
 
 - #### Required seconds inside
 
-    In this field, you can set the time in seconds the *second object* should stay within the radius of the *first object*.
+    In this field, you can set the time in seconds the *tracked object* should stay within the radius of the *reference object*.
 
 ------
 
