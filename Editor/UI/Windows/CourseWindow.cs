@@ -1,4 +1,5 @@
-﻿using Innoactive.Creator.Core;
+﻿using System;
+using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UndoRedo;
 using UnityEditor;
 using UnityEngine;
@@ -21,6 +22,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
         private TrainingMenuView chapterMenu;
 
         private ChapterRepresentation chapterRepresentation;
+
+        private bool isPanning;
+        private Vector2 mousePosition;
 
         /// <summary>
         /// Sets the <paramref name="course"/> to be displayed and edited in this window.
@@ -179,12 +183,30 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void DrawChapterWorkflow(Rect scrollRect)
         {
+
+            Event current = Event.current;
+            if (current.type == EventType.MouseDown && current.button == 2)
+            {
+                mousePosition = current.mousePosition;
+                isPanning = true;
+            }
+            else if (current.type == EventType.MouseUp && current.button == 2)
+            {
+                isPanning = false;
+            }
+
+            if (isPanning && current.type == EventType.MouseDrag)
+            {
+                currentScrollPosition += (mousePosition - current.mousePosition);
+                mousePosition = current.mousePosition;
+            }
+
             currentScrollPosition = GUI.BeginScrollView(new Rect(scrollRect.position, scrollRect.size), currentScrollPosition - chapterRepresentation.BoundingBox.min, chapterRepresentation.BoundingBox, true, true) + chapterRepresentation.BoundingBox.min;
             {
                 Rect controlRect = new Rect(currentScrollPosition, scrollRect.size);
                 chapterRepresentation.HandleEvent(Event.current, controlRect);
 
-                if (Event.current.type == EventType.Used)
+                if (Event.current.type == EventType.Used || isPanning)
                 {
                     Repaint();
                 }
