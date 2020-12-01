@@ -1,8 +1,11 @@
-﻿using System;
-using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.UndoRedo;
+﻿using System.IO;
 using UnityEditor;
 using UnityEngine;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
+using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.UndoRedo;
+using Innoactive.Creator.Core.Configuration;
 
 namespace Innoactive.CreatorEditor.UI.Windows
 {
@@ -104,7 +107,18 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 titleIcon = new EditorIcon("icon_training_editor");
             }
 
+            EditorSceneManager.newSceneCreated += OnNewScene;
+            EditorSceneManager.sceneOpened += OnSceneOpened;
+            EditorSceneManager.sceneClosing += OnSceneClosed;
             GlobalEditorHandler.CourseWindowOpened(this);
+        }
+
+        private void OnDestroy()
+        {
+            EditorSceneManager.newSceneCreated -= OnNewScene;
+            EditorSceneManager.sceneOpened -= OnSceneOpened;
+            EditorSceneManager.sceneClosing -= OnSceneClosed;
+            GlobalEditorHandler.CourseWindowClosed(this);
         }
 
         private void SetTabName()
@@ -129,11 +143,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
             HandleEditorCommands(centerViewpointOnCanvas);
             chapterMenu.Draw();
             DrawChapterWorkflow(scrollRect);
-        }
-
-        private void OnDestroy()
-        {
-            GlobalEditorHandler.CourseWindowClosed(this);
         }
 
         private void HandleEditorCommands(Vector2 centerViewpointOnCanvas)
@@ -183,8 +192,8 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void DrawChapterWorkflow(Rect scrollRect)
         {
-
             Event current = Event.current;
+
             if (current.type == EventType.MouseDown && current.button == 2)
             {
                 mousePosition = current.mousePosition;
@@ -212,6 +221,36 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 }
             }
             GUI.EndScrollView();
+        }
+
+        private void OnSceneOpened(Scene scene, OpenSceneMode mode)
+        {
+            if (RuntimeConfigurator.Exists == false)
+            {
+                Close();
+                return;
+            }
+
+            string coursePath = RuntimeConfigurator.Instance.GetSelectedCourse();
+
+            if (string.IsNullOrEmpty(coursePath))
+            {
+                Close();
+                return;
+            }
+
+            string courseName = Path.GetFileNameWithoutExtension(coursePath);
+            GlobalEditorHandler.SetCurrentCourse(courseName);
+        }
+
+        private void OnSceneClosed(Scene scene, bool removingscene)
+        {
+            activeCourse = null;
+        }
+
+        private void OnNewScene(Scene scene, NewSceneSetup setup, NewSceneMode mode)
+        {
+            Close();
         }
     }
 }
