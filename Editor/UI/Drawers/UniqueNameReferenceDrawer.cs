@@ -44,7 +44,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             if (oldUniqueName != newUniqueName && string.IsNullOrEmpty(newUniqueName) == false)
             {
-                Debug.LogWarning($"Changing\nOld:[´{oldUniqueName}, New: {newUniqueName}");
                 RevertableChangesHandler.Do(
                     new CourseCommand(
                         () =>
