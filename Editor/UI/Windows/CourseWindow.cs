@@ -108,16 +108,16 @@ namespace Innoactive.CreatorEditor.UI.Windows
             }
 
             EditorSceneManager.newSceneCreated += OnNewScene;
-            EditorSceneManager.sceneOpened += OnSceneOpened;
             EditorSceneManager.sceneClosing += OnSceneClosed;
+            EditorSceneManager.sceneOpened += OnSceneOpened;
             GlobalEditorHandler.CourseWindowOpened(this);
         }
 
         private void OnDestroy()
         {
             EditorSceneManager.newSceneCreated -= OnNewScene;
-            EditorSceneManager.sceneOpened -= OnSceneOpened;
             EditorSceneManager.sceneClosing -= OnSceneClosed;
+            EditorSceneManager.sceneOpened -= OnSceneOpened;
             GlobalEditorHandler.CourseWindowClosed(this);
         }
 
@@ -228,19 +228,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             if (RuntimeConfigurator.Exists == false)
             {
                 Close();
-                return;
             }
-
-            string coursePath = RuntimeConfigurator.Instance.GetSelectedCourse();
-
-            if (string.IsNullOrEmpty(coursePath))
-            {
-                Close();
-                return;
-            }
-
-            string courseName = Path.GetFileNameWithoutExtension(coursePath);
-            GlobalEditorHandler.SetCurrentCourse(courseName);
         }
 
         private void OnSceneClosed(Scene scene, bool removingscene)
