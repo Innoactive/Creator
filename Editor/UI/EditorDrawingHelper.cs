@@ -10,7 +10,7 @@ namespace Innoactive.CreatorEditor.UI
     internal static class EditorDrawingHelper
     {
         private static readonly Vector2 addComponentButtonSize = new Vector2(228, 22);
-
+        private static readonly int StepTransitionStrokeSize=3;
         /// <summary>
         /// Default spacing between Step Inspector elements.
         /// </summary>
@@ -98,7 +98,7 @@ namespace Innoactive.CreatorEditor.UI
                 Handles.color = GUI.color * color;
                 Handles.DrawSolidArc(to, new Vector3(0, 0, 1f), from - to, arrowheadAngleInDegrees / 2f, arrowheadLength);
                 Handles.DrawSolidArc(to, new Vector3(0, 0, 1f), from - to, -arrowheadAngleInDegrees / 2f, arrowheadLength);
-                Handles.DrawLine(from, to);
+                Handles.DrawBezier(from, to, from, to, color, null, StepTransitionStrokeSize);
                 Handles.color = handlesColor;
             }
             Handles.EndGUI();
@@ -255,7 +255,7 @@ namespace Innoactive.CreatorEditor.UI
                 Handles.BeginGUI();
                 {
                     Handles.color = color;
-                    Handles.DrawLine(lastPosition, points[i]);
+                    Handles.DrawBezier(lastPosition, points[i], lastPosition, points[i], color, null, StepTransitionStrokeSize);
                     Handles.color = handlesColor;
                 }
                 Handles.EndGUI();
