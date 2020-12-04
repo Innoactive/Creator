@@ -1,5 +1,6 @@
 ﻿using System;
 using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.Configuration;
 using Innoactive.CreatorEditor.UndoRedo;
 using UnityEditor;
 using UnityEngine;
@@ -129,6 +130,14 @@ namespace Innoactive.CreatorEditor.UI.Windows
             HandleEditorCommands(centerViewpointOnCanvas);
             chapterMenu.Draw();
             DrawChapterWorkflow(scrollRect);
+        }
+
+        private void OnFocus()
+        {
+            if (EditorConfigurator.Instance.Validation.IsAllowedToValidate() && activeCourse != null)
+            {
+                EditorConfigurator.Instance.Validation.Validate(activeCourse.Data, GlobalEditorHandler.GetCurrentCourse());
+            }
         }
 
         private void OnDestroy()
