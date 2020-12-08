@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEditor.SceneManagement;
@@ -7,6 +5,7 @@ using UnityEngine.SceneManagement;
 using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UndoRedo;
 using Innoactive.Creator.Core.Configuration;
+using Innoactive.CreatorEditor.Configuration;
 
 namespace Innoactive.CreatorEditor.UI.Windows
 {
@@ -152,11 +151,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 EditorConfigurator.Instance.Validation.Validate(activeCourse.Data, GlobalEditorHandler.GetCurrentCourse());
             }
-        }
-
-        private void OnDestroy()
-        {
-            GlobalEditorHandler.CourseWindowClosed(this);
         }
 
         private void HandleEditorCommands(Vector2 centerViewpointOnCanvas)
