@@ -1,4 +1,5 @@
-﻿using System.IO;
+using System;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEditor.SceneManagement;
@@ -143,6 +144,19 @@ namespace Innoactive.CreatorEditor.UI.Windows
             HandleEditorCommands(centerViewpointOnCanvas);
             chapterMenu.Draw();
             DrawChapterWorkflow(scrollRect);
+        }
+
+        private void OnFocus()
+        {
+            if (EditorConfigurator.Instance.Validation.IsAllowedToValidate() && activeCourse != null)
+            {
+                EditorConfigurator.Instance.Validation.Validate(activeCourse.Data, GlobalEditorHandler.GetCurrentCourse());
+            }
+        }
+
+        private void OnDestroy()
+        {
+            GlobalEditorHandler.CourseWindowClosed(this);
         }
 
         private void HandleEditorCommands(Vector2 centerViewpointOnCanvas)
