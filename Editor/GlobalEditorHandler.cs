@@ -1,7 +1,10 @@
-using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.UI.Windows;
 using UnityEditor;
 using UnityEngine;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
+using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.UI.Windows;
+using Innoactive.Creator.Core.Configuration;
 
 namespace Innoactive.CreatorEditor
 {
@@ -21,6 +24,8 @@ namespace Innoactive.CreatorEditor
 
             string lastEditedCourseName = EditorPrefs.GetString(LastEditedCourseNameKey);
             SetCurrentCourse(lastEditedCourseName);
+
+            EditorSceneManager.sceneOpened += OnSceneOpened;
         }
 
         /// <summary>
@@ -157,6 +162,26 @@ namespace Innoactive.CreatorEditor
         internal static void ExitPlayMode()
         {
             strategy.HandleExitingPlayMode();
+        }
+
+        private static void OnSceneOpened(Scene scene, OpenSceneMode mode)
+        {
+            if (RuntimeConfigurator.Exists == false)
+            {
+                SetCurrentCourse(string.Empty);
+                return;
+            }
+
+            string coursePath = RuntimeConfigurator.Instance.GetSelectedCourse();
+
+            if (string.IsNullOrEmpty(coursePath))
+            {
+                SetCurrentCourse(string.Empty);
+                return;
+            }
+
+            string courseName = System.IO.Path.GetFileNameWithoutExtension(coursePath);
+            SetCurrentCourse(courseName);
         }
     }
 }
