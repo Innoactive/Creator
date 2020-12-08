@@ -1,5 +1,6 @@
 using Innoactive.CreatorEditor.UI.Graphics.Renderers;
 using UnityEngine;
+using UnityEditor;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
@@ -19,8 +20,9 @@ namespace Innoactive.CreatorEditor.UI.Graphics
                 normal = { textColor = TextColor },
                 wordWrap = false,
             };
-
-            GUI.Label(Owner.BoundingBox, "+", labelStyle);
+            GUI.color = Color.gray;
+            GUI.DrawTexture(Owner.BoundingBox, EditorGUIUtility.IconContent("CreateAddNew@2x").image as Texture2D);
+            GUI.color = CurrentColor;
         }
 
         public override Color NormalColor
