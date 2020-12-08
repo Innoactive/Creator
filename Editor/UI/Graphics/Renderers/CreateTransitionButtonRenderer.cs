@@ -6,6 +6,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
 {
     internal class CreateTransitionButtonRenderer : MulticoloredGraphicalElementRenderer<CreateTransitionButton>
     {
+        private Texture2D plusIcon = EditorGUIUtility.IconContent("CreateAddNew@2x").image as Texture2D;
         public CreateTransitionButtonRenderer(CreateTransitionButton owner, WorkflowEditorColorPalette colorPalette) : base(owner, colorPalette)
         {
         }
@@ -21,7 +22,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
                 wordWrap = false,
             };
             GUI.color = Color.gray;
-            GUI.DrawTexture(Owner.BoundingBox, EditorGUIUtility.IconContent("CreateAddNew@2x").image as Texture2D);
+            GUI.DrawTexture(Owner.BoundingBox, plusIcon);
             GUI.color = CurrentColor;
         }
 
