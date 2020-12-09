@@ -6,7 +6,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
 {
     internal class EntryJointRenderer : MulticoloredGraphicalElementRenderer<EntryJoint>
     {
-        private Texture2D ingoingIcon = EditorGUIUtility.IconContent("tab_next").image as Texture2D;
+        private static EditorIcon ingoingIcon = new EditorIcon("icon_arrow_right");
         private int iconSize = 15;
 
         public EntryJointRenderer(EntryJoint owner, WorkflowEditorColorPalette colorPalette) : base(owner, colorPalette)
@@ -27,7 +27,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
             };
 
             GUI.color = Color.gray;
-            GUI.DrawTexture(iconRect, ingoingIcon);
+            GUI.DrawTexture(iconRect, ingoingIcon.Texture);
             GUI.color = CurrentColor;
         }
 

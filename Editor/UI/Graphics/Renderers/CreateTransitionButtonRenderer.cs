@@ -6,8 +6,8 @@ namespace Innoactive.CreatorEditor.UI.Graphics
 {
     internal class CreateTransitionButtonRenderer : MulticoloredGraphicalElementRenderer<CreateTransitionButton>
     {
-        private Texture2D plusIcon = EditorGUIUtility.IconContent("Toolbar Plus").image as Texture2D;
-        private int iconSize = 12;
+        private static EditorIcon plusIcon = new EditorIcon("icon_add");
+        private int iconSize = 14;
 
         public CreateTransitionButtonRenderer(CreateTransitionButton owner, WorkflowEditorColorPalette colorPalette) : base(owner, colorPalette)
         {
@@ -25,7 +25,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
             };
             GUI.color = Color.gray;
             Rect iconBoundingBox = new Rect(Owner.Position.x - (iconSize / 2f), Owner.Position.y - (iconSize / 2f), iconSize, iconSize);
-            GUI.DrawTexture(iconBoundingBox, plusIcon);
+            GUI.DrawTexture(iconBoundingBox, plusIcon.Texture);
             GUI.color = CurrentColor;
         }
 
