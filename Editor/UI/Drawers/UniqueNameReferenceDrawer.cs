@@ -42,7 +42,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             string newUniqueName = GetIDFromSelectedObject(selectedSceneObject, valueType, oldUniqueName);
 
-            if (oldUniqueName != newUniqueName)
+            if (oldUniqueName != newUniqueName && string.IsNullOrEmpty(newUniqueName) == false)
             {
                 RevertableChangesHandler.Do(
                     new CourseCommand(
@@ -81,7 +81,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
                 if (gameObject == null)
                 {
-                    Debug.LogWarningFormat("{0} with Unique Name \"{1}\" could not be found.", valueType.Name, objectUniqueName);
+                    Debug.LogError($"{valueType.Name} with Unique Name \"{objectUniqueName}\" could not be found.");
                 }
 
                 return gameObject;
@@ -119,10 +119,9 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
         private GameObject GetGameObjectFromInstanceID(string objectUniqueName)
         {
-            int instanceId;
             GameObject gameObject = null;
 
-            if (int.TryParse(objectUniqueName, out instanceId))
+            if (int.TryParse(objectUniqueName, out int instanceId))
             {
                 gameObject = EditorUtility.InstanceIDToObject(instanceId) as GameObject;
             }
@@ -139,20 +138,18 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 return sceneObject.UniqueName;
             }
 
-            Debug.LogWarningFormat("Game Object \"{0}\" does not have a Training Scene Object component.", selectedSceneObject.name);
+            Debug.LogWarning($"Game Object \"{selectedSceneObject.name}\" does not have a Training Scene Object component.");
             return string.Empty;
         }
 
         private string GetUniqueNameFromTrainingProperty(GameObject selectedTrainingPropertyObject, Type valueType, string oldUniqueName)
         {
-            ISceneObjectProperty trainingProperty = selectedTrainingPropertyObject.GetComponent(valueType) as ISceneObjectProperty;
-
-            if (trainingProperty != null)
+            if (selectedTrainingPropertyObject.GetComponent(valueType) is ISceneObjectProperty trainingProperty)
             {
                 return trainingProperty.SceneObject.UniqueName;
             }
 
-            Debug.LogWarningFormat("Scene Object \"{0}\" with Unique Name \"{1}\" does not have a {2} component.", selectedTrainingPropertyObject.name, oldUniqueName, valueType.Name);
+            Debug.LogWarning($"Scene Object \"{selectedTrainingPropertyObject.name}\" with Unique Name \"{oldUniqueName}\" does not have a {valueType.Name} component.");
             return string.Empty;
         }
 
@@ -160,7 +157,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         {
             if (selectedSceneObject != null && selectedSceneObject.GetComponent(valueType) == null)
             {
-                string warning = string.Format("{0} is not configured as {1}", selectedSceneObject.name, valueType.Name);
+                string warning = $"{selectedSceneObject.name} is not configured as {valueType.Name}";
                 const string button = "Fix it";
 
                 EditorGUI.HelpBox(guiLineRect, warning, MessageType.Error);

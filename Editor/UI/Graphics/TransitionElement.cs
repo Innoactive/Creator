@@ -83,8 +83,15 @@ namespace Innoactive.CreatorEditor.UI.Graphics
 
             RelativePosition = (Destination.Position - Start.Position) / 2f;
 
-            Vector2[] controlPoints = BezierCurveHelper.CalculateControlPointsForTransition(Start.Position, Destination.Position, Start.Parent.BoundingBox, Destination.Parent.BoundingBox);
-            PolylinePoints = Array.AsReadOnly(BezierCurveHelper.CalculateDeCastejauCurve(Start.Position, controlPoints[0], controlPoints[1], Destination.Position, CurveSegmentCount));
+            if (Mathf.Abs(Start.Position.y - Destination.Position.y) > 1.0 || start.Position.x > Destination.Position.x)
+            {
+                Vector2[] controlPoints = BezierCurveHelper.CalculateControlPointsForTransition(Start.Position, Destination.Position, Start.Parent.BoundingBox, Destination.Parent.BoundingBox);
+                PolylinePoints = Array.AsReadOnly(BezierCurveHelper.CalculateDeCastejauCurve(Start.Position, controlPoints[0], controlPoints[1], Destination.Position, CurveSegmentCount));
+            }
+            else
+            {
+                PolylinePoints = Array.AsReadOnly(new Vector2[] {Start.Position, Destination.Position});
+            }
 
             boundingBox = BezierCurveHelper.CalculateBoundingBoxForPolyline(PolylinePoints);
         }
