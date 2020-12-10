@@ -22,10 +22,13 @@ namespace Innoactive.CreatorEditor.UI
             config.LogBehaviors = GUILayout.Toggle(config.LogBehaviors, "Log Behaviors output", CreatorEditorStyles.Toggle);
             config.LogTransitions = GUILayout.Toggle(config.LogTransitions, "Log Transition output", CreatorEditorStyles.Toggle);
             config.LogConditions = GUILayout.Toggle(config.LogConditions, "Log Condition output", CreatorEditorStyles.Toggle);
+        }
 
-            if (EditorGUI.EndChangeCheck())
+        ~LoggingSettingsSection()
+        {
+            if (EditorUtility.IsDirty(LifeCycleLoggingConfig.Instance))
             {
-                config.Save();
+                LifeCycleLoggingConfig.Instance.Save();
             }
         }
     }
