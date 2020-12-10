@@ -69,10 +69,12 @@ namespace Innoactive.Creator.Core.Runtime.Utils
 
         ~SettingsObject()
         {
+#if UNITY_EDITOR
             if (EditorUtility.IsDirty(this))
             {
                 Save();
             }
+#endif
         }
     }
 }
