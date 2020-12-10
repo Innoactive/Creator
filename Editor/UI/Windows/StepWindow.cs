@@ -1,16 +1,15 @@
+using UnityEditor;
+using UnityEngine;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.Tabs;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.CreatorEditor.Configuration;
-using Innoactive.CreatorEditor.CourseValidation;
 using Innoactive.CreatorEditor.UI.Drawers;
-using UnityEditor;
-using UnityEngine;
+using Innoactive.CreatorEditor.Configuration;
 
 namespace Innoactive.CreatorEditor.UI.Windows
 {
-    /// <inheritdoc />
     /// <summary>
     /// This class draws the Step Inspector.
     /// </summary>
@@ -43,11 +42,13 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void OnEnable()
         {
+            EditorSceneManager.sceneClosing += OnSceneClosed;
             GlobalEditorHandler.StepWindowOpened(this);
         }
 
         private void OnDestroy()
         {
+            EditorSceneManager.sceneClosing -= OnSceneClosed;
             GlobalEditorHandler.StepWindowClosed(this);
         }
 
@@ -56,7 +57,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             Repaint();
         }
 
-        void OnFocus()
+        private void OnFocus()
         {
             if (step?.Data == null)
             {
@@ -94,6 +95,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 stepRect = new Rect(stepDrawingRect.position - new Vector2(border,border), stepDrawingRect.size + new Vector2(border * 2f, border * 2f));
             }
             GUI.EndScrollView();
+        }
+
+        private void OnSceneClosed(Scene scene, bool removingscene)
+        {
+            SetStep(null);
         }
 
         private void ModifyStep(object newStep)

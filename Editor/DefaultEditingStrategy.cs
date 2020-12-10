@@ -1,10 +1,8 @@
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.CreatorEditor.Configuration;
-using Innoactive.CreatorEditor.CourseValidation;
-using Innoactive.CreatorEditor.UI.Windows;
 using UnityEditor;
 using UnityEngine;
+using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.UI.Windows;
+using Innoactive.CreatorEditor.Configuration;
 
 namespace Innoactive.CreatorEditor
 {

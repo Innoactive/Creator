@@ -1,9 +1,11 @@
-﻿using System;
-using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.Configuration;
-using Innoactive.CreatorEditor.UndoRedo;
 using UnityEditor;
 using UnityEngine;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
+using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.UndoRedo;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.CreatorEditor.Configuration;
 
 namespace Innoactive.CreatorEditor.UI.Windows
 {
@@ -105,7 +107,18 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 titleIcon = new EditorIcon("icon_training_editor");
             }
 
+            EditorSceneManager.newSceneCreated += OnNewScene;
+            EditorSceneManager.sceneClosing += OnSceneClosed;
+            EditorSceneManager.sceneOpened += OnSceneOpened;
             GlobalEditorHandler.CourseWindowOpened(this);
+        }
+
+        private void OnDestroy()
+        {
+            EditorSceneManager.newSceneCreated -= OnNewScene;
+            EditorSceneManager.sceneClosing -= OnSceneClosed;
+            EditorSceneManager.sceneOpened -= OnSceneOpened;
+            GlobalEditorHandler.CourseWindowClosed(this);
         }
 
         private void SetTabName()
@@ -138,11 +151,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 EditorConfigurator.Instance.Validation.Validate(activeCourse.Data, GlobalEditorHandler.GetCurrentCourse());
             }
-        }
-
-        private void OnDestroy()
-        {
-            GlobalEditorHandler.CourseWindowClosed(this);
         }
 
         private void HandleEditorCommands(Vector2 centerViewpointOnCanvas)
@@ -192,8 +200,8 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void DrawChapterWorkflow(Rect scrollRect)
         {
-
             Event current = Event.current;
+
             if (current.type == EventType.MouseDown && current.button == 2)
             {
                 mousePosition = current.mousePosition;
@@ -221,6 +229,24 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 }
             }
             GUI.EndScrollView();
+        }
+
+        private void OnSceneOpened(Scene scene, OpenSceneMode mode)
+        {
+            if (RuntimeConfigurator.Exists == false)
+            {
+                Close();
+            }
+        }
+
+        private void OnSceneClosed(Scene scene, bool removingscene)
+        {
+            activeCourse = null;
+        }
+
+        private void OnNewScene(Scene scene, NewSceneSetup setup, NewSceneMode mode)
+        {
+            Close();
         }
     }
 }
