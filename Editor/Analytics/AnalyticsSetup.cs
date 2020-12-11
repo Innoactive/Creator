@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Linq;
+#if CREATOR_PRO
+using Innoactive.CreatorPro.Account;
+#endif
 using UnityEditor;
 using UnityEngine;
 
@@ -46,6 +49,12 @@ namespace Innoactive.CreatorEditor.Analytics
                 tracker.Send(new AnalyticsEvent() {Category = "unity", Action = "version", Label = Application.unityVersion});
                 // Send the Creator Core version.
                 tracker.Send(new AnalyticsEvent() {Category = "creator", Action = "version", Label = EditorUtils.GetCoreVersion()});
+                // Send the Creator license type.
+#if CREATOR_PRO
+                tracker.Send(new AnalyticsEvent() {Category = "creator", Action = "license", Label = UserAccount.IsCustomer() ? "customer" : "trial"});
+#else
+                tracker.Send(new AnalyticsEvent() {Category = "creator", Action = "license", Label = "free"});
+#endif
             }
         }
     }
