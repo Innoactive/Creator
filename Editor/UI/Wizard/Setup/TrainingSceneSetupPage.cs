@@ -87,6 +87,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 {
                     createNewScene = false;
                     useCurrentScene = false;
+                    CanProceed = true;
 
                     GUILayout.BeginHorizontal();
                     {
