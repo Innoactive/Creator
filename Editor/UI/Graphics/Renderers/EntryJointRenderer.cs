@@ -1,20 +1,24 @@
 using Innoactive.CreatorEditor.UI.Graphics.Renderers;
 using UnityEngine;
+using UnityEditor;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
     internal class EntryJointRenderer : MulticoloredGraphicalElementRenderer<EntryJoint>
     {
+        private static EditorIcon ingoingIcon = new EditorIcon("icon_arrow_right");
+        private int iconSize = 15;
+
         public EntryJointRenderer(EntryJoint owner, WorkflowEditorColorPalette colorPalette) : base(owner, colorPalette)
         {
         }
 
         public override void Draw()
         {
-            Rect drawInRect = new Rect(Owner.Position - Owner.BoundingBox.size / 4f, Owner.BoundingBox.size / 2f);
+            Rect iconRect = new Rect(Owner.Position.x - iconSize / 2f, Owner.Position.y - iconSize / 2f, iconSize, iconSize);
 
-            EditorDrawingHelper.DrawCircle(Owner.Position, drawInRect.width / 2f, CurrentColor);
-
+            EditorDrawingHelper.DrawCircle(Owner.Position, Owner.BoundingBox.width / 4f, CurrentColor);
+            
             GUIStyle labelStyle = new GUIStyle
             {
                 alignment = TextAnchor.MiddleCenter,
@@ -22,7 +26,9 @@ namespace Innoactive.CreatorEditor.UI.Graphics
                 wordWrap = false,
             };
 
-            GUI.Label(drawInRect, ">", labelStyle);
+            GUI.color = Color.gray;
+            GUI.DrawTexture(iconRect, ingoingIcon.Texture);
+            GUI.color = CurrentColor;
         }
 
         public override Color NormalColor
