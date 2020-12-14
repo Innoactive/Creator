@@ -5,18 +5,27 @@ namespace Innoactive.CreatorEditor.UI.Graphics
 {
     internal class ExitJointRenderer : MulticoloredGraphicalElementRenderer<ExitJoint>
     {
+        private static EditorIcon outgoingIcon = new EditorIcon("icon_arrow_right");
+        private int iconSize = 15;
+
         public ExitJointRenderer(ExitJoint owner, WorkflowEditorColorPalette colorPalette) : base(owner, colorPalette)
         {
         }
 
         public override void Draw()
         {
+            Rect iconRect = new Rect(Owner.Position.x - iconSize / 2f, Owner.Position.y - iconSize / 2f, iconSize, iconSize);
+
             EditorDrawingHelper.DrawCircle(Owner.Position, Owner.BoundingBox.width / 2f, CurrentColor);
 
             if (Owner.DragDelta.magnitude > Owner.BoundingBox.width / 2f)
             {
                 EditorDrawingHelper.DrawArrow(Owner.Position, Owner.Position + Owner.DragDelta, CurrentColor, 40f, 10f);
             }
+
+            GUI.color = Color.gray;
+            GUI.DrawTexture(iconRect, outgoingIcon.Texture);
+            GUI.color = CurrentColor;
         }
 
         public override Color NormalColor
