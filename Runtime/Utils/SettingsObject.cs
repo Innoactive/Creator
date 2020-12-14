@@ -66,5 +66,15 @@ namespace Innoactive.Creator.Core.Runtime.Utils
             AssetDatabase.Refresh();
 #endif
         }
+
+        ~SettingsObject()
+        {
+#if UNITY_EDITOR
+            if (EditorUtility.IsDirty(this))
+            {
+                Save();
+            }
+#endif
+        }
     }
 }
