@@ -88,8 +88,10 @@
   items:
     - name: Overview
       href: pro/index.md
-    - name: Introduction
+    - name: Validation System
       href: pro/01-validation.md
+    - name: Advanced Spectator
+      href: pro/02-advanced-spectator.md
 
 - name: Transition Guide to v2.0 for Developers
   href: transition-to-v2.0/index.md
