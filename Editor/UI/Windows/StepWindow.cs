@@ -42,13 +42,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void OnEnable()
         {
-            EditorSceneManager.sceneClosing += OnSceneClosed;
             GlobalEditorHandler.StepWindowOpened(this);
         }
 
         private void OnDestroy()
         {
-            EditorSceneManager.sceneClosing -= OnSceneClosed;
             GlobalEditorHandler.StepWindowClosed(this);
         }
 
@@ -95,11 +93,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 stepRect = new Rect(stepDrawingRect.position - new Vector2(border,border), stepDrawingRect.size + new Vector2(border * 2f, border * 2f));
             }
             GUI.EndScrollView();
-        }
-
-        private void OnSceneClosed(Scene scene, bool removingscene)
-        {
-            SetStep(null);
         }
 
         private void ModifyStep(object newStep)

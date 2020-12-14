@@ -1,6 +1,7 @@
 ﻿using Innoactive.CreatorEditor;
 using Innoactive.CreatorEditor.Analytics;
 using UnityEditor;
+using UnityEngine;
 
 namespace Innoactive.Creator.Core.Editor
 {
@@ -14,9 +15,13 @@ namespace Innoactive.Creator.Core.Editor
 
         static VersionCheckerEvent()
         {
-            CreatorProjectSettings settings = CreatorProjectSettings.Load();
+            if (Application.isBatchMode)
+            {
+                return;
+            }
 
-            if (string.IsNullOrEmpty(settings.ProjectCreatorVersion))
+            CreatorProjectSettings settings = CreatorProjectSettings.Load();
+            if (settings == null || string.IsNullOrEmpty(settings.ProjectCreatorVersion))
             {
                 return;
             }

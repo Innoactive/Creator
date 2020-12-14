@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Innoactive.CreatorEditor;
 using UnityEditor;
 using UnityEngine;
@@ -40,7 +39,7 @@ public partial class CreatorProjectSettings : ScriptableObject
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 
-            return Resources.Load<CreatorProjectSettings>("CreatorProjectSettings");
+            return settings;
         }
         return settings;
     }

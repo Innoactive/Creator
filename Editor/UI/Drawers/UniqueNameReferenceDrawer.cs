@@ -74,21 +74,29 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 return null;
             }
 
-            if (RuntimeConfigurator.Configuration.SceneObjectRegistry.ContainsName(objectUniqueName) == false)
+            // If the Runtime Configurator exists, we try to retrieve the Training Scene Object
+            try
             {
-                // If the saved unique name is not registered in the scene, perhaps is actually a GameObject's InstanceID
-                GameObject gameObject = GetGameObjectFromInstanceID(objectUniqueName);
-
-                if (gameObject == null)
+                if (RuntimeConfigurator.Configuration.SceneObjectRegistry.ContainsName(objectUniqueName) == false)
                 {
-                    Debug.LogError($"{valueType.Name} with Unique Name \"{objectUniqueName}\" could not be found.");
+                    // If the saved unique name is not registered in the scene, perhaps is actually a GameObject's InstanceID
+                    GameObject gameObject = GetGameObjectFromInstanceID(objectUniqueName);
+
+                    if (gameObject == null)
+                    {
+                        Debug.LogError($"{valueType.Name} with Unique Name \"{objectUniqueName}\" could not be found.");
+                    }
+
+                    return gameObject;
                 }
 
-                return gameObject;
+                ISceneObject sceneObject = RuntimeConfigurator.Configuration.SceneObjectRegistry.GetByName(objectUniqueName);
+                return sceneObject.GameObject;
             }
-
-            ISceneObject sceneObject = RuntimeConfigurator.Configuration.SceneObjectRegistry.GetByName(objectUniqueName);
-            return sceneObject.GameObject;
+            catch
+            {
+                return null;
+            }
         }
 
         private string GetIDFromSelectedObject(GameObject selectedSceneObject, Type valueType, string oldUniqueName)
