@@ -108,7 +108,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
             }
 
             EditorSceneManager.newSceneCreated += OnNewScene;
-            EditorSceneManager.sceneClosing += OnSceneClosed;
             EditorSceneManager.sceneOpened += OnSceneOpened;
             GlobalEditorHandler.CourseWindowOpened(this);
         }
@@ -116,7 +115,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
         private void OnDestroy()
         {
             EditorSceneManager.newSceneCreated -= OnNewScene;
-            EditorSceneManager.sceneClosing -= OnSceneClosed;
             EditorSceneManager.sceneOpened -= OnSceneOpened;
             GlobalEditorHandler.CourseWindowClosed(this);
         }
@@ -237,11 +235,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 Close();
             }
-        }
-
-        private void OnSceneClosed(Scene scene, bool removingscene)
-        {
-            activeCourse = null;
         }
 
         private void OnNewScene(Scene scene, NewSceneSetup setup, NewSceneMode mode)
