@@ -1,10 +1,12 @@
-# Validation System
+# Advanced Spectator
 
 The advanced spectator is an improved version of the standard spectator. It extends the spectator with a smoother movement of the camera when watching the trainee carry out the training. Additionally, you can add view points within the scene and observe the trainee from a third person perspective.
 
 ## Activate the advanced spectator
 
 To make use of the improved spectator feature you simply have to choose the _Advanced_ course controller in the _[COURSE_CONTROLLER_SETUP]_ object in your Unity training scene.
+
+[![Set advanced spectator](../images/pro/advanced-spectator.png "Set advanced spectator.")](../images/pro/advanced-spectator.png)
 
 ## Add additional cameras
 
