@@ -3,14 +3,47 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
-    internal class EntryNodeRenderer : ColoredGraphicalElementRenderer<EntryNode>
+    internal class EntryNodeRenderer : MulticoloredGraphicalElementRenderer<EntryNode>
     {
         /// <inheritdoc />
         public override Color NormalColor
         {
             get
             {
+                if (Owner.IsDragging) return SelectedColor;
                 return ColorPalette.ElementBackground;
+            }
+        }
+
+        protected override Color PressedColor
+        {
+            get
+            {
+                return SelectedColor;
+            }
+        }
+
+        protected override Color HoveredColor
+        {
+            get
+            {
+                return ColorPalette.Secondary;
+            }
+        }
+
+        protected override Color TextColor
+        {
+            get
+            {
+                return ColorPalette.Text;
+            }
+        }
+
+        protected virtual Color SelectedColor
+        {
+            get
+            {
+                return ColorPalette.Primary;
             }
         }
 
