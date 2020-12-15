@@ -7,7 +7,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
     internal class EntryNodeRenderer : ColoredGraphicalElementRenderer<EntryNode>
     {
         private static int LabelWidth = 30;
-        private static int LabelHight = 50;
+        private static int LabelHeight = 50;
     
         /// <inheritdoc />
         public override Color NormalColor
@@ -26,7 +26,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
         public override void Draw()
         {
             EditorDrawingHelper.DrawCircle(Owner.BoundingBox.center, Owner.BoundingBox.size.x / 2f, CurrentColor);
-            Rect StartLabelRect = new Rect(Owner.BoundingBox.center.x - LabelWidth / 2f, Owner.BoundingBox.center.y, LabelWidth, LabelHight);
+            Rect StartLabelRect = new Rect(Owner.BoundingBox.center.x - LabelWidth / 2f, Owner.BoundingBox.center.y, LabelWidth, LabelHeight);
             EditorGUI.LabelField(StartLabelRect, "Start", EditorStyles.label);
         }
     }
