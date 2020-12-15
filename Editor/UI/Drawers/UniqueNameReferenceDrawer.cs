@@ -1,6 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Reflection;
+using System.Collections.Generic;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Core.Properties;
@@ -38,7 +38,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             Rect guiLineRect = rect;
             string oldUniqueName = uniqueNameReference.UniqueName;
-            GameObject selectedSceneObject = GetGameObjectFromID(oldUniqueName, valueType);
+            GameObject selectedSceneObject = GetGameObjectFromID(oldUniqueName);
 
             if (selectedSceneObject == null && string.IsNullOrEmpty(oldUniqueName) == false && missingUniqueNames.Contains(oldUniqueName) == false)
             {
@@ -51,7 +51,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             string newUniqueName = GetIDFromSelectedObject(selectedSceneObject, valueType, oldUniqueName);
 
-            if (oldUniqueName != newUniqueName && string.IsNullOrEmpty(newUniqueName) == false)
+            if (oldUniqueName != newUniqueName)
             {
                 RevertableChangesHandler.Do(
                     new CourseCommand(
@@ -76,7 +76,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             return rect;
         }
 
-        private GameObject GetGameObjectFromID(string objectUniqueName, Type valueType)
+        private GameObject GetGameObjectFromID(string objectUniqueName)
         {
             if (string.IsNullOrEmpty(objectUniqueName))
             {
