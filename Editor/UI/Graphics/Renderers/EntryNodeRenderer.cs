@@ -4,7 +4,7 @@ using UnityEditor;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
-    internal class EntryNodeRenderer : ColoredGraphicalElementRenderer<EntryNode>
+    internal class EntryNodeRenderer : MulticoloredGraphicalElementRenderer<EntryNode>
     {
         private static int LabelWidth = 30;
         private static int LabelHeight = 50;
@@ -14,7 +14,40 @@ namespace Innoactive.CreatorEditor.UI.Graphics
         {
             get
             {
+                if (Owner.IsDragging) return SelectedColor;
                 return ColorPalette.ElementBackground;
+            }
+        }
+
+        protected override Color PressedColor
+        {
+            get
+            {
+                return SelectedColor;
+            }
+        }
+
+        protected override Color HoveredColor
+        {
+            get
+            {
+                return ColorPalette.Secondary;
+            }
+        }
+
+        protected override Color TextColor
+        {
+            get
+            {
+                return ColorPalette.Text;
+            }
+        }
+
+        protected virtual Color SelectedColor
+        {
+            get
+            {
+                return ColorPalette.Primary;
             }
         }
 
