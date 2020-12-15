@@ -1,16 +1,15 @@
+using UnityEditor;
+using UnityEngine;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.Tabs;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.CreatorEditor.Configuration;
-using Innoactive.CreatorEditor.CourseValidation;
 using Innoactive.CreatorEditor.UI.Drawers;
-using UnityEditor;
-using UnityEngine;
+using Innoactive.CreatorEditor.Configuration;
 
 namespace Innoactive.CreatorEditor.UI.Windows
 {
-    /// <inheritdoc />
     /// <summary>
     /// This class draws the Step Inspector.
     /// </summary>
@@ -56,7 +55,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             Repaint();
         }
 
-        void OnFocus()
+        private void OnFocus()
         {
             if (step?.Data == null)
             {

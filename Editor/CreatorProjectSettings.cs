@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Innoactive.CreatorEditor;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,8 +12,13 @@ public partial class CreatorProjectSettings : ScriptableObject
     /// Was the Creator imported and therefore started for the first time.
     /// </summary>
     [HideInInspector]
-    [SerializeField]
     public bool IsFirstTimeStarted = true;
+
+    /// <summary>
+    /// Creator version used last time this was checked.
+    /// </summary>
+    [HideInInspector]
+    public string ProjectCreatorVersion = null;
 
     /// <summary>
     /// Loads the Creator settings for this Unity project from Resources.
@@ -33,9 +39,17 @@ public partial class CreatorProjectSettings : ScriptableObject
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 
-            return Resources.Load<CreatorProjectSettings>("CreatorProjectSettings");
+            return settings;
         }
         return settings;
+    }
+
+    private void OnEnable()
+    {
+        if (string.IsNullOrEmpty(ProjectCreatorVersion))
+        {
+            ProjectCreatorVersion = EditorUtils.GetCoreVersion();
+        }
     }
 
     /// <summary>

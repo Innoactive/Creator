@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using System.Collections.Generic;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Core.Properties;
@@ -20,6 +21,8 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         private bool isUndoOperation;
         private const string undoGroupName = "brotcat";
 
+        private readonly HashSet<string> missingUniqueNames = new HashSet<string>();
+
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
@@ -35,7 +38,13 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             Rect guiLineRect = rect;
             string oldUniqueName = uniqueNameReference.UniqueName;
-            GameObject selectedSceneObject = GetGameObjectFromID(oldUniqueName, valueType);
+            GameObject selectedSceneObject = GetGameObjectFromID(oldUniqueName);
+
+            if (selectedSceneObject == null && string.IsNullOrEmpty(oldUniqueName) == false && missingUniqueNames.Contains(oldUniqueName) == false)
+            {
+                missingUniqueNames.Add(oldUniqueName);
+                Debug.LogError($"The Training Scene Object with the unique name '{oldUniqueName}' cannot be found!");
+            }
 
             CheckForMisconfigurationIssues(selectedSceneObject, valueType, ref rect, ref guiLineRect);
             selectedSceneObject = EditorGUI.ObjectField(guiLineRect, label, selectedSceneObject, typeof(GameObject), true) as GameObject;
@@ -67,28 +76,29 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             return rect;
         }
 
-        private GameObject GetGameObjectFromID(string objectUniqueName, Type valueType)
+        private GameObject GetGameObjectFromID(string objectUniqueName)
         {
             if (string.IsNullOrEmpty(objectUniqueName))
             {
                 return null;
             }
 
-            if (RuntimeConfigurator.Configuration.SceneObjectRegistry.ContainsName(objectUniqueName) == false)
+            // If the Runtime Configurator exists, we try to retrieve the Training Scene Object
+            try
             {
-                // If the saved unique name is not registered in the scene, perhaps is actually a GameObject's InstanceID
-                GameObject gameObject = GetGameObjectFromInstanceID(objectUniqueName);
-
-                if (gameObject == null)
+                if (RuntimeConfigurator.Configuration.SceneObjectRegistry.ContainsName(objectUniqueName) == false)
                 {
-                    Debug.LogWarningFormat("{0} with Unique Name \"{1}\" could not be found.", valueType.Name, objectUniqueName);
+                    // If the saved unique name is not registered in the scene, perhaps is actually a GameObject's InstanceID
+                    return GetGameObjectFromInstanceID(objectUniqueName);
                 }
 
-                return gameObject;
+                ISceneObject sceneObject = RuntimeConfigurator.Configuration.SceneObjectRegistry.GetByName(objectUniqueName);
+                return sceneObject.GameObject;
             }
-
-            ISceneObject sceneObject = RuntimeConfigurator.Configuration.SceneObjectRegistry.GetByName(objectUniqueName);
-            return sceneObject.GameObject;
+            catch
+            {
+                return null;
+            }
         }
 
         private string GetIDFromSelectedObject(GameObject selectedSceneObject, Type valueType, string oldUniqueName)
@@ -119,10 +129,9 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
         private GameObject GetGameObjectFromInstanceID(string objectUniqueName)
         {
-            int instanceId;
             GameObject gameObject = null;
 
-            if (int.TryParse(objectUniqueName, out instanceId))
+            if (int.TryParse(objectUniqueName, out int instanceId))
             {
                 gameObject = EditorUtility.InstanceIDToObject(instanceId) as GameObject;
             }
@@ -139,20 +148,18 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 return sceneObject.UniqueName;
             }
 
-            Debug.LogWarningFormat("Game Object \"{0}\" does not have a Training Scene Object component.", selectedSceneObject.name);
+            Debug.LogWarning($"Game Object \"{selectedSceneObject.name}\" does not have a Training Scene Object component.");
             return string.Empty;
         }
 
         private string GetUniqueNameFromTrainingProperty(GameObject selectedTrainingPropertyObject, Type valueType, string oldUniqueName)
         {
-            ISceneObjectProperty trainingProperty = selectedTrainingPropertyObject.GetComponent(valueType) as ISceneObjectProperty;
-
-            if (trainingProperty != null)
+            if (selectedTrainingPropertyObject.GetComponent(valueType) is ISceneObjectProperty trainingProperty)
             {
                 return trainingProperty.SceneObject.UniqueName;
             }
 
-            Debug.LogWarningFormat("Scene Object \"{0}\" with Unique Name \"{1}\" does not have a {2} component.", selectedTrainingPropertyObject.name, oldUniqueName, valueType.Name);
+            Debug.LogWarning($"Scene Object \"{selectedTrainingPropertyObject.name}\" with Unique Name \"{oldUniqueName}\" does not have a {valueType.Name} component.");
             return string.Empty;
         }
 
@@ -160,7 +167,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         {
             if (selectedSceneObject != null && selectedSceneObject.GetComponent(valueType) == null)
             {
-                string warning = string.Format("{0} is not configured as {1}", selectedSceneObject.name, valueType.Name);
+                string warning = $"{selectedSceneObject.name} is not configured as {valueType.Name}";
                 const string button = "Fix it";
 
                 EditorGUI.HelpBox(guiLineRect, warning, MessageType.Error);
