@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.SceneObjects;
@@ -20,6 +21,8 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         private bool isUndoOperation;
         private const string undoGroupName = "brotcat";
 
+        private readonly HashSet<string> missingUniqueNames = new HashSet<string>();
+
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
@@ -36,6 +39,12 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             Rect guiLineRect = rect;
             string oldUniqueName = uniqueNameReference.UniqueName;
             GameObject selectedSceneObject = GetGameObjectFromID(oldUniqueName, valueType);
+
+            if (selectedSceneObject == null && string.IsNullOrEmpty(oldUniqueName) == false && missingUniqueNames.Contains(oldUniqueName) == false)
+            {
+                missingUniqueNames.Add(oldUniqueName);
+                Debug.LogError($"The Training Scene Object with the unique name '{oldUniqueName}' cannot be found!");
+            }
 
             CheckForMisconfigurationIssues(selectedSceneObject, valueType, ref rect, ref guiLineRect);
             selectedSceneObject = EditorGUI.ObjectField(guiLineRect, label, selectedSceneObject, typeof(GameObject), true) as GameObject;
@@ -80,14 +89,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 if (RuntimeConfigurator.Configuration.SceneObjectRegistry.ContainsName(objectUniqueName) == false)
                 {
                     // If the saved unique name is not registered in the scene, perhaps is actually a GameObject's InstanceID
-                    GameObject gameObject = GetGameObjectFromInstanceID(objectUniqueName);
-
-                    if (gameObject == null)
-                    {
-                        Debug.LogError($"{valueType.Name} with Unique Name \"{objectUniqueName}\" could not be found.");
-                    }
-
-                    return gameObject;
+                    return GetGameObjectFromInstanceID(objectUniqueName);
                 }
 
                 ISceneObject sceneObject = RuntimeConfigurator.Configuration.SceneObjectRegistry.GetByName(objectUniqueName);
