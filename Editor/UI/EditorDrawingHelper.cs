@@ -137,10 +137,10 @@ namespace Innoactive.CreatorEditor.UI
 
                     Vector3 directionalAxis = new Vector3(to.x - from.x, to.y - from.y, 1f);
                     directionalAxis.Normalize();
-                    Vector3 orthoDirectionalAxis = new Vector3( directionalAxis.y, -directionalAxis.x);
+                    Vector3 orthoDirectionalAxis = new Vector3(directionalAxis.y, -directionalAxis.x);
 
-                    p1 = new Vector3(to.x - (arrowHeadHeight*directionalAxis.x) + (arrowHeadWidth * orthoDirectionalAxis.x/2f), to.y - (arrowHeadHeight * directionalAxis.y) + (arrowHeadWidth * orthoDirectionalAxis.y / 2f),1f);
-                    p2 = new Vector3(to.x - (arrowHeadHeight * directionalAxis.x) - (arrowHeadWidth * orthoDirectionalAxis.x / 2f), to.y - (arrowHeadHeight * directionalAxis.y) - (arrowHeadWidth * orthoDirectionalAxis.y / 2f),1f);
+                    p1 = new Vector3(to.x - (arrowHeadHeight * directionalAxis.x) + (arrowHeadWidth * orthoDirectionalAxis.x/ 2f), to.y - (arrowHeadHeight * directionalAxis.y) + (arrowHeadWidth * orthoDirectionalAxis.y / 2f), 1f);
+                    p2 = new Vector3(to.x - (arrowHeadHeight * directionalAxis.x) - (arrowHeadWidth * orthoDirectionalAxis.x / 2f), to.y - (arrowHeadHeight * directionalAxis.y) - (arrowHeadWidth * orthoDirectionalAxis.y / 2f), 1f);
                     p3 = new Vector3(to.x, to.y, 1f);
 
                 }
