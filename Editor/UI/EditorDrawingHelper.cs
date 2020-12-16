@@ -129,9 +129,8 @@ namespace Innoactive.CreatorEditor.UI
                     p1 = new Vector3(trianglePoint.x, trianglePoint.y - arrowHeadWidth/2, 1f);
                     p2 = new Vector3(trianglePoint.x, trianglePoint.y + arrowHeadWidth / 2, 1f);
                     p3 = new Vector3(trianglePoint.x + arrowHeadHeight, trianglePoint.y, 1f);
-                } else
+                } else if (points.Count > 4)
                 {
-                    //Vector3 center = points[3];
                     Vector3 from = points[2];
                     Vector3 to = points[4];
 
@@ -143,6 +142,10 @@ namespace Innoactive.CreatorEditor.UI
                     p2 = new Vector3(to.x - (arrowHeadHeight * directionalAxis.x) - (arrowHeadWidth * orthoDirectionalAxis.x / 2f), to.y - (arrowHeadHeight * directionalAxis.y) - (arrowHeadWidth * orthoDirectionalAxis.y / 2f), 1f);
                     p3 = new Vector3(to.x, to.y, 1f);
 
+                }
+                else
+                {
+                    return;
                 }
 
                 pointList = new Vector3[] { p1,p2,p3} ;
