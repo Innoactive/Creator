@@ -15,7 +15,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
     /// </summary>
     internal class StepWindow : EditorWindow
     {
-        private const int border = 4;
+        private const int border = 10;
 
         private IStep step;
 
