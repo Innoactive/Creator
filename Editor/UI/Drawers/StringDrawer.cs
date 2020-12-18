@@ -1,6 +1,7 @@
 using System;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Innoactive.CreatorEditor.UI.Drawers
 {
@@ -16,7 +17,8 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             rect.height = EditorDrawingHelper.SingleLineHeight;
 
             string stringValue = (string)currentValue;
-            string newValue = EditorGUI.TextField(rect, label, stringValue);
+            string newValue = " ";// EditorGUI.TextField(rect, label, stringValue);
+
 
             if (stringValue != newValue)
             {

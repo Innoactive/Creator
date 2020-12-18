@@ -7,6 +7,8 @@ using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.Tabs;
 using Innoactive.CreatorEditor.UI.Drawers;
 using Innoactive.CreatorEditor.Configuration;
+using UnityEngine.UIElements;
+
 
 namespace Innoactive.CreatorEditor.UI.Windows
 {
@@ -15,15 +17,21 @@ namespace Innoactive.CreatorEditor.UI.Windows
     /// </summary>
     internal class StepWindow : EditorWindow
     {
+
         private const int border = 10;
 
         private IStep step;
+
+        public static VisualElement root;
 
         [SerializeField]
         private Vector2 scrollPosition;
 
         [SerializeField]
         private Rect stepRect;
+
+        private StyleSheet style;
+        private VisualTreeAsset inpectorVisualTree;
 
         /// <summary>
         /// Returns the first <see cref="StepWindow"/> which is currently opened.
@@ -44,12 +52,44 @@ namespace Innoactive.CreatorEditor.UI.Windows
         {
             EditorSceneManager.sceneClosing += OnSceneClosed;
             GlobalEditorHandler.StepWindowOpened(this);
+               
+            root = rootVisualElement;
+            style = (StyleSheet)Resources.Load("InspectorStyle");
+              
+            root.styleSheets.Add(style);
+            inpectorVisualTree = (VisualTreeAsset)Resources.Load("Inspector_Main");
+            inpectorVisualTree.CloneTree(root);
+ 
+            root.styleSheets.Add(style);
+
+            // Queries all the buttons (via type) in our root and passes them
+            // in the SetupButton method.
+            var toolButtons = root.Query<Button>();
+            var label = root.Query<Label>();
+            label.ForEach(SetupLabel);
+            //toolButtons.ForEach(SetupButton);
+
         }
 
-        private void OnDestroy()
+        private void SetupLabel(Label l)
+        {
+            var myLabel = l.Q(className: "default-label");
+
+
+        }
+
+        private void SetupButton(Button button)
+        {
+            var b = button.Q(className: "default-button");
+            
+
+        }
+
+            private void OnDestroy()
         {
             EditorSceneManager.sceneClosing -= OnSceneClosed;
             GlobalEditorHandler.StepWindowClosed(this);
+            
         }
 
         private void OnInspectorUpdate()
@@ -95,6 +135,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 stepRect = new Rect(stepDrawingRect.position - new Vector2(border,border), stepDrawingRect.size + new Vector2(border * 2f, border * 2f));
             }
             GUI.EndScrollView();
+           
         }
 
         private void OnSceneClosed(Scene scene, bool removingscene)

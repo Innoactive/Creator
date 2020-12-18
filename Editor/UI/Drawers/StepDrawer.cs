@@ -4,6 +4,9 @@ using Innoactive.CreatorEditor.Configuration;
 using Innoactive.CreatorEditor.Tabs;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Innoactive.CreatorEditor.UI.Windows;
+
 
 namespace Innoactive.CreatorEditor.UI.Drawers
 {
@@ -62,23 +65,29 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 new DynamicTab(behaviorLabel, () => step.Behaviors, value => step.Behaviors = (IBehaviorCollection)value),
                 new DynamicTab(transitionLabel, () => step.Transitions, value => step.Transitions = (ITransitionCollection)value),
                 lockablePropertyTab
-            );
+            ); 
 
             Rect tabRect = new TabsGroupDrawer().Draw(new Rect(rect.x, rect.y + rect.height + 4f, rect.width, 0), activeTab, changeValueCallback, label);
             rect.height += tabRect.height;
             return rect;
         }
 
+        private void myButtonDraw(Button button)
+        {
+            var b = button.Q(className: "default-button");
+        }
+
         protected override float DrawLabel(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
             Step.EntityData step = currentValue as Step.EntityData;
-
+              
             Rect nameRect = rect;
             nameRect.width = EditorGUIUtility.labelWidth;
             Rect typeRect = rect;
             typeRect.x += EditorGUIUtility.labelWidth;
             typeRect.width -= EditorGUIUtility.labelWidth;
 
+              
             GUIStyle textFieldStyle = new GUIStyle(EditorStyles.textField)
             {
                 fontStyle = FontStyle.Bold,
@@ -91,12 +100,16 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 fontSize = 12
             };
 
+            //var toolButtons = StepWindow.root.Query<Button>();
+            //toolButtons.ForEach(myButtonDraw);
+
+
             rect.height = labelStyle.CalcHeight(new GUIContent("Step Name"), rect.width);
 
-            EditorGUI.LabelField(typeRect, "Step Name", labelStyle);
+            //EditorGUI.LabelField(typeRect, "Step Name", labelStyle);
 
             string oldName = step.Name;
-            string newName = EditorGUI.DelayedTextField(nameRect, step.Name, textFieldStyle);
+            string newName = oldName;//EditorGUI.DelayedTextField(nameRect, step.Name, textFieldStyle);
 
             if (newName != step.Name)
             {

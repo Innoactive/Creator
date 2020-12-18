@@ -11,6 +11,7 @@ using Innoactive.CreatorEditor.Configuration;
 using Innoactive.CreatorEditor.CourseValidation;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Innoactive.CreatorEditor.UI.Drawers
 {
