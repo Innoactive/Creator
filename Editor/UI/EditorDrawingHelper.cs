@@ -126,10 +126,11 @@ namespace Innoactive.CreatorEditor.UI
                 if (points.Count == 2)
                 {//straight line
                     Vector3 trianglePoint = new Vector3(points[0].x + (points[1].x - points[0].x) / 5, points[0].y); 
-                    p1 = new Vector3(trianglePoint.x, trianglePoint.y - arrowHeadWidth/2, 1f);
+                    p1 = new Vector3(trianglePoint.x, trianglePoint.y - arrowHeadWidth / 2, 1f);
                     p2 = new Vector3(trianglePoint.x, trianglePoint.y + arrowHeadWidth / 2, 1f);
                     p3 = new Vector3(trianglePoint.x + arrowHeadHeight, trianglePoint.y, 1f);
-                } else if (points.Count > 4)
+                } 
+                else if (points.Count > 4)
                 {
                     Vector3 from = points[2];
                     Vector3 to = points[4];
@@ -138,7 +139,7 @@ namespace Innoactive.CreatorEditor.UI
                     directionalAxis.Normalize();
                     Vector3 orthoDirectionalAxis = new Vector3(directionalAxis.y, -directionalAxis.x);
 
-                    p1 = new Vector3(to.x - (arrowHeadHeight * directionalAxis.x) + (arrowHeadWidth * orthoDirectionalAxis.x/ 2f), to.y - (arrowHeadHeight * directionalAxis.y) + (arrowHeadWidth * orthoDirectionalAxis.y / 2f), 1f);
+                    p1 = new Vector3(to.x - (arrowHeadHeight * directionalAxis.x) + (arrowHeadWidth * orthoDirectionalAxis.x / 2f), to.y - (arrowHeadHeight * directionalAxis.y) + (arrowHeadWidth * orthoDirectionalAxis.y / 2f), 1f);
                     p2 = new Vector3(to.x - (arrowHeadHeight * directionalAxis.x) - (arrowHeadWidth * orthoDirectionalAxis.x / 2f), to.y - (arrowHeadHeight * directionalAxis.y) - (arrowHeadWidth * orthoDirectionalAxis.y / 2f), 1f);
                     p3 = new Vector3(to.x, to.y, 1f);
 
@@ -148,7 +149,7 @@ namespace Innoactive.CreatorEditor.UI
                     return;
                 }
 
-                pointList = new Vector3[] { p1,p2,p3} ;
+                pointList = new Vector3[] {p1, p2, p3} ;
                 Handles.color = Color.white;
                 Handles.DrawAAConvexPolygon(pointList);
                 Handles.color = handlesColor;
