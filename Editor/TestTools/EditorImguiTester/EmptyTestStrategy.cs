@@ -1,5 +1,6 @@
 using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UI.Windows;
+using UnityEngine;
 
 namespace Innoactive.CreatorEditor.TestTools
 {
@@ -9,6 +10,7 @@ namespace Innoactive.CreatorEditor.TestTools
     internal class EmptyTestStrategy : IEditingStrategy
     {
         public ICourse CurrentCourse { get; }
+        public IChapter CurrentChapter { get; private set; }
 
         /// <inheritdoc/>
         public void HandleNewCourseWindow(CourseWindow window)
@@ -58,6 +60,11 @@ namespace Innoactive.CreatorEditor.TestTools
         /// <inheritdoc/>
         public void HandleCurrentStepChanged(IStep step)
         {
+        }
+
+        public void HandleCurrentChapterChanged(IChapter chapter)
+        {
+            CurrentChapter = chapter;
         }
 
         /// <inheritdoc/>
