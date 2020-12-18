@@ -6,6 +6,8 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.Behaviors;
+using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.UI.Drawers.Metadata;
 using Innoactive.Creator.Core.Utils;
 using UnityEditor;
@@ -39,11 +41,11 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
             MetadataWrapper wrapper = (MetadataWrapper)currentValue;
-            bool isTransition = wrapper.ValueDeclaredType == typeof(ITransition);
+            bool isProperBar = wrapper.ValueDeclaredType == typeof(ITransition) || wrapper.ValueDeclaredType == typeof(IBehavior) || wrapper.ValueDeclaredType == typeof(ICondition);
 
             if (wrapper.Metadata.ContainsKey(reorderableName))
             {
-                return DrawReorderable(rect, wrapper, changeValueCallback, label, isTransition);
+                return DrawReorderable(rect, wrapper, changeValueCallback, label, isProperBar);
             }
 
             if (wrapper.Metadata.ContainsKey(separatedName))
@@ -53,12 +55,12 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             if (wrapper.Metadata.ContainsKey(deletableName))
             {
-                return DrawDeletable(rect, wrapper, changeValueCallback, label, isTransition);
+                return DrawDeletable(rect, wrapper, changeValueCallback, label, isProperBar);
             }
 
             if (wrapper.Metadata.ContainsKey(foldableName))
             {
-                return DrawFoldable(rect, wrapper, changeValueCallback, label, isTransition);
+                return DrawFoldable(rect, wrapper, changeValueCallback, label, isProperBar);
             }
 
             if (wrapper.Metadata.ContainsKey(drawIsBlockingToggleName))
@@ -105,14 +107,14 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             return valueDrawer.GetLabel(wrapper.Value, wrapper.ValueDeclaredType);
         }
 
-        private GUIStyle GetStyle(bool isTransition = false)
+        private GUIStyle GetStyle(bool isProperBar = false)
         {
             GUIStyle style = new GUIStyle(GUI.skin.button)
             {
                 fontStyle = FontStyle.Bold
             };
 
-            if (isTransition)
+            if (isProperBar)
             {
                 Texture2D normal = new Texture2D(1, 1);
                 normal.SetPixels(new Color[]{ new Color(1, 1, 1, 0)  });
@@ -130,13 +132,13 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             return style;
         }
 
-        private Rect DrawReorderable(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label, bool isTransition)
+        private Rect DrawReorderable(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label, bool isProperBar)
         {
             rect = DrawRecursively(rect, wrapper, reorderableName, changeValueCallback, label);
 
             Vector2 buttonSize = new Vector2(EditorGUIUtility.singleLineHeight + 3f, EditorDrawingHelper.SingleLineHeight);
 
-            GUIStyle style = GetStyle(isTransition);
+            GUIStyle style = GetStyle(isProperBar);
 
             GUI.enabled = ((ReorderableElementMetadata)wrapper.Metadata[reorderableName]).IsLast == false;
             if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 2 - 0.1f, rect.y + 1, buttonSize.x, buttonSize.y), arrowDownIcon.Texture, style))
@@ -222,7 +224,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             return rect;
         }
 
-        private Rect DrawFoldable(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label, bool isTransition)
+        private Rect DrawFoldable(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label, bool isProperBar)
         {
             if (wrapper.Metadata[foldableName] == null)
             {
@@ -246,7 +248,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             Rect foldoutRect = new Rect(rect.x, rect.y, rect.width, EditorDrawingHelper.HeaderLineHeight);
 
-            if (isTransition)
+            if (isProperBar)
             {
                 EditorGUI.DrawRect(new Rect(0, foldoutRect.y, foldoutRect.width + foldoutRect.x + 8, foldoutRect.height), new Color(62f / 256f, 62f / 256f, 62f / 256f));
                 EditorGUI.DrawRect(new Rect(0, foldoutRect.y, foldoutRect.width + foldoutRect.x + 8, 1), new Color(26f / 256f, 26f / 256f, 26f / 256f));

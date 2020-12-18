@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Behaviors;
 using Innoactive.Creator.Core.Conditions;
 using Innoactive.CreatorEditor.CourseValidation;
 using UnityEditor;
@@ -29,6 +30,20 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 GUI.Label(warningRect, AddValidationInformation(new GUIContent(), reports));
             }
 
+            if (currentValue.GetType() != typeof(IStepData))
+            {
+                DrawName(rect, nameable);
+            }
+            else
+            {
+                DrawRenameable(rect, nameable, changeValueCallback);
+            }
+
+            return rect.height;
+        }
+
+        private void DrawRenameable(Rect rect, INamedData nameable, Action<object> changeValueCallback)
+        {
             Rect nameRect = rect;
             nameRect.width = EditorGUIUtility.labelWidth;
             Rect typeRect = rect;
@@ -42,7 +57,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             };
 
             string newName = EditorGUI.DelayedTextField(nameRect, nameable.Name, textFieldStyle);
-
             GUIStyle labelStyle = new GUIStyle(EditorStyles.label)
             {
                 fontStyle = FontStyle.Bold,
@@ -66,8 +80,17 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                         return nameable;
                     }, changeValueCallback);
             }
+        }
 
-            return rect.height;
+        private void DrawName(Rect rect, INamedData nameable)
+        {
+            GUIStyle labelStyle = new GUIStyle(EditorStyles.label)
+            {
+                fontStyle = FontStyle.Bold,
+                fontSize = 12,
+                padding = new RectOffset(4, 0, 0, 0)
+            };
+            EditorGUI.LabelField(rect, GetTypeNameLabel(nameable, nameable.GetType()), labelStyle);
         }
     }
 }
