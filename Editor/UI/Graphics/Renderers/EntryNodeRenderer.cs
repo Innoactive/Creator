@@ -14,7 +14,10 @@ namespace Innoactive.CreatorEditor.UI.Graphics
         {
             get
             {
-                if (Owner.IsDragging) return SelectedColor;
+                if (Owner.IsDragging)
+                {
+                    return SelectedColor;
+                }
                 return ColorPalette.ElementBackground;
             }
         }
