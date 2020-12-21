@@ -39,8 +39,8 @@ namespace Innoactive.Creator.Core
                 GUIStyle backgroundStyle = new GUIStyle(GUI.skin.box);
                 backgroundStyle.normal.background = backgroundTexture;
 
-                GUI.Box(new Rect(windowRect.x + (windowRect.width / 2) - 260, windowRect.y + (windowRect.height / 2) - 20, 520, 40), "", backgroundStyle);
-                GUI.Label(new Rect(windowRect.x + (windowRect.width / 2) - 260, windowRect.y + (windowRect.height / 2 - 20), 520, 40), "Right-click to empty area to create new step", style);
+                GUI.Box(new Rect(windowRect.x + (windowRect.width / 2) - 260, windowRect.y + (windowRect.height / 2) - 20, 420, 40), "", backgroundStyle);
+                GUI.Label(new Rect(windowRect.x + (windowRect.width / 2) - 260, windowRect.y + (windowRect.height / 2 - 20), 420, 40), "Right-click to create new step", style);
             }
             
                 
