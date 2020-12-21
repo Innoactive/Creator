@@ -89,7 +89,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             GUIStyle labelStyle = new GUIStyle(EditorStyles.label)
             {
-                fontStyle = FontStyle.Bold,
+                fontStyle = FontStyle.Normal,
                 fontSize = 12
             };
 
