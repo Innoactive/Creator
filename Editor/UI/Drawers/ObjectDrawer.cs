@@ -118,7 +118,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             }
             return new List<EditorReportEntry>();
         }
-
+         
         /// <summary>
         /// Draw a label for an object.
         /// </summary>

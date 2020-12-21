@@ -20,10 +20,35 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         private IStepData lastStep;
         private LockablePropertyTab lockablePropertyTab;
 
+        class UD
+        {
+            string label = "myTest";
+
+            public string getLabel()
+            {
+                Debug.Log("returning label");
+                return label;
+            }
+        }
 
         protected StepDrawer()
         {
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+
+            var visualTree = (VisualTreeAsset)Resources.Load("UI/ICFormRow");
+            
+            VisualElement stepdrawerRoot = visualTree.CloneTree();
+            stepdrawerRoot.ToggleInClassList("form-element");
+
+
+            UD ud = new UD();
+            
+            stepdrawerRoot.userData = (UD) ud;
+            //Debug.Log((UD)(stepdrawerRoot.userData).getLabel());
+            StepWindow.root.Add(stepdrawerRoot);
+            StyleSheet style = (StyleSheet)Resources.Load("UI/ICFormRowStyle");
+            StepWindow.root.styleSheets.Add(style);
+
         }
 
         ~StepDrawer()
@@ -59,19 +84,19 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             {
                 transitionLabel.image = EditorGUIUtility.IconContent("Warning").image;
             }
-
+                
             TabsGroup activeTab = new TabsGroup(
                 step.Metadata,
                 new DynamicTab(behaviorLabel, () => step.Behaviors, value => step.Behaviors = (IBehaviorCollection)value),
                 new DynamicTab(transitionLabel, () => step.Transitions, value => step.Transitions = (ITransitionCollection)value),
                 lockablePropertyTab
             ); 
-
+             
             Rect tabRect = new TabsGroupDrawer().Draw(new Rect(rect.x, rect.y + rect.height + 4f, rect.width, 0), activeTab, changeValueCallback, label);
             rect.height += tabRect.height;
             return rect;
         }
-
+        
         private void myButtonDraw(Button button)
         {
             var b = button.Q(className: "default-button");
@@ -100,16 +125,23 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 fontSize = 12
             };
 
-            //var toolButtons = StepWindow.root.Query<Button>();
-            //toolButtons.ForEach(myButtonDraw);
+
+            //VisualElement stepname = new Label("Hello world");
+            //StepWindow.root.Add(stepname);
+
+            var formLabel = StepWindow.root.Q<Label>("form-label");
+            var formTextfield = StepWindow.root.Q<TextField>("form-textfield");
+            //formLabel.text = "StepName";
+            //Debug.Log(formTextfield.value);
 
 
-            rect.height = labelStyle.CalcHeight(new GUIContent("Step Name"), rect.width);
+
+            //rect.height = labelStyle.CalcHeight(new GUIContent("Step Name"), rect.width);
 
             //EditorGUI.LabelField(typeRect, "Step Name", labelStyle);
 
             string oldName = step.Name;
-            string newName = oldName;//EditorGUI.DelayedTextField(nameRect, step.Name, textFieldStyle);
+            string newName = formTextfield.value;//EditorGUI.DelayedTextField(nameRect, step.Name, textFieldStyle);
 
             if (newName != step.Name)
             {

@@ -1,0 +1,8 @@
+<UXML xmlns="UnityEngine.UIElements">
+        <Button  class="ic-tabHeader selected-tab" text="Behaviors">
+        </Button>
+         <Button  class="ic-tabHeader" text="Transitions">
+        </Button>
+         <Button  class="ic-tabHeader" text="Unlocked Objects">
+        </Button>
+</UXML>

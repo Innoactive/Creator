@@ -22,7 +22,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
         /// <inheritdoc />
         public abstract Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label);
-
+          
         public virtual GUIContent GetLabel(MemberInfo memberInfo, object memberOwner)
         {
             Type memberType = ReflectionUtils.GetDeclaredTypeOfPropertyOrField(memberInfo);

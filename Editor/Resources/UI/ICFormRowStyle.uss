@@ -1,0 +1,11 @@
+.form-element{
+    flex-direction: row;
+}
+
+.ic-label{
+    width: 25%;
+}
+
+.ic-textfield{
+    width: 70%;
+}

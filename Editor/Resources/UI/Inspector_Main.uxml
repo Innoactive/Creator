@@ -1,0 +1,18 @@
+<UXML xmlns="UnityEngine.UIElements">
+    <!-- Creates our template and gives it a name for future reference. -->
+    <Template src="./ICFormRow.uxml" name="formrow-template" />
+    <Template src="./ICTabHeader.uxml" name="tabheader-template" />
+    <Template src="./ICBehaviorDelay.uxml" name="delay-template" />
+    <!-- Creates a parent VisualElement in which we will add our template. -->
+    <VisualElement class="form-element">
+        <Instance template="formrow-template" name="FormRow"/>
+    </VisualElement>
+    <VisualElement class="form-element">
+        <Instance template="formrow-template" name="FormRow"/>
+    </VisualElement>
+    <VisualElement class="tabs">
+        <Instance template="tabheader-template" name="TabHeader"/>
+    </VisualElement>
+    
+    
+</UXML>

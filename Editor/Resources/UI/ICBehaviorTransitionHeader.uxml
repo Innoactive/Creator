@@ -1,0 +1,4 @@
+<UXML xmlns="UnityEngine.UIElements">
+    <Label  class="ic-label" text="myLabel">
+        </Label>
+</UXML>

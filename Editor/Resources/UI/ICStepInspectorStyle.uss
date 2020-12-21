@@ -1,0 +1,60 @@
+.default-button {
+    
+    height: 150px;
+    /* Style rule that aligns items on the horizontal axis. */
+    align-items: flex-start;
+    /* Style rule that aligns items on the vertical axis. */
+    justify-content: center;
+}
+
+.default-label{
+    margin-left: 20px;
+    
+    align-self: flex-start;
+    backround-color: red;
+}
+ 
+.form-element{
+    flex-direction: column;
+    padding-top: 5px;
+    width: 100%;
+    flex-flow: space-between;
+}
+
+
+
+#FormRow{
+    flex-direction: row;
+    margin-left:10px;
+    margin-right:50px;
+    width: 100%;
+}
+
+#TabHeader{
+    flex-direction:row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#unity-panel-container2{
+    min-width: 300;
+}
+
+.ic-tabHeader{
+    background-color: rgb(56, 56, 56);
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(56, 56, 56);
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+
+}
+.selected-tab{
+    border-bottom-width:3px;
+    border-bottom-color: white;
+
+}
+
+.default-editortextfield{
+    width: 100px;
+    right: 5px;
+}

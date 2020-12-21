@@ -1,0 +1,9 @@
+<UXML xmlns="UnityEngine.UIElements">
+    <Template src="./ICFormRow.uxml" name="formrow-template" />
+    <Template src="./ICBehaviorTransitionHeader.uxml" name="behaviortransitionheader-template" />
+
+    <VisualElement class="delay-behavior">
+        <Instance template="behaviortransitionheader-template" name="header"/>
+        <Instance template="formrow-template" name="body"/>
+    </VisualElement>
+</UXML>

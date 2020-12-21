@@ -54,36 +54,25 @@ namespace Innoactive.CreatorEditor.UI.Windows
             GlobalEditorHandler.StepWindowOpened(this);
                
             root = rootVisualElement;
-            style = (StyleSheet)Resources.Load("InspectorStyle");
-              
-            root.styleSheets.Add(style);
-            inpectorVisualTree = (VisualTreeAsset)Resources.Load("Inspector_Main");
+
+
+            inpectorVisualTree = (VisualTreeAsset)Resources.Load("UI/Inspector_Main");
             inpectorVisualTree.CloneTree(root);
- 
+
+            style = (StyleSheet)Resources.Load("UI/ICStepInspectorStyle");
             root.styleSheets.Add(style);
+
 
             // Queries all the buttons (via type) in our root and passes them
             // in the SetupButton method.
             var toolButtons = root.Query<Button>();
             var label = root.Query<Label>();
-            label.ForEach(SetupLabel);
+            //label.ForEach(SetupLabel);
             //toolButtons.ForEach(SetupButton);
-
-        }
-
-        private void SetupLabel(Label l)
-        {
-            var myLabel = l.Q(className: "default-label");
-
-
-        }
-
-        private void SetupButton(Button button)
-        {
-            var b = button.Q(className: "default-button");
             
-
         }
+
+      
 
             private void OnDestroy()
         {
