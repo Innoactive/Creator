@@ -1,0 +1,71 @@
+.delay-behavior-header{
+    font-size: 12;
+    font-style: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom-width: 1px;
+    background-color: rgb(62, 62, 62);
+    padding-bottom: 0px;
+    padding-top:0px;
+    
+
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.delay-behavior-header Button{
+       background-color:  rgb(62, 62, 62);
+       border-left-color:  rgb(62, 62, 62);
+       border-right-color:  rgb(62, 62, 62);
+       border-top-color:  rgb(62, 62, 62);
+       border-bottom-color:  rgb(62, 62, 62);
+    }
+
+.micons{
+        align-self: center;
+        flex-direction: row;
+        flex-grow: 1;
+        justify-content: flex-end;
+ }
+
+ .micons Button{
+    
+    height: 15px;
+ }
+
+.arrow-and-label{
+    
+    flex-direction: row;
+}
+
+.behavior-header-collapsed{
+
+    border-bottom-width: 0px;
+    
+}
+
+.delay-behavior-body{
+    font-size: 12;
+    flex-direction: row;
+    background-color: rgb(56, 56, 56);
+    padding-left:25px;
+}
+
+.invisible{
+    display: none;
+}
+
+
+.delay-behavior-header Label{
+
+    -unity-text-align: middle-center;
+}
+
+.delay-behavior-body Label{
+    
+}
+
+.delay-behavior-body TextField{
+    flex-grow: 1;
+    margin-left: 20px;
+}

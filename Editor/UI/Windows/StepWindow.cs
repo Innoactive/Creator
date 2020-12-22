@@ -8,6 +8,7 @@ using Innoactive.CreatorEditor.Tabs;
 using Innoactive.CreatorEditor.UI.Drawers;
 using Innoactive.CreatorEditor.Configuration;
 using UnityEngine.UIElements;
+using Innoactive.CreatorEditor.UI.UIElements;
 
 
 namespace Innoactive.CreatorEditor.UI.Windows
@@ -59,9 +60,14 @@ namespace Innoactive.CreatorEditor.UI.Windows
             inpectorVisualTree = (VisualTreeAsset)Resources.Load("UI/Inspector_Main");
             inpectorVisualTree.CloneTree(root);
 
-            style = (StyleSheet)Resources.Load("UI/ICStepInspectorStyle");
-            root.styleSheets.Add(style);
+            
 
+            //load all style files required for this windows here.
+            style = (StyleSheet)Resources.Load("UI/ICStepInspectorStyle");
+            StyleSheet behaviorStyle = (StyleSheet)Resources.Load("UI/ICBehaviorStyle");
+
+            root.styleSheets.Add(style);
+            root.styleSheets.Add(behaviorStyle);
 
             // Queries all the buttons (via type) in our root and passes them
             // in the SetupButton method.
@@ -69,6 +75,16 @@ namespace Innoactive.CreatorEditor.UI.Windows
             var label = root.Query<Label>();
             //label.ForEach(SetupLabel);
             //toolButtons.ForEach(SetupButton);
+
+            var mBehavior = new Behavior();
+            mBehavior.draw();
+            root.Add(mBehavior);
+
+            var mOtherBehavior = new Behavior();
+            mOtherBehavior.draw();
+            root.Add(mOtherBehavior);
+
+
             
         }
 
@@ -97,6 +113,8 @@ namespace Innoactive.CreatorEditor.UI.Windows
             {
                 EditorConfigurator.Instance.Validation.Validate(step.Data, GlobalEditorHandler.GetCurrentCourse());
             }
+
+
         }
 
         private void OnGUI()
@@ -108,7 +126,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 return;
             }
 
-            ITrainingDrawer drawer = DrawerLocator.GetDrawerForValue(step, typeof(Step));
+            //ITrainingDrawer drawer = DrawerLocator.GetDrawerForValue(step, typeof(Step));
 
             stepRect.width = position.width;
 
@@ -120,8 +138,8 @@ namespace Innoactive.CreatorEditor.UI.Windows
             scrollPosition = GUI.BeginScrollView(new Rect(0, 0, position.width, position.height), scrollPosition, stepRect, false, false);
             {
                 Rect stepDrawingRect = new Rect(stepRect.position + new Vector2(border, border), stepRect.size - new Vector2(border * 2f, border * 2f));
-                stepDrawingRect = drawer.Draw(stepDrawingRect, step, ModifyStep, "Step");
-                stepRect = new Rect(stepDrawingRect.position - new Vector2(border,border), stepDrawingRect.size + new Vector2(border * 2f, border * 2f));
+                //stepDrawingRect = drawer.Draw(stepDrawingRect, step, ModifyStep, "Step");
+                //stepRect = new Rect(stepDrawingRect.position - new Vector2(border,border), stepDrawingRect.size + new Vector2(border * 2f, border * 2f));
             }
             GUI.EndScrollView();
            

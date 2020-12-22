@@ -1,4 +1,4 @@
-<UXML xmlns="UnityEngine.UIElements">
+<UXML xmlns="UnityEngine.UIElements" xmlns:ic="Innoactive.CreatorEditor.UI.UIElements">
     <!-- Creates our template and gives it a name for future reference. -->
     <Template src="./ICFormRow.uxml" name="formrow-template" />
     <Template src="./ICTabHeader.uxml" name="tabheader-template" />
@@ -12,6 +12,8 @@
     </VisualElement>
     <VisualElement class="tabs">
         <Instance template="tabheader-template" name="TabHeader"/>
+        <ic:Behavior />
+        <VisualElement name="TabContainer"/>
     </VisualElement>
     
     
