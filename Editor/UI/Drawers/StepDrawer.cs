@@ -17,9 +17,9 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         private IStepData lastStep;
         private LockablePropertyTab lockablePropertyTab;
 
-
         private static int margin = 3;
         private static int padding = 2;
+        
         protected StepDrawer()
         {
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
