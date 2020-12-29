@@ -14,6 +14,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
 
         public override void Draw()
         {
+            GUI.color = CurrentColor;
             Rect iconRect = new Rect(Owner.Position.x - iconSize / 2f, Owner.Position.y - iconSize / 2f, iconSize, iconSize);
 
             EditorDrawingHelper.DrawCircle(Owner.Position, Owner.BoundingBox.width / 2f, CurrentColor);

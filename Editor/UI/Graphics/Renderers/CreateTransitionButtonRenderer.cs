@@ -1,6 +1,5 @@
 using Innoactive.CreatorEditor.UI.Graphics.Renderers;
 using UnityEngine;
-using UnityEditor;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
@@ -15,6 +14,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
 
         public override void Draw()
         {
+            GUI.color = CurrentColor;
             EditorDrawingHelper.DrawCircle(Owner.Position, Owner.BoundingBox.width / 2f, CurrentColor);
 
             GUIStyle labelStyle = new GUIStyle

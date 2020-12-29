@@ -65,8 +65,8 @@ namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
 
         public override void Draw()
         {
+            GUI.color = TextColor;
             EditorDrawingHelper.DrawRoundedRect(Owner.BoundingBox, CurrentColor, 10f);
-
 
             IValidationHandler validation = EditorConfigurator.Instance.Validation;
             if (validation.IsAllowedToValidate())
