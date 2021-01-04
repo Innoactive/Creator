@@ -1,11 +1,4 @@
-/* Copyright (C) Innoactive GmbH - All Rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- * Innoactive GmbH, November 2020
- */
-
 using Innoactive.CreatorEditor.UI;
-using Innoactive.CreatorPro.Account;
 using UnityEditor;
 using UnityEngine;
 using Innoactive.CreatorEditor;
@@ -28,7 +21,7 @@ namespace Innoactive.Creator.Core
 
         public void Draw(Rect windowRect)
         {
-            IChapter c = GlobalEditorHandler.GetCurrentChapter();
+            IChapter chapter = GlobalEditorHandler.GetCurrentChapter();
             if(c != null && (c.Data.FirstStep == null && c.Data.Steps.Count == 0))
             {
                 GUIStyle style = new GUIStyle(EditorStyles.label);
@@ -42,9 +35,6 @@ namespace Innoactive.Creator.Core
                 GUI.Box(new Rect(windowRect.x + (windowRect.width / 2) - 260, windowRect.y + (windowRect.height / 2) - 20, 420, 40), "", backgroundStyle);
                 GUI.Label(new Rect(windowRect.x + (windowRect.width / 2) - 260, windowRect.y + (windowRect.height / 2 - 20), 420, 40), "Right-click to create new step", style);
             }
-            
-                
-            
         }
     }
 }
