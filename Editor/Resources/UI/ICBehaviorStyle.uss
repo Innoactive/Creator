@@ -30,7 +30,7 @@
 
  .micons Button{
     
-    height: 15px;
+    height: 20px;
  }
 
 .arrow-and-label{
@@ -69,3 +69,24 @@
     flex-grow: 1;
     margin-left: 20px;
 }
+
+
+.micons Button .delete{
+    --unity-image: resource("icon_delete_light");
+    width: 16px;
+    height: 16px;
+    
+}
+
+.micons Button .up{
+    --unity-image: resource("icon_arrow_up_light");
+    width: 16px;
+    height: 16px;
+}
+
+.micons Button .down{
+    --unity-image: resource("icon_arrow_down_light");
+    width: 16px;
+    height: 16px;   
+}
+

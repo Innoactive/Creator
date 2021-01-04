@@ -1,9 +1,8 @@
-<UXML xmlns="UnityEngine.UIElements">
-    <Template src="./ICFormRow.uxml" name="formrow-template" />
-    <Template src="./ICBehaviorTransitionHeader.uxml" name="behaviortransitionheader-template" />
-
-    <VisualElement class="delay-behavior">
-        <Instance template="behaviortransitionheader-template" name="header"/>
-        <Instance template="formrow-template" name="body"/>
-    </VisualElement>
+<UXML xmlns="UnityEngine.UIElements" xmlns:ic="Innoactive.CreatorEditor.UI.UIElements">
+    <Template src="./ICBehaviorHeader.uxml" name="header-template" /> 
+    <ic:ICBehaviorHeader header-title="Delay Behavior" />
+    <!-- We could also create the UI in the UXMLTraits method and call the following, but we want to keep the UI in UXML files -->
+    <!-- <ic:ICDelayBehavior
+    duration="6" />-->
+    <ic:ICDelayBehavior/>
 </UXML>

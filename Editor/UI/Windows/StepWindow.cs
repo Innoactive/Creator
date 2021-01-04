@@ -19,6 +19,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
     internal class StepWindow : EditorWindow
     {
 
+
         private const int border = 10;
 
         private IStep step;
@@ -49,6 +50,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             instance.Repaint();
         }
 
+
         private void OnEnable()
         {
             EditorSceneManager.sceneClosing += OnSceneClosed;
@@ -56,11 +58,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
                
             root = rootVisualElement;
 
-
+            //load the main visual tree containing all elements which do not need to be dynamically loaded, e.g. step name, descriptiong, the tabs
             inpectorVisualTree = (VisualTreeAsset)Resources.Load("UI/Inspector_Main");
             inpectorVisualTree.CloneTree(root);
-
-            
 
             //load all style files required for this windows here.
             style = (StyleSheet)Resources.Load("UI/ICStepInspectorStyle");
@@ -69,23 +69,12 @@ namespace Innoactive.CreatorEditor.UI.Windows
             root.styleSheets.Add(style);
             root.styleSheets.Add(behaviorStyle);
 
-            // Queries all the buttons (via type) in our root and passes them
-            // in the SetupButton method.
-            var toolButtons = root.Query<Button>();
-            var label = root.Query<Label>();
-            //label.ForEach(SetupLabel);
-            //toolButtons.ForEach(SetupButton);
-
-            var mBehavior = new Behavior();
-            mBehavior.draw();
-            root.Add(mBehavior);
-
-            var mOtherBehavior = new Behavior();
-            mOtherBehavior.draw();
-            root.Add(mOtherBehavior);
+            //here I load a delay behavior. Of course this needs to be done in the callback of "add behavior"-button or when loading stored behaviors for steps.
+            VisualTreeAsset DelayBehaviorXML = (VisualTreeAsset)Resources.Load("UI/ICBehaviorDelay");
+            VisualElement DelayBehavior = DelayBehaviorXML.CloneTree();
+            root.Add(DelayBehavior);
 
 
-            
         }
 
       
