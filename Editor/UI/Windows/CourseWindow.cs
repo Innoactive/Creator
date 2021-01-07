@@ -27,7 +27,10 @@ namespace Innoactive.CreatorEditor.UI.Windows
         private ChapterRepresentation chapterRepresentation;
 
         private bool isPanning;
-        private Vector2 mousePosition;
+
+        private float zoomValue = 1f;
+        private const float zoomMin = 0.5f;
+        private const float zoomMax = 2.0f;
 
         /// <summary>
         /// Sets the <paramref name="course"/> to be displayed and edited in this window.
@@ -202,7 +205,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             if (current.type == EventType.MouseDown && current.button == 2)
             {
-                mousePosition = current.mousePosition;
                 isPanning = true;
             }
             else if (current.type == EventType.MouseUp && current.button == 2)
@@ -212,21 +214,58 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             if (isPanning && current.type == EventType.MouseDrag)
             {
-                currentScrollPosition += (mousePosition - current.mousePosition);
-                mousePosition = current.mousePosition;
+                currentScrollPosition -= current.delta / zoomValue;
+                current.Use();
             }
 
-            currentScrollPosition = GUI.BeginScrollView(new Rect(scrollRect.position, scrollRect.size), currentScrollPosition - chapterRepresentation.BoundingBox.min, chapterRepresentation.BoundingBox, true, true) + chapterRepresentation.BoundingBox.min;
+            if (current.type == EventType.ScrollWheel && current.control)
             {
-                Rect controlRect = new Rect(currentScrollPosition, scrollRect.size);
-                chapterRepresentation.HandleEvent(Event.current, controlRect);
+                Vector2 currentMousePositionZoomCoordinates = (current.mousePosition - new Vector2(scrollRect.xMin, scrollRect.yMin)) / zoomValue + currentScrollPosition;
+                float oldZoom = zoomValue;
+                zoomValue += -current.delta.y / 150.0f;
+                zoomValue = Mathf.Clamp(zoomValue, zoomMin, zoomMax);
+                currentScrollPosition += (currentMousePositionZoomCoordinates - currentScrollPosition) - (oldZoom / zoomValue) * (currentMousePositionZoomCoordinates - currentScrollPosition);
 
-                if (Event.current.type == EventType.Used || isPanning)
+                current.Use();
+            }
+
+            Rect clippedArea = ScaleRectSize(scrollRect, 1.0f / zoomValue, new Vector2(scrollRect.xMin, scrollRect.yMin));
+            clippedArea.y += 21f;
+
+            GUI.EndGroup();
+            currentScrollPosition = GUI.BeginScrollView(new Rect(clippedArea.position, clippedArea.size), currentScrollPosition - chapterRepresentation.BoundingBox.min, chapterRepresentation.BoundingBox, true, true, GUIStyle.none, GUIStyle.none) + chapterRepresentation.BoundingBox.min;
+            {
+                Matrix4x4 prevGuiMatrix = GUI.matrix;
+                Matrix4x4 translation = Matrix4x4.TRS(new Vector2(clippedArea.xMin, clippedArea.yMin), Quaternion.identity, Vector3.one);
+                Matrix4x4 scale = Matrix4x4.Scale(new Vector3(zoomValue, zoomValue, 1.0f));
+                GUI.matrix = translation * scale * translation.inverse * GUI.matrix;
+
+                Rect controlRect = new Rect(currentScrollPosition, clippedArea.size);
+                chapterRepresentation.HandleEvent(current, controlRect);
+
+                if (current.type == EventType.Used || isPanning)
                 {
                     Repaint();
                 }
+
+                GUI.matrix = prevGuiMatrix;
             }
             GUI.EndScrollView();
+            GUI.BeginGroup(new Rect(0.0f, 21f, Screen.width, Screen.height));
+        }
+
+        private static Rect ScaleRectSize(Rect rect, float scale, Vector2 pivotPoint)
+        {
+            Rect result = rect;
+            result.x -= pivotPoint.x;
+            result.y -= pivotPoint.y;
+            result.xMin *= scale;
+            result.xMax *= scale;
+            result.yMin *= scale;
+            result.yMax *= scale;
+            result.x += pivotPoint.x;
+            result.y += pivotPoint.y;
+            return result;
         }
 
         private void OnSceneOpened(Scene scene, OpenSceneMode mode)
