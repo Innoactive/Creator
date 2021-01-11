@@ -41,12 +41,12 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
             MetadataWrapper wrapper = (MetadataWrapper)currentValue;
-            // If the drawn object is a ITransition, IBehavior or ICondition the list object will be part of bar.
-            bool isPartOfBar = wrapper.ValueDeclaredType == typeof(ITransition) || wrapper.ValueDeclaredType == typeof(IBehavior) || wrapper.ValueDeclaredType == typeof(ICondition);
+            // If the drawn object is a ITransition, IBehavior or ICondition the list object will be part of a header.
+            bool isPartOfHeader = wrapper.ValueDeclaredType == typeof(ITransition) || wrapper.ValueDeclaredType == typeof(IBehavior) || wrapper.ValueDeclaredType == typeof(ICondition);
 
             if (wrapper.Metadata.ContainsKey(reorderableName))
             {
-                return DrawReorderable(rect, wrapper, changeValueCallback, label, isPartOfBar);
+                return DrawReorderable(rect, wrapper, changeValueCallback, label, isPartOfHeader);
             }
 
             if (wrapper.Metadata.ContainsKey(separatedName))
@@ -56,12 +56,12 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             if (wrapper.Metadata.ContainsKey(deletableName))
             {
-                return DrawDeletable(rect, wrapper, changeValueCallback, label, isPartOfBar);
+                return DrawDeletable(rect, wrapper, changeValueCallback, label, isPartOfHeader);
             }
 
             if (wrapper.Metadata.ContainsKey(foldableName))
             {
-                return DrawFoldable(rect, wrapper, changeValueCallback, label, isPartOfBar);
+                return DrawFoldable(rect, wrapper, changeValueCallback, label, isPartOfHeader);
             }
 
             if (wrapper.Metadata.ContainsKey(drawIsBlockingToggleName))
@@ -108,14 +108,14 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             return valueDrawer.GetLabel(wrapper.Value, wrapper.ValueDeclaredType);
         }
 
-        private GUIStyle GetStyle(bool isProperBar = false)
+        private GUIStyle GetStyle(bool isPartOfHeader = false)
         {
             GUIStyle style = new GUIStyle(GUI.skin.button)
             {
                 fontStyle = FontStyle.Bold
             };
 
-            if (isProperBar)
+            if (isPartOfHeader)
             {
                 Texture2D normal = new Texture2D(1, 1);
                 normal.SetPixels(new Color[]{ new Color(1, 1, 1, 0)  });
@@ -133,13 +133,13 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             return style;
         }
 
-        private Rect DrawReorderable(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label, bool isProperBar)
+        private Rect DrawReorderable(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label, bool isPartOfHeader)
         {
             rect = DrawRecursively(rect, wrapper, reorderableName, changeValueCallback, label);
 
             Vector2 buttonSize = new Vector2(EditorGUIUtility.singleLineHeight + 3f, EditorDrawingHelper.SingleLineHeight);
 
-            GUIStyle style = GetStyle(isProperBar);
+            GUIStyle style = GetStyle(isPartOfHeader);
 
             GUI.enabled = ((ReorderableElementMetadata)wrapper.Metadata[reorderableName]).IsLast == false;
             if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 2 - 0.1f, rect.y + 1, buttonSize.x, buttonSize.y), arrowDownIcon.Texture, style))
@@ -198,13 +198,13 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             return rect;
         }
 
-        private Rect DrawDeletable(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label, bool isPartOfBar)
+        private Rect DrawDeletable(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label, bool isPartOfHeader)
         {
             rect = DrawRecursively(rect, wrapper, deletableName, changeValueCallback, label);
 
             Vector2 buttonSize = new Vector2(EditorGUIUtility.singleLineHeight + 3, EditorDrawingHelper.SingleLineHeight);
 
-            GUIStyle style = GetStyle(isPartOfBar);
+            GUIStyle style = GetStyle(isPartOfHeader);
 
             if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x, rect.y + 1, buttonSize.x, buttonSize.y), deleteIcon.Texture, style))
             {
@@ -225,7 +225,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             return rect;
         }
 
-        private Rect DrawFoldable(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label, bool isProperBar)
+        private Rect DrawFoldable(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label, bool isPartOfHeader)
         {
             if (wrapper.Metadata[foldableName] == null)
             {
@@ -249,7 +249,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             Rect foldoutRect = new Rect(rect.x, rect.y, rect.width, EditorDrawingHelper.HeaderLineHeight);
 
-            if (isProperBar)
+            if (isPartOfHeader)
             {
                 EditorGUI.DrawRect(new Rect(0, foldoutRect.y, foldoutRect.width + foldoutRect.x + 8, foldoutRect.height), new Color(62f / 256f, 62f / 256f, 62f / 256f));
                 EditorGUI.DrawRect(new Rect(0, foldoutRect.y, foldoutRect.width + foldoutRect.x + 8, 1), new Color(26f / 256f, 26f / 256f, 26f / 256f));
