@@ -3,7 +3,6 @@ using UnityEditor;
 using UnityEngine;
 using Innoactive.CreatorEditor;
 
-
 namespace Innoactive.Creator.Core
 {
     internal class CourseWindowFixedOverlay : IEditorGraphicDrawer
@@ -22,7 +21,7 @@ namespace Innoactive.Creator.Core
         public void Draw(Rect windowRect)
         {
             IChapter chapter = GlobalEditorHandler.GetCurrentChapter();
-            if(c != null && (c.Data.FirstStep == null && c.Data.Steps.Count == 0))
+            if(chapter != null && (chapter.Data.FirstStep == null && chapter.Data.Steps.Count == 0))
             {
                 GUIStyle style = new GUIStyle(EditorStyles.label);
                 style.normal.textColor = new Color(1, 1, 1, 0.70f);
