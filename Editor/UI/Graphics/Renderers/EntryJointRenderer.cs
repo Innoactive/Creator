@@ -14,21 +14,9 @@ namespace Innoactive.CreatorEditor.UI.Graphics
 
         public override void Draw()
         {
-            GUI.color = CurrentColor;
-            Rect iconRect = new Rect(Owner.Position.x - iconSize / 2f, Owner.Position.y - iconSize / 2f, iconSize, iconSize);
-
             EditorDrawingHelper.DrawCircle(Owner.Position, Owner.BoundingBox.width / 4f, CurrentColor);
-
-            GUIStyle labelStyle = new GUIStyle
-            {
-                alignment = TextAnchor.MiddleCenter,
-                normal = { textColor = TextColor },
-                wordWrap = false,
-            };
-
-            GUI.color = Color.gray;
-            GUI.DrawTexture(iconRect, ingoingIcon.Texture);
-            GUI.color = CurrentColor;
+            Rect iconRect = new Rect(Owner.Position.x - iconSize / 2f, Owner.Position.y - iconSize / 2f, iconSize, iconSize);
+            EditorDrawingHelper.DrawTexture(iconRect, ingoingIcon.Texture, Color.gray);
         }
 
         public override Color NormalColor
