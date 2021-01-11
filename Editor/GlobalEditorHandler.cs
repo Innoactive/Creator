@@ -59,6 +59,14 @@ namespace Innoactive.CreatorEditor
         }
 
         /// <summary>
+        /// Returns the current active course, can be null.
+        /// </summary>
+        internal static IChapter GetCurrentChapter()
+        {
+            return strategy.CurrentChapter;
+        }
+
+        /// <summary>
         /// Notifies selected <see cref="IEditingStrategy"/> when a new <see cref="CourseWindow"/> was just opened.
         /// </summary>
         internal static void CourseWindowOpened(CourseWindow window)
@@ -96,6 +104,11 @@ namespace Innoactive.CreatorEditor
         internal static void SetCurrentCourse(string courseName)
         {
             strategy.HandleCurrentCourseChanged(courseName);
+        }
+
+        internal static void SetCurrentChapter(IChapter chapter)
+        {
+            strategy.HandleCurrentChapterChanged(chapter);
         }
 
         /// <summary>
