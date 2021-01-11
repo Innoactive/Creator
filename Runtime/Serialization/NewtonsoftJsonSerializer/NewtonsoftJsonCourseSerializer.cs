@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Boo.Lang.Runtime;
 using Innoactive.Creator.Core.UI.Drawers.Metadata;
 using Innoactive.Creator.Core.Utils;
 using Newtonsoft.Json;
@@ -92,6 +93,15 @@ namespace Innoactive.Creator.Core.Serialization.NewtonsoftJson
         /// <inheritdoc/>
         public virtual ICourse CourseFromByteArray(byte[] data)
         {
+            JObject dataObject = JsonConvert.DeserializeObject<JObject>(new UTF8Encoding().GetString(data), CourseSerializerSettings);
+
+            // Check if course was serialized with version 1
+            int version = dataObject.GetValue("$serializerVersion").ToObject<int>();
+            if (version != 1)
+            {
+                throw new RuntimeException($"The loaded course is serialized with a serializer version {version}, which in compatible with this serializer.");
+            }
+
             return Deserialize<ICourse>(data, CourseSerializerSettings);
         }
 

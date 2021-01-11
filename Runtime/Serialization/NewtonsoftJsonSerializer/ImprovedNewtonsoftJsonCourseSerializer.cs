@@ -102,14 +102,11 @@ namespace Innoactive.Creator.Core.Serialization
                 [DataMember]
                 public int PositionIndex = -1;
 
-                private IData data;
-                private IStepData data1;
+                IData IDataOwner.Data { get; } = null;
 
-                IData IDataOwner.Data => data;
+                IStepData IDataOwner<IStepData>.Data { get; } = null;
 
-                IStepData IDataOwner<IStepData>.Data => data1;
-
-                public ILifeCycle LifeCycle { get; }
+                public ILifeCycle LifeCycle { get; } = null;
 
                 public IProcess GetActivatingProcess()
                 {
