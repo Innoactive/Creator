@@ -512,6 +512,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         public void SetChapter(IChapter chapter)
         {
+            if (chapter != GlobalEditorHandler.GetCurrentChapter())
+            {
+                GlobalEditorHandler.SetCurrentChapter(chapter);
+            }
+
             CurrentChapter = chapter;
 
             Graphics.Reset();

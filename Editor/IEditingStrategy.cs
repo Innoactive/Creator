@@ -13,6 +13,8 @@ namespace Innoactive.CreatorEditor
         /// </summary>
         ICourse CurrentCourse { get; }
 
+        IChapter CurrentChapter { get; }
+
         /// <summary>
         /// Invoked when a new <see cref="CourseWindow"/> was just opened.
         /// </summary>
@@ -62,6 +64,11 @@ namespace Innoactive.CreatorEditor
         /// Invoked when a designer chooses a <see cref="IStep"/> to edit.
         /// </summary>
         void HandleCurrentStepChanged(IStep step);
+
+        /// <summary>
+        /// Invoked when the chapter changes, can be null.
+        /// </summary>
+        void HandleCurrentChapterChanged(IChapter chapter);
 
         /// <summary>
         ///  Invoked when the project is going to be unloaded (when assemblies are unloaded, when user starts or stop runtime, when scripts were modified).
