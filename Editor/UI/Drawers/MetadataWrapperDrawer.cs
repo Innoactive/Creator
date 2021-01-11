@@ -41,11 +41,12 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
             MetadataWrapper wrapper = (MetadataWrapper)currentValue;
-            bool isProperBar = wrapper.ValueDeclaredType == typeof(ITransition) || wrapper.ValueDeclaredType == typeof(IBehavior) || wrapper.ValueDeclaredType == typeof(ICondition);
+            // If the drawn object is a ITransition, IBehavior or ICondition the list object will be part of bar.
+            bool isPartOfBar = wrapper.ValueDeclaredType == typeof(ITransition) || wrapper.ValueDeclaredType == typeof(IBehavior) || wrapper.ValueDeclaredType == typeof(ICondition);
 
             if (wrapper.Metadata.ContainsKey(reorderableName))
             {
-                return DrawReorderable(rect, wrapper, changeValueCallback, label, isProperBar);
+                return DrawReorderable(rect, wrapper, changeValueCallback, label, isPartOfBar);
             }
 
             if (wrapper.Metadata.ContainsKey(separatedName))
@@ -55,12 +56,12 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             if (wrapper.Metadata.ContainsKey(deletableName))
             {
-                return DrawDeletable(rect, wrapper, changeValueCallback, label, isProperBar);
+                return DrawDeletable(rect, wrapper, changeValueCallback, label, isPartOfBar);
             }
 
             if (wrapper.Metadata.ContainsKey(foldableName))
             {
-                return DrawFoldable(rect, wrapper, changeValueCallback, label, isProperBar);
+                return DrawFoldable(rect, wrapper, changeValueCallback, label, isPartOfBar);
             }
 
             if (wrapper.Metadata.ContainsKey(drawIsBlockingToggleName))
@@ -197,13 +198,13 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             return rect;
         }
 
-        private Rect DrawDeletable(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label, bool isBar)
+        private Rect DrawDeletable(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label, bool isPartOfBar)
         {
             rect = DrawRecursively(rect, wrapper, deletableName, changeValueCallback, label);
 
             Vector2 buttonSize = new Vector2(EditorGUIUtility.singleLineHeight + 3, EditorDrawingHelper.SingleLineHeight);
 
-            GUIStyle style = GetStyle(isBar);
+            GUIStyle style = GetStyle(isPartOfBar);
 
             if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x, rect.y + 1, buttonSize.x, buttonSize.y), deleteIcon.Texture, style))
             {
