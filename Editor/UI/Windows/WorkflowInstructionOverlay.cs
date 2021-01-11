@@ -5,13 +5,16 @@ using Innoactive.CreatorEditor;
 
 namespace Innoactive.Creator.Core
 {
-    internal class CourseWindowFixedOverlay : IEditorGraphicDrawer
+    internal class WorkflowInstructionOverlay : IEditorGraphicDrawer
     {
         public int Priority { get; } = 100;
 
         private Texture2D backgroundTexture;
 
-        public CourseWindowFixedOverlay()
+        private readonly float width = 420;
+        private readonly float height = 40;
+
+        public WorkflowInstructionOverlay()
         {
             backgroundTexture = new Texture2D(1, 1);
             backgroundTexture.SetPixel(0, 0, new Color(0, 0, 0, 0.3f));
@@ -31,8 +34,10 @@ namespace Innoactive.Creator.Core
                 GUIStyle backgroundStyle = new GUIStyle(GUI.skin.box);
                 backgroundStyle.normal.background = backgroundTexture;
 
-                GUI.Box(new Rect(windowRect.x + (windowRect.width / 2) - 260, windowRect.y + (windowRect.height / 2) - 20, 420, 40), "", backgroundStyle);
-                GUI.Label(new Rect(windowRect.x + (windowRect.width / 2) - 260, windowRect.y + (windowRect.height / 2 - 20), 420, 40), "Right-click to create new step", style);
+                Rect positionalRect = new Rect(windowRect.x + (windowRect.width / 2) - (width / 2),  windowRect.y + (windowRect.height / 2) - (height / 2), width, height);
+
+                GUI.Box(positionalRect, "", backgroundStyle);
+                GUI.Label(positionalRect, "Right-click to create new step", style);
             }
         }
     }
