@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics
     {
         private static int LabelWidth = 30;
         private static int LabelHeight = 50;
-    
+
         /// <inheritdoc />
         public override Color NormalColor
         {
