@@ -6,6 +6,10 @@ using Innoactive.CreatorPro.Account;
 
 namespace Innoactive.Creator.Core
 {
+    /// <summary>
+    /// Overlay for the workflow editor showing basic instructions on how to get started,
+    /// e.g. how to create a first step.
+    /// </summary>
     internal class WorkflowInstructionOverlay : IEditorGraphicDrawer
     {
         public int Priority { get; } = 100;
@@ -22,8 +26,10 @@ namespace Innoactive.Creator.Core
             backgroundTexture.Apply();
         }
 
+        /// <inheritdoc />
         public void Draw(Rect windowRect)
         {
+            // Do not show when user is not logged in.
             if (UserAccount.IsAccountLoggedIn() == false)
             {
                 return;
