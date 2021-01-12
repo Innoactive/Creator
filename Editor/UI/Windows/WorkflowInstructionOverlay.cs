@@ -2,7 +2,9 @@ using Innoactive.CreatorEditor.UI;
 using UnityEditor;
 using UnityEngine;
 using Innoactive.CreatorEditor;
+#if CREATOR_PRO
 using Innoactive.CreatorPro.Account;
+#endif
 
 namespace Innoactive.Creator.Core
 {
@@ -29,11 +31,13 @@ namespace Innoactive.Creator.Core
         /// <inheritdoc />
         public void Draw(Rect windowRect)
         {
+#if CREATOR_PRO
             // Do not show when user is not logged in.
             if (UserAccount.IsAccountLoggedIn() == false)
             {
                 return;
             }
+#endif
 
             IChapter chapter = GlobalEditorHandler.GetCurrentChapter();
             if(chapter != null && (chapter.Data.FirstStep == null && chapter.Data.Steps.Count == 0))
