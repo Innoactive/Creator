@@ -2,6 +2,7 @@ using Innoactive.CreatorEditor.UI;
 using UnityEditor;
 using UnityEngine;
 using Innoactive.CreatorEditor;
+using Innoactive.CreatorPro.Account;
 
 namespace Innoactive.Creator.Core
 {
@@ -23,6 +24,11 @@ namespace Innoactive.Creator.Core
 
         public void Draw(Rect windowRect)
         {
+            if (UserAccount.IsAccountLoggedIn() == false)
+            {
+                return;
+            }
+
             IChapter chapter = GlobalEditorHandler.GetCurrentChapter();
             if(chapter != null && (chapter.Data.FirstStep == null && chapter.Data.Steps.Count == 0))
             {
