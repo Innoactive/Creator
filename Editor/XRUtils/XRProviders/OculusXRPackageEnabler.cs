@@ -1,4 +1,4 @@
-﻿#if CREATOR_OCULUS
+﻿#if UNITY_XR_MANAGEMENT && OCULUS_XR
 namespace Innoactive.CreatorEditor.XRUtils
 {
     /// <summary>

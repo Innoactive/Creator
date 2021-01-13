@@ -1,10 +1,10 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using Innoactive.CreatorEditor.XRUtils;
 using Innoactive.CreatorEditor.Analytics;
+using UnityEditor;
 
 namespace Innoactive.CreatorEditor.UI.Wizard
 {
@@ -39,6 +39,9 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         [SerializeField]
         private string otherHardwareText = null;
 
+        [SerializeField]
+        private bool wasApplied = false;
+
         public XRSDKSetupPage() : base("XR Hardware")
         {
 
@@ -47,6 +50,8 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         /// <inheritdoc/>
         public override void Draw(Rect window)
         {
+            wasApplied = false;
+
             GUILayout.BeginArea(window);
             {
                 GUILayout.Label("VR Hardware Setup", CreatorEditorStyles.Title);
@@ -66,10 +71,9 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             GUILayout.EndArea();
         }
 
-        /// <inheritdoc/>
         public override void Apply()
         {
-
+            wasApplied = true;
         }
 
         /// <inheritdoc/>
@@ -81,7 +85,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         /// <inheritdoc/>
         public override void Closing(bool isCompleted)
         {
-            if (isCompleted)
+            if (isCompleted && wasApplied)
             {
                 AnalyticsEvent hardwareSelectedEvent = new AnalyticsEvent
                 {

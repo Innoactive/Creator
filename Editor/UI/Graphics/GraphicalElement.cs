@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
     /// <summary>
-    /// Base class for all views in the workflow editor.
+    /// Base class for all views in the Workflow window.
     /// </summary>
     internal abstract class GraphicalElement
     {

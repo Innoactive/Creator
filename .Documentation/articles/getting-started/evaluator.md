@@ -59,9 +59,9 @@ All `Advanced` scenes use a custom trainer's overlay and wait for you to click a
 
 If you never used Unity before, you can learn basics [here](https://docs.unity3d.com/Manual/UsingTheEditor.html).
 
-To open a training course for the current scene, select the `[TRAINING_CONFIGURATION]` game object in the [Hierarchy](https://docs.unity3d.com/Manual/Hierarchy.html) view and click `Open course in Workflow Editor`. It will open the Workflow Editor window.
+To open a training course for the current scene, select the `[TRAINING_CONFIGURATION]` game object in the [Hierarchy](https://docs.unity3d.com/Manual/Hierarchy.html) view and click `Open course in Workflow window`. It will open the Workflow window.
 
-![How to open a tranining course in the Workflow Editor](../images/open-training-course.png "Screenshot of the Hierarchy and Inspector views which supports the text above.")
+![How to open a tranining course in the Workflow window](../images/open-training-course.png "Screenshot of the Hierarchy and Inspector views which supports the text above.")
 
 ### Explore Further
 

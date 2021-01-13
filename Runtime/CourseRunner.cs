@@ -103,7 +103,7 @@ namespace Innoactive.Creator.Core
         /// <param name="course">The course which should be run.</param>
         public static void Initialize(ICourse course)
         {
-            instance = new GameObject("[TRAINING_RUNNER]").AddComponent<CourseRunnerInstance>();
+            instance = instance == null ? new GameObject("[TRAINING_RUNNER]").AddComponent<CourseRunnerInstance>() : instance;
             instance.course = course;
         }
 

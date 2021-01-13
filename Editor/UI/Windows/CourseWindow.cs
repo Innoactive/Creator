@@ -1,12 +1,16 @@
-﻿using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.UndoRedo;
 using UnityEditor;
 using UnityEngine;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
+using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.UndoRedo;
+using Innoactive.Creator.Core.Configuration;
+using Innoactive.CreatorEditor.Configuration;
 
 namespace Innoactive.CreatorEditor.UI.Windows
 {
     /// <summary>
-    /// Workflow Editor window.
+    /// This class draws the Workflow window..
     /// </summary>
     public class CourseWindow : EditorWindow
     {
@@ -21,6 +25,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
         private TrainingMenuView chapterMenu;
 
         private ChapterRepresentation chapterRepresentation;
+
+        private bool isPanning;
+        private Vector2 mousePosition;
 
         /// <summary>
         /// Sets the <paramref name="course"/> to be displayed and edited in this window.
@@ -87,7 +94,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             if (chapterRepresentation == null)
             {
+ #if CREATOR_PRO
+                chapterRepresentation = new ProChapterRepresentation();
+ #else
                 chapterRepresentation = new ChapterRepresentation();
+ #endif
                 chapterRepresentation.Graphics.Canvas.PointerDrag += (o, eventArgs) => currentScrollPosition -= eventArgs.PointerDelta;
             }
 
@@ -96,12 +107,21 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 titleIcon = new EditorIcon("icon_training_editor");
             }
 
+            EditorSceneManager.newSceneCreated += OnNewScene;
+            EditorSceneManager.sceneOpened += OnSceneOpened;
             GlobalEditorHandler.CourseWindowOpened(this);
+        }
+
+        private void OnDestroy()
+        {
+            EditorSceneManager.newSceneCreated -= OnNewScene;
+            EditorSceneManager.sceneOpened -= OnSceneOpened;
+            GlobalEditorHandler.CourseWindowClosed(this);
         }
 
         private void SetTabName()
         {
-            titleContent = new GUIContent("Course Editor", titleIcon.Texture);
+            titleContent = new GUIContent("Workflow", titleIcon.Texture);
         }
 
         private void OnGUI()
@@ -123,9 +143,12 @@ namespace Innoactive.CreatorEditor.UI.Windows
             DrawChapterWorkflow(scrollRect);
         }
 
-        private void OnDestroy()
+        private void OnFocus()
         {
-            GlobalEditorHandler.CourseWindowClosed(this);
+            if (EditorConfigurator.Instance.Validation.IsAllowedToValidate() && activeCourse != null)
+            {
+                EditorConfigurator.Instance.Validation.Validate(activeCourse.Data, GlobalEditorHandler.GetCurrentCourse());
+            }
         }
 
         private void HandleEditorCommands(Vector2 centerViewpointOnCanvas)
@@ -175,17 +198,48 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void DrawChapterWorkflow(Rect scrollRect)
         {
+            Event current = Event.current;
+
+            if (current.type == EventType.MouseDown && current.button == 2)
+            {
+                mousePosition = current.mousePosition;
+                isPanning = true;
+            }
+            else if (current.type == EventType.MouseUp && current.button == 2)
+            {
+                isPanning = false;
+            }
+
+            if (isPanning && current.type == EventType.MouseDrag)
+            {
+                currentScrollPosition += (mousePosition - current.mousePosition);
+                mousePosition = current.mousePosition;
+            }
+
             currentScrollPosition = GUI.BeginScrollView(new Rect(scrollRect.position, scrollRect.size), currentScrollPosition - chapterRepresentation.BoundingBox.min, chapterRepresentation.BoundingBox, true, true) + chapterRepresentation.BoundingBox.min;
             {
                 Rect controlRect = new Rect(currentScrollPosition, scrollRect.size);
                 chapterRepresentation.HandleEvent(Event.current, controlRect);
 
-                if (Event.current.type == EventType.Used)
+                if (Event.current.type == EventType.Used || isPanning)
                 {
                     Repaint();
                 }
             }
             GUI.EndScrollView();
+        }
+
+        private void OnSceneOpened(Scene scene, OpenSceneMode mode)
+        {
+            if (RuntimeConfigurator.Exists == false)
+            {
+                Close();
+            }
+        }
+
+        private void OnNewScene(Scene scene, NewSceneSetup setup, NewSceneMode mode)
+        {
+            Close();
         }
     }
 }

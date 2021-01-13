@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.Configuration;
 using Innoactive.CreatorEditor.UI.Graphics;
 using Innoactive.CreatorEditor.UndoRedo;
 using Innoactive.CreatorEditor.Utils;
@@ -13,13 +14,13 @@ namespace Innoactive.CreatorEditor.UI.Windows
     {
         public EditorGraphics Graphics { get; private set; }
 
-        private IChapter currentChapter;
+        protected IChapter CurrentChapter { get; set; }
         private StepNode lastSelectedStepNode;
 
-        private WorkflowEditorGrid grid;
+        protected WorkflowEditorGrid Grid { get; set; }
         private float gridCellSize = 10f;
 
-        private bool isUpdated = false;
+        protected bool IsUpdated { get; set; }
 
         public Rect BoundingBox
         {
@@ -92,9 +93,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void DeleteStepWithUndo(IStep step, StepNode ownerNode)
         {
-            IList<ITransition> incomingTransitions = currentChapter.Data.Steps.SelectMany(s => s.Data.Transitions.Data.Transitions).Where(transition => transition.Data.TargetStep == step).ToList();
+            IList<ITransition> incomingTransitions = CurrentChapter.Data.Steps.SelectMany(s => s.Data.Transitions.Data.Transitions).Where(transition => transition.Data.TargetStep == step).ToList();
 
-            bool wasFirstStep = step == currentChapter.Data.FirstStep;
+            bool wasFirstStep = step == CurrentChapter.Data.FirstStep;
 
             RevertableChangesHandler.Do(new CourseCommand(
                 () =>
@@ -108,7 +109,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
                     if (wasFirstStep)
                     {
-                        currentChapter.Data.FirstStep = null;
+                        CurrentChapter.Data.FirstStep = null;
                     }
                 },
                 () =>
@@ -117,7 +118,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
                     if (wasFirstStep)
                     {
-                        currentChapter.Data.FirstStep = step;
+                        CurrentChapter.Data.FirstStep = step;
                     }
 
                     foreach (ITransition transition in incomingTransitions)
@@ -132,7 +133,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private StepNode CreateNewStepNode(IStep step)
         {
-            StepNode node = new StepNode(Graphics, step);
+            StepNode node = new StepNode(Graphics, CurrentChapter, step);
 
             node.GraphicalEventHandler.ContextClick += (sender, args) =>
             {
@@ -189,7 +190,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 ));
             };
 
-            if (currentChapter.ChapterMetadata.LastSelectedStep == step)
+            if (CurrentChapter.ChapterMetadata.LastSelectedStep == step)
             {
                 SelectStepNode(node);
             }
@@ -209,7 +210,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             }
 
             lastSelectedStepNode = stepNode;
-            currentChapter.ChapterMetadata.LastSelectedStep = step;
+            CurrentChapter.ChapterMetadata.LastSelectedStep = step;
 
             if (stepNode != null)
             {
@@ -228,7 +229,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void MarkToRefresh()
         {
-            isUpdated = false;
+            IsUpdated = false;
         }
 
         private EntryNode CreateEntryNode(IChapter chapter)
@@ -437,19 +438,19 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void DeleteStep(IStep step)
         {
-            if (currentChapter.ChapterMetadata.LastSelectedStep == step)
+            if (CurrentChapter.ChapterMetadata.LastSelectedStep == step)
             {
-                currentChapter.ChapterMetadata.LastSelectedStep = null;
+                CurrentChapter.ChapterMetadata.LastSelectedStep = null;
                 GlobalEditorHandler.ChangeCurrentStep(null);
             }
 
-            currentChapter.Data.Steps.Remove(step);
+            CurrentChapter.Data.Steps.Remove(step);
             MarkToRefresh();
         }
 
         private void AddStep(IStep step)
         {
-            currentChapter.Data.Steps.Add(step);
+            CurrentChapter.Data.Steps.Add(step);
 
             MarkToRefresh();
         }
@@ -465,7 +466,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
             RevertableChangesHandler.Do(new CourseCommand(() =>
                 {
                     AddStep(step);
-                    currentChapter.ChapterMetadata.LastSelectedStep = step;
+                    CurrentChapter.ChapterMetadata.LastSelectedStep = step;
                 },
                 () =>
                 {
@@ -502,11 +503,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         public void SetChapter(IChapter chapter)
         {
-            currentChapter = chapter;
+            CurrentChapter = chapter;
 
             Graphics.Reset();
 
-            grid = new WorkflowEditorGrid(Graphics, gridCellSize);
+            Grid = new WorkflowEditorGrid(Graphics, gridCellSize);
 
             Graphics.Canvas.ContextClick += HandleCanvasContextClick;
 
@@ -515,19 +516,24 @@ namespace Innoactive.CreatorEditor.UI.Windows
             SetupTransitions(chapter, entryNode, stepNodes);
 
             Graphics.CalculateBoundingBox();
+
+            if (EditorConfigurator.Instance.Validation.IsAllowedToValidate())
+            {
+                EditorConfigurator.Instance.Validation.Validate(CurrentChapter.Data, GlobalEditorHandler.GetCurrentCourse(), null);
+            }
         }
 
-        public void HandleEvent(Event current, Rect controlRect)
+        public virtual void HandleEvent(Event current, Rect windowRect)
         {
-            if (isUpdated == false)
+            if (IsUpdated == false)
             {
-                SetChapter(currentChapter);
-                isUpdated = true;
+                SetChapter(CurrentChapter);
+                IsUpdated = true;
             }
 
-            grid.SetSize(controlRect);
+            Grid.SetSize(windowRect);
 
-            Graphics.HandleEvent(current, controlRect);
+            Graphics.HandleEvent(current, windowRect);
         }
 
         private bool CopyStep(IStep step)
@@ -554,7 +560,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
         /// <returns>True if successful.</returns>
         public bool CopySelected()
         {
-            IStep step = currentChapter.ChapterMetadata.LastSelectedStep;
+            IStep step = CurrentChapter.ChapterMetadata.LastSelectedStep;
             return CopyStep(step);
         }
 
@@ -575,7 +581,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
         /// <returns>True if successful.</returns>
         public bool CutSelected()
         {
-            IStep step = currentChapter.ChapterMetadata.LastSelectedStep;
+            IStep step = CurrentChapter.ChapterMetadata.LastSelectedStep;
             return CutStep(step, lastSelectedStepNode);
         }
 
@@ -615,7 +621,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
         /// <returns>True if successful.</returns>
         public bool DeleteSelected()
         {
-            IStep step = currentChapter.ChapterMetadata.LastSelectedStep;
+            IStep step = CurrentChapter.ChapterMetadata.LastSelectedStep;
             if (step == null)
             {
                 return false;

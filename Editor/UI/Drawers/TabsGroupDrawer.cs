@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Innoactive.Creator.Core.Tabs;
+using Innoactive.CreatorEditor.Tabs;
 using UnityEditor;
 using UnityEngine;
 
@@ -40,7 +40,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             GUIContent[] labels = tabsGroup.Tabs.Select(tab => tab.Label).ToArray();
 
             int oldSelected = tabsGroup.Selected;
-
             int selected = GUI.Toolbar(rect, oldSelected, labels);
 
             if (selected != oldSelected)
@@ -50,6 +49,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                         tabsGroup.Tabs[oldSelected].OnUnselect();
                         tabsGroup.Tabs[selected].OnSelected();
                         tabsGroup.Selected = selected;
+                        EditorUtils.ResetKeyboardElementFocus();
                         return tabsGroup;
                     },
                     () =>
@@ -57,6 +57,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                         tabsGroup.Tabs[selected].OnUnselect();
                         tabsGroup.Tabs[oldSelected].OnSelected();
                         tabsGroup.Selected = oldSelected;
+                        EditorUtils.ResetKeyboardElementFocus();
                         return tabsGroup;
                     },
                     changeValueCallback);

@@ -10,4 +10,4 @@ The Innoactive Creator collects anonymous usage data if you are a user of the Un
 
 Innoactive also uses the data to tune the Unity plugin for users. Innoactive is commited to the responsible collection and use of user data - and enhancing privacy safeguards.
 
-You can at any time change the settings of the collection of user data in Unity in the Analytics Settings (Innoactive > Creator > Windows > Analytics Settings).
+You can at any time change the settings of the collection of user data in Unity in the Analytics Settings (Innoactive > Settings > Analytics Settings).

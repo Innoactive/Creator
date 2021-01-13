@@ -27,6 +27,8 @@ namespace Innoactive.CreatorEditor.Analytics
 
         public abstract void Send(AnalyticsEvent data);
 
+        public abstract void SendSessionStart();
+
         protected string GetLanguage()
         {
             return CultureInfo.InstalledUICulture.Name;

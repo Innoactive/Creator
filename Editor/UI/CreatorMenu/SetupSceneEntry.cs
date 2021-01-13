@@ -8,7 +8,7 @@ namespace Innoactive.CreatorEditor.CreatorMenu
         /// <summary>
         /// Setup the current unity scene to be a functioning training scene.
         /// </summary>
-        [MenuItem("Innoactive/Creator/Setup Training Scene", false, 16)]
+        [MenuItem("Innoactive/Setup Training Scene", false, 16)]
         public static void SetupScene()
         {
             TrainingSceneSetup.Run();

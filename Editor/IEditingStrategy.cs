@@ -9,6 +9,11 @@ namespace Innoactive.CreatorEditor
     internal interface IEditingStrategy
     {
         /// <summary>
+        /// Returns the current course.
+        /// </summary>
+        ICourse CurrentCourse { get; }
+
+        /// <summary>
         /// Invoked when a new <see cref="CourseWindow"/> was just opened.
         /// </summary>
         void HandleNewCourseWindow(CourseWindow window);

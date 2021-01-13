@@ -60,9 +60,16 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             }
             GUI.enabled = true;
 
-            foreach (LockableProperty property in sceneObject.Properties.Where(property => property is LockableProperty))
+            try
             {
-                currentPosition = DrawProperty(currentPosition, property);
+                foreach (LockableProperty property in sceneObject.Properties.Where(property => property is LockableProperty))
+                {
+                    currentPosition = DrawProperty(currentPosition, property);
+                }
+            }
+            catch (MissingReferenceException)
+            {
+                // Swallow this exception, will be thrown in frames between exiting playmode and having setup the object reference library.
             }
 
             return currentPosition;

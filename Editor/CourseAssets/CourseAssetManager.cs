@@ -20,7 +20,7 @@ namespace Innoactive.CreatorEditor
         {
             if (CourseAssetUtils.DoesCourseAssetExist(courseName))
             {
-                Directory.Delete(CourseAssetUtils.GetCourseAssetDirectory(courseName));
+                Directory.Delete(CourseAssetUtils.GetCourseAssetDirectory(courseName), true);
                 AssetDatabase.Refresh();
             }
         }

@@ -2,8 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.Behaviors;
+using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.Utils;
+using Innoactive.CreatorEditor.Configuration;
+using Innoactive.CreatorEditor.CourseValidation;
 using UnityEditor;
 using UnityEngine;
 
@@ -53,6 +58,8 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
                     GUIContent displayName = memberDrawer.GetLabel(closuredMemberInfo, currentValue);
 
+                    CheckValidationForValue(currentValue, closuredMemberInfo, displayName);
+
                     height += memberDrawer.Draw(nextPosition, memberValue, (value) =>
                     {
                         ReflectionUtils.SetValueToPropertyOrField(currentValue, closuredMemberInfo, value);
@@ -63,6 +70,52 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             rect.height = height;
             return rect;
+        }
+
+        protected virtual void CheckValidationForValue(object currentValue, MemberInfo info, GUIContent label)
+        {
+            if (currentValue is IData data && EditorConfigurator.Instance.Validation.IsAllowedToValidate())
+            {
+                List<EditorReportEntry> entries = GetValidationReportsFor(data, info);
+                if (entries.Count > 0)
+                {
+                    AddValidationInformation(label, entries);
+                }
+            }
+        }
+
+        protected virtual GUIContent AddValidationInformation(GUIContent guiContent, List<EditorReportEntry> entries)
+        {
+            guiContent.image = EditorGUIUtility.IconContent("Warning").image;
+            guiContent.tooltip = ValidationTooltipGenerator.CreateTooltip(entries);
+            return guiContent;
+        }
+
+        protected virtual List<EditorReportEntry> GetValidationReports(object value)
+        {
+            if (EditorConfigurator.Instance.Validation.LastReport != null)
+            {
+                if (value is IConditionData conditionData)
+                {
+                    return EditorConfigurator.Instance.Validation.LastReport.GetEntriesFor(conditionData);
+                }
+
+                if (value is IBehaviorData behaviorData)
+                {
+                    return EditorConfigurator.Instance.Validation.LastReport.GetEntriesFor(behaviorData);
+                }
+            }
+
+            return new List<EditorReportEntry>();
+        }
+
+        protected virtual List<EditorReportEntry> GetValidationReportsFor(IData data, MemberInfo memberInfo)
+        {
+            if (EditorConfigurator.Instance.Validation.LastReport != null)
+            {
+                return EditorConfigurator.Instance.Validation.LastReport.GetEntriesFor(data, memberInfo);
+            }
+            return new List<EditorReportEntry>();
         }
 
         /// <summary>
@@ -88,17 +141,17 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
         private float CreateAndDrawMetadataWrapper(Rect rect, object ownerObject, MemberInfo drawnMemberInfo, Action<object> changeValueCallback)
         {
-            PropertyInfo metadataProperty = ownerObject.GetType().GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(property => typeof(Creator.Core.Metadata).IsAssignableFrom(property.PropertyType));
-            FieldInfo metadataField = ownerObject.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(field => typeof(Creator.Core.Metadata).IsAssignableFrom(field.FieldType));
-            Creator.Core.Metadata ownerObjectMetadata = null;
+            PropertyInfo metadataProperty = ownerObject.GetType().GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(property => typeof(Metadata).IsAssignableFrom(property.PropertyType));
+            FieldInfo metadataField = ownerObject.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(field => typeof(Metadata).IsAssignableFrom(field.FieldType));
+            Metadata ownerObjectMetadata = null;
 
             if (metadataProperty != null)
             {
-                ownerObjectMetadata = (Creator.Core.Metadata)metadataProperty.GetValue(ownerObject, null) ?? new Creator.Core.Metadata();
+                ownerObjectMetadata = (Metadata)metadataProperty.GetValue(ownerObject, null) ?? new Metadata();
             }
             else if (metadataField != null)
             {
-                ownerObjectMetadata = (Creator.Core.Metadata)metadataField.GetValue(ownerObject) ?? new Creator.Core.Metadata();
+                ownerObjectMetadata = (Metadata)metadataField.GetValue(ownerObject) ?? new Metadata();
             }
             else
             {
@@ -178,6 +231,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             ITrainingDrawer wrapperDrawer = DrawerLocator.GetDrawerForValue(wrapper, typeof(MetadataWrapper));
 
             GUIContent displayName = memberDrawer.GetLabel(drawnMemberInfo, ownerObject);
+
             return wrapperDrawer.Draw(rect, wrapper, wrapperChangedCallback, displayName).height;
         }
 

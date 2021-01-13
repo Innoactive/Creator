@@ -18,7 +18,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
     {
         private static AllowedMenuItemsWindow window;
 
-        private const string menuPath = "Innoactive/Creator/Developer/Allowed Menu Items Configuration";
+        private const string menuPath = "Innoactive/Developer/Allowed Menu Items Configuration";
 
         private bool isEditUnlocked;
         private static IList<EntityEntry> behaviorList;

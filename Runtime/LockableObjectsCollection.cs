@@ -1,13 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using Innoactive.Creator.Core.Behaviors;
 using Innoactive.Creator.Core.Properties;
 using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.SceneObjects;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 namespace Innoactive.Creator.Core
 {
@@ -33,6 +29,8 @@ namespace Innoactive.Creator.Core
 
         private void CreateSceneObjects()
         {
+            CleanProperties();
+
             foreach (LockablePropertyReference propertyReference in data.ToUnlock)
             {
                 AddSceneObject(propertyReference.Target.Value);
@@ -62,8 +60,15 @@ namespace Innoactive.Creator.Core
         {
             if (SceneObjects.Remove(sceneObject))
             {
-                data.ToUnlock = data.ToUnlock.Where(property => property.GetProperty().SceneObject != sceneObject).ToList();
-                SortSceneObjectList();
+                data.ToUnlock = data.ToUnlock.Where(property =>
+                {
+                    if (property.GetProperty() == null)
+                    {
+                        return false;
+                    }
+
+                    return property.GetProperty().SceneObject != sceneObject;
+                }).ToList();
             }
         }
 
@@ -106,6 +111,11 @@ namespace Innoactive.Creator.Core
         public void Add(LockableProperty property)
         {
             data.ToUnlock = data.ToUnlock.Union(new [] {new LockablePropertyReference(property), }).ToList();
+        }
+
+        private void CleanProperties()
+        {
+            data.ToUnlock = data.ToUnlock.Where(reference => reference.Target.IsEmpty() == false).ToList();
         }
     }
 }

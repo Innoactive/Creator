@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Innoactive.CreatorEditor.UI;
-using Innoactive.CreatorEditor.UI.Graphics;
-using Innoactive.CreatorEditor.UI.Graphics.Renderers;
+﻿using Innoactive.CreatorEditor.UI.Graphics.Renderers;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Graphics
 {
     /// <summary>
-    /// Represents the grid in the background of the chapter within the workflow editor.
+    /// Represents the grid in the background of the chapter within the Workflow window.
     /// </summary>
     internal class WorkflowEditorGrid : Grid
     {

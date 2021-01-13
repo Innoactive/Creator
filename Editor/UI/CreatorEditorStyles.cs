@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEditor;
+using UnityEditor.Graphs;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI
@@ -28,6 +29,24 @@ namespace Innoactive.CreatorEditor.UI
                 }
 
                 return title;
+            }
+        }
+
+        private static GUIStyle titleNoPadding;
+        public static GUIStyle TitleNoPadding
+        {
+            get
+            {
+                if (titleNoPadding == null)
+                {
+                    titleNoPadding = new GUIStyle(EditorStyles.largeLabel);
+                    titleNoPadding.fontSize = 22;
+                    titleNoPadding.fontStyle = FontStyle.Bold;
+                    titleNoPadding.normal.textColor = HighlightTextColor;
+                    titleNoPadding.padding = new RectOffset(BaseIndent, BaseIndent, BaseIndent, BaseIndent);
+                }
+
+                return titleNoPadding;
             }
         }
 
@@ -70,6 +89,26 @@ namespace Innoactive.CreatorEditor.UI
             }
         }
 
+        private static GUIStyle paragraphNoPadding;
+        public static GUIStyle ParagraphNoPadding
+        {
+            get
+            {
+                if (paragraphNoPadding == null)
+                {
+                    paragraphNoPadding = new GUIStyle(GUI.skin.label);
+                    paragraphNoPadding.alignment = TextAnchor.UpperLeft;
+                    paragraphNoPadding.fontSize = 13;
+                    paragraphNoPadding.richText = true;
+                    paragraphNoPadding.clipping = TextClipping.Clip;
+                    paragraphNoPadding.wordWrap = true;
+                    paragraphNoPadding.padding = new RectOffset(BaseIndent, BaseIndent, BaseIndent, BaseIndent);
+                }
+
+                return paragraphNoPadding;
+            }
+        }
+
         private static GUIStyle textField;
         public static GUIStyle TextField
         {
@@ -100,6 +139,23 @@ namespace Innoactive.CreatorEditor.UI
                 }
 
                 return toggle;
+            }
+        }
+
+        private static GUIStyle radioButton;
+        public static GUIStyle RadioButton
+        {
+            get
+            {
+                if (radioButton == null)
+                {
+                    radioButton = new GUIStyle(EditorStyles.radioButton);
+                    radioButton.fontSize = Paragraph.fontSize;
+                    radioButton.padding = new RectOffset((int)(Indent + Indent * 0.75f), BaseIndent, 0, 0); // this only affects the text
+                    radioButton.margin = new RectOffset(Indent, BaseIndent, BaseIndent, BaseIndent); // this affects the position
+                }
+
+                return radioButton;
             }
         }
 
@@ -187,6 +243,21 @@ namespace Innoactive.CreatorEditor.UI
                 }
 
                 return helpBox;
+            }
+        }
+
+        private static GUIStyle button;
+        public static GUIStyle Button
+        {
+            get
+            {
+                if (button == null)
+                {
+                    button = new GUIStyle(GUI.skin.button);
+                    button.margin = new RectOffset(Indent, BaseIndent, BaseIndent, BaseIndent);
+                }
+
+                return button;
             }
         }
 

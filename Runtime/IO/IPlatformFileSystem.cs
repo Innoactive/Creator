@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Innoactive.Creator.Core.IO
 {
     /// <summary>
@@ -8,11 +10,19 @@ namespace Innoactive.Creator.Core.IO
     {
         /// <summary>
         /// Loads a file stored at <paramref name="filePath"/>.
-        /// Returns a `FileNotFoundException` if file does not exist.
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets or the persistent data folder.</remarks>
         /// <returns>The contents of the file into a byte array.</returns>
+        /// <exception cref="FileNotFoundException">Exception thrown if the file does not exist.</exception>
         byte[] Read(string filePath);
+
+        /// <summary>
+        /// Loads a file stored at <paramref name="filePath"/>.
+        /// </summary>
+        /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets or the persistent data folder.</remarks>
+        /// <returns>Returns a `string` with the content of the file.</returns>
+        /// <exception cref="FileNotFoundException">Exception thrown if the file does not exist.</exception>
+        string ReadAllText(string filePath);
 
         /// <summary>
         /// Saves given <paramref name="fileData"/> in provided <paramref name="filePath"/>.
@@ -26,5 +36,15 @@ namespace Innoactive.Creator.Core.IO
         /// </summary>
         /// <remarks><paramref name="filePath"/> must be relative to the StreamingAssets or the platform persistent data folder.</remarks>
         bool Exists(string filePath);
+
+        /// <summary>
+        /// Returns the names of files (including their paths) that match the specified search pattern in the specified directory relative to the Streaming Assets folder.
+        /// </summary>
+        /// <param name="path">The relative path to the Streaming Assets folder. This string is not case-sensitive.</param>
+        /// <param name="searchPattern">
+        /// The search string to match against the names of files in <paramref name="path" />.
+        /// Depending on the platform, this parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions.
+        /// </param>
+        IEnumerable<string> FetchStreamingAssetsFilesAt(string path, string searchPattern);
     }
 }

@@ -3,16 +3,17 @@ using UnityEngine;
 using System.IO;
 using System.Linq;
 using System.IO.Compression;
+using System.Collections.Generic;
 
 namespace Innoactive.Creator.Core.IO
 {
     /// <summary>
     /// Android implementation of <see cref="IPlatformFileSystem"/>.
     /// </summary>
-    public class AndroidFileSystem : DefaultFileSystem, IPlatformFileSystem
+    public class AndroidFileSystem : DefaultFileSystem
     {
         private readonly string rootFolder;
-        private readonly string[] streamingAssetsFilesPath;
+        private readonly IEnumerable<string> cachedStreamingAssetsFilesPath;
 
         private const string StreamingAssetsArchivePath = "assets/";
         private const string ExcludedArchivePath = "assets/bin/";
@@ -23,11 +24,44 @@ namespace Innoactive.Creator.Core.IO
 
             using (ZipArchive archive = ZipFile.OpenRead(rootFolder))
             {
-                streamingAssetsFilesPath = archive.Entries.Select(entry => entry.FullName)
+                cachedStreamingAssetsFilesPath = archive.Entries.Select(entry => entry.FullName)
                     .Where(name => name.StartsWith(StreamingAssetsArchivePath))
-                    .Where(name => name.StartsWith(ExcludedArchivePath) == false)
-                    .ToArray();
+                    .Where(name => name.StartsWith(ExcludedArchivePath) == false);
             }
+        }
+
+        /// <inheritdoc />
+        public override string ReadAllText(string filePath)
+        {
+            using (ZipArchive archive = ZipFile.OpenRead(rootFolder))
+            {
+                string relativePath = filePath.StartsWith(StreamingAssetsArchivePath) ? filePath : Path.Combine("assets", filePath);
+                ZipArchiveEntry file = archive.Entries.First(entry => entry.FullName == relativePath);
+
+                if (file == null)
+                {
+                    throw new FileNotFoundException(relativePath);
+                }
+
+                using (Stream fileStream = file.Open())
+                {
+                    using (StreamReader streamReader = new StreamReader(fileStream))
+                    {
+                        return streamReader.ReadToEnd();
+                    }
+                }
+            }
+        }
+
+        /// <inheritdoc />
+        /// <remarks>In Android, <paramref name="searchPattern"/> does not support wildcard characters.</remarks>
+        public override IEnumerable<string> FetchStreamingAssetsFilesAt(string path, string searchPattern)
+        {
+            string relativePath = Path.Combine("assets", path);
+            string[] wildCardChars = { "?", "_", "*", "%", "#" };
+            searchPattern = wildCardChars.Aggregate(searchPattern, (current, wildCardChar) => current.Replace(wildCardChar, string.Empty));
+
+            return cachedStreamingAssetsFilesPath.Where(filePath => filePath.StartsWith(relativePath) && filePath.Contains(searchPattern));
         }
 
         /// <inheritdoc />
@@ -38,19 +72,21 @@ namespace Innoactive.Creator.Core.IO
         {
             using (ZipArchive archive = ZipFile.OpenRead(rootFolder))
             {
-                ZipArchiveEntry file = archive.Entries.First(entry => entry.FullName == filePath);
+                string relativePath = filePath.StartsWith(StreamingAssetsArchivePath) ? filePath : Path.Combine("assets", filePath);
+                ZipArchiveEntry file = archive.Entries.First(entry => entry.FullName == relativePath);
 
                 if (file == null)
                 {
-                    throw new FileNotFoundException(filePath);
+                    throw new FileNotFoundException(relativePath);
                 }
 
-                using (MemoryStream memoryStream = new MemoryStream())
+                using (Stream fileStream = file.Open())
                 {
-                    Stream fileStream = file.Open();
-                    fileStream.CopyTo(memoryStream);
-
-                    return memoryStream.ToArray();
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        fileStream.CopyTo(memoryStream);
+                        return memoryStream.ToArray();
+                    }
                 }
             }
         }
@@ -58,7 +94,7 @@ namespace Innoactive.Creator.Core.IO
         /// <inheritdoc />
         protected override bool FileExistsInStreamingAssets(string filePath)
         {
-            return streamingAssetsFilesPath.Any(path => path == filePath);
+            return cachedStreamingAssetsFilesPath.Any(path => path == filePath);
         }
 
         /// <inheritdoc />

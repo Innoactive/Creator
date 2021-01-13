@@ -1,8 +1,8 @@
-using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.Configuration;
-using Innoactive.CreatorEditor.UI.Windows;
 using UnityEditor;
 using UnityEngine;
+using Innoactive.Creator.Core;
+using Innoactive.CreatorEditor.UI.Windows;
+using Innoactive.CreatorEditor.Configuration;
 
 namespace Innoactive.CreatorEditor
 {
@@ -13,7 +13,8 @@ namespace Innoactive.CreatorEditor
     {
         private CourseWindow courseWindow;
         private StepWindow stepWindow;
-        private ICourse course;
+
+        public ICourse CurrentCourse { get; protected set; }
 
         /// <inheritdoc/>
         public void HandleNewCourseWindow(CourseWindow window)
@@ -25,7 +26,7 @@ namespace Innoactive.CreatorEditor
 
             courseWindow = window;
 
-            courseWindow.SetCourse(course);
+            courseWindow.SetCourse(CurrentCourse);
         }
 
         /// <inheritdoc/>
@@ -61,9 +62,9 @@ namespace Innoactive.CreatorEditor
                 return;
             }
 
-            if (course != null)
+            if (CurrentCourse != null)
             {
-                CourseAssetManager.Save(course);
+                CourseAssetManager.Save(CurrentCourse);
             }
 
             if (stepWindow != null)
@@ -80,9 +81,9 @@ namespace Innoactive.CreatorEditor
                 return;
             }
 
-            if (course != null)
+            if (CurrentCourse != null)
             {
-                CourseAssetManager.Save(course);
+                CourseAssetManager.Save(CurrentCourse);
             }
 
             stepWindow = null;
@@ -101,9 +102,9 @@ namespace Innoactive.CreatorEditor
         /// <inheritdoc/>
         public void HandleCurrentCourseChanged(string courseName)
         {
-            if (course != null)
+            if (CurrentCourse != null)
             {
-                CourseAssetManager.Save(course);
+                CourseAssetManager.Save(CurrentCourse);
             }
 
             EditorPrefs.SetString(GlobalEditorHandler.LastEditedCourseNameKey, courseName);
@@ -112,10 +113,16 @@ namespace Innoactive.CreatorEditor
 
         private void LoadCourse(ICourse newCourse)
         {
-            course = newCourse;
+            CurrentCourse = newCourse;
+
+            if (newCourse != null && EditorConfigurator.Instance.Validation.IsAllowedToValidate())
+            {
+                EditorConfigurator.Instance.Validation.Validate(newCourse.Data, newCourse);
+            }
+
             if (courseWindow != null)
             {
-                courseWindow.SetCourse(course);
+                courseWindow.SetCourse(CurrentCourse);
             }
 
             if (stepWindow != null)
@@ -128,6 +135,12 @@ namespace Innoactive.CreatorEditor
         public void HandleCurrentStepModified(IStep step)
         {
             courseWindow.GetChapter().ChapterMetadata.LastSelectedStep = step;
+
+            if (EditorConfigurator.Instance.Validation.IsAllowedToValidate())
+            {
+                EditorConfigurator.Instance.Validation.Validate(step.Data, CurrentCourse);
+            }
+
             courseWindow.RefreshChapterRepresentation();
         }
 
@@ -136,6 +149,10 @@ namespace Innoactive.CreatorEditor
         {
             if (stepWindow != null)
             {
+                if (step != null &&  EditorConfigurator.Instance.Validation.IsAllowedToValidate())
+                {
+                    EditorConfigurator.Instance.Validation.Validate(step.Data, CurrentCourse);
+                }
                 stepWindow.SetStep(step);
             }
         }
@@ -152,18 +169,18 @@ namespace Innoactive.CreatorEditor
         /// <inheritdoc/>
         public void HandleProjectIsGoingToUnload()
         {
-            if (course != null)
+            if (CurrentCourse != null)
             {
-                CourseAssetManager.Save(course);
+                CourseAssetManager.Save(CurrentCourse);
             }
         }
 
         /// <inheritdoc/>
         public void HandleProjectIsGoingToSave()
         {
-            if (course != null)
+            if (CurrentCourse != null)
             {
-                CourseAssetManager.Save(course);
+                CourseAssetManager.Save(CurrentCourse);
             }
         }
 

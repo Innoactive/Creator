@@ -38,6 +38,10 @@ namespace Innoactive.CreatorEditor
             catch (Exception ex)
             {
                 Debug.LogError(ex);
+                if (Application.isBatchMode)
+                {
+                    EditorApplication.Exit(1);
+                }
             }
         }
 

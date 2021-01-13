@@ -11,6 +11,11 @@
       href: getting-started/designer.md
     - name: As a Developer
       href: getting-started/developer.md
+- name: Step by Step Guides
+  href: step-by-step-guides/index.md
+  items:
+    - name: Hello Creator
+      href: step-by-step-guides/hello-creator.md
 - name: Setup Guides
   href: setup-guides/index.md
   items:
@@ -21,7 +26,7 @@
     - name: Unity Setup
       href: setup-guides/02-unity-setup.md
     - name: Project Setup
-      href: setup-guides/03-project-setup.md
+      href: setup-guides/03-xr-setup.md
 - name: Innoactive Creator for Designers
   href: innoactive-creator/index.md
   items:
@@ -31,8 +36,8 @@
       href: innoactive-creator/course-creation-wizard.md
     - name: Training Configuration
       href: innoactive-creator/training-configuration.md
-    - name: Workflow Editor
-      href: innoactive-creator/workflow-editor.md
+    - name: Workflow Window
+      href: innoactive-creator/workflow-window.md
     - name: Step Inspector
       href: innoactive-creator/step-inspector.md
     - name: Training Scene Objects
@@ -78,6 +83,16 @@
       href: developer/12-text-to-speech.md
     - name: Dependency Manager
       href: developer/13-dependency-manager.md
+- name: Innoactive Creator Pro
+  href: pro/index.md  
+  items:
+    - name: Overview
+      href: pro/index.md
+    - name: Validation System
+      href: pro/01-validation.md
+    - name: Advanced Spectator
+      href: pro/02-advanced-spectator.md
+
 - name: Transition Guide to v2.0 for Developers
   href: transition-to-v2.0/index.md
   items:
