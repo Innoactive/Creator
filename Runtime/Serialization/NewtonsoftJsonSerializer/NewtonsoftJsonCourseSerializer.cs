@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Boo.Lang.Runtime;
 using Innoactive.Creator.Core.UI.Drawers.Metadata;
 using Innoactive.Creator.Core.Utils;
 using Newtonsoft.Json;
@@ -99,7 +98,7 @@ namespace Innoactive.Creator.Core.Serialization.NewtonsoftJson
             int version = dataObject.GetValue("$serializerVersion").ToObject<int>();
             if (version != 1)
             {
-                throw new RuntimeException($"The loaded course is serialized with a serializer version {version}, which in compatible with this serializer.");
+                throw new Exception($"The loaded course is serialized with a serializer version {version}, which in compatible with this serializer.");
             }
 
             return Deserialize<ICourse>(data, CourseSerializerSettings);
