@@ -59,7 +59,7 @@ namespace Innoactive.CreatorEditor
         }
 
         /// <summary>
-        /// Returns the current active course, can be null.
+        /// Returns the current active chapter, can be null.
         /// </summary>
         internal static IChapter GetCurrentChapter()
         {
