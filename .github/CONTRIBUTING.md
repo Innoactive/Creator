@@ -66,7 +66,7 @@ See more about [Pull Requests](https://help.github.com/en/github/collaborating-w
 
 ## Maintainers
 
-Meet out maintainers:
+Meet our maintainers:
 
 [<img alt="SimonTheSourcerer" src="https://github.com/SimonTheSourcerer.png" width="110">](https://github.com/SimonTheSourcerer) | [<img alt="Tomwim" src="https://github.com/tomwim.png" width="110">](https://github.com/Tomwim)
 :---: | :---: |
