@@ -9,6 +9,9 @@ using Newtonsoft.Json.Linq;
 
 namespace Innoactive.Creator.Core.Serialization
 {
+    /// <summary>
+    /// Improved version of the NewtonsoftJsonCourseSerializer, which now allows to serialize very long chapters.
+    /// </summary>
     public class ImprovedNewtonsoftJsonCourseSerializer : NewtonsoftJsonCourseSerializer
     {
         /// <inheritdoc/>
@@ -16,6 +19,7 @@ namespace Innoactive.Creator.Core.Serialization
 
         protected override int Version { get; } = 2;
 
+        /// <inheritdoc/>
         public override ICourse CourseFromByteArray(byte[] data)
         {
             string stringData = new UTF8Encoding().GetString(data);
@@ -32,6 +36,7 @@ namespace Innoactive.Creator.Core.Serialization
             return wrapper.GetCourse();
         }
 
+        /// <inheritdoc/>
         public override byte[] CourseToByteArray(ICourse course)
         {
             CourseWrapper wrapper = new CourseWrapper(course);
