@@ -75,7 +75,7 @@ Meet our maintainers:
 
 Maintainers are responsible for this repository and its community.
 
-### Former Contributer
+### Former Maintainers
 [Aleksei Korolev](https://github.com/aleksei-korolev)
 
 ## Coding Conventions
