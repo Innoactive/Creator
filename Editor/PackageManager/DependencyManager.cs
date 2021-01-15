@@ -29,7 +29,6 @@ namespace Innoactive.CreatorEditor.PackageManager
         /// </summary>
         public static event EventHandler<DependenciesEnabledEventArgs> OnPostProcess;
 
-        private static Queue<Dependency> dependencies;
         private static List<Dependency> dependenciesList;
 
         static DependencyManager()
@@ -44,10 +43,9 @@ namespace Innoactive.CreatorEditor.PackageManager
                 return;
             }
 
-            IEnumerable<Type> dependenciesTypes = ReflectionUtils.GetConcreteImplementationsOf<Dependency>();
             dependenciesList = new List<Dependency>();
 
-            foreach (Type dependencyType in dependenciesTypes)
+            foreach (Type dependencyType in ReflectionUtils.GetConcreteImplementationsOf<Dependency>())
             {
                 try
                 {
@@ -65,7 +63,6 @@ namespace Innoactive.CreatorEditor.PackageManager
             if (dependenciesList.Any())
             {
                 dependenciesList = dependenciesList.OrderBy(setup => setup.Priority).ToList();
-                dependencies = new Queue<Dependency>(dependenciesList);
                 ProcessDependencies();
             }
         }
@@ -77,22 +74,26 @@ namespace Innoactive.CreatorEditor.PackageManager
                 await Task.Delay(100);
             }
 
-            while (dependencies.Any())
+            float percentage = 100f / dependenciesList.Count;
+
+            foreach (Dependency dependency in dependenciesList)
             {
-                Dependency dependency = dependencies.Peek();
+                int index = dependenciesList.FindIndex(item => item == dependency);
+                EditorUtility.DisplayProgressBar("Importing Creator dependencies", $"Fetching {dependency.Package}", index * percentage);
 
                 if (PackageOperationsManager.IsPackageLoaded(dependency.Package))
                 {
+                    dependency.Version = PackageOperationsManager.GetInstalledPackageVersion(dependency.Package);
                     dependency.IsEnabled = true;
-                    dependencies.Dequeue();
                 }
                 else
                 {
-                    PackageOperationsManager.LoadPackage(dependency.Package);
+                    PackageOperationsManager.LoadPackage(dependency.Package, dependency.Version);
                     return;
                 }
             }
 
+            EditorUtility.ClearProgressBar();
             OnPostProcess?.Invoke(null, new DependenciesEnabledEventArgs(dependenciesList));
         }
     }
