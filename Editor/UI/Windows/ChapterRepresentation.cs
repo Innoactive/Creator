@@ -236,6 +236,8 @@ namespace Innoactive.CreatorEditor.UI.Windows
         {
             EntryNode entryNode = new EntryNode(Graphics);
 
+            entryNode.IsDragging = false;
+
             ExitJoint joint = new ExitJoint(Graphics, entryNode)
             {
                 RelativePosition = new Vector2(entryNode.LocalBoundingBox.xMax, entryNode.LocalBoundingBox.center.y),
@@ -252,6 +254,13 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             entryNode.GraphicalEventHandler.PointerUp += (sender, args) =>
             {
+                entryNode.IsDragging = false;
+                Graphics.CalculateBoundingBox();
+            };
+
+            entryNode.GraphicalEventHandler.PointerDown += (sender, args) =>
+            {
+                entryNode.IsDragging = true;
                 Graphics.CalculateBoundingBox();
             };
 
@@ -503,6 +512,11 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         public void SetChapter(IChapter chapter)
         {
+            if (chapter != GlobalEditorHandler.GetCurrentChapter())
+            {
+                GlobalEditorHandler.SetCurrentChapter(chapter);
+            }
+
             CurrentChapter = chapter;
 
             Graphics.Reset();

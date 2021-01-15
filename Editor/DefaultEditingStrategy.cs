@@ -15,6 +15,7 @@ namespace Innoactive.CreatorEditor
         private StepWindow stepWindow;
 
         public ICourse CurrentCourse { get; protected set; }
+        public IChapter CurrentChapter { get; protected set; }
 
         /// <inheritdoc/>
         public void HandleNewCourseWindow(CourseWindow window)
@@ -114,6 +115,7 @@ namespace Innoactive.CreatorEditor
         private void LoadCourse(ICourse newCourse)
         {
             CurrentCourse = newCourse;
+            CurrentChapter = null;
 
             if (newCourse != null && EditorConfigurator.Instance.Validation.IsAllowedToValidate())
             {
@@ -164,6 +166,11 @@ namespace Innoactive.CreatorEditor
             {
                 StepWindow.ShowInspector();
             }
+        }
+
+        public void HandleCurrentChapterChanged(IChapter chapter)
+        {
+            CurrentChapter = chapter;
         }
 
         /// <inheritdoc/>

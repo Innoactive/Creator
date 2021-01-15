@@ -5,6 +5,9 @@ namespace Innoactive.CreatorEditor.UI.Graphics
 {
     internal class ExitJointRenderer : MulticoloredGraphicalElementRenderer<ExitJoint>
     {
+        private static EditorIcon outgoingIcon = new EditorIcon("icon_arrow_right");
+        private int iconSize = 15;
+
         public ExitJointRenderer(ExitJoint owner, WorkflowEditorColorPalette colorPalette) : base(owner, colorPalette)
         {
         }
@@ -17,6 +20,9 @@ namespace Innoactive.CreatorEditor.UI.Graphics
             {
                 EditorDrawingHelper.DrawArrow(Owner.Position, Owner.Position + Owner.DragDelta, CurrentColor, 40f, 10f);
             }
+
+            Rect iconRect = new Rect(Owner.Position.x - iconSize / 2f, Owner.Position.y - iconSize / 2f, iconSize, iconSize);
+            EditorDrawingHelper.DrawTexture(iconRect, outgoingIcon.Texture, Color.gray);
         }
 
         public override Color NormalColor

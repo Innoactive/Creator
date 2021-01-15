@@ -104,6 +104,58 @@ namespace Innoactive.CreatorEditor.UI
             Handles.EndGUI();
         }
 
+
+        /// <summary>
+        /// Draw a triangle.
+        /// </summary>
+        /// <param name="points">List of points</param>
+        /// <param name="color">Fill color of triangle</param>
+        public static void DrawTriangle(IList<Vector2> points, Color color)
+        {
+            Handles.BeginGUI();
+            {
+                Color handlesColor = Handles.color;
+                Handles.color = GUI.color * color;
+
+                Vector3 p1, p2, p3;
+                Vector3[] pointList;
+
+                float arrowHeadWidth = 15f;
+                float arrowHeadHeight = 8f;
+
+                if (points.Count == 2)
+                {//straight line
+                    Vector3 trianglePoint = new Vector3(points[0].x + (points[1].x - points[0].x) / 5, points[0].y);
+                    p1 = new Vector3(trianglePoint.x, trianglePoint.y - arrowHeadWidth / 2, 1f);
+                    p2 = new Vector3(trianglePoint.x, trianglePoint.y + arrowHeadWidth / 2, 1f);
+                    p3 = new Vector3(trianglePoint.x + arrowHeadHeight, trianglePoint.y, 1f);
+                }
+                else if (points.Count > 4)
+                {
+                    Vector3 from = points[2];
+                    Vector3 to = points[4];
+
+                    Vector3 directionalAxis = new Vector3(to.x - from.x, to.y - from.y, 1f);
+                    directionalAxis.Normalize();
+                    Vector3 orthoDirectionalAxis = new Vector3(directionalAxis.y, -directionalAxis.x);
+
+                    p1 = new Vector3(to.x - (arrowHeadHeight * directionalAxis.x) + (arrowHeadWidth * orthoDirectionalAxis.x / 2f), to.y - (arrowHeadHeight * directionalAxis.y) + (arrowHeadWidth * orthoDirectionalAxis.y / 2f), 1f);
+                    p2 = new Vector3(to.x - (arrowHeadHeight * directionalAxis.x) - (arrowHeadWidth * orthoDirectionalAxis.x / 2f), to.y - (arrowHeadHeight * directionalAxis.y) - (arrowHeadWidth * orthoDirectionalAxis.y / 2f), 1f);
+                    p3 = new Vector3(to.x, to.y, 1f);
+                }
+                else
+                {
+                    return;
+                }
+
+                pointList = new Vector3[] {p1, p2, p3} ;
+                Handles.color = Color.white;
+                Handles.DrawAAConvexPolygon(pointList);
+                Handles.color = handlesColor;
+            }
+            Handles.EndGUI();
+        }
+
         /// <summary>
         /// Draw a rect.
         /// </summary>
@@ -246,15 +298,13 @@ namespace Innoactive.CreatorEditor.UI
         public static void DrawPolyline(IList<Vector2> points, Color color)
         {
             Vector2 lastPosition = points[0];
-
-            color = GUI.color * color;
             Color handlesColor = Handles.color;
 
             for (int i = 1; i < points.Count; i++)
             {
                 Handles.BeginGUI();
                 {
-                    Handles.color = color;
+                    Handles.color = GUI.color * color;
                     Handles.DrawBezier(lastPosition, points[i], lastPosition, points[i], color, null, StepTransitionStrokeSize);
                     Handles.color = handlesColor;
                 }
@@ -272,7 +322,6 @@ namespace Innoactive.CreatorEditor.UI
         /// <param name="color">Color or line.</param>
         public static void DrawHorizontalLine(Vector2 startPoint, float length, Color color)
         {
-            color = GUI.color * color;
             EditorGUI.DrawRect(new Rect(startPoint.x, startPoint.y, length, 1), color);
         }
 
@@ -284,8 +333,21 @@ namespace Innoactive.CreatorEditor.UI
         /// <param name="color">Color or line.</param>
         public static void DrawVerticalLine(Vector2 startPoint, float length, Color color)
         {
-            color = GUI.color * color;
             EditorGUI.DrawRect(new Rect(startPoint.x, startPoint.y, 1, length), color);
+        }
+
+        /// <summary>
+        /// Draws a texture in a specific color
+        /// </summary>
+        /// <param name="iconRect">Position and size of the texture.</param>
+        /// <param name="texture">The texture to paint.</param>
+        /// <param name="color">The color it should be painted in.</param>
+        public static void DrawTexture(Rect iconRect, Texture texture, Color color)
+        {
+            Color defaultColor = GUI.color;
+            GUI.color = color;
+            GUI.DrawTexture(iconRect, texture);
+            GUI.color = defaultColor;
         }
     }
 }

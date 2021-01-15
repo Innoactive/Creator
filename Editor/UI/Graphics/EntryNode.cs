@@ -11,6 +11,23 @@ namespace Innoactive.CreatorEditor.UI.Graphics
         private static readonly Vector2 size = new Vector2(24f, 24f);
         private readonly GraphicalElementRenderer renderer;
 
+        private bool isDragging;
+
+        public bool IsDragging
+        {
+            get
+            {
+                return isDragging;
+            }
+            set
+            {
+                if (value != isDragging)
+                {
+                    isDragging = value;
+                }
+            }
+        }
+
         /// <inheritdoc />
         public override GraphicalElementRenderer Renderer
         {
