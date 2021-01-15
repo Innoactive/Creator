@@ -24,6 +24,7 @@ namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
         public override void Draw()
         {
             EditorDrawingHelper.DrawPolyline(Owner.PolylinePoints, CurrentColor);
+            EditorDrawingHelper.DrawTriangle(Owner.PolylinePoints, CurrentColor);
         }
     }
 }

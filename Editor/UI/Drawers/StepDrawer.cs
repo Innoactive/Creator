@@ -17,7 +17,9 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         private IStepData lastStep;
         private LockablePropertyTab lockablePropertyTab;
 
-
+        private static int margin = 3;
+        private static int padding = 2;
+        
         protected StepDrawer()
         {
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
@@ -73,11 +75,11 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         {
             Step.EntityData step = currentValue as Step.EntityData;
 
-            Rect nameRect = rect;
-            nameRect.width = EditorGUIUtility.labelWidth;
-            Rect typeRect = rect;
-            typeRect.x += EditorGUIUtility.labelWidth;
-            typeRect.width -= EditorGUIUtility.labelWidth;
+            Rect labelRect = rect;
+            labelRect.width = EditorGUIUtility.labelWidth;
+            Rect textfieldRect = rect;
+            textfieldRect.x += EditorGUIUtility.labelWidth + padding;
+            textfieldRect.width -= (EditorGUIUtility.labelWidth + padding);
 
             GUIStyle textFieldStyle = new GUIStyle(EditorStyles.textField)
             {
@@ -87,16 +89,16 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             GUIStyle labelStyle = new GUIStyle(EditorStyles.label)
             {
-                fontStyle = FontStyle.Bold,
+                fontStyle = FontStyle.Normal,
                 fontSize = 12
             };
 
-            rect.height = labelStyle.CalcHeight(new GUIContent("Step Name"), rect.width);
+            rect.height = labelStyle.CalcHeight(new GUIContent("Step Name"), rect.width) + margin;
 
-            EditorGUI.LabelField(typeRect, "Step Name", labelStyle);
+            EditorGUI.LabelField(labelRect, "Step Name", labelStyle);
 
             string oldName = step.Name;
-            string newName = EditorGUI.DelayedTextField(nameRect, step.Name, textFieldStyle);
+            string newName = EditorGUI.DelayedTextField(textfieldRect, step.Name, textFieldStyle);
 
             if (newName != step.Name)
             {
