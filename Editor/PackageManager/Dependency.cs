@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEditor;
 using UnityEditor.PackageManager.UI;
-using UnityEngine;
 
 namespace Innoactive.CreatorEditor.PackageManager
 {
