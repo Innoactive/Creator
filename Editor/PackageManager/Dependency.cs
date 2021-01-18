@@ -90,7 +90,7 @@ namespace Innoactive.CreatorEditor.PackageManager
         {
             IEnumerable<Sample> samples = Sample.FindByPackage(Package, Version);
 
-            if (samples != null && samples.Any())
+            if (Samples != null && samples != null && samples.Any())
             {
                 foreach (Sample sample in samples)
                 {
