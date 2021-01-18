@@ -90,3 +90,9 @@
     height: 16px;   
 }
 
+.delay-behavior-header Button .collapseButton{
+    --unity-image: resource("icon_collapsed_light");
+    width: 16px;
+    height: 16px;   
+}
+

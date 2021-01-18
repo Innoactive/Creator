@@ -50,7 +50,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
             instance.Repaint();
         }
 
-
         private void OnEnable()
         {
             EditorSceneManager.sceneClosing += OnSceneClosed;
@@ -68,12 +67,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             root.styleSheets.Add(style);
             root.styleSheets.Add(behaviorStyle);
-
-            //here I load a delay behavior. Of course this needs to be done in the callback of "add behavior"-button or when loading stored behaviors for steps.
-            VisualTreeAsset DelayBehaviorXML = (VisualTreeAsset)Resources.Load("UI/ICBehaviorDelay");
-            VisualElement DelayBehavior = DelayBehaviorXML.CloneTree();
-            root.Add(DelayBehavior);
-
 
         }
 

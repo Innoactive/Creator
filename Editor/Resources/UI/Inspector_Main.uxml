@@ -1,6 +1,6 @@
-<UXML xmlns="UnityEngine.UIElements" >
+<UXML xmlns="UnityEngine.UIElements" xmlns:ic="Innoactive.CreatorEditor.UI.UIElements">
     <!-- Creates our template and gives it a name for future reference. -->
-    <Template src="./ICTabHeader.uxml" name="tabheader-template" />
+    
     <!-- Creates a parent VisualElement in which we will add our template. -->
     <VisualElement class="form-element"  name="step-name-container">
         <Label  class="ic-label" text="Step Name"  name="step-label"/>
@@ -10,8 +10,5 @@
         <Label  class="ic-label" text="Description" name="desc-label"/>
         <TextField class="ic-textfield" name="desc-textfield"/>
     </VisualElement>
-    <VisualElement class="tabs">
-        <Instance template="tabheader-template" name="TabHeader"/>
-        <VisualElement name="TabContainer"/>
-    </VisualElement>
+    <ic:ICTabController/>
 </UXML>

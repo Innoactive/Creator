@@ -1,0 +1,5 @@
+<UXML xmlns="UnityEngine.UIElements" xmlns:ic="Innoactive.CreatorEditor.UI.UIElements">
+    <ic:ICBehaviorHeader header-title="Disable Object" />
+    <ic:ICDisableBehaviorBody/>
+    <ic:ICDisableBehavior/>
+</UXML>

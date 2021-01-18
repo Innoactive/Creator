@@ -1,0 +1,7 @@
+<UXML xmlns="UnityEngine.UIElements" xmlns:ic="Innoactive.CreatorEditor.UI.UIElements">
+    <VisualElement name="TabContainer">
+        <Style src="TabContainer.uss" />
+        <Box name="Behaviors" class="Behaviors"/>
+        <Button class="add-button" name="add-button" text="Add Behavior"/>
+    </VisualElement>
+</UXML>

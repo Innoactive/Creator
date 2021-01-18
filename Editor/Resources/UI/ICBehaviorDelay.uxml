@@ -1,8 +1,5 @@
 <UXML xmlns="UnityEngine.UIElements" xmlns:ic="Innoactive.CreatorEditor.UI.UIElements">
-    <Template src="./ICBehaviorHeader.uxml" name="header-template" /> 
     <ic:ICBehaviorHeader header-title="Delay Behavior" />
-    <!-- We could also create the UI in the UXMLTraits method and call the following, but we want to keep the UI in UXML files -->
-    <!-- <ic:ICDelayBehavior
-    duration="6" />-->
+    <ic:ICDelayBehaviorBody/>
     <ic:ICDelayBehavior/>
 </UXML>

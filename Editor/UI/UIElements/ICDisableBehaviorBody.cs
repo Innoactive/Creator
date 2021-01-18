@@ -7,17 +7,14 @@ using Innoactive.CreatorEditor.UI.Windows;
 
 namespace Innoactive.CreatorEditor.UI.UIElements
 {
-    public class ICDelayBehavior : VisualElement
+    public class ICDisableBehaviorBody : VisualElement
     {
-       
-      
-       
-        public new class UxmlFactory : UxmlFactory<ICDelayBehavior, UxmlTraits> {
-            
-        }
+
+
+        public new class UxmlFactory : UxmlFactory<ICDisableBehaviorBody, UxmlTraits> { }
         public new class UxmlTraits : VisualElement.UxmlTraits
         {
-            
+       
             public override IEnumerable<UxmlChildElementDescription> uxmlChildElementsDescription
             {
                 get { yield break; }
@@ -26,18 +23,16 @@ namespace Innoactive.CreatorEditor.UI.UIElements
             public override void Init(VisualElement ve, IUxmlAttributes bag, CreationContext cc)
             {
                 base.Init(ve, bag, cc);
-                var ate = ve as ICDelayBehavior;
-
+                var ate = ve as ICDisableBehaviorBody;
                 ate.Clear();
 
-                Debug.Log("DELAY BEHAVIOR ______________");
+                //load body into the visual tree of behavior
+                var BodyTree = (VisualTreeAsset)Resources.Load("UI/ICBehaviorDisableBody");
+                VisualElement bt = BodyTree.CloneTree();
+                ate.Add(bt);    
             }
-
 
         }
 
-       
     }
-
 }
-

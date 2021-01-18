@@ -8,6 +8,7 @@ namespace Innoactive.CreatorEditor.UI.UIElements
 {
     public class ICBehaviorHeader : VisualElement
     {
+        public static int id_cnt = 0;
 
         public string headerTitle { get; set; }
 
@@ -38,32 +39,35 @@ namespace Innoactive.CreatorEditor.UI.UIElements
         public new class UxmlTraits : VisualElement.UxmlTraits
         {
 
-            UxmlStringAttributeDescription m_title = new UxmlStringAttributeDescription { name = "header-title", defaultValue = "dffjfjkd" };
+            UxmlStringAttributeDescription m_title = new UxmlStringAttributeDescription { name = "header-title", defaultValue = "Behavior name"};
+            
             public override void Init(VisualElement ve, IUxmlAttributes bag, CreationContext cc)
             {
                 base.Init(ve, bag, cc);
                 var ate = ve as ICBehaviorHeader;
+                ate.Clear();
 
                 //load header into the visual tree of behavior
                 var HeaderTree = (VisualTreeAsset)Resources.Load("UI/ICBehaviorHeader");
                 VisualElement ht = HeaderTree.CloneTree();
-                StepWindow.root.Add(ht);
+                ate.Add(ht);
 
-                ate.Clear();
+
                 ate.headerTitle = m_title.GetValueFromBag(bag, cc);
-                //query the header element
-
-                var title = StepWindow.root.Query<Label>("headertitle").First();
+                //ate.headerTitle = title_str;
+                
+                
+                var title = ht.Query<Label>("headertitle").First();
                 title.text = ate.headerTitle;
 
                 //make Buttons interactive
-                var upButton = StepWindow.root.Query<Button>("up").First();
+                var upButton = ate.Query<Button>("up").First();
                 upButton.clickable.clicked += () => ate.moveUp();
 
-                var downButton = StepWindow.root.Query<Button>("down").First();
+                var downButton = ate.Query<Button>("down").First();
                 downButton.clickable.clicked += () => ate.moveDown();
 
-                var deleteButton = StepWindow.root.Query<Button>("delete").First();
+                var deleteButton = ate.Query<Button>("delete").First();
                 deleteButton.clickable.clicked += () => ate.delete();
 
 

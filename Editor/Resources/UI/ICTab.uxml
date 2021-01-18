@@ -1,0 +1,9 @@
+<UXML xmlns="UnityEngine.UIElements" xmlns:ic="Innoactive.CreatorEditor.UI.UIElements">
+    <Template src="./ICTabHeader.uxml" name="tabheader-template" />
+    <VisualElement class="tabs">
+        <ic:ICTabHeader/>
+    </VisualElement>
+    <VisualElement>
+        <ic:ICTabContainer/>
+    </VisualElement>
+</UXML>
