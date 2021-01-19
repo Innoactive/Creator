@@ -1,6 +1,7 @@
 <UXML xmlns="UnityEngine.UIElements" xmlns:ic="Innoactive.CreatorEditor.UI.UIElements">
-    <VisualElement class="disable -behavior-body" name="behavior-body">
-        <Label  class="ic-label" text="Delay in seconds"  name="delay-label"/>
+    <VisualElement class="delay-behavior-body" name="behavior-body">
+        <Style src="ICBehaviorStyle.uss" />
+        <Label  class="ic-label" text="object"  name="delay-label"/>
         <TextField class="ic-textfield" name="delayvalue"/>
     </VisualElement>
 </UXML>

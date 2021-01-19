@@ -18,6 +18,7 @@ namespace Innoactive.CreatorEditor.UI.UIElements
 
         public void addButton()
         {
+            Debug.Log("add button");
             menu = new GenericMenu();
 
             int delayMenuItem = 1;
@@ -36,7 +37,9 @@ namespace Innoactive.CreatorEditor.UI.UIElements
             var menuPosition = new Vector2(button.layout.xMin, button.layout.height);
             menuPosition = this.LocalToWorld(menuPosition);
             var menuRect = new Rect(menuPosition, Vector2.zero);
+            menu.DropDown(menuRect);
             //updateMenuPosition();
+
 
 
 
@@ -52,7 +55,10 @@ namespace Innoactive.CreatorEditor.UI.UIElements
                     this.Insert(0, DelayBehavior);
                     
                     break;
-                case 2: Debug.Log("disable object");
+                case 2: 
+                    VisualTreeAsset DisableBehaviorXML = (VisualTreeAsset)Resources.Load("UI/ICBehaviorDisable");
+                    VisualElement DisableBehavior = DisableBehaviorXML.CloneTree();
+                    this.Insert(0, DisableBehavior);
                     break;
                 default: Debug.Log("default case");
                     break;

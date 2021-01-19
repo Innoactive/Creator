@@ -51,6 +51,13 @@
     padding-left:25px;
 }
 
+.disable-behavior-body{
+    font-size: 12;
+    flex-direction: row;
+    background-color: rgb(56, 56, 56);
+    padding-left:25px;
+}
+
 .invisible{
     display: none;
 }
