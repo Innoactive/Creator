@@ -1,6 +1,6 @@
 <UXML xmlns="UnityEngine.UIElements" xmlns:ic="Innoactive.CreatorEditor.UI.UIElements">
     <VisualElement class="delay-behavior-header" name="mHeader">
-        <Button><Image class="collapse" name="collapseButton"/></Button>
+        <Button name="collapseButton" class="collapseButton"><Image class="collapse" name="collapseButton"/></Button>
         <Label name="headertitle" class="headertitle" header-title="Delay Behavior"></Label>
         <VisualElement class="micons" name="micons">
             <Button name="up"><Image class="up" name="up"/></Button>

@@ -9,6 +9,10 @@ namespace Innoactive.CreatorEditor.UI.UIElements
     public class ICTabHeader : VisualElement
     {
 
+        private void toggleCollapse()
+        {
+            Debug.Log("toggle");
+        }
 
 
         public new class UxmlFactory : UxmlFactory<ICTabHeader, UxmlTraits> { }
@@ -27,8 +31,6 @@ namespace Innoactive.CreatorEditor.UI.UIElements
                 StepWindow.root.Add(tabHeaderElement);
 
                 ate.Clear();
-
-
 
 
             }

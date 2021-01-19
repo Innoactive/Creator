@@ -1,5 +1,6 @@
 <UXML xmlns="UnityEngine.UIElements" xmlns:ic="Innoactive.CreatorEditor.UI.UIElements">
-    <ic:ICBehaviorHeader header-title="Delay Behavior" />
-    <ic:ICDelayBehaviorBody/>
-    <ic:ICDelayBehavior/>
+    <ic:ICDelayBehavior>
+        <ic:ICBehaviorHeader header-title="Delay Behavior" />
+        <ic:ICDelayBehaviorBody/>
+    </ic:ICDelayBehavior>
 </UXML>

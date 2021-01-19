@@ -41,8 +41,6 @@ namespace Innoactive.CreatorEditor.UI.UIElements
             //updateMenuPosition();
 
 
-
-
         }
 
         private void ChangeValueFromMenu(object menuItem)
@@ -53,7 +51,6 @@ namespace Innoactive.CreatorEditor.UI.UIElements
                     VisualTreeAsset DelayBehaviorXML = (VisualTreeAsset)Resources.Load("UI/ICBehaviorDelay");
                     VisualElement DelayBehavior = DelayBehaviorXML.CloneTree();
                     this.Insert(0, DelayBehavior);
-                    
                     break;
                 case 2: 
                     VisualTreeAsset DisableBehaviorXML = (VisualTreeAsset)Resources.Load("UI/ICBehaviorDisable");

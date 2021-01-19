@@ -7,11 +7,30 @@ using Innoactive.CreatorEditor.UI.Windows;
 
 namespace Innoactive.CreatorEditor.UI.UIElements
 {
-    public class ICDelayBehavior : VisualElement
+    public class ICDelayBehavior : VisualElement, ICBehavior
     {
-       
-      
-       
+
+        public void toggleCollapse()
+        {
+            //add class display: none to body
+            //Debug.Log(this.Children().OfType<ICDelayBehaviorBody>());
+            foreach(var item in this.Children())
+            {
+                if(item is ICDelayBehaviorBody)
+                {
+                    if(item.style.display == DisplayStyle.None)
+                    {
+                        item.style.display = DisplayStyle.Flex;
+                    }
+                    else
+                    {
+                        item.style.display = DisplayStyle.None;
+                    }
+                    
+                }
+            }
+        }
+
         public new class UxmlFactory : UxmlFactory<ICDelayBehavior, UxmlTraits> {
             
         }

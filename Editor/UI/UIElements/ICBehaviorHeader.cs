@@ -14,6 +14,8 @@ namespace Innoactive.CreatorEditor.UI.UIElements
 
         private Label headerLabel { get; set; }
 
+        private bool collapsed { get; set; }
+
         private void delete()
         {
             Debug.Log("delete Behavior");
@@ -32,7 +34,27 @@ namespace Innoactive.CreatorEditor.UI.UIElements
 
         private void toggleCollapse()
         {
-            Debug.Log("toggle Collapse");
+            
+            ((ICBehavior)this.parent).toggleCollapse();
+            updateToggleState();
+
+        }
+
+        public void updateToggleState()
+        {
+            this.collapsed = !this.collapsed;
+
+            Image collapseButton = this.Query<Image>("collapseButton").First();
+            if (this.collapsed)
+            {
+                collapseButton.image = Resources.Load("icon_collapsed_light") as Texture2D;
+            }
+            else
+            {
+                collapseButton.image = Resources.Load("icon_expanded_light") as Texture2D;
+            }
+            
+            
         }
 
         public new class UxmlFactory : UxmlFactory<ICBehaviorHeader, UxmlTraits> { }
@@ -70,7 +92,13 @@ namespace Innoactive.CreatorEditor.UI.UIElements
                 var deleteButton = ate.Query<Button>("delete").First();
                 deleteButton.clickable.clicked += () => ate.delete();
 
+                var collapseButton = ate.Query<Button>("collapseButton").First();
+                collapseButton.clickable.clicked += () => ate.toggleCollapse();
 
+                var collapseButtonImage = ate.Query<Image>("collapseButton").First();
+                ate.collapsed = false;
+                collapseButtonImage.image = Resources.Load("icon_expanded_light") as Texture2D;
+                
 
             }
         }

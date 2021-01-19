@@ -96,7 +96,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 EditorConfigurator.Instance.Validation.Validate(step.Data, GlobalEditorHandler.GetCurrentCourse());
             }
 
-
         }
 
         private void OnGUI()
@@ -124,6 +123,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 //stepRect = new Rect(stepDrawingRect.position - new Vector2(border,border), stepDrawingRect.size + new Vector2(border * 2f, border * 2f));
             }
             GUI.EndScrollView();
+
            
         }
 
