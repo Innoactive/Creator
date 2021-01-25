@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Innoactive.Creator.Core;
@@ -20,26 +21,14 @@ namespace Innoactive.CreatorEditor
         /// <inheritdoc/>
         public void HandleNewCourseWindow(CourseWindow window)
         {
-            if (courseWindow != null && courseWindow != window)
-            {
-                courseWindow.Close();
-            }
-
             courseWindow = window;
-
             courseWindow.SetCourse(CurrentCourse);
         }
 
         /// <inheritdoc/>
         public void HandleNewStepWindow(StepWindow window)
         {
-            if (stepWindow != null && stepWindow != window)
-            {
-                stepWindow.Close();
-            }
-
             stepWindow = window;
-
             if (courseWindow == null || courseWindow.Equals(null))
             {
                 HandleCurrentStepChanged(null);
@@ -67,21 +56,11 @@ namespace Innoactive.CreatorEditor
             {
                 CourseAssetManager.Save(CurrentCourse);
             }
-
-            if (stepWindow != null)
-            {
-                stepWindow.Close();
-            }
         }
 
         /// <inheritdoc/>
         public void HandleStepWindowClosed(StepWindow window)
         {
-            if (stepWindow != window)
-            {
-                return;
-            }
-
             if (CurrentCourse != null)
             {
                 CourseAssetManager.Save(CurrentCourse);
@@ -97,6 +76,10 @@ namespace Innoactive.CreatorEditor
             {
                 courseWindow = EditorWindow.GetWindow<CourseWindow>();
                 courseWindow.minSize = new Vector2(400f, 100f);
+            }
+            else
+            {
+                courseWindow.Focus();
             }
         }
 
@@ -125,11 +108,14 @@ namespace Innoactive.CreatorEditor
             if (courseWindow != null)
             {
                 courseWindow.SetCourse(CurrentCourse);
+                if (stepWindow != null)
+                {
+                    stepWindow.SetStep(courseWindow.GetChapter()?.ChapterMetadata.LastSelectedStep);
+                }
             }
-
-            if (stepWindow != null)
+            else if (stepWindow != null)
             {
-                stepWindow.SetStep(courseWindow.GetChapter()?.ChapterMetadata.LastSelectedStep);
+                stepWindow.SetStep(null);
             }
         }
 
@@ -151,7 +137,7 @@ namespace Innoactive.CreatorEditor
         {
             if (stepWindow != null)
             {
-                if (step != null &&  EditorConfigurator.Instance.Validation.IsAllowedToValidate())
+                if (step != null && EditorConfigurator.Instance.Validation.IsAllowedToValidate())
                 {
                     EditorConfigurator.Instance.Validation.Validate(step.Data, CurrentCourse);
                 }
