@@ -56,7 +56,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             string newUniqueName = GetIDFromSelectedObject(selectedSceneObject, valueType, oldUniqueName);
 
-            if (oldUniqueName != newUniqueName && RuntimeConfigurator.Exists)
+            if (oldUniqueName != newUniqueName)
             {
                 RevertableChangesHandler.Do(
                     new CourseCommand(
