@@ -66,7 +66,7 @@ namespace Innoactive.CreatorEditor.PackageManager
 
             if (listRequest2.Status == StatusCode.Failure)
             {
-                Debug.LogErrorFormat("There was an error trying to retrieve a package list from the Package Manager - Error Code: [{0}] .\n{1}", listRequest2.Error.errorCode, listRequest2.Error.message);
+                Debug.LogError($"There was an error trying to retrieve a package list from the Package Manager - Error Code: [{listRequest2.Error.errorCode}] .\n{listRequest2.Error.message}");
             }
             else
             {
@@ -78,15 +78,21 @@ namespace Innoactive.CreatorEditor.PackageManager
         /// Adds a package to the Package Manager.
         /// </summary>
         /// <param name="package">A string representing the package to be added.</param>
-        public static async void LoadPackage(string package)
+        /// <param name="version">If provided, the package will be loaded with this specific version.</param>
+        public static async void LoadPackage(string package, string version = null)
         {
-            if (string.IsNullOrEmpty(package) || IsPackageLoaded(package) || EditorApplication.isPlayingOrWillChangePlaymode)
+            if (string.IsNullOrEmpty(package) || IsPackageLoaded(package, version) || EditorApplication.isPlayingOrWillChangePlaymode)
             {
                 return;
             }
 
+            if (package.Contains("@") == false && string.IsNullOrEmpty(version) == false)
+            {
+                package = $"{package}@{version}";
+            }
+
             AddRequest addRequest = Client.Add(package);
-            Debug.LogFormat("Enabling {0}.", package);
+            Debug.Log($"Enabling package: {package}, Version: {(string.IsNullOrEmpty(version) ? "latest" : version)}.");
 
             while (addRequest.IsCompleted == false)
             {
@@ -95,12 +101,12 @@ namespace Innoactive.CreatorEditor.PackageManager
 
             if (addRequest.Status == StatusCode.Failure)
             {
-                Debug.LogErrorFormat("There was an error trying to enable '{0}' - Error Code: [{1}] .\n{2}", package, addRequest.Error.errorCode, addRequest.Error.message);
+                Debug.LogError($"There was an error trying to enable '{package}' - Error Code: [{addRequest.Error.errorCode}] .\n{addRequest.Error.message}");
             }
             else
             {
                 OnPackageEnabled?.Invoke(null, new PackageEnabledEventArgs(addRequest.Result));
-                Debug.LogFormat("The package '{0} version {1}' has been automatically added", addRequest.Result.displayName, addRequest.Result.version);
+                Debug.Log($"The package '{addRequest.Result.displayName} version {addRequest.Result.version}' has been automatically added");
             }
         }
 
@@ -115,7 +121,7 @@ namespace Innoactive.CreatorEditor.PackageManager
                 if (IsPackageLoaded(package))
                 {
                     RemoveRequest removeRequest = Client.Remove(package);
-                    Debug.LogFormat("Removing {0}.", package);
+                    Debug.Log($"Removing {package}.");
 
                     while (removeRequest.IsCompleted == false)
                     {
@@ -124,13 +130,12 @@ namespace Innoactive.CreatorEditor.PackageManager
 
                     if (removeRequest.Status >= StatusCode.Failure)
                     {
-                        Debug.LogErrorFormat("There was an error trying to enable '{0}' - Error Code: [{1}] .\n{2}",
-                            package, removeRequest.Error.errorCode, removeRequest.Error.message);
+                        Debug.LogError($"There was an error trying to enable '{package}' - Error Code: [{removeRequest.Error.errorCode}] .\n{removeRequest.Error.message}");
                     }
                     else
                     {
                         OnPackageDisabled?.Invoke(null, new PackageDisabledEventArgs(removeRequest.PackageIdOrName));
-                        Debug.LogFormat("The package '{0} has been removed", removeRequest.PackageIdOrName);
+                        Debug.Log($"The package '{removeRequest.PackageIdOrName} has been removed");
                     }
                 }
             }
@@ -138,9 +143,10 @@ namespace Innoactive.CreatorEditor.PackageManager
 
         /// <summary>
         /// Returns true if the <see cref="PackageOperationsManager"/> has already collected a list of currently available packages and
-        /// given <paramref name="package"/> is already on that list.
+        /// given <paramref name="package"/> is already on that list with given <paramref name="version"/>.
         /// </summary>
-        public static bool IsPackageLoaded(string package)
+        /// <remarks>If <paramref name="package"/> already contains an embedded version, <paramref name="version"/> will be ignored.</remarks>
+        public static bool IsPackageLoaded(string package, string version = null)
         {
             if (package.Contains('@'))
             {
@@ -148,7 +154,22 @@ namespace Innoactive.CreatorEditor.PackageManager
                 return Packages != null && Packages.Any(packageInfo => packageInfo.name == packageData.First() && packageInfo.version == packageData.Last());
             }
 
-            return Packages != null && Packages.Any(packageInfo => packageInfo.name == package);
+            if (string.IsNullOrEmpty(version))
+            {
+                return Packages != null && Packages.Any(packageInfo => packageInfo.name == package);
+            }
+            else
+            {
+                return Packages != null && Packages.Any(packageInfo => packageInfo.name == package && packageInfo.version == version);
+            }
+        }
+
+        /// <summary>
+        /// Returns the version corresponding to the provided <paramref name="package"/> if this is installed, otherwise it returns null.
+        /// </summary>
+        public static string GetInstalledPackageVersion(string package)
+        {
+            return Packages.First(packageInfo => package.Contains(packageInfo.name))?.version;
         }
     }
 }

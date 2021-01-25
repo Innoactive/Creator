@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+using UnityEditor.PackageManager.UI;
 
 namespace Innoactive.CreatorEditor.PackageManager
 {
@@ -13,10 +18,20 @@ namespace Innoactive.CreatorEditor.PackageManager
         public virtual string Package { get; } = "";
 
         /// <summary>
+        /// A string representing the version of the package.
+        /// </summary>
+        public virtual string Version { get; internal set; } = "";
+
+        /// <summary>
         /// Priority lets you tweak in which order each <see cref="Dependency"/> will be performed.
         /// The priority is considered from lowest to highest.
         /// </summary>
         public virtual int Priority { get; } = 0;
+
+        /// <summary>
+        /// Collection of samples to be imported from the Unity Package.
+        /// </summary>
+        public virtual string[] Samples { get; } = null;
 
         /// <summary>
         /// A list of layers to be added.
@@ -47,6 +62,7 @@ namespace Innoactive.CreatorEditor.PackageManager
                     {
                         EmitOnEnabled();
                         AddMissingLayers();
+                        ImportPackageSamples();
                     }
                     else
                     {
@@ -68,6 +84,24 @@ namespace Innoactive.CreatorEditor.PackageManager
         protected virtual void EmitOnDisabled()
         {
             OnPackageDisabled?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void ImportPackageSamples()
+        {
+            IEnumerable<Sample> samples = Sample.FindByPackage(Package, Version);
+
+            if (Samples != null && samples != null && samples.Any())
+            {
+                foreach (Sample sample in samples)
+                {
+                    if (Samples.Any(s => s == sample.displayName && sample.isImported == false))
+                    {
+                        sample.Import();
+                        AssetDatabase.Refresh();
+                        Debug.Log($"{sample.displayName} was imported.");
+                    }
+                }
+            }
         }
 
         private void AddMissingLayers()
