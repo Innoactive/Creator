@@ -41,25 +41,34 @@ namespace Innoactive.CreatorEditor
         /// <exception cref="FileNotFoundException">Exception thrown if no prefab can be found in project with given <paramref name="prefab"/>.</exception>
         protected void SetupPrefab(string prefab)
         {
-            string prefabName = Path.GetFileName(prefab);
-
-            if (IsPrefabMissingInScene(prefabName))
+            if (IsPrefabMissingInScene(Path.GetFileName(prefab)))
             {
-                string filter = $"{prefab} t:Prefab";
-                string[] prefabsGUIDs = AssetDatabase.FindAssets(filter, null);
-
-                if (prefabsGUIDs.Any() == false)
-                {
-                    throw new FileNotFoundException($"No prefabs found that match \"{prefab}\"." );
-                }
-
-                string assetPath = AssetDatabase.GUIDToAssetPath(prefabsGUIDs.First());
-                string[] brokenPaths = Regex.Split(assetPath, "Resources/");
-                string relativePath = brokenPaths.Last().Replace(".prefab", string.Empty);
-
-                GameObject instance = Object.Instantiate(Resources.Load(relativePath, typeof(GameObject))) as GameObject;
+                GameObject instance = Object.Instantiate(FindPrefab(prefab));
                 instance.name = instance.name.Replace("(Clone)", string.Empty);
             }
+        }
+
+        /// <summary>
+        /// Finds and returns a prefab
+        /// </summary>
+        /// <remarks>Extensions must be omitted. All asset names and paths in Unity use forward slashes, paths using backslashes will not work.</remarks>
+        /// <param name="prefab">Name or path to the target resource to setup.</param>
+        /// <exception cref="FileNotFoundException">Exception thrown if no prefab can be found in project with given <paramref name="prefab"/>.</exception>
+        protected GameObject FindPrefab(string prefab)
+        {
+            string filter = $"{prefab} t:Prefab";
+            string[] prefabsGUIDs = AssetDatabase.FindAssets(filter, null);
+
+            if (prefabsGUIDs.Any() == false)
+            {
+                throw new FileNotFoundException($"No prefabs found that match \"{prefab}\".");
+            }
+
+            string assetPath = AssetDatabase.GUIDToAssetPath(prefabsGUIDs.First());
+            string[] brokenPaths = Regex.Split(assetPath, "Resources/");
+            string relativePath = brokenPaths.Last().Replace(".prefab", string.Empty);
+
+            return Resources.Load(relativePath, typeof(GameObject)) as GameObject;
         }
 
         /// <summary>

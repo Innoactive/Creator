@@ -32,7 +32,6 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 EditorGUI.HelpBox(rect, "Your project does not contain any Conditions. Either create one or import an Innoactive Creator Component.", MessageType.Error);
                 rect.height += rect.height + EditorDrawingHelper.VerticalSpacing;
             }
-
             return rect;
         }
     }

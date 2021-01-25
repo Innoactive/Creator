@@ -33,7 +33,7 @@ namespace Innoactive.Creator.Core.Configuration
         }
 
         /// <inheritdoc />
-        public ICourseSerializer Serializer { get; set; } = new NewtonsoftJsonCourseSerializer();
+        public ICourseSerializer Serializer { get; set; } = new ImprovedNewtonsoftJsonCourseSerializer();
 
         /// <inheritdoc />
         public IModeHandler Modes { get; protected set; }
