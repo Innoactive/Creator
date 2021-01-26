@@ -1,7 +1,5 @@
 using UnityEditor;
 using UnityEngine;
-using UnityEditor.SceneManagement;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.Tabs;
@@ -31,13 +29,12 @@ namespace Innoactive.CreatorEditor.UI.Windows
         /// </summary>
         public static void ShowInspector()
         {
-            if (EditorUtils.IsWindowOpened<StepWindow>())
-            {
-                return;
-            }
+            GetInstance().Repaint();
+        }
 
-            StepWindow instance = GetWindow<StepWindow>("Step", false);
-            instance.Repaint();
+        public static StepWindow GetInstance(bool focus = false)
+        {
+            return GetWindow<StepWindow>("Step Inspector", focus);
         }
 
         private void OnEnable()
@@ -70,8 +67,6 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void OnGUI()
         {
-            titleContent = new GUIContent("Step Inspector");
-
             if (step == null)
             {
                 return;
