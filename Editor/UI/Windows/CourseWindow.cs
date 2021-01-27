@@ -6,6 +6,7 @@ using Innoactive.Creator.Core;
 using Innoactive.CreatorEditor.UndoRedo;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.CreatorEditor.Configuration;
+using UnityEngine.UIElements;
 
 namespace Innoactive.CreatorEditor.UI.Windows
 {
@@ -81,7 +82,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void OnInspectorUpdate()
         {
-            Repaint();
+           // Repaint();
         }
 
         private void OnEnable()
@@ -107,10 +108,19 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 titleIcon = new EditorIcon("icon_training_editor");
             }
 
-            EditorSceneManager.newSceneCreated += OnNewScene;
-            EditorSceneManager.sceneClosing += OnSceneClosed;
-            EditorSceneManager.sceneOpened += OnSceneOpened;
-            GlobalEditorHandler.CourseWindowOpened(this);
+            //EditorSceneManager.newSceneCreated += OnNewScene;
+            //EditorSceneManager.sceneClosing += OnSceneClosed;
+            //EditorSceneManager.sceneOpened += OnSceneOpened;
+            // GlobalEditorHandler.CourseWindowOpened(this);
+
+
+            VisualTreeAsset inpectorVisualTree = (VisualTreeAsset)Resources.Load("UI/ICWorkflowMain");
+            inpectorVisualTree.CloneTree(rootVisualElement);
+
+            StyleSheet mainStyle = (StyleSheet)Resources.Load("UI/ICWorkflowMainStyle");
+            rootVisualElement.styleSheets.Add(mainStyle);
+
+
         }
 
         private void OnDestroy()
@@ -123,7 +133,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void SetTabName()
         {
-            titleContent = new GUIContent("Workflow", titleIcon.Texture);
+            titleContent = new GUIContent("Workffffffflow", titleIcon.Texture);
         }
 
         private void OnGUI()
@@ -140,9 +150,9 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             Vector2 centerViewpointOnCanvas = currentScrollPosition + scrollRect.size / 2f;
 
-            HandleEditorCommands(centerViewpointOnCanvas);
-            chapterMenu.Draw();
-            DrawChapterWorkflow(scrollRect);
+            //HandleEditorCommands(centerViewpointOnCanvas);
+           // chapterMenu.Draw();
+            //DrawChapterWorkflow(scrollRect);
         }
 
         private void OnFocus()
@@ -229,6 +239,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                 }
             }
             GUI.EndScrollView();
+          
         }
 
         private void OnSceneOpened(Scene scene, OpenSceneMode mode)

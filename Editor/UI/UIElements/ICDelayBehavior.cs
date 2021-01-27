@@ -31,6 +31,17 @@ namespace Innoactive.CreatorEditor.UI.UIElements
             }
         }
 
+        public void deleteBehavior()
+        {
+           // this.parent.RemoveFromHierachy();
+        }
+
+        public new void RemoveFromHierachy()
+        {
+            //base.RemoveFromHierachy();
+
+        }
+
         public new class UxmlFactory : UxmlFactory<ICDelayBehavior, UxmlTraits> {
             
         }

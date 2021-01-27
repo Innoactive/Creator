@@ -1,0 +1,7 @@
+<UXML xmlns="UnityEngine.UIElements" xmlns:ic="Innoactive.CreatorEditor.UI.UIElements">
+    <VisualElement name="step" class="step">
+        <Box name="entry" class="entry"/>
+        <Box name="exit" class="exit"/>
+        <Label text="step name"/>
+    </VisualElement>
+</UXML>

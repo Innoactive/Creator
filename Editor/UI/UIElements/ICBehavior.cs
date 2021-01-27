@@ -2,6 +2,7 @@ namespace Innoactive.CreatorEditor.UI.UIElements
 {
     interface ICBehavior
     {
-         void toggleCollapse();
+        void toggleCollapse();
+        void deleteBehavior();
     }
 }

@@ -19,7 +19,8 @@ namespace Innoactive.CreatorEditor.UI.UIElements
         private void delete()
         {
             Debug.Log("delete Behavior");
-            
+
+            ((ICBehavior)this.parent).deleteBehavior();
         }
 
         private void moveUp()
@@ -34,9 +35,10 @@ namespace Innoactive.CreatorEditor.UI.UIElements
 
         private void toggleCollapse()
         {
-            
+
             ((ICBehavior)this.parent).toggleCollapse();
             updateToggleState();
+           
 
         }
 

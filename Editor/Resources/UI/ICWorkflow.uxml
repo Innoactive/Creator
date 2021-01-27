@@ -1,0 +1,8 @@
+<UXML xmlns="UnityEngine.UIElements" xmlns:ic="Innoactive.CreatorEditor.UI.UIElements">
+    <VisualElement name="stepContainer" class="step-container">
+        
+    </VisualElement>
+    <VisualElement name="transitionsContainer" class="transition-container">
+        
+    </VisualElement>
+</UXML>
