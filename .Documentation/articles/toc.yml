@@ -92,7 +92,13 @@
       href: pro/01-validation.md
     - name: Advanced Spectator
       href: pro/02-advanced-spectator.md
-
+name: XR Interaction Toolkit
+  href: xr/index.md  
+  items:
+    - name: OverView
+      href: xr/index.md
+    - name: Simulator
+      href: xr/01-simulator.md  
 - name: Transition Guide to v2.0 for Developers
   href: transition-to-v2.0/index.md
   items:
