@@ -26,6 +26,11 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
+            if (RuntimeConfigurator.Exists == false)
+            {
+                return rect;
+            }
+
             isUndoOperation = false;
             UniqueNameReference uniqueNameReference = (UniqueNameReference)currentValue;
             PropertyInfo valueProperty = currentValue.GetType().GetProperty("Value");
