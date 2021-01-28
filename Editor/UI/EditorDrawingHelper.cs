@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,6 +10,7 @@ namespace Innoactive.CreatorEditor.UI
     internal static class EditorDrawingHelper
     {
         private static readonly Vector2 addComponentButtonSize = new Vector2(228, 22);
+        private static readonly Vector2 addHelpButtonSize = new Vector2(20, 22);
         private static readonly int StepTransitionStrokeSize = 3;
         /// <summary>
         /// Default spacing between Step Inspector elements.
@@ -32,6 +33,7 @@ namespace Innoactive.CreatorEditor.UI
             }
         }
 
+        private static readonly EditorIcon helpIcon = new EditorIcon("icon_help");
         /// <summary>
         /// Height of slightly bigger line in the Step Inspector.
         /// </summary>
@@ -43,10 +45,11 @@ namespace Innoactive.CreatorEditor.UI
             }
         }
 
+
         /// <summary>
         /// Draw button which is similar to default "Add Component" Unity button.
         /// </summary>
-        public static bool DrawAddButton(ref Rect rect, string label)
+        public static Rect CalculateAddButtonRect(ref Rect rect)
         {
             rect.height = SingleLineHeight + addComponentButtonSize.y;
 
@@ -54,6 +57,16 @@ namespace Innoactive.CreatorEditor.UI
             buttonRect.size = addComponentButtonSize;
             buttonRect.x = rect.x + (rect.width - buttonRect.width) / 2f;
             buttonRect.y = rect.y + (rect.height - buttonRect.height) / 2f;
+            return buttonRect;
+        }
+
+
+        /// <summary>
+        /// Draw button which is similar to default "Add Component" Unity button.
+        /// </summary>
+        public static bool DrawAddButton(ref Rect rect, string label)
+        {
+            Rect buttonRect = EditorDrawingHelper.CalculateAddButtonRect(ref rect);
 
             GUIStyle style = new GUIStyle(GUI.skin.button)
             {
@@ -64,6 +77,23 @@ namespace Innoactive.CreatorEditor.UI
             return GUI.Button(buttonRect, new GUIContent(label), style);
         }
 
+        /// <summary>
+        /// Draw a help button next to the 'Add Behavior' / 'Add Condition' button.
+        /// </summary>
+        public static bool DrawHelpButton(ref Rect rect)
+        {
+            Rect addbuttonRect = EditorDrawingHelper.CalculateAddButtonRect(ref rect);
+            Rect helpbuttonRect = addbuttonRect;
+            helpbuttonRect.size = addHelpButtonSize;
+            helpbuttonRect.x = addbuttonRect.x + addbuttonRect.width + 5;
+
+            GUIStyle style = new GUIStyle(GUI.skin.button)
+            {
+                fontSize = 12
+            };
+            
+            return GUI.Button(helpbuttonRect, helpIcon.Texture, style);
+        }
         /// <summary>
         /// Draw a circle.
         /// </summary>

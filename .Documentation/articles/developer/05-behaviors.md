@@ -120,6 +120,26 @@ public class ScalingBehaviorData : IBehaviorData
 }
 ```
 
+Each behavior or condition of our base template has a help button in their header. The button is linked to a webpage.
+If you would like to add your own link, add a `[HelpLink]` attribute above the behavior class.
+
+[![Help Button](../images/developer/help-link.png)](../images/developer/help-link.png "The HelpLink attribute allows to insert guidance for your training designers.")
+
+
+```csharp
+namespace Innoactive.Creator.BaseTemplate.Behaviors
+{
+    [DataContract(IsReference = true)]
+    [HelpLink("http://my-documentation.org/scale-object.html")]
+    public class ScalingBehavior: Behavior<ScalingBehavior.EntityData>
+    {
+        //Your Behavior code as shown above
+    }
+}
+
+```
+
+
 ## Stage Process
 
 Now we need to define the process of the scaling behavior. It will read and modify the data as it will take the target and apply a new scale to it over a given duration in seconds.

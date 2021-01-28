@@ -25,6 +25,10 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             }
             EditorGUI.EndDisabledGroup();
 
+            if (EditorDrawingHelper.DrawHelpButton(ref rect))
+            {
+                Application.OpenURL("https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html");
+            }
             if (EditorConfigurator.Instance.AllowedMenuItemsSettings.GetConditionMenuOptions().Any() == false)
             {
                 rect.y += rect.height + EditorDrawingHelper.VerticalSpacing;

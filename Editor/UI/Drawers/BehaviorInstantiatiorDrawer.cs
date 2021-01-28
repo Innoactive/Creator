@@ -24,6 +24,11 @@ namespace Innoactive.CreatorEditor.UI.Drawers
                 TestableEditorElements.DisplayContextMenu(options);
             }
             EditorGUI.EndDisabledGroup();
+            
+            if (EditorDrawingHelper.DrawHelpButton(ref rect))
+            {
+                Application.OpenURL("https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-behaviors.html");
+            }
 
             if (EditorConfigurator.Instance.AllowedMenuItemsSettings.GetBehaviorMenuOptions().Any() == false)
             {
