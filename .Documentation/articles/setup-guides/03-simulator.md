@@ -48,7 +48,7 @@ Check the Unity Inspector. There should be an 'Interaction Rig Setup' script, wh
 
 The script is 'smart'. In case Unity is setup to the new input system the list disables the incompatible rigs and only shows the compatible XR Rig.
 
-![Available Rigs](../images/xr/availableRigs.png "The Interaction Rig Setup script shows which Rigs are currently configured and available.")
+![Available Rigs](../images/xr/availableRigs.jpg "The Interaction Rig Setup script shows which Rigs are currently configured and available.")
 
 Enable/Disable available Rigs, you are also able to prioritize them by changing the position in the array. The topmost entry has the highest priority. The interaction rig will be spawned at the `[TRAINEE]` GameObject.
 
