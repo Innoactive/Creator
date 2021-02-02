@@ -1,12 +1,12 @@
-# XRI Simulator
+# XR Device Simulator
 
-The Unity's XRI Simulator comes in handy when you want to test your VR Application without headset.
-The XRI Simulator requires to use of the latest XR Interaction Toolkit version along with the new input system. Currently, the Creator is not compatible.
+The XR Device Simulator comes in handy when you want to test your VR Application without headset.
+The XR Device Simulator requires to use of the latest XR Interaction Toolkit version along with the new input system. Currently, the Creator is not compatible.
 Innoactive Creator automatically downloads and enables the XR Interaction Toolkit.
 
 
 ## Step 1: Configure the use of the 'new input system' for your Project
-The XRI Simulator uses the Unity Input System to drive VR interactions. Make sure that the new input system is configured in your project.
+The XR Device Simulator uses the Unity Input System to drive VR interactions. Make sure that the new input system is configured in your project.
 
 > Open _Edit > Project Settings_ 
 
@@ -16,7 +16,7 @@ The XRI Simulator uses the Unity Input System to drive VR interactions. Make sur
 
 
 ## Step 2: Check if you have required packages
-The Simulator uses a default set of input actions and presets used with the XR Interaction Toolkit behaviors that use the new Input System. It also delivers Assets related to the simulation of XR HMD and controllers. Both needs to be imported.
+The XR Device Simulator uses a default set of input actions and presets used with the XR Interaction Toolkit behaviors that use the new Input System. It also delivers Assets related to the simulation of XR HMD and controllers. Both needs to be imported.
 
 > Open the Package Manager at Window > Package Manager 
 
@@ -32,7 +32,7 @@ The Simulator uses a default set of input actions and presets used with the XR I
 
 If your scene has the obsolete `[XR Setup]` object in the scene, a pop-up window allows you to delete it. You will not need it anymore.
 
-![Delete Obsolete Rig](../images/xr/dialogXRRigDeletion.png "A pop-up allows you to delete the obsolete `[XR Setup]` object from the scene").
+![Delete Obsolete Rig](../images/xr/dialogXRRigDeletion.png "A pop-up allows you to delete the obsolete `[XR Setup]` object from the scene")
 
 > delete the `[XR Setup]` object if it is in your object hierachy.
 
@@ -61,16 +61,15 @@ If you configured Unity's Active Input Handling in Step 1 to `both`, you will se
 
 > Drag both files into the hiearachy.
 
-## Step 6: Run XR Simulator / change back to VR
+## Step 6: Run XR Device Simulator / change back to VR
 
 > Select thee Unity Play button.
 
-You can run your training now in the XR Simulator. See section 'Helpful Links' for more information on how to control the scene with your keyboard and mouse.
+You can run your training now in the XR Device Simulator. See section 'Helpful Links' for more information on how to control the scene with your keyboard and mouse.
 
 If you want to switch back to running your training in VR, you need to delete the two objects you added in Step 5 from your object hierachy.
 
 ## Helpful Links:
 [XR Device Simulator Controls](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@0.10/manual/samples.html#input-actions-asset-1)
-[How To add XR Simulator](https://www.youtube.com/watch?v=d4bTpkvBwrs&feature=youtu.be)
 
 
