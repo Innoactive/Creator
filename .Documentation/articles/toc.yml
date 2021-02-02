@@ -26,7 +26,7 @@
     - name: Unity Setup
       href: setup-guides/02-unity-setup.md
     - name: Project Setup
-      href: setup-guides/03-xr-setup.md
+      href: setup-guides/03-project-setup.md
 - name: Innoactive Creator for Designers
   href: innoactive-creator/index.md
   items:

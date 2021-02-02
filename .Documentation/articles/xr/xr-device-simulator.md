@@ -1,21 +1,23 @@
 # XR Device Simulator
 
-The XR Device Simulator comes in handy when you want to test your VR Application without headset.
-The XR Device Simulator requires to use of the latest XR Interaction Toolkit version along with the new input system. Currently, the Creator is not compatible.
-Innoactive Creator automatically downloads and enables the XR Interaction Toolkit.
+The [XR Device Simulator](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@0.10/manual/samples.html#xr-device-simulator) is a tool bundled within `XR Interaction Toolkit` starting from its version `1.0.0-pre.2`. It handles mouse and keyboard input from the user and uses it to drive simulated XR controllers and an XR head-mounted display (HMD).
 
+The XR Device Simulator is only supported when using [Actions](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/Actions.html), for which the [new input system](https://blogs.unity3d.com/2019/10/14/introducing-the-new-input-system/) is required.
 
-## Step 1: Configure the use of the 'new input system' for your Project
-The XR Device Simulator uses the Unity Input System to drive VR interactions. Make sure that the new input system is configured in your project.
+## Prerequisites
 
-> Open _Edit > Project Settings_ 
+- XR Interaction Toolkit must be at least at version 1.0.0-pre.2.
 
-> Select the _Player_ tab in the opening window. 
+> [How to change a package version.](https://docs.unity3d.com/Manual/upm-ui-update.html)
 
-> Scroll down to _Active Input Handling_ and set it to either `both` or `new input system`.
+- The new input system must be enabled.
 
+> [How to set up the new input system.](../setup-guides/03-project-setup.md#input-system)
+
+If missing, import the 
 
 ## Step 2: Check if you have required packages
+
 The XR Device Simulator uses a default set of input actions and presets used with the XR Interaction Toolkit behaviors that use the new Input System. It also delivers Assets related to the simulation of XR HMD and controllers. Both needs to be imported.
 
 > Open the Package Manager at Window > Package Manager 
