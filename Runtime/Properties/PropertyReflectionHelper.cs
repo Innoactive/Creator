@@ -39,7 +39,12 @@ namespace Innoactive.Creator.Core
             return result;
         }
 
-        public static List<LockablePropertyData> ExtractLockablePropertiesFromConditions(IConditionData data, bool alsoRequired = true)
+        /// <summary>
+        /// Extracts all <see cref="LockableProperties"/> from given condition.
+        /// </summary>
+        /// <param name="data">Condition to be used for extraction</param>
+        /// <param name="checkRequiredComponentsToo">if true the [RequiredComponents] will be checked and added too.</param>
+        public static List<LockablePropertyData> ExtractLockablePropertiesFromConditions(IConditionData data, bool checkRequiredComponentsToo = true)
         {
             List<MemberInfo> memberInfo = data.GetType()
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
@@ -82,7 +87,7 @@ namespace Innoactive.Creator.Core
                 if (refType != null)
                 {
                     IEnumerable<Type> types = new[] {refType};
-                    if (alsoRequired)
+                    if (checkRequiredComponentsToo)
                     {
                         types = GetLockableDependenciesFrom(refType);
                     }
