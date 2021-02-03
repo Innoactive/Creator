@@ -14,7 +14,16 @@ The XR Device Simulator is only supported when using [Actions](https://docs.unit
 
 > [How to set up the new input system.](../setup-guides/03-project-setup.md#input-system)
 
-If missing, import the 
+If missing, import the...
+
+## How to something-...
+
+
+[![Open the Step Inspector](../images/xr/how-to-set-up-the-xr-simulator.gif "How to set up the XR Device Simulator.")](../images/xr/how-to-set-up-the-xr-simulator.gif)
+
+[![Open the Step Inspector](../images/xr/xr-simulator.gif "XR Device Simulator.")](../images/xr/xr-simulator.gif)
+
+![Delete Obsolete Rig](../images/xr/interaction-rig-loader.png "A pop-up allows you to delete the obsolete `[XR Setup]` object from the scene")
 
 ## Step 2: Check if you have required packages
 
