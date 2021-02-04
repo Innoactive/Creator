@@ -168,13 +168,22 @@ namespace Innoactive.Creator.Core.SceneObjects
             }
 
             uniqueName = newName;
-
-            RuntimeConfigurator.Configuration.SceneObjectRegistry.Register(this);
+            if (IsPrefab() == false)
+            {
+                RuntimeConfigurator.Configuration.SceneObjectRegistry.Register(this);
+            }
 
             if (UniqueNameChanged != null)
             {
                 UniqueNameChanged.Invoke(this, new SceneObjectNameChanged(UniqueName, previousName));
             }
+        }
+
+        private bool IsPrefab()
+        {
+            return (GameObject.scene.name != gameObject.name
+                   && string.IsNullOrEmpty(GameObject.scene.path)
+                   && gameObject.scene.rootCount == 0) == false;
         }
     }
 }
