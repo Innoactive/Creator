@@ -4,83 +4,55 @@ The [XR Device Simulator](https://docs.unity3d.com/Packages/com.unity.xr.interac
 
 The XR Device Simulator is only supported when using [Actions](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/Actions.html), for which the [new input system](https://blogs.unity3d.com/2019/10/14/introducing-the-new-input-system/) is required.
 
+[![Open the Step Inspector](../images/xr/xr-simulator.gif "XR Device Simulator.")](../images/xr/xr-simulator.gif)
+
 ## Prerequisites
 
-- XR Interaction Toolkit must be at least at version 1.0.0-pre.2.
-
-> [How to change a package version.](https://docs.unity3d.com/Manual/upm-ui-update.html)
-
-- The new input system must be enabled.
+- The `new input system` must be enabled.
 
 > [How to set up the new input system.](../setup-guides/03-project-setup.md#input-system)
 
-If missing, import the...
+- The `XR Interaction Toolkit`package must be at least at version `1.0.0-pre.2`.
 
-## How to something-...
+> [How to change a package version.](https://docs.unity3d.com/Manual/upm-ui-update.html)
 
+- Make sure you have imported the `Default Input Actions` and `XR Device Simulator` [samples](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@0.10/manual/samples.html).
+
+![Delete Obsolete Rig](../images/xr/xr-samples.png "XR Interaction Toolkit Samples")
+
+
+## Initial Setup
+
+If in your scene you are missing the `[INTERACTION_RIG_LOADER]` then you need to [Setup the Training Configuration](../innoactive-creator/training-configuration.md#setup-the-training-configuration-in-the-current-scene), you can do this by selecting in the toolbar `Innoactive` > `Setup Training Scene`.
 
 [![Open the Step Inspector](../images/xr/how-to-set-up-the-xr-simulator.gif "How to set up the XR Device Simulator.")](../images/xr/how-to-set-up-the-xr-simulator.gif)
 
-[![Open the Step Inspector](../images/xr/xr-simulator.gif "XR Device Simulator.")](../images/xr/xr-simulator.gif)
+The `[INTERACTION_RIG_LOADER]` contains a list of available XR rigs, including an `XR Simulator`. The `[INTERACTION_RIG_LOADER]` will spawn the first available rig going from top to bottom of the list, the list can be rearranged.
 
 ![Delete Obsolete Rig](../images/xr/interaction-rig-loader.png "A pop-up allows you to delete the obsolete `[XR Setup]` object from the scene")
 
-## Step 2: Check if you have required packages
+> In order to try out the simulator, make sure to position the XR Simulator at the top of the list.
 
-The XR Device Simulator uses a default set of input actions and presets used with the XR Interaction Toolkit behaviors that use the new Input System. It also delivers Assets related to the simulation of XR HMD and controllers. Both needs to be imported.
+## Simulator Controls (Input Actions)
 
-> Open the Package Manager at Window > Package Manager 
+The XR Device Simulator uses a sample [Input Action Set](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@0.10/manual/samples.html#input-actions-asset-1), you can find and [edit](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/ActionAssets.html#editing-input-action-assets) it in the `Assets\Samples\XR Interaction Toolkit\[version]\XR Device Simulator Controls` folder.
 
-> Select 'in Project' in the drop-down on the top. 
+The `XR Device Simulator Controls` is divided in two `Action Maps`: 
 
-> Select the XR Interaction Toolkit and scroll the tab window down. Make sure that both `Default Input Actions` and `XR Device Simulator` are imported. 
+- **Main**
 
-> Check also if the folder _Assets/Samples_ exists in the Unity Project tab.
+Actions like `Manipulate Left Hand`, `Manipulate Right Hand`, `Manipulate Head`, and `Toggle Coursor Lock` can be found here.
 
-## Step 3: Change from XR Rig to XR Rig action-based
+![Delete Obsolete Rig](../images/xr/xr-simulator-controls-main.png "A pop-up allows you to delete the obsolete `[XR Setup]` object from the scene")
 
-> Select 'Setup Training Scene' from the Innoactive Menu drop-down.
+- **Input Controls**
 
-If your scene has the obsolete `[XR Setup]` object in the scene, a pop-up window allows you to delete it. You will not need it anymore.
+Actions like `Grip`, `Trigger`, `Primary Button`, `Primary Touch`, and `Menu`can be found here.
 
-![Delete Obsolete Rig](../images/xr/dialogXRRigDeletion.png "A pop-up allows you to delete the obsolete `[XR Setup]` object from the scene")
+![Delete Obsolete Rig](../images/xr/xr-simulator-controls-input-controls.png "A pop-up allows you to delete the obsolete `[XR Setup]` object from the scene")
 
-> delete the `[XR Setup]` object if it is in your object hierachy.
+## Disclaimer
 
-Check the object hierachy tab in unity. You should see an `[INTERACTION_RIG_LOADER]` and a `[TRAINEE]` object.
+The `XR Device Simulator` is a tool developed and maintained by `Unity Technologies`, it is not distributed with the `Innoactive Creator`.
 
-## Step 4: check the available Rigs
->Select the `[INTERACTION_RIG_LOADER]`.
-
-Check the Unity Inspector. There should be an 'Interaction Rig Setup' script, which contains a list with available interaction Rigs. 
-- XR Rig Legacy for the legacy input
-- XR Rig for the new input system
-- none in case you want to use your custom XR Rig already on the scene.
-
-The script is 'smart'. In case Unity is setup to the new input system the list disables the incompatible rigs and only shows the compatible XR Rig.
-
-![Available Rigs](../images/xr/availableRigs.jpg "The Interaction Rig Setup script shows which Rigs are currently configured and available.")
-
-Enable/Disable available Rigs, you are also able to prioritize them by changing the position in the array. The topmost entry has the highest priority. The interaction rig will be spawned at the `[TRAINEE]` GameObject.
-
-If you configured Unity's Active Input Handling in Step 1 to `both`, you will see both Rigs, XR legacy Rig and XR Rig, enabled.
-
-## Step 5: Import Required Objects to Scene
-
-
-> In Unity's project tab, search for 'XR Setup Action Based' and 'XR Device Simulator'. 
-
-> Drag both files into the hiearachy.
-
-## Step 6: Run XR Device Simulator / change back to VR
-
-> Select thee Unity Play button.
-
-You can run your training now in the XR Device Simulator. See section 'Helpful Links' for more information on how to control the scene with your keyboard and mouse.
-
-If you want to switch back to running your training in VR, you need to delete the two objects you added in Step 5 from your object hierachy.
-
-## Helpful Links:
-[XR Device Simulator Controls](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@0.10/manual/samples.html#input-actions-asset-1)
-
-
+Do you have more questions? Let us know about your experience in our [community](https://innoactive.io/creator/community?tab=posts).
