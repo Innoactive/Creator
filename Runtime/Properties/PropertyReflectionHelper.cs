@@ -39,7 +39,12 @@ namespace Innoactive.Creator.Core
             return result;
         }
 
-        public static List<LockablePropertyData> ExtractLockablePropertiesFromConditions(IConditionData data)
+        /// <summary>
+        /// Extracts all <see cref="LockableProperties"/> from given condition.
+        /// </summary>
+        /// <param name="data">Condition to be used for extraction</param>
+        /// <param name="checkRequiredComponentsToo">if true the [RequiredComponents] will be checked and added too.</param>
+        public static List<LockablePropertyData> ExtractLockablePropertiesFromConditions(IConditionData data, bool checkRequiredComponentsToo = true)
         {
             List<MemberInfo> memberInfo = data.GetType()
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
@@ -69,15 +74,24 @@ namespace Innoactive.Creator.Core
                     return;
                 }
 
-                Type refType = ReflectionUtils
-                    .GetConcreteImplementationsOf(reference.GetReferenceType())
-                    .Where(typeof(LockableProperty).IsAssignableFrom)
-                    .FirstOrDefault(type => Enumerable.All(type.Assembly.GetReferencedAssemblies(),
-                        assemblyName => UnitTestChecker.IsUnitTesting || (assemblyName.Name != "UnityEditor" && assemblyName.Name != "nunit.framework")));
+                IEnumerable<Type> refs = ReflectionUtils.GetConcreteImplementationsOf(reference.GetReferenceType());
+                refs = refs.Where(typeof(LockableProperty).IsAssignableFrom);
 
+                if (UnitTestChecker.IsUnitTesting == false)
+                {
+                    refs = refs.Where(type => type.Assembly.GetReferencedAssemblies().All(name => name.Name != "nunit.framework"));
+                    refs = refs.Where(type => type.Assembly.GetReferencedAssemblies().All(name => name.Name != "UnityEditor"));
+                }
+
+                Type refType = refs.FirstOrDefault();
                 if (refType != null)
                 {
-                    IEnumerable<Type> types = GetLockableDependenciesFrom(refType);
+                    IEnumerable<Type> types = new[] {refType};
+                    if (checkRequiredComponentsToo)
+                    {
+                        types = GetLockableDependenciesFrom(refType);
+                    }
+
                     foreach (Type type in types)
                     {
                         LockableProperty property = GetProperty(reference, type);
