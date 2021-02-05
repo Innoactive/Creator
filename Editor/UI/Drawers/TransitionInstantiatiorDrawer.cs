@@ -1,6 +1,7 @@
 using System;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Behaviors;
+using UnityEditor;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor.UI.Drawers
@@ -14,6 +15,9 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
+            EditorGUI.DrawRect(new Rect(0, rect.y, rect.width + 8, 1), new Color(26f / 256f, 26f / 256f, 26f / 256f));
+
+            rect = new Rect(rect.x, rect.y - 5, rect.width, rect.height);
             if (EditorDrawingHelper.DrawAddButton(ref rect, "Add Transition"))
             {
                 ChangeValue(() => EntityFactory.CreateTransition(), () => currentValue, changeValueCallback);

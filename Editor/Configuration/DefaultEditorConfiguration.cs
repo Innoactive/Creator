@@ -31,7 +31,7 @@ namespace Innoactive.CreatorEditor.Configuration
         /// <inheritdoc />
         public virtual ICourseSerializer Serializer
         {
-            get { return new NewtonsoftJsonCourseSerializer(); }
+            get { return new ImprovedNewtonsoftJsonCourseSerializer(); }
         }
 
         /// <inheritdoc />
