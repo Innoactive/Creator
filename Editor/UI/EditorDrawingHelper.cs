@@ -10,6 +10,7 @@ namespace Innoactive.CreatorEditor.UI
     internal static class EditorDrawingHelper
     {
         private static readonly Vector2 addComponentButtonSize = new Vector2(228, 22);
+        private static readonly Vector2 addHelpButtonSize = new Vector2(20, 22);
         private static readonly int StepTransitionStrokeSize = 3;
         /// <summary>
         /// Default spacing between Step Inspector elements.
@@ -32,6 +33,7 @@ namespace Innoactive.CreatorEditor.UI
             }
         }
 
+        private static readonly EditorIcon helpIcon = new EditorIcon("icon_help");
         /// <summary>
         /// Height of slightly bigger line in the Step Inspector.
         /// </summary>
@@ -64,6 +66,26 @@ namespace Innoactive.CreatorEditor.UI
             return GUI.Button(buttonRect, new GUIContent(label), style);
         }
 
+        public static bool DrawHelpButton(ref Rect rect)
+        {
+            rect.height = SingleLineHeight + addComponentButtonSize.y;
+
+            Rect addbuttonRect = rect;
+            addbuttonRect.size = addComponentButtonSize;
+            addbuttonRect.x = rect.x + (rect.width - addbuttonRect.width) / 2f;
+            addbuttonRect.y = rect.y + (rect.height - addbuttonRect.height) / 2f;
+
+            Rect helpbuttonRect = addbuttonRect;
+            helpbuttonRect.size = addHelpButtonSize;
+            helpbuttonRect.x = addbuttonRect.x + addbuttonRect.width + 5;
+
+            GUIStyle style = new GUIStyle(GUI.skin.button)
+            {
+                fontSize = 12
+            };
+            
+            return GUI.Button(helpbuttonRect, helpIcon.Texture, style);
+        }
         /// <summary>
         /// Draw a circle.
         /// </summary>
