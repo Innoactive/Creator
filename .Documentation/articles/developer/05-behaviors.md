@@ -120,6 +120,39 @@ public class ScalingBehaviorData : IBehaviorData
 }
 ```
 
+Each behavior or condition has a help button in their header. The button is linked to a webpage.
+If you would like to add your own link, add a `[HelpLink]` attribute to the behavior class.
+
+[![Help Button](../images/developer/help-attribute.png)](../images/developer/help-attribute.png "The HelpLink attribute allows to insert guidance for your training designers.")
+
+
+```csharp
+// The step inspector draws data objects, not entities. 
+// This is why we have to attribute the data class.
+[DisplayName("Scale Object")]
+// Optionally, add an HTML-link to an own help page.
+[HelpLink("https://spectrum.chat/innoactive-creator")]
+[DataContract(IsReference = true)]
+public class ScalingBehaviorData : IBehaviorData
+{
+    [DataMember]
+    public SceneObjectReference Target { get; set; }
+
+    [DataMember]
+    [DisplayName("Target Scale")]
+    public Vector3 TargetScale { get; set; }
+
+    [DataMember]
+    [DisplayName("Animation Duration")]
+    public float Duration { get; set; }
+
+    public Metadata Metadata { get; set; }
+
+    public string Name { get; set; }
+}
+```
+
+
 ## Stage Process
 
 Now we need to define the process of the scaling behavior. It will read and modify the data as it will take the target and apply a new scale to it over a given duration in seconds.
