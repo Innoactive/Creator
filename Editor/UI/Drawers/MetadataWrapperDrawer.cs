@@ -38,7 +38,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         private static readonly EditorIcon arrowDownIcon = new EditorIcon("icon_arrow_down");
         private static readonly EditorIcon helpIcon = new EditorIcon("icon_help");
 
-        private float spaceBetweenButtons = 2f;
+        
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
@@ -147,7 +147,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             HelpLinkAttribute hl = wrapper.Value.GetType().GetCustomAttribute(typeof(HelpLinkAttribute)) as HelpLinkAttribute;
             if (hl != null)
             {
-                if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 4 - 0.1f - 2 * spaceBetweenButtons, rect.y + 1, buttonSize.x, buttonSize.y), helpIcon.Texture, style))
+                if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 4 - 0.1f, rect.y + 1, buttonSize.x, buttonSize.y), helpIcon.Texture, style))
                 {
                     Application.OpenURL(hl.HelpLink);
                 }
@@ -163,7 +163,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             GUIStyle style = GetStyle(isPartOfHeader);
            
             GUI.enabled = ((ReorderableElementMetadata)wrapper.Metadata[reorderableName]).IsLast == false;
-            if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 2 - 3 - spaceBetweenButtons, rect.y + 1, buttonSize.x, buttonSize.y), arrowDownIcon.Texture, style))
+            if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 2, rect.y + 1, buttonSize.x, buttonSize.y), arrowDownIcon.Texture, style))
             {
                 object oldValue = wrapper.Value;
                 ChangeValue(() =>
@@ -182,7 +182,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
             GUI.enabled = ((ReorderableElementMetadata)wrapper.Metadata[reorderableName]).IsFirst == false;
             
-            if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 3 + 3 - spaceBetweenButtons, rect.y + 1, buttonSize.x, buttonSize.y), arrowUpIcon.Texture, style))
+            if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 3, rect.y + 1, buttonSize.x, buttonSize.y), arrowUpIcon.Texture, style))
             {
                 object oldValue = wrapper.Value;
                 ChangeValue(() =>
