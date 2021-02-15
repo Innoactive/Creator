@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -45,10 +45,11 @@ namespace Innoactive.CreatorEditor.UI
             }
         }
 
+
         /// <summary>
         /// Draw button which is similar to default "Add Component" Unity button.
         /// </summary>
-        public static bool DrawAddButton(ref Rect rect, string label)
+        public static Rect calculateAddButtonRect(ref Rect rect)
         {
             rect.height = SingleLineHeight + addComponentButtonSize.y;
 
@@ -56,6 +57,16 @@ namespace Innoactive.CreatorEditor.UI
             buttonRect.size = addComponentButtonSize;
             buttonRect.x = rect.x + (rect.width - buttonRect.width) / 2f;
             buttonRect.y = rect.y + (rect.height - buttonRect.height) / 2f;
+            return buttonRect;
+        }
+
+
+        /// <summary>
+        /// Draw button which is similar to default "Add Component" Unity button.
+        /// </summary>
+        public static bool DrawAddButton(ref Rect rect, string label)
+        {
+            Rect buttonRect = EditorDrawingHelper.calculateAddButtonRect(ref rect);
 
             GUIStyle style = new GUIStyle(GUI.skin.button)
             {
@@ -68,13 +79,7 @@ namespace Innoactive.CreatorEditor.UI
 
         public static bool DrawHelpButton(ref Rect rect)
         {
-            rect.height = SingleLineHeight + addComponentButtonSize.y;
-
-            Rect addbuttonRect = rect;
-            addbuttonRect.size = addComponentButtonSize;
-            addbuttonRect.x = rect.x + (rect.width - addbuttonRect.width) / 2f;
-            addbuttonRect.y = rect.y + (rect.height - addbuttonRect.height) / 2f;
-
+            Rect addbuttonRect = EditorDrawingHelper.calculateAddButtonRect(ref rect);
             Rect helpbuttonRect = addbuttonRect;
             helpbuttonRect.size = addHelpButtonSize;
             helpbuttonRect.x = addbuttonRect.x + addbuttonRect.width + 5;

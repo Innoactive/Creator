@@ -131,7 +131,7 @@ If you would like to add your own link, add a `[HelpLink]` attribute to the beha
 // This is why we have to attribute the data class.
 [DisplayName("Scale Object")]
 // Optionally, add an HTML-link to an own help page.
-[HelpLink("https://spectrum.chat/innoactive-creator")]
+[HelpLink("http://my-documentation.org/scale-object.html")]
 [DataContract(IsReference = true)]
 public class ScalingBehaviorData : IBehaviorData
 {

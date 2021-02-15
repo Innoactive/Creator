@@ -144,12 +144,15 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             rect = DrawRecursively(rect, wrapper, showHelpName, changeValueCallback, label);
             Vector2 buttonSize = new Vector2(EditorGUIUtility.singleLineHeight + 3f, EditorDrawingHelper.SingleLineHeight);
             GUIStyle style = GetStyle(isPartOfHeader);
-            HelpLinkAttribute hl = wrapper.Value.GetType().GetCustomAttribute(typeof(HelpLinkAttribute)) as HelpLinkAttribute;
-            if (hl != null)
+            if(wrapper.Value != null && wrapper.Value.GetType() != null)
             {
-                if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 4 - 0.1f, rect.y + 1, buttonSize.x, buttonSize.y), helpIcon.Texture, style))
+                HelpLinkAttribute helpLinkAttribute = wrapper.Value.GetType().GetCustomAttribute(typeof(HelpLinkAttribute)) as HelpLinkAttribute;
+                if (helpLinkAttribute != null)
                 {
-                    Application.OpenURL(hl.HelpLink);
+                    if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 4 - 0.1f, rect.y + 1, buttonSize.x, buttonSize.y), helpIcon.Texture, style))
+                    {
+                        Application.OpenURL(helpLinkAttribute.HelpLink);
+                    }
                 }
             }
             return rect;

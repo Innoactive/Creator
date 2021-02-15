@@ -3,7 +3,7 @@ using System;
 namespace Innoactive.Creator.Core.Attributes
 {
     /// <summary>
-    /// Add a link to a documentation which explains a behavior or condition.
+    /// Adds a link to a documentation that explains a behavior or condition.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Class)]
     public class HelpLinkAttribute : Attribute
