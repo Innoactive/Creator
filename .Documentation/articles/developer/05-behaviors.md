@@ -123,7 +123,7 @@ public class ScalingBehaviorData : IBehaviorData
 Each behavior or condition has a help button in their header. The button is linked to a webpage.
 If you would like to add your own link, add a `[HelpLink]` attribute to the behavior class.
 
-[![Help Button](../images/developer/help-attribute.png)](../images/developer/help-attribute.png "The HelpLink attribute allows to insert guidance for your training designers.")
+[![Help Button](../images/developer/help-link.png)](../images/developer/help-link.png "The HelpLink attribute allows to insert guidance for your training designers.")
 
 
 ```csharp
