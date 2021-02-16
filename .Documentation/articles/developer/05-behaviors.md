@@ -129,10 +129,12 @@ If you would like to add your own link, add a `[HelpLink]` attribute above the b
 ```csharp
 namespace Innoactive.Creator.BaseTemplate.Behaviors
 {
-[DataContract(IsReference = true)]
-[HelpLink("http://my-documentation.org/scale-object.html")]
-public class ScalingBehavior: Behavior<ScalingBehavior.EntityData>
-{
+    [DataContract(IsReference = true)]
+    [HelpLink("http://my-documentation.org/scale-object.html")]
+    public class ScalingBehavior: Behavior<ScalingBehavior.EntityData>
+    {
+        //Your Behavior code as shown above
+    }
 }
 
 ```
