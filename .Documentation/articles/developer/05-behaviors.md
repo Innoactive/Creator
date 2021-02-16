@@ -120,36 +120,21 @@ public class ScalingBehaviorData : IBehaviorData
 }
 ```
 
-Each behavior or condition has a help button in their header. The button is linked to a webpage.
-If you would like to add your own link, add a `[HelpLink]` attribute to the behavior class.
+Each behavior or condition of our base template has a help button in their header. The button is linked to a webpage.
+If you would like to add your own link, add a `[HelpLink]` attribute above the behavior class.
 
 [![Help Button](../images/developer/help-link.png)](../images/developer/help-link.png "The HelpLink attribute allows to insert guidance for your training designers.")
 
 
 ```csharp
-// The step inspector draws data objects, not entities. 
-// This is why we have to attribute the data class.
-[DisplayName("Scale Object")]
-// Optionally, add an HTML-link to an own help page.
-[HelpLink("http://my-documentation.org/scale-object.html")]
-[DataContract(IsReference = true)]
-public class ScalingBehaviorData : IBehaviorData
+namespace Innoactive.Creator.BaseTemplate.Behaviors
 {
-    [DataMember]
-    public SceneObjectReference Target { get; set; }
-
-    [DataMember]
-    [DisplayName("Target Scale")]
-    public Vector3 TargetScale { get; set; }
-
-    [DataMember]
-    [DisplayName("Animation Duration")]
-    public float Duration { get; set; }
-
-    public Metadata Metadata { get; set; }
-
-    public string Name { get; set; }
+[DataContract(IsReference = true)]
+[HelpLink("http://my-documentation.org/scale-object.html")]
+public class ScalingBehavior: Behavior<ScalingBehavior.EntityData>
+{
 }
+
 ```
 
 
