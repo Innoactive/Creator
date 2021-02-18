@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Configuration.Modes;
 using UnityEngine;
@@ -75,18 +74,6 @@ namespace Innoactive.Creator.Core
             }
         }
 
-        public class CourseEventArgs : EventArgs
-        {
-            public readonly ICourse Course;
-
-            public CourseEventArgs(ICourse course)
-            {
-                Course = course;
-            }
-        }
-
-        public static EventHandler<CourseEventArgs> CourseSetup;
-
         private static CourseRunnerInstance instance;
 
         /// <summary>
@@ -119,8 +106,6 @@ namespace Innoactive.Creator.Core
         {
             instance = instance == null ? new GameObject("[TRAINING_RUNNER]").AddComponent<CourseRunnerInstance>() : instance;
             instance.course = course;
-
-            CourseSetup?.Invoke(instance, new CourseEventArgs(course));
         }
 
         /// <summary>
