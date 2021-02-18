@@ -40,11 +40,11 @@ namespace Innoactive.Creator.Core
         }
 
         /// <summary>
-        /// Extracts all <see cref="LockableProperties"/> from given condition.
+        /// Extracts all <see cref="ISceneObjectProperty"/> from type T from the given condition.
         /// </summary>
         /// <param name="data">Condition to be used for extraction</param>
         /// <param name="checkRequiredComponentsToo">if true the [RequiredComponents] will be checked and added too.</param>
-        public static List<ISceneObjectProperty> ExtractPropertiesFromConditions<T>(IConditionData data, bool checkRequiredComponentsToo = true)
+        public static List<ISceneObjectProperty> ExtractPropertiesFromConditions(IConditionData data, bool checkRequiredComponentsToo = true)
         {
             List<ISceneObjectProperty> result = new List<ISceneObjectProperty>();
 
