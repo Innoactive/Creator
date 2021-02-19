@@ -157,6 +157,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             }
             return rect;
         }
+
         private Rect DrawReorderable(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label, bool isPartOfHeader)
         {
             rect = DrawRecursively(rect, wrapper, reorderableName, changeValueCallback, label);

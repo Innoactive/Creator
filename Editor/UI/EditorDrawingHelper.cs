@@ -49,7 +49,7 @@ namespace Innoactive.CreatorEditor.UI
         /// <summary>
         /// Draw button which is similar to default "Add Component" Unity button.
         /// </summary>
-        public static Rect calculateAddButtonRect(ref Rect rect)
+        public static Rect CalculateAddButtonRect(ref Rect rect)
         {
             rect.height = SingleLineHeight + addComponentButtonSize.y;
 
@@ -66,7 +66,7 @@ namespace Innoactive.CreatorEditor.UI
         /// </summary>
         public static bool DrawAddButton(ref Rect rect, string label)
         {
-            Rect buttonRect = EditorDrawingHelper.calculateAddButtonRect(ref rect);
+            Rect buttonRect = EditorDrawingHelper.CalculateAddButtonRect(ref rect);
 
             GUIStyle style = new GUIStyle(GUI.skin.button)
             {
@@ -77,9 +77,12 @@ namespace Innoactive.CreatorEditor.UI
             return GUI.Button(buttonRect, new GUIContent(label), style);
         }
 
+        /// <summary>
+        /// Draw a help button next to the 'Add Behavior' / 'Add Condition' button.
+        /// </summary>
         public static bool DrawHelpButton(ref Rect rect)
         {
-            Rect addbuttonRect = EditorDrawingHelper.calculateAddButtonRect(ref rect);
+            Rect addbuttonRect = EditorDrawingHelper.CalculateAddButtonRect(ref rect);
             Rect helpbuttonRect = addbuttonRect;
             helpbuttonRect.size = addHelpButtonSize;
             helpbuttonRect.x = addbuttonRect.x + addbuttonRect.width + 5;
