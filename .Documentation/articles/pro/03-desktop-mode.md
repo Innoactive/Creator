@@ -1,10 +1,10 @@
 # Desktop Mode
 
-The Desktop Mode is part of our PRO offer and allows you to run your training applications without a VR headset on a regular desktop PC. You can build one training for both VR and non-VR, switch during runtime and the best thing is you do not have to make any adjustments to your training course at all.
+The Desktop Mode is part of our Innoactive Creator PRO offer and allows you to run your training applications without the need of a VR headset. You can perform the training using keyboard and mouse on a regular desktop PC. The training course created in Innoactive Creator does not need to be adapted to run in Desktop mode. Just build your training for both VR and non-VR and you can switch even during runtime between a training experience in VR and a training experience using keyboard and mouse.
 
 ## Setup in Unity
 
-You can define if you want to start in Desktop Mode or in VR when you run your application. You have to make adjustments to two game objects in your training scene.
+Define if you want to start in Desktop Mode or in VR when launching your training application. You have to configure two game objects in your training scene.
 
 First the _[COURSE_CONTROLLER]_:
 
