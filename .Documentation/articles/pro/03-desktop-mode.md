@@ -44,9 +44,9 @@ In this simple mode interaction is done only with your left mouse button. You ca
 
 Clicking a selected object triggers an interaction. The interaction that is triggered depends on your current training course step. Therefore, if in your current step you have to grab a sphere _or_ touch a cube, clicking on the sphere will actually grab it and touching the cube will trigger "touching". As said before, this very simplified interaction system is a balance between functionality and usability with a weight on usability.
 
-**Inventory**
+Every object you grab will be shown in your **inventory**. From there you can drop or place them again or you interact with them while they are inside your inventory, like using or touching it. You also get additional information on what to do next.
 
-Every object you grab will be shown in your inventory. From there you can drop or place them again or you interact with them while they are inside your inventory, like using or touching it.
+[![Inventory](../images/pro/03_inventory.png "Inventory and additional hints.")](../images/pro/03_inventory.png)
 
 ### Switching between modes
 
