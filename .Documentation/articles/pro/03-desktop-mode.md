@@ -14,7 +14,7 @@ When using the _Desktop Mode_ you have to make sure that _Desktop_ is chosen in 
 
 Second the _[INTERACTION_RIG_LOADER]_:
 
-[![Interaction Rig](../images/pro/03-interaction-rig.png "Interaction rig settings.")](../images/pro/03-interaction-rig.png)
+[![Interaction Rig](../images/pro/03-rig-loader.png "Interaction rig settings.")](../images/pro/03-rig-loader.png)
 
 Moving the _Novice Desktop Mode_ rig to the top will ensure that the desktop mode (camera and interactions) will be loaded. Choosing any XR rig (_XR Rig_ is recommended) will load a VR configured camera rig and controllers as soon as the application starts.
 
