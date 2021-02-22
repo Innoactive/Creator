@@ -13,6 +13,7 @@ internal class AssemblySymbolChecker
     {
         CheckForClass("Innoactive.Creator.Core", "Innoactive.Creator.Core.Behaviors.BehaviorSequence", "BASIC_CONDITION_BEHAVIORS");
         CheckForAssembly("Innoactive.Creator.BasicInteraction", "BASIC_INTERACTION");
+        CheckForAssembly("Innoactive.Creator.BasicUI", "BASIC_UI");
     }
 
     /// <summary>
