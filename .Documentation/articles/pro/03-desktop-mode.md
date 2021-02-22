@@ -1,6 +1,6 @@
 # Desktop Mode
 
-The Desktop Mode is part of our Innoactive Creator PRO offer and allows you to run your training applications without the need of a VR headset. You can perform the training using keyboard and mouse on a regular desktop PC. The training course created in Innoactive Creator does not need to be adapted to run in Desktop mode. Just build your training for both VR and non-VR and you can switch even during runtime between a training experience in VR and a training experience using keyboard and mouse.
+The Desktop Mode is part of our Innoactive Creator PRO offer and allows you to run your training applications without the need of a VR headset. You can perform the training using keyboard and mouse on a regular desktop PC. The training course created in Innoactive Creator does not need to be adapted to run in desktop mode. Just build your training for both VR and non-VR and you can switch even during runtime between a training experience in VR and a training experience using keyboard and mouse.
 
 ## Setup in Unity
 
@@ -27,8 +27,8 @@ In this section, we will describe how to control a training in _novice_ desktop 
 
 ### Moving around and rotating view
 
-The _novice_ desktop mode does not support to move around your training scene.
-To rotate your viewport, simply click anywhere in your scene, keep the mouse button pressed and move your mouse around. 
+The _novice_ desktop mode does not support moving around your training scene (locomotion) but to rotate your viewport around your current position.
+In order to rotate your viewport, simply click anywhere in your scene, keep the mouse button pressed and drag your mouse to any direction. 
 
 [![Looking around](../images/pro/03-mouse-viewport-control.gif "Looking around in the scene.")](../images/pro/03-mouse-viewport-control.gif)
 
@@ -38,13 +38,13 @@ _Note:_ As a developer you can choose the mouse button in the _Mouse Controller_
 
 ### Interacting with objects
 
-In this simple mode interaction is done only with your left mouse button. You can select objects by moving your mouse over them, which will highlight the object to make it clearer.
+In _novice_ desktop mode, users interact via left mouse button. Moving the mouse pointer over interactable objects will highlight them to communicate a possible interaction with such objects.
 
 [![Selecting objects](../images/pro/03-mouse-over-highlighting.gif "Selecting objects.")](../images/pro/03-mouse-over-highlighting.gif)
 
-Clicking a selected object triggers an interaction. The interaction that is triggered depends on your current training course step. Therefore, if in your current step you have to grab a sphere _or_ touch a cube, clicking on the sphere will actually grab it and touching the cube will trigger "touching". As said before, this very simplified interaction system is a balance between functionality and usability with a weight on usability.
+Clicking an interactable object triggers the interaction. Depending on the current training course step, the configured interaction will automatically completed. Therefore, if in your current step you have to grab a sphere _or_ touch a cube, clicking on the sphere will actually grab it and touching the cube will trigger "touching". As said before, this very simplified interaction system is a balance between functionality and usability with a weight on usability.
 
-Every object you grab will be shown in your **inventory**. From there you can drop or place them again or you interact with them while they are inside your inventory, like using or touching it. You also get additional information on what to do next.
+Complex interaction such as _snap object_ are divided into two interaction steps: clicking on the respective object to snap will pick the object up and place it to into an **inventory**. A textual instruction informs you to now select the snap zone to place it. By selecting the snap zone, the object is dropped or placed from within your inventory to the desired position. You can also interact with objects while they are inside your inventory, like using or touching it, by clicking the respective action buttons inside the inventory. 
 
 [![Inventory](../images/pro/03_inventory.png "Inventory and additional hints.")](../images/pro/03_inventory.png)
 
