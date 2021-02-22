@@ -10,7 +10,7 @@ First the _[COURSE_CONTROLLER]_:
 
 [![Course Controller](../images/pro/03-course-controller.png "Course controller settings.")](../images/pro/03-course-controller.png)
 
-When using the _Desktop Mode_ you have to make sure that _Desktop_ is chosen in the _Course Controller Setup_. For VR (and the possibility to switch to Desktop during runtime) choose _Advanced_. You do not have to make any changes on any other component on the _Course Controller_ game object, everything will be automateically configured.
+When using the _Desktop Mode_ you have to make sure that _Desktop_ is chosen in the _Course Controller Setup_. For VR (and the possibility to switch to Desktop during runtime) choose _Advanced_. You do not have to make any changes on any other component on the _Course Controller_ game object, everything will be automatically configured.
 
 Second the _[INTERACTION_RIG_LOADER]_:
 
@@ -22,7 +22,7 @@ _Note:_ For testing in Unity you can switch between settings, but before you bui
 
 ## How to use the _novice_ Desktop Mode
 
-The novice Desktop mode is targeted 'conservative' users, not used to playing computer games or any advanced interaction with keyboard and mouse. We intentionally reduced the freedom of control to reduce complexity and increased the usability by simplifying the interaction. We will soon release the _advanced_ desktop mode providing more control. 
+The novice Desktop mode is targeted on 'conservative' users, not used to playing computer games or to any advanced interaction with keyboard and mouse. We intentionally reduced the freedom of control to reduce complexity and increased the usability by simplifying the interaction. We will soon release the _advanced_ desktop mode providing more control. 
 In this section, we will describe how to control a training in _novice_ desktop mode.
 
 ### Moving around and rotating view
@@ -30,7 +30,7 @@ In this section, we will describe how to control a training in _novice_ desktop 
 The _novice_ desktop mode does not support to move around your training scene.
 To rotate your viewport, simply click anywhere in your scene, keep the mouse button pressed and move your mouse around. 
 
-<!-- Add a gif here? -->
+[![Looking around](../images/pro/03-mouse-viewport-control.gif "Looking around in the scene.")](../images/pro/03-mouse-viewport-control.gif)
 
 _Note:_ As a developer you can choose the mouse button in the _Mouse Controller_ of the _Desktop Mode Rig_ prefab (e.g. _[NOVICE_DESKTOP_MODE_RIG]_).
 
@@ -38,12 +38,26 @@ _Note:_ As a developer you can choose the mouse button in the _Mouse Controller_
 
 ### Interacting with objects
 
+In this simple mode interaction is done only with your left mouse button. You can select objects by moving your mouse over them, which will highlight the object to make it clearer.
+
+[![Selecting objects](../images/pro/03-mouse-over-highlighting.gif "Selecting objects.")](../images/pro/03-mouse-over-highlighting.gif)
+
+Clicking a selected object triggers an interaction. The interaction that is triggered depends on your current training course step. Therefore, if in your current step you have to grab a sphere _or_ touch a cube, clicking on the sphere will actually grab it and touching the cube will trigger "touching". As said before, this very simplified interaction system is a balance between functionality and usability with a weight on usability.
+
+**Inventory**
+
+Every object you grab will be shown in your inventory. From there you can drop or place them again or you interact with them while they are inside your inventory, like using or touching it.
+
 ### Switching between modes
 
-You can switch between VR-mode and Desktop Mode through the course controller menu on the bottom of your screen. 
+You can switch between VR-mode and Desktop Mode through the course controller menu on the bottom of your screen. Switching the mode will reload your current scene and switching is not possible while a training course is running.
+
+[![Switching modes](../images/pro/03-trainer-menu.png "Switching between VR and Desktop Mode.")](../images/pro/03-trainer-menu.png)
 
 ## Advanced Mode
+
 An advanced desktop mode with more features and more possibilities to interact with your scene will come soon.
 
 ## Extending the Desktop Mode
+
 A detailed documentation on how to extend the desktop mode will come soon.
