@@ -40,26 +40,15 @@ namespace Innoactive.Creator.Core
         }
 
         /// <summary>
-        /// Extracts all <see cref="LockableProperties"/> from given condition.
+        /// Extracts all <see cref="ISceneObjectProperty"/> from type T from the given condition.
         /// </summary>
         /// <param name="data">Condition to be used for extraction</param>
         /// <param name="checkRequiredComponentsToo">if true the [RequiredComponents] will be checked and added too.</param>
-        public static List<LockablePropertyData> ExtractLockablePropertiesFromConditions(IConditionData data, bool checkRequiredComponentsToo = true)
+        public static List<ISceneObjectProperty> ExtractPropertiesFromConditions(IConditionData data, bool checkRequiredComponentsToo = true)
         {
-            List<MemberInfo> memberInfo = data.GetType()
-                .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-                .Where(info =>
-                    info.PropertyType.IsConstructedGenericType && info.PropertyType.GetGenericTypeDefinition() ==
-                    typeof(ScenePropertyReference<>))
-                .Cast<MemberInfo>()
-                .ToList();
+            List<ISceneObjectProperty> result = new List<ISceneObjectProperty>();
 
-            memberInfo.AddRange(data.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public)
-                .Where(info =>
-                    info.FieldType.IsConstructedGenericType && info.FieldType.GetGenericTypeDefinition() ==
-                    typeof(ScenePropertyReference<>)));
-
-            List<LockablePropertyData> result = new List<LockablePropertyData>();
+            List<MemberInfo> memberInfo = GetAllPropertyReferencesFromCondition(data);
             memberInfo.ForEach(info =>
             {
                 UniqueNameReference reference = ReflectionUtils.GetValueFromPropertyOrField(data, info) as UniqueNameReference;
@@ -74,14 +63,7 @@ namespace Innoactive.Creator.Core
                     return;
                 }
 
-                IEnumerable<Type> refs = ReflectionUtils.GetConcreteImplementationsOf(reference.GetReferenceType());
-                refs = refs.Where(typeof(LockableProperty).IsAssignableFrom);
-
-                if (UnitTestChecker.IsUnitTesting == false)
-                {
-                    refs = refs.Where(type => type.Assembly.GetReferencedAssemblies().All(name => name.Name != "nunit.framework"));
-                    refs = refs.Where(type => type.Assembly.GetReferencedAssemblies().All(name => name.Name != "UnityEditor"));
-                }
+                IEnumerable<Type> refs = ExtractFittingPropertyTypeFrom<ISceneObjectProperty>(reference);
 
                 Type refType = refs.FirstOrDefault();
                 if (refType != null)
@@ -89,12 +71,61 @@ namespace Innoactive.Creator.Core
                     IEnumerable<Type> types = new[] {refType};
                     if (checkRequiredComponentsToo)
                     {
-                        types = GetLockableDependenciesFrom(refType);
+                        types = GetDependenciesFrom(refType);
                     }
 
                     foreach (Type type in types)
                     {
-                        LockableProperty property = GetProperty(reference, type);
+                        ISceneObjectProperty property = GetFittingPropertyFromReference<ISceneObjectProperty>(reference, type);
+                        if (property != null)
+                        {
+                            result.Add(property);
+                        }
+                    }
+                }
+            });
+
+            return result;
+        }
+
+        /// <summary>
+        /// Extracts all <see cref="LockableProperties"/> from given condition.
+        /// </summary>
+        /// <param name="data">Condition to be used for extraction</param>
+        /// <param name="checkRequiredComponentsToo">if true the [RequiredComponents] will be checked and added too.</param>
+        public static List<LockablePropertyData> ExtractLockablePropertiesFromConditions(IConditionData data, bool checkRequiredComponentsToo = true)
+        {
+            List<LockablePropertyData> result = new List<LockablePropertyData>();
+
+            List<MemberInfo> memberInfo = GetAllPropertyReferencesFromCondition(data);
+            memberInfo.ForEach(info =>
+            {
+                UniqueNameReference reference = ReflectionUtils.GetValueFromPropertyOrField(data, info) as UniqueNameReference;
+
+                if (reference == null || string.IsNullOrEmpty(reference.UniqueName))
+                {
+                    return;
+                }
+
+                if (RuntimeConfigurator.Configuration.SceneObjectRegistry.ContainsName(reference.UniqueName) == false)
+                {
+                    return;
+                }
+
+                IEnumerable<Type> refs = ExtractFittingPropertyTypeFrom<LockableProperty>(reference);
+
+                Type refType = refs.FirstOrDefault();
+                if (refType != null)
+                {
+                    IEnumerable<Type> types = new[] {refType};
+                    if (checkRequiredComponentsToo)
+                    {
+                        types = GetDependenciesFrom<LockableProperty>(refType);
+                    }
+
+                    foreach (Type type in types)
+                    {
+                        LockableProperty property = GetFittingPropertyFromReference<LockableProperty>(reference, type);
                         if (property != null)
                         {
                             result.Add(new LockablePropertyData(property));
@@ -106,21 +137,64 @@ namespace Innoactive.Creator.Core
             return result;
         }
 
-        private static LockableProperty GetProperty(UniqueNameReference reference, Type type)
+        private static IEnumerable<Type> ExtractFittingPropertyTypeFrom<T>(UniqueNameReference reference) where T : ISceneObjectProperty
+        {
+            IEnumerable<Type> refs = ReflectionUtils.GetConcreteImplementationsOf(reference.GetReferenceType());
+            refs = refs.Where(typeof(T).IsAssignableFrom);
+
+            if (UnitTestChecker.IsUnitTesting == false)
+            {
+                refs = refs.Where(type => type.Assembly.GetReferencedAssemblies().All(name => name.Name != "nunit.framework"));
+                refs = refs.Where(type => type.Assembly.GetReferencedAssemblies().All(name => name.Name != "UnityEditor"));
+            }
+
+            return refs;
+        }
+
+        private static List<MemberInfo> GetAllPropertyReferencesFromCondition(IConditionData conditionData)
+        {
+            List<MemberInfo> memberInfo = conditionData.GetType()
+                .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                .Where(info =>
+                    info.PropertyType.IsConstructedGenericType && info.PropertyType.GetGenericTypeDefinition() ==
+                    typeof(ScenePropertyReference<>))
+                .Cast<MemberInfo>()
+                .ToList();
+
+            memberInfo.AddRange(conditionData.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public)
+                .Where(info =>
+                    info.FieldType.IsConstructedGenericType && info.FieldType.GetGenericTypeDefinition() ==
+                    typeof(ScenePropertyReference<>)));
+
+            return memberInfo;
+        }
+
+        private static T GetFittingPropertyFromReference<T>(UniqueNameReference reference, Type type) where T : class, ISceneObjectProperty
         {
             ISceneObject sceneObject = RuntimeConfigurator.Configuration.SceneObjectRegistry.GetByName(reference.UniqueName);
             foreach (ISceneObjectProperty prop in sceneObject.Properties)
             {
                 if (prop.GetType() == type)
                 {
-                    return prop as LockableProperty;
+                    return prop as T;
                 }
             }
             Debug.LogWarningFormat("Could not find fitting {0} type in SceneObject {1}", type.Name, reference.UniqueName);
             return null;
         }
 
-        private static IEnumerable<Type> GetLockableDependenciesFrom(Type trainingProperty)
+        /// <summary>
+        /// Get training scene properties which the given type dependence on.
+        /// </summary>
+        private static IEnumerable<Type> GetDependenciesFrom(Type trainingProperty)
+        {
+            return GetDependenciesFrom<ISceneObjectProperty>(trainingProperty);
+        }
+
+        /// <summary>
+        /// Get training scene properties which the given type dependence on, which has to be a subclass of <T>
+        /// </summary>
+        private static IEnumerable<Type> GetDependenciesFrom<T>(Type trainingProperty) where T : ISceneObjectProperty
         {
             List<Type> dependencies = new List<Type>();
             IEnumerable<Type> requiredComponents = trainingProperty.GetCustomAttributes(typeof(RequireComponent), false)
@@ -129,9 +203,9 @@ namespace Innoactive.Creator.Core
 
             foreach (Type requiredComponent in requiredComponents)
             {
-                if (requiredComponent != null && requiredComponent.IsSubclassOf(typeof(LockableProperty)))
+                if (requiredComponent != null && requiredComponent.IsSubclassOf(typeof(T)))
                 {
-                    dependencies.AddRange(GetLockableDependenciesFrom(requiredComponent));
+                    dependencies.AddRange(GetDependenciesFrom<T>(requiredComponent));
                 }
             }
 

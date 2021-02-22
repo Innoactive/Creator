@@ -25,7 +25,7 @@ namespace Innoactive.Creator.Core
             /// List of all <see cref="IBehavior"/>s added.
             /// </summary>
             [DataMember]
-            [DisplayName(""), ReorderableListOf(typeof(FoldableAttribute), typeof(DeletableAttribute), typeof(DrawIsBlockingToggleAttribute)), ExtendableList]
+            [DisplayName(""), ReorderableListOf(typeof(FoldableAttribute), typeof(DeletableAttribute), typeof(DrawIsBlockingToggleAttribute), typeof(HelpAttribute)), ExtendableList]
             public virtual IList<IBehavior> Behaviors { get; set; }
 
             /// <summary>
