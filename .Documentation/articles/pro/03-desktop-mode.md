@@ -10,7 +10,7 @@ First the _[COURSE_CONTROLLER]_:
 
 [![Course Controller](../images/pro/03-course-controller.png "Course controller settings.")](../images/pro/03-course-controller.png)
 
-When using the _Desktop Mode_ you have to make sure that _Desktop_ is chosen in the _Course Controller Setup_. For VR (and the possibility to switch to Desktop during runtime) choose _Advanced_. You do not have to make any changes on any other component on the _Course Controller_ game object, everything will be set up for you.
+When using the _Desktop Mode_ you have to make sure that _Desktop_ is chosen in the _Course Controller Setup_. For VR (and the possibility to switch to Desktop during runtime) choose _Advanced_. You do not have to make any changes on any other component on the _Course Controller_ game object, everything will be automateically configured.
 
 Second the _[INTERACTION_RIG_LOADER]_:
 
@@ -20,13 +20,15 @@ Moving the _Novice Desktop Mode_ rig to the top will ensure that the desktop mod
 
 _Note:_ For testing in Unity you can switch between settings, but before you build your final application make sure you have the desired starting configuration set in both objects.
 
-## How to use in your training application
+## How to use the _novice_ Desktop Mode
 
-This section will show you how to use the desktop mode in a built training application. For now this only covers a _novice_ mode with limited functionality and possibilities to navigate within your scene. For more suffisticated functionality an _advanced desktop mode_ will come soon.
+The novice Desktop mode is targeted 'conservative' users, not used to playing computer games or any advanced interaction with keyboard and mouse. We intentionally reduced the freedom of control to reduce complexity and increased the usability by simplifying the interaction. We will soon release the _advanced_ desktop mode providing more control. 
+In this section, we will describe how to control a training in _novice_ desktop mode.
 
-### Moving around
+### Moving around and rotating view
 
-In the simple desktop mode you cannot move around your training scene but you can change your viewport by clicking and dragging the screen with your mouse. Simply click anywhere in your scene, keep the mouse button pressed and move your mouse around. 
+The _novice_ desktop mode does not support to move around your training scene.
+To rotate your viewport, simply click anywhere in your scene, keep the mouse button pressed and move your mouse around. 
 
 <!-- Add a gif here? -->
 
