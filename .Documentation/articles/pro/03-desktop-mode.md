@@ -6,13 +6,13 @@ The Desktop Mode is part of our Innoactive Creator PRO offer and allows you to r
 
 Define if you want to start in Desktop Mode or in VR when launching your training application. You have to configure two game objects in your training scene.
 
-First the _[COURSE_CONTROLLER]_:
+First the **[COURSE_CONTROLLER]**:
 
 [![Course Controller](../images/pro/03-course-controller.png "Course controller settings.")](../images/pro/03-course-controller.png)
 
 When using the _Desktop Mode_ you have to make sure that _Desktop_ is chosen in the _Course Controller Setup_. For VR (and the possibility to switch to Desktop during runtime) choose _Advanced_. You do not have to make any changes on any other component on the _Course Controller_ game object, everything will be automatically configured.
 
-Second the _[INTERACTION_RIG_LOADER]_:
+Second the **[INTERACTION_RIG_LOADER]**:
 
 [![Interaction Rig](../images/pro/03-rig-loader.png "Interaction rig settings.")](../images/pro/03-rig-loader.png)
 
@@ -22,8 +22,7 @@ _Note:_ For testing in Unity you can switch between settings, but before you bui
 
 ## How to use the _novice_ Desktop Mode
 
-The novice Desktop mode is targeted on 'conservative' users, not used to playing computer games or to any advanced interaction with keyboard and mouse. We intentionally reduced the freedom of control to reduce complexity and increased the usability by simplifying the interaction. We will soon release the _advanced_ desktop mode providing more control. 
-In this section, we will describe how to control a training in _novice_ desktop mode.
+The novice Desktop mode is targeted on 'conservative' users, not used to playing computer games or to any advanced interaction with keyboard and mouse. We intentionally reduced the freedom of control to reduce complexity and increased the usability by simplifying the interaction. In this section, we will describe how to control a training in _novice_ desktop mode.
 
 ### Moving around and rotating view
 
