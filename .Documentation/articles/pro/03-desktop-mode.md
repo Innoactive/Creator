@@ -1,16 +1,16 @@
 # Desktop Mode
 
-The Desktop Mode is part of our Innoactive Creator PRO offer and allows you to run your training applications without the need of a VR headset. You can perform the training using keyboard and mouse on a regular desktop PC. The training course created in Innoactive Creator does not need to be adapted to run in desktop mode. Just build your training for both VR and non-VR and you can switch even during runtime between a training experience in VR and a training experience using keyboard and mouse.
+The desktop mode is part of the Innoactive Creator Pro and allows you to run your training applications without the need of a VR headset. You can perform the training using keyboard and mouse on a regular desktop PC or laptop. The training course created in Innoactive Creator does not need to be adapted to run in desktop mode. Just build your training application for both VR and non-VR and you can switch even during runtime between a training experience in VR and a training experience using keyboard and mouse.
 
 ## Setup in Unity
 
-Define if you want to start in Desktop Mode or in VR when launching your training application. You have to configure two game objects in your training scene.
+Define if you want to start in desktop mode or in VR when launching your training application. You have to configure two game objects in your training scene.
 
 First the **[COURSE_CONTROLLER]**:
 
 [![Course Controller](../images/pro/03-course-controller.png "Course controller settings.")](../images/pro/03-course-controller.png)
 
-When using the _Desktop Mode_ you have to make sure that _Desktop_ is chosen in the _Course Controller Setup_. For VR (and the possibility to switch to Desktop during runtime) choose _Advanced_. You do not have to make any changes on any other component on the _Course Controller_ game object, everything will be automatically configured.
+When using the _desktop mode_ you have to make sure that _Desktop_ is chosen in the _Course Controller Setup_. For VR (and the possibility to switch to Desktop during runtime) choose _Advanced_. You do not have to make any changes on any other component on the _Course Controller_ game object, everything will be automatically configured.
 
 Second the **[INTERACTION_RIG_LOADER]**:
 
@@ -22,7 +22,7 @@ _Note:_ For testing in Unity you can switch between settings, but before you bui
 
 ## How to use the _novice_ Desktop Mode
 
-The novice Desktop mode is targeted on 'conservative' users, not used to playing computer games or to any advanced interaction with keyboard and mouse. We intentionally reduced the freedom of control to reduce complexity and increased the usability by simplifying the interaction. In this section, we will describe how to control a training in _novice_ desktop mode.
+The novice Desktop mode is targeted on 'conservative' users, not used to playing computer games or to any advanced interaction with keyboard and mouse. We intentionally reduced the freedom of control to reduce complexity and increased the usability by simplifying the interaction. In this section, we will describe how to navigate and interact when using the _novice_ desktop mode.
 
 ### Moving around and rotating view
 
@@ -49,7 +49,7 @@ Complex interaction such as [_snap object_](../innoactive-creator/default-condit
 
 ### Switching between modes
 
-You can switch between VR-mode and Desktop Mode through the course controller menu on the bottom of your screen. Switching the mode will reload your current scene and switching is not possible while a training course is running.
+You can switch between VR-mode and desktop mode through the trainer menu on the bottom of your screen. Switching the mode will reload your current scene and switching is not possible while a training course is running.
 
 [![Switching modes](../images/pro/03-trainer-menu.png "Switching between VR and Desktop Mode.")](../images/pro/03-trainer-menu.png)
 
