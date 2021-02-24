@@ -88,7 +88,7 @@ This Behavior plays an audio clip loaded from the `Resources` folder in your pro
 
 ### Location of this behavior (for developers):
 
-    This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
+This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
 
 ------
 
@@ -153,7 +153,8 @@ The default language is set to ‘English’. Consult [the Text-to-Speech docume
     Note: this might lead to an audio file not even being started.
 
 ### Location of this behavior (for developers):
-    This behavior is part of the [Text-to-Speech](https://github.com/Innoactive/TextToSpeech-Component#readme) component. 
+
+This behavior is part of the [Text-to-Speech](https://github.com/Innoactive/TextToSpeech-Component) component. 
 
 ------
 
@@ -186,7 +187,8 @@ This behavior contains a list of child behaviors which will be activated one aft
     Uncheck this option, If you want to interrupt the sequence as soon as all conditions of a transition are fulfilled.
 
 ### Location of this behavior (for developers):
-    This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
+
+This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
 
 
 ------
@@ -212,7 +214,8 @@ This behavior completes after the specified amount of time. Even when trainees f
     Delay (in seconds) = 1.3
 
 ### Location of this behavior (for developers):
-    This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
+
+This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
 
 ------
 
@@ -237,7 +240,8 @@ If you would like to make an object non-interactive while being visible, see the
     the `Training Scene Object` to be disabled.
 
 ### Location of this behavior (for developers):
-    This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
+
+This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
 
 ------
 
@@ -262,7 +266,8 @@ Put into Unity terms, it activates the selected Game Object.
     the `Training Scene Object` to be enabled.
 
 ### Location of this behavior (for developers):
-    This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
+    
+This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
 
 ------
 
@@ -295,7 +300,7 @@ You can define the Color and Material for *On Touch Highlight*, *On Grab Highlig
     the `Training Scene Object` which should be highlighted.
 
 ### Location of this behavior (for developers):
-    This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
+This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
 
 ------
 
@@ -350,7 +355,7 @@ Note: If `Object` was affected by gravity before, it will continue to be effecte
 
 
 ### Location of this behavior (for developers):
-    This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
+This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
 ------
 
 ## Unlock Object (deprecated)
