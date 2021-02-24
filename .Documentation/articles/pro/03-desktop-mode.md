@@ -1,6 +1,6 @@
 # Desktop Mode
 
-The desktop mode is part of the Innoactive Creator Pro and allows you to run your training applications without the need of a VR headset. You can perform the training using keyboard and mouse on a regular desktop PC or laptop. The training course created in Innoactive Creator does not need to be adapted to run in desktop mode. Just build your training application for both VR and non-VR and you can switch even during runtime between a training experience in VR and a training experience using keyboard and mouse.
+The desktop mode is part of the Innoactive Creator Pro and allows you to run your training applications without the need of a VR headset. You can perform the training using only a regular desktop PC or laptop. The training course created in Innoactive Creator does not need to be adapted to run in desktop mode. Just build your training application for both VR and non-VR and you can switch even during runtime between a training experience in VR and without an HMD.
 
 ## Setup in Unity
 
@@ -55,7 +55,7 @@ You can switch between VR-mode and desktop mode through the trainer menu on the 
 
 ## Advanced Mode
 
-An advanced desktop mode with more features and more possibilities to interact with your scene will come soon.
+An advanced desktop mode with more features and more possibilities to interact with your scene is planned.
 
 ## Extending the Desktop Mode
 
