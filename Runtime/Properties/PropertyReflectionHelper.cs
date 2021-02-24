@@ -145,7 +145,10 @@ namespace Innoactive.Creator.Core
             if (UnitTestChecker.IsUnitTesting == false)
             {
                 refs = refs.Where(type => type.Assembly.GetReferencedAssemblies().All(name => name.Name != "nunit.framework"));
-                refs = refs.Where(type => type.Assembly.GetReferencedAssemblies().All(name => name.Name != "UnityEditor"));
+                if (Application.isEditor == false)
+                {
+                    refs = refs.Where(type => type.Assembly.GetReferencedAssemblies().All(name => name.Name != "UnityEditor"));
+                }
             }
 
             return refs;
