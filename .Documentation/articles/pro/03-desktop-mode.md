@@ -45,9 +45,9 @@ In _novice_ desktop mode, users interact via left mouse button. Moving the mouse
 
 Clicking an interactable object triggers the interaction. Depending on the current training course step, the configured interaction will automatically be completed. Therefore, if in your current step you have to grab a sphere _or_ touch a cube, clicking on the sphere will actually grab it and touching the cube will trigger "touching". As said before, this very simplified interaction system is a balance between functionality and usability with a weight on usability.
 
-Complex interaction such as [_snap object_](../innoactive-creator/default-conditions.md#snap-object) are divided into two interaction steps: clicking on the respective object to snap will pick the object up and place it into an **inventory**. A textual instruction now informs you to select the snap zone. By selecting the snap zone, the object is dropped or placed from within your inventory to the desired position. You can also interact with objects while they are inside your inventory, like using or touching it, by clicking the respective action buttons inside the inventory. 
+Complex interaction such as [_snap object_](../innoactive-creator/default-conditions.md#snap-object) are divided into two interaction steps: clicking on the respective object to snap will pick the object up and place it into a **hand field** (an on-screen hand that represents the trainee's hand holding an object). A textual instruction now informs you to select the snap zone. By selecting the snap zone, the object is dropped or placed from within your hand field to the desired position. You can also interact with objects while they are inside your hand field, like using or touching it, by clicking the respective action buttons inside the hand field. 
 
-[![Inventory](../images/pro/03_inventory.png "Inventory and additional hints.")](../images/pro/03_inventory.png)
+[![Inventory](../images/pro/03_inventory.png "Hand field and additional hints.")](../images/pro/03_inventory.png)
 
 ### Switching between modes
 
