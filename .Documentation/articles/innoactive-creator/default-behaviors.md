@@ -345,9 +345,9 @@ Note: If `Object` was affected by gravity before, it will continue to be effecte
 
     the `Training Scene Object` that is being used as position provider object which should be placed at the exact position and rotation where you want to move and rotate your `object` to.
 
-- #### Duration (in seconds)
+- #### Animation duration (in seconds)
 
-    time in seconds the move and rotation animation to the `Final position provider` takes.
+    time in seconds the animation takes to move and rotate `object` to the `Final position provider`.
 
     ##### Example
     
