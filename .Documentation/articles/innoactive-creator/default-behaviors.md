@@ -25,13 +25,27 @@ See [this article](step-inspector.md) to learn Step Inspector controls.
 
 ### Description
 
-The `Play Audio File` behavior plays audio clips from any `Resources` folder in your project's asset folder.
+This Behavior plays an audio clip loaded from the `Resources` folder in your project’s asset folder. The Innoactive Creator supports the audio file format which are supported by Unity, which are 
+
+- aif
+- wav
+- mp3
+- ogg
+
+### Application Example
+
+- The Trainee is supposed to react to alarming signs: the trainee hears a suspicious clicking sound during his training, which you want him to identify as an important sign of a dangerous situation that the trainee needs to handle.
+
+- Feedback of interactions: feedback sounds for using for example specific tools.
+
 
 ### Configuration
 
 - #### Localization key
 
-    If you use localization files for your project, you can write the localization key for the corresponding sound file that you want to play into this text field. If you do not use localization files, leave this text field empty and use the `Default resource path` field.
+    Use this if there are localization files (JSON) for preferred languages in your project which contains a key-value mapping for various file paths or string values. 
+
+    Leave this field empty and use the `Default resource path` below if you want to play an audio clip from a specific file instead.
 
     ##### Example
 
@@ -45,16 +59,18 @@ The `Play Audio File` behavior plays audio clips from any `Resources` folder in 
     }
     ```
 
-    If you want to hear the teleport sound, you have to enter the `teleport_sound` key into the `Localization key` text field.
+    If you want to hear the teleport sound, you have to enter the the key *"teleport_sound"* into the `Localization key` text field.
 
 - #### Default resource path
 
-    If you want to play an audio clip from a file with this behavior, the file path must be the relative path **after** the `Resources` folder. The extension of the file must be omitted.
+    Relative file path from the Resources folder. Omit the file extension (see example).
+    Use this field if you do not want to use localization files specified in `Localization Key`.
+
 
     ##### Example
      
-    File to be played: `Assets/.../Resources/Sounds/teleport.ogg`  
-    Path entered in the field: `Sounds/teleport` 
+    File to be played: `Assets/.../Resources/Sounds/click-sound.ogg`  
+    Default resource path: `Sounds/click-sound`  
 
 - #### Execution stages
 
@@ -64,26 +80,42 @@ The `Play Audio File` behavior plays audio clips from any `Resources` folder in 
     - `After Step Execution`: Once a transition to another step has been selected and the current step starts deactivating, the behavior is invoked.
     - `Before and After Step Execution`: Execution at activation and deactivation of a step.
 
-- #### Is blocking
+- #### Wait for completion
 
-    By default, a behavior is blocking the transition to another step while the behavior is executing. If you want to skip a behavior's execution when a transition to another step is happening (e. g. when all conditions of one transition are met), you can uncheck this option. 
-    In this case the unchecked `Is blocking` option means that the audio clip will be interrupted or not even started when a transition to another step is happening.
+    By default, the step waits for the audio file to finish. If you want the step to interrupt the audio in case the trainee completes the condition(s), uncheck this option. 
+    
+    Note: this might lead to an audio file not even being started.
+
+### Location of this behavior (for developers):
+
+    This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
 
 ------
 
 ## Audio/Play TextToSpeech Audio
 
-This behavior is part of the TextToSpeech Component. The Innoactive Base Template provides it by default.
 
 ### Description
 
-The `Play TextToSpeech Audio` behavior plays speech audio clips generated from text. The behavior can convert localized text into speech by fetching values from `.json` files using the provided localization keys. If either the key in `Localization Key` does not exist or the text field is empty, the text entered into the `Default text` field will be used.
+This behavior reads digital text aloud. The behavior can convert localized text into speech by fetching values from the localisation files (.json) using the provided localization keys. 
+If the key in `Localization Key` does not exist or the text field is empty, the text entered into the `Default text` field will be used.
+
+### Application Example
+
+- You want to give your trainees an audio instruction of what they need to accomplish in their training.
+- You train the same process in multiple countries requiring instructions in multiple languages.
+
 
 ### Configuration
 
+The default language is set to ‘English’. Consult [the Text-to-Speech documentation](https://developers.innoactive.de/documentation/creator/v2.8.0/articles/developer/12-text-to-speech.html) to learn how to configure the Text-to-Speech Engine (TTS).
+
+
 - #### Localization key
 
-    If you use localization files for your project, you can write the localization key for the corresponding text that you want to hear into this text field. If you do not use localization files, leave this text field empty and use the `Default text` field.
+    Use this if there are localization files (JSON) for preferred languages in your project which contains a key-value mapping for various file paths or string values.
+
+    Leave this field empty and use the `Default text` below if you want a text-to-speech engine to read your typed text.
 
     ##### Example
 
@@ -98,11 +130,13 @@ The `Play TextToSpeech Audio` behavior plays speech audio clips generated from t
     }
     ```
 
-    If you want to hear the spoken text *"Behold! The mighty flying cube!"*, you have to enter the `move_cube` key into the `Localization key` text field.
+    If you want to hear the spoken text *"Behold! The mighty flying cube!"*, you have to enter the key *"move_cube"* into the `Localization key` text field.
 
 - #### Default text
 
-    The text entered into this text field is used, if either the `Localization key` text field is empty or the provided localization key is invalid (e. g. the key does not exist or the localization file is not loaded).
+    The text entered into this text field is used, if either the `Localization key` text field is empty or the provided localization key is invalid (e.g. the key does not exist or the localization file is not loaded).
+
+    Use this field if you do not want to use localization files specified in `Localization Key`.
 
 - #### Execution stages
 
@@ -112,10 +146,14 @@ The `Play TextToSpeech Audio` behavior plays speech audio clips generated from t
     - `After Step Execution`: Once a transition to another step has been selected and the current step starts deactivating, the behavior is invoked.
     - `Before and After Step Execution`: Execution at activation and deactivation of a step.
 
-- #### Is blocking
+- #### Wait for completion
 
-    By default, a behavior is blocking the transition to another step while the behavior is executing. If you want to skip a behavior's execution when a transition to another step is happening (e. g. when all conditions of one transition are met), you can uncheck this option. 
-    In this case the unchecked `Is blocking` option means that the audio clip will be interupted or not even started when a transition to another step is happening.
+    By default, the step waits for the audio file to finish. If you want the step to interrupt the audio in case the trainee completes the conditions, uncheck this option. 
+    
+    Note: this might lead to an audio file not even being started.
+
+### Location of this behavior (for developers):
+    This behavior is part of the [Text-to-Speech](https://github.com/Innoactive/TextToSpeech-Component#readme) component. 
 
 ------
 
@@ -123,22 +161,33 @@ The `Play TextToSpeech Audio` behavior plays speech audio clips generated from t
 
 ### Description
 
-The `Behavior Sequence` contains a list of child behaviors which will be activated one after the other. This means that the next child behavior in the list will not be activated until the previous child behavior has finished its life cycle.
+This behavior contains a list of child behaviors which will be activated one after the other. A child behavior in the list will not be activated until the previous child behavior has finished its life cycle.
+
+### Application Example
+
+- the trainee places a package to the assembly line. Use a behavior sequence to move the package first to the right on the assembly line, then to the left onto the next assembly line.
+
+- the trainee should watch a short tutorial where trainers explain the next steps which need to be accomplished. For example, give instructions to push button A, then highlight button A, then give instructions to push button B, then highlight button B. Afterwards, give the instruction to execute the sequence shown in the tutorial.
+
 
 ### Configuration
 
 - #### Repeat
 
-    If this option is checked, the behavior sequence will start from the top of the child behaviors list over and over again as soon as the life cycle of the last child behavior in the list is finished.
+    if checked, the behavior sequence restarts from the top of the child behavior list as soon as the life cycle of the last child behavior in the list has finished.
 
 - #### Child behaviors
 
-    This is the list of all queued behaviors. By clicking on the `Add Behavior` button below it, you can add any behavior to it.
+    List of all queued behaviors. Add behaviors to the list using the *"add Behavior"* button.
 
-- #### Is blocking
+- #### Wait for completion
 
-    By default, the behavior sequence is blocking the transition to another step while it is executing all its child behaviors in the list. After completion, it does not block the transition to another step anymore even if you enabled the `Repeat` option. 
-    If you want to skip or interrupt the execution of the behavior sequence when a transition to another step is happening (e. g. when all conditions of one transition are met), you can uncheck this option. 
+    if checked, the behavior sequence will finish the life cycle of each child behavior in the list before it transitions to another step. Even when the *"Repeat"* option is enabled, the execution will transition to the next step after the child behavior list has been completed. 
+    Uncheck this option, If you want to interrupt the sequence as soon as all conditions of a transition are fulfilled.
+
+### Location of this behavior (for developers):
+    This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
+
 
 ------
 
@@ -146,13 +195,24 @@ The `Behavior Sequence` contains a list of child behaviors which will be activat
 
 ### Description
 
-The activated `Delay` behavior completes after the specified amount of time. This behavior is especially useful for the `Behavior Sequence`, if you want to have time breaks in between its child behaviors. But you can also just delay the completion of a step with it.
+This behavior completes after the specified amount of time. Even when trainees fulfill the required conditions to transition to the next step, this step will wait for the duration configured in `Delay (in seconds)`.  
+
+### Application Example
+
+- In a Behavior Sequence, this delay behavior allows you to insert pauses between its child behaviors.
 
 ### Configuration
 
-- #### Delay in seconds
+- #### Delay (in seconds)
 
-    In this field you can set the behavior's delay duration in seconds.
+    configure the behavior’s delay duration in seconds.
+
+    ##### Example
+
+    Delay (in seconds) = 1.3
+
+### Location of this behavior (for developers):
+    This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
 
 ------
 
@@ -160,13 +220,24 @@ The activated `Delay` behavior completes after the specified amount of time. Thi
 
 ### Description
 
-The `Disable Object` behavior **deactivates** the target's *GameObject* until it will be enabled again.
+This behavior makes the selected `Object` invisible and non-interactive until it specifically is set back to *"enabled"* in a future step.
+Put into Unity terms, it deactivates the selected Game Object.
+
+If you would like to make an object non-interactive while being visible, see the [Suspending Interactions](https://developers.innoactive.de/documentation/creator/v2.8.0/articles/innoactive-creator/suspending-interactions.html) article.
+
+### Application Example
+
+- The Trainee has finished working with certain tools. In order to clean up the scene, you might want to disable such tools.
+
 
 ### Configuration
 
-- #### Object to disable
+- #### Object
 
-    This field contains the `Training Scene Object` to be disabled.
+    the `Training Scene Object` to be disabled.
+
+### Location of this behavior (for developers):
+    This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
 
 ------
 
@@ -174,13 +245,24 @@ The `Disable Object` behavior **deactivates** the target's *GameObject* until it
 
 ### Description
 
-The `Enable Object` behavior **activates** the target's *GameObject* until it will be disabled again.
+This behavior makes the selected `Object` visible and interactive until it is specifically set back to *"disabled"* in a future step.
+Put into Unity terms, it activates the selected Game Object.
+
+### Application Example
+
+- In some scenarios you want trainees to interact with objects that are not visible at the start of the scene. By enabling them they can be “added” to the training scene when needed.
+
+- Use this behavior as an easy way to add additional visual hints.
+
 
 ### Configuration
 
-- #### Object to enable
+- #### Object
 
-    This field contains the `Training Scene Object` to be enabled.
+    the `Training Scene Object` to be enabled.
+
+### Location of this behavior (for developers):
+    This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
 
 ------
 
@@ -188,21 +270,37 @@ The `Enable Object` behavior **activates** the target's *GameObject* until it wi
 
 ### Description
 
-The `Highlight Object` behavior will highlight the target object in the specified color until the end of the step.
+This behavior visually highlights the selected object until the end of a step.
+
+Select the Highlighted `Object` in the Unity Hierarchy and open the Unity Inspector. Search for the *Interactable Highlighter Script*.
+
+[![Interactable Highlighter Script](../images/default-behaviors/interactable-highlighter-script.png "")](../images/default-behaviors/interactable-highlighter-script.png)
+
+You can define the Color and Material for *On Touch Highlight*, *On Grab Highlight*, and *On Use Highlight*. The object will show the highlight color configured in the Highlight behavior by default, as soon as the object is touched it will change to the color configured in *On Touch Highlight*. The same happens when the object is grabbed or used. It will display the configured color in ‘On Grab Highlight’ or ‘On Use Highlight’. 
+
+### Application Example
+
+- Give trainees feedback of objects in the scene they can interact with in the current step. 
+
+- Give trainees feedback when entering an object using their controllers (*On Touch Highlight*) or when grabbing (*On Grab Highlight*) or using (*On Use Highlight*) an object. 
 
 ### Configuration
 
-- #### Hightlight color
+- #### Color
 
-    This field contains the color in which the target object will be colored.
+    Color in which the target object will be highlighted. Colors are defined in the RGBA color channel. By configuring the alpha (A) value, highlights can be translucent.
 
-- #### Object to highlight
+- #### Object
 
-    This field contains the `Training Scene Object` which should be highlighted.
+    the `Training Scene Object` which should be highlighted.
+
+### Location of this behavior (for developers):
+    This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
 
 ------
 
-## Lock Object
+## Lock Object (deprecated)
+Deprecated: please see [Suspending Interactions](https://developers.innoactive.de/documentation/creator/v2.8.0/articles/innoactive-creator/suspending-interactions.html).
 
 ### Description
 
@@ -210,7 +308,7 @@ The `Lock Object` behavior locks the target object so that you can no longer int
 
 ### Configuration
 
-- #### Object to lock
+- #### Object
 
     This field contains the `Training Scene Object` to be locked.
 
@@ -224,25 +322,40 @@ The `Lock Object` behavior locks the target object so that you can no longer int
 
 ### Description
 
-The `Move Object` behavior moves and rotates the target game object to the position and rotation of the position provider game object within a specified time. Note that if the game object is affected by gravity before it moves, it will also be affected by gravity afterwards.
+This behavior animates the `Object` to move and rotate (no scaling) to the position and rotation of the `Final Position Provider` in the time in seconds specified in `Duration (in seconds)`.
+ 
+Note: If `Object` was affected by gravity before, it will continue to be effected after this behavior. 
+
+### Application Example
+
+- When trainees pick up the wrong tool, move the tool back to their initial place as soon as trainees release the object.
 
 ### Configuration
 
-- #### Object to move
+- #### Object
 
-    This field contains the `Training Scene Object` to be moved which should be moved and rotated.
+    the `Training Scene Object` to be moved and rotated (no scaling).
 
 - #### Final position provider
 
-    This field contains the `Training Scene Object` that is being used as position provider object which should be placed at the exact position and rotation where you want to move and rotate your target object to.
+    the `Training Scene Object` that is being used as position provider object which should be placed at the exact position and rotation where you want to move and rotate your `object` to.
 
-- #### Duration in seconds
+- #### Duration (in seconds)
 
-    In this field you can set the number of seconds it should take to move and rotate the target object.
+    time in seconds the move and rotation animation to the `Final position provider` takes.
 
+    ##### Example
+    
+    Duration (in seconds) = 1.3
+
+
+### Location of this behavior (for developers):
+    This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
 ------
 
-## Unlock Object
+## Unlock Object (deprecated)
+
+Deprecated: please see [Suspending Interactions](https://developers.innoactive.de/documentation/creator/v2.8.0/articles/innoactive-creator/suspending-interactions.html).
 
 ### Description
 
@@ -250,7 +363,7 @@ The `Unlock Object` behavior unlocks a previously locked object so that it can b
 
 ### Configuration
 
-- #### Object to unlock
+- #### Object
 
     This field contains the `Training Scene Object` to be unlocked.
 
