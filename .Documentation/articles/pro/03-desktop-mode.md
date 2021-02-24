@@ -55,7 +55,7 @@ You can switch between VR-mode and desktop mode through the trainer menu on the 
 
 ## Advanced Mode
 
-An advanced desktop mode with more features and more possibilities to interact with your scene is planned.
+An advanced desktop mode with more features and more possibilities to interact with your scene is coming in a future release.
 
 ## Extending the Desktop Mode
 
