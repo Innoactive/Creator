@@ -355,7 +355,9 @@ Note: If `Object` was affected by gravity before, it will continue to be effecte
 
 
 ### Location of this behavior (for developers):
+
 This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
+
 ------
 
 ## Unlock Object (deprecated)
