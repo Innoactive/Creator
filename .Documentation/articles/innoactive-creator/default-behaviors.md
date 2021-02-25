@@ -25,7 +25,7 @@ See [this article](step-inspector.md) to learn Step Inspector controls.
 
 ### Description
 
-This Behavior plays an audio clip loaded from the `Resources` folder in your project’s asset folder. The Innoactive Creator supports the audio file format which are supported by Unity, which are 
+This Behavior plays an audio clip loaded from the `Resources` folder in your project’s asset folder. The Innoactive Creator supports all audio file formats supported by Unity, which are 
 
 - aif
 - wav
@@ -34,9 +34,9 @@ This Behavior plays an audio clip loaded from the `Resources` folder in your pro
 
 ### Application Example
 
-- The Trainee is supposed to react to alarming signs: the trainee hears a suspicious clicking sound during his training, which you want him to identify as an important sign of a dangerous situation that the trainee needs to handle.
+- The trainee is supposed to react to alarming signs: the trainee hears a suspicious clicking sound during his training, which he is supposed to identify as a sign of danger. He then has to react accordingly.
 
-- Feedback of interactions: feedback sounds for using for example specific tools.
+- Feedback of interactions: feedback sounds for using tools, e.g. drill sound for a drill.
 
 
 ### Configuration
@@ -59,7 +59,7 @@ This Behavior plays an audio clip loaded from the `Resources` folder in your pro
     }
     ```
 
-    If you want to hear the teleport sound, you have to enter the the key *"teleport_sound"* into the `Localization key` text field.
+    If you want to hear the teleport sound, you have to enter the key *"teleport_sound"* into the `Localization key` text field.
 
 - #### Default resource path
 
@@ -97,7 +97,7 @@ This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com
 
 ### Description
 
-This behavior reads digital text aloud. The behavior can convert localized text into speech by fetching values from the localisation files (.json) using the provided localization keys. 
+This behavior reads digital text aloud. The behavior can convert localized text into speech by fetching values from the localization files (.json) using the provided localization keys. 
 If the key in `Localization Key` does not exist or the text field is empty, the text entered into the `Default text` field will be used.
 
 ### Application Example
@@ -108,7 +108,7 @@ If the key in `Localization Key` does not exist or the text field is empty, the 
 
 ### Configuration
 
-The default language is set to ‘English’. Consult [the Text-to-Speech documentation](https://developers.innoactive.de/documentation/creator/v2.8.0/articles/developer/12-text-to-speech.html) to learn how to configure the Text-to-Speech Engine (TTS).
+The default language is set to ‘English’. Consult [the Text-to-Speech documentation](https://developers.innoactive.de/documentation/creator/latest/articles/developer/12-text-to-speech.html) to learn how to configure the Text-to-Speech Engine (TTS).
 
 
 - #### Localization key
@@ -162,7 +162,7 @@ This behavior is part of the [Text-to-Speech](https://github.com/Innoactive/Text
 
 ### Description
 
-This behavior contains a list of child behaviors which will be activated one after the other. A child behavior in the list will not be activated until the previous child behavior has finished its life cycle.
+This behavior contains a list of child behaviors which will be activated one after another. A child behavior in the list will not be activated until the previous child behavior has finished its life cycle.
 
 ### Application Example
 
@@ -179,7 +179,7 @@ This behavior contains a list of child behaviors which will be activated one aft
 
 - #### Child behaviors
 
-    List of all queued behaviors. Add behaviors to the list using the *"add Behavior"* button.
+    List of all queued behaviors. Add behaviors to the list using the *"Add Behavior"* button.
 
 - #### Wait for completion
 
@@ -226,7 +226,7 @@ This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com
 This behavior makes the selected `Object` invisible and non-interactive until it specifically is set back to *"enabled"* in a future step.
 Put into Unity terms, it deactivates the selected Game Object.
 
-If you would like to make an object non-interactive while being visible, see the [Suspending Interactions](https://developers.innoactive.de/documentation/creator/v2.8.0/articles/innoactive-creator/suspending-interactions.html) article.
+If you would like to make an object non-interactive while being visible, see the [Suspending Interactions](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/suspending-interactions.html) article.
 
 ### Application Example
 
@@ -277,7 +277,7 @@ This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com
 
 This behavior visually highlights the selected object until the end of a step.
 
-Select the Highlighted `Object` in the Unity Hierarchy and open the Unity Inspector. Search for the *Interactable Highlighter Script*.
+Select the highlighted `Object` in the Unity Hierarchy and open the Unity Inspector. Search for the *Interactable Highlighter Script*.
 
 [![Interactable Highlighter Script](../images/default-behaviors/interactable-highlighter-script.png "")](../images/default-behaviors/interactable-highlighter-script.png)
 
@@ -285,7 +285,7 @@ You can define the Color and Material for *On Touch Highlight*, *On Grab Highlig
 
 ### Application Example
 
-- Give trainees feedback of objects in the scene they can interact with in the current step. 
+- Give trainees feedback when interacting with objects in the scene. 
 
 - Give trainees feedback when entering an object using their controllers (*On Touch Highlight*) or when grabbing (*On Grab Highlight*) or using (*On Use Highlight*) an object. 
 
@@ -305,7 +305,7 @@ This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com
 ------
 
 ## Lock Object (deprecated)
-Deprecated: please see [Suspending Interactions](https://developers.innoactive.de/documentation/creator/v2.8.0/articles/innoactive-creator/suspending-interactions.html).
+Deprecated: please see [Suspending Interactions](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/suspending-interactions.html).
 
 ### Description
 
@@ -347,7 +347,7 @@ Note: If `Object` was affected by gravity before, it will continue to be effecte
 
 - #### Animation duration (in seconds)
 
-    time in seconds the animation takes to move and rotate `object` to the `Final position provider`.
+    time in seconds the animation takes to move and rotate `Object` to the `Final position provider`.
 
     ##### Example
     
