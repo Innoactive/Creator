@@ -293,7 +293,7 @@ You can define the Color and Material for *On Touch Highlight*, *On Grab Highlig
 
 - #### Color
 
-    Color in which the target object will be highlighted. Colors are defined in the RGBA color channel. By configuring the alpha (A) value, highlights can be translucent.
+    Color in which the target object will be highlighted. Colors are defined in the RGBA or HSV color channel. By configuring the alpha (A) value, highlights can be translucent.
 
 - #### Object
 
