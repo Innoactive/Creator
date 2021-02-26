@@ -88,7 +88,7 @@ This Behavior plays an audio clip loaded from the `Resources` folder in your pro
 
 ### Location of this behavior (for developers):
 
-This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Behaviors/PlayAudioBehavior.cs" target="_blank">here</a>
 
 ------
 
@@ -154,7 +154,8 @@ The default language is set to ‘English’. Consult [the Text-to-Speech docume
 
 ### Location of this behavior (for developers):
 
-This behavior is part of the [Text-to-Speech](https://github.com/Innoactive/TextToSpeech-Component) component. 
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Behaviors/PlayAudioBehavior.cs" target="_blank">here</a>
+
 
 ------
 
@@ -188,7 +189,7 @@ This behavior contains a list of child behaviors which will be activated one aft
 
 ### Location of this behavior (for developers):
 
-This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Behaviors/BehaviorSequence.cs" target="_blank">here</a>
 
 
 ------
@@ -215,7 +216,8 @@ This behavior completes after the specified amount of time. Even when trainees f
 
 ### Location of this behavior (for developers):
 
-This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Behaviors/DelayBehavior.cs" target="_blank">here</a>
+
 
 ------
 
@@ -241,7 +243,8 @@ If you would like to make an object non-interactive while being visible, see the
 
 ### Location of this behavior (for developers):
 
-This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Behaviors/DisableGameObjectBehavior.cs" target="_blank">here</a>
+
 
 ------
 
@@ -267,7 +270,7 @@ Put into Unity terms, it activates the selected Game Object.
 
 ### Location of this behavior (for developers):
     
-This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Behaviors/EnableGameObjectBehavior.cs" target="_blank">here</a>
 
 ------
 
@@ -300,7 +303,7 @@ You can define the Color and Material for *On Touch Highlight*, *On Grab Highlig
     the `Training Scene Object` which should be highlighted.
 
 ### Location of this behavior (for developers):
-This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Behaviors/HighlightObjectBehavior.cs" target="_blank">here</a>
 
 ------
 
@@ -356,7 +359,7 @@ Note: If `Object` was affected by gravity before, it will continue to be effecte
 
 ### Location of this behavior (for developers):
 
-This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. 
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Behaviors/MoveObjectBehavior.cs" target="_blank">here</a>
 
 ------
 
