@@ -335,7 +335,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             {
                 backgroundBehaviorData.IsBlocking = (bool)newValue;
                 changeValueCallback(wrapper);
-            }, "Is blocking").height;
+            }, "Wait for completion").height;
 
             return rect;
         }
