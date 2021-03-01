@@ -32,11 +32,13 @@ namespace Innoactive.CreatorEditor.UI.Drawers
         private readonly string keepPopulatedName = typeof(KeepPopulatedAttribute).FullName;
         private readonly string reorderableListOfName = typeof(ReorderableListOfAttribute).FullName;
         private readonly string listOfName = typeof(ListOfAttribute).FullName;
-
+        private readonly string showHelpName = typeof(HelpAttribute).FullName;
         private static readonly EditorIcon deleteIcon = new EditorIcon("icon_delete");
         private static readonly EditorIcon arrowUpIcon = new EditorIcon("icon_arrow_up");
         private static readonly EditorIcon arrowDownIcon = new EditorIcon("icon_arrow_down");
+        private static readonly EditorIcon helpIcon = new EditorIcon("icon_help");
 
+        
         /// <inheritdoc />
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
@@ -44,6 +46,10 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             // If the drawn object is a ITransition, IBehavior or ICondition the list object will be part of a header.
             bool isPartOfHeader = wrapper.ValueDeclaredType == typeof(ITransition) || wrapper.ValueDeclaredType == typeof(IBehavior) || wrapper.ValueDeclaredType == typeof(ICondition);
 
+            if (wrapper.Metadata.ContainsKey(showHelpName))
+            {
+                return DrawHelp(rect, wrapper, changeValueCallback, label, isPartOfHeader);
+            }
             if (wrapper.Metadata.ContainsKey(reorderableName))
             {
                 return DrawReorderable(rect, wrapper, changeValueCallback, label, isPartOfHeader);
@@ -133,16 +139,35 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             return style;
         }
 
+        private Rect DrawHelp(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label, bool isPartOfHeader)
+        {
+            rect = DrawRecursively(rect, wrapper, showHelpName, changeValueCallback, label);
+            Vector2 buttonSize = new Vector2(EditorGUIUtility.singleLineHeight + 3f, EditorDrawingHelper.SingleLineHeight);
+            GUIStyle style = GetStyle(isPartOfHeader);
+            if(wrapper.Value != null && wrapper.Value.GetType() != null)
+            {
+                HelpLinkAttribute helpLinkAttribute = wrapper.Value.GetType().GetCustomAttribute(typeof(HelpLinkAttribute)) as HelpLinkAttribute;
+                if (helpLinkAttribute != null)
+                {
+                    if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 4 - 0.1f, rect.y + 1, buttonSize.x, buttonSize.y), helpIcon.Texture, style))
+                    {
+                        Application.OpenURL(helpLinkAttribute.HelpLink);
+                    }
+                }
+            }
+            return rect;
+        }
+
         private Rect DrawReorderable(Rect rect, MetadataWrapper wrapper, Action<object> changeValueCallback, GUIContent label, bool isPartOfHeader)
         {
             rect = DrawRecursively(rect, wrapper, reorderableName, changeValueCallback, label);
 
             Vector2 buttonSize = new Vector2(EditorGUIUtility.singleLineHeight + 3f, EditorDrawingHelper.SingleLineHeight);
-
+            
             GUIStyle style = GetStyle(isPartOfHeader);
-
+           
             GUI.enabled = ((ReorderableElementMetadata)wrapper.Metadata[reorderableName]).IsLast == false;
-            if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 2 - 0.1f, rect.y + 1, buttonSize.x, buttonSize.y), arrowDownIcon.Texture, style))
+            if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 2, rect.y + 1, buttonSize.x, buttonSize.y), arrowDownIcon.Texture, style))
             {
                 object oldValue = wrapper.Value;
                 ChangeValue(() =>
@@ -160,7 +185,8 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             }
 
             GUI.enabled = ((ReorderableElementMetadata)wrapper.Metadata[reorderableName]).IsFirst == false;
-            if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 3 - 0.1f, rect.y + 1, buttonSize.x, buttonSize.y), arrowUpIcon.Texture, style))
+            
+            if (GUI.Button(new Rect(rect.x + rect.width - buttonSize.x * 3, rect.y + 1, buttonSize.x, buttonSize.y), arrowUpIcon.Texture, style))
             {
                 object oldValue = wrapper.Value;
                 ChangeValue(() =>
@@ -309,7 +335,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             {
                 backgroundBehaviorData.IsBlocking = (bool)newValue;
                 changeValueCallback(wrapper);
-            }, "Is blocking").height;
+            }, "Wait for completion").height;
 
             return rect;
         }

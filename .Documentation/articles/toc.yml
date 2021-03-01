@@ -90,6 +90,8 @@
       href: pro/01-validation.md
     - name: Advanced Spectator
       href: pro/02-advanced-spectator.md
+    - name: Desktop Mode
+      href: pro/03-desktop-mode.md
 - name: XR Interaction Toolkit
   href: xr/index.md  
   items:
