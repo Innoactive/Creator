@@ -1,14 +1,14 @@
 ﻿using UnityEditor;
-using UnityEngine;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using Innoactive.CreatorEditor.PackageManager;
+using Debug = UnityEngine.Debug;
 
 #if UNITY_XR_MANAGEMENT
-using System.Reflection;
-using System.Threading.Tasks;
+using UnityEngine;
+using System.Diagnostics;
 using UnityEngine.XR.Management;
-using UnityEditor.XR.Management.Metadata;
 #endif
 
 namespace Innoactive.CreatorEditor.XRUtils
@@ -21,7 +21,7 @@ namespace Innoactive.CreatorEditor.XRUtils
         internal const string IsXRLoaderInitialized = "IsXRLoaderInitialized";
         private const string OculusXRPackage = "com.unity.xr.oculus";
         private const string WindowsXRPackage = "com.unity.xr.windowsmr";
-        private const string XRManagementPackage = "com.unity.xr.management";
+        private const string XRManagementPackage = "com.unity.xr.management@4.0.1";
 
         public enum XRSDK
         {
@@ -83,13 +83,17 @@ namespace Innoactive.CreatorEditor.XRUtils
 
             EditorPrefs.DeleteKey(IsXRLoaderInitialized);
 
-#if UNITY_XR_MANAGEMENT
-            DisplayDialog("Oculus XR");
-            PackageOperationsManager.LoadPackage(OculusXRPackage);
-#else
+#if UNITY_XR_MANAGEMENT && OCULUS_XR
+#pragma warning disable CS4014
+            TryToEnableLoader("OculusLoader");
+#pragma warning restore CS4014
+#elif !UNITY_XR_MANAGEMENT
             DisplayDialog("XR Plug-in Management");
             EditorPrefs.SetInt(nameof(XRSDK), (int)XRSDK.Oculus);
             PackageOperationsManager.LoadPackage(XRManagementPackage);
+#else
+            DisplayDialog("Oculus XR");
+            PackageOperationsManager.LoadPackage(OculusXRPackage);
 #endif
         }
 
@@ -106,13 +110,17 @@ namespace Innoactive.CreatorEditor.XRUtils
 
             EditorPrefs.DeleteKey(IsXRLoaderInitialized);
 
-#if UNITY_XR_MANAGEMENT
-            DisplayDialog("Windows MR");
-            PackageOperationsManager.LoadPackage(WindowsXRPackage);
-#else
+#if UNITY_XR_MANAGEMENT && WINDOWS_XR
+#pragma warning disable CS4014
+            TryToEnableLoader("WindowsMRLoader");
+#pragma warning restore CS4014
+#elif !UNITY_XR_MANAGEMENT
             DisplayDialog("XR Plug-in Management");
             EditorPrefs.SetInt(nameof(XRSDK), (int)XRSDK.WindowsMR);
             PackageOperationsManager.LoadPackage(XRManagementPackage);
+#else
+            DisplayDialog("Windows MR");
+            PackageOperationsManager.LoadPackage(WindowsXRPackage);
 #endif
         }
 
@@ -128,7 +136,7 @@ namespace Innoactive.CreatorEditor.XRUtils
 #if UNITY_XR_MANAGEMENT
                 if (XRGeneralSettings.Instance != null)
                 {
-                    foreach (XRLoader loader in XRGeneralSettings.Instance.Manager.loaders)
+                    foreach (XRLoader loader in XRGeneralSettings.Instance.Manager.activeLoaders)
                     {
                         if (loader.name == "Oculus Loader")
                         {
@@ -171,31 +179,37 @@ namespace Innoactive.CreatorEditor.XRUtils
                 enabledSDKs.Add(XRConfiguration.None);
             }
 
+
+
             return enabledSDKs;
         }
 
 #if UNITY_XR_MANAGEMENT
-        internal static async void EnableLoader(string package, string loader, BuildTargetGroup buildTargetGroup = BuildTargetGroup.Standalone)
+        internal static async Task<bool> TryToEnableLoader(string loaderName)
         {
             EditorPrefs.SetBool(IsXRLoaderInitialized, true);
             SettingsService.OpenProjectSettings("Project/XR Plug-in Management");
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
-            await Task.Delay(500);
-
-            if (XRGeneralSettings.Instance == null)
+            while (XRGeneralSettings.Instance == null)
             {
-                EditorUtility.DisplayDialog($"Can't enable {loader}!", $"Can't enable {loader} because general settings for XR are missing. Enable them manually here:\nEdit > Project Settings... > XR Plug-in Management\nand then select the provider for your VR headset.", "Continue");
-                return;
+                await Task.Delay(500);
+
+                if (stopwatch.ElapsedMilliseconds > 5000f)
+                {
+                    EditorUtility.DisplayDialog($"The {loaderName} could not be enable!", $"The XR general settings file is missing. Enable {loaderName} manually here:\nEdit > Project Settings... > XR Plug-in Management.", "Continue");
+                    return false;
+                }
+            }
+            stopwatch.Stop();
+
+            if (XRGeneralSettings.Instance.Manager.activeLoaders.Any(xrLoader => xrLoader.GetType().Name == loaderName))
+            {
+                return true;
             }
 
-            if (XRGeneralSettings.Instance.Manager.loaders.Any(xrLoader => xrLoader.GetType().Name == loader))
-            {
-                return;
-            }
-
-            typeof(XRPackageMetadataStore)
-                .GetMethod("InstallPackageAndAssignLoaderForBuildTarget", BindingFlags.Static | BindingFlags.NonPublic)?
-                .Invoke(null, new object[] { package, loader, buildTargetGroup });
+            XRLoader loader = ScriptableObject.CreateInstance(loaderName) as XRLoader;
+            return XRGeneralSettings.Instance.Manager.TryAddLoader(loader);
         }
 #endif
 
@@ -211,7 +225,7 @@ namespace Innoactive.CreatorEditor.XRUtils
 #pragma warning disable CS0618
             PlayerSettings.virtualRealitySupported = true;
             UnityEngine.XR.XRSettings.LoadDeviceByName("OpenVR");
-            await System.Threading.Tasks.Task.Delay(1000);
+            await Task.Delay(1000);
             UnityEngine.XR.XRSettings.enabled = true;
 #pragma warning restore CS0618
         }

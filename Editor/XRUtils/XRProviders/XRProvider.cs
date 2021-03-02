@@ -2,6 +2,7 @@
 using System;
 using UnityEditor;
 using Innoactive.CreatorEditor.PackageManager;
+using UnityEngine;
 
 namespace Innoactive.CreatorEditor.XRUtils
 {
@@ -22,10 +23,15 @@ namespace Innoactive.CreatorEditor.XRUtils
             OnPackageEnabled -= InitializeXRLoader;
         }
 
-        protected virtual void InitializeXRLoader(object sender, EventArgs e)
+        protected virtual async void InitializeXRLoader(object sender, EventArgs e)
         {
             OnPackageEnabled -= InitializeXRLoader;
-            XRLoaderHelper.EnableLoader(Package, XRLoaderName);
+            bool wasLoaderEnabled = await XRLoaderHelper.TryToEnableLoader(XRLoaderName);
+
+            if (wasLoaderEnabled == false)
+            {
+                Debug.LogWarning($"{XRLoaderName} could not be loaded. Enable it manually here:\nEdit > Project Settings... > XR Plug-in Management.");
+            }
         }
     }
 }
