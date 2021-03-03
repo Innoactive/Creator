@@ -81,9 +81,13 @@ namespace Innoactive.CreatorEditor.PackageManager
                 int index = dependenciesList.FindIndex(item => item == dependency);
                 EditorUtility.DisplayProgressBar("Importing Creator dependencies", $"Fetching {dependency.Package}", index * percentage);
 
-                if (PackageOperationsManager.IsPackageLoaded(dependency.Package))
+                if (PackageOperationsManager.IsPackageLoaded(dependency.Package, dependency.Version))
                 {
-                    dependency.Version = PackageOperationsManager.GetInstalledPackageVersion(dependency.Package);
+                    if (string.IsNullOrEmpty(dependency.Version))
+                    {
+                        dependency.Version = PackageOperationsManager.GetInstalledPackageVersion(dependency.Package);
+                    }
+
                     dependency.IsEnabled = true;
                 }
                 else
