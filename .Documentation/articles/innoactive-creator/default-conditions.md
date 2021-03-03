@@ -23,7 +23,14 @@ See [this article](step-inspector.md) to learn Step Inspector controls.
 
 ### Description
 
-The `Grab Object` condition is fulfilled once the specified `Training Scene Object` is grabbed while this condition is active. It is fulfilled immediately if the condition becomes active while the `Training Scene Object` is already being held.
+This condition is fulfilled when the trainee grabs the `Training Scene Object`. 
+The condition is also fulfilled if the trainee already grabs the `object` before the step is activated, so, if a trainee is already holding 
+the specified object in hand while this condition is active, it is fulfilled immediately.
+
+### Interaction in VR
+
+
+### Interaction in Desktop Mode
 
 ### Configuration
 
