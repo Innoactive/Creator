@@ -42,6 +42,8 @@
       href: innoactive-creator/step-inspector.md
     - name: Training Scene Objects
       href: innoactive-creator/training-scene-object.md
+    - name: General Concepts
+      href: innoactive-creator/general-concepts.md
     - name: Default Behaviors
       href: innoactive-creator/default-behaviors.md
     - name: Default Conditions
