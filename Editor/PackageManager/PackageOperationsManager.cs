@@ -98,7 +98,7 @@ namespace Innoactive.CreatorEditor.PackageManager
             }
 
             AddRequest addRequest = Client.Add(package);
-            Debug.Log($"Enabling package: {package}, Version: {(string.IsNullOrEmpty(version) ? "latest" : version)}.");
+            Debug.Log($"Enabling package: {package.Split('@').First()}, Version: {(string.IsNullOrEmpty(version) ? "latest" : version)}.");
 
             while (addRequest.IsCompleted == false)
             {
@@ -112,7 +112,7 @@ namespace Innoactive.CreatorEditor.PackageManager
             else
             {
                 OnPackageEnabled?.Invoke(null, new PackageEnabledEventArgs(addRequest.Result));
-                Debug.Log($"The package '{addRequest.Result.displayName} version {addRequest.Result.version}' has been automatically added");
+                Debug.Log($"The package '{addRequest.Result.displayName}' version '{addRequest.Result.version}' has been automatically added");
             }
         }
 
