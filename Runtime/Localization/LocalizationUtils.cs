@@ -1,10 +1,14 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
- using UnityEngine;
+using System.Text.RegularExpressions;
+using Innoactive.Creator.Core.IO;
+using Newtonsoft.Json;
+using UnityEngine;
 
- namespace Innoactive.Creator.Core.Internationalization
+namespace Innoactive.Creator.Core.Internationalization
 {
     /// <summary>
     /// Collection of localization utilities.
@@ -12,6 +16,135 @@ using System.Linq;
     public static class LocalizationUtils
     {
         private const string defaultIsoCode = "en";
+
+        /// <summary>
+        /// Finds all available languages for the given config, any additional parameters for the paths
+        /// have to be provided. Keep in mind that only sources which are flagged as DefinesAvailableLanguages are
+        /// used and the result will be a union of all of them.
+        ///
+        /// Note: Only sources based on streaming assets work for now.
+        /// </summary>
+        public static List<string> FindAvailableLanguagesForConfig(LocalizationConfig config, Dictionary<string, string> parameters)
+        {
+            IEnumerable<string> result = null;
+
+            if (parameters.ContainsKey(LocalizationReader.KeyLanguage))
+            {
+                parameters[LocalizationReader.KeyLanguage] = "*";
+            }
+            else
+            {
+                parameters.Add(LocalizationReader.KeyLanguage, "*");
+            }
+
+            IEnumerable<LocalizationConfig.LocalizationSource> sources = config.Sources.Where(source => source.DefinesAvailableLanguages);
+            foreach (LocalizationConfig.LocalizationSource source in sources)
+            {
+                string path = LocalizationReader.ResolvePath(source.Path, parameters);
+                if (source.ResourceType == LocalizationConfig.ResourceType.StreamingAssets)
+                {
+                    List<string> foundLanguages = FindLanguagesFileInStreamingAssets(path);
+                    if (result == null)
+                    {
+                        result = foundLanguages;
+                    }
+                    else
+                    {
+                        result = result.Union(foundLanguages);
+                    }
+                }
+            }
+
+            if (result == null)
+            {
+                return new List<string>() {config.FallbackLanguage};
+            }
+
+            if (result.Contains(config.FallbackLanguage) == false)
+            {
+                result.Append(config.FallbackLanguage);
+            }
+
+            return result.Distinct().ToList();
+        }
+
+        private static List<string> FindLanguagesFileInStreamingAssets(string path)
+        {
+            string filename = Path.GetFileName(path);
+            string regex = filename.Replace("*", "[a-zA-Z][a-zA-Z]");
+
+            string directory = Path.GetDirectoryName(path);
+
+            try
+            {
+                return FileManager.FetchStreamingAssetsFilesAt(directory, "*.json")
+                    .Where(file => Regex.Match(file, regex).Success)
+                    .Select(file => ExtractIsoCode(Path.GetFileName(file), filename))
+                    .Where(IsTwoLettersIsoCode)
+                    .ToList();
+            }
+            catch
+            {
+                return new List<string>();
+            }
+        }
+
+        private static string ExtractIsoCode(string filename, string pattern)
+        {
+            if (pattern.Contains("*") && pattern.StartsWith("*") == false)
+            {
+                filename = filename.Substring(pattern.Split('*')[0].Length);
+            }
+
+            return filename.Substring(0, 2);
+        }
+
+        /// <summary>
+        /// Loads a json file containing a dictionary from the Resources path by loading a TextAssets (required .txt ending).
+        /// </summary>
+        internal static Dictionary<string, string> LoadFromResource(string path)
+        {
+            TextAsset asset = Resources.Load<TextAsset>(path);
+
+            if (asset == null)
+            {
+                return new Dictionary<string, string>();
+            }
+
+            try
+            {
+                return JsonConvert.DeserializeObject<Dictionary<string, string>>(asset.text);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning(ex);
+            }
+
+            return new Dictionary<string, string>();
+        }
+
+        /// <summary>
+        /// Loads a json file containing a dictionary from the StreamingAssets.
+        /// </summary>
+        internal static Dictionary<string, string> LoadFromStreamingAssets(string path)
+        {
+            if (FileManager.Exists(path) == false)
+            {
+                return new Dictionary<string, string>();
+            }
+
+            try
+            {
+                string jsonValue = FileManager.ReadAllText(path);
+                return JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonValue);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning(ex);
+            }
+
+            return new Dictionary<string, string>();
+        }
 
         /// <summary>
         /// Returns new instance of LocalizedString with the same values.
