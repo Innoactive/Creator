@@ -103,7 +103,7 @@ This condition is fulfilled when the `Object` is within the specified `Range` of
 ### Interaction in Desktop Mode
 ### Interaction Highlights
 
-### Application Example!
+### Application Example
 
 - The trainee is supposed to hold a RFID tag included in his gloves (represented by his controller) near a scanner.
 - If a trainee moves to close to a machinery while it is operating, the emergency shut down is triggered.
@@ -138,15 +138,22 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Condit
 
 ### Description
 
-The `Release Object` condition is fulfilled once the *Grabbable object* is released while this condition is active. It is fulfilled immediately if the condition becomes active and the *Grabbable object* is not being held.
+This condition is fulfilled when the `Object` is released by the trainee’s controller. If a trainee is already holding the specified object in hand while this condition is active, it is fulfilled immediately.
+### Interaction in VR
+### Interaction in Desktop Mode
+### Interaction Highlights
+
+### Application Example
 
 ### Configuration
 
-- #### Grabbable object
+- #### Object
 
-    This field contains the `Training Scene Object` that is required to be released. Make sure you added the `Grabbable Property` component to the game object in the Unity Inspector. Besides, the object must have a collider component in order to be grabbable.
+    the `Training Scene Object` to release. The object needs to have the Grabbable Property and a collider component configured. 
 
-    [![Grabbable Properties](../images/conditions/grabbable_properties.png "")](../images/conditions/grabbable_properties.png)
+### Location of this Condition (for Developers)
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/ReleasedCondition.cs" target="_blank">here</a>
+ 
 
 ------
 
