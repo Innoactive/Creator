@@ -102,12 +102,12 @@ namespace Innoactive.Creator.Core
         public static EventHandler<CourseEventArgs> CourseStarted;
 
         /// <summary>
-        /// Will be called each time a chapter activates
+        /// Will be called each time a chapter activates.
         /// </summary>
         public static EventHandler<CourseEventArgs> ChapterStarted;
 
         /// <summary>
-        /// Will be called each time a step activates
+        /// Will be called each time a step activates.
         /// </summary>
         public static EventHandler<CourseEventArgs> StepStarted;
 
