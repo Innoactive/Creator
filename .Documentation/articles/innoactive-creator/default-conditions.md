@@ -25,23 +25,34 @@ See [this article](step-inspector.md) to learn Step Inspector controls.
 
 ### Description
 
-This condition is fulfilled when the trainee grabs the `Training Scene Object`. 
-The condition is also fulfilled if the trainee already grabs the `object` before the step is activated, so, if a trainee is already holding 
+This condition is fulfilled when the trainee grabs the `Object`. 
+The condition is also fulfilled if the trainee already grabs the `Object` before the step is activated, so, if a trainee is already holding 
 the specified object in hand while this condition is active, it is fulfilled immediately.
 
 ### Interaction in VR
 
+To grab the object in VR, by default, the trainee has to move one of their hands/controllers into the object (it’s collider) and press the trigger button. The button to trigger can be changed by the template developer as described here (TO BE DONE).
+
 
 ### Interaction in Desktop Mode
 
+To grab the object in Desktop Mode, the trainee has to move the mouse on the object (so that the cast ray hit’s the objects collider) and press the left mouse button. The button to trigger can be changed by the template developer as described here (TO BE DONE).
+
+### Interaction Highlights
+Before the controller button or, respectively, mouse button is pressed, by default, the object is already highlighted to indicate that the trainee can now grab this object. This “on hover” effect can be changed by the template developer here (TO BE DONE). The training designer can also change this in the interactable highlighter property of the given object as described here. You can easily enable/disable this hover effect, or change the highlight color and transparency (TO BE DONE).
+
+### Application Example
+
+- Trainees need to grab objects to position them somewhere.
+- Trainees need to grab a tool to use it.
+- Trainees need to grab a component part to assemble it to another component part.
+
+
 ### Configuration
 
-- #### Grabbable object
+- #### Object
 
-    This field contains the `Training Scene Object` with a `Grabbable Property` that is required to be grabbed.
-    Besides, the object must have a collider component in order to be grabbed.
-
-    [![Grabbable Properties](../images/conditions/grabbable_properties.png "")](../images/conditions/grabbable_properties.png)
+    The `Training Scene Object` to grab. The object needs to have the `Grabbable Property` and a collider component configured. The collider defines the area where the trainee can grab this object.
 
 ------
 
