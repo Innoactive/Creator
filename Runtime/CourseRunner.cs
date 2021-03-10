@@ -51,12 +51,12 @@ namespace Innoactive.Creator.Core
 
                 course.Update();
 
-                if (course.Data.Current.LifeCycle.Stage == Stage.Activating)
+                if (course.Data.Current?.LifeCycle.Stage == Stage.Activating)
                 {
                     ChapterStarted?.Invoke(this, new CourseEventArgs(course));
                 }
 
-                if (course.Data.Current?.Data.Current.LifeCycle.Stage == Stage.Activating)
+                if (course.Data.Current?.Data.Current?.LifeCycle.Stage == Stage.Activating)
                 {
                     StepStarted?.Invoke(this, new CourseEventArgs(course));
                 }
