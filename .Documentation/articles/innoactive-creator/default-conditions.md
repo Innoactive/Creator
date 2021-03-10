@@ -54,6 +54,9 @@ Before the controller button or, respectively, mouse button is pressed, by defau
 
     The `Training Scene Object` to grab. The object needs to have the `Grabbable Property` and a collider component configured. The collider defines the area where the trainee can grab this object.
 
+### Location of this Condition (for Developers)
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/GrabbedCondition.cs" target="_blank">here</a>
+ 
 ------
 
 ## Move Object into Collider
