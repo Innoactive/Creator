@@ -97,25 +97,40 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Condit
 
 ### Description
 
-The `Object Nearby` condition triggers when the *tracked object* is within the specified *range* from the *reference object* for the required amount of time while this condition is active.
+This condition is fulfilled when the `Object` is within the specified `Range` of a `Reference object`.
+
+### Interaction in VR
+### Interaction in Desktop Mode
+### Interaction Highlights
+
+### Application Example!
+
+- The trainee is supposed to hold a RFID tag included in his gloves (represented by his controller) near a scanner.
+- If a trainee moves to close to a machinery while it is operating, the emergency shut down is triggered.
+
 
 ### Configuration
 
+- #### Object
+
+    The `Training Scene Object` that should be in the radius of the `Reference object`. Make sure you add at least the `Training Scene Object` component to this game object in the Unity Inspector. 
+    
 - #### Reference Object
 
-    This field contains the `Training Scene Object` you want to measure the distance from.
+   The `Training Scene Object` you want to measure the distance from.
 
-- #### Tracked Object
-
-    This field contains the `Training Scene Object` that should be in the radius of the *reference object*. Make sure you add at least the `Training Scene Object` component to this game object in the Unity Inspector. You would usually move this object close to the reference object.
 
 - #### Range
 
-    In this field, you can set the maximum distance between the *tracked object* and the *reference object* required to fulfill this condition.
+    In this field, you can set the maximum distance between the *Object* and the *Reference object* required to fulfill this condition.The distance is calculated as the Euclidean norm between the transform’s positions of Object and Reference Object.
 
 - #### Required seconds inside
 
-    In this field, you can set the time in seconds the *tracked object* should stay within the radius of the *reference object*.
+    In this field, you can set the time in seconds the `Object` should stay within the radius `Range` of the `Reference object`.
+
+### Location of this Condition (for Developers)
+
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Conditions/PositionalConditions/ObjectInRangeCondition.cs" target="_blank">here</a>  
 
 ------
 
