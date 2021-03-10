@@ -60,29 +60,37 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Intera
 ------
 
 ## Move Object into Collider
-
 ### Description
 
-The `Move Object into Collider` condition is fulfilled if the target object is within the specified collider for the required amount of time while this condition is active.
+This condition is fulfilled when the `Object` is within the specified `Collider` for the required amount of time (`Required seconds inside`) while this condition is active.
+
+### Interaction in VR
+### Interaction in Desktop Mode
+### Interaction Highlights
+
+### Application Example
+- You train air traffic controllers to give certain signs by waving red paddles. By positioning the collider above the trainee's head and one to the trainees right side, you can validate if the trainee raised one red paddle over his head and one to the side.
 
 ### Configuration
 
-- #### Object to collide into
+- #### Object
 
-    This field contains the `Training Scene Object` with the collider inside which you want to move the target object. Make sure you added the `Collider With Trigger Property` component to the game object with the collider. Besides, the collider component needs the `Is Trigger` property to be *enabled*.
+    The Training Scene Object to grab. The object needs to have the `Grabbable Property` and a collider component configured. The collider defines the area where the trainee can grab this object.
 
-    [![Object with trigger collider](../images/conditions/object_into_colliders_properties_1.png "")](../images/conditions/object_into_colliders_properties_1.png)
 
-- #### Target object
 
-    This field contains the `Training Scene Object` that you want to move into the *Object to collide into*. Make sure you added the `Training Scene Object` component to the game object in the Unity Inspector. Besides, the object must have a collider component with the `Is Trigger` property *disabled*.
+- #### Collider
 
-    [![Target object with collider](../images/conditions/object_into_colliders_properties_2.png "")](../images/conditions/object_into_colliders_properties_2.png)
+    The Training Scene Object with the collider inside which you want to move the Object to. Make sure that the Collider Object has a collider added and that the option ‘Is Trigger’ is enabled.
 
 - #### Required seconds inside
 
-    In this field, you can set the time in seconds the target object should stay within the collider.
-  
+    Set the time in seconds the Object should stay within the Collider.
+
+### Location of this Condition (for Developers)
+
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Conditions/PositionalConditions/ObjectInColliderCondition.cs" target="_blank">here</a>  
+
 ------
 
 ## Object Nearby
