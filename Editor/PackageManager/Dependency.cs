@@ -76,6 +76,16 @@ namespace Innoactive.CreatorEditor.PackageManager
 
         private bool isEnabled;
 
+        protected Dependency()
+        {
+            if (string.IsNullOrEmpty(Package) && Package.Contains('@'))
+            {
+                string[] packageData = Package.Split('@');
+                Package = packageData.First();
+                Version = packageData.Last();
+            }
+        }
+
         protected virtual void EmitOnEnabled()
         {
             OnPackageEnabled?.Invoke(this, EventArgs.Empty);
