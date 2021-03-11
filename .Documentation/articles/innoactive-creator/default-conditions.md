@@ -38,7 +38,7 @@ Before the controller button is pressed, by default, the object is already highl
 
 #### Interaction in Desktop Mode
 
-To grab the object in Desktop Mode, the trainee has to move the mouse over the object (so that the raycast hits the object's collider) and press the left mouse button.
+To grab the object in Desktop Mode, the trainee has to move the mouse over the object (so that the ray hits the object's collider) and press the left mouse button.
 
 Before the mouse button is pressed, by default, the object is already highlighted to indicate that the trainee can now grab this object. This “on hover” effect can be changed by the template developer in the `Hover Highlight Handler` of the Desktop Mode Rig prefab. 
 
@@ -63,6 +63,7 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Intera
 ------
 
 ## Move Object into Collider
+
 ### Description
 
 This condition is fulfilled when the `Object` is within the specified `Collider` for the required amount of time (`Required seconds inside`) while this condition is active.
@@ -73,7 +74,6 @@ In order to move the object into a collider, trainees need to move their hands/c
 #### Interaction in Desktop Mode
 In order to move the object into a collider in Desktop Mode, trainees have to move the mouse on the object (so that the cast ray hit’s the objects collider) and press the left mouse button. The object is now grabbed, which is represented by an on-screen hand holding a miniature version of the object. In order to release the object into the collider, trainees move the mouse on the collider and press the lef mouse button. The on-screen hand disappears and the released object is now placed into the selected collider.
 
-#### Interaction Highlights
 
 ### Application Example
 - You train air traffic controllers to give certain signs by waving red paddles. By positioning the collider above the trainee's head and one to the trainees right side, you can validate if the trainee raised one red paddle over his head and one to the side.
@@ -114,7 +114,6 @@ In order to move the object nearby a collider, trainees need to move their hands
 
 In order to approach the sollider with an object in Desktop Mode, trainees have to move the mouse on the object (so that the cast ray hit’s the objects collider) and press the left mouse button. The object is now grabbed, which is represented by an on-screen hand holding a miniature version of the object. In order to release the object nearby the collider, trainees move the mouse on the collider and press the left mouse button. The on-screen hand disappears and the released object is now placed into the selected collider. `Object nearby` is difficult to simulate in Desktop Mode and is hence solved similar to `Move Object into collider`. 
 
-#### Interaction Highlights
 
 ### Application Example
 
@@ -161,7 +160,6 @@ In order to release the object in VR, trainees need to have an object grabbed wi
 
 In order to release the object in Desktop mode, trainees need to have an object grabbed in Desktop Mode. An on-screen hand visually represents holding the object. By touching the `release button` next to the on-screen hand, the object is released and placed at the position it was grabbed before. 
 
-#### Interaction Highlights
 
 ### Application Example
 
@@ -190,7 +188,6 @@ After the trainee releases the `Object` (see [Release Condition](https://develop
 
 #### Interaction in VR
 #### Interaction in Desktop Mode
-#### Interaction Highlights
 
 Snap zones are restricted to which objects can be snapped to them, which means, any object can be valid (i.e. it can be snapped to this zone) or invalid (it can not be snapped to this zone) for a snap zone. In case you are moving a valid object into a zone (c.f. above, colliders and stuff), the snap zone color changes to ‘Validation Color’, giving the trainee a positive feedback. In case you are moving an invalid object into a zone, the snap zone color changes to ‘Invalid Color’, giving the trainee the feedback that this is the wrong object for this zone. 
 Which colors and which materials are to be used can be changed in the Snap Zones Settings. They can be found in tab “Innoactive” -> “Settings” -> “Snap Zones”.
