@@ -266,7 +266,10 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Intera
 This condition is fulfilled when the `Object` is used by pressing the *Use* button of the controller while being touched or grabbed.
 
 #### Interaction in VR
+
+
 #### Interaction in Desktop Mode
+In order to use an object in Desktop mode, it needs to be grabbed before (see [Grab Condition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#grab-object)). A grabbed object
 #### Interaction Highlights
 
 ### Application Example
