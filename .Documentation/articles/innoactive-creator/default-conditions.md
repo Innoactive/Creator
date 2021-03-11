@@ -31,7 +31,7 @@ the specified object in hand while this condition is active, it is fulfilled imm
 
 #### Interaction in VR
 
-To grab the object in VR, by default, the trainee has to move one of their hands/controllers into the object (its collider) and press the trigger button. The button to trigger can be changed by the template developer as described here <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
+To grab the object in VR, by default, the trainee has to move one of their hands/controllers into the object (its collider) and press the trigger button. The button to trigger can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
 
 Before the controller button is pressed, by default, the object is already highlighted to indicate that the trainee can now grab this object. The training designer can change this in the interactable highlighter script of the given object. You can enable/disable this interaction effect, change the highlight color and transparency for `On Touch`, `On Grab`, and `On Use`.
 
