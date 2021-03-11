@@ -1,7 +1,7 @@
 # Transitions
 
 Transitions define when and how the training course transits from one step to the next. 
-They are automatically triggered when all conditions are fulfilled. However this might not happen immediately! This is the case if behaviors or conditions of the previous steps need time to deactivate. Prominente examples of this are a `Delay Behavior` or an `Audio Behavior` that has the ‘Blocking’ attribute checked. Conditions might also create a delay, for example if they have a success animation.
+They are automatically triggered when all conditions are fulfilled. However this might not happen immediately! This is the case if behaviors or conditions of the previous steps need time to deactivate. Prominente examples of this are a `Delay Behavior` or an `Audio Behavior` that has the ‘Wait for completion’ attribute checked. Conditions might also create a delay, for example if they have a success animation.
 
 To learn more about the life cycle of transitions, behaviors and conditions, check out section <a href="https://developers.innoactive.de/documentation/creator/latest/articles/developer/04-general-concepts.html#life-cycle" target="_blank">Life Cycle</a> in general concepts.
 
