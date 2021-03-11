@@ -33,13 +33,16 @@ the specified object in hand while this condition is active, it is fulfilled imm
 
 To grab the object in VR, by default, the trainee has to move one of their hands/controllers into the object (its collider) and press the trigger button. The button to trigger can be changed by the template developer as described here (TO BE DONE).
 
+Before the controller button is pressed, by default, the object is already highlighted to indicate that the trainee can now grab this object. The training designer can change this in the interactable highlighter script of the given object. You can enable/disable this interaction effect, change the highlight color and transparency for `On Touch`, `On Grab`, and `On Use`.
+
 
 #### Interaction in Desktop Mode
 
-To grab the object in Desktop Mode, the trainee has to move the mouse on the object (so that the cast ray hit’s the objects collider) and press the left mouse button.
+To grab the object in Desktop Mode, the trainee has to move the mouse over the object (so that the raycast hits the object's collider) and press the left mouse button.
 
-#### Interaction Highlights
-Before the controller button or, respectively, mouse button is pressed, by default, the object is already highlighted to indicate that the trainee can now grab this object. This “on hover” effect can be changed by the template developer here (TO BE DONE). The training designer can also change this in the interactable highlighter property of the given object as described here. You can easily enable/disable this hover effect, or change the highlight color and transparency (TO BE DONE).
+Before the mouse button is pressed, by default, the object is already highlighted to indicate that the trainee can now grab this object. This “on hover” effect can be changed by the template developer in the `Hover Highlight Handler` of the Desktop Mode Rig prefab. 
+
+
 
 ### Application Example
 
