@@ -1,6 +1,6 @@
 # Default Conditions
 
-Conditions need to be active in order to be fulfilled. Condtions are always active as soon as the [step transition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/transitions.html) containing this condition is active.
+Conditions need to be active in order to be fulfilled. As soon as a step is active, all containing Conditions are active as well (see [step transition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/transitions.html)).
 
 The following conditions are part of the `Basic Conditions and Behaviors` and the `Basic Interactions` Component. The Innoactive Base Template provides them by default.
 
@@ -29,16 +29,16 @@ This condition is fulfilled when the trainee grabs the `Object`.
 The condition is also fulfilled if the trainee already grabs the `Object` before the step is activated, so, if a trainee is already holding 
 the specified object in hand while this condition is active, it is fulfilled immediately.
 
-### Interaction in VR
+#### Interaction in VR
 
 To grab the object in VR, by default, the trainee has to move one of their hands/controllers into the object (it’s collider) and press the trigger button. The button to trigger can be changed by the template developer as described here (TO BE DONE).
 
 
-### Interaction in Desktop Mode
+#### Interaction in Desktop Mode
 
-To grab the object in Desktop Mode, the trainee has to move the mouse on the object (so that the cast ray hit’s the objects collider) and press the left mouse button. The button to trigger can be changed by the template developer as described here (TO BE DONE).
+To grab the object in Desktop Mode, the trainee has to move the mouse on the object (so that the cast ray hit’s the objects collider) and press the left mouse button.
 
-### Interaction Highlights
+#### Interaction Highlights
 Before the controller button or, respectively, mouse button is pressed, by default, the object is already highlighted to indicate that the trainee can now grab this object. This “on hover” effect can be changed by the template developer here (TO BE DONE). The training designer can also change this in the interactable highlighter property of the given object as described here. You can easily enable/disable this hover effect, or change the highlight color and transparency (TO BE DONE).
 
 ### Application Example
@@ -64,9 +64,13 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Intera
 
 This condition is fulfilled when the `Object` is within the specified `Collider` for the required amount of time (`Required seconds inside`) while this condition is active.
 
-### Interaction in VR
-### Interaction in Desktop Mode
-### Interaction Highlights
+#### Interaction in VR
+In order to move the object into a collider, trainees need to move their hands/controllers into the object (it's collider) and press the trigger button. While holding the trigger button and moving the arm, the object stays grabbed by trainees hands. Trainees move the object into the specified collider and release it. The button to trigger can be changed by the template developer as described here (TO BE DONE).
+
+#### Interaction in Desktop Mode
+In order to move the object into a collider in Desktop Mode, trainees have to move the mouse on the object (so that the cast ray hit’s the objects collider) and press the left mouse button. The object is now grabbed, which is represented by an on-screen hand holding a miniature version of the object. In order to release the object into the collider, trainees move the mouse on the collider and press the lef mouse button. The on-screen hand disappears and the released object is now placed into the selected collider.
+
+#### Interaction Highlights
 
 ### Application Example
 - You train air traffic controllers to give certain signs by waving red paddles. By positioning the collider above the trainee's head and one to the trainees right side, you can validate if the trainee raised one red paddle over his head and one to the side.
@@ -99,9 +103,15 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Condit
 
 This condition is fulfilled when the `Object` is within the specified `Range` of a `Reference object`.
 
-### Interaction in VR
-### Interaction in Desktop Mode
-### Interaction Highlights
+#### Interaction in VR
+
+In order to move the object nearby a collider, trainees need to move their hands/controllers into the object (it's collider) and press the trigger button. While holding the trigger button and moving the arm, the object stays attached to the trainees' hands. Trainees approach with the object the specified collider and release it. The button to trigger can be changed by the template developer as described here (TO BE DONE).
+
+#### Interaction in Desktop Mode
+
+In order to approach the sollider with an object in Desktop Mode, trainees have to move the mouse on the object (so that the cast ray hit’s the objects collider) and press the left mouse button. The object is now grabbed, which is represented by an on-screen hand holding a miniature version of the object. In order to release the object nearby the collider, trainees move the mouse on the collider and press the left mouse button. The on-screen hand disappears and the released object is now placed into the selected collider. `Object nearby` is difficult to simulate in Desktop Mode and is hence solved similar to `Move Object into collider`. 
+
+#### Interaction Highlights
 
 ### Application Example
 
@@ -139,9 +149,16 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Condit
 ### Description
 
 This condition is fulfilled when the `Object` is released by the trainee’s controller. If a trainee is already holding the specified object in hand while this condition is active, it is fulfilled immediately.
-### Interaction in VR
-### Interaction in Desktop Mode
-### Interaction Highlights
+
+#### Interaction in VR
+
+In order to release the object in VR, trainees need to have an object grabbed with their hand/controllers (see [Grab Condition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#grab-object)). By releasing the trigger button, the object is released at the current position. The button to trigger can be changed by the template developer as described here (TO BE DONE).
+
+#### Interaction in Desktop Mode
+
+In order to release the object in Desktop mode, trainees need to have an object grabbed in Desktop Mode. An on-screen hand visually represents holding the object. By touching the `release button` next to the on-screen hand, the object is released and placed at the position it was grabbed before. 
+
+#### Interaction Highlights
 
 ### Application Example
 
