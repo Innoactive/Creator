@@ -31,7 +31,7 @@ the specified object in hand while this condition is active, it is fulfilled imm
 
 #### Interaction in VR
 
-To grab the object in VR, by default, the trainee has to move one of their hands/controllers into the object (its collider) and press the trigger button. The button to trigger can be changed by the template developer as described here (TO BE DONE).
+To grab the object in VR, by default, the trainee has to move one of their hands/controllers into the object (its collider) and press the trigger button. The button to trigger can be changed by the template developer as described here <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
 
 Before the controller button is pressed, by default, the object is already highlighted to indicate that the trainee can now grab this object. The training designer can change this in the interactable highlighter script of the given object. You can enable/disable this interaction effect, change the highlight color and transparency for `On Touch`, `On Grab`, and `On Use`.
 
@@ -58,7 +58,7 @@ Before the mouse button is pressed, by default, the object is already highlighte
     The `Training Scene Object` to grab. The object needs to have the `Grabbable Property` and a collider component configured. The collider defines the area where the trainee can grab this object.
 
 ### Location of this Condition (for Developers)
-This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/GrabbedCondition.cs" target="_blank">here</a>
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/GrabbedCondition.cs" target="_blank">here</a>.
  
 ------
 
@@ -69,7 +69,7 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Intera
 This condition is fulfilled when the `Object` is within the specified `Collider` for the required amount of time (`Required seconds inside`) while this condition is active.
 
 #### Interaction in VR
-In order to move the object into a collider, trainees need to move their hands/controllers into the object (its collider) and press the trigger button. While holding the trigger button and moving the arm, the object stays grabbed by trainees hands. Trainees move the object into the specified collider and release it. The button to trigger can be changed by the template developer as described here (TO BE DONE).
+In order to move the object into a collider, trainees need to move their hands/controllers into the object (its collider) and press the trigger button. While holding the trigger button and moving the arm, the object stays grabbed by trainees hands. Trainees move the object into the specified collider and release it. The button to trigger can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
 
 #### Interaction in Desktop Mode
 In order to move the object into a collider in Desktop Mode, trainees have to move the mouse on the object (so that the cast ray hit’s the objects collider) and press the left mouse button. The object is now grabbed, which is represented by an on-screen hand holding a miniature version of the object. In order to release the object into the collider, trainees move the mouse on the collider and press the lef mouse button. The on-screen hand disappears and the released object is now placed into the selected collider.
@@ -88,7 +88,7 @@ In order to move the object into a collider in Desktop Mode, trainees have to mo
 
 - #### Collider
 
-    The Training Scene Object with the collider inside which you want to move the Object to. Make sure that the Collider Object has a collider added and that the option ‘Is Trigger’ is enabled.
+    The Training Scene Object with the collider inside which you want to move the Object to. Make sure that the Collider Object has a collider added and that the option `Is Trigger` is enabled.
 
 - #### Required seconds inside
 
@@ -96,7 +96,7 @@ In order to move the object into a collider in Desktop Mode, trainees have to mo
 
 ### Location of this Condition (for Developers)
 
-This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Conditions/PositionalConditions/ObjectInColliderCondition.cs" target="_blank">here</a>  
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Conditions/PositionalConditions/ObjectInColliderCondition.cs" target="_blank">here</a>.
 
 ------
 
@@ -108,7 +108,7 @@ This condition is fulfilled when the `Object` is within the specified `Range` of
 
 #### Interaction in VR
 
-In order to move the object nearby a collider, trainees need to move their hands/controllers into the object (its collider) and press the trigger button. While holding the trigger button and moving the arm, the object stays attached to the trainees' hands. Trainees approach with the object the specified collider and release it. The button to trigger can be changed by the template developer as described here (TO BE DONE).
+In order to move the object nearby a collider, trainees need to move their hands/controllers into the object (its collider) and press the trigger button. While holding the trigger button and moving the arm, the object stays attached to the trainees' hands. Trainees approach with the object the specified collider and release it. The button to trigger can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
 
 #### Interaction in Desktop Mode
 
@@ -142,7 +142,7 @@ In order to approach the sollider with an object in Desktop Mode, trainees have 
 
 ### Location of this Condition (for Developers)
 
-This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Conditions/PositionalConditions/ObjectInRangeCondition.cs" target="_blank">here</a>  
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Conditions/PositionalConditions/ObjectInRangeCondition.cs" target="_blank">here</a>.
 
 ------
 
@@ -154,7 +154,7 @@ This condition is fulfilled when the `Object` is released by the trainee’s con
 
 #### Interaction in VR
 
-In order to release the object in VR, trainees need to have an object grabbed with their hand/controllers (see [Grab Condition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#grab-object)). By releasing the trigger button, the object is released at the current position. The button to trigger can be changed by the template developer as described here (TO BE DONE).
+In order to release the object in VR, trainees need to have an object grabbed with their hand/controllers (see [Grab Condition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#grab-object)). By releasing the trigger button, the object is released at the current position. The button to trigger can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
 
 #### Interaction in Desktop Mode
 
@@ -170,7 +170,7 @@ In order to release the object in Desktop mode, trainees need to have an object 
     the `Training Scene Object` to release. The object needs to have the Grabbable Property and a collider component configured. 
 
 ### Location of this Condition (for Developers)
-This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/ReleasedCondition.cs" target="_blank">here</a>
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/ReleasedCondition.cs" target="_blank">here</a>.
  
 
 ------
@@ -208,7 +208,7 @@ Which colors and which materials are to be used can be changed in the Snap Zones
     This field contains the `Training Scene Object` where the `Object` is required to be snapped. Make sure you added the `Snap Zone Property` component to the snap zone game object in the Unity Inspector. Besides, the object must have a collider component with the `Is Trigger` property *enabled*.
 
 ### Location of this Condition (for Developers)
-This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/SnappedCondition.cs" target="_blank">here</a>
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/SnappedCondition.cs" target="_blank">here</a>.
  
 ------
 
@@ -228,7 +228,7 @@ This condition is fulfilled when the time specified in `Wait (in seconds)` has e
 
 ### Location of this Condition (for Developers)
 
-This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/TouchedCondition.cs" target="_blank">here</a>  
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/TouchedCondition.cs" target="_blank">here</a>. 
 
 
 ------
@@ -253,7 +253,7 @@ This condition is fulfilled when the `Object` is touched by the trainee’s cont
     the `Training Scene Object` to be touched. The object needs to have the `Touchable Property` and a collider component configured. 
 
 ### Location of this Condition (for Developers)
-This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/SnappedCondition.cs" target="_blank">here</a>
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/SnappedCondition.cs" target="_blank">here</a>.
  
  
 
@@ -280,4 +280,4 @@ This condition is fulfilled when the `Object` is used by pressing the *Use* butt
     the `Training Scene Object` that is required to be used.The `Object` needs to have the `Usable Property` and a collider component configured.
 
 ### Location of this Condition (for Developers)
-This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/UsedCondition.cs" target="_blank">here</a>
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/UsedCondition.cs" target="_blank">here</a>.
