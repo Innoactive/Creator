@@ -178,35 +178,58 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Intera
 
 ### Description
 
-The `Snap Object` condition is fulfilled once the specified *Object to snap* is being snapped into the *Zone to snap into* (i.e. the game object is released within the snap zone) while this condition is active.
+This condition is fulfilled when the `Object` is released into the `Zone to snap into`, which means the collider of the Object and collider of the Zone overlap. Adapt the collider size of the snap zone to increase or decrease the area where trainees can release the `Object`. Increasing the collider size of the snap zone, decreases the required *snap* precision and simplifies the trainees' interaction in VR. 
+After the trainee releases the `Object` (see [Release Condition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#release-object)), it is moved to the snap Zones SnapPoint. To adjust this position, change the position of the SnapPoint child object of the `Zone to snap into` object.
 
-### Configuration**
+####Snap zone Generator
+####Manual snap zone generation
+####Snap Zone settings
 
-- #### Object to snap
+#### Interaction in VR
+#### Interaction in Desktop Mode
+#### Interaction Highlights
 
-    This field contains the `Training Scene Object` that is required to be snapped. Make sure you added the `Snappable Property` component to the game object in the Unity Inspector. Besides, the object must have a collider component in order to be grabbed and snapped.
+Snap zones are restricted to which objects can be snapped to them, which means, any object can be valid (i.e. it can be snapped to this zone) or invalid (it can not be snapped to this zone) for a snap zone. In case you are moving a valid object into a zone (c.f. above, colliders and stuff), the snap zone color changes to ‘Validation Color’, giving the trainee a positive feedback. In case you are moving an invalid object into a zone, the snap zone color changes to ‘Invalid Color’, giving the trainee the feedback that this is the wrong object for this zone. 
+Which colors and which materials are to be used can be changed in the Snap Zones Settings. They can be found in tab “Innoactive” -> “Settings” -> “Snap Zones”.
 
-    [![Snappable Properties](../images/conditions/snappable_properties.png "")](../images/conditions/snappable_properties.png)
+### Application Example
+
+- Teach trainees where to position certain component parts in a car.
+
+### Configuration
+
+- #### Object
+
+    the Training Scene Object to place (snap). The object needs to have the `Grabbable Property` and a collider component configured. 
+ 
 
 - #### Zone to snap into
 
-    This field contains the `Training Scene Object` where the *Object to snap* is required to be snapped. Make sure you added the `Snap Zone Property` component to the snap zone game object in the Unity Inspector. Besides, the object must have a collider component with the `Is Trigger` property *enabled*.
+    This field contains the `Training Scene Object` where the `Object` is required to be snapped. Make sure you added the `Snap Zone Property` component to the snap zone game object in the Unity Inspector. Besides, the object must have a collider component with the `Is Trigger` property *enabled*.
 
-    [![Snap Zone Properties](../images/conditions/snap_zone_properties.png "")](../images/conditions/snap_zone_properties.png)
-
+### Location of this Condition (for Developers)
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/SnappedCondition.cs" target="_blank">here</a>
+ 
 ------
 
 ## Timeout
 
 ### Description
 
-The `Timeout` condition is fulfilled once the specified time is elapsed while this condition is active.
+This condition is fulfilled when the time specified in `Wait (in seconds)` has elapsed.
+
+### Application Example
 
 ### Configuration
 
-- #### Wait for seconds
+- #### Wait (in seconds)
 
-    In this field, you can set the time in seconds that should elapse before this condition is fulfilled.
+    Set the time in seconds that should elapse before this condition is fulfilled.
+
+### Location of this Condition (for Developers)
+
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Conditions/TimeoutCondition.cs" target="_blank">here</a>  
+
 
 ------
 
