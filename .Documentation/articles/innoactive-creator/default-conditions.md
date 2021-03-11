@@ -181,9 +181,9 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Intera
 This condition is fulfilled when the `Object` is released into the `Zone to snap into`, which means the collider of the Object and collider of the Zone overlap. Adapt the collider size of the snap zone to increase or decrease the area where trainees can release the `Object`. Increasing the collider size of the snap zone, decreases the required *snap* precision and simplifies the trainees' interaction in VR. 
 After the trainee releases the `Object` (see [Release Condition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#release-object)), it is moved to the snap Zones SnapPoint. To adjust this position, change the position of the SnapPoint child object of the `Zone to snap into` object.
 
-####Snap zone Generator
-####Manual snap zone generation
-####Snap Zone settings
+#### Snap zone Generator
+#### Manual snap zone generation
+#### Snap Zone settings
 
 #### Interaction in VR
 #### Interaction in Desktop Mode
@@ -228,7 +228,7 @@ This condition is fulfilled when the time specified in `Wait (in seconds)` has e
 
 ### Location of this Condition (for Developers)
 
-This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Conditions/TimeoutCondition.cs" target="_blank">here</a>  
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Conditions-And-Behaviors" target="_blank">Basic-Conditions-And-Behaviors</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/TouchedCondition.cs" target="_blank">here</a>  
 
 
 ------
@@ -237,15 +237,25 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Condit
 
 ### Description
 
-The `Touch Object` condition is fulfilled when the *Touchable object* is touched by the controller while this condition is active. It is fulfilled immediately if the condition becomes active while the *Touchable object* is being touched.
+This condition is fulfilled when the `Object` is touched by the trainee’s controller.  If a trainee is already touching the specified object while this condition is active, it is fulfilled immediately.
+
+#### Interaction in VR
+#### Interaction in Desktop Mode
+#### Interaction Highlights
+
+### Application Example
+- the trainee needs to push a button in VR.
 
 ### Configuration
 
-- #### Touchable object
+- #### Object
 
-    This field contains the `Training Scene Object` that is required to be touched. Make sure you added the `Touchable Property` component to the target game object in the Unity Inspector. Besides, the object must have a collider component in order to be touchable.
+    the `Training Scene Object` to be touched. The object needs to have the `Touchable Property` and a collider component configured. 
 
-    [![Touchable Properties](../images/conditions/touchable_properties.png "")](../images/conditions/touchable_properties.png)
+### Location of this Condition (for Developers)
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/SnappedCondition.cs" target="_blank">here</a>
+ 
+ 
 
 ------
 
@@ -253,12 +263,21 @@ The `Touch Object` condition is fulfilled when the *Touchable object* is touched
 
 ### Description
 
-The `Use Object` condition is fulfilled as the *Usable object* is used by pressing the `Use` button of the controller while being touched or grabbed when the condition is active.
+This condition is fulfilled when the `Object` is used by pressing the *Use* button of the controller while being touched or grabbed.
+
+#### Interaction in VR
+#### Interaction in Desktop Mode
+#### Interaction Highlights
+
+### Application Example
+- The trainee picks up a drill and drills in screws.
+- The trainee pushes a button on a machine.
 
 ### Configuration
 
-- #### Usable object
+- #### Object
 
-    This field contains the `Training Scene Object` that is required to be used. Make sure you added the `Usable Property` component to the target game object in the Unity Inspector. Besides, the object must have a collider component, as it needs to be touched or grabbed.
+    the `Training Scene Object` that is required to be used.The `Object` needs to have the `Usable Property` and a collider component configured.
 
-    [![Usable Properties](../images/conditions/usable_properties.png "")](../images/conditions/usable_properties.png)
+### Location of this Condition (for Developers)
+This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/UsedCondition.cs" target="_blank">here</a>
