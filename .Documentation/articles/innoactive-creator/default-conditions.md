@@ -2,7 +2,7 @@
 
 Conditions need to be active in order to be fulfilled. As soon as a step is active, all containing Conditions are active as well (see [step transition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/transitions.html)).
 
-The following conditions are part of the `Basic Conditions and Behaviors` and the `Basic Interactions` Component. The Innoactive Creator package provides them by default.
+The following conditions are part of the `Basic Conditions and Behaviors` and the `Basic Interactions` component. The Innoactive Creator package provides them by default.
 
 Take a look at the [Training Scene Object](training-scene-object.md) article if you have not read it yet. It will help you to understand how to handle training scene objects and training properties.
 
