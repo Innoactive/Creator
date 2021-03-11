@@ -86,13 +86,19 @@ namespace Innoactive.CreatorEditor.PackageManager
                 return;
             }
 
+            if (IsPackageLoaded(package) && string.IsNullOrEmpty(version) == false)
+            {
+                PackageInfo installedPackage = Packages.First(packageInfo => packageInfo.name == package);
+                EditorUtility.DisplayDialog($"{installedPackage.displayName} Upgrade", $"{installedPackage.displayName} will be upgraded from v{installedPackage.version} to v{version}." , "Continue");
+            }
+
             if (package.Contains("@") == false && string.IsNullOrEmpty(version) == false)
             {
                 package = $"{package}@{version}";
             }
 
             AddRequest addRequest = Client.Add(package);
-            Debug.Log($"Enabling package: {package}, Version: {(string.IsNullOrEmpty(version) ? "latest" : version)}.");
+            Debug.Log($"Enabling package: {package.Split('@').First()}, Version: {(string.IsNullOrEmpty(version) ? "latest" : version)}.");
 
             while (addRequest.IsCompleted == false)
             {
@@ -106,7 +112,7 @@ namespace Innoactive.CreatorEditor.PackageManager
             else
             {
                 OnPackageEnabled?.Invoke(null, new PackageEnabledEventArgs(addRequest.Result));
-                Debug.Log($"The package '{addRequest.Result.displayName} version {addRequest.Result.version}' has been automatically added");
+                Debug.Log($"The package '{addRequest.Result.displayName}' version '{addRequest.Result.version}' has been automatically added");
             }
         }
 
@@ -148,20 +154,23 @@ namespace Innoactive.CreatorEditor.PackageManager
         /// <remarks>If <paramref name="package"/> already contains an embedded version, <paramref name="version"/> will be ignored.</remarks>
         public static bool IsPackageLoaded(string package, string version = null)
         {
+            if (string.IsNullOrEmpty(package))
+            {
+                throw new ArgumentException($"Parameter '{nameof(package)}' is null or empty.");
+            }
+
             if (package.Contains('@'))
             {
                 string[] packageData = package.Split('@');
-                return Packages != null && Packages.Any(packageInfo => packageInfo.name == packageData.First() && packageInfo.version == packageData.Last());
+                return Packages.Any(packageInfo => packageInfo.name == packageData.First() && packageInfo.version == packageData.Last());
             }
 
             if (string.IsNullOrEmpty(version))
             {
-                return Packages != null && Packages.Any(packageInfo => packageInfo.name == package);
+                return Packages.Any(packageInfo => packageInfo.name == package);
             }
-            else
-            {
-                return Packages != null && Packages.Any(packageInfo => packageInfo.name == package && packageInfo.version == version);
-            }
+
+            return Packages.Any(packageInfo => packageInfo.name == package && packageInfo.version == version);
         }
 
         /// <summary>
