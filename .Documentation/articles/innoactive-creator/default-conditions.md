@@ -167,7 +167,7 @@ In order to release the object in Desktop mode, trainees need to have an object 
 
 - #### Object
 
-    the `Training Scene Object` to release. The object needs to have the Grabbable Property and a collider component configured. 
+    The `Training Scene Object` to release. The object needs to have the Grabbable Property and a collider component configured. 
 
 ### Location of this Condition (for Developers)
 This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/ReleasedCondition.cs" target="_blank">here</a>.
@@ -182,15 +182,24 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Intera
 This condition is fulfilled when the `Object` is released into the `Zone to snap into`, which means the collider of the Object and collider of the Zone overlap. Adapt the collider size of the snap zone to increase or decrease the area where trainees can release the `Object`. Increasing the collider size of the snap zone, decreases the required *snap* precision and simplifies the trainees' interaction in VR. 
 After the trainee releases the `Object` (see [Release Condition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#release-object)), it is moved to the snap Zones SnapPoint. To adjust this position, change the position of the SnapPoint child object of the `Zone to snap into` object.
 
-#### Snap zone Generator
-#### Manual snap zone generation
-#### Snap Zone settings
+#### Snap Zone Generator
+For any snappable object you can generate a snap zone that can snap exactly this object and makes it possible to use as a `Zone to snap into`. To do so, display the `Snappable Property` in Unity's Inspector and click on the button `Create Snap Zone`. INSERT IMAGE "Snap zone generator button" HERE
 
-#### Interaction in VR
-#### Interaction in Desktop Mode
+#### Manual Snap Zone Creation
+Instead of the automatic generation as described above, you can do those steps also manually. Please refer to available documention on the XRSocketInteractor from Unity or related sources. You can also make changes to the automatically created snap zone to adapt them to your needs. Please note, that these changes might impact the training process logic and can lead to breaking Creator logic. Do so on your own risk.
+
+#### Feed Forward for Snap Zones
 
 Snap zones are restricted to which objects can be snapped to them, which means, any object can be valid (i.e. it can be snapped to this zone) or invalid (it can not be snapped to this zone) for a snap zone. In case you are moving a valid object into a zone (c.f. above, colliders and stuff), the snap zone color changes to ‘Validation Color’, giving the trainee a positive feedback. In case you are moving an invalid object into a zone, the snap zone color changes to ‘Invalid Color’, giving the trainee the feedback that this is the wrong object for this zone. 
-Which colors and which materials are to be used can be changed in the Snap Zones Settings. They can be found in tab “Innoactive” -> “Settings” -> “Snap Zones”.
+Which colors and which materials are to be used can be changed in the Snap Zones parameters and settings.
+
+#### Snap Zone Parameters and Settings
+To change the highlight color or validation hover material of a dedicated snap zone, display this snap zone object in the Unity inspector. In the script `Snap Zone` you will find these parameters among others. 
+INSERT IMAGE "Snap zone parameters" HERE 
+
+To change the colors and materials of all snap zones in the scene, select them in the Creator snap zone settings and press 'Apply settings in current scene'.
+INSERT IMAGE "Snap zone settings" HERE
+The snap zone settings can be found in tab “Innoactive” -> “Settings” -> “Snap Zones”.
 
 ### Application Example
 
@@ -200,7 +209,7 @@ Which colors and which materials are to be used can be changed in the Snap Zones
 
 - #### Object
 
-    the Training Scene Object to place (snap). The object needs to have the `Grabbable Property` and a collider component configured. 
+    The Training Scene Object to place (snap). The object needs to have the `Grabbable Property` and a collider component configured. 
  
 
 - #### Zone to snap into
@@ -244,13 +253,13 @@ This condition is fulfilled when the `Object` is touched by the trainee’s cont
 #### Interaction Highlights
 
 ### Application Example
-- the trainee needs to push a button in VR.
+- The trainee needs to push a button in VR.
 
 ### Configuration
 
 - #### Object
 
-    the `Training Scene Object` to be touched. The object needs to have the `Touchable Property` and a collider component configured. 
+    The `Training Scene Object` to be touched. The object needs to have the `Touchable Property` and a collider component configured. 
 
 ### Location of this Condition (for Developers)
 This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/SnappedCondition.cs" target="_blank">here</a>.
@@ -266,10 +275,7 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Intera
 This condition is fulfilled when the `Object` is used by pressing the *Use* button of the controller while being touched or grabbed.
 
 #### Interaction in VR
-
-
 #### Interaction in Desktop Mode
-In order to use an object in Desktop mode, it needs to be grabbed before (see [Grab Condition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#grab-object)). A grabbed object
 #### Interaction Highlights
 
 ### Application Example
@@ -280,7 +286,7 @@ In order to use an object in Desktop mode, it needs to be grabbed before (see [G
 
 - #### Object
 
-    the `Training Scene Object` that is required to be used.The `Object` needs to have the `Usable Property` and a collider component configured.
+    The `Training Scene Object` that is required to be used.The `Object` needs to have the `Usable Property` and a collider component configured.
 
 ### Location of this Condition (for Developers)
 This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/UsedCondition.cs" target="_blank">here</a>.
