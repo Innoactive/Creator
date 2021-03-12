@@ -249,8 +249,10 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Condit
 This condition is fulfilled when the `Object` is touched by the trainee’s controller.  If a trainee is already touching the specified object while this condition is active, it is fulfilled immediately.
 
 #### Interaction in VR
+In order to touch an object in VR, trainees have to move one of their hands/controllers into the object (its collider).
+
 #### Interaction in Desktop Mode
-#### Interaction Highlights
+In order to touch an object in desktop mode, trainees have to move the mouse over the object (so that the ray hits the object's collider). The object is visually highlighted to indicate that it is interactive. Touch the object by clicking it with the left mouse button.
 
 ### Application Example
 - The trainee needs to push a button in VR.
@@ -278,7 +280,7 @@ This condition is fulfilled when the `Object` is used by pressing the *Use* butt
 To use an object in VR, by default, the trainee has to move one of their hands/controllers into the object (its collider) and press the trigger button. The button to trigger can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
 
 #### Interaction in Desktop Mode
-In order to use an object in Desktop mode, it needs to be grabbed before (see [Grab Condition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#grab-object)). A grabbed object is displayed in miniature size inside an on-screen hand. Trainees click the button next to it, titled *use object*, to use the previously selected object.
+In order to use an object in desktop mode, it needs to be grabbed before (see [Grab Condition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#grab-object)). A grabbed object is displayed in miniature size inside an on-screen hand. Trainees click the button next to it, titled *use object*, to use the previously selected object.
 
 ### Application Example
 - The trainee picks up a drill and drills in screws.
