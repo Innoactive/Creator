@@ -183,7 +183,10 @@ This condition is fulfilled when the `Object` is released into the `Zone to snap
 After the trainee releases the `Object` (see [Release Condition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#release-object)), it is moved to the snap Zones SnapPoint. To adjust this position, change the position of the SnapPoint child object of the `Zone to snap into` object.
 
 #### Snap Zone Generator
-For any snappable object you can generate a snap zone that can snap exactly this object and makes it possible to use as a `Zone to snap into`. To do so, display the `Snappable Property` in Unity's Inspector and click on the button `Create Snap Zone`. INSERT IMAGE "Snap zone generator button" HERE
+For any snappable object you can generate a snap zone that can snap exactly this object and makes it possible to use as a `Zone to snap into`. To do so, display the `Snappable Property` in Unity's Inspector and click on the button `Create Snap Zone`. 
+
+[![Snap Zone Generator](../images/default-conditions/snapzonegenerator.png "")](../images/default-conditions/snapzonegenerator.png)
+
 
 #### Manual Snap Zone Creation
 Instead of the automatic generation as described above, you can do those steps also manually. Please refer to available documention on the XRSocketInteractor from Unity or related sources. You can also make changes to the automatically created snap zone to adapt them to your needs. Please note, that these changes might impact the training process logic and can lead to breaking Creator logic. Do so on your own risk.
@@ -195,10 +198,15 @@ Which colors and which materials are to be used can be changed in the Snap Zones
 
 #### Snap Zone Parameters and Settings
 To change the highlight color or validation hover material of a dedicated snap zone, display this snap zone object in the Unity inspector. In the script `Snap Zone` you will find these parameters among others. 
-INSERT IMAGE "Snap zone parameters" HERE 
+
+[![Snap Zone Parameters](../images/default-conditions/snapzoneparameters.png "")](../images/default-conditions/snapzoneparameters.png)
+
 
 To change the colors and materials of all snap zones in the scene, select them in the Creator snap zone settings and press 'Apply settings in current scene'.
-INSERT IMAGE "Snap zone settings" HERE
+
+[![Snap Zone Settings](../images/default-conditions/snapzonesettings.png "")](../images/default-conditions/snapzonesettings.png)
+
+
 The snap zone settings can be found in tab “Innoactive” -> “Settings” -> “Snap Zones”.
 
 ### Application Example
