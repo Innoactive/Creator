@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Innoactive.Creator.Core.Configuration;
@@ -50,10 +51,21 @@ namespace Innoactive.Creator.Core
 
                 course.Update();
 
+                if (course.Data.Current?.LifeCycle.Stage == Stage.Activating)
+                {
+                    ChapterStarted?.Invoke(this, new CourseEventArgs(course));
+                }
+
+                if (course.Data.Current?.Data.Current?.LifeCycle.Stage == Stage.Activating)
+                {
+                    StepStarted?.Invoke(this, new CourseEventArgs(course));
+                }
+
                 if (course.LifeCycle.Stage == Stage.Active)
                 {
                     course.LifeCycle.Deactivate();
                     RuntimeConfigurator.Configuration.StepLockHandling.OnCourseFinished(course);
+                    CourseFinished?.Invoke(this, new CourseEventArgs(course));
                 }
             }
 
@@ -62,6 +74,8 @@ namespace Innoactive.Creator.Core
             /// </summary>
             public void Execute()
             {
+                CourseSetup?.Invoke(this, new CourseEventArgs(course));
+
                 RuntimeConfigurator.ModeChanged += HandleModeChanged;
 
                 course.LifeCycle.StageChanged += HandleCourseStageChanged;
@@ -70,10 +84,37 @@ namespace Innoactive.Creator.Core
                 RuntimeConfigurator.Configuration.StepLockHandling.Configure(RuntimeConfigurator.Configuration.Modes.CurrentMode);
                 RuntimeConfigurator.Configuration.StepLockHandling.OnCourseStarted(course);
                 course.LifeCycle.Activate();
+
+                CourseStarted?.Invoke(this, new CourseEventArgs(course));
             }
         }
 
         private static CourseRunnerInstance instance;
+
+        /// <summary>
+        /// Will be called before the course is setup internally.
+        /// </summary>
+        public static EventHandler<CourseEventArgs> CourseSetup;
+
+        /// <summary>
+        /// Will be called on course start.
+        /// </summary>
+        public static EventHandler<CourseEventArgs> CourseStarted;
+
+        /// <summary>
+        /// Will be called each time a chapter activates.
+        /// </summary>
+        public static EventHandler<CourseEventArgs> ChapterStarted;
+
+        /// <summary>
+        /// Will be called each time a step activates.
+        /// </summary>
+        public static EventHandler<CourseEventArgs> StepStarted;
+
+        /// <summary>
+        /// Will be called when the course finishes.
+        /// </summary>
+        public static EventHandler<CourseEventArgs> CourseFinished;
 
         /// <summary>
         /// Currently running <see cref="ICourse"/>
