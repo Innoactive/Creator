@@ -31,16 +31,16 @@ the specified object in hand while this condition is active, it is fulfilled imm
 
 #### Interaction in VR
 
-To grab the object in VR, by default, trainees have to move one of their hands/controllers into the object (more precisely its collider) and press the trigger button. The trigger button can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
+To grab the object in VR, trainees have to move one of their hands/controllers into the object (more precisely its collider) and press the trigger button. The trigger button can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
 
-Before the controller button is pressed, by default, the object is already highlighted to indicate that the trainee can now grab this object. The training designer can change this in the interactable highlighter script of the given object. You can enable/disable this interaction effect, change the highlight color and transparency for `On Touch`, `On Grab`, and `On Use`.
+Before the controller button is pressed, the object is already highlighted to indicate that the trainee can now grab this object. The training designer can change this in the interactable highlighter script of the given object. You can enable/disable this interaction effect, change the highlight color and transparency for `On Touch`, `On Grab`, and `On Use`.
 
 
 #### Interaction in Desktop Mode
 
 To grab the object in Desktop Mode, the trainee has to move the mouse over the object (so that the ray hits the object's collider) and press the left mouse button.
 
-Before the mouse button is pressed, by default, the object is already highlighted to indicate that the trainee can now grab this object. This “on hover” effect can be changed by the template developer in the `Hover Highlight Handler` of the Desktop Mode Rig prefab. 
+Before the mouse button is pressed, the object is already highlighted to indicate that the trainee can now grab this object. This “on hover” effect can be changed by the template developer in the `Hover Highlight Handler` of the Desktop Mode Rig prefab. 
 
 
 
@@ -284,7 +284,7 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Intera
 This condition is fulfilled when the `Object` is used by pressing the *Use* button of the controller while being touched or grabbed.
 
 #### Interaction in VR
-To use an object in VR, by default, trainees have to move one of their hands/controllers into the object (more precisely its collider) and press the trigger button. The trigger button can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
+To use an object in VR, trainees have to move one of their hands/controllers into the object (more precisely its collider) and press the trigger button. The trigger button can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
 
 #### Interaction in Desktop Mode
 In order to use an object in desktop mode, it needs to be grabbed before (see [Grab Condition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#grab-object)). A grabbed object is displayed in miniature size inside an on-screen hand. Trainees click the button next to it, titled *use object*, to use the previously selected object.
