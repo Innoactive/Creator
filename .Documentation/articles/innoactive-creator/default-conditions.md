@@ -285,7 +285,7 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Intera
 This condition is fulfilled when the `Object` is used by pressing the *Use* button of the controller while being touched or grabbed.
 
 #### Interaction in VR
-To use an object in VR, by default, the trainee has to move one of their hands/controllers into the object (its collider) and press the trigger button. The button to trigger can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
+To use an object in VR, by default, trainees have to move one of their hands/controllers into the object (its collider) and press the trigger button. The button to trigger can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
 
 #### Interaction in Desktop Mode
 In order to use an object in desktop mode, it needs to be grabbed before (see [Grab Condition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#grab-object)). A grabbed object is displayed in miniature size inside an on-screen hand. Trainees click the button next to it, titled *use object*, to use the previously selected object.
