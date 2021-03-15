@@ -112,7 +112,7 @@ In order to move the object nearby a collider, trainees need to move their hands
 
 #### Interaction in Desktop Mode
 
-In order to approach the sollider with an object in Desktop Mode, trainees have to move the mouse on the object (so that the cast ray hit’s the objects collider) and press the left mouse button. The object is now grabbed, which is represented by an on-screen hand holding a miniature version of the object. In order to release the object nearby the collider, trainees move the mouse on the collider and press the left mouse button. The on-screen hand disappears and the released object is now placed into the selected collider. `Object nearby` is difficult to simulate in Desktop Mode and is hence solved similar to `Move Object into collider`. 
+In order to approach the collider with an object in Desktop Mode, trainees have to move the mouse over the object (so that the cast ray hit’s the objects collider) and press the left mouse button. The object is now grabbed, which is represented by an on-screen hand holding a miniature version of the object. In order to release the object nearby the collider, trainees move the mouse over the collider and press the left mouse button. The on-screen hand disappears and the released object is now placed into the selected collider. `Object nearby` is difficult to simulate in Desktop Mode and is hence solved similar to `Move Object into collider`. 
 
 
 ### Application Example
@@ -167,7 +167,7 @@ In order to release the object in Desktop mode, trainees need to have an object 
 
 - #### Object
 
-    The `Training Scene Object` to release. The object needs to have the Grabbable Property and a collider component configured. 
+    The `Training Scene Object` to release. The object needs to have the `Grabbable Property` and a collider component configured. 
 
 ### Location of this Condition (for Developers)
 This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/ReleasedCondition.cs" target="_blank">here</a>.
@@ -183,7 +183,7 @@ This condition is fulfilled when the `Object` is released into the `Zone to snap
 After the trainee releases the `Object` (see [Release Condition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#release-object)), it is moved to the snap Zones SnapPoint. To adjust this position, change the position of the SnapPoint child object of the `Zone to snap into` object.
 
 #### Snap Zone Generator
-For any snappable object you can generate a snap zone that can snap exactly this object and makes it possible to use as a `Zone to snap into`. To do so, display the `Snappable Property` in Unity's Inspector and click on the button `Create Snap Zone`. 
+For any snappable object you can generate a snap zone that can snap exactly this object and makes it possible to use as a `Zone to snap into`. To do so, navigate to the `Snappable Property` in Unity's Inspector and click on the button `Create Snap Zone`. 
 
 [![Snap Zone Generator](../images/default-conditions/snapzonegenerator.png "")](../images/default-conditions/snapzonegenerator.png)
 
@@ -197,7 +197,7 @@ Snap zones are restricted to which objects can be snapped to them, which means, 
 Which colors and which materials are to be used can be changed in the Snap Zones parameters and settings.
 
 #### Snap Zone Parameters and Settings
-To change the highlight color or validation hover material of a dedicated snap zone, display this snap zone object in the Unity inspector. In the script `Snap Zone` you will find these parameters among others. 
+To change the highlight color or validation hover material of a dedicated snap zone, navigate to the snap zone object in the Unity inspector. In the script `Snap Zone` you will find these parameters among others. 
 
 [![Snap Zone Parameters](../images/default-conditions/snapzoneparameters.png "")](../images/default-conditions/snapzoneparameters.png)
 
