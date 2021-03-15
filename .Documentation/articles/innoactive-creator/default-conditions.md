@@ -31,7 +31,7 @@ the specified object in hand while this condition is active, it is fulfilled imm
 
 #### Interaction in VR
 
-To grab the object in VR, by default, trainees have to move one of their hands/controllers into the object (its collider) and press the trigger button. The button to trigger can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
+To grab the object in VR, by default, trainees have to move one of their hands/controllers into the object (more precisely its collider) and press the trigger button. The trigger button can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
 
 Before the controller button is pressed, by default, the object is already highlighted to indicate that the trainee can now grab this object. The training designer can change this in the interactable highlighter script of the given object. You can enable/disable this interaction effect, change the highlight color and transparency for `On Touch`, `On Grab`, and `On Use`.
 
@@ -69,7 +69,7 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Intera
 This condition is fulfilled when the `Object` is within the specified `Collider` for the required amount of time (`Required seconds inside`) while this condition is active.
 
 #### Interaction in VR
-In order to move the object into a collider, trainees need to move their hands/controllers into the object (its collider) and press the trigger button. While holding the trigger button and moving the arm, the object stays grabbed by trainees hands. Trainees move the object into the specified collider and release it. The button to trigger can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
+In order to move the object into a collider, trainees need to move their hands/controllers into the object (more precisely its collider) and press the trigger button. While holding the trigger button and moving the arm, the object stays grabbed by trainees hands. Trainees move the object into the specified collider and release it. The button to trigger can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
 
 #### Interaction in Desktop Mode
 In order to move the object into a collider in Desktop Mode, trainees have to move the mouse over the object (so that the cast ray hit’s the objects collider) and press the left mouse button. The object is now grabbed, which is represented by an on-screen hand holding a miniature version of the object. In order to release the object into the collider, trainees move the mouse on the collider and press the left mouse button. The on-screen hand disappears and the released object is now placed into the selected collider.
@@ -108,7 +108,7 @@ This condition is fulfilled when the `Object` is within the specified `Range` of
 
 #### Interaction in VR
 
-In order to move the object nearby a collider, trainees need to move their hands/controllers into the object (its collider) and press the trigger button. While holding the trigger button and moving the arm, the object stays attached to the trainees' hands. Trainees approach with the object the specified collider and release it. The button to trigger can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
+In order to move the object nearby a collider, trainees need to move their hands/controllers into the object (more precisely its collider) and press the trigger button. While holding the trigger button and moving the arm, the object stays attached to the trainees' hands. Trainees approach with the object the specified collider and release it. The button to trigger can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
 
 #### Interaction in Desktop Mode
 
@@ -257,8 +257,7 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Condit
 This condition is fulfilled when the `Object` is touched by the trainee’s controller.  If a trainee is already touching the specified object while this condition is active, it is fulfilled immediately.
 
 #### Interaction in VR
-In order to touch an object in VR, trainees have to move one of their hands/controllers into the object (its collider).
-
+In order to touch an object in VR, trainees have to move one of their hands/controllers into the object (more precisely its collider). 
 #### Interaction in Desktop Mode
 In order to touch an object in desktop mode, trainees have to move the mouse over the object (so that the ray hits the object's collider). The object is visually highlighted to indicate that it is interactive. Touch the object by clicking it with the left mouse button.
 
@@ -285,7 +284,7 @@ This behavior is part of the <a href="https://github.com/Innoactive/Basic-Intera
 This condition is fulfilled when the `Object` is used by pressing the *Use* button of the controller while being touched or grabbed.
 
 #### Interaction in VR
-To use an object in VR, by default, trainees have to move one of their hands/controllers into the object (its collider) and press the trigger button. The button to trigger can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
+To use an object in VR, by default, trainees have to move one of their hands/controllers into the object (more precisely its collider) and press the trigger button. The trigger button can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
 
 #### Interaction in Desktop Mode
 In order to use an object in desktop mode, it needs to be grabbed before (see [Grab Condition](https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#grab-object)). A grabbed object is displayed in miniature size inside an on-screen hand. Trainees click the button next to it, titled *use object*, to use the previously selected object.
