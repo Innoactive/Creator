@@ -88,11 +88,11 @@ In order to move the object into a collider in Desktop Mode, trainees have to mo
 
 - #### Collider
 
-    The `Training Scene Object` with the collider inside which you want to move the Object to. Make sure that the Collider Object has a collider added and that the option `Is Trigger` is enabled.
+    The `Training Scene Object` with the collider you want to move the `Object` to. Make sure that it has a collider added and that the option `Is Trigger` is enabled.
 
 - #### Required seconds inside
 
-    Set the time in seconds the Object should stay within the Collider.
+    Set the time in seconds that the `Object` should stay inside the `Collider`.
 
 ### Location of this Condition (for Developers)
 
@@ -117,7 +117,7 @@ In order to approach the collider with an object in Desktop Mode, trainees have 
 
 ### Application Example
 
-- The trainee is supposed to hold a RFID tag included in his gloves (represented by his controller) near a scanner.
+- The trainee is supposed to hold an RFID tag that is integrated into their gloves (represented by his controller) near a scanner.
 - If a trainee moves to close to a machinery while it is operating, the emergency shut down is triggered.
 
 
@@ -193,7 +193,7 @@ Instead of the automatic generation as described above, you can do those steps a
 
 #### Feed Forward for Snap Zones
 
-Snap zones are restricted to which objects can be snapped to them, which means, any object can be valid (i.e. it can be snapped to this zone) or invalid (it can not be snapped to this zone) for a snap zone. In case you are moving a valid object into a zone (c.f. above, colliders and stuff), the snap zone color changes to ‘Validation Color’, giving the trainee a positive feedback. In case you are moving an invalid object into a zone, the snap zone color changes to ‘Invalid Color’, giving the trainee the feedback that this is the wrong object for this zone. 
+Snap zones are restricted to which objects can be snapped to them, which means, any object can be valid (i.e. it can be snapped to this zone) or invalid (it can not be snapped to this zone) for a snap zone. In case you are moving a valid object into a zone (c.f. above, colliders and stuff), the snap zone color changes to ‘Validation Color’ (green), giving the trainee a positive feedback. In case you are moving an invalid object into a zone, the snap zone color changes to ‘Invalid Color’ (red), giving the trainee the feedback that this is the wrong object for this zone. 
 Which colors and which materials are to be used can be changed in the Snap Zones parameters and settings.
 
 #### Snap Zone Parameters and Settings
@@ -217,7 +217,7 @@ The snap zone settings can be found in tab “Innoactive” -> “Settings” ->
 
 - #### Object
 
-    The `Training Scene Object` to place (snap). The object needs to have the `Grabbable Property` and a collider component configured. 
+    The `Training Scene Object` to place (snap). The object needs to have the `Snappable Property` and a collider component configured. 
  
 
 - #### Zone to snap into
