@@ -2,11 +2,25 @@
 
 namespace Innoactive.Creator.Core
 {
+    /// <summary>
+    /// EventArgs for course events.
+    /// </summary>
     public class CourseEventArgs : EventArgs
     {
+        /// <summary>
+        /// Active course.
+        /// </summary>
         public readonly ICourse Course;
+
+        /// <summary>
+        /// Active Chapter.
+        /// </summary>
         public readonly IChapter Chapter;
-        public readonly IStep CurrentStep;
+
+        /// <summary>
+        /// Active Step.
+        /// </summary>
+        public readonly IStep Step;
 
         public CourseEventArgs(ICourse course)
         {
@@ -14,7 +28,7 @@ namespace Innoactive.Creator.Core
             Chapter = course.Data.Current;
             if (Chapter != null)
             {
-                CurrentStep = Chapter.Data.Current;
+                Step = Chapter.Data.Current;
             }
         }
     }
