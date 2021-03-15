@@ -82,13 +82,13 @@ In order to move the object into a collider in Desktop Mode, trainees have to mo
 
 - #### Object
 
-    The Training Scene Object to grab. The object needs to have the `Grabbable Property` and a collider component configured. The collider defines the area where the trainee can grab this object.
+    The `Training Scene Object` to grab. The object needs to have the `Grabbable Property` and a collider component configured. The collider defines the area where the trainee can grab this object.
 
 
 
 - #### Collider
 
-    The Training Scene Object with the collider inside which you want to move the Object to. Make sure that the Collider Object has a collider added and that the option `Is Trigger` is enabled.
+    The `Training Scene Object` with the collider inside which you want to move the Object to. Make sure that the Collider Object has a collider added and that the option `Is Trigger` is enabled.
 
 - #### Required seconds inside
 
@@ -217,7 +217,7 @@ The snap zone settings can be found in tab “Innoactive” -> “Settings” ->
 
 - #### Object
 
-    The Training Scene Object to place (snap). The object needs to have the `Grabbable Property` and a collider component configured. 
+    The `Training Scene Object` to place (snap). The object needs to have the `Grabbable Property` and a collider component configured. 
  
 
 - #### Zone to snap into
@@ -258,6 +258,7 @@ This condition is fulfilled when the `Object` is touched by the trainee’s cont
 
 #### Interaction in VR
 In order to touch an object in VR, trainees have to move one of their hands/controllers into the object (more precisely its collider). 
+
 #### Interaction in Desktop Mode
 In order to touch an object in desktop mode, trainees have to move the mouse over the object (so that the ray hits the object's collider). The object is visually highlighted to indicate that it is interactive. Touch the object by clicking it with the left mouse button.
 
