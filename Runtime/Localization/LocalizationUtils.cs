@@ -100,7 +100,7 @@ namespace Innoactive.Creator.Core.Internationalization
         }
 
         /// <summary>
-        /// Loads a json file containing a dictionary from the Resources path by loading a TextAssets (required .txt ending).
+        /// Loads a json file containing a dictionary from the Resources path by loading a TextAssets (requires .txt ending).
         /// </summary>
         internal static Dictionary<string, string> LoadFromResource(string path)
         {

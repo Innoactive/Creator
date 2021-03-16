@@ -21,7 +21,7 @@ namespace Innoactive.Creator.Core.Internationalization
         public const string StandaloneDefaultLocalizationConfig = "Localization/StandaloneLocalization";
 
         [SerializeField]
-        [Tooltip("Will be replacing the {fallback_language} token in paths.")]
+        [Tooltip("Replaces the {fallback_language} token in paths.")]
         public string FallbackLanguage = "en";
 
         [SerializeField]
@@ -39,7 +39,7 @@ namespace Innoactive.Creator.Core.Internationalization
             public ResourceType ResourceType;
 
             [SerializeField]
-            [Tooltip("If set true, this source will be used determine which languages are supported (selectable) right now.")]
+            [Tooltip("If set to true, all language files fitting this path are available during runtime via e.g. the trainer menu.")]
             public bool DefinesAvailableLanguages;
         }
 
