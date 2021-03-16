@@ -16,7 +16,7 @@ namespace Innoactive.Creator.Core.Internationalization
         /// <summary>
         /// Dictionary with all registered localizations.
         /// </summary>
-        internal static Dictionary<string, string> entries = new Dictionary<string, string>();
+        public static Dictionary<string, string> entries = new Dictionary<string, string>();
 
         /// <summary>
         /// Loads the given config into the localization database, will overwrite everything.
@@ -27,16 +27,6 @@ namespace Innoactive.Creator.Core.Internationalization
         public static void LoadLocalization(LocalizationConfig config, string language, string course)
         {
             entries = LocalizationReader.Load(config, language, course);
-        }
-
-        /// <summary>
-        /// Loads the given config into the localization, will overwrite everything in there.
-        /// </summary>
-        /// <param name="config">Localization config which should be used.</param>
-        /// <param name="language">Language which should be loaded.</param>
-        public static void LoadLocalization(LocalizationConfig config, string language)
-        {
-            entries = LocalizationReader.Load(config, language);
         }
 
         /// <summary>
