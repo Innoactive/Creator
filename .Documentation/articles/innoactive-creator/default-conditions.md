@@ -72,7 +72,7 @@ This condition is fulfilled when the `Object` is within the specified `Collider`
 In order to move the object into a collider, trainees need to move their hands/controllers into the object (more precisely its collider) and press the trigger button. While holding the trigger button and moving the arm, the object stays grabbed by trainees hands. Trainees move the object into the specified collider and release it. The button to trigger can be changed by the template developer as described <a href="https://developers.innoactive.de/documentation/creator/latest/articles/xr/index.html" target="_blank">here</a>.
 
 #### Interaction in Desktop Mode
-In order to move the object into a collider in Desktop Mode, trainees have to move the mouse over the object (so that the cast ray hit’s the objects collider) and press the left mouse button. The object is now grabbed, which is represented by an on-screen hand holding a miniature version of the object. In order to release the object into the collider, trainees move the mouse on the collider and press the left mouse button. The on-screen hand disappears and the released object is now placed into the selected collider.
+In order to move the object into a collider in Desktop Mode, trainees have to move the mouse over the object (so that the cast ray hit’s the objects collider) and press the left mouse button. The object is now grabbed, which is represented by an on-screen hand holding a miniature version of the object. In order to release the object into the `Collider`, trainees move the mouse on the `Collider` and press the left mouse button. The on-screen hand disappears and the released object is now placed into the selected `Collider`.
 
 
 ### Application Example
