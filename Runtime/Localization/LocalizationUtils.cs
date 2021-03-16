@@ -21,9 +21,8 @@ namespace Innoactive.Creator.Core.Internationalization
         /// Finds all available languages for the given config, any additional parameters for the paths
         /// have to be provided. Keep in mind that only sources which are flagged as DefinesAvailableLanguages are
         /// used and the result will be a union of all of them.
-        ///
-        /// Note: Only sources based on streaming assets work for now.
         /// </summary>
+        /// <remarks>Note: Only sources based on streaming assets work for now.</remarks>
         public static List<string> FindAvailableLanguagesForConfig(LocalizationConfig config, Dictionary<string, string> parameters)
         {
             IEnumerable<string> result = null;
