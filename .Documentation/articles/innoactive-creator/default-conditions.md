@@ -310,7 +310,7 @@ This behavior is part of the [Basic-Interaction](https://github.com/Innoactive/B
 
 This condition is fulfilled when the trainee teleports to the referenced `Teleportation Point`. Previous teleportation actions made into the `Teleportation Point` are not considered.
 
-The provided `Teleportation Property` is based on the Unity XR Interaction Toolkit's `Teleportation Anchor`. For further reference, please check out the <a href="https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@1.0/api/UnityEngine.XR.Interaction.Toolkit.TeleportationProvider.html" target="_blank">XRI documentation</a>.
+The provided `Teleportation Property` is based on the Unity XR Interaction Toolkit's `Teleportation Anchor`. For further reference, please check out the XR Interaction Toolkit  [documentation](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@1.0/api/UnityEngine.XR.Interaction.Toolkit.TeleportationProvider.html).
 
 #### Configuring the Teleportation Point
 
@@ -335,22 +335,9 @@ To teleport in Desktop Mode, click on the highlighted `Teleportation Point`. Thi
 
 ### Configuration
 
-- #### Teleportation Point
+- **Teleportation Point**
 
     The `Teleportation Property` is used as the location point for the trainee to teleport to.
 
 ### Location of this Condition (for Developers)
-This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/TeleportCondition.cs" target="_blank">here</a>.
-To teleport in Desktop Mode, click on the highlighted `Teleportation Point`. This will teleport you to this point.
-
-### Application Example
-- The trainee has to move to another workstation to continue with the process.
-
-### Configuration
-
-- #### Teleportation Point
-
-    The `Teleportation Property` is used as the location point for the trainee to teleport to.
-
-### Location of this Condition (for Developers)
-This behavior is part of the <a href="https://github.com/Innoactive/Basic-Interaction-Component" target="_blank">Basic-Interaction</a> component. The file is located <a href="https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/TeleportCondition.cs" target="_blank">here</a>.
+This behavior is part of the [Basic-Interaction](https://github.com/Innoactive/Basic-Interaction-Component) component. The file is located [here](https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/TeleportCondition.cs).
