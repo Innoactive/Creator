@@ -80,17 +80,17 @@ In order to move the object into a collider in Desktop Mode, trainees have to mo
 
 ### Configuration
 
-- #### Object
+- **Object**
 
     The `Training Scene Object` to grab. The object needs to have the `Grabbable Property` and a collider component configured. The collider defines the area where the trainee can grab this object.
 
 
 
-- #### Collider
+- **Collider**
 
     The `Training Scene Object` with the collider you want to move the `Object` to. Make sure that it has a collider added and that the option `Is Trigger` is enabled.
 
-- #### Required seconds inside
+- **Required seconds inside**
 
     Set the time in seconds that the `Object` should stay inside the `Collider`.
 
@@ -123,20 +123,20 @@ In order to approach the collider with an object in Desktop Mode, trainees have 
 
 ### Configuration
 
-- #### Object
+- **Object**
 
     The `Training Scene Object` that should be in the radius of the `Reference object`. Make sure you add at least the `Training Scene Object` component to this game object in the Unity Inspector. 
     
-- #### Reference Object
+- **Reference Object**
 
    The `Training Scene Object` you want to measure the distance from.
 
 
-- #### Range
+- **Range**
 
     In this field, you can set the maximum distance between the *Object* and the *Reference object* required to fulfill this condition.The distance is calculated as the Euclidean norm between the transform’s positions of Object and Reference Object.
 
-- #### Required seconds inside
+- **Required seconds inside**
 
     In this field, you can set the time in seconds the `Object` should stay within the radius `Range` of the `Reference object`.
 
@@ -165,7 +165,7 @@ In order to release the object in Desktop mode, trainees need to have an object 
 
 ### Configuration
 
-- #### Object
+- **Object**
 
     The `Training Scene Object` to release. The object needs to have the `Grabbable Property` and a collider component configured. 
 
@@ -215,12 +215,12 @@ The snap zone settings can be found in tab “Innoactive” -> “Settings” ->
 
 ### Configuration
 
-- #### Object
+- **Object**
 
     The `Training Scene Object` to place (snap). The object needs to have the `Snappable Property` and a collider component configured. 
  
 
-- #### Zone to snap into
+- **Zone to snap into**
 
     This field contains the `Training Scene Object` where the `Object` is required to be snapped. Make sure you added the `Snap Zone Property` component to the snap zone game object in the Unity Inspector. Besides, the object must have a collider component with the `Is Trigger` property *enabled*.
 
@@ -239,7 +239,7 @@ This condition is fulfilled when the time specified in `Wait (in seconds)` has e
 
 ### Configuration
 
-- #### Wait (in seconds)
+- **Wait (in seconds)**
 
     Set the time in seconds that should elapse before this condition is fulfilled.
 
@@ -267,7 +267,7 @@ In order to touch an object in desktop mode, trainees have to move the mouse ove
 
 ### Configuration
 
-- #### Object
+- **Object**
 
     The `Training Scene Object` to be touched. The object needs to have the `Touchable Property` and a collider component configured. 
 
@@ -295,7 +295,7 @@ In order to use an object in desktop mode, it needs to be grabbed before (see [G
 
 ### Configuration
 
-- #### Object
+- **Object**
 
     The `Training Scene Object` that is required to be used.The `Object` needs to have the `Usable Property` and a collider component configured.
 
