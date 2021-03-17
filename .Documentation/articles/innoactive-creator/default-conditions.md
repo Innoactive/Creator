@@ -53,7 +53,7 @@ Before the mouse button is pressed, the object is already highlighted to indicat
 
 ### Configuration
 
-- #### Object
+- **Object**
 
     The `Training Scene Object` to grab. The object needs to have the `Grabbable Property` and a collider component configured. The collider defines the area where the trainee can grab this object.
 
