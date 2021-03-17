@@ -26,8 +26,8 @@ See [this article](step-inspector.md) to learn Step Inspector controls.
 ### Description
 
 This condition is fulfilled when the trainee grabs the `Object`. 
-The condition is also fulfilled if the trainee already grabs the `Object` before the step is activated, so, if a trainee is already holding 
-the specified object in hand while this condition is active, it is fulfilled immediately.
+The condition is also fulfilled if the trainee already grabbed the Object before the step was activated, so, if the trainee is already holding
+the specified object.
 
 #### Interaction in VR
 
