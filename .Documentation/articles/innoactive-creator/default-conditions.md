@@ -245,7 +245,7 @@ This condition is fulfilled when the time specified in `Wait (in seconds)` has e
 
 ### Location of this Condition (for Developers)
 
-This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. The file is located [here](https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/TouchedCondition.cs). 
+This behavior is part of the [Basic-Conditions-And-Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors) component. The file is located [here](https://github.com/Innoactive/Basic-Conditions-And-Behaviors/blob/develop/Runtime/Conditions/TimeoutCondition.cs). 
 
 
 ------
@@ -272,7 +272,7 @@ In order to touch an object in desktop mode, trainees have to move the mouse ove
     The `Training Scene Object` to be touched. The object needs to have the `Touchable Property` and a collider component configured. 
 
 ### Location of this Condition (for Developers)
-This behavior is part of the [Basic-Interaction](https://github.com/Innoactive/Basic-Interaction-Component) component. The file is located [here](https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/SnappedCondition.cs).
+This behavior is part of the [Basic-Interaction](https://github.com/Innoactive/Basic-Interaction-Component) component. The file is located [here](https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/TouchedCondition.cs).
  
  
 
