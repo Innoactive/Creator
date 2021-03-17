@@ -316,7 +316,7 @@ The provided `Teleportation Property` is based on the Unity XR Interaction Toolk
 
 The `Teleportation Property` can be set as a **Default Teleportation Anchor** by clicking on the `Set Default Teleportation Anchor` button. You can find it when selecting the `Teleportation Point` and viewing it in the Unity Inspector.
 
-[![Teleportation Property](../images/default-conditions/teleportationproperty.png "")](../images/default-conditions/teleportationproperty.png)
+[![Teleportation Property](../images/default-conditions/teleportationproperty.PNG "")](../images/default-conditions/teleportationproperty.PNG)
 
 This will configure the attached `Teleportation Anchor`. It will provide a visual element in the Unity Editor that helps the training designer to place the `Teleportation Point` in the scene. This visual element will also be shown in the virtual world during training execution to guide the trainee.
 
