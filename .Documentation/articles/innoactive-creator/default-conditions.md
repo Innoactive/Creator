@@ -4,7 +4,7 @@ Conditions need to be active in order to be fulfilled. As soon as a step is acti
 
 The following conditions are part of the `Basic Conditions and Behaviors` and the `Basic Interactions` component. The Innoactive Creator package provides them by default.
 
-Take a look at the [Training Scene Object](training-scene-object.md) article if you have not read it yet. It will help you to understand how to handle training scene objects and training properties.
+Take a look at the [Training Scene Object](training-scene-object.md) article if you have not read it yet. It will help you understand how to handle training scene objects and training properties.
 
 See [this article](step-inspector.md) to learn Step Inspector controls.
 
@@ -118,7 +118,7 @@ In order to approach the collider with an object in Desktop Mode, trainees have 
 ### Application Example
 
 - The trainee is supposed to hold an RFID tag that is integrated into their gloves (represented by his controller) near a scanner.
-- If a trainee moves to close to a machinery while it is operating, the emergency shut down is triggered.
+- If a trainee moves too close to a machinery while it is operating, the emergency shut down is triggered.
 
 
 ### Configuration
@@ -263,7 +263,7 @@ In order to touch an object in VR, trainees have to move one of their hands/cont
 In order to touch an object in desktop mode, trainees have to move the mouse over the object (so that the ray hits the object's collider). The object is visually highlighted to indicate that it is interactive. Touch the object by clicking it with the left mouse button.
 
 ### Application Example
-- The trainee needs to push a button in VR.
+- The trainee needs to push a button on a maschine.
 
 ### Configuration
 
@@ -292,7 +292,6 @@ In order to use an object in desktop mode, it needs to be grabbed before (see [G
 
 ### Application Example
 - The trainee picks up a drill and drills in screws.
-- The trainee pushes a button on a machine.
 
 ### Configuration
 
