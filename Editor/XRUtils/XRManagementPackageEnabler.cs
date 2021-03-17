@@ -8,10 +8,16 @@ namespace Innoactive.CreatorEditor.XRUtils
     /// <summary>
     /// Enables the XR Plug-in Management.
     /// </summary>
+    /// <remarks>
+    /// The purpose of this class is to ensure the XR SDKs are enabled after the XR Plugin Management is installed.
+    /// </remarks>
     internal sealed class XRManagementPackageEnabler : Dependency, IDisposable
     {
         /// <inheritdoc/>
         public override string Package { get; } = "com.unity.xr.management";
+
+        /// <inheritdoc/>
+        public override string Version { get; internal set; } = "4.0.1";
 
         /// <inheritdoc/>
         public override int Priority { get; } = 1;
