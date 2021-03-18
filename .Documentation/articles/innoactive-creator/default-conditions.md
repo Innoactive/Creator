@@ -18,6 +18,7 @@ See [this article](step-inspector.md) to learn Step Inspector controls.
 - [Timeout](#timeout)
 - [Touch Object](#touch-object)
 - [Use Object](#use-object)
+- [Teleport](#teleport)
 
 ------
 
@@ -302,3 +303,41 @@ In order to use an object in desktop mode, it needs to be grabbed before (see [G
 
 ### Location of this Condition (for Developers)
 This behavior is part of the [Basic-Interaction](https://github.com/Innoactive/Basic-Interaction-Component) component. The file is located [here](https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/UsedCondition.cs).
+
+## Teleport
+
+### Description
+
+This condition is fulfilled when the trainee teleports to the referenced `Teleportation Point`. Previous teleportation actions made into the `Teleportation Point` are not considered.
+
+The provided `Teleportation Property` is based on the Unity XR Interaction Toolkit's `Teleportation Anchor`. For further reference, please check out the XR Interaction Toolkit  [documentation](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@1.0/api/UnityEngine.XR.Interaction.Toolkit.TeleportationProvider.html).
+
+#### Configuring the Teleportation Point
+
+The `Teleportation Property` can be set as a **Default Teleportation Anchor** by clicking on the `Set Default Teleportation Anchor` button. You can find it when selecting the `Teleportation Point` and viewing it in the Unity Inspector.
+
+[![Teleportation Property](../images/default-conditions/teleportationproperty.PNG "")](../images/default-conditions/teleportationproperty.PNG)
+
+This will configure the attached `Teleportation Anchor`. It will provide a visual element in the Unity Editor that helps the training designer to place the `Teleportation Point` in the scene. This visual element will also be shown in the virtual world during training execution to guide the trainee.
+
+[![Setting a Default Teleportation Anchor](../images/default-conditions/defaultteleportationanchor.gif "Snap Zone")](../images/default-conditions/defaultteleportationanchor.gif)
+
+#### Interaction in VR
+
+To teleport in VR use the teleport controller and point at the highlighted `Teleportation Point`. This will teleport you to this point.
+
+#### Interaction in Desktop Mode
+
+To teleport in Desktop Mode, click on the highlighted `Teleportation Point`. This will teleport you to this point.
+
+### Application Example
+- The trainee has to move to another workstation to continue with the process.
+
+### Configuration
+
+- **Teleportation Point**
+
+    The `Teleportation Property` is used as the location point for the trainee to teleport to.
+
+### Location of this Condition (for Developers)
+This behavior is part of the [Basic-Interaction](https://github.com/Innoactive/Basic-Interaction-Component) component. The file is located [here](https://github.com/Innoactive/Basic-Interaction-Component/blob/develop/Runtime/Conditions/TeleportCondition.cs).
