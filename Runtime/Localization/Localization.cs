@@ -216,11 +216,13 @@ namespace Innoactive.Creator.Core.Internationalization
 
             public static void LanguageLoaded(object sender, LocalizationEventArgs args)
             {
-                if (args.DefaultLanguage.ToLower() == "ar" && args.Language.ToLower() == "en")
+#if !UNITY_ANDROID
+                if (args.Language.ToLower() == "en" && (args.DefaultLanguage.ToLower() == "ar" || System.Environment.GetCommandLineArgs().ToList().Contains("--pirate")))
                 {
                     AddSentences(args.Entries);
                     ReplaceWords(args.Entries);
                 }
+#endif
             }
 
             private static void AddSentences(Dictionary<string, string> entries)
