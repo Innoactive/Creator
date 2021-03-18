@@ -217,7 +217,8 @@ namespace Innoactive.Creator.Core.Internationalization
             public static void LanguageLoaded(object sender, LocalizationEventArgs args)
             {
 #if !UNITY_ANDROID
-                if (args.Language.ToLower() == "en" && (args.DefaultLanguage.ToLower() == "ar" || System.Environment.GetCommandLineArgs().ToList().Contains("--pirate")))
+                bool isPirateModeArgument = Environment.GetCommandLineArgs().Length > 0 && Environment.GetCommandLineArgs().ToList().Contains("--pirate");
+                if (args.Language.ToLower() == "en" && (args.DefaultLanguage.ToLower() == "ar" || isPirateModeArgument))
                 {
                     AddSentences(args.Entries);
                     ReplaceWords(args.Entries);
