@@ -59,9 +59,10 @@ namespace Innoactive.Creator.Core.Internationalization
                 return new List<string> {config.FallbackLanguage};
             }
 
-            if (result.Contains(config.FallbackLanguage) == false)
+            string fallbackLanguage = config.FallbackLanguage.ToLower();
+            if (result.Contains(fallbackLanguage) == false)
             {
-                result.Add(config.FallbackLanguage);
+                result.Add(fallbackLanguage);
             }
 
             return result.Distinct().ToList();
@@ -80,6 +81,7 @@ namespace Innoactive.Creator.Core.Internationalization
                     .Where(file => Regex.Match(file, regex).Success)
                     .Select(file => ExtractIsoCode(Path.GetFileName(file), filename))
                     .Where(IsTwoLettersIsoCode)
+                    .Select(language => language.ToLower())
                     .ToList();
             }
             catch
