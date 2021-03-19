@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Innoactive.Creator.Core.Internationalization
 {
@@ -49,7 +50,7 @@ namespace Innoactive.Creator.Core.Internationalization
 
         internal static Dictionary<string, string> Load(LocalizationConfig config, Dictionary<string, string> parameters)
         {
-            AddMissingParameter(KeyFallbackLanguage, config.FallbackLanguage, parameters);
+            AddMissingParameter(KeyFallbackLanguage, LanguageSettings.Instance.DefaultLanguage, parameters);
 
             Dictionary<string, string> result = new Dictionary<string, string>();
             foreach (LocalizationConfig.LocalizationSource source in config.Sources)
@@ -63,7 +64,6 @@ namespace Innoactive.Creator.Core.Internationalization
         private static Dictionary<string, string> LoadSource(LocalizationConfig.LocalizationSource source, Dictionary<string, string> parameters)
         {
             string path = ResolvePath(source.Path, parameters);
-
             if (source.ResourceType == LocalizationConfig.ResourceType.Resources)
             {
                 return LocalizationUtils.LoadFromResource(path);

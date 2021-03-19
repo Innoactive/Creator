@@ -21,10 +21,6 @@ namespace Innoactive.Creator.Core.Internationalization
         public const string StandaloneDefaultLocalizationConfig = "Localization/StandaloneLocalization";
 
         [SerializeField]
-        [Tooltip("Replaces the {fallback_language} token in paths.")]
-        public string FallbackLanguage = "en";
-
-        [SerializeField]
         public LocalizationSource[] Sources;
 
         [Serializable]

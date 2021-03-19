@@ -54,12 +54,12 @@ namespace Innoactive.Creator.Core.Internationalization
                 }
             }
 
+            string fallbackLanguage = LanguageSettings.Instance.DefaultLanguage.ToLower();
             if (result == null)
             {
-                return new List<string> {config.FallbackLanguage};
+                return new List<string> {fallbackLanguage};
             }
 
-            string fallbackLanguage = config.FallbackLanguage.ToLower();
             if (result.Contains(fallbackLanguage) == false)
             {
                 result.Add(fallbackLanguage);
