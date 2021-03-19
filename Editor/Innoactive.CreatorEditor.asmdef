@@ -3,9 +3,7 @@
     "references": [
         "GUID:c8561f9de838ac04d8feeda695bc572d",
         "GUID:e40ba710768534012815d3193fa296cb",
-        "GUID:f9fe0089ec81f4079af78eb2287a6163",
-        "GUID:4af21795022437d4bb139a86514b9ff9",
-        "GUID:3d9f59ae91c131e408fec0e5f661c340"
+        "GUID:f9fe0089ec81f4079af78eb2287a6163"
     ],
     "includePlatforms": [
         "Editor"
@@ -19,7 +17,7 @@
     "versionDefines": [
         {
             "name": "com.unity.xr.management",
-            "expression": "",
+            "expression": "4.0.1",
             "define": "UNITY_XR_MANAGEMENT"
         },
         {
