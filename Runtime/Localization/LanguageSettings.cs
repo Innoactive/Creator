@@ -2,6 +2,9 @@
 
 namespace Innoactive.Creator.Core.Internationalization
 {
+    /// <summary>
+    /// Language settings for the Creator.
+    /// </summary>
     public class LanguageSettings : SettingsObject<LanguageSettings>
     {
         /// <summary>
