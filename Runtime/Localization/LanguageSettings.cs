@@ -1,5 +1,4 @@
-﻿using System;
-using Innoactive.Creator.Core.Runtime.Utils;
+﻿using Innoactive.Creator.Core.Runtime.Utils;
 
 namespace Innoactive.Creator.Core.Internationalization
 {
@@ -10,25 +9,9 @@ namespace Innoactive.Creator.Core.Internationalization
         /// </summary>
         public string DefaultLanguage = "En";
 
-        [NonSerialized]
-        private string activeLanguage = null;
-
-        public string ActiveLanguage
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(activeLanguage))
-                {
-                    return DefaultLanguage;
-                }
-
-                return activeLanguage;
-            }
-
-            set
-            {
-                activeLanguage = value;
-            }
-        }
+        /// <summary>
+        /// Returns the active, will be stored for one session.
+        /// </summary>
+        public string ActiveLanguage { get; set; }
     }
 }
