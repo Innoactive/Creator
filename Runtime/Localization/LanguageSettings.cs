@@ -13,7 +13,7 @@ namespace Innoactive.Creator.Core.Internationalization
         public string DefaultLanguage = "En";
 
         /// <summary>
-        /// Returns the active, will be stored for one session.
+        /// Returns the currently active language, will be stored for one session.
         /// </summary>
         public string ActiveLanguage { get; set; }
 
