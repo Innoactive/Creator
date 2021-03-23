@@ -36,14 +36,13 @@ namespace Innoactive.CreatorEditor.UI
                 GUILayout.Space(8);
                 GUILayout.BeginVertical();
 
+                    InternalDraw(searchContext);
+
                     sections.ForEach(section =>
                     {
                         GUILayout.Label(section.Title, CreatorEditorStyles.Header);
                         section.OnGUI(searchContext);
                     });
-
-                    InternalDraw(searchContext);
-
                 GUILayout.EndVertical();
             GUILayout.EndHorizontal();
         }

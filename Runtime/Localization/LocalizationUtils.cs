@@ -25,7 +25,7 @@ namespace Innoactive.Creator.Core.Internationalization
         /// <remarks>Note: Only sources based on streaming assets work for now.</remarks>
         public static List<string> FindAvailableLanguagesForConfig(LocalizationConfig config, Dictionary<string, string> parameters)
         {
-            IEnumerable<string> result = null;
+            List<string> result = null;
 
             if (parameters.ContainsKey(LocalizationReader.KeyLanguage))
             {
@@ -49,19 +49,20 @@ namespace Innoactive.Creator.Core.Internationalization
                     }
                     else
                     {
-                        result = result.Union(foundLanguages);
+                        result = result.Union(foundLanguages).ToList();
                     }
                 }
             }
 
+            string fallbackLanguage = LanguageSettings.Instance.DefaultLanguage.ToLower();
             if (result == null)
             {
-                return new List<string>() {config.FallbackLanguage};
+                return new List<string> {fallbackLanguage};
             }
 
-            if (result.Contains(config.FallbackLanguage) == false)
+            if (result.Contains(fallbackLanguage) == false)
             {
-                result.Append(config.FallbackLanguage);
+                result.Add(fallbackLanguage);
             }
 
             return result.Distinct().ToList();
@@ -80,6 +81,7 @@ namespace Innoactive.Creator.Core.Internationalization
                     .Where(file => Regex.Match(file, regex).Success)
                     .Select(file => ExtractIsoCode(Path.GetFileName(file), filename))
                     .Where(IsTwoLettersIsoCode)
+                    .Select(language => language.ToLower())
                     .ToList();
             }
             catch
