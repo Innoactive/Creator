@@ -126,7 +126,7 @@ namespace Innoactive.Creator.Core.IO
         {
             string absolutePath = Path.Combine(PersistentDataPath, filePath);
 
-            if (FileExistsInPersistentData(filePath))
+            if (FileExistsInPersistentData(filePath) == false)
             {
                 throw new FileNotFoundException($"File at path '{absolutePath}' could not be found.");
             }
