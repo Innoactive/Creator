@@ -40,5 +40,4 @@ An extension for an english translation would look like this:
 
 When starting the training in Desktop Mode first the EN.json will be loaded and after that the EN_desktop_mode.json which will extend the already existing key/value pairs and overwrite duplicates.
 
-***Be aware that an base file like EN.json always have to exist to make the language selectable.***
-
+***Be aware that a base file like EN.json always has to exist to make the language selectable.***
