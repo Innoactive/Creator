@@ -12,7 +12,40 @@ namespace Innoactive.Creator.Core
     /// </summary>
     public static class CourseRunner
     {
-        private class CourseRunnerInstance : MonoBehaviour
+        public abstract class CourseEvents : MonoBehaviour
+        {
+            /// <summary>
+            /// Will be called before the course is setup internally.
+            /// </summary>
+            public EventHandler<CourseEventArgs> CourseSetup;
+
+            /// <summary>
+            /// Will be called on course start.
+            /// </summary>
+            public EventHandler<CourseEventArgs> CourseStarted;
+
+            /// <summary>
+            /// Will be called each time a chapter activates.
+            /// </summary>
+            public EventHandler<CourseEventArgs> ChapterStarted;
+
+            /// <summary>
+            /// Will be called each time a step activates.
+            /// </summary>
+            public EventHandler<CourseEventArgs> StepStarted;
+
+            /// <summary>
+            /// Will be called when the course finishes.
+            /// </summary>
+            public EventHandler<CourseEventArgs> CourseFinished;
+
+            /// <summary>
+            /// Will be called when manual fast forward is triggered.
+            /// </summary>
+            public EventHandler<FastForwardCourseEventArgs> FastForwardStep;
+        }
+
+        private class CourseRunnerInstance : CourseEvents
         {
             /// <summary>
             /// Reference to the currently used <see cref="ICourse"/>.
@@ -92,29 +125,15 @@ namespace Innoactive.Creator.Core
         private static CourseRunnerInstance instance;
 
         /// <summary>
-        /// Will be called before the course is setup internally.
+        /// Returns all course events for the current scene.
         /// </summary>
-        public static EventHandler<CourseEventArgs> CourseSetup;
-
-        /// <summary>
-        /// Will be called on course start.
-        /// </summary>
-        public static EventHandler<CourseEventArgs> CourseStarted;
-
-        /// <summary>
-        /// Will be called each time a chapter activates.
-        /// </summary>
-        public static EventHandler<CourseEventArgs> ChapterStarted;
-
-        /// <summary>
-        /// Will be called each time a step activates.
-        /// </summary>
-        public static EventHandler<CourseEventArgs> StepStarted;
-
-        /// <summary>
-        /// Will be called when the course finishes.
-        /// </summary>
-        public static EventHandler<CourseEventArgs> CourseFinished;
+        public static CourseEvents Events
+        {
+            get
+            {
+                return instance;
+            }
+        }
 
         /// <summary>
         /// Currently running <see cref="ICourse"/>
@@ -175,6 +194,8 @@ namespace Innoactive.Creator.Core
 
             Current.Data.Current.Data.Current.LifeCycle.MarkToFastForward();
             transition.Autocomplete();
+
+            instance.FastForwardStep?.Invoke(instance, new FastForwardCourseEventArgs(transition, Current));
         }
 
         /// <summary>
