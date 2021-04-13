@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEditor;
@@ -162,15 +163,13 @@ namespace Innoactive.CreatorEditor.PackageManager
             if (package.Contains('@'))
             {
                 string[] packageData = package.Split('@');
-                return Packages.Any(packageInfo => packageInfo.name == packageData.First() && packageInfo.version == packageData.Last());
+                string packageName = packageData.First();
+                string packageVersion = packageData.Last();
+
+                return IsPackageInstalled(packageName, packageVersion);
             }
 
-            if (string.IsNullOrEmpty(version))
-            {
-                return Packages.Any(packageInfo => packageInfo.name == package);
-            }
-
-            return Packages.Any(packageInfo => packageInfo.name == package && packageInfo.version == version);
+            return string.IsNullOrEmpty(version) ? IsPackageInstalled(package) : IsPackageInstalled(package, version);
         }
 
         /// <summary>
@@ -179,6 +178,38 @@ namespace Innoactive.CreatorEditor.PackageManager
         public static string GetInstalledPackageVersion(string package)
         {
             return Packages.First(packageInfo => package.Contains(packageInfo.name))?.version;
+        }
+
+        private static bool IsPackageInstalled(string package)
+        {
+            return Packages.Any(packageInfo => packageInfo.name == package);
+        }
+
+        private static bool IsPackageInstalled(string package, string version)
+        {
+            if (IsPackageInstalled(package))
+            {
+                if (string.IsNullOrEmpty(version))
+                {
+                    return true;
+                }
+
+                PackageInfo packageInfo = Packages.First(pi => pi.name == package);
+
+                return IsVersionInstalledOrSupported(packageInfo, version);
+            }
+
+            return false;
+        }
+
+        private static bool IsVersionInstalledOrSupported(PackageInfo packageInfo, string version)
+        {
+            List<string> packageVersions = packageInfo.versions.all.ToList();
+
+            int currentVersion = packageVersions.IndexOf(packageInfo.version);
+            int targetVersion = packageVersions.IndexOf(version);
+
+            return currentVersion >= targetVersion;
         }
     }
 }
