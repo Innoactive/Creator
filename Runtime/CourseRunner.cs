@@ -137,10 +137,16 @@ namespace Innoactive.Creator.Core
                 if (events == null)
                 {
                     events = new CourseEvents();
-                    SceneManager.activeSceneChanged += (s1, s2) => events = null;
+                    SceneManager.sceneUnloaded += OnSceneUnloaded;
                 }
                 return events;
             }
+        }
+
+        private static void OnSceneUnloaded(Scene scene)
+        {
+            events = null;
+            SceneManager.sceneUnloaded -= OnSceneUnloaded;
         }
 
         /// <summary>
