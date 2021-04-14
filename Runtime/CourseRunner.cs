@@ -4,6 +4,7 @@ using System.Linq;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.Configuration.Modes;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Innoactive.Creator.Core
 {
@@ -12,6 +13,39 @@ namespace Innoactive.Creator.Core
     /// </summary>
     public static class CourseRunner
     {
+        public class CourseEvents
+        {
+            /// <summary>
+            /// Will be called before the course is setup internally.
+            /// </summary>
+            public EventHandler<CourseEventArgs> CourseSetup;
+
+            /// <summary>
+            /// Will be called on course start.
+            /// </summary>
+            public EventHandler<CourseEventArgs> CourseStarted;
+
+            /// <summary>
+            /// Will be called each time a chapter activates.
+            /// </summary>
+            public EventHandler<CourseEventArgs> ChapterStarted;
+
+            /// <summary>
+            /// Will be called each time a step activates.
+            /// </summary>
+            public EventHandler<CourseEventArgs> StepStarted;
+
+            /// <summary>
+            /// Will be called when the course finishes.
+            /// </summary>
+            public EventHandler<CourseEventArgs> CourseFinished;
+
+            /// <summary>
+            /// Will be called when manual fast forward is triggered.
+            /// </summary>
+            public EventHandler<FastForwardCourseEventArgs> FastForwardStep;
+        }
+
         private class CourseRunnerInstance : MonoBehaviour
         {
             /// <summary>
@@ -53,19 +87,19 @@ namespace Innoactive.Creator.Core
 
                 if (course.Data.Current?.LifeCycle.Stage == Stage.Activating)
                 {
-                    ChapterStarted?.Invoke(this, new CourseEventArgs(course));
+                    Events.ChapterStarted?.Invoke(this, new CourseEventArgs(course));
                 }
 
                 if (course.Data.Current?.Data.Current?.LifeCycle.Stage == Stage.Activating)
                 {
-                    StepStarted?.Invoke(this, new CourseEventArgs(course));
+                    Events.StepStarted?.Invoke(this, new CourseEventArgs(course));
                 }
 
                 if (course.LifeCycle.Stage == Stage.Active)
                 {
                     course.LifeCycle.Deactivate();
                     RuntimeConfigurator.Configuration.StepLockHandling.OnCourseFinished(course);
-                    CourseFinished?.Invoke(this, new CourseEventArgs(course));
+                    Events.CourseFinished?.Invoke(this, new CourseEventArgs(course));
                 }
             }
 
@@ -74,7 +108,7 @@ namespace Innoactive.Creator.Core
             /// </summary>
             public void Execute()
             {
-                CourseSetup?.Invoke(this, new CourseEventArgs(course));
+                Events.CourseSetup?.Invoke(this, new CourseEventArgs(course));
 
                 RuntimeConfigurator.ModeChanged += HandleModeChanged;
 
@@ -85,36 +119,35 @@ namespace Innoactive.Creator.Core
                 RuntimeConfigurator.Configuration.StepLockHandling.OnCourseStarted(course);
                 course.LifeCycle.Activate();
 
-                CourseStarted?.Invoke(this, new CourseEventArgs(course));
+                Events.CourseStarted?.Invoke(this, new CourseEventArgs(course));
             }
         }
 
         private static CourseRunnerInstance instance;
 
-        /// <summary>
-        /// Will be called before the course is setup internally.
-        /// </summary>
-        public static EventHandler<CourseEventArgs> CourseSetup;
+        private static CourseEvents events;
 
         /// <summary>
-        /// Will be called on course start.
+        /// Returns all course events for the current scene.
         /// </summary>
-        public static EventHandler<CourseEventArgs> CourseStarted;
+        public static CourseEvents Events
+        {
+            get
+            {
+                if (events == null)
+                {
+                    events = new CourseEvents();
+                    SceneManager.sceneUnloaded += OnSceneUnloaded;
+                }
+                return events;
+            }
+        }
 
-        /// <summary>
-        /// Will be called each time a chapter activates.
-        /// </summary>
-        public static EventHandler<CourseEventArgs> ChapterStarted;
-
-        /// <summary>
-        /// Will be called each time a step activates.
-        /// </summary>
-        public static EventHandler<CourseEventArgs> StepStarted;
-
-        /// <summary>
-        /// Will be called when the course finishes.
-        /// </summary>
-        public static EventHandler<CourseEventArgs> CourseFinished;
+        private static void OnSceneUnloaded(Scene scene)
+        {
+            events = null;
+            SceneManager.sceneUnloaded -= OnSceneUnloaded;
+        }
 
         /// <summary>
         /// Currently running <see cref="ICourse"/>
@@ -175,6 +208,8 @@ namespace Innoactive.Creator.Core
 
             Current.Data.Current.Data.Current.LifeCycle.MarkToFastForward();
             transition.Autocomplete();
+
+            Events.FastForwardStep?.Invoke(instance, new FastForwardCourseEventArgs(transition, Current));
         }
 
         /// <summary>
