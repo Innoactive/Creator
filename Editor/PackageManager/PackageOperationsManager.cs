@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEditor;
@@ -86,13 +87,19 @@ namespace Innoactive.CreatorEditor.PackageManager
                 return;
             }
 
+            if (IsPackageLoaded(package) && string.IsNullOrEmpty(version) == false)
+            {
+                PackageInfo installedPackage = Packages.First(packageInfo => packageInfo.name == package);
+                EditorUtility.DisplayDialog($"{installedPackage.displayName} Upgrade", $"{installedPackage.displayName} will be upgraded from v{installedPackage.version} to v{version}." , "Continue");
+            }
+
             if (package.Contains("@") == false && string.IsNullOrEmpty(version) == false)
             {
                 package = $"{package}@{version}";
             }
 
             AddRequest addRequest = Client.Add(package);
-            Debug.Log($"Enabling package: {package}, Version: {(string.IsNullOrEmpty(version) ? "latest" : version)}.");
+            Debug.Log($"Enabling package: {package.Split('@').First()}, Version: {(string.IsNullOrEmpty(version) ? "latest" : version)}.");
 
             while (addRequest.IsCompleted == false)
             {
@@ -106,7 +113,7 @@ namespace Innoactive.CreatorEditor.PackageManager
             else
             {
                 OnPackageEnabled?.Invoke(null, new PackageEnabledEventArgs(addRequest.Result));
-                Debug.Log($"The package '{addRequest.Result.displayName} version {addRequest.Result.version}' has been automatically added");
+                Debug.Log($"The package '{addRequest.Result.displayName}' version '{addRequest.Result.version}' has been automatically added");
             }
         }
 
@@ -148,20 +155,21 @@ namespace Innoactive.CreatorEditor.PackageManager
         /// <remarks>If <paramref name="package"/> already contains an embedded version, <paramref name="version"/> will be ignored.</remarks>
         public static bool IsPackageLoaded(string package, string version = null)
         {
+            if (string.IsNullOrEmpty(package))
+            {
+                throw new ArgumentException($"Parameter '{nameof(package)}' is null or empty.");
+            }
+
             if (package.Contains('@'))
             {
                 string[] packageData = package.Split('@');
-                return Packages != null && Packages.Any(packageInfo => packageInfo.name == packageData.First() && packageInfo.version == packageData.Last());
+                string packageName = packageData.First();
+                string packageVersion = packageData.Last();
+
+                return IsPackageInstalled(packageName, packageVersion);
             }
 
-            if (string.IsNullOrEmpty(version))
-            {
-                return Packages != null && Packages.Any(packageInfo => packageInfo.name == package);
-            }
-            else
-            {
-                return Packages != null && Packages.Any(packageInfo => packageInfo.name == package && packageInfo.version == version);
-            }
+            return string.IsNullOrEmpty(version) ? IsPackageInstalled(package) : IsPackageInstalled(package, version);
         }
 
         /// <summary>
@@ -170,6 +178,38 @@ namespace Innoactive.CreatorEditor.PackageManager
         public static string GetInstalledPackageVersion(string package)
         {
             return Packages.First(packageInfo => package.Contains(packageInfo.name))?.version;
+        }
+
+        private static bool IsPackageInstalled(string package)
+        {
+            return Packages.Any(packageInfo => packageInfo.name == package);
+        }
+
+        private static bool IsPackageInstalled(string package, string version)
+        {
+            if (IsPackageInstalled(package))
+            {
+                if (string.IsNullOrEmpty(version))
+                {
+                    return true;
+                }
+
+                PackageInfo packageInfo = Packages.First(pi => pi.name == package);
+
+                return IsVersionInstalledOrSupported(packageInfo, version);
+            }
+
+            return false;
+        }
+
+        private static bool IsVersionInstalledOrSupported(PackageInfo packageInfo, string version)
+        {
+            List<string> packageVersions = packageInfo.versions.all.ToList();
+
+            int currentVersion = packageVersions.IndexOf(packageInfo.version);
+            int targetVersion = packageVersions.IndexOf(version);
+
+            return currentVersion >= targetVersion;
         }
     }
 }

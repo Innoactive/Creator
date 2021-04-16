@@ -95,10 +95,23 @@ namespace Innoactive.CreatorEditor
                 root += '/';
             }
 
+            string[] includes = config.Includes.Select(includingPattern => AddRootDirIfNoStartingWildcard(root, includingPattern)).ToArray();
+            string[] excludes = config.Excludes.Select(excludingPattern => AddRootDirIfNoStartingWildcard(root, excludingPattern)).ToArray();
+
             string[] assetPathsInRootDirectory = AssetDatabase.GetAllAssetPaths().Where(assetPath => assetPath.StartsWith(root)).ToArray();
-            string[] assetPathsIncludedOnly = assetPathsInRootDirectory.Where(filePath => config.Includes.Any(includingPattern => Regex.IsMatch(filePath, WildcardToRegular(includingPattern)))).ToArray();
-            string[] assetPathsWithoutExcluded = assetPathsIncludedOnly.Where(filePath => config.Excludes.Any(excludingPattern => Regex.IsMatch(filePath, WildcardToRegular(excludingPattern))) == false).ToArray();
+            string[] assetPathsIncludedOnly = assetPathsInRootDirectory.Where(filePath => includes.Any(includingPattern => Regex.IsMatch(filePath, WildcardToRegular(includingPattern)))).ToArray();
+            string[] assetPathsWithoutExcluded = assetPathsIncludedOnly.Where(filePath => excludes.Any(excludingPattern => Regex.IsMatch(filePath, WildcardToRegular(excludingPattern))) == false).ToArray();
+
             return assetPathsWithoutExcluded;
+        }
+
+        private static string AddRootDirIfNoStartingWildcard(string rootDirectory, string pattern)
+        {
+            if (pattern.StartsWith("*") == false)
+            {
+                return $"{rootDirectory}{pattern}";
+            }
+            return pattern;
         }
 
         private static void UpdateVersionFile(string path, string content)

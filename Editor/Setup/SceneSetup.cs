@@ -39,13 +39,16 @@ namespace Innoactive.CreatorEditor
         /// <remarks>Extensions must be omitted. All asset names and paths in Unity use forward slashes, paths using backslashes will not work.</remarks>
         /// <param name="prefab">Name or path to the target resource to setup.</param>
         /// <exception cref="FileNotFoundException">Exception thrown if no prefab can be found in project with given <paramref name="prefab"/>.</exception>
-        protected void SetupPrefab(string prefab)
+        protected GameObject SetupPrefab(string prefab)
         {
             if (IsPrefabMissingInScene(Path.GetFileName(prefab)))
             {
                 GameObject instance = Object.Instantiate(FindPrefab(prefab));
                 instance.name = instance.name.Replace("(Clone)", string.Empty);
+                return instance;
             }
+
+            return null;
         }
 
         /// <summary>

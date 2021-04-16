@@ -34,6 +34,14 @@ This component is an abstraction layer between the Creator Core and a component 
 git submodule add git@github.com:Innoactive/Basic-Interaction-Component.git Innoactive/Creator/Components/Basic-Interaction 
 ```
 
+### [Basic UI Component](https://github.com/Innoactive/Basic-UI-Component)
+
+This component is an abstraction layer between the Creator Core and basic UI components required for user interactions.
+
+```
+git submodule add git@github.com:Innoactive/Basic-UI-Component.git Innoactive/Creator/Components/Basic-UI 
+```
+
 ### [Unity XR Interaction Component](https://github.com/Innoactive/XR-Interaction-Component)
 
 This component implements user interactions in VR by using the Unity XR framework. Include the Basic Interaction component along this repository to your project to let designers create training applications for VR.
