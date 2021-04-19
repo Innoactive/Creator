@@ -231,7 +231,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void OnSceneOpened(Scene scene, OpenSceneMode mode)
         {
-            if (RuntimeConfigurator.Exists == false)
+            if (BuildPipeline.isBuildingPlayer == false && RuntimeConfigurator.Exists == false)
             {
                 Close();
             }
@@ -239,7 +239,10 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
         private void OnNewScene(Scene scene, NewSceneSetup setup, NewSceneMode mode)
         {
-            Close();
+            if (BuildPipeline.isBuildingPlayer == false)
+            {
+                Close();
+            }
         }
     }
 }
