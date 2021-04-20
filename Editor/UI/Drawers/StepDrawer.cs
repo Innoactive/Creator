@@ -19,7 +19,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
         private static int margin = 3;
         private static int padding = 2;
-        
+
         protected StepDrawer()
         {
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
@@ -32,6 +32,11 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
         public override Rect Draw(Rect rect, object currentValue, Action<object> changeValueCallback, GUIContent label)
         {
+            if (BuildPipeline.isBuildingPlayer)
+            {
+                return rect;
+            }
+
             rect = base.Draw(rect, currentValue, changeValueCallback, label);
 
             Step.EntityData step = (Step.EntityData) currentValue;
@@ -120,7 +125,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
 
         private void OnPlayModeStateChanged(PlayModeStateChange mode)
         {
-            
+
         }
     }
 }
