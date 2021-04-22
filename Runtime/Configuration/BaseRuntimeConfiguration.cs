@@ -4,8 +4,8 @@ using Innoactive.Creator.Core.IO;
 using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Core.Serialization;
-using Innoactive.Creator.Core.Serialization.NewtonsoftJson;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Innoactive.Creator.Core.Configuration
 {
@@ -34,6 +34,42 @@ namespace Innoactive.Creator.Core.Configuration
 
         /// <inheritdoc />
         public ICourseSerializer Serializer { get; set; } = new ImprovedNewtonsoftJsonCourseSerializer();
+
+        /// <summary>
+        /// Default input action asset which is used when no customization of key bindings are done.
+        /// Should be stored inside the Creator package.
+        /// </summary>
+        public virtual string DefaultInputActionAssetPath { get; } = "KeyBindings/CreatorDefaultKeyBindings";
+
+        /// <summary>
+        /// Custom InputActionAsset path which is used when key bindings are modified.
+        /// Should be stored in project path.
+        /// </summary>
+        public virtual string CustomInputActionAssetPath { get; } = "KeyBindings/CreatorCustomKeyBindings";
+
+        private InputActionAsset inputActionAsset;
+
+        /// <summary>
+        /// Current active InputActionAsset.
+        /// </summary>
+        public virtual InputActionAsset CurrentInputActionAsset
+        {
+            get
+            {
+                if (inputActionAsset == null)
+                {
+                    inputActionAsset = Resources.Load<InputActionAsset>(CustomInputActionAssetPath);
+                    if (inputActionAsset == null)
+                    {
+                        inputActionAsset = Resources.Load<InputActionAsset>(DefaultInputActionAssetPath);
+                    }
+                }
+
+                return inputActionAsset;
+            }
+
+            set => inputActionAsset = value;
+        }
 
         /// <inheritdoc />
         public IModeHandler Modes { get; protected set; }
