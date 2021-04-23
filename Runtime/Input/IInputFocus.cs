@@ -1,7 +1,7 @@
 ﻿namespace Innoactive.Creator.Core.Input
 {
     /// <summary>
-    /// Can be used to mark an GameObject focusable.
+    /// Can be used to mark a GameObject focusable.
     /// </summary>
     public interface IInputFocus
     {
@@ -16,7 +16,7 @@
         bool CanBeFocused { get; }
 
         /// <summary>
-        /// Will be called when this object on focus.
+        /// Will be called when this object is focused.
         /// </summary>
         void OnFocus();
 

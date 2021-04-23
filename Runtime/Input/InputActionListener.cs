@@ -18,7 +18,7 @@ namespace Innoactive.Creator.Core.Input
         /// <summary>
         /// Registers the given method as input event, the name of the method will be the event name.
         /// </summary>
-        protected virtual void RegisterInputEvent(Func<InputAction.CallbackContext, bool> action)
+        protected virtual void RegisterInputEvent(Action<InputAction.CallbackContext> action)
         {
             InputController.Instance.RegisterEvent(this, action);
         }
@@ -26,7 +26,7 @@ namespace Innoactive.Creator.Core.Input
         /// <summary>
         /// Unregisters the given method as input event, the name of the method will be the event name.
         /// </summary>
-        protected virtual void UnregisterInputEvent(Func<InputAction.CallbackContext, bool> action)
+        protected virtual void UnregisterInputEvent(Action<InputAction.CallbackContext> action)
         {
             InputController.Instance.UnregisterEvent(this, action);
         }

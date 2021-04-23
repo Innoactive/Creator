@@ -6,16 +6,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Central unity instance for input via the new Input System using C# events.
+/// Central controller for input via the new Input System using C# events.
 /// </summary>
 public class InputController : UnitySceneSingleton<InputController>
 {
     private struct ListenerInfo
     {
         public readonly IInputActionListener ActionListener;
-        public readonly Func<InputAction.CallbackContext, bool> Action;
+        public readonly Action<InputAction.CallbackContext> Action;
 
-        public ListenerInfo(IInputActionListener actionListener, Func<InputAction.CallbackContext, bool> action)
+        public ListenerInfo(IInputActionListener actionListener, Action<InputAction.CallbackContext> action)
         {
             ActionListener = actionListener;
             Action = action;
@@ -58,7 +58,7 @@ public class InputController : UnitySceneSingleton<InputController>
     /// </summary>
     /// <param name="listener">The listener owning the action.</param>
     /// <param name="action">The action method which will be called.</param>
-    public void RegisterEvent(IInputActionListener listener, Func<InputAction.CallbackContext, bool> action)
+    public void RegisterEvent(IInputActionListener listener, Action<InputAction.CallbackContext> action)
     {
         string actionName = action.Method.Name;
         if (listenerDictionary.ContainsKey(actionName) == false)
@@ -75,7 +75,7 @@ public class InputController : UnitySceneSingleton<InputController>
     /// <summary>
     /// Unregisters the given listeners action.
     /// </summary>
-    public void UnregisterEvent(IInputActionListener listener, Func<InputAction.CallbackContext, bool> action)
+    public void UnregisterEvent(IInputActionListener listener, Action<InputAction.CallbackContext> action)
     {
         string actionName = action.Method.Name;
         List<ListenerInfo> infoList = listenerDictionary[actionName];
@@ -156,10 +156,7 @@ public class InputController : UnitySceneSingleton<InputController>
                     break;
                 }
 
-                if (info.Action(context))
-                {
-                    break;
-                }
+                info.Action(context);
             }
             catch (Exception ex)
             {
