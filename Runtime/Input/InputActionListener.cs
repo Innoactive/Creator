@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Innoactive.Creator.Core.Input
 {
@@ -18,7 +17,7 @@ namespace Innoactive.Creator.Core.Input
         /// <summary>
         /// Registers the given method as input event, the name of the method will be the event name.
         /// </summary>
-        protected virtual void RegisterInputEvent(Action<InputAction.CallbackContext> action)
+        protected virtual void RegisterInputEvent(Action<InputController.InputEventArgs> action)
         {
             InputController.Instance.RegisterEvent(this, action);
         }
@@ -26,7 +25,7 @@ namespace Innoactive.Creator.Core.Input
         /// <summary>
         /// Unregisters the given method as input event, the name of the method will be the event name.
         /// </summary>
-        protected virtual void UnregisterInputEvent(Action<InputAction.CallbackContext> action)
+        protected virtual void UnregisterInputEvent(Action<InputController.InputEventArgs> action)
         {
             InputController.Instance.UnregisterEvent(this, action);
         }

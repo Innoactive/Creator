@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Unity;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,14 +10,25 @@ namespace Innoactive.Creator.Core.Input
     /// <summary>
     /// Central controller for input via the new Input System using C# events.
     /// </summary>
+    [RequireComponent(typeof(PlayerInput))]
     public class InputController : UnitySceneSingleton<InputController>
     {
+        public class InputEventArgs : EventArgs
+        {
+            public readonly object Context;
+
+            public InputEventArgs(object context)
+            {
+                Context = context;
+            }
+        }
+
         private struct ListenerInfo
         {
             public readonly IInputActionListener ActionListener;
-            public readonly Action<InputAction.CallbackContext> Action;
+            public readonly Action<InputEventArgs> Action;
 
-            public ListenerInfo(IInputActionListener actionListener, Action<InputAction.CallbackContext> action)
+            public ListenerInfo(IInputActionListener actionListener, Action<InputEventArgs> action)
             {
                 ActionListener = actionListener;
                 Action = action;
@@ -59,7 +71,7 @@ namespace Innoactive.Creator.Core.Input
         /// </summary>
         /// <param name="listener">The listener owning the action.</param>
         /// <param name="action">The action method which will be called.</param>
-        public void RegisterEvent(IInputActionListener listener, Action<InputAction.CallbackContext> action)
+        public void RegisterEvent(IInputActionListener listener, Action<InputEventArgs> action)
         {
             string actionName = action.Method.Name;
             if (listenerDictionary.ContainsKey(actionName) == false)
@@ -76,7 +88,7 @@ namespace Innoactive.Creator.Core.Input
         /// <summary>
         /// Unregisters the given listeners action.
         /// </summary>
-        public void UnregisterEvent(IInputActionListener listener, Action<InputAction.CallbackContext> action)
+        public void UnregisterEvent(IInputActionListener listener, Action<InputEventArgs> action)
         {
             string actionName = action.Method.Name;
             List<ListenerInfo> infoList = listenerDictionary[actionName];
@@ -122,7 +134,12 @@ namespace Innoactive.Creator.Core.Input
         protected override void Awake()
         {
             base.Awake();
-            playerInput = GetComponent<PlayerInput>();
+            SetupInputPlayer();
+        }
+
+        protected void Reset()
+        {
+            SetupInputPlayer();
         }
 
         protected void OnEnable()
@@ -157,13 +174,20 @@ namespace Innoactive.Creator.Core.Input
                         break;
                     }
 
-                    info.Action(context);
+                    info.Action(new InputEventArgs(context));
                 }
                 catch (Exception ex)
                 {
                     Debug.LogError(ex);
                 }
             }
+        }
+
+        private void SetupInputPlayer()
+        {
+            playerInput = GetComponent<PlayerInput>();
+            playerInput.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
+            playerInput.actions = RuntimeConfigurator.Configuration.CurrentInputActionAsset;
         }
     }
 }
