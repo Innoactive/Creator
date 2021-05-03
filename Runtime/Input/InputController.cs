@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Unity;
-using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Innoactive.Creator.Core.Input
 {
     /// <summary>
     /// Central controller for input via the new Input System using C# events.
     /// </summary>
-    [RequireComponent(typeof(PlayerInput))]
-    public class InputController : UnitySceneSingleton<InputController>
+    public abstract class InputController : UnitySceneSingleton<InputController>
     {
         public class InputEventArgs : EventArgs
         {
@@ -23,7 +19,17 @@ namespace Innoactive.Creator.Core.Input
             }
         }
 
-        private struct ListenerInfo
+        public class InputFocusEventArgs : EventArgs
+        {
+            public readonly IInputFocus InputFocus;
+
+            public InputFocusEventArgs(IInputFocus inputFocus)
+            {
+                InputFocus = inputFocus;
+            }
+        }
+
+        protected struct ListenerInfo
         {
             public readonly IInputActionListener ActionListener;
             public readonly Action<InputEventArgs> Action;
@@ -32,16 +38,6 @@ namespace Innoactive.Creator.Core.Input
             {
                 ActionListener = actionListener;
                 Action = action;
-            }
-        }
-
-        public class InputFocusEventArgs : EventArgs
-        {
-            public readonly IInputFocus InputFocus;
-
-            public InputFocusEventArgs(IInputFocus inputFocus)
-            {
-                InputFocus = inputFocus;
             }
         }
 
@@ -60,11 +56,7 @@ namespace Innoactive.Creator.Core.Input
         /// </summary>
         protected IInputFocus CurrentInputFocus { get; set; } = null;
 
-        private readonly Dictionary<string, List<ListenerInfo>> listenerDictionary = new Dictionary<string, List<ListenerInfo>>();
-
-        private string defaultActionMap;
-
-        private PlayerInput playerInput;
+        protected Dictionary<string, List<ListenerInfo>> ListenerDictionary { get; } = new Dictionary<string, List<ListenerInfo>>();
 
         /// <summary>
         /// Registers an action event to input.
@@ -74,12 +66,12 @@ namespace Innoactive.Creator.Core.Input
         public void RegisterEvent(IInputActionListener listener, Action<InputEventArgs> action)
         {
             string actionName = action.Method.Name;
-            if (listenerDictionary.ContainsKey(actionName) == false)
+            if (ListenerDictionary.ContainsKey(actionName) == false)
             {
-                listenerDictionary.Add(actionName, new List<ListenerInfo>());
+                ListenerDictionary.Add(actionName, new List<ListenerInfo>());
             }
 
-            List<ListenerInfo> infoList = listenerDictionary[actionName];
+            List<ListenerInfo> infoList = ListenerDictionary[actionName];
 
             infoList.Add(new ListenerInfo(listener, action));
             infoList.Sort((l1, l2) => l1.ActionListener.Priority.CompareTo(l2.ActionListener.Priority) * -1);
@@ -91,103 +83,29 @@ namespace Innoactive.Creator.Core.Input
         public void UnregisterEvent(IInputActionListener listener, Action<InputEventArgs> action)
         {
             string actionName = action.Method.Name;
-            List<ListenerInfo> infoList = listenerDictionary[actionName];
+            List<ListenerInfo> infoList = ListenerDictionary[actionName];
             infoList.RemoveAll(info => info.ActionListener == listener && info.Action.Method.Name == actionName);
         }
 
         /// <summary>
         /// Focus the given input focus target.
         /// </summary>
-        public void Focus(IInputFocus target)
-        {
-            if (target == CurrentInputFocus)
-            {
-                return;
-            }
+        public abstract void Focus(IInputFocus target);
 
-            CurrentInputFocus = target;
-            if (string.IsNullOrEmpty(target.ActionMapName) == false)
-            {
-                playerInput.SwitchCurrentActionMap(target.ActionMapName);
-            }
-
-            target.OnFocus();
-            OnFocused?.Invoke(this, new InputFocusEventArgs(target));
-        }
-
-        /// <summary>
-        /// Releases the focus, if possible.
-        /// </summary>
-        public void ReleaseFocus()
-        {
-            if (CurrentInputFocus != null)
-            {
-                CurrentInputFocus.OnReleaseFocus();
-
-                CurrentInputFocus = null;
-                playerInput.SwitchCurrentActionMap(defaultActionMap);
-
-                OnFocusReleased?.Invoke(this, new InputFocusEventArgs(null));
-            }
-        }
+        public abstract void ReleaseFocus();
 
         protected override void Awake()
         {
             base.Awake();
-            SetupInputPlayer();
+            Setup();
         }
 
         protected void Reset()
         {
-            SetupInputPlayer();
+            Setup();
         }
 
-        protected void OnEnable()
-        {
-            playerInput.onActionTriggered += OnActionTriggered;
-            defaultActionMap = playerInput.defaultActionMap;
-        }
 
-        protected void OnDisable()
-        {
-            playerInput.onActionTriggered -= OnActionTriggered;
-        }
-
-        /// <summary>
-        /// Internal method handling all actions triggered by the new input system.
-        /// </summary>
-        protected virtual void OnActionTriggered(InputAction.CallbackContext context)
-        {
-            if (context.action.triggered == false || listenerDictionary.ContainsKey(context.action.name) == false)
-            {
-                return;
-            }
-
-            List<ListenerInfo> infoList = listenerDictionary[context.action.name];
-
-            foreach (ListenerInfo info in infoList)
-            {
-                try
-                {
-                    if (CurrentInputFocus != null && info.ActionListener.IgnoreFocus == false && info.ActionListener != CurrentInputFocus)
-                    {
-                        break;
-                    }
-
-                    info.Action(new InputEventArgs(context));
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogError(ex);
-                }
-            }
-        }
-
-        private void SetupInputPlayer()
-        {
-            playerInput = GetComponent<PlayerInput>();
-            playerInput.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
-            playerInput.actions = RuntimeConfigurator.Configuration.CurrentInputActionAsset;
-        }
+        protected abstract void Setup();
     }
 }
