@@ -21,7 +21,15 @@ namespace Innoactive.Creator.Unity
             {
                 if (typeof(T).IsAbstract)
                 {
-                    return ReflectionUtils.GetConcreteImplementationsOf(typeof(T)).First();
+                    try
+                    {
+                        return ReflectionUtils.GetConcreteImplementationsOf(typeof(T)).First();
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        Debug.LogError($"You have no concrete implementation of '{typeof(T).Name}'");
+                        throw;
+                    }
                 }
 
                 return typeof(T);
