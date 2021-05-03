@@ -15,6 +15,9 @@ namespace Innoactive.Creator.Unity
         /// </summary>
         private static object semaphore = new object();
 
+        /// <summary>
+        /// Concrete Implementation of the given class T, this also allows abstract classes as singletons.
+        /// </summary>
         public static Type ConcreteType
         {
             get
