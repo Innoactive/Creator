@@ -5,7 +5,6 @@ using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Core.Serialization;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Innoactive.Creator.Core.Configuration
 {
@@ -47,21 +46,22 @@ namespace Innoactive.Creator.Core.Configuration
         /// </summary>
         public virtual string CustomInputActionAssetPath { get; } = "KeyBindings/CreatorCustomKeyBindings";
 
-        private InputActionAsset inputActionAsset;
+#if ENABLE_INPUT_SYSTEM
+        private UnityEngine.InputSystem.InputActionAsset inputActionAsset;
 
         /// <summary>
         /// Current active InputActionAsset.
         /// </summary>
-        public virtual InputActionAsset CurrentInputActionAsset
+        public virtual UnityEngine.InputSystem.InputActionAsset CurrentInputActionAsset
         {
             get
             {
                 if (inputActionAsset == null)
                 {
-                    inputActionAsset = Resources.Load<InputActionAsset>(CustomInputActionAssetPath);
+                    inputActionAsset = Resources.Load<UnityEngine.InputSystem.InputActionAsset>(CustomInputActionAssetPath);
                     if (inputActionAsset == null)
                     {
-                        inputActionAsset = Resources.Load<InputActionAsset>(DefaultInputActionAssetPath);
+                        inputActionAsset = Resources.Load<UnityEngine.InputSystem.InputActionAsset>(DefaultInputActionAssetPath);
                     }
                 }
 
@@ -70,6 +70,7 @@ namespace Innoactive.Creator.Core.Configuration
 
             set => inputActionAsset = value;
         }
+#endif
 
         /// <inheritdoc />
         public IModeHandler Modes { get; protected set; }

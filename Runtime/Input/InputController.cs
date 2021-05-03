@@ -1,25 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using Innoactive.Creator.Unity;
-using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Innoactive.Creator.Core.Input
 {
     /// <summary>
     /// Central controller for input via the new Input System using C# events.
     /// </summary>
-    public class InputController : UnitySceneSingleton<InputController>
+    public abstract class InputController : UnitySceneSingleton<InputController>
     {
-        private struct ListenerInfo
+        public class InputEventArgs : EventArgs
         {
-            public readonly IInputActionListener ActionListener;
-            public readonly Action<InputAction.CallbackContext> Action;
+            public readonly object Context;
 
-            public ListenerInfo(IInputActionListener actionListener, Action<InputAction.CallbackContext> action)
+            public InputEventArgs(object context)
             {
-                ActionListener = actionListener;
-                Action = action;
+                Context = context;
             }
         }
 
@@ -30,6 +26,21 @@ namespace Innoactive.Creator.Core.Input
             public InputFocusEventArgs(IInputFocus inputFocus)
             {
                 InputFocus = inputFocus;
+            }
+        }
+
+        /// <summary>
+        /// Information of the listener registered.
+        /// </summary>
+        protected struct ListenerInfo
+        {
+            public readonly IInputActionListener ActionListener;
+            public readonly Action<InputEventArgs> Action;
+
+            public ListenerInfo(IInputActionListener actionListener, Action<InputEventArgs> action)
+            {
+                ActionListener = actionListener;
+                Action = action;
             }
         }
 
@@ -48,26 +59,25 @@ namespace Innoactive.Creator.Core.Input
         /// </summary>
         protected IInputFocus CurrentInputFocus { get; set; } = null;
 
-        private readonly Dictionary<string, List<ListenerInfo>> listenerDictionary = new Dictionary<string, List<ListenerInfo>>();
-
-        private string defaultActionMap;
-
-        private PlayerInput playerInput;
+        /// <summary>
+        /// Registered listener.
+        /// </summary>
+        protected Dictionary<string, List<ListenerInfo>> ListenerDictionary { get; } = new Dictionary<string, List<ListenerInfo>>();
 
         /// <summary>
         /// Registers an action event to input.
         /// </summary>
         /// <param name="listener">The listener owning the action.</param>
         /// <param name="action">The action method which will be called.</param>
-        public void RegisterEvent(IInputActionListener listener, Action<InputAction.CallbackContext> action)
+        public void RegisterEvent(IInputActionListener listener, Action<InputEventArgs> action)
         {
             string actionName = action.Method.Name;
-            if (listenerDictionary.ContainsKey(actionName) == false)
+            if (ListenerDictionary.ContainsKey(actionName) == false)
             {
-                listenerDictionary.Add(actionName, new List<ListenerInfo>());
+                ListenerDictionary.Add(actionName, new List<ListenerInfo>());
             }
 
-            List<ListenerInfo> infoList = listenerDictionary[actionName];
+            List<ListenerInfo> infoList = ListenerDictionary[actionName];
 
             infoList.Add(new ListenerInfo(listener, action));
             infoList.Sort((l1, l2) => l1.ActionListener.Priority.CompareTo(l2.ActionListener.Priority) * -1);
@@ -76,94 +86,39 @@ namespace Innoactive.Creator.Core.Input
         /// <summary>
         /// Unregisters the given listeners action.
         /// </summary>
-        public void UnregisterEvent(IInputActionListener listener, Action<InputAction.CallbackContext> action)
+        public void UnregisterEvent(IInputActionListener listener, Action<InputEventArgs> action)
         {
             string actionName = action.Method.Name;
-            List<ListenerInfo> infoList = listenerDictionary[actionName];
+            List<ListenerInfo> infoList = ListenerDictionary[actionName];
             infoList.RemoveAll(info => info.ActionListener == listener && info.Action.Method.Name == actionName);
         }
 
         /// <summary>
         /// Focus the given input focus target.
         /// </summary>
-        public void Focus(IInputFocus target)
-        {
-            if (target == CurrentInputFocus)
-            {
-                return;
-            }
-
-            CurrentInputFocus = target;
-            if (string.IsNullOrEmpty(target.ActionMapName) == false)
-            {
-                playerInput.SwitchCurrentActionMap(target.ActionMapName);
-            }
-
-            target.OnFocus();
-            OnFocused?.Invoke(this, new InputFocusEventArgs(target));
-        }
+        public abstract void Focus(IInputFocus target);
 
         /// <summary>
         /// Releases the focus, if possible.
         /// </summary>
-        public void ReleaseFocus()
-        {
-            if (CurrentInputFocus != null)
-            {
-                CurrentInputFocus.OnReleaseFocus();
+        public abstract void ReleaseFocus();
 
-                CurrentInputFocus = null;
-                playerInput.SwitchCurrentActionMap(defaultActionMap);
-
-                OnFocusReleased?.Invoke(this, new InputFocusEventArgs(null));
-            }
-        }
 
         protected override void Awake()
         {
             base.Awake();
-            playerInput = GetComponent<PlayerInput>();
+            Setup();
         }
 
-        protected void OnEnable()
+        protected virtual void Reset()
         {
-            playerInput.onActionTriggered += OnActionTriggered;
-            defaultActionMap = playerInput.defaultActionMap;
-        }
-
-        protected void OnDisable()
-        {
-            playerInput.onActionTriggered -= OnActionTriggered;
+            Setup();
         }
 
         /// <summary>
-        /// Internal method handling all actions triggered by the new input system.
+        /// will be called on Reset (in editor time) and Awake (in play mode).
+        /// Intended to setup the input controller properly.
         /// </summary>
-        protected virtual void OnActionTriggered(InputAction.CallbackContext context)
-        {
-            if (context.action.triggered == false || listenerDictionary.ContainsKey(context.action.name) == false)
-            {
-                return;
-            }
-
-            List<ListenerInfo> infoList = listenerDictionary[context.action.name];
-
-            foreach (ListenerInfo info in infoList)
-            {
-                try
-                {
-                    if (CurrentInputFocus != null && info.ActionListener.IgnoreFocus == false && info.ActionListener != CurrentInputFocus)
-                    {
-                        break;
-                    }
-
-                    info.Action(context);
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogError(ex);
-                }
-            }
-        }
+        protected abstract void Setup();
     }
 }

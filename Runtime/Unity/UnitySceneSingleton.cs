@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using Innoactive.Creator.Core.Utils;
+using UnityEngine;
 
 namespace Innoactive.Creator.Unity
 {
@@ -11,6 +14,30 @@ namespace Innoactive.Creator.Unity
         /// Semaphore to avoid instantiating the singleton twice.
         /// </summary>
         private static object semaphore = new object();
+
+        /// <summary>
+        /// Concrete Implementation of the given class T, this also allows abstract classes as singletons.
+        /// </summary>
+        public static Type ConcreteType
+        {
+            get
+            {
+                if (typeof(T).IsAbstract)
+                {
+                    try
+                    {
+                        return ReflectionUtils.GetConcreteImplementationsOf(typeof(T)).First();
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        Debug.LogError($"You have no concrete implementation of '{typeof(T).Name}'");
+                        throw;
+                    }
+                }
+
+                return typeof(T);
+            }
+        }
 
         /// <summary>
         /// The actual instance of the singleton object.
@@ -28,13 +55,13 @@ namespace Innoactive.Creator.Unity
                 {
                     if (instance == null)
                     {
-                        instance = FindObjectOfType<T>();
+                        instance = (T)FindObjectOfType(ConcreteType);
                     }
 
                     if (instance == null)
                     {
                         GameObject g = new GameObject();
-                        instance = g.AddComponent<T>();
+                        instance = (T)g.AddComponent(ConcreteType);
                         g.name = instance.GetName();
                     }
                 }
