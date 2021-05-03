@@ -17,8 +17,15 @@ namespace Innoactive.CreatorEditor.Input
         {
             UnityEngine.InputSystem.InputActionAsset defaultBindings = Resources.Load<UnityEngine.InputSystem.InputActionAsset>(RuntimeConfigurator.Configuration.DefaultInputActionAssetPath);
 
-            AssetDatabase.CreateFolder("Assets", "Resources");
-            AssetDatabase.CreateFolder("Assets/Resources", "KeyBindings");
+            if (AssetDatabase.IsValidFolder("Assets/Resources") == false)
+            {
+                AssetDatabase.CreateFolder("Assets", "Resources");
+            }
+
+            if (AssetDatabase.IsValidFolder("Assets/Resources/KeyBindings") == false)
+            {
+                AssetDatabase.CreateFolder("Assets/Resources", "KeyBindings");
+            }
 
             AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(defaultBindings),
                 $"Assets/Resources/{RuntimeConfigurator.Configuration.CustomInputActionAssetPath}.inputactions");
