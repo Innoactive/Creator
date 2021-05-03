@@ -73,7 +73,7 @@ namespace Innoactive.CreatorEditor.Input
         /// <summary>
         /// Opens the key binding editor.
         /// </summary>
-        public static void OpenKeyBindingEdit()
+        public static void OpenKeyBindingEditor()
         {
             Debug.LogError("Error, no implementation for the old input system");
         }
