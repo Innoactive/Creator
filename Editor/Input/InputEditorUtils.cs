@@ -41,8 +41,8 @@ namespace Innoactive.CreatorEditor.Input
         /// </summary>
         public static bool UsesCustomKeyBindingAsset()
         {
-            return AssetDatabase.GetAssetPath(RuntimeConfigurator.Configuration.CurrentInputActionAsset).Equals("Assets/Resources" + RuntimeConfigurator.Configuration.CustomInputActionAssetPath);
-
+            return AssetDatabase.GetAssetPath(RuntimeConfigurator.Configuration.CurrentInputActionAsset)
+                .Equals("Assets/Resources" + RuntimeConfigurator.Configuration.CustomInputActionAssetPath);
         }
 
         /// <summary>
@@ -54,9 +54,7 @@ namespace Innoactive.CreatorEditor.Input
             {
                 CopyCustomKeyBindingAsset();
             }
-
             AssetDatabase.OpenAsset(RuntimeConfigurator.Configuration.CurrentInputActionAsset);
-
         }
 #else
         /// <summary>
@@ -72,7 +70,6 @@ namespace Innoactive.CreatorEditor.Input
         /// </summary>
         public static bool UsesCustomKeyBindingAsset()
         {
-
             Debug.LogError("Error, no implementation for the old input system");
             return false;
         }

@@ -29,6 +29,9 @@ namespace Innoactive.Creator.Core.Input
             }
         }
 
+        /// <summary>
+        /// Information of the listener registered.
+        /// </summary>
         protected struct ListenerInfo
         {
             public readonly IInputActionListener ActionListener;
@@ -56,6 +59,9 @@ namespace Innoactive.Creator.Core.Input
         /// </summary>
         protected IInputFocus CurrentInputFocus { get; set; } = null;
 
+        /// <summary>
+        /// Registered listener.
+        /// </summary>
         protected Dictionary<string, List<ListenerInfo>> ListenerDictionary { get; } = new Dictionary<string, List<ListenerInfo>>();
 
         /// <summary>
@@ -92,7 +98,11 @@ namespace Innoactive.Creator.Core.Input
         /// </summary>
         public abstract void Focus(IInputFocus target);
 
+        /// <summary>
+        /// Releases the focus, if possible.
+        /// </summary>
         public abstract void ReleaseFocus();
+
 
         protected override void Awake()
         {
@@ -100,12 +110,15 @@ namespace Innoactive.Creator.Core.Input
             Setup();
         }
 
-        protected void Reset()
+        protected virtual void Reset()
         {
             Setup();
         }
 
-
+        /// <summary>
+        /// will be called on Reset (in editor time) and Awake (in play mode).
+        /// Intended to setup the input controller properly.
+        /// </summary>
         protected abstract void Setup();
     }
 }

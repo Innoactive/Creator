@@ -8,6 +8,9 @@ using UnityEngine.InputSystem;
 
 namespace Innoactive.Creator.Core.Input
 {
+    /// <summary>
+    /// Input controller based on unity's InputSystem.
+    /// </summary>
     [RequireComponent(typeof(PlayerInput))]
     public class DefaultInputController : InputController
     {
