@@ -1,27 +1,27 @@
 # Innoactive Creator
 
-An Unity based Training creation framework.
+A Unity based training application creation framework.
 
 The Innoactive Creator helps you to train employees in VR in a safe and cost-effective way. With our tool, you can design training processes inside the Unity Editor with no programming at all. As a developer, you can configure it with custom templates and extend it with separate components.
 
-Easiest way to start is trying out the Creator Pro which includes additional features to speed up your training creation.
+Easiest way to start is trying out the [Creator package](https://www.innoactive.io/creator) which includes additional features to speed up your training creation.
 
 ## [Visit our Documentation](https://developers.innoactive.de/documentation/creator/latest/articles/getting-started/index.html)
 
-**Note:** The Creator is build to work with the Unity 2019.4.X LTS version to compile on a Windows 10 machine, creation Applications for Windows and Android based Standalone devices.
+**Note:** The Creator is built to work with Unity 2019.4.X LTS version to compile on a Windows 10 machine, and supports applications for Windows and Android based Standalone devices.
 
 ## Available Repositories
 
 |Name|Description|
 |---|---|
 |[Core](https://github.com/Innoactive/Creator)|Every project in this list depends on the Creator Core. It contains fundamental definitions, generally applicable logic, and the visual editor.|
-|[Basic Conditions & Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors)|Core Extension which implement multiple usable conditions and behaviors to start your training out of the box.|
+|[Basic Conditions & Behaviors](https://github.com/Innoactive/Basic-Conditions-And-Behaviors)|Core Extension which implements multiple standard conditions and behaviors that help you developing your first VR training application.|
 |[Basic Interaction](https://github.com/Innoactive/Basic-Interaction-Component)|This component is an abstraction layer between the Creator Core and a component that would implement user interactions.|
-|[Unity XR Interaction](https://github.com/Innoactive/XR-Interaction-Component)|Concrete integration of the Unity XR framework based on basic interaction|
-|[Basic UI](https://github.com/Innoactive/Basic-UI-Component)|Implements a groundwork to show and interact with the training application via UI|
-|[Text-To-Speech](https://github.com/Innoactive/TextToSpeech-Component)|Adds support for text to speech|
+|[Unity XR Interaction](https://github.com/Innoactive/XR-Interaction-Component)|Concrete integration of the Unity XR framework based on the basic interaction component.|
+|[Basic UI](https://github.com/Innoactive/Basic-UI-Component)|Implements a groundwork to show and interact with the training application via a UI.|
+|[Text-To-Speech](https://github.com/Innoactive/TextToSpeech-Component)|Adds support for text to speech.|
 |[Base Template](https://github.com/Innoactive/Creator-Base-Template)|This template makes an initial setup of the Creator, and serves both as example and as a starting point for creating new templates.|
-|[Examples](https://github.com/Innoactive/XR-Creator-Examples)|Training scene examples with prebuild training courses|
+|[Examples](https://github.com/Innoactive/XR-Creator-Examples)|Training scene examples with prebuild training courses.|
 
 ## Documentation
 
