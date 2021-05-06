@@ -3,7 +3,7 @@
 The input system within the Innoactive Creator is implemented similar to Unity's Input System (new) and adds an additional abstraction layer. This allows template developers to implement their own input handling. The default one used in the Creator is based on the Unity Input System.
 
 ## Edit Key bindings
-To edit your key bindings go to the creator Settings > Spectator and click _Edit key bindings_.
+To edit your key bindings go to the Creator Settings > Spectator and click _Edit key bindings_.
 
 ## To implement your own actions for your MonoBehavior, follow these steps:
 1. Instead of extending MonoBehavior, extend InputActionListener
