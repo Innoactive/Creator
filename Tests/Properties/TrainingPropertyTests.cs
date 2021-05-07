@@ -16,7 +16,12 @@ namespace Innoactive.Creator.Tests.Properties
     {
         public static IEnumerable<Type> TrainingProperties
         {
-            get { return ReflectionUtils.GetConcreteImplementationsOf(typeof(TrainingSceneObjectProperty)).Where(type => type.IsPublic); }
+            get
+            {
+                return ReflectionUtils.GetConcreteImplementationsOf(typeof(TrainingSceneObjectProperty))
+                    .Where(type => type.IsPublic)
+                    .Where(type => type.Assembly.GetReferencedAssemblies().All(assemblyName => assemblyName.Name != "UnityEditor" && assemblyName.Name != "nunit.framework"));
+            }
         }
 
         public static readonly IEnumerable<Type> NotTrainingProperties = new Type[]
