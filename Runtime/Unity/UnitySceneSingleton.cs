@@ -88,17 +88,20 @@ namespace Innoactive.Creator.Unity
         protected virtual void Awake()
         {
             // Make sure to assign the instance on awake.
-            if (instance == null)
+            if (instance == null && typeof(T).IsAbstract == false)
             {
                 instance = (T) this;
             }
-            else
+            else if (Instance != this)
             {
-                if (Instance == this)
+                if (name.Equals(GetName()))
                 {
-                    return;
+                    Destroy(gameObject);
                 }
-                Destroy(gameObject);
+                else
+                {
+                    Destroy(this);
+                }
                 Debug.LogWarningFormat("An instance of the UnitySceneSingleton {0} already exists.", typeof(T).Name);
             }
         }

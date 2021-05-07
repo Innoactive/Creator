@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Innoactive.Creator.Core.Utils;
 using Innoactive.CreatorEditor.Configuration;
+using UnityEditor;
 using UnityEngine;
 
 namespace Innoactive.CreatorEditor
@@ -62,6 +63,9 @@ namespace Innoactive.CreatorEditor
                     Debug.LogErrorFormat("{0} while initializing SceneSetup object of type {1}.\n{2}", exception.GetType().Name, onSceneSetup.GetType().Name, exception.StackTrace);
                 }
             }
+
+            GameObject courseController = GameObject.Find("[COURSE_CONTROLLER]");
+            Selection.activeGameObject = courseController;
 
             Debug.Log("Scene setup is complete.");
         }

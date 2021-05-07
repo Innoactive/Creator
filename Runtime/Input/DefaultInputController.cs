@@ -56,13 +56,19 @@ namespace Innoactive.Creator.Core.Input
 
         protected void OnEnable()
         {
-            playerInput.onActionTriggered += OnActionTriggered;
-            defaultActionMap = playerInput.defaultActionMap;
+            if (playerInput != null)
+            {
+                playerInput.onActionTriggered += OnActionTriggered;
+                defaultActionMap = playerInput.defaultActionMap;
+            }
         }
 
         protected void OnDisable()
         {
-            playerInput.onActionTriggered -= OnActionTriggered;
+            if (playerInput != null)
+            {
+                playerInput.onActionTriggered -= OnActionTriggered;
+            }
         }
 
         /// <summary>
