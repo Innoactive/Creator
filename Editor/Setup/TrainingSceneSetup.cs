@@ -64,9 +64,6 @@ namespace Innoactive.CreatorEditor
                 }
             }
 
-            GameObject courseController = GameObject.Find("[COURSE_CONTROLLER]");
-            Selection.activeGameObject = courseController;
-
             Debug.Log("Scene setup is complete.");
         }
     }
