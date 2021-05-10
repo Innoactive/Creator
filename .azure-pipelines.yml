@@ -85,6 +85,8 @@ stages:
             u3d run -u $(UnityVersion) -- -projectPath '$(Path.Project)' -logFile $(Build.ArtifactStagingDirectory)/logs/editor_playmode_tests.log -batchmode -runTests -testPlatform playmode -testResults $(System.DefaultWorkingDirectory)\TEST-PlayMode.xml
 
       - task: PublishTestResults@2
+        condition: always()
+        continueOnError: true
         inputs:
             testResultsFormat: "NUnit"
             testResultsFiles: "TEST-*.xml"

@@ -16,7 +16,12 @@ namespace Innoactive.Creator.Tests.Properties
     {
         public static IEnumerable<Type> TrainingProperties
         {
-            get { return ReflectionUtils.GetConcreteImplementationsOf(typeof(TrainingSceneObjectProperty)).Where(type => type.IsPublic); }
+            get
+            {
+                return ReflectionUtils.GetConcreteImplementationsOf(typeof(TrainingSceneObjectProperty))
+                    .Where(type => type.IsPublic)
+                    .Where(type => type.Assembly.GetReferencedAssemblies().All(assemblyName => assemblyName.Name != "UnityEditor" && assemblyName.Name != "nunit.framework"));
+            }
         }
 
         public static readonly IEnumerable<Type> NotTrainingProperties = new Type[]
@@ -96,15 +101,15 @@ namespace Innoactive.Creator.Tests.Properties
         [UnityTest]
         public IEnumerator AddPropertyWithDependencies()
         {
+            // Test skipped if there are no implementations of TrainingSceneObjectProperty
+            if (TrainingProperties.Any() == false)
+            {
+                Assert.Ignore("Test ignored due to lack of TrainingSceneObjectProperty implementations");
+            }
+
             // Given an ISceneObjectProperty and a list with its dependencies.
             List<Type> dependencies = new List<Type>();
             Type trainingProperty = TrainingProperties.First(propertyType => GetAllDependenciesFrom(propertyType, ref dependencies));
-
-            if (trainingProperty == null)
-            {
-                Debug.LogWarningFormat("AddPropertyWithItsDependencies from {0} was ignored because no TrainingProperties with dependencies could be found.", GetType().Name);
-                Assert.Ignore();
-            }
 
             // When adding the ISceneObjectProperty.
             // Then assert that all its dependencies were added.
@@ -114,15 +119,15 @@ namespace Innoactive.Creator.Tests.Properties
         [UnityTest]
         public IEnumerator RemovePropertyAndDependencies()
         {
+            // Test skipped if there are no implementations of TrainingSceneObjectProperty
+            if (TrainingProperties.Any() == false)
+            {
+                Assert.Ignore("Test ignored due to lack of TrainingSceneObjectProperty implementations");
+            }
+
             // Given an ISceneObjectProperty and a list with its dependencies.
             List<Type> dependencies = new List<Type>();
             Type trainingProperty = TrainingProperties.First(propertyType => GetAllDependenciesFrom(propertyType, ref dependencies));
-
-            if (trainingProperty == null)
-            {
-                Debug.LogWarningFormat("RemovePropertyAndDependencies from {0} was ignored because no TrainingProperties with dependencies could be found.", GetType().Name);
-                Assert.Ignore();
-            }
 
             // When adding the ISceneObjectProperty, we also make sure that all its dependencies were added.
             yield return AddPropertyAndVerifyDependencies(trainingProperty, dependencies);
@@ -145,15 +150,15 @@ namespace Innoactive.Creator.Tests.Properties
         [UnityTest]
         public IEnumerator AddPropertyAndRemoveDependency()
         {
+            // Test skipped if there are no implementations of TrainingSceneObjectProperty
+            if (TrainingProperties.Any() == false)
+            {
+                Assert.Ignore("Test ignored due to lack of TrainingSceneObjectProperty implementations");
+            }
+
             // Given an ISceneObjectProperty, a list with its dependencies and a type dependant of ISceneObjectProperty.
             List<Type> dependencies = new List<Type>();
             Type trainingProperty = TrainingProperties.First(propertyType => GetAllDependenciesFrom(propertyType, ref dependencies, true)), dependantType = dependencies.First();
-
-            if (trainingProperty == null || dependantType == null)
-            {
-                Debug.LogWarningFormat("AddPropertyAndRemoveDependency from {0} was ignored because no TrainingProperties with dependencies as ISceneObjectProperty could be found.", GetType().Name);
-                Assert.Ignore();
-            }
 
             // When adding adding the ISceneObjectProperty, we also make sure that all its dependencies were added.
             yield return AddPropertyAndVerifyDependencies(trainingProperty, dependencies);
@@ -175,15 +180,15 @@ namespace Innoactive.Creator.Tests.Properties
         [UnityTest]
         public IEnumerator RemovePropertyWithoutDependencies()
         {
+            // Test skipped if there are no implementations of TrainingSceneObjectProperty
+            if (TrainingProperties.Any() == false)
+            {
+                Assert.Ignore("Test ignored due to lack of TrainingSceneObjectProperty implementations");
+            }
+
             // Given an ISceneObjectProperty and a list with its dependencies.
             List<Type> dependencies = new List<Type>();
             Type trainingProperty = TrainingProperties.First(propertyType => GetAllDependenciesFrom(propertyType, ref dependencies));
-
-            if (trainingProperty == null)
-            {
-                Debug.LogWarningFormat("RemovePropertyAndDependencies from {0} was ignored because no TrainingProperties with dependencies could be found.", GetType().Name);
-                Assert.Ignore();
-            }
 
             // When adding adding the ISceneObjectProperty, we also make sure that all its dependencies were added.
             yield return AddPropertyAndVerifyDependencies(trainingProperty, dependencies);
