@@ -71,4 +71,4 @@ public override IEnumerable<LockablePropertyData> GetLockableProperties()
 }
 ```
 
-[To the next chapter!](12-text-to-speech.md)
+[To the next chapter!](input-system.md)

@@ -82,7 +82,9 @@
     - name: Properties
       href: developer/10-properties.md
     - name: Lockable Properties
-      href: developer/11-lockable-properties.md
+      href: developer/11-lockable-properties.md      
+    - name: Input System
+      href: developer/input-system.md      
     - name: Text-To-Speech
       href: developer/12-text-to-speech.md
     - name: Dependency Manager
