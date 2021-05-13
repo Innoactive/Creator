@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Attributes;
+using VPG.Creator.Core;
+using VPG.Creator.Core.Attributes;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Drawers
+namespace VPG.CreatorEditor.UI.Drawers
 {
     /// <summary>
     /// Drawer for a transition which displays name of the target step as part of its label.

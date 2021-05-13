@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.UI.Windows;
+using VPG.Creator.Core;
+using VPG.CreatorEditor.UI.Windows;
 
-namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
+namespace VPG.CreatorEditor.Tests.CourseWindowTests
 {
     internal class LinearChapterTest : BaseCourseWindowTest
     {

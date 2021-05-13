@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Innoactive.CreatorEditor.Configuration;
+using VPG.CreatorEditor.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Innoactive.CreatorEditor.Serialization
+namespace VPG.CreatorEditor.Serialization
 {
     public static class JsonEditorConfigurationSerializer
     {

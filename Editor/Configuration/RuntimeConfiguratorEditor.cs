@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Core.Utils;
+using VPG.Creator.Core.Configuration;
+using VPG.Creator.Core.Utils;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.Configuration
+namespace VPG.CreatorEditor.Configuration
 {
     /// <summary>
     /// Custom editor for choosing the training configuration in the Unity game object inspector.

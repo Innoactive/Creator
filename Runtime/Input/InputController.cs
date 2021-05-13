@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Innoactive.Creator.Unity;
+using VPG.Creator.Unity;
 
-namespace Innoactive.Creator.Core.Input
+namespace VPG.Creator.Core.Input
 {
     /// <summary>
     /// Central controller for input via the new Input System using C# events.

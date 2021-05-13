@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.CreatorEditor.UI.Drawers
+namespace VPG.CreatorEditor.UI.Drawers
 {
     [AttributeUsage(AttributeTargets.Class)]
     internal class InstantiatorTrainingDrawerAttribute : Attribute

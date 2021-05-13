@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Core.Configuration.Modes;
+using VPG.Creator.Core.Configuration;
+using VPG.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Creator.Tests.Utils
+namespace VPG.Creator.Tests.Utils
 {
     /// <summary>
     /// DynamicDefinition allows to dynamically adjust training modes.

@@ -1,4 +1,4 @@
-﻿namespace Innoactive.Creator.Core.Input
+﻿namespace VPG.Creator.Core.Input
 {
     /// <summary>
     /// Allows to prioritize input actions.

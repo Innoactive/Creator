@@ -1,6 +1,6 @@
-﻿using Innoactive.Creator.Core;
+﻿using VPG.Creator.Core;
 
-namespace Innoactive.CreatorEditor.CourseValidation
+namespace VPG.CreatorEditor.CourseValidation
 {
     /// <summary>
     /// Retrieves <see cref="IContext"/> from any provided <see cref="IData"/>.

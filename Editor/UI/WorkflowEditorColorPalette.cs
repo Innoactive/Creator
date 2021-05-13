@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI
+namespace VPG.CreatorEditor.UI
 {
     /// <summary>
     /// Class to provide convenient access to all colors used in the Workflow window.

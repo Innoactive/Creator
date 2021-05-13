@@ -1,7 +1,7 @@
 using System;
-using Innoactive.Creator.Core.Configuration.Modes;
+using VPG.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Creator.Core.EntityOwners
+namespace VPG.Creator.Core.EntityOwners
 {
     /// <summary>
     /// A configurator for a sequence of entities.

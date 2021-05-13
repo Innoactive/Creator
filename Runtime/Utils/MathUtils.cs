@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Innoactive.Creator.Core.Utils
+namespace VPG.Creator.Core.Utils
 {
     internal static class MathUtils
     {

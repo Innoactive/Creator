@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Innoactive.Creator.Core;
+using VPG.Creator.Core;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.Tabs
+namespace VPG.CreatorEditor.Tabs
 {
     /// <inheritdoc cref="ITabsGroup"/>
     [DataContract]

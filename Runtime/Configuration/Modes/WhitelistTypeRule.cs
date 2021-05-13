@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Creator.Core.Configuration.Modes
+namespace VPG.Creator.Core.Configuration.Modes
 {
     /// <summary>
     /// All listed types will be valid.

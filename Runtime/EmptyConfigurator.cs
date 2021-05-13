@@ -1,6 +1,6 @@
-using Innoactive.Creator.Core.Configuration.Modes;
+using VPG.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// A configurator that does nothing.

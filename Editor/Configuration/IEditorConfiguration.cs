@@ -1,10 +1,10 @@
 using System.Collections.ObjectModel;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.Conditions;
-using Innoactive.Creator.Core.Serialization;
-using Innoactive.CreatorEditor.UI.StepInspector.Menu;
+using VPG.Creator.Core.Behaviors;
+using VPG.Creator.Core.Conditions;
+using VPG.Creator.Core.Serialization;
+using VPG.CreatorEditor.UI.StepInspector.Menu;
 
-namespace Innoactive.CreatorEditor.Configuration
+namespace VPG.CreatorEditor.Configuration
 {
     /// <summary>
     /// Interface for editor configuration definition. Implement it to create your own.

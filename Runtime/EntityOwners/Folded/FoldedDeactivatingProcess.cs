@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Innoactive.Creator.Core.EntityOwners.FoldedEntityCollection
+namespace VPG.Creator.Core.EntityOwners.FoldedEntityCollection
 {
     /// <summary>
     /// A process over entities' sequence which deactivates entities in an opposite order.

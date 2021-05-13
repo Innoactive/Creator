@@ -2,11 +2,11 @@
 
 using System;
 using System.Collections.Generic;
-using Innoactive.Creator.Core.Configuration;
+using VPG.Creator.Core.Configuration;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Innoactive.Creator.Core.Input
+namespace VPG.Creator.Core.Input
 {
     /// <summary>
     /// Input controller based on Unity's InputSystem.

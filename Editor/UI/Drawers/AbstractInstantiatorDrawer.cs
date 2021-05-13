@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.CreatorEditor.UI.StepInspector.Menu;
+using VPG.CreatorEditor.UI.StepInspector.Menu;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Drawers
+namespace VPG.CreatorEditor.UI.Drawers
 {
     /// <summary>
     /// An abstract drawer for Step Inspector UI elements that create new instances of objects.

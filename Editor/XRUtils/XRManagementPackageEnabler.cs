@@ -1,9 +1,9 @@
-﻿#if UNITY_XR_MANAGEMENT
+#if UNITY_XR_MANAGEMENT
 using UnityEditor;
 using System;
-using Innoactive.CreatorEditor.PackageManager;
+using VPG.CreatorEditor.PackageManager;
 
-namespace Innoactive.CreatorEditor.XRUtils
+namespace VPG.CreatorEditor.XRUtils
 {
     /// <summary>
     /// Enables the XR Plug-in Management.

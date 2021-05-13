@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.Conditions;
-using Innoactive.Creator.Core.Utils;
-using Innoactive.CreatorEditor.Configuration;
-using Innoactive.CreatorEditor.UI.StepInspector.Menu;
+using VPG.Creator.Core.Behaviors;
+using VPG.Creator.Core.Conditions;
+using VPG.Creator.Core.Utils;
+using VPG.CreatorEditor.Configuration;
+using VPG.CreatorEditor.UI.StepInspector.Menu;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Windows
+namespace VPG.CreatorEditor.UI.Windows
 {
     /// <summary>
     /// Window that allows to manage the allowed menu items.
@@ -18,7 +18,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
     {
         private static AllowedMenuItemsWindow window;
 
-        private const string menuPath = "Innoactive/Developer/Allowed Menu Items Configuration";
+        private const string menuPath = "VR Process Gizmo/Developer/Allowed Menu Items Configuration";
 
         private bool isEditUnlocked;
         private static IList<EntityEntry> behaviorList;
@@ -113,7 +113,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
 
             GUILayout.Space(20f);
 
-            EditorGUILayout.HelpBox("This window provides editor configuration settings for the Innoactive Creator. "
+            EditorGUILayout.HelpBox("This window provides editor configuration settings for the VR Process Gizmo. "
                 + "It is supposed to be changed only by a software developer. "
                 + "Modification of these values may lead to various issues.", MessageType.Warning);
 
@@ -141,7 +141,7 @@ namespace Innoactive.CreatorEditor.UI.Windows
                     "If you want to configure what menu items should be displayed in the <i>Training Step Inspector</i>, " +
                     "override the <i>DefaultEditorConfiguration</i> (if you have not already done so) " +
                     "and let this property return a valid asset path.\n\n" +
-                    "Example of a valid asset path:\n<i>Assets/Editor/Innoactive/allowed_menu_items_config.json</i>\n\n" +
+                    "Example of a valid asset path:\n<i>Assets/Editor/VPG/allowed_menu_items_config.json</i>\n\n" +
                     "Note: The file will then be created at this location and is used to save the configurations made in this window.", labelStyle);
 
                 return;

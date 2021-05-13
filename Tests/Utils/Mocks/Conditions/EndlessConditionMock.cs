@@ -1,8 +1,8 @@
-﻿using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Conditions;
+﻿using VPG.Creator.Core;
+using VPG.Creator.Core.Conditions;
 using System.Runtime.Serialization;
 
-namespace Innoactive.Creator.Tests.Utils.Mocks
+namespace VPG.Creator.Tests.Utils.Mocks
 {
     /// <summary>
     /// Helper condition for testing that allows explicitly marking a condition as completed

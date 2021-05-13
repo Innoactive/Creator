@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Innoactive.Creator.Core;
+using VPG.Creator.Core;
 
-namespace Innoactive.Creator.Tests.Builder
+namespace VPG.Creator.Tests.Builder
 {
     /// <summary>
     /// Builder that creates linear trainings.

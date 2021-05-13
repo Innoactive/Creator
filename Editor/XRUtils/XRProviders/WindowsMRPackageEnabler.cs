@@ -1,5 +1,5 @@
-﻿#if UNITY_XR_MANAGEMENT && WINDOWS_XR
-namespace Innoactive.CreatorEditor.XRUtils
+#if UNITY_XR_MANAGEMENT && WINDOWS_XR
+namespace VPG.CreatorEditor.XRUtils
 {
     /// <summary>
     /// Enables the Windows MR Plugin.

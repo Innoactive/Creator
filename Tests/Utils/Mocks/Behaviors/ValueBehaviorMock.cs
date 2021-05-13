@@ -1,7 +1,7 @@
-﻿using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Behaviors;
+﻿using VPG.Creator.Core;
+using VPG.Creator.Core.Behaviors;
 
-namespace Innoactive.Creator.Tests.Utils.Mocks
+namespace VPG.Creator.Tests.Utils.Mocks
 {
     /// <summary>
     /// Helper behavior for testing which just has a float value.

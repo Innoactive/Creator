@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     [Obsolete("This event is not used anymore.")]
     public class ChildActivatedEventArgs<TEntity> : EventArgs where TEntity : IEntity

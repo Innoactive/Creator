@@ -1,7 +1,7 @@
-﻿using Innoactive.Creator.Core.SceneObjects;
+﻿using VPG.Creator.Core.SceneObjects;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Properties
+namespace VPG.Creator.Core.Properties
 {
     [RequireComponent(typeof(TrainingSceneObject))]
     public abstract class TrainingSceneObjectProperty : MonoBehaviour, ISceneObjectProperty

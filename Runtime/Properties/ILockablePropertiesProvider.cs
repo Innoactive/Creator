@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Innoactive.Creator.Core.RestrictiveEnvironment;
+using VPG.Creator.Core.RestrictiveEnvironment;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// This interface is used to allow entities, for example <see cref="Transition"/> or <see cref="Conditions"/>

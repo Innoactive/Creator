@@ -1,16 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.Conditions;
-using Innoactive.Creator.Core.Configuration.Modes;
-using Innoactive.Creator.Core.Internationalization;
-using Innoactive.Creator.Tests.Utils.Mocks;
+using VPG.Creator.Core;
+using VPG.Creator.Core.Behaviors;
+using VPG.Creator.Core.Conditions;
+using VPG.Creator.Core.Configuration.Modes;
+using VPG.Creator.Core.Internationalization;
+using VPG.Creator.Tests.Utils.Mocks;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Creator.Tests.Utils
+namespace VPG.Creator.Tests.Utils
 {
     public class ChangeModeDuringExecutionTests : RuntimeTests
     {

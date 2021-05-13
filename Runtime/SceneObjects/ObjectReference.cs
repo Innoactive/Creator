@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Innoactive.Creator.Core.Exceptions;
-using Innoactive.Creator.Core.Runtime.Properties;
+using VPG.Creator.Core.Exceptions;
+using VPG.Creator.Core.Runtime.Properties;
 
-namespace Innoactive.Creator.Core.SceneObjects
+namespace VPG.Creator.Core.SceneObjects
 {
     /// <summary>
     /// Base class for references to training scene objects and their properties.

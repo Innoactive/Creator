@@ -1,12 +1,12 @@
 ﻿using System.Collections;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Tests.Utils;
-using Innoactive.Creator.Tests.Utils.Mocks;
+using VPG.Creator.Core;
+using VPG.Creator.Core.Configuration;
+using VPG.Creator.Tests.Utils;
+using VPG.Creator.Tests.Utils.Mocks;
 using UnityEngine.Assertions;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Creator.Tests.Behaviors
+namespace VPG.Creator.Tests.Behaviors
 {
     public class BackgroundBehaviorTests : RuntimeTests
     {

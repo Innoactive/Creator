@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Core.Properties;
+using VPG.Creator.Core.Configuration;
+using VPG.Creator.Core.Properties;
 
-namespace Innoactive.Creator.Core.SceneObjects
+namespace VPG.Creator.Core.SceneObjects
 {
     /// <summary>
     /// Weak reference to a property of a training scene object with the same unique name.

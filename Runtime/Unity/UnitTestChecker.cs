@@ -1,4 +1,4 @@
-﻿namespace Innoactive.Creator.Unity
+﻿namespace VPG.Creator.Unity
 {
     /// <summary>
     /// Allows to check if we are unit testing right now.

@@ -2,14 +2,14 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Innoactive.Creator.Core.Attributes;
-using Innoactive.Creator.Core.Configuration.Modes;
-using Innoactive.Creator.Core.EntityOwners;
-using Innoactive.Creator.Core.Exceptions;
-using Innoactive.Creator.Core.Utils;
-using Innoactive.Creator.Core.Utils.Logging;
+using VPG.Creator.Core.Attributes;
+using VPG.Creator.Core.Configuration.Modes;
+using VPG.Creator.Core.EntityOwners;
+using VPG.Creator.Core.Exceptions;
+using VPG.Creator.Core.Utils;
+using VPG.Creator.Core.Utils.Logging;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// A chapter of a training <see cref="Course"/>.

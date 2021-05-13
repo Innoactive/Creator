@@ -1,7 +1,7 @@
 using System;
-using Innoactive.CreatorEditor.UI.Windows;
+using VPG.CreatorEditor.UI.Windows;
 
-namespace Innoactive.CreatorEditor.UndoRedo
+namespace VPG.CreatorEditor.UndoRedo
 {
     /// <summary>
     /// A <see cref="CallbackCommand"/> which notifies the <seealso cref="GlobalEditorHandler"/> class that the current course was modified.

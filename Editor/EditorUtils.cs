@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor
+namespace VPG.CreatorEditor
 {
     /// <summary>
     /// Utility helper to ease up working with Unity Editor.
@@ -16,7 +16,7 @@ namespace Innoactive.CreatorEditor
     [InitializeOnLoad]
     internal static class EditorUtils
     {
-        private const string ignoreEditorImguiTestsDefineSymbol = "INNOACTIVE_IGNORE_EDITOR_IMGUI_TESTS";
+        private const string ignoreEditorImguiTestsDefineSymbol = "VPG_IGNORE_EDITOR_IMGUI_TESTS";
 
         private static string coreFolder;
 
@@ -147,7 +147,7 @@ namespace Innoactive.CreatorEditor
 
             if (roots.Length == 0)
             {
-                throw new FileNotFoundException("Innoactive Creator Core folder not found!");
+                throw new FileNotFoundException("Creator Core folder not found!");
             }
 
             coreFolder = Path.GetDirectoryName(roots.First());

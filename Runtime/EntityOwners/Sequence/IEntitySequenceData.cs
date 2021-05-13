@@ -1,4 +1,4 @@
-namespace Innoactive.Creator.Core.EntityOwners
+namespace VPG.Creator.Core.EntityOwners
 {
     public interface IEntitySequenceData<TEntity> : IEntityCollectionData<TEntity> where TEntity : IEntity
     {

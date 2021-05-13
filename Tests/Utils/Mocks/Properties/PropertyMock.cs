@@ -1,6 +1,6 @@
-﻿using Innoactive.Creator.Core.Properties;
+﻿using VPG.Creator.Core.Properties;
 
-namespace Innoactive.Creator.Tests.Utils.Mocks
+namespace VPG.Creator.Tests.Utils.Mocks
 {
     /// <summary>
     /// Mock of a simple <see cref="TrainingSceneObjectProperty"/>.

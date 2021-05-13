@@ -1,4 +1,4 @@
-namespace Innoactive.CreatorEditor.UI.StepInspector.Menu
+namespace VPG.CreatorEditor.UI.StepInspector.Menu
 {
     /// <summary>
     /// A base class for options displayed in the "Add Behavior" and "Add Condition" buttons' dropdown menus.

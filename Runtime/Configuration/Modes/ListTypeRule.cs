@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Innoactive.Creator.Core.Configuration.Modes
+namespace VPG.Creator.Core.Configuration.Modes
 {
     /// <summary>
     /// Base class for list-based implementations of the <see cref="TypeRule{TValueBase}"/> class.

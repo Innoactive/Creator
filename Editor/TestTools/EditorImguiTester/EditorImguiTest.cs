@@ -6,11 +6,11 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
-using Innoactive.Creator.Core.Utils;
-using Innoactive.CreatorEditor.ImguiTester;
+using VPG.Creator.Core.Utils;
+using VPG.CreatorEditor.ImguiTester;
 using UnityEngine.TestTools;
 
-namespace Innoactive.CreatorEditor.TestTools
+namespace VPG.CreatorEditor.TestTools
 {
     /// <summary>
     /// Inherit from this class to implement your own editor IMGUI tests.
@@ -98,7 +98,7 @@ namespace Innoactive.CreatorEditor.TestTools
         /// When you implement a non-abstract, non-generic class which inherits from <see cref="EditorImguiTest{T}"/>,
         /// this method will be automatically detected by the test runner. You don't need to do anything.
         /// </summary>
-#if INNOACTIVE_IGNORE_EDITOR_IMGUI_TESTS
+#if VPG_IGNORE_EDITOR_IMGUI_TESTS
         [Ignore("Editor IMGUI tests are disabled, skipping it.")]
 #endif
         [UnityTest]

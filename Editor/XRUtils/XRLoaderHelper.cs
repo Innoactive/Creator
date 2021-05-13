@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using Innoactive.CreatorEditor.PackageManager;
+using VPG.CreatorEditor.PackageManager;
 using Debug = UnityEngine.Debug;
 
 #if UNITY_XR_MANAGEMENT
@@ -11,7 +11,7 @@ using System.Diagnostics;
 using UnityEngine.XR.Management;
 #endif
 
-namespace Innoactive.CreatorEditor.XRUtils
+namespace VPG.CreatorEditor.XRUtils
 {
     /// <summary>
     /// Utility class that allows to load XR packages.

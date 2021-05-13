@@ -1,12 +1,12 @@
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
-using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.Tabs;
-using Innoactive.CreatorEditor.UI.Drawers;
-using Innoactive.CreatorEditor.Configuration;
+using VPG.Creator.Core;
+using VPG.CreatorEditor.Tabs;
+using VPG.CreatorEditor.UI.Drawers;
+using VPG.CreatorEditor.Configuration;
 
-namespace Innoactive.CreatorEditor.UI.Windows
+namespace VPG.CreatorEditor.UI.Windows
 {
     /// <summary>
     /// This class draws the Step Inspector.

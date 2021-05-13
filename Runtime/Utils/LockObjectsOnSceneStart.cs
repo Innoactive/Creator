@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using Innoactive.Creator.Core.Properties;
-using Innoactive.Creator.Unity;
+using VPG.Creator.Core.Properties;
+using VPG.Creator.Unity;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Utils
+namespace VPG.Creator.Core.Utils
 {
     /// <summary>
     /// Handles locking of all training scene objects in the scene and makes them non-interactable before the training is started.

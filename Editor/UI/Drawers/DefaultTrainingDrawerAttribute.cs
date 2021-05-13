@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.CreatorEditor.UI.Drawers
+namespace VPG.CreatorEditor.UI.Drawers
 {
     /// <summary>
     /// Marks a training drawer as a default drawer for a given type.

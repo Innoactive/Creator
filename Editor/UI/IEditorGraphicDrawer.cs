@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI
+namespace VPG.CreatorEditor.UI
 {
     /// <summary>
     /// Allows to draws over the normal EditorGraphics.

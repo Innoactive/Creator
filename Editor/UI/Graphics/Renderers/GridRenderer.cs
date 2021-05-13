@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
+namespace VPG.CreatorEditor.UI.Graphics.Renderers
 {
     /// <summary>
     /// Base class which handles rendering of a <see cref="Grid"/>.

@@ -2,12 +2,12 @@ using UnityEditor;
 using UnityEngine;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
-using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.UndoRedo;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.CreatorEditor.Configuration;
+using VPG.Creator.Core;
+using VPG.CreatorEditor.UndoRedo;
+using VPG.Creator.Core.Configuration;
+using VPG.CreatorEditor.Configuration;
 
-namespace Innoactive.CreatorEditor.UI.Windows
+namespace VPG.CreatorEditor.UI.Windows
 {
     /// <summary>
     /// This class draws the Workflow window..

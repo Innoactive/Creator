@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Linq;
-using Innoactive.Creator.Core.Configuration.Modes;
+using VPG.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Creator.Core.EntityOwners.ParallelEntityCollection
+namespace VPG.Creator.Core.EntityOwners.ParallelEntityCollection
 {
     /// <summary>
     /// A process which deactivates a collection of entities in parallel.

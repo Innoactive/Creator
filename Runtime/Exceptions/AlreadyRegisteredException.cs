@@ -1,6 +1,6 @@
-﻿using Innoactive.Creator.Core.SceneObjects;
+﻿using VPG.Creator.Core.SceneObjects;
 
-namespace Innoactive.Creator.Core.Exceptions
+namespace VPG.Creator.Core.Exceptions
 {
     public class AlreadyRegisteredException : TrainingException
     {

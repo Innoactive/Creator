@@ -2,11 +2,11 @@
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-using Innoactive.Creator.Core.Utils;
-using Innoactive.CreatorEditor.Configuration;
+using VPG.Creator.Core.Utils;
+using VPG.CreatorEditor.Configuration;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor
+namespace VPG.CreatorEditor
 {
     /// <summary>
     /// Can be run to setup the current scene as a training scene.

@@ -1,8 +1,8 @@
 using UnityEditor;
 using UnityEngine;
-using Innoactive.CreatorEditor.Setup;
+using VPG.CreatorEditor.Setup;
 
-namespace Innoactive.CreatorEditor.UI.Wizard
+namespace VPG.CreatorEditor.UI.Wizard
 {
     /// <summary>
     /// Wizard page which handles the training scene setup.

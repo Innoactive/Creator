@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// EventArgs for fast forward course events.

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Innoactive.Creator.Core.EntityOwners
+namespace VPG.Creator.Core.EntityOwners
 {
     /// <summary>
     /// A base class for data classes that are collections of other entities.

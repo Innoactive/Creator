@@ -1,7 +1,7 @@
-using Innoactive.CreatorEditor.UI.Graphics.Renderers;
+using VPG.CreatorEditor.UI.Graphics.Renderers;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Graphics
+namespace VPG.CreatorEditor.UI.Graphics
 {
     internal class EntryJointRenderer : MulticoloredGraphicalElementRenderer<EntryJoint>
     {

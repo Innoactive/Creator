@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// A life cycle of an entity. It handles transition between four stages: Inactive, Activating, Active, and Deactivating.

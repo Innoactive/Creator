@@ -1,3 +1,3 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Innoactive.Creator.Core.Tests.Editmode")]
+[assembly: InternalsVisibleTo("VPG.Creator.Core.Tests.Editmode")]

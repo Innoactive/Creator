@@ -1,11 +1,11 @@
-﻿#if !UNITY_EDITOR && UNITY_ANDROID
+#if !UNITY_EDITOR && UNITY_ANDROID
 using UnityEngine;
 using System.IO;
 using System.Linq;
 using System.IO.Compression;
 using System.Collections.Generic;
 
-namespace Innoactive.Creator.Core.IO
+namespace VPG.Creator.Core.IO
 {
     /// <summary>
     /// Android implementation of <see cref="IPlatformFileSystem"/>.

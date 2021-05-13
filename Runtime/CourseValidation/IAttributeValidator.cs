@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Innoactive.Creator.Core.Validation
+namespace VPG.Creator.Core.Validation
 {
     /// <summary>
     /// Can be used to validate variables in any EntityData.

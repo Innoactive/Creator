@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Innoactive.Creator.Core.Configuration.Modes
+namespace VPG.Creator.Core.Configuration.Modes
 {
     /// <summary>
     /// This is a <see cref="EventArgs"/> used for <see cref="IMode"/> changes.

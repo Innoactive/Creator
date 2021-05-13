@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Creator.Core.Attributes
+namespace VPG.Creator.Core.Attributes
 {
     /// <summary>
     /// Displayed name of training entity's property or field.

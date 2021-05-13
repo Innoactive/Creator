@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UndoRedo
+namespace VPG.CreatorEditor.UndoRedo
 {
     /// <summary>
     /// Utility class to hook up non-serializeable changes to Unity's `Undo`.

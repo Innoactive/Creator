@@ -1,8 +1,8 @@
 ﻿using System;
 using UnityEngine;
-using Innoactive.Creator.Core.Utils;
+using VPG.Creator.Core.Utils;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// Base factory interface for <see cref="IEntity"/> objects.

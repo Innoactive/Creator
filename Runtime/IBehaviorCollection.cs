@@ -1,4 +1,4 @@
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// A collection of <see cref="Behaviors.IBehavior"/>s of a <see cref="IStep"/>.

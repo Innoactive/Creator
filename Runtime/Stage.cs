@@ -1,4 +1,4 @@
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// All possible states of an <see cref="IEntity"/>.

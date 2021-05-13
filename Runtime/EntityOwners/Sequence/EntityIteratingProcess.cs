@@ -1,7 +1,7 @@
 using System.Collections;
-using Innoactive.Creator.Core.Configuration.Modes;
+using VPG.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Creator.Core.EntityOwners
+namespace VPG.Creator.Core.EntityOwners
 {
     /// <summary>
     /// A process that activates and deactivates entities one after another.

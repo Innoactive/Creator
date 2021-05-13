@@ -1,4 +1,4 @@
-﻿namespace Innoactive.Creator.Core.Runtime.Properties
+﻿namespace VPG.Creator.Core.Runtime.Properties
 {
     /// <summary>
     /// Interface which allows validation to check if the object validated is empty.

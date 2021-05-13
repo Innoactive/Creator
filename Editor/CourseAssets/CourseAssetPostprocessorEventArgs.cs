@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.CreatorEditor
+namespace VPG.CreatorEditor
 {
     /// <summary>
     /// Event args for <see cref="CourseAssetPostprocessor"/> events.

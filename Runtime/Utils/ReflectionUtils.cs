@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Innoactive.Creator.Core.Runtime.Properties;
+using VPG.Creator.Core.Runtime.Properties;
 
-namespace Innoactive.Creator.Core.Utils
+namespace VPG.Creator.Core.Utils
 {
     public static class ReflectionUtils
     {

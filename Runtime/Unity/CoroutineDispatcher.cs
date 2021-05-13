@@ -1,4 +1,4 @@
-namespace Innoactive.Creator.Unity
+namespace VPG.Creator.Unity
 {
     /// <summary>
     /// Auxiliary class that allows starting UnityCoroutines from a context that is not

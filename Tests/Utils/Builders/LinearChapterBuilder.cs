@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.Core;
+using VPG.Creator.Core;
 
-namespace Innoactive.Creator.Tests.Builder
+namespace VPG.Creator.Tests.Builder
 {
     /// <summary>
     /// Builder for a linear chapter.

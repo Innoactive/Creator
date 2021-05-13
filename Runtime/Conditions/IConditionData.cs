@@ -1,4 +1,4 @@
-namespace Innoactive.Creator.Core.Conditions
+namespace VPG.Creator.Core.Conditions
 {
     /// <summary>
     /// The base interface for any condition's data class.

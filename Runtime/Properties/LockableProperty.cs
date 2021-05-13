@@ -1,8 +1,8 @@
 ﻿﻿using System;
- using Innoactive.Creator.Core.SceneObjects;
+ using VPG.Creator.Core.SceneObjects;
  using UnityEngine;
 
-namespace Innoactive.Creator.Core.Properties
+namespace VPG.Creator.Core.Properties
 {
     /// <summary>
     /// <see cref="TrainingSceneObjectProperty"/> which is lockable, to allow the restrictive environment to handle

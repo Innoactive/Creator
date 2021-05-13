@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Innoactive.Creator.Core.Attributes
+namespace VPG.Creator.Core.Attributes
 {
     /// <summary>
     /// Declares that "Help" button has to be drawn.

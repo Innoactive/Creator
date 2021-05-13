@@ -1,9 +1,9 @@
 ﻿using System;
-using Innoactive.Creator.Core.Behaviors;
+using VPG.Creator.Core.Behaviors;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Drawers
+namespace VPG.CreatorEditor.UI.Drawers
 {
     /// <summary>
     /// Training drawer for <see cref="BehaviorExecutionStages"/> members.

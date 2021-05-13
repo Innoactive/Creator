@@ -1,10 +1,10 @@
-﻿using System.IO;
+using System.IO;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Runtime.Utils
+namespace VPG.Creator.Core.Runtime.Utils
 {
     /// <summary>
     /// ScriptableObject with additional load and save mechanic to make it a singleton.
@@ -56,7 +56,7 @@ namespace Innoactive.Creator.Core.Runtime.Utils
         }
 
         /// <summary>
-        /// Saves the Creator settings, only works in editor.
+        /// Saves the VR Process Gizmo settings, only works in editor.
         /// </summary>
         public void Save()
         {

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-using Innoactive.CreatorEditor;
+using VPG.CreatorEditor;
 using UnityEditor;
 
 /// <summary>
@@ -11,9 +11,9 @@ internal class AssemblySymbolChecker
 {
     static AssemblySymbolChecker()
     {
-        CheckForClass("Innoactive.Creator.Core", "Innoactive.Creator.Core.Behaviors.BehaviorSequence", "BASIC_CONDITION_BEHAVIORS");
-        CheckForAssembly("Innoactive.Creator.BasicInteraction", "BASIC_INTERACTION");
-        CheckForAssembly("Innoactive.Creator.BasicUI", "BASIC_UI");
+        CheckForClass("VPG.Creator.Core", "VPG.Creator.Core.Behaviors.BehaviorSequence", "BASIC_CONDITION_BEHAVIORS");
+        CheckForAssembly("VPG.Creator.BasicInteraction", "BASIC_INTERACTION");
+        CheckForAssembly("VPG.Creator.BasicUI", "BASIC_UI");
     }
 
     /// <summary>

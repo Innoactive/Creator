@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Internationalization
+namespace VPG.Creator.Core.Internationalization
 {
     /// <summary>
     /// Includes all logic which allows to load a localized dictionary configured by a <see cref="LocalizationConfig"/>.

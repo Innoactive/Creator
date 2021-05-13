@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.Configuration;
-using Innoactive.CreatorEditor.UI.Graphics;
-using Innoactive.CreatorEditor.UndoRedo;
-using Innoactive.CreatorEditor.Utils;
+using VPG.Creator.Core;
+using VPG.CreatorEditor.Configuration;
+using VPG.CreatorEditor.UI.Graphics;
+using VPG.CreatorEditor.UndoRedo;
+using VPG.CreatorEditor.Utils;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Windows
+namespace VPG.CreatorEditor.UI.Windows
 {
     internal class ChapterRepresentation
     {

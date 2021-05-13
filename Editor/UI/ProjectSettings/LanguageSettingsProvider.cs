@@ -1,7 +1,7 @@
-﻿using Innoactive.Creator.Core.Internationalization;
+﻿using VPG.Creator.Core.Internationalization;
 using UnityEditor;
 
-namespace Innoactive.CreatorEditor.UI
+namespace VPG.CreatorEditor.UI
 {
     public class LanguageSettingsProvider : BaseSettingsProvider
     {

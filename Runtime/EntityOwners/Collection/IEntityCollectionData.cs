@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Innoactive.Creator.Core.EntityOwners
+namespace VPG.Creator.Core.EntityOwners
 {
     /// <summary>
     /// A generic version of <see cref="IEntityCollectionData"/>

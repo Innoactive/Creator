@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Tests.Utils;
-using Innoactive.Creator.Tests.Utils.Mocks;
-using Innoactive.Creator.Tests.Builder;
+using VPG.Creator.Core;
+using VPG.Creator.Core.Configuration;
+using VPG.Creator.Tests.Utils;
+using VPG.Creator.Tests.Utils.Mocks;
+using VPG.Creator.Tests.Builder;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Creator.Tests.Courses
+namespace VPG.Creator.Tests.Courses
 {
     public class BaseTrainingCourseTests : RuntimeTests
     {

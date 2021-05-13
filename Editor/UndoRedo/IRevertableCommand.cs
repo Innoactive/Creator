@@ -1,4 +1,4 @@
-namespace Innoactive.CreatorEditor.UndoRedo
+namespace VPG.CreatorEditor.UndoRedo
 {
     /// <summary>
     /// An interface for a method object,

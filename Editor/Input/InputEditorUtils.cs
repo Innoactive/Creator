@@ -1,8 +1,8 @@
-﻿using Innoactive.Creator.Core.Configuration;
+﻿using VPG.Creator.Core.Configuration;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.Input
+namespace VPG.CreatorEditor.Input
 {
     /// <summary>
     /// Static utility class which provides methods to help managing assets and functionalities of the new input system.

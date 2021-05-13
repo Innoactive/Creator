@@ -1,10 +1,10 @@
-using Innoactive.CreatorEditor;
-using Innoactive.CreatorEditor.TestTools;
-using Innoactive.CreatorEditor.UI.Windows;
+using VPG.CreatorEditor;
+using VPG.CreatorEditor.TestTools;
+using VPG.CreatorEditor.UI.Windows;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Tests.Editor.StepWindowTests
+namespace VPG.Creator.Core.Tests.Editor.StepWindowTests
 {
     internal abstract class BaseStepWindowTest : EditorImguiTest<StepWindow>
     {

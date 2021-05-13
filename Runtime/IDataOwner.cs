@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// Abstract holder of data.

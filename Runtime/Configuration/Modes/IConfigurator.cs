@@ -1,4 +1,4 @@
-namespace Innoactive.Creator.Core.Configuration.Modes
+namespace VPG.Creator.Core.Configuration.Modes
 {
     /// <summary>
     /// An interface for entities' configurators.

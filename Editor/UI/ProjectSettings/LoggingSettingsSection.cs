@@ -1,9 +1,9 @@
 ﻿using System;
-using Innoactive.Creator.Core.Utils.Logging;
+using VPG.Creator.Core.Utils.Logging;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI
+namespace VPG.CreatorEditor.UI
 {
     internal class LoggingSettingsSection : IProjectSettingsSection
     {

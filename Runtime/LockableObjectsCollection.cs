@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.Properties;
-using Innoactive.Creator.Core.RestrictiveEnvironment;
-using Innoactive.Creator.Core.SceneObjects;
+using VPG.Creator.Core.Behaviors;
+using VPG.Creator.Core.Properties;
+using VPG.Creator.Core.RestrictiveEnvironment;
+using VPG.Creator.Core.SceneObjects;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// Collection of <see cref="ISceneObject"/>s that can be locked and unlocked during a step.

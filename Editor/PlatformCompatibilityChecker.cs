@@ -1,11 +1,11 @@
-﻿#if UNITY_ANDROID
+#if UNITY_ANDROID
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor
+namespace VPG.CreatorEditor
 {
     /// <summary>
     /// Validates that full .Net dependencies are referenced by Unity.

@@ -1,9 +1,9 @@
-using Innoactive.Creator.Core.Serialization.NewtonsoftJson;
+using VPG.Creator.Core.Serialization.NewtonsoftJson;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace Innoactive.Creator.Tests.Serialization
+namespace VPG.Creator.Tests.Serialization
 {
     public class JsonSerializationTests
     {

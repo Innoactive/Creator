@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Innoactive.Creator.Core.Conditions;
-using Innoactive.Creator.Core.EntityOwners;
+using VPG.Creator.Core.Conditions;
+using VPG.Creator.Core.EntityOwners;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     // An interface for a transition's data.
     public interface ITransitionData : IEntityCollectionDataWithMode<ICondition>, ICompletableData

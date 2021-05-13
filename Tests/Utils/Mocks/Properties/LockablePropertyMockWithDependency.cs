@@ -1,7 +1,7 @@
-﻿using Innoactive.Creator.Core.Properties;
+﻿using VPG.Creator.Core.Properties;
 using UnityEngine;
 
-namespace Innoactive.Creator.Tests.Utils.Mocks
+namespace VPG.Creator.Tests.Utils.Mocks
 {
     /// <summary>
     /// Property requiring a <see cref="LockablePropertyMock"/>.

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Graphics
+namespace VPG.CreatorEditor.UI.Graphics
 {
     internal class PointerDraggedGraphicalElementEventArgs : PointerGraphicalElementEventArgs
     {

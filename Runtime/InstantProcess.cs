@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// A convenience class for processes that happen instantly. You only have to implement the <see cref="Start"/> method.

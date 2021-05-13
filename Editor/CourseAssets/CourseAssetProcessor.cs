@@ -1,4 +1,4 @@
-namespace Innoactive.CreatorEditor
+namespace VPG.CreatorEditor
 {
     /// <summary>
     /// A class which detects if the project is going to be saved and informs the <seealso cref="GlobalEditorHandler"/> about it.

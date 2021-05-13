@@ -1,18 +1,18 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.CreatorMenu
+namespace VPG.CreatorEditor.CreatorMenu
 {
     internal static class SupportMenuEntry
     {
-        /// <summary>
-        /// Allows to open the URL to Innoactive's Jira Servicedesk.
-        /// </summary>
-        [MenuItem("Innoactive/Help/Support", false, 80)]
-        private static void OpenSupportPage()
-        {
-            Application.OpenURL("https://innoactive.io/creator/support");
-        }
-
+        // VPG - Disabled Innoactive support.
+        ///// <summary>
+        ///// Allows to open the URL to Innoactive's Jira Servicedesk.
+        ///// </summary>
+        //[MenuItem("VR Process Gizmo/Innoactive Help/Support", false, 80)]
+        //private static void OpenSupportPage()
+        //{
+        //    Application.OpenURL("https://innoactive.io/creator/support");
+        //}
     }
 }

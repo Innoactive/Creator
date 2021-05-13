@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Innoactive.CreatorEditor.UI;
+using VPG.CreatorEditor.UI;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Wizard
+namespace VPG.CreatorEditor.UI.Wizard
 {
     internal class WizardNavigation
     {

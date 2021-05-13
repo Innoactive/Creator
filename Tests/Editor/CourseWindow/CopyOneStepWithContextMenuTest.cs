@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.UI.Windows;
+using VPG.Creator.Core;
+using VPG.CreatorEditor.UI.Windows;
 using NUnit.Framework;
 
-namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
+namespace VPG.CreatorEditor.Tests.CourseWindowTests
 {
     internal class CopyOneStepWithContextMenuTest : BaseCourseWindowTest
     {

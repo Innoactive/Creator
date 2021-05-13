@@ -1,6 +1,6 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Innoactive.CreatorEditor")]
-[assembly: InternalsVisibleTo("Innoactive.Creator.Core.Tests")]
-[assembly: InternalsVisibleTo("Innoactive.Creator.Core.Tests.Editmode")]
-[assembly: InternalsVisibleTo("Innoactive.Creator.DesktopMode")]
+[assembly: InternalsVisibleTo("VPG.CreatorEditor")]
+[assembly: InternalsVisibleTo("VPG.Creator.Core.Tests")]
+[assembly: InternalsVisibleTo("VPG.Creator.Core.Tests.Editmode")]
+[assembly: InternalsVisibleTo("VPG.Creator.DesktopMode")]

@@ -1,4 +1,4 @@
-﻿namespace Innoactive.Creator.Core.Input
+﻿namespace VPG.Creator.Core.Input
 {
     /// <summary>
     /// Can be used to mark a GameObject focusable.

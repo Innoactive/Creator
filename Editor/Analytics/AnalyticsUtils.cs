@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.Analytics
+namespace VPG.CreatorEditor.Analytics
 {
     internal class AnalyticsUtils
     {

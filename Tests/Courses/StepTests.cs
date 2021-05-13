@@ -1,17 +1,17 @@
 using System.Collections;
 using UnityEngine.TestTools;
 using System;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.Conditions;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Core.Exceptions;
-using Innoactive.Creator.Tests.Utils;
-using Innoactive.Creator.Tests.Utils.Mocks;
+using VPG.Creator.Core;
+using VPG.Creator.Core.Behaviors;
+using VPG.Creator.Core.Conditions;
+using VPG.Creator.Core.Configuration;
+using VPG.Creator.Core.Exceptions;
+using VPG.Creator.Tests.Utils;
+using VPG.Creator.Tests.Utils.Mocks;
 using UnityEngine;
 using NUnit.Framework;
 
-namespace Innoactive.Creator.Tests.Courses
+namespace VPG.Creator.Tests.Courses
 {
     public class StepTests : RuntimeTests
     {

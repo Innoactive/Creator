@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using Innoactive.Creator.Core.Attributes;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.Configuration.Modes;
-using Innoactive.Creator.Core.EntityOwners;
-using Innoactive.Creator.Core.EntityOwners.ParallelEntityCollection;
+using VPG.Creator.Core.Attributes;
+using VPG.Creator.Core.Behaviors;
+using VPG.Creator.Core.Configuration.Modes;
+using VPG.Creator.Core.EntityOwners;
+using VPG.Creator.Core.EntityOwners.ParallelEntityCollection;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// A collection of <see cref="IBehavior"/>s of a <see cref="IStep"/>.

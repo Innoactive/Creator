@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Core.Exceptions;
-using Innoactive.Creator.Core.Properties;
+using VPG.Creator.Core.Configuration;
+using VPG.Creator.Core.Exceptions;
+using VPG.Creator.Core.Properties;
 
-namespace Innoactive.Creator.Core.SceneObjects
+namespace VPG.Creator.Core.SceneObjects
 {
     /// <inheritdoc cref="ISceneObject"/>
     [ExecuteInEditMode]

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
-using Innoactive.Creator.Core;
+using VPG.Creator.Core;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Drawers
+namespace VPG.CreatorEditor.UI.Drawers
 {
     [DefaultTrainingDrawer(typeof(BehaviorCollection))]
     internal class BehaviorCollectionDrawer : DataOwnerDrawer

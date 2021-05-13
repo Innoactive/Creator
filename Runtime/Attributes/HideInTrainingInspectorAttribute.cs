@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Creator.Core.Attributes
+namespace VPG.Creator.Core.Attributes
 {
     /// <summary>
     /// Use this attribute to hide serializeable members in the training inspector.

@@ -1,9 +1,9 @@
 using System.Linq;
-using Innoactive.Creator.Core.Conditions;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Core.SceneObjects;
+using VPG.Creator.Core.Conditions;
+using VPG.Creator.Core.Configuration;
+using VPG.Creator.Core.SceneObjects;
 
-namespace Innoactive.Creator.Tests.Builder
+namespace VPG.Creator.Tests.Builder
 {
     /// <summary>
     /// Static class to provide fast access to predefined builders.

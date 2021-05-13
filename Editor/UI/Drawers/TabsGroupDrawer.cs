@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
-using Innoactive.CreatorEditor.Tabs;
+using VPG.CreatorEditor.Tabs;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Drawers
+namespace VPG.CreatorEditor.UI.Drawers
 {
     [DefaultTrainingDrawer(typeof(ITabsGroup))]
     internal class TabsGroupDrawer : AbstractDrawer

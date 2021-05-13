@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.Core.Utils;
+using VPG.Creator.Core.Utils;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI
+namespace VPG.CreatorEditor.UI
 {
     /// <summary>
     /// Base Settings provider which allows to inject additional sections which implement <see cref="IProjectSettingsSection"/>.

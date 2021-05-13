@@ -1,6 +1,6 @@
-﻿using Innoactive.Creator.Core.Configuration.Modes;
+﻿using VPG.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// The basic interface for all components of a training course: behaviors, conditions, transitions, and so on.

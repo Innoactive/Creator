@@ -3,7 +3,7 @@ using System.Text;
 using UnityEngine;
 using NUnit.Framework;
 
-namespace Innoactive.Creator.Tests.IO
+namespace VPG.Creator.Tests.IO
 {
     public class IOTests
     {

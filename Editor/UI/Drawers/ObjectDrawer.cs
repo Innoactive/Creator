@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Attributes;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.Conditions;
-using Innoactive.Creator.Core.Utils;
-using Innoactive.CreatorEditor.Configuration;
-using Innoactive.CreatorEditor.CourseValidation;
+using VPG.Creator.Core;
+using VPG.Creator.Core.Attributes;
+using VPG.Creator.Core.Behaviors;
+using VPG.Creator.Core.Conditions;
+using VPG.Creator.Core.Utils;
+using VPG.CreatorEditor.Configuration;
+using VPG.CreatorEditor.CourseValidation;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Drawers
+namespace VPG.CreatorEditor.UI.Drawers
 {
     /// <summary>
     /// Training drawer for object properties. Used when everything else does not fit.

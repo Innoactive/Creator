@@ -1,5 +1,5 @@
 ﻿using System;
-using Innoactive.Creator.Core.Input;
+using VPG.Creator.Core.Input;
 using UnityEditor;
 
 [InitializeOnLoad]

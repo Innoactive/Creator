@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Core.Configuration.Modes;
+using VPG.Creator.Core.Configuration;
+using VPG.Creator.Core.Configuration.Modes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// Runs a <see cref="ICourse"/>, expects to be run only once.

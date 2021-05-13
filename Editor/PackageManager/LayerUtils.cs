@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEditor;
 using Object = UnityEngine.Object;
 
-namespace Innoactive.CreatorEditor.PackageManager
+namespace VPG.CreatorEditor.PackageManager
 {
     /// <summary>
     /// Utility class for adding missing layers to the Unity's TagManager.

@@ -1,11 +1,11 @@
 using System.Linq;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.Conditions;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Core.SceneObjects;
+using VPG.Creator.Core;
+using VPG.Creator.Core.Behaviors;
+using VPG.Creator.Core.Conditions;
+using VPG.Creator.Core.Configuration;
+using VPG.Creator.Core.SceneObjects;
 
-namespace Innoactive.Creator.Tests.Builder
+namespace VPG.Creator.Tests.Builder
 {
     /// <summary>
     /// Basic step builder that creates step of type <typeparamref name="Step" />.

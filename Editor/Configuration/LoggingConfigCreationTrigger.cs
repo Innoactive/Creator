@@ -1,10 +1,10 @@
 ﻿using System.IO;
-using Innoactive.Creator.Core.Utils.Logging;
+using VPG.Creator.Core.Utils.Logging;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Innoactive.CreatorEditor.Configuration
+namespace VPG.CreatorEditor.Configuration
 {
     /// <summary>
     /// Checks on editor initialization if there is a logging config. Will add one if it's missing.

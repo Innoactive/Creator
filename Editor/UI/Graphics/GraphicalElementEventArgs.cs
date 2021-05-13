@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Innoactive.CreatorEditor.UI.Graphics
+namespace VPG.CreatorEditor.UI.Graphics
 {
     internal class GraphicalElementEventArgs : EventArgs
     {

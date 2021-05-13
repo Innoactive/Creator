@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Innoactive.CreatorEditor.CourseValidation
+namespace VPG.CreatorEditor.CourseValidation
 {
     /// <summary>
     /// ValidationScope limits the scope of the validation done. For example scopes are:

@@ -1,6 +1,6 @@
-using Innoactive.Creator.Core.Configuration.Modes;
+using VPG.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Creator.Core.EntityOwners
+namespace VPG.Creator.Core.EntityOwners
 {
     /// <summary>
     /// An <seealso cref="IEntitySequenceData{TEntity}"/> with <seealso cref="IModeData"/>.

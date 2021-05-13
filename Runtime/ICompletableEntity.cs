@@ -1,4 +1,4 @@
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// An <see cref="IEntity"/> which can be completed.

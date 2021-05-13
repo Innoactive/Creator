@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
+namespace VPG.CreatorEditor.UI.Graphics.Renderers
 {
     /// <summary>
     /// Base class for graphical element renderers that use only one color.

@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Creator.Core.Attributes
+namespace VPG.Creator.Core.Attributes
 {
     /// <summary>
     /// Adds a link to a documentation that explains a behavior or condition.

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Innoactive.CreatorEditor.UI.Graphics
+namespace VPG.CreatorEditor.UI.Graphics
 {
     /// <summary>
     /// Base class for Entry and Exit nodes.

@@ -1,7 +1,7 @@
-using Innoactive.Creator.Core.Runtime.Properties;
+using VPG.Creator.Core.Runtime.Properties;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Audio
+namespace VPG.Creator.Core.Audio
 {
     /// <summary>
     /// This class provides audio data in form of an AudioClip. Which also might not be loaded at the time needed,

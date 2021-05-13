@@ -1,8 +1,8 @@
 ﻿using System;
-using Innoactive.Creator.Core.SceneObjects;
+using VPG.Creator.Core.SceneObjects;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Configuration
+namespace VPG.Creator.Core.Configuration
 {
     /// <summary>
     /// This wrapper is used for <see cref="IRuntimeConfiguration"/> configurations, which

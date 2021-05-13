@@ -1,6 +1,6 @@
-﻿using Innoactive.Creator.Core.SceneObjects;
+﻿using VPG.Creator.Core.SceneObjects;
 
-namespace Innoactive.Creator.Core.Properties
+namespace VPG.Creator.Core.Properties
 {
     /// <summary>
     /// Used to identify a trainee within the scene.

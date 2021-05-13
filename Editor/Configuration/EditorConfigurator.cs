@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
-using Innoactive.Creator.Core.Utils;
+using VPG.Creator.Core.Utils;
 using UnityEngine;
 using UnityEditor.Callbacks;
 
-namespace Innoactive.CreatorEditor.Configuration
+namespace VPG.CreatorEditor.Configuration
 {
     /// <summary>
     /// Configurator to set the training editor configuration which is used by the training creation editor tools (like Step Inspector).

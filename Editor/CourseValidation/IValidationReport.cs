@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.Conditions;
+using VPG.Creator.Core;
+using VPG.Creator.Core.Behaviors;
+using VPG.Creator.Core.Conditions;
 
-namespace Innoactive.CreatorEditor.CourseValidation
+namespace VPG.CreatorEditor.CourseValidation
 {
     /// <summary>
     /// Report about the last validation done by the validation system.

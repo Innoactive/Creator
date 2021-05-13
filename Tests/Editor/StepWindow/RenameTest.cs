@@ -1,7 +1,7 @@
-using Innoactive.CreatorEditor.UI.Windows;
+using VPG.CreatorEditor.UI.Windows;
 using NUnit.Framework;
 
-namespace Innoactive.Creator.Core.Tests.Editor.StepWindowTests
+namespace VPG.Creator.Core.Tests.Editor.StepWindowTests
 {
     internal class RenameTest : BaseStepWindowTest
     {

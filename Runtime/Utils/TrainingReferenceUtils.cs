@@ -1,7 +1,7 @@
-﻿using Innoactive.Creator.Core.SceneObjects;
-using Innoactive.Creator.Core.Properties;
+﻿using VPG.Creator.Core.SceneObjects;
+using VPG.Creator.Core.Properties;
 
-namespace Innoactive.Creator.Core.Utils
+namespace VPG.Creator.Core.Utils
 {
     public static class TrainingReferenceUtils
     {

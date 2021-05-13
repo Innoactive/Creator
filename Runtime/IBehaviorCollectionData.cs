@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.EntityOwners;
+using VPG.Creator.Core.Behaviors;
+using VPG.Creator.Core.EntityOwners;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// A data that contains a list of <see cref="IBehavior"/>s.

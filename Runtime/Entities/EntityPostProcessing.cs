@@ -1,4 +1,4 @@
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// Base class for implementing post processing after a <see cref="IEntity"/> creation.

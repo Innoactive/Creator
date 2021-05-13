@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Innoactive.Creator.Core.Configuration.Modes;
+using VPG.Creator.Core.Configuration.Modes;
 
-namespace Innoactive.Creator.Core.RestrictiveEnvironment
+namespace VPG.Creator.Core.RestrictiveEnvironment
 {
     /// <summary>
     /// Allows to implement strategies which restrict interaction with scene objects for specific steps.

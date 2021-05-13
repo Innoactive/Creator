@@ -1,4 +1,4 @@
-﻿namespace Innoactive.CreatorEditor.Analytics
+﻿namespace VPG.CreatorEditor.Analytics
 {
     internal struct AnalyticsEvent
     {

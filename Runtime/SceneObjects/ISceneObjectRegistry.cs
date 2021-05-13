@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Creator.Core.SceneObjects
+namespace VPG.Creator.Core.SceneObjects
 {
     public interface ISceneObjectRegistry
     {

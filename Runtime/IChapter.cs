@@ -1,4 +1,4 @@
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// A chapter is a high-level grouping of several <see cref="IStep"/>s.

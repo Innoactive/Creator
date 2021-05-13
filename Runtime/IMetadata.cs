@@ -1,7 +1,7 @@
-﻿﻿namespace Innoactive.Creator.Core
+﻿namespace VPG.Creator.Core
 {
     /// <summary>
-    /// Utility data which is used by the Creator SDK custom editors.
+    /// Utility data which is used by the VR Process Gizmo SDK custom editors.
     /// </summary>
     public interface IMetadata { }
 }

@@ -1,7 +1,7 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 
- namespace Innoactive.CreatorEditor
+ namespace VPG.CreatorEditor
  {
      /// <summary>
      /// Modal Window that helps setting the 'API Compatibility Level' to '.Net 4.x'.
@@ -30,7 +30,7 @@ using UnityEngine;
          private void OnGUI()
          {
              EditorGUILayout.Space();
-             EditorGUILayout.HelpBox($"This Unity project uses {currentLevel} but some features of the Innoactive Creator require .NET 4.X support.\n\nThe built application might not work as expected.", MessageType.Warning);
+             EditorGUILayout.HelpBox($"This Unity project uses {currentLevel} but some features require .NET 4.X support.\n\nThe built application might not work as expected.", MessageType.Warning);
              EditorGUILayout.Space(20f);
              EditorGUILayout.BeginHorizontal();
              GUILayout.FlexibleSpace();

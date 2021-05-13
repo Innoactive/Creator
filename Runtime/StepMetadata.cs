@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// Implementation of <see cref="IMetadata"/> adapted for <see cref="IStep"/> data.

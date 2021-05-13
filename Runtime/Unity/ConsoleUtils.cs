@@ -1,4 +1,4 @@
-namespace Innoactive.Creator.Unity
+namespace VPG.Creator.Unity
 {
     internal static class ConsoleUtils
     {

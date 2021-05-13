@@ -1,6 +1,6 @@
 ﻿﻿using System;
 
-namespace Innoactive.Creator.Core.Behaviors
+namespace VPG.Creator.Core.Behaviors
 {
     [Flags]
     public enum BehaviorExecutionStages

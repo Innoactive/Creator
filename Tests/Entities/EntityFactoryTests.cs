@@ -1,9 +1,9 @@
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Tests.Utils;
+using VPG.Creator.Core;
+using VPG.Creator.Tests.Utils;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace Innoactive.Creator.Tests
+namespace VPG.Creator.Tests
 {
     public class EntityFactoryTests : RuntimeTests
     {

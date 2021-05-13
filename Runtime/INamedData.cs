@@ -1,7 +1,7 @@
 using System.Runtime.Serialization;
-using Innoactive.Creator.Core.Attributes;
+using VPG.Creator.Core.Attributes;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// Data structure with an <see cref="IStep"/>'s name.

@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Creator.Core.Attributes
+namespace VPG.Creator.Core.Attributes
 {
     /// <summary>
     /// Declares the drawing order for this element.

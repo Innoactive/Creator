@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Runtime.Serialization;
-using Innoactive.Creator.Core.Utils.Logging;
-using Innoactive.Creator.Unity;
+using VPG.Creator.Core.Utils.Logging;
+using VPG.Creator.Unity;
 
-namespace Innoactive.Creator.Core.Behaviors
+namespace VPG.Creator.Core.Behaviors
 {
     /// <summary>
     /// Inherit from this abstract class when creating your own behaviors.

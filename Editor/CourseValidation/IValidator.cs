@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Innoactive.CreatorEditor.CourseValidation
+namespace VPG.CreatorEditor.CourseValidation
 {
     /// <summary>
     /// Validator provides validation for a specific Type.

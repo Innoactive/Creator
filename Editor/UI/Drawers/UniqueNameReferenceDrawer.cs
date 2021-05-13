@@ -1,16 +1,16 @@
 using System;
 using System.Reflection;
 using System.Collections.Generic;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Core.SceneObjects;
-using Innoactive.Creator.Core.Properties;
-using Innoactive.Creator.Core.Utils;
-using Innoactive.CreatorEditor.UndoRedo;
+using VPG.Creator.Core.Configuration;
+using VPG.Creator.Core.SceneObjects;
+using VPG.Creator.Core.Properties;
+using VPG.Creator.Core.Utils;
+using VPG.CreatorEditor.UndoRedo;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Innoactive.CreatorEditor.UI.Drawers
+namespace VPG.CreatorEditor.UI.Drawers
 {
     /// <summary>
     /// Training drawer for <see cref="UniqueNameReference"/> members.

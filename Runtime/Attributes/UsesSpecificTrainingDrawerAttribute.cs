@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Creator.Core.Attributes
+namespace VPG.Creator.Core.Attributes
 {
     /// <summary>
     /// Use this attribute to explicitly specify an implementation of `ITrainingDrawer` that should be used.

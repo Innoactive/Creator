@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Innoactive.CreatorEditor.Tabs
+namespace VPG.CreatorEditor.Tabs
 {
     /// <summary>
     /// Draws a view with multiple tabs.

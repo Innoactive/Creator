@@ -1,12 +1,12 @@
 using UnityEngine;
 using NUnit.Framework;
 using System.Collections.Generic;
-using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.TestTools;
-using Innoactive.CreatorEditor.UI.Windows;
+using VPG.Creator.Core;
+using VPG.CreatorEditor.TestTools;
+using VPG.CreatorEditor.UI.Windows;
 using UnityEditor;
 
-namespace Innoactive.CreatorEditor.Tests.CourseWindowTests
+namespace VPG.CreatorEditor.Tests.CourseWindowTests
 {
     /// <summary>
     /// Base class for all training window tests.

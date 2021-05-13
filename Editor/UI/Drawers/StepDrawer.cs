@@ -1,11 +1,11 @@
 using System;
-using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.Configuration;
-using Innoactive.CreatorEditor.Tabs;
+using VPG.Creator.Core;
+using VPG.CreatorEditor.Configuration;
+using VPG.CreatorEditor.Tabs;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Drawers
+namespace VPG.CreatorEditor.UI.Drawers
 {
     /// <summary>
     /// Drawer for a step to skip NameableDrawer.

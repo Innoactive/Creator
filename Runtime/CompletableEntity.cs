@@ -1,6 +1,6 @@
-using Innoactive.Creator.Core.Conditions;
+using VPG.Creator.Core.Conditions;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// An <see cref="Entity{TData}"/> which can be completed. Entities can be completed only during their Active <seealso cref="Stage"/>.

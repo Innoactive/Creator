@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Innoactive.Creator.Core.Conditions;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Core.Properties;
-using Innoactive.Creator.Core.RestrictiveEnvironment;
-using Innoactive.Creator.Core.SceneObjects;
-using Innoactive.Creator.Core.Utils;
-using Innoactive.Creator.Unity;
+using VPG.Creator.Core.Conditions;
+using VPG.Creator.Core.Configuration;
+using VPG.Creator.Core.Properties;
+using VPG.Creator.Core.RestrictiveEnvironment;
+using VPG.Creator.Core.SceneObjects;
+using VPG.Creator.Core.Utils;
+using VPG.Creator.Unity;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// Helper class which provides methods to extract <see cref="LockablePropertyData"/> from different course entities.

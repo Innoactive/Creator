@@ -1,12 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Innoactive.CreatorEditor.XRUtils;
-using Innoactive.CreatorEditor.Analytics;
+using VPG.CreatorEditor.XRUtils;
+using VPG.CreatorEditor.Analytics;
 using UnityEditor;
 
-namespace Innoactive.CreatorEditor.UI.Wizard
+namespace VPG.CreatorEditor.UI.Wizard
 {
     /// <summary>
     /// Wizard page which retrieves and loads XR SDKs.
@@ -60,7 +60,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
                 if (selectedLoader == XRLoader.Other)
                 {
-                    GUILayout.Label("The Creator does not provide an automated setup for your device. You need to refer to your device's vendor documentation in order to enable a compatible loader in the Unity's XR Plugin Management.", CreatorEditorStyles.Paragraph);
+                    GUILayout.Label("The VR Process Gizmo does not provide an automated setup for your device. You need to refer to your device's vendor documentation in order to enable a compatible loader in the Unity's XR Plugin Management.", CreatorEditorStyles.Paragraph);
 
                     GUILayout.BeginHorizontal();
                         GUILayout.Label("Please tell us which VR Hardware you are using:", CreatorEditorStyles.Label);

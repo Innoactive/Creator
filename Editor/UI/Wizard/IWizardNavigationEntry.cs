@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Wizard
+namespace VPG.CreatorEditor.UI.Wizard
 {
     internal interface IWizardNavigationEntry
     {

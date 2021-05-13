@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.CreatorEditor.UI.StepInspector.Menu
+namespace VPG.CreatorEditor.UI.StepInspector.Menu
 {
     /// <summary>
     /// The Step Inspector populates "Add Behavior" and "Add Condition" buttons' dropdown menus with implementations of this class.

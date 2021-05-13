@@ -1,7 +1,7 @@
-﻿using Innoactive.Creator.Core.SceneObjects;
-using Innoactive.Creator.Core.Properties;
+﻿using VPG.Creator.Core.SceneObjects;
+using VPG.Creator.Core.Properties;
 
-namespace Innoactive.Creator.Tests.Utils.Mocks
+namespace VPG.Creator.Tests.Utils.Mocks
 {
     /// <summary>
     /// Interface for a <see cref="LockablePropertyMock"/>.

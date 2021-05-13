@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.IO
+namespace VPG.Creator.Core.IO
 {
     /// <summary>
     /// Default implementation of <see cref="IPlatformFileSystem"/> based in 'System.IO'.

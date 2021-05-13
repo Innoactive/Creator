@@ -1,8 +1,8 @@
 ﻿using System.Runtime.Serialization;
-using Innoactive.Creator.Core.Attributes;
-using Innoactive.Creator.Core.Behaviors;
+using VPG.Creator.Core.Attributes;
+using VPG.Creator.Core.Behaviors;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// Interface that enables non-blocking background behaviors.

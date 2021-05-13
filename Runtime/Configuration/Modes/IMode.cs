@@ -1,6 +1,6 @@
 ﻿﻿using System;
 
-namespace Innoactive.Creator.Core.Configuration.Modes
+namespace VPG.Creator.Core.Configuration.Modes
 {
     /// <summary>
     /// The interface of a training mode. A training mode determines if an entity has to be skipped and provides configurable entities with parameters.

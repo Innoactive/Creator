@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.CreatorEditor.PackageManager;
-using Innoactive.CreatorEditor.XRUtils;
+using VPG.CreatorEditor.PackageManager;
+using VPG.CreatorEditor.XRUtils;
 
-namespace Innoactive.CreatorEditor.UI.Wizard
+namespace VPG.CreatorEditor.UI.Wizard
 {
     /// <summary>
     /// Wizard which guides the user through setting up a new training project,
@@ -19,11 +19,11 @@ namespace Innoactive.CreatorEditor.UI.Wizard
     public static class CreatorSetupWizard
     {
         /// <summary>
-        /// Will be called when the creator Setup wizard is closed.
+        /// Will be called when the VR Process Gizmo Setup wizard is closed.
         /// </summary>
         public static event EventHandler<EventArgs> SetupFinished;
 
-        private const string XRInnoactiveAssemblyName = "Innoactive.Creator.XRInteraction";
+        private const string XRDefaultAssemblyName = "VPG.Creator.XRInteraction";
         private const string XRAssemblyName = "Unity.XR.Management";
         static CreatorSetupWizard()
         {
@@ -48,7 +48,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         }
 
 #if UNITY_2019_4_OR_NEWER && !UNITY_EDITOR_OSX
-        [MenuItem("Innoactive/Create New Course...", false, 0)]
+        [MenuItem("VR Process Gizmo/Create New Course...", false, 0)]
 #endif
         internal static void Show()
         {
@@ -57,7 +57,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
             {
                 new WelcomePage(),
                 new TrainingSceneSetupPage(),
-                new AnalyticsPage(),
+                //new AnalyticsPage(),
                 new AllAboutPage()
             };
 
@@ -69,7 +69,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
                 xrSetupIndex++;
             }
 #endif
-            bool isShowingXRSetupPage = EditorReflectionUtils.AssemblyExists(XRInnoactiveAssemblyName);
+            bool isShowingXRSetupPage = EditorReflectionUtils.AssemblyExists(XRDefaultAssemblyName);
             isShowingXRSetupPage &= EditorReflectionUtils.AssemblyExists(XRAssemblyName) == false;
             isShowingXRSetupPage &= XRLoaderHelper.GetCurrentXRConfiguration()
                 .Contains(XRLoaderHelper.XRConfiguration.XRLegacy) == false;
@@ -81,7 +81,7 @@ namespace Innoactive.CreatorEditor.UI.Wizard
 
             wizard.WizardClosing += OnWizardClosing;
 
-            wizard.Setup("Innoactive Creator - VR Training Setup Wizard", pages);
+            wizard.Setup("Creator - VR Training Setup Wizard", pages);
             wizard.ShowModalUtility();
         }
 

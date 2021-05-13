@@ -1,9 +1,9 @@
-using Innoactive.CreatorEditor.UI.Windows;
-using Innoactive.CreatorEditor.TestTools;
+using VPG.CreatorEditor.UI.Windows;
+using VPG.CreatorEditor.TestTools;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.Tests.CourseWizardTests
+namespace VPG.CreatorEditor.Tests.CourseWizardTests
 {
     internal class CreateCourseTest : EditorImguiTest<CourseCreationWizard>
     {

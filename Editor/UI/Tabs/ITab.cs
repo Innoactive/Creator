@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.Tabs
+namespace VPG.CreatorEditor.Tabs
 {
     /// <summary>
     /// A tab in the <seealso cref="ITabsGroup"/>

@@ -1,9 +1,9 @@
-using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.UndoRedo;
+using VPG.Creator.Core;
+using VPG.CreatorEditor.UndoRedo;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Windows
+namespace VPG.CreatorEditor.UI.Windows
 {
     internal class ChangeNamePopup : EditorWindow
     {

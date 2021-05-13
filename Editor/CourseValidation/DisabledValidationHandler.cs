@@ -1,5 +1,5 @@
-﻿using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.CourseValidation;
+﻿using VPG.Creator.Core;
+using VPG.CreatorEditor.CourseValidation;
 
 /// <summary>
 /// Does not validate, used to disabled the validation system.

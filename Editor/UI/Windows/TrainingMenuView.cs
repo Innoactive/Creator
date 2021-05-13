@@ -1,13 +1,13 @@
 using System;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Validation;
-using Innoactive.CreatorEditor.Configuration;
-using Innoactive.CreatorEditor.CourseValidation;
-using Innoactive.CreatorEditor.UndoRedo;
+using VPG.Creator.Core;
+using VPG.Creator.Core.Validation;
+using VPG.CreatorEditor.Configuration;
+using VPG.CreatorEditor.CourseValidation;
+using VPG.CreatorEditor.UndoRedo;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Windows
+namespace VPG.CreatorEditor.UI.Windows
 {
     /// <summary>
     /// TrainingMenuView is shown on the left side of the <see cref="CourseWindow"/> and takes care about overall

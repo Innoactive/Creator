@@ -1,8 +1,8 @@
-﻿using Innoactive.CreatorEditor.UI.Graphics.Renderers;
+﻿using VPG.CreatorEditor.UI.Graphics.Renderers;
 using UnityEngine;
 using UnityEditor;
 
-namespace Innoactive.CreatorEditor.UI.Graphics
+namespace VPG.CreatorEditor.UI.Graphics
 {
     internal class EntryNodeRenderer : MulticoloredGraphicalElementRenderer<EntryNode>
     {

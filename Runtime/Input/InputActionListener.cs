@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Input
+namespace VPG.Creator.Core.Input
 {
     /// <summary>
     /// Base class for InputActionListener.

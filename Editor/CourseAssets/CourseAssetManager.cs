@@ -1,12 +1,12 @@
 using System;
 using System.IO;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Serialization;
-using Innoactive.CreatorEditor.Configuration;
+using VPG.Creator.Core;
+using VPG.Creator.Core.Serialization;
+using VPG.CreatorEditor.Configuration;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor
+namespace VPG.CreatorEditor
 {
     /// <summary>
     /// A static class that handles the course assets. It lets you to save, load, delete, and import training courses and provides multiple related utility methods.

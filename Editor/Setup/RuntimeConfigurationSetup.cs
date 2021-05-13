@@ -1,8 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using Innoactive.Creator.Core.Configuration;
+using VPG.Creator.Core.Configuration;
 
-namespace Innoactive.CreatorEditor
+namespace VPG.CreatorEditor
 {
     /// <summary>
     /// Will setup a <see cref="RuntimeConfigurator"/> when none is existent in scene.

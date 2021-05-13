@@ -1,7 +1,7 @@
-using Innoactive.Creator.Core.Configuration.Modes;
+using VPG.Creator.Core.Configuration.Modes;
 using NUnit.Framework;
 
-namespace Innoactive.Creator.Tests.Utils
+namespace VPG.Creator.Tests.Utils
 {
     public class ModeParameterTests
     {

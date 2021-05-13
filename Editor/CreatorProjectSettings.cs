@@ -1,15 +1,15 @@
-﻿using System.IO;
-using Innoactive.CreatorEditor;
+using System.IO;
+using VPG.CreatorEditor;
 using UnityEditor;
 using UnityEngine;
 
 /// <summary>
-/// Settings for an Innoactive Creator Unity project.
+/// Settings for a VR Process Gizmo Unity project.
 /// </summary>
 public partial class CreatorProjectSettings : ScriptableObject
 {
     /// <summary>
-    /// Was the Creator imported and therefore started for the first time.
+    /// Was the VR Process Gizmo imported and therefore started for the first time.
     /// </summary>
     [HideInInspector]
     public bool IsFirstTimeStarted = true;
@@ -21,7 +21,7 @@ public partial class CreatorProjectSettings : ScriptableObject
     public string ProjectCreatorVersion = null;
 
     /// <summary>
-    /// Loads the Creator settings for this Unity project from Resources.
+    /// Loads the VR Process Gizmo settings for this Unity project from Resources.
     /// </summary>
     /// <returns>Creator Settings</returns>
     public static CreatorProjectSettings Load()
@@ -53,7 +53,7 @@ public partial class CreatorProjectSettings : ScriptableObject
     }
 
     /// <summary>
-    /// Saves the Creator settings.
+    /// Saves the VR Process Gizmo settings.
     /// </summary>
     public void Save()
     {

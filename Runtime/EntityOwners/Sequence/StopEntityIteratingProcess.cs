@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace Innoactive.Creator.Core.EntityOwners
+namespace VPG.Creator.Core.EntityOwners
 {
     /// <summary>
     /// A process that stops activation of a current entity in the entity sequence.

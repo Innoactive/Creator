@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Innoactive.Creator.Core.Behaviors;
+using VPG.Creator.Core.Behaviors;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// Extends the step data with lockable data.

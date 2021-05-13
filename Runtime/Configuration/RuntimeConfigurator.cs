@@ -1,9 +1,9 @@
 using System;
-using Innoactive.Creator.Core.Configuration.Modes;
-using Innoactive.Creator.Core.Utils;
+using VPG.Creator.Core.Configuration.Modes;
+using VPG.Creator.Core.Utils;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Configuration
+namespace VPG.Creator.Core.Configuration
 {
     /// <summary>
     /// Configurator to set the training runtime configuration which is used by a training course during its execution.

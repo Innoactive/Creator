@@ -1,4 +1,4 @@
-﻿namespace Innoactive.Creator.Core.Exceptions
+﻿namespace VPG.Creator.Core.Exceptions
 {
     public class MissingEntityException : TrainingException
     {

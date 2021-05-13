@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.TestTools
+namespace VPG.CreatorEditor.TestTools
 {
     /// <summary>
     /// Utility window which draws itself on top of a given window and intercepts the events.

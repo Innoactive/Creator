@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.CreatorEditor.TestTools
+namespace VPG.CreatorEditor.TestTools
 {
     /// <summary>
     /// Event args for event which is fired when a <see cref="IEditorImguiTest"/> test finishes its execution.

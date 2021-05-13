@@ -1,4 +1,4 @@
-﻿namespace Innoactive.Creator.Core
+﻿namespace VPG.Creator.Core
 {
     /// <summary>
     /// <see cref="IStep"/> implementation of <see cref="EntityPostProcessing{T}"/>.

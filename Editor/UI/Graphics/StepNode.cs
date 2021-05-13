@@ -1,10 +1,10 @@
 using System;
-using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.CourseValidation;
-using Innoactive.CreatorEditor.UI.Graphics.Renderers;
+using VPG.Creator.Core;
+using VPG.CreatorEditor.CourseValidation;
+using VPG.CreatorEditor.UI.Graphics.Renderers;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Graphics
+namespace VPG.CreatorEditor.UI.Graphics
 {
     /// <summary>
     /// Represents step node of the Workflow window.

@@ -1,29 +1,29 @@
-﻿using System.Linq;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI
+namespace VPG.CreatorEditor.UI
 {
     /// <summary>
-    /// Helper editor class that allows retrieving or drawing a Innoactive Logo that
+    /// Helper editor class that allows retrieving or drawing a logo that
     /// fits the current Unity color theme.
     /// </summary>
-    internal static class InnoactiveLogoEditorHelper
+    internal static class LogoEditorHelper
     {
         /// <summary>
-        /// Filename of light Innoactive Hub logo (used for dark Unity theme)
+        /// Filename of light logo (used for dark Unity theme)
         /// </summary>
-        private const string InnoactiveHubLogoDarkFilename = "innoactive-hub-logo-claim-black";
+        private const string LogoDarkFilename = "logo-claim-black";
 
         /// <summary>
-        /// Filename of dark Innoactive Hub logo (used for light Unity theme)
+        /// Filename of dark logo (used for light Unity theme)
         /// </summary>
-        private const string InnoactiveHubLogoLightFilename = "innoactive-hub-logo-claim-white";
+        private const string LogoLightFilename = "logo-claim-white";
 
         private static Texture2D textureCache = null;
 
         /// <summary>
-        /// Returns a common texture containing the correct Hub Logo
+        /// Returns a common texture containing the correct logo
         /// </summary>
         public static Texture2D GetLogoTexture()
         {
@@ -35,7 +35,7 @@ namespace Innoactive.CreatorEditor.UI
         }
 
         /// <summary>
-        /// Draws the Innoactive logo with the specified width in the current GUI context
+        /// Draws the logo with the specified width in the current GUI context
         /// </summary>
         public static void DrawLogo(float width)
         {
@@ -54,11 +54,11 @@ namespace Innoactive.CreatorEditor.UI
         {
             if (EditorGUIUtility.isProSkin)
             {
-                return InnoactiveHubLogoLightFilename;
+                return LogoLightFilename;
             }
             else
             {
-                return InnoactiveHubLogoDarkFilename;
+                return LogoDarkFilename;
             }
         }
 

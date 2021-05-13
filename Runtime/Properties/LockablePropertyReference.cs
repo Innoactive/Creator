@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Innoactive.Creator.Core.Properties;
-using Innoactive.Creator.Core.SceneObjects;
+using VPG.Creator.Core.Properties;
+using VPG.Creator.Core.SceneObjects;
 
-namespace Innoactive.Creator.Core.Behaviors
+namespace VPG.Creator.Core.Behaviors
 {
     /// <summary>
     /// Serializable reference to a <see cref="LockableProperty"/>

@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.CreatorEditor.Configuration;
+using VPG.Creator.Core.Behaviors;
+using VPG.CreatorEditor.Configuration;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Drawers
+namespace VPG.CreatorEditor.UI.Drawers
 {
     /// <summary>
     /// Draws a dropdown button with all <see cref="InstantiationOption{IBehavior}"/> in the project, and creates a new instance of choosen behavior on click.
@@ -34,7 +34,7 @@ namespace Innoactive.CreatorEditor.UI.Drawers
             {
                 rect.y += rect.height + EditorDrawingHelper.VerticalSpacing;
                 rect.width -= EditorDrawingHelper.IndentationWidth;
-                EditorGUI.HelpBox(rect, "Your project does not contain any Behaviors. Either create one or import an Innoactive Creator Component.", MessageType.Error);
+                EditorGUI.HelpBox(rect, "Your project does not contain any Behaviors. Either create one or import a VR Process Gizmo Component.", MessageType.Error);
                 rect.height += rect.height + EditorDrawingHelper.VerticalSpacing;
             }
 

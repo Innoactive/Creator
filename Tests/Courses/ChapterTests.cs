@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Core.Exceptions;
-using Innoactive.Creator.Tests.Builder;
-using Innoactive.Creator.Tests.Utils;
-using Innoactive.Creator.Tests.Utils.Mocks;
+using VPG.Creator.Core;
+using VPG.Creator.Core.Configuration;
+using VPG.Creator.Core.Exceptions;
+using VPG.Creator.Tests.Builder;
+using VPG.Creator.Tests.Utils;
+using VPG.Creator.Tests.Utils.Mocks;
 using NUnit.Framework;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Creator.Tests.Courses
+namespace VPG.Creator.Tests.Courses
 {
     public class ChapterTests : RuntimeTests
     {

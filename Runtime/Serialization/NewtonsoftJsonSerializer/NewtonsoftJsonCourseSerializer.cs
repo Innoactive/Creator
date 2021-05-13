@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Innoactive.Creator.Core.UI.Drawers.Metadata;
-using Innoactive.Creator.Core.Utils;
+using VPG.Creator.Core.UI.Drawers.Metadata;
+using VPG.Creator.Core.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
-namespace Innoactive.Creator.Core.Serialization.NewtonsoftJson
+namespace VPG.Creator.Core.Serialization.NewtonsoftJson
 {
     /// <summary>
     /// This serializer uses NewtonsoftJson to serialize data, the outcome is a json file in the UTF-8 encoding.
@@ -120,7 +120,7 @@ namespace Innoactive.Creator.Core.Serialization.NewtonsoftJson
         {
             public override Type BindToType(string assemblyName, string typeName)
             {
-                if (typeName == "Innoactive.CreatorEditor.UI.Drawers.Metadata.ReorderableElementMetadata")
+                if (typeName == "VPG.CreatorEditor.UI.Drawers.Metadata.ReorderableElementMetadata")
                 {
                     return typeof(ReorderableElementMetadata);
                 }

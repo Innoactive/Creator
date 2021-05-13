@@ -1,7 +1,7 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Wizard
+namespace VPG.CreatorEditor.UI.Wizard
 {
     internal class WelcomePage : WizardPage
     {
@@ -13,8 +13,8 @@ namespace Innoactive.CreatorEditor.UI.Wizard
         public override void Draw(Rect window)
         {
             GUILayout.BeginArea(window);
-                GUILayout.Label("Welcome to Innoactive Creator", CreatorEditorStyles.Title);
-                GUILayout.Label("We want to get you started with Innoactive Creator as fast as possible.\nThis Wizard guides you through the process.", CreatorEditorStyles.Paragraph);
+                GUILayout.Label("Welcome to the VR Process Gizmo", CreatorEditorStyles.Title);
+                GUILayout.Label("We want to get you started with the VR Process Gizmo as fast as possible.\nThis Wizard guides you through the process.", CreatorEditorStyles.Paragraph);
             GUILayout.EndArea();
         }
     }

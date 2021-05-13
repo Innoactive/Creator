@@ -3,17 +3,17 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Innoactive.Creator.Core.Attributes;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Core.Configuration.Modes;
-using Innoactive.Creator.Core.EntityOwners;
-using Innoactive.Creator.Core.EntityOwners.FoldedEntityCollection;
-using Innoactive.Creator.Core.RestrictiveEnvironment;
-using Innoactive.Creator.Core.Utils.Logging;
-using Innoactive.Creator.Unity;
+using VPG.Creator.Core.Attributes;
+using VPG.Creator.Core.Behaviors;
+using VPG.Creator.Core.Configuration;
+using VPG.Creator.Core.Configuration.Modes;
+using VPG.Creator.Core.EntityOwners;
+using VPG.Creator.Core.EntityOwners.FoldedEntityCollection;
+using VPG.Creator.Core.RestrictiveEnvironment;
+using VPG.Creator.Core.Utils.Logging;
+using VPG.Creator.Unity;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// An implementation of <see cref="IStep"/> interface.

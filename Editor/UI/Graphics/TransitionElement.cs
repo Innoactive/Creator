@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using Innoactive.CreatorEditor.UI.Graphics.Renderers;
+using VPG.CreatorEditor.UI.Graphics.Renderers;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Graphics
+namespace VPG.CreatorEditor.UI.Graphics
 {
     /// <summary>
     /// Represents transition arrow between two steps.

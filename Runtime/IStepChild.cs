@@ -1,4 +1,4 @@
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// Abstract data structure. Usually works along with <see cref="IDataOwner"/>.

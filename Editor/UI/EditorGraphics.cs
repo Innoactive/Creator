@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.Core.Utils;
-using Innoactive.CreatorEditor.UI.Graphics;
+using VPG.Creator.Core.Utils;
+using VPG.CreatorEditor.UI.Graphics;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Edge = UnityEngine.RectTransform.Edge;
 
-namespace Innoactive.CreatorEditor.UI
+namespace VPG.CreatorEditor.UI
 {
     /// <summary>
     /// UI events handler and graphical elements drawer.

@@ -1,13 +1,13 @@
 ﻿using NUnit.Framework;
 using System.Collections;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Core.Exceptions;
-using Innoactive.Creator.Core.SceneObjects;
-using Innoactive.Creator.Tests.Utils;
+using VPG.Creator.Core.Configuration;
+using VPG.Creator.Core.Exceptions;
+using VPG.Creator.Core.SceneObjects;
+using VPG.Creator.Tests.Utils;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Creator.Tests
+namespace VPG.Creator.Tests
 {
     public class SceneObjectRegistryTests : RuntimeTests
     {

@@ -1,13 +1,13 @@
 using System.Collections.ObjectModel;
 using System.Linq;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.Conditions;
-using Innoactive.Creator.Core.Serialization;
-using Innoactive.Creator.Core.Serialization.NewtonsoftJson;
-using Innoactive.CreatorEditor.CourseValidation;
-using Innoactive.CreatorEditor.UI.StepInspector.Menu;
+using VPG.Creator.Core.Behaviors;
+using VPG.Creator.Core.Conditions;
+using VPG.Creator.Core.Serialization;
+using VPG.Creator.Core.Serialization.NewtonsoftJson;
+using VPG.CreatorEditor.CourseValidation;
+using VPG.CreatorEditor.UI.StepInspector.Menu;
 
-namespace Innoactive.CreatorEditor.Configuration
+namespace VPG.CreatorEditor.Configuration
 {
     /// <summary>
     /// Default editor configuration definition which is used if no other was implemented.

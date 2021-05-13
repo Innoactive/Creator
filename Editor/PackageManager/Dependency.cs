@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.PackageManager.UI;
 
-namespace Innoactive.CreatorEditor.PackageManager
+namespace VPG.CreatorEditor.PackageManager
 {
     /// <summary>
     /// Base class for dependencies used by the <see cref="DependencyManager"/>.

@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using Innoactive.Creator.Core.Attributes;
-using Innoactive.Creator.Core.Conditions;
-using Innoactive.Creator.Core.Configuration.Modes;
-using Innoactive.Creator.Core.EntityOwners;
-using Innoactive.Creator.Core.RestrictiveEnvironment;
-using Innoactive.Creator.Core.Utils.Logging;
-using Innoactive.Creator.Unity;
+using VPG.Creator.Core.Attributes;
+using VPG.Creator.Core.Conditions;
+using VPG.Creator.Core.Configuration.Modes;
+using VPG.Creator.Core.EntityOwners;
+using VPG.Creator.Core.RestrictiveEnvironment;
+using VPG.Creator.Core.Utils.Logging;
+using VPG.Creator.Unity;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// A class for a transition from one step to another.

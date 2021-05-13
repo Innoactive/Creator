@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.Linq;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Properties;
-using Innoactive.Creator.Core.SceneObjects;
+using VPG.Creator.Core;
+using VPG.Creator.Core.Properties;
+using VPG.Creator.Core.SceneObjects;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Drawers
+namespace VPG.CreatorEditor.UI.Drawers
 {
     [DefaultTrainingDrawer(typeof(LockableObjectsCollection))]
     internal class LockableObjectsDrawer : DataOwnerDrawer

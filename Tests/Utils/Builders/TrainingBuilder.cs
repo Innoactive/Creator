@@ -1,6 +1,6 @@
-using Innoactive.Creator.Core;
+using VPG.Creator.Core;
 
-namespace Innoactive.Creator.Tests.Builder
+namespace VPG.Creator.Tests.Builder
 {
     public abstract class TrainingBuilder<TCourse> : BuilderWithResourcePath<TCourse> where TCourse : ICourse
     {

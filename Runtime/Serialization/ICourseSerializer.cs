@@ -1,4 +1,4 @@
-namespace Innoactive.Creator.Core.Serialization
+namespace VPG.Creator.Core.Serialization
 {
     /// <summary>
     /// A serializer which can de/serialize courses and steps to a certain format.

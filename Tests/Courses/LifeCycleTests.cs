@@ -1,11 +1,11 @@
 using System.Collections;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Tests.Utils;
-using Innoactive.Creator.Tests.Utils.Mocks;
+using VPG.Creator.Core;
+using VPG.Creator.Tests.Utils;
+using VPG.Creator.Tests.Utils.Mocks;
 using UnityEngine.Assertions;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Creator.Tests.Courses
+namespace VPG.Creator.Tests.Courses
 {
     public class LifeCycleTests : RuntimeTests
     {

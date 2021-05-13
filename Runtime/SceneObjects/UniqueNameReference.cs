@@ -1,7 +1,7 @@
 ﻿﻿using System;
  using System.Runtime.Serialization;
 
-namespace Innoactive.Creator.Core.SceneObjects
+namespace VPG.Creator.Core.SceneObjects
 {
     /// <summary>
     /// Simple container for UniqueName.

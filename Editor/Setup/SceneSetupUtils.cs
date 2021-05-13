@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Configuration;
+using VPG.Creator.Core;
+using VPG.Creator.Core.Configuration;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 
-namespace Innoactive.CreatorEditor.Setup
+namespace VPG.CreatorEditor.Setup
 {
     /// <summary>
     /// Helper class to setup scenes and trainings.

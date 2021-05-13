@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEditor;
 
-namespace Innoactive.CreatorEditor
+namespace VPG.CreatorEditor
 {
     /// <summary>
     /// Monitors training course files added or removed from the project.

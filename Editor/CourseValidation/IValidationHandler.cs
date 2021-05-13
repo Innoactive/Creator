@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Innoactive.Creator.Core;
+using VPG.Creator.Core;
 
-namespace Innoactive.CreatorEditor.CourseValidation
+namespace VPG.CreatorEditor.CourseValidation
 {
     /// <summary>
     /// ValidationHandler validates data objects, e.g. steps or conditions, of a given course and reports whether

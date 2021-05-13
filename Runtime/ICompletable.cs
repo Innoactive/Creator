@@ -1,4 +1,4 @@
-﻿namespace Innoactive.Creator.Core
+﻿namespace VPG.Creator.Core
 {
     /// <summary>
     /// Base interface for objects which can be completed.

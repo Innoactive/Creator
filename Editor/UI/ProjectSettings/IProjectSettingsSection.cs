@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Innoactive.CreatorEditor.UI
+namespace VPG.CreatorEditor.UI
 {
     /// <summary>
     /// Allows to inject a settings section into a setting provider.

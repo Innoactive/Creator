@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// A process for an <see cref="IEntity"/>'s <see cref="Stage"/>.

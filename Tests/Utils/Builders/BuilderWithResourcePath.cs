@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Creator.Tests.Builder
+namespace VPG.Creator.Tests.Builder
 {
     /// <summary>
     /// Abstract Builder with ResourcePath property.

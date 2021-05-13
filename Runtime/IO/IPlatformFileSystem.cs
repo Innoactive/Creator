@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Innoactive.Creator.Core.IO
+namespace VPG.Creator.Core.IO
 {
     /// <summary>
     /// Interface with basic platform operations for reading and saving files in Unity.

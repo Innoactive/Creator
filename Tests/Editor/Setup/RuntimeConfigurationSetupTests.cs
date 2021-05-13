@@ -1,15 +1,15 @@
 ﻿using System.Linq;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Configuration;
-using Innoactive.Creator.Tests.Builder;
-using Innoactive.Creator.Tests.Utils.Mocks;
-using Innoactive.Creator.Unity;
-using Innoactive.CreatorEditor.Utils;
+using VPG.Creator.Core;
+using VPG.Creator.Core.Configuration;
+using VPG.Creator.Tests.Builder;
+using VPG.Creator.Tests.Utils.Mocks;
+using VPG.Creator.Unity;
+using VPG.CreatorEditor.Utils;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.Tests
+namespace VPG.CreatorEditor.Tests
 {
     public class RuntimeConfigurationSetupTests
     {

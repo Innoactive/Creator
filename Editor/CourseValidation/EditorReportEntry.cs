@@ -1,6 +1,6 @@
-﻿using Innoactive.Creator.Core.Validation;
+﻿using VPG.Creator.Core.Validation;
 
-namespace Innoactive.CreatorEditor.CourseValidation
+namespace VPG.CreatorEditor.CourseValidation
 {
     /// <summary>
     /// Report generated from validations of <see cref="IValidator"/> objects.

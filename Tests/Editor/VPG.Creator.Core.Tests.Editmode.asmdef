@@ -1,5 +1,5 @@
 {
-    "name": "Innoactive.Creator.Core.Tests.Editmode",
+    "name": "VPG.Creator.Core.Tests.Editmode",
     "references": [
         "GUID:0acc523941302664db1f4e527237feb3",
         "GUID:c8561f9de838ac04d8feeda695bc572d",

@@ -1,12 +1,12 @@
 ﻿using System.IO;
 using System.Text;
 using System.Collections;
-using Innoactive.Creator.Core.IO;
+using VPG.Creator.Core.IO;
 using UnityEngine;
 using NUnit.Framework;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Creator.Tests.IO
+namespace VPG.Creator.Tests.IO
 {
     public class DefaultFileSystemTests : IOTests
     {

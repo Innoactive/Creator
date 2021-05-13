@@ -1,4 +1,4 @@
-﻿namespace Innoactive.Creator.Core.Conditions
+﻿namespace VPG.Creator.Core.Conditions
 {
     public interface ICondition: ICompletableEntity, IDataOwner<IConditionData>
     {

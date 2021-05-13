@@ -1,7 +1,7 @@
-﻿using Innoactive.CreatorEditor.UI.Graphics.Renderers;
+﻿using VPG.CreatorEditor.UI.Graphics.Renderers;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.UI.Graphics
+namespace VPG.CreatorEditor.UI.Graphics
 {
     /// <summary>
     /// Base class for a grid which can be used as e.g. a background of the chapter view.

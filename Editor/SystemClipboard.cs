@@ -1,9 +1,9 @@
 using System.Text;
-using Innoactive.Creator.Core;
-using Innoactive.CreatorEditor.Configuration;
+using VPG.Creator.Core;
+using VPG.CreatorEditor.Configuration;
 using UnityEditor;
 
-namespace Innoactive.CreatorEditor.Utils
+namespace VPG.CreatorEditor.Utils
 {
     /// <summary>
     /// A utility class that converts a step from/to UTF-8 string using the serializer from the current <see cref="IEditorConfiguration"/>

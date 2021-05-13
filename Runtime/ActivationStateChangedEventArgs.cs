@@ -1,6 +1,6 @@
 using System;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// Event that is fired when the current stage changes.

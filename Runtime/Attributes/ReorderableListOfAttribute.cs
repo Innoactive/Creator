@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Innoactive.Creator.Core.Attributes
+namespace VPG.Creator.Core.Attributes
 {
     /// <summary>
     /// Declares that children of this list have metadata attributes and can be reordered.

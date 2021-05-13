@@ -1,7 +1,7 @@
-﻿using Innoactive.Creator.Core.Runtime.Utils;
+﻿using VPG.Creator.Core.Runtime.Utils;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.Utils.Logging
+namespace VPG.Creator.Core.Utils.Logging
 {
     /// <summary>
     /// ScriptableObject which allows you to configure what of the course life cycle should be logged.

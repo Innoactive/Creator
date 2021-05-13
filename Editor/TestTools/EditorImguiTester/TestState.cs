@@ -1,4 +1,4 @@
-namespace Innoactive.CreatorEditor.TestTools
+namespace VPG.CreatorEditor.TestTools
 {
     /// <summary>
     /// State of <see cref="EditorImguiTest{T}"/>

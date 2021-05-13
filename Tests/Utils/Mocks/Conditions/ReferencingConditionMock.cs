@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Conditions;
-using Innoactive.Creator.Core.Properties;
-using Innoactive.Creator.Core.RestrictiveEnvironment;
-using Innoactive.Creator.Core.SceneObjects;
+using VPG.Creator.Core;
+using VPG.Creator.Core.Conditions;
+using VPG.Creator.Core.Properties;
+using VPG.Creator.Core.RestrictiveEnvironment;
+using VPG.Creator.Core.SceneObjects;
 
-namespace Innoactive.Creator.Tests.Utils.Mocks
+namespace VPG.Creator.Tests.Utils.Mocks
 {
     /// <summary>
     /// Helper condition for testing that allows explicitly marking a condition as completed.

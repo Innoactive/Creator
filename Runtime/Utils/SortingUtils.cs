@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Innoactive.Creator.Core.Utils
+namespace VPG.Creator.Core.Utils
 {
     /// <summary>
     /// Utilities related to sorting elements in collections.

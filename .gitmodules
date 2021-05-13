@@ -1,3 +1,0 @@
-[submodule ".Documentation/theme"]
-	path = .Documentation/theme
-	url = git@github.com:Innoactive/Hub-Documentation-DocFx-Theme.git

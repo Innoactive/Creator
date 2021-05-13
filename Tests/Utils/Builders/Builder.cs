@@ -1,7 +1,7 @@
 using System;
-using Innoactive.Creator.Core.Utils;
+using VPG.Creator.Core.Utils;
 
-namespace Innoactive.Creator.Tests.Builder
+namespace VPG.Creator.Tests.Builder
 {
     /// <summary>
     /// Abstract Builder pattern class.

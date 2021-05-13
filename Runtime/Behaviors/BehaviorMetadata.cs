@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Innoactive.Creator.Core.Behaviors
+namespace VPG.Creator.Core.Behaviors
 {
     [DataContract(IsReference = true)]
     public class BehaviorMetadata : IMetadata

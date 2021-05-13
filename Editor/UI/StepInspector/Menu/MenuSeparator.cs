@@ -1,4 +1,4 @@
-namespace Innoactive.CreatorEditor.UI.StepInspector.Menu
+namespace VPG.CreatorEditor.UI.StepInspector.Menu
 {
     /// <summary>
     /// This class adds a separator in the "Add Behavior"/"Add Condition" dropdown menus.

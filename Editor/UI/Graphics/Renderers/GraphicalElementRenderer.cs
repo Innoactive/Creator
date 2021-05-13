@@ -1,4 +1,4 @@
-﻿namespace Innoactive.CreatorEditor.UI.Graphics.Renderers
+﻿namespace VPG.CreatorEditor.UI.Graphics.Renderers
 {
     /// <summary>
     /// Base class for all graphical element renderers.

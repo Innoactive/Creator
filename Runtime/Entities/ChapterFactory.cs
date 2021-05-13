@@ -1,6 +1,6 @@
-using Innoactive.Creator.Unity;
+using VPG.Creator.Unity;
 
-namespace Innoactive.Creator.Core
+namespace VPG.Creator.Core
 {
     /// <summary>
     /// Factory implementation for <see cref="IChapter"/> objects.

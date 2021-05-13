@@ -1,5 +1,5 @@
-﻿#if UNITY_XR_MANAGEMENT && OCULUS_XR
-namespace Innoactive.CreatorEditor.XRUtils
+#if UNITY_XR_MANAGEMENT && OCULUS_XR
+namespace VPG.CreatorEditor.XRUtils
 {
     /// <summary>
     /// Enables the Oculus XR Plugin.

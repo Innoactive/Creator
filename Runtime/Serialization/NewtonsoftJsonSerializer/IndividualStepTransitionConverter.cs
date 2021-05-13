@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
-namespace Innoactive.Creator.Core.Serialization
+namespace VPG.Creator.Core.Serialization
 {
     /// <summary>
     /// A `JsonConverter` for transitions which serializes the transition's Target as null. It is used to serialize individual steps (for example, for copy/paste feature).

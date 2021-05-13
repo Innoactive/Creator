@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.Tabs
+namespace VPG.CreatorEditor.Tabs
 {
     /// <summary>
     /// This <inheritdoc cref="ITab"/> implementation defines <seealso cref="GetValue"/> and <seealso cref="SetValue"/> implementation with delegates through the constructor.

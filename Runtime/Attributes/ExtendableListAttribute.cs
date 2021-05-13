@@ -1,9 +1,9 @@
 using System;
 using System.Reflection;
 using System.Runtime.Serialization;
-using Innoactive.Creator.Core.Utils;
+using VPG.Creator.Core.Utils;
 
-namespace Innoactive.Creator.Core.Attributes
+namespace VPG.Creator.Core.Attributes
 {
     /// <summary>
     /// Declares that new elements can be added to this list.

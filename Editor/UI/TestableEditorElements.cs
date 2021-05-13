@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.Core.Exceptions;
+using VPG.Creator.Core.Exceptions;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor
+namespace VPG.CreatorEditor
 {
     public static class TestableEditorElements
     {

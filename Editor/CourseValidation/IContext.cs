@@ -1,4 +1,4 @@
-﻿namespace Innoactive.CreatorEditor.CourseValidation
+﻿namespace VPG.CreatorEditor.CourseValidation
 {
     /// <summary>
     /// Context is used to indicate the position in the course structure.

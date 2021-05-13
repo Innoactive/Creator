@@ -1,6 +1,6 @@
-﻿using Innoactive.Creator.Core.Properties;
+﻿using VPG.Creator.Core.Properties;
 
-namespace Innoactive.Creator.Core.RestrictiveEnvironment
+namespace VPG.Creator.Core.RestrictiveEnvironment
 {
     /// <summary>
     /// Contains a target <see cref="LockableProperty"/> and additional information which define how the property is handled.

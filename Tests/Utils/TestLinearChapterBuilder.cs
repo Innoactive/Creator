@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Tests.Utils.Mocks;
+using VPG.Creator.Core;
+using VPG.Creator.Tests.Utils.Mocks;
 
-namespace Innoactive.Creator.Tests.Utils
+namespace VPG.Creator.Tests.Utils
 {
     public class TestLinearChapterBuilder
     {

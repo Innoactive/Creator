@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace Innoactive.CreatorEditor.UI
+namespace VPG.CreatorEditor.UI
 {
     internal class CreatorSettingsProvider : BaseSettingsProvider
     {

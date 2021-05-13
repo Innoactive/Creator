@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Linq;
-using Innoactive.Creator.Core;
-using Innoactive.Creator.Core.Behaviors;
-using Innoactive.Creator.Core.Conditions;
-using Innoactive.Creator.Core.Internationalization;
-using Innoactive.Creator.Tests.Builder;
-using Innoactive.Creator.Tests.Utils;
-using Innoactive.Creator.Tests.Utils.Mocks;
+using VPG.Creator.Core;
+using VPG.Creator.Core.Behaviors;
+using VPG.Creator.Core.Conditions;
+using VPG.Creator.Core.Internationalization;
+using VPG.Creator.Tests.Builder;
+using VPG.Creator.Tests.Utils;
+using VPG.Creator.Tests.Utils.Mocks;
 using UnityEngine.Assertions;
 using UnityEngine.TestTools;
 
-namespace Innoactive.Creator.Tests.Serialization
+namespace VPG.Creator.Tests.Serialization
 {
     public class JsonTrainingSerializerTests : RuntimeTests
     {

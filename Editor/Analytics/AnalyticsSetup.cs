@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 #if CREATOR_PRO
 using Innoactive.CreatorPro.Account;
@@ -6,7 +6,7 @@ using Innoactive.CreatorPro.Account;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.Analytics
+namespace VPG.CreatorEditor.Analytics
 {
     /// <summary>
     /// Checks on each recompile/start of the unity if we have already sent a hello.
@@ -19,7 +19,10 @@ namespace Innoactive.CreatorEditor.Analytics
 
         static AnalyticsSetup()
         {
-            AnalyticsState trackingState = AnalyticsUtils.GetTrackingState();
+            //VPG - Force analytics disabled.
+            //AnalyticsState trackingState = AnalyticsUtils.GetTrackingState();
+            AnalyticsState trackingState = AnalyticsState.Disabled;
+
             if (trackingState == AnalyticsState.Disabled)
             {
                 return;

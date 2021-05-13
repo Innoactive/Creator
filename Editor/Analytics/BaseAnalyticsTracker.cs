@@ -2,7 +2,7 @@
 using System.Globalization;
 using UnityEditor;
 
-namespace Innoactive.CreatorEditor.Analytics
+namespace VPG.CreatorEditor.Analytics
 {
     /// <summary>
     /// Abstract analytics handler, which handles the SessionId

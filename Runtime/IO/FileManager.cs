@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Innoactive.Creator.Core.IO
+namespace VPG.Creator.Core.IO
 {
     /// <summary>
     /// Handles runtime operations that allow reading and writing to files in Unity.
