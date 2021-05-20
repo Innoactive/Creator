@@ -9,7 +9,7 @@ namespace VPG.Editor.UI.Wizard
     {
         private const float PaddingTop = 4f;
 
-        protected EditorIcon logo = new EditorIcon("logo_creator_icon");
+        protected EditorIcon logo = new EditorIcon("logo_vpg_icon");
 
         protected List<IWizardNavigationEntry> Entries { get; }
 
