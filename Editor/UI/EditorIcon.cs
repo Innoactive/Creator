@@ -2,7 +2,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI
+namespace VPG.Editor.UI
 {
     /// <summary>
     /// Utility class to help with different unity color schemes (dark/light). Takes care about loading the given icon,

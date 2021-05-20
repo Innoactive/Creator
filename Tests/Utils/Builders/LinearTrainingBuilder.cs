@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using VPG.Creator.Core;
+using VPG.Core;
 
-namespace VPG.Creator.Tests.Builder
+namespace VPG.Tests.Builder
 {
     /// <summary>
     /// Builder that creates linear trainings.

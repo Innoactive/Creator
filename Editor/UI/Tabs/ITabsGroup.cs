@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VPG.CreatorEditor.Tabs
+namespace VPG.Editor.Tabs
 {
     /// <summary>
     /// Draws a view with multiple tabs.

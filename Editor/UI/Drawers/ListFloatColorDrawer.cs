@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Drawers
+namespace VPG.Editor.UI.Drawers
 {
     /// <summary>
     /// Custom color drawer for the case when color is stored as a list of four floats.

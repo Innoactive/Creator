@@ -3,7 +3,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.Analytics
+namespace VPG.Editor.Analytics
 {
     internal static class EditorPrefExtensions
     {

@@ -1,14 +1,14 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using VPG.Creator.Core.Configuration.Modes;
-using VPG.Creator.Core.IO;
-using VPG.Creator.Core.SceneObjects;
-using VPG.Creator.Core.Properties;
-using VPG.Creator.Core.Serialization;
-using VPG.Creator.Core.Serialization.NewtonsoftJson;
+using VPG.Core.Configuration.Modes;
+using VPG.Core.IO;
+using VPG.Core.SceneObjects;
+using VPG.Core.Properties;
+using VPG.Core.Serialization;
+using VPG.Core.Serialization.NewtonsoftJson;
 
-namespace VPG.Creator.Core.Configuration
+namespace VPG.Core.Configuration
 {
     /// <summary>
     /// Training runtime configuration which is used if no other was implemented.

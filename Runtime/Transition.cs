@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using VPG.Creator.Core.Attributes;
-using VPG.Creator.Core.Conditions;
-using VPG.Creator.Core.Configuration.Modes;
-using VPG.Creator.Core.EntityOwners;
-using VPG.Creator.Core.RestrictiveEnvironment;
-using VPG.Creator.Core.Utils.Logging;
-using VPG.Creator.Unity;
+using VPG.Core.Attributes;
+using VPG.Core.Conditions;
+using VPG.Core.Configuration.Modes;
+using VPG.Core.EntityOwners;
+using VPG.Core.RestrictiveEnvironment;
+using VPG.Core.Utils.Logging;
+using VPG.Unity;
 using UnityEngine;
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// A class for a transition from one step to another.

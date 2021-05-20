@@ -1,4 +1,4 @@
-﻿namespace VPG.Creator.Core.Validation
+﻿namespace VPG.Core.Validation
 {
     /// <summary>
     /// Base report entry with all information available non editor creator core.

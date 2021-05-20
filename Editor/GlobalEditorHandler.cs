@@ -2,11 +2,11 @@ using UnityEditor;
 using UnityEngine;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
-using VPG.Creator.Core;
-using VPG.CreatorEditor.UI.Windows;
-using VPG.Creator.Core.Configuration;
+using VPG.Core;
+using VPG.Editor.UI.Windows;
+using VPG.Core.Configuration;
 
-namespace VPG.CreatorEditor
+namespace VPG.Editor
 {
     /// <summary>
     /// A class that handles interactions between Creator windows and course assets by using selected <seealso cref="IEditingStrategy"/> strategy.

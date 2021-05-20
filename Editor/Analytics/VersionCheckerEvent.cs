@@ -1,9 +1,9 @@
-using VPG.CreatorEditor;
-using VPG.CreatorEditor.Analytics;
+using VPG.Editor;
+using VPG.Editor.Analytics;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.Creator.Core.Editor
+namespace VPG.Core.Editor
 {
     /// <summary>
     /// Checks if the version of the VR Process Gizmo was updated and sends an event.

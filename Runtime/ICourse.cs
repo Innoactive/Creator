@@ -1,4 +1,4 @@
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// Interface of a training course.

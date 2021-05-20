@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Text;
 using System.Collections;
-using VPG.Creator.Core.IO;
+using VPG.Core.IO;
 using UnityEngine;
 using NUnit.Framework;
 using UnityEngine.TestTools;
 
-namespace VPG.Creator.Tests.IO
+namespace VPG.Tests.IO
 {
     public class FileManagerTests : IOTests
     {

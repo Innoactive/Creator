@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace VPG.Creator.Core.Attributes
+namespace VPG.Core.Attributes
 {
     /// <summary>
     /// Declare that this element has to be separated with thin gray lines.

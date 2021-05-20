@@ -1,6 +1,6 @@
-﻿using VPG.Creator.Core.SceneObjects;
+﻿using VPG.Core.SceneObjects;
 
-namespace VPG.Creator.Core.Properties
+namespace VPG.Core.Properties
 {
     public interface ISceneObjectProperty
     {

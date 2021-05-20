@@ -1,11 +1,11 @@
 using System.Collections;
-using VPG.Creator.Core;
-using VPG.Creator.Tests.Utils;
-using VPG.Creator.Tests.Utils.Mocks;
+using VPG.Core;
+using VPG.Tests.Utils;
+using VPG.Tests.Utils.Mocks;
 using UnityEngine.Assertions;
 using UnityEngine.TestTools;
 
-namespace VPG.Creator.Tests.Courses
+namespace VPG.Tests.Courses
 {
     public class LifeCycleTests : RuntimeTests
     {

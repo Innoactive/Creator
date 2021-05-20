@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using VPG.Creator.Core.Configuration;
-using VPG.Creator.Core.Configuration.Modes;
+using VPG.Core.Configuration;
+using VPG.Core.Configuration.Modes;
 
-namespace VPG.Creator.Tests.Utils
+namespace VPG.Tests.Utils
 {
     /// <summary>
     /// DynamicDefinition allows to dynamically adjust training modes.

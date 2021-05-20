@@ -1,6 +1,6 @@
-using VPG.Creator.Core.Configuration.Modes;
+using VPG.Core.Configuration.Modes;
 
-namespace VPG.Creator.Core.EntityOwners
+namespace VPG.Core.EntityOwners
 {
     /// <summary>
     /// An <seealso cref="IEntitySequenceData{TEntity}"/> with <seealso cref="IModeData"/>.

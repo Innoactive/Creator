@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Wizard
+namespace VPG.Editor.UI.Wizard
 {
     /// <summary>
     /// Wizard base class which allows you to implement a new, awesome wizard!

@@ -1,6 +1,6 @@
 using System;
 
-namespace VPG.Creator.Core.Configuration.Modes
+namespace VPG.Core.Configuration.Modes
 {
     /// <summary>
     /// ModeParameter is responsible for fetching its parameter value from a <see cref="IMode"/>.

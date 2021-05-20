@@ -1,6 +1,6 @@
 using System;
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     [Obsolete("This event is not used anymore.")]
     public class CurrentChildChangedEventArgs<TEntity> : EventArgs where TEntity : IEntity

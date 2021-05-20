@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Runtime.Serialization;
-using VPG.Creator.Core.Utils.Logging;
-using VPG.Creator.Unity;
+using VPG.Core.Utils.Logging;
+using VPG.Unity;
 
-namespace VPG.Creator.Core.Behaviors
+namespace VPG.Core.Behaviors
 {
     /// <summary>
     /// Inherit from this abstract class when creating your own behaviors.

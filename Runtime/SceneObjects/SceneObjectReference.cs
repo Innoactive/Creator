@@ -1,8 +1,8 @@
 ﻿using System.Runtime.Serialization;
-using VPG.Creator.Core.Configuration;
+using VPG.Core.Configuration;
 using UnityEngine;
 
-namespace VPG.Creator.Core.SceneObjects
+namespace VPG.Core.SceneObjects
 {
     /// <summary>
     /// Weak reference by a unique name to a training scene object in a scene.

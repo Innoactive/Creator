@@ -1,4 +1,4 @@
-namespace VPG.Creator.Unity
+namespace VPG.Unity
 {
     public abstract class Singleton<T> where T : Singleton<T>, new()
     {

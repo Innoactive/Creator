@@ -1,11 +1,11 @@
 using System;
-using VPG.Creator.Core;
-using VPG.CreatorEditor.Configuration;
-using VPG.CreatorEditor.Tabs;
+using VPG.Core;
+using VPG.Editor.Configuration;
+using VPG.Editor.Tabs;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Drawers
+namespace VPG.Editor.UI.Drawers
 {
     /// <summary>
     /// Drawer for a step to skip NameableDrawer.

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VPG.Creator.Core.Exceptions
+namespace VPG.Core.Exceptions
 {
     public class TrainingException : Exception
     {

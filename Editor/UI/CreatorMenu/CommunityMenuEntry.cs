@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.CreatorMenu
+namespace VPG.Editor.CreatorMenu
 {
     internal static class CommunityMenuEntry
     {

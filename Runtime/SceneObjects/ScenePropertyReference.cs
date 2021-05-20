@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using VPG.Creator.Core.Configuration;
-using VPG.Creator.Core.Properties;
+using VPG.Core.Configuration;
+using VPG.Core.Properties;
 
-namespace VPG.Creator.Core.SceneObjects
+namespace VPG.Core.SceneObjects
 {
     /// <summary>
     /// Weak reference to a property of a training scene object with the same unique name.

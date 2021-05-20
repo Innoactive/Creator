@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using VPG.Creator.Core.Exceptions;
-using VPG.Creator.Unity;
+using VPG.Core.Exceptions;
+using VPG.Unity;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace VPG.Creator.Core.SceneObjects
+namespace VPG.Core.SceneObjects
 {
     /// <inheritdoc />
     public class SceneObjectRegistry : ISceneObjectRegistry

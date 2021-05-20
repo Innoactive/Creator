@@ -1,4 +1,4 @@
-﻿namespace VPG.Creator.Core.Input
+﻿namespace VPG.Core.Input
 {
     /// <summary>
     /// Allows to prioritize input actions.

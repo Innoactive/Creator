@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace VPG.Creator.Core.Attributes
+namespace VPG.Core.Attributes
 {
     /// <summary>
     /// Declares that this element's view has to be foldable.

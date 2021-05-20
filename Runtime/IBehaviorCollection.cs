@@ -1,4 +1,4 @@
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// A collection of <see cref="Behaviors.IBehavior"/>s of a <see cref="IStep"/>.

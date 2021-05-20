@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using VPG.Creator.Core.Attributes;
-using VPG.Creator.Core.Configuration.Modes;
-using VPG.Creator.Core.EntityOwners;
+using VPG.Core.Attributes;
+using VPG.Core.Configuration.Modes;
+using VPG.Core.EntityOwners;
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// An implementation of <see cref="ICourse"/> class.

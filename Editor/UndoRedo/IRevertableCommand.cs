@@ -1,4 +1,4 @@
-namespace VPG.CreatorEditor.UndoRedo
+namespace VPG.Editor.UndoRedo
 {
     /// <summary>
     /// An interface for a method object,

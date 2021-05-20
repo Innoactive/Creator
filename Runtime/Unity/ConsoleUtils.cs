@@ -1,4 +1,4 @@
-namespace VPG.Creator.Unity
+namespace VPG.Unity
 {
     internal static class ConsoleUtils
     {

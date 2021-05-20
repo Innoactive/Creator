@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VPG.CreatorEditor.UI.Graphics
+namespace VPG.Editor.UI.Graphics
 {
     /// <summary>
     /// Base class for Entry and Exit nodes.

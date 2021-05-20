@@ -1,10 +1,10 @@
 using System.Linq;
 using System.Reflection;
-using VPG.Creator.Core.SceneObjects;
-using VPG.Creator.Core.Properties;
+using VPG.Core.SceneObjects;
+using VPG.Core.Properties;
 using UnityEngine;
 
-namespace VPG.Creator.Tests.Utils
+namespace VPG.Tests.Utils
 {
     public static class TestingUtils
     {

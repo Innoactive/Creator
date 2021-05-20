@@ -1,7 +1,7 @@
-﻿using VPG.Creator.Core.SceneObjects;
-using VPG.Creator.Core.Properties;
+﻿using VPG.Core.SceneObjects;
+using VPG.Core.Properties;
 
-namespace VPG.Creator.Core.Utils
+namespace VPG.Core.Utils
 {
     public static class TrainingReferenceUtils
     {

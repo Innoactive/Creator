@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using VPG.Creator.Core.Serialization;
+using VPG.Core.Serialization;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.CreatorMenu
+namespace VPG.Editor.CreatorMenu
 {
     /// <summary>
     /// Allows user to select which serializer they want to use.

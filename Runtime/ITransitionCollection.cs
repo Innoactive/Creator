@@ -1,4 +1,4 @@
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// Interface for a collection of transitions.

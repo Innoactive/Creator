@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace VPG.Creator.Core.Configuration.Modes
+namespace VPG.Core.Configuration.Modes
 {
     /// <summary>
     /// A training mode that is defined by its name, IConfigurables activation policy and a collection of parameters.

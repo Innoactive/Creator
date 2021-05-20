@@ -1,7 +1,7 @@
 using System.Runtime.Serialization;
-using VPG.Creator.Core.Attributes;
+using VPG.Core.Attributes;
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// Data structure with an <see cref="IStep"/>'s name.

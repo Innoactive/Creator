@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.TestTools
+namespace VPG.Editor.TestTools
 {
     /// <summary>
     /// Json converter for an IMGUI event.

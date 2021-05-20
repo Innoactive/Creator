@@ -1,13 +1,13 @@
 using System.Linq;
-using VPG.Creator.Core.Serialization;
-using VPG.Creator.Core.Utils;
-using VPG.Creator.Unity;
-using VPG.Creator.Core.Serialization.NewtonsoftJson;
-using VPG.CreatorEditor;
+using VPG.Core.Serialization;
+using VPG.Core.Utils;
+using VPG.Unity;
+using VPG.Core.Serialization.NewtonsoftJson;
+using VPG.Editor;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace VPG.Creator.Tests.Utils
+namespace VPG.Tests.Utils
 {
     public abstract class RuntimeTests
     {

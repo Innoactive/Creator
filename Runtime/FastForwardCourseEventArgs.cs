@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// EventArgs for fast forward course events.

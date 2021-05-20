@@ -1,4 +1,4 @@
-namespace VPG.Creator.Unity
+namespace VPG.Unity
 {
     /// <summary>
     /// Auxiliary class that allows starting UnityCoroutines from a context that is not

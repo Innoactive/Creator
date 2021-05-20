@@ -1,9 +1,9 @@
 ﻿using System;
-using VPG.Creator.Core.Utils.Logging;
+using VPG.Core.Utils.Logging;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI
+namespace VPG.Editor.UI
 {
     internal class LoggingSettingsSection : IProjectSettingsSection
     {

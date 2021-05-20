@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace VPG.CreatorEditor.TestTools
+namespace VPG.Editor.TestTools
 {
     /// <summary>
     /// Utility window which sends given sequence of events to another window.

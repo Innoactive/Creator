@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using VPG.Creator.Core.Attributes;
+using VPG.Core.Attributes;
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// General implementation of <see cref="IMetadata"/>.

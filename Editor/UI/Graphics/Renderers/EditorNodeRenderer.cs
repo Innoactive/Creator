@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Graphics.Renderers
+namespace VPG.Editor.UI.Graphics.Renderers
 {
     /// <summary>
     /// Base class for rendering nodes of the Workflow window (entry node, exit node, and step node).

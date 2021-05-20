@@ -1,8 +1,8 @@
-﻿using VPG.Creator.Core;
-using VPG.Creator.Core.Conditions;
+﻿using VPG.Core;
+using VPG.Core.Conditions;
 using System.Runtime.Serialization;
 
-namespace VPG.Creator.Tests.Utils.Mocks
+namespace VPG.Tests.Utils.Mocks
 {
     /// <summary>
     /// Helper condition for testing that allows explicitly marking a condition as completed

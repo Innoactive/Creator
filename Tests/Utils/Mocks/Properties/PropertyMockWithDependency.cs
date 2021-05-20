@@ -1,7 +1,7 @@
-﻿using VPG.Creator.Core.Properties;
+﻿using VPG.Core.Properties;
 using UnityEngine;
 
-namespace VPG.Creator.Tests.Utils.Mocks
+namespace VPG.Tests.Utils.Mocks
 {
     /// <summary>
     /// Property requiring a <see cref="PropertyMock"/>.

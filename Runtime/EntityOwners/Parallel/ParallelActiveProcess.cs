@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Linq;
-using VPG.Creator.Core.Configuration.Modes;
+using VPG.Core.Configuration.Modes;
 
-namespace VPG.Creator.Core.EntityOwners.ParallelEntityCollection
+namespace VPG.Core.EntityOwners.ParallelEntityCollection
 {
     /// <summary>
     /// A process for a collection of entities which are activated and deactivated in parallel.

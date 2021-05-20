@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace VPG.Creator.Core.Utils
+namespace VPG.Core.Utils
 {
     internal static class MathUtils
     {

@@ -1,16 +1,16 @@
 using System;
 using System.Reflection;
 using System.Collections.Generic;
-using VPG.Creator.Core.Configuration;
-using VPG.Creator.Core.SceneObjects;
-using VPG.Creator.Core.Properties;
-using VPG.Creator.Core.Utils;
-using VPG.CreatorEditor.UndoRedo;
+using VPG.Core.Configuration;
+using VPG.Core.SceneObjects;
+using VPG.Core.Properties;
+using VPG.Core.Utils;
+using VPG.Editor.UndoRedo;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace VPG.CreatorEditor.UI.Drawers
+namespace VPG.Editor.UI.Drawers
 {
     /// <summary>
     /// Training drawer for <see cref="UniqueNameReference"/> members.

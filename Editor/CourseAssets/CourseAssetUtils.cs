@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using VPG.Creator.Core;
-using VPG.CreatorEditor.Configuration;
+using VPG.Core;
+using VPG.Editor.Configuration;
 using UnityEngine;
 
-namespace VPG.CreatorEditor
+namespace VPG.Editor
 {
     /// <summary>
     /// A collection of helper functions which are related to course asset handling.

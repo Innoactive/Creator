@@ -1,4 +1,4 @@
-﻿namespace VPG.Creator.Unity
+﻿namespace VPG.Unity
 {
     /// <summary>
     /// Allows to check if we are unit testing right now.

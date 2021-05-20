@@ -1,8 +1,8 @@
-using VPG.Creator.Core;
-using VPG.CreatorEditor.UI.Windows;
+using VPG.Core;
+using VPG.Editor.UI.Windows;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.TestTools
+namespace VPG.Editor.TestTools
 {
     /// <summary>
     /// An editing strategy that does nothing. Use it to isolate windows logic during testing.

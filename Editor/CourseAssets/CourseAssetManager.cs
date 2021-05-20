@@ -1,12 +1,12 @@
 using System;
 using System.IO;
-using VPG.Creator.Core;
-using VPG.Creator.Core.Serialization;
-using VPG.CreatorEditor.Configuration;
+using VPG.Core;
+using VPG.Core.Serialization;
+using VPG.Editor.Configuration;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor
+namespace VPG.Editor
 {
     /// <summary>
     /// A static class that handles the course assets. It lets you to save, load, delete, and import training courses and provides multiple related utility methods.

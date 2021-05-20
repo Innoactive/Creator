@@ -1,12 +1,12 @@
 using System;
-using VPG.Creator.Core.Configuration.Modes;
-using VPG.Creator.Core.IO;
-using VPG.Creator.Core.RestrictiveEnvironment;
-using VPG.Creator.Core.SceneObjects;
-using VPG.Creator.Core.Serialization;
+using VPG.Core.Configuration.Modes;
+using VPG.Core.IO;
+using VPG.Core.RestrictiveEnvironment;
+using VPG.Core.SceneObjects;
+using VPG.Core.Serialization;
 using UnityEngine;
 
-namespace VPG.Creator.Core.Configuration
+namespace VPG.Core.Configuration
 {
     /// <summary>
     /// Base class for your runtime course configuration. Extend it to create your own.

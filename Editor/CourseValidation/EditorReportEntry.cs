@@ -1,6 +1,6 @@
-﻿using VPG.Creator.Core.Validation;
+﻿using VPG.Core.Validation;
 
-namespace VPG.CreatorEditor.CourseValidation
+namespace VPG.Editor.CourseValidation
 {
     /// <summary>
     /// Report generated from validations of <see cref="IValidator"/> objects.

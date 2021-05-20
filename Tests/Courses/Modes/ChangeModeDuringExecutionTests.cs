@@ -1,16 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using VPG.Creator.Core;
-using VPG.Creator.Core.Behaviors;
-using VPG.Creator.Core.Conditions;
-using VPG.Creator.Core.Configuration.Modes;
-using VPG.Creator.Core.Internationalization;
-using VPG.Creator.Tests.Utils.Mocks;
+using VPG.Core;
+using VPG.Core.Behaviors;
+using VPG.Core.Conditions;
+using VPG.Core.Configuration.Modes;
+using VPG.Core.Internationalization;
+using VPG.Tests.Utils.Mocks;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace VPG.Creator.Tests.Utils
+namespace VPG.Tests.Utils
 {
     public class ChangeModeDuringExecutionTests : RuntimeTests
     {

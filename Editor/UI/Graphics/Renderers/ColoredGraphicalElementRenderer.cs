@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Graphics.Renderers
+namespace VPG.Editor.UI.Graphics.Renderers
 {
     /// <summary>
     /// Base class for graphical element renderers that use only one color.

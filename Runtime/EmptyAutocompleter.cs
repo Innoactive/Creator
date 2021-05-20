@@ -1,4 +1,4 @@
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// An autocompleter that does nothing.

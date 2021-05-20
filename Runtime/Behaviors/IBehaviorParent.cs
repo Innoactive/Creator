@@ -1,7 +1,7 @@
 ﻿﻿using System;
 using System.Collections.ObjectModel;
 
-namespace VPG.Creator.Core.Behaviors
+namespace VPG.Core.Behaviors
 {
     public class BehaviorCollectionChangedEventArgs : EventArgs { }
 

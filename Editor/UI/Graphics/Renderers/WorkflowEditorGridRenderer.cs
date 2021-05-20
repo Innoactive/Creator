@@ -1,4 +1,4 @@
-﻿namespace VPG.CreatorEditor.UI.Graphics.Renderers
+﻿namespace VPG.Editor.UI.Graphics.Renderers
 {
     /// <summary>
     /// Handles rendering of a <see cref="WorkflowEditorGrid"/>.

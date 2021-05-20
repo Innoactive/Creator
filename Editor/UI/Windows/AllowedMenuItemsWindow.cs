@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using VPG.Creator.Core.Behaviors;
-using VPG.Creator.Core.Conditions;
-using VPG.Creator.Core.Utils;
-using VPG.CreatorEditor.Configuration;
-using VPG.CreatorEditor.UI.StepInspector.Menu;
+using VPG.Core.Behaviors;
+using VPG.Core.Conditions;
+using VPG.Core.Utils;
+using VPG.Editor.Configuration;
+using VPG.Editor.UI.StepInspector.Menu;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Windows
+namespace VPG.Editor.UI.Windows
 {
     /// <summary>
     /// Window that allows to manage the allowed menu items.

@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// A convenience class for processes that happen instantly. You only have to implement the <see cref="Start"/> method.

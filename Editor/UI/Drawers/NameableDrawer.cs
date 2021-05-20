@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using VPG.Creator.Core;
-using VPG.Creator.Core.Behaviors;
-using VPG.Creator.Core.Conditions;
-using VPG.CreatorEditor.CourseValidation;
+using VPG.Core;
+using VPG.Core.Behaviors;
+using VPG.Core.Conditions;
+using VPG.Editor.CourseValidation;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Drawers
+namespace VPG.Editor.UI.Drawers
 {
     /// <summary>
     /// Drawer for values implementing INameable interface.

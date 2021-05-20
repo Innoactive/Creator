@@ -1,9 +1,9 @@
 using System.Text;
-using VPG.Creator.Core;
-using VPG.CreatorEditor.Configuration;
+using VPG.Core;
+using VPG.Editor.Configuration;
 using UnityEditor;
 
-namespace VPG.CreatorEditor.Utils
+namespace VPG.Editor.Utils
 {
     /// <summary>
     /// A utility class that converts a step from/to UTF-8 string using the serializer from the current <see cref="IEditorConfiguration"/>

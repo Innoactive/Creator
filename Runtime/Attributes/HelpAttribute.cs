@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace VPG.Creator.Core.Attributes
+namespace VPG.Core.Attributes
 {
     /// <summary>
     /// Declares that "Help" button has to be drawn.

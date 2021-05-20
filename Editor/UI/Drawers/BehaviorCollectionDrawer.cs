@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
-using VPG.Creator.Core;
+using VPG.Core;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Drawers
+namespace VPG.Editor.UI.Drawers
 {
     [DefaultTrainingDrawer(typeof(BehaviorCollection))]
     internal class BehaviorCollectionDrawer : DataOwnerDrawer

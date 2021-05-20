@@ -1,4 +1,4 @@
-﻿namespace VPG.CreatorEditor.Analytics
+﻿namespace VPG.Editor.Analytics
 {
     internal interface IAnalyticsTracker
     {

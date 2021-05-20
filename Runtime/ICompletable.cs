@@ -1,4 +1,4 @@
-﻿namespace VPG.Creator.Core
+﻿namespace VPG.Core
 {
     /// <summary>
     /// Base interface for objects which can be completed.

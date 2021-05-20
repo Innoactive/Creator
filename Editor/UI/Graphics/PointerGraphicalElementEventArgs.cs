@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Graphics
+namespace VPG.Editor.UI.Graphics
 {
     internal class PointerGraphicalElementEventArgs : GraphicalElementEventArgs
     {

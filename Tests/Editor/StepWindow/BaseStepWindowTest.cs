@@ -1,10 +1,10 @@
-using VPG.CreatorEditor;
-using VPG.CreatorEditor.TestTools;
-using VPG.CreatorEditor.UI.Windows;
+using VPG.Editor;
+using VPG.Editor.TestTools;
+using VPG.Editor.UI.Windows;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.Creator.Core.Tests.Editor.StepWindowTests
+namespace VPG.Core.Tests.Editor.StepWindowTests
 {
     internal abstract class BaseStepWindowTest : EditorImguiTest<StepWindow>
     {

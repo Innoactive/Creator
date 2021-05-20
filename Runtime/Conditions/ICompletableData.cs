@@ -1,4 +1,4 @@
-namespace VPG.Creator.Core.Conditions
+namespace VPG.Core.Conditions
 {
     public interface ICompletableData : IData
     {

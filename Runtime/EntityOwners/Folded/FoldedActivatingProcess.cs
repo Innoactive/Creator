@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace VPG.Creator.Core.EntityOwners.FoldedEntityCollection
+namespace VPG.Core.EntityOwners.FoldedEntityCollection
 {
     /// <summary>
     /// An activating process over an entities' sequence which activates all entities in order.

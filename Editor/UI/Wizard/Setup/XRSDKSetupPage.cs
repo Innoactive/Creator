@@ -2,11 +2,11 @@ using UnityEngine;
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using VPG.CreatorEditor.XRUtils;
-using VPG.CreatorEditor.Analytics;
+using VPG.Editor.XRUtils;
+using VPG.Editor.Analytics;
 using UnityEditor;
 
-namespace VPG.CreatorEditor.UI.Wizard
+namespace VPG.Editor.UI.Wizard
 {
     /// <summary>
     /// Wizard page which retrieves and loads XR SDKs.

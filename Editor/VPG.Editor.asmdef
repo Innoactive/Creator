@@ -1,5 +1,5 @@
 {
-    "name": "VPG.CreatorEditor",
+    "name": "VPG.Editor",
     "references": [
         "GUID:c8561f9de838ac04d8feeda695bc572d",
         "GUID:e40ba710768534012815d3193fa296cb",

@@ -1,8 +1,8 @@
 using UnityEditor;
 using UnityEngine;
-using VPG.CreatorEditor.Setup;
+using VPG.Editor.Setup;
 
-namespace VPG.CreatorEditor.UI.Wizard
+namespace VPG.Editor.UI.Wizard
 {
     /// <summary>
     /// Wizard page which handles the training scene setup.

@@ -1,6 +1,6 @@
 using System;
 
-namespace VPG.Creator.Core.Attributes
+namespace VPG.Core.Attributes
 {
     /// <summary>
     /// Use this attribute to explicitly specify an implementation of `ITrainingDrawer` that should be used.

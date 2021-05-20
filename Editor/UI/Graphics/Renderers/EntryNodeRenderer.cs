@@ -1,8 +1,8 @@
-﻿using VPG.CreatorEditor.UI.Graphics.Renderers;
+﻿using VPG.Editor.UI.Graphics.Renderers;
 using UnityEngine;
 using UnityEditor;
 
-namespace VPG.CreatorEditor.UI.Graphics
+namespace VPG.Editor.UI.Graphics
 {
     internal class EntryNodeRenderer : MulticoloredGraphicalElementRenderer<EntryNode>
     {

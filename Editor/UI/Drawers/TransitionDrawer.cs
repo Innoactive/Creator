@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
-using VPG.Creator.Core;
-using VPG.Creator.Core.Attributes;
+using VPG.Core;
+using VPG.Core.Attributes;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Drawers
+namespace VPG.Editor.UI.Drawers
 {
     /// <summary>
     /// Drawer for a transition which displays name of the target step as part of its label.

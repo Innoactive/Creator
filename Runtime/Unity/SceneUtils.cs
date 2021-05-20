@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace VPG.Creator.Unity
+namespace VPG.Unity
 {
     public static class SceneUtils
     {

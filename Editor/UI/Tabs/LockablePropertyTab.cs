@@ -1,8 +1,8 @@
 ﻿using System.Runtime.Serialization;
-using VPG.Creator.Core;
+using VPG.Core;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.Tabs
+namespace VPG.Editor.Tabs
 {
     internal class LockablePropertyTab : ITab
     {

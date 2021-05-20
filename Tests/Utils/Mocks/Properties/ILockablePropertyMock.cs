@@ -1,7 +1,7 @@
-﻿using VPG.Creator.Core.SceneObjects;
-using VPG.Creator.Core.Properties;
+﻿using VPG.Core.SceneObjects;
+using VPG.Core.Properties;
 
-namespace VPG.Creator.Tests.Utils.Mocks
+namespace VPG.Tests.Utils.Mocks
 {
     /// <summary>
     /// Interface for a <see cref="LockablePropertyMock"/>.

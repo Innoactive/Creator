@@ -1,8 +1,8 @@
-﻿using VPG.Creator.Core;
-using VPG.Creator.Core.Behaviors;
-using VPG.Creator.Core.Internationalization;
+﻿using VPG.Core;
+using VPG.Core.Behaviors;
+using VPG.Core.Internationalization;
 
-namespace VPG.Creator.Tests.Utils.Mocks
+namespace VPG.Tests.Utils.Mocks
 {
     /// <summary>
     /// Helper behavior for testing that has a <seealso cref="LocalizedString"/>.

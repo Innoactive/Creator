@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VPG.Creator.Core.SceneObjects
+namespace VPG.Core.SceneObjects
 {
     public class LockStateChangedEventArgs : EventArgs
     {

@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// Abstract holder of data.

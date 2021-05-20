@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace VPG.Creator.Core.Serialization
+namespace VPG.Core.Serialization
 {
     /// <summary>
     /// Converts Vector2 into json and back.

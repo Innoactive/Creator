@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using VPG.Creator.Core;
-using VPG.Creator.Core.Conditions;
-using VPG.Creator.Core.Properties;
-using VPG.Creator.Core.RestrictiveEnvironment;
-using VPG.Creator.Core.SceneObjects;
+using VPG.Core;
+using VPG.Core.Conditions;
+using VPG.Core.Properties;
+using VPG.Core.RestrictiveEnvironment;
+using VPG.Core.SceneObjects;
 
-namespace VPG.Creator.Tests.Utils.Mocks
+namespace VPG.Tests.Utils.Mocks
 {
     /// <summary>
     /// Helper condition for testing that allows explicitly marking a condition as completed.

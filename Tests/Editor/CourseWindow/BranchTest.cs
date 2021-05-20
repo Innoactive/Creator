@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using VPG.Creator.Core;
-using VPG.CreatorEditor.UI.Windows;
+using VPG.Core;
+using VPG.Editor.UI.Windows;
 
-namespace VPG.CreatorEditor.Tests.CourseWindowTests
+namespace VPG.Editor.Tests.CourseWindowTests
 {
     internal class BranchTest : BaseCourseWindowTest
     {

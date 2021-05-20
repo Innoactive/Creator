@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VPG.Creator.Core.Configuration.Modes;
-using VPG.Creator.Core.Properties;
-using VPG.Creator.Unity;
+using VPG.Core.Configuration.Modes;
+using VPG.Core.Properties;
+using VPG.Unity;
 
-namespace VPG.Creator.Core.RestrictiveEnvironment
+namespace VPG.Core.RestrictiveEnvironment
 {
     /// <summary>
     /// Restricts interaction with scene objects by using LockableProperties, which are extracted from the <see cref="IStepData"/>.

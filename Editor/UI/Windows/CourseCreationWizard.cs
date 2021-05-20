@@ -1,10 +1,10 @@
-using VPG.Creator.Core;
-using VPG.Creator.Core.Configuration;
+using VPG.Core;
+using VPG.Core.Configuration;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Windows
+namespace VPG.Editor.UI.Windows
 {
     /// <summary>
     /// Wizard for training course creation and management.

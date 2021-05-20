@@ -1,7 +1,7 @@
-namespace VPG.Creator.Core.UI.Drawers.Metadata
+namespace VPG.Core.UI.Drawers.Metadata
 {
     /// <summary>
-    /// Metadata to make <see cref="VPG.Creator.Core.Attributes.ReorderableListOfAttribute"/> reorderable.
+    /// Metadata to make <see cref="VPG.Core.Attributes.ReorderableListOfAttribute"/> reorderable.
     /// </summary>
     public class ReorderableElementMetadata
     {

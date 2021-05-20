@@ -1,4 +1,4 @@
-﻿namespace VPG.CreatorEditor.CourseValidation
+﻿namespace VPG.Editor.CourseValidation
 {
     /// <summary>
     /// Context is used to indicate the position in the course structure.

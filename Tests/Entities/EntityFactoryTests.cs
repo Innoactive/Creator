@@ -1,9 +1,9 @@
-using VPG.Creator.Core;
-using VPG.Creator.Tests.Utils;
+using VPG.Core;
+using VPG.Tests.Utils;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace VPG.Creator.Tests
+namespace VPG.Tests
 {
     public class EntityFactoryTests : RuntimeTests
     {

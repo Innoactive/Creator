@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Linq;
 
-namespace VPG.Creator.Core.EntityOwners.FoldedEntityCollection
+namespace VPG.Core.EntityOwners.FoldedEntityCollection
 {
     /// <summary>
     /// An active process over a sequence of entities.

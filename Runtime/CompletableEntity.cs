@@ -1,6 +1,6 @@
-using VPG.Creator.Core.Conditions;
+using VPG.Core.Conditions;
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// An <see cref="Entity{TData}"/> which can be completed. Entities can be completed only during their Active <seealso cref="Stage"/>.

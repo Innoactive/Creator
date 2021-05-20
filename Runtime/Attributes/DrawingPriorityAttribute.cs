@@ -1,6 +1,6 @@
 using System;
 
-namespace VPG.Creator.Core.Attributes
+namespace VPG.Core.Attributes
 {
     /// <summary>
     /// Declares the drawing order for this element.

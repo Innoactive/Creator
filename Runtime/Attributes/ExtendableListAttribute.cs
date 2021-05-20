@@ -1,9 +1,9 @@
 using System;
 using System.Reflection;
 using System.Runtime.Serialization;
-using VPG.Creator.Core.Utils;
+using VPG.Core.Utils;
 
-namespace VPG.Creator.Core.Attributes
+namespace VPG.Core.Attributes
 {
     /// <summary>
     /// Declares that new elements can be added to this list.

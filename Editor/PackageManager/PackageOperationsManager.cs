@@ -8,7 +8,7 @@ using UnityEditor.PackageManager.Requests;
 using Debug = UnityEngine.Debug;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
-namespace VPG.CreatorEditor.PackageManager
+namespace VPG.Editor.PackageManager
 {
     /// <summary>
     /// Handles different Unity's Package Manager requests.

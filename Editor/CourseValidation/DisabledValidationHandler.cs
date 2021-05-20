@@ -1,5 +1,5 @@
-﻿using VPG.Creator.Core;
-using VPG.CreatorEditor.CourseValidation;
+﻿using VPG.Core;
+using VPG.Editor.CourseValidation;
 
 /// <summary>
 /// Does not validate, used to disabled the validation system.

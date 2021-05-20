@@ -1,6 +1,6 @@
-﻿using VPG.Creator.Core.Configuration.Modes;
+﻿using VPG.Core.Configuration.Modes;
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// The basic interface for all components of a training course: behaviors, conditions, transitions, and so on.

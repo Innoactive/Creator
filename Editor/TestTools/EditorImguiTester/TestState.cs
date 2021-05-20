@@ -1,4 +1,4 @@
-namespace VPG.CreatorEditor.TestTools
+namespace VPG.Editor.TestTools
 {
     /// <summary>
     /// State of <see cref="EditorImguiTest{T}"/>

@@ -3,12 +3,12 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using CommandLine;
-using VPG.Creator.Unity;
+using VPG.Unity;
 using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor
+namespace VPG.Editor
 {
     internal static class PackageExporter
     {

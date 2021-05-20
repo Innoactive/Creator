@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using VPG.Creator.Core;
-using VPG.CreatorEditor.Configuration;
-using VPG.CreatorEditor.UI.Graphics;
-using VPG.CreatorEditor.UndoRedo;
-using VPG.CreatorEditor.Utils;
+using VPG.Core;
+using VPG.Editor.Configuration;
+using VPG.Editor.UI.Graphics;
+using VPG.Editor.UndoRedo;
+using VPG.Editor.Utils;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Windows
+namespace VPG.Editor.UI.Windows
 {
     internal class ChapterRepresentation
     {

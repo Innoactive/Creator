@@ -1,11 +1,11 @@
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using VPG.Creator.Core;
-using VPG.CreatorEditor.UI.Windows;
-using VPG.CreatorEditor.Configuration;
+using VPG.Core;
+using VPG.Editor.UI.Windows;
+using VPG.Editor.Configuration;
 
-namespace VPG.CreatorEditor
+namespace VPG.Editor
 {
     /// <summary>
     /// This strategy is used by default and it handles interaction between course assets and various Creator windows.

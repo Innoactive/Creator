@@ -1,12 +1,12 @@
-using VPG.CreatorEditor.UI;
+using VPG.Editor.UI;
 using UnityEditor;
 using UnityEngine;
-using VPG.CreatorEditor;
+using VPG.Editor;
 #if CREATOR_PRO
 using Innoactive.CreatorPro.Account;
 #endif
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// Overlay for the workflow editor showing basic instructions on how to get started,

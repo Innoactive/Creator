@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.Analytics
+namespace VPG.Editor.Analytics
 {
     /// <summary>
     /// Sends data to Google Analytics.

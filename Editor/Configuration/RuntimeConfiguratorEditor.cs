@@ -2,18 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using VPG.Creator.Core.Configuration;
-using VPG.Creator.Core.Utils;
+using VPG.Core.Configuration;
+using VPG.Core.Utils;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.Configuration
+namespace VPG.Editor.Configuration
 {
     /// <summary>
     /// Custom editor for choosing the training configuration in the Unity game object inspector.
     /// </summary>
     [CustomEditor(typeof(RuntimeConfigurator))]
-    public class RuntimeConfiguratorEditor : Editor
+    public class RuntimeConfiguratorEditor : UnityEditor.Editor
     {
         private const string configuratorSelectedCoursePropertyName = "selectedCourseStreamingAssetsPath";
 

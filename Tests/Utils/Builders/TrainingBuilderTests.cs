@@ -2,19 +2,19 @@ using System;
 using NUnit.Framework;
 using System.Collections;
 using System.Linq;
-using VPG.Creator.Core;
-using VPG.Creator.Core.Behaviors;
-using VPG.Creator.Core.Conditions;
-using VPG.Creator.Core.Internationalization;
-using VPG.Creator.Core.SceneObjects;
-using VPG.Creator.Core.Properties;
-using VPG.Creator.Tests.Builder;
-using VPG.Creator.Tests.Utils;
+using VPG.Core;
+using VPG.Core.Behaviors;
+using VPG.Core.Conditions;
+using VPG.Core.Internationalization;
+using VPG.Core.SceneObjects;
+using VPG.Core.Properties;
+using VPG.Tests.Builder;
+using VPG.Tests.Utils;
 using UnityEngine;
 using UnityEngine.TestTools;
 using Object = UnityEngine.Object;
 
-namespace VPG.Creator.Tests.Builder
+namespace VPG.Tests.Builder
 {
     public class TrainingBuilderTests : RuntimeTests
     {

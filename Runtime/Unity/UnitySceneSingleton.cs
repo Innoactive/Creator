@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using VPG.Creator.Core.Utils;
+using VPG.Core.Utils;
 using UnityEngine;
 
-namespace VPG.Creator.Unity
+namespace VPG.Unity
 {
     /// <summary>
     /// An UnitySceneSingleton is intended to be destroyed on scene change.

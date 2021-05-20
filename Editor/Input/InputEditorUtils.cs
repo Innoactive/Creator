@@ -1,8 +1,8 @@
-﻿using VPG.Creator.Core.Configuration;
+﻿using VPG.Core.Configuration;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.Input
+namespace VPG.Editor.Input
 {
     /// <summary>
     /// Static utility class which provides methods to help managing assets and functionalities of the new input system.

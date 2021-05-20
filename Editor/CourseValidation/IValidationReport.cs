@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using VPG.Creator.Core;
-using VPG.Creator.Core.Behaviors;
-using VPG.Creator.Core.Conditions;
+using VPG.Core;
+using VPG.Core.Behaviors;
+using VPG.Core.Conditions;
 
-namespace VPG.CreatorEditor.CourseValidation
+namespace VPG.Editor.CourseValidation
 {
     /// <summary>
     /// Report about the last validation done by the validation system.

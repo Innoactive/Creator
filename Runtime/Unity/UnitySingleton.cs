@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VPG.Creator.Unity
+namespace VPG.Unity
 {
     /// <summary>
     /// Make sure we always have one and only one instance of this class when we need it.

@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// A base implementation of a <seealso cref="IProcess"/> which provides access to its entity's data.

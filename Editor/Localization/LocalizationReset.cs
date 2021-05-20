@@ -1,7 +1,7 @@
-﻿using VPG.Creator.Core.Internationalization;
+﻿using VPG.Core.Internationalization;
 using UnityEditor;
 
-namespace VPG.Creator.Core.Editor.Internationalization
+namespace VPG.Core.Editor.Internationalization
 {
     /// <summary>
     /// Resets the active language so this behaves in editor the same as in a build version.

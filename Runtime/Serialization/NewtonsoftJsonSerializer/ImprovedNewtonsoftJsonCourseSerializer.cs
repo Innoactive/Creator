@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
-using VPG.Creator.Core.Configuration.Modes;
-using VPG.Creator.Core.Serialization.NewtonsoftJson;
+using VPG.Core.Configuration.Modes;
+using VPG.Core.Serialization.NewtonsoftJson;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace VPG.Creator.Core.Serialization
+namespace VPG.Core.Serialization
 {
     /// <summary>
     /// Improved version of the NewtonsoftJsonCourseSerializer, which now allows to serialize very long chapters.

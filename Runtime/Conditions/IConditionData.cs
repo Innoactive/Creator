@@ -1,4 +1,4 @@
-namespace VPG.Creator.Core.Conditions
+namespace VPG.Core.Conditions
 {
     /// <summary>
     /// The base interface for any condition's data class.

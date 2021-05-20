@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace VPG.Creator.Core.EntityOwners
+namespace VPG.Core.EntityOwners
 {
     /// <summary>
     /// A process that stops activation of a current entity in the entity sequence.

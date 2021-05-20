@@ -1,13 +1,13 @@
 using System;
-using VPG.Creator.Core;
-using VPG.Creator.Core.Validation;
-using VPG.CreatorEditor.Configuration;
-using VPG.CreatorEditor.CourseValidation;
-using VPG.CreatorEditor.UndoRedo;
+using VPG.Core;
+using VPG.Core.Validation;
+using VPG.Editor.Configuration;
+using VPG.Editor.CourseValidation;
+using VPG.Editor.UndoRedo;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Windows
+namespace VPG.Editor.UI.Windows
 {
     /// <summary>
     /// TrainingMenuView is shown on the left side of the <see cref="CourseWindow"/> and takes care about overall

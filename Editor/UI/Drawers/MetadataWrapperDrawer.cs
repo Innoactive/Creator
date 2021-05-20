@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using VPG.Creator.Core;
-using VPG.Creator.Core.Attributes;
-using VPG.Creator.Core.Behaviors;
-using VPG.Creator.Core.Conditions;
-using VPG.Creator.Core.UI.Drawers.Metadata;
-using VPG.Creator.Core.Utils;
+using VPG.Core;
+using VPG.Core.Attributes;
+using VPG.Core.Behaviors;
+using VPG.Core.Conditions;
+using VPG.Core.UI.Drawers.Metadata;
+using VPG.Core.Utils;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Drawers
+namespace VPG.Editor.UI.Drawers
 {
     /// <summary>
     /// This drawer receives a data structure which contains an actual object to draw and additional drawing information.

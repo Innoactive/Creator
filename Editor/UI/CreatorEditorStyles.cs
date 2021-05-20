@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEditor.Graphs;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI
+namespace VPG.Editor.UI
 {
     public static class CreatorEditorStyles
     {

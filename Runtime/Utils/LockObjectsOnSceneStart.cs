@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using VPG.Creator.Core.Properties;
-using VPG.Creator.Unity;
+using VPG.Core.Properties;
+using VPG.Unity;
 using UnityEngine;
 
-namespace VPG.Creator.Core.Utils
+namespace VPG.Core.Utils
 {
     /// <summary>
     /// Handles locking of all training scene objects in the scene and makes them non-interactable before the training is started.

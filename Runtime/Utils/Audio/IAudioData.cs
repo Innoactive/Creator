@@ -1,7 +1,7 @@
-using VPG.Creator.Core.Runtime.Properties;
+using VPG.Core.Runtime.Properties;
 using UnityEngine;
 
-namespace VPG.Creator.Core.Audio
+namespace VPG.Core.Audio
 {
     /// <summary>
     /// This class provides audio data in form of an AudioClip. Which also might not be loaded at the time needed,

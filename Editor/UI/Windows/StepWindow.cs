@@ -1,12 +1,12 @@
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
-using VPG.Creator.Core;
-using VPG.CreatorEditor.Tabs;
-using VPG.CreatorEditor.UI.Drawers;
-using VPG.CreatorEditor.Configuration;
+using VPG.Core;
+using VPG.Editor.Tabs;
+using VPG.Editor.UI.Drawers;
+using VPG.Editor.Configuration;
 
-namespace VPG.CreatorEditor.UI.Windows
+namespace VPG.Editor.UI.Windows
 {
     /// <summary>
     /// This class draws the Step Inspector.

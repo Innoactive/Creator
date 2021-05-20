@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace VPG.Creator.Core.Internationalization
+namespace VPG.Core.Internationalization
 {
     /// <summary>
     /// References a localized string.

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace VPG.CreatorEditor.UI
+namespace VPG.Editor.UI
 {
     /// <summary>
     /// Allows to draws over the normal EditorGraphics.

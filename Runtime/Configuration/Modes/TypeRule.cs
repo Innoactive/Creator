@@ -1,6 +1,6 @@
 using System;
 
-namespace VPG.Creator.Core.Configuration.Modes
+namespace VPG.Core.Configuration.Modes
 {
     /// <summary>
     /// An <see cref="IRule{T}"/> for types.

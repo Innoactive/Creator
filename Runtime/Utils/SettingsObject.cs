@@ -4,7 +4,7 @@ using UnityEditor;
 #endif
 using UnityEngine;
 
-namespace VPG.Creator.Core.Runtime.Utils
+namespace VPG.Core.Runtime.Utils
 {
     /// <summary>
     /// ScriptableObject with additional load and save mechanic to make it a singleton.

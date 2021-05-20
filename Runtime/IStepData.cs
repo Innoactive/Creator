@@ -1,6 +1,6 @@
-using VPG.Creator.Core.EntityOwners;
+using VPG.Core.EntityOwners;
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// The interface for a step's data.

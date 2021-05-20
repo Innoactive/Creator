@@ -1,6 +1,6 @@
 ﻿﻿using System;
 
-namespace VPG.Creator.Core.Behaviors
+namespace VPG.Core.Behaviors
 {
     [Flags]
     public enum BehaviorExecutionStages

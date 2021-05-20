@@ -1,6 +1,6 @@
-using VPG.Creator.Core.Configuration.Modes;
+using VPG.Core.Configuration.Modes;
 
-namespace VPG.Creator.Tests.Utils.Mocks
+namespace VPG.Tests.Utils.Mocks
 {
     public class OptionalEndlessBehaviorMock : EndlessBehaviorMock, IOptional
     {

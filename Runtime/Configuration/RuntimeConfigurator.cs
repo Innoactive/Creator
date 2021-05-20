@@ -1,9 +1,9 @@
 using System;
-using VPG.Creator.Core.Configuration.Modes;
-using VPG.Creator.Core.Utils;
+using VPG.Core.Configuration.Modes;
+using VPG.Core.Utils;
 using UnityEngine;
 
-namespace VPG.Creator.Core.Configuration
+namespace VPG.Core.Configuration
 {
     /// <summary>
     /// Configurator to set the training runtime configuration which is used by a training course during its execution.

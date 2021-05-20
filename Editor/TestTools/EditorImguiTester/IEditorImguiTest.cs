@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEditor;
 
-namespace VPG.CreatorEditor.TestTools
+namespace VPG.Editor.TestTools
 {
     /// <summary>
     /// Base interface for all Editor IMGUI tests.

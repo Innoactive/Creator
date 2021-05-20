@@ -1,4 +1,4 @@
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// Base class for implementing post processing after a <see cref="IEntity"/> creation.

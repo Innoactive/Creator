@@ -1,4 +1,4 @@
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// A chapter is a high-level grouping of several <see cref="IStep"/>s.

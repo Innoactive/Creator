@@ -1,6 +1,6 @@
 ﻿﻿using System;
 
-namespace VPG.Creator.Core.SceneObjects
+namespace VPG.Core.SceneObjects
 {
     /// <summary>
     /// Basic interface for everything which is lockable.

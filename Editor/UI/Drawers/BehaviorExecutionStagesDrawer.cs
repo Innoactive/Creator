@@ -1,9 +1,9 @@
 ﻿using System;
-using VPG.Creator.Core.Behaviors;
+using VPG.Core.Behaviors;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Drawers
+namespace VPG.Editor.UI.Drawers
 {
     /// <summary>
     /// Training drawer for <see cref="BehaviorExecutionStages"/> members.

@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace VPG.Creator.Core.Conditions
+namespace VPG.Core.Conditions
 {
     /// <summary>
     /// An abstract class for processes for Active <see cref="Stage"/> of <see cref="ICompletableEntity"/>.

@@ -1,9 +1,9 @@
-﻿using VPG.Creator.Core;
-using VPG.CreatorEditor.UndoRedo;
+﻿using VPG.Core;
+using VPG.Editor.UndoRedo;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Windows
+namespace VPG.Editor.UI.Windows
 {
     /// <summary>
     /// Handles changing the course name.

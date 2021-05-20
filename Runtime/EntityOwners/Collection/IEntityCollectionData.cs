@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VPG.Creator.Core.EntityOwners
+namespace VPG.Core.EntityOwners
 {
     /// <summary>
     /// A generic version of <see cref="IEntityCollectionData"/>

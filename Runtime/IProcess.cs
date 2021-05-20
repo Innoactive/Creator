@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// A process for an <see cref="IEntity"/>'s <see cref="Stage"/>.

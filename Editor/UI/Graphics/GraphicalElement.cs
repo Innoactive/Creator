@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using VPG.CreatorEditor.UI.Graphics.Renderers;
+using VPG.Editor.UI.Graphics.Renderers;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Graphics
+namespace VPG.Editor.UI.Graphics
 {
     /// <summary>
     /// Base class for all views in the Workflow window.

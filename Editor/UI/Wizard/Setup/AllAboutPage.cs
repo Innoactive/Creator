@@ -1,7 +1,7 @@
-using VPG.CreatorEditor.Analytics;
+using VPG.Editor.Analytics;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Wizard
+namespace VPG.Editor.UI.Wizard
 {
     internal class AllAboutPage : WizardPage
     {

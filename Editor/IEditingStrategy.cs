@@ -1,7 +1,7 @@
-using VPG.Creator.Core;
-using VPG.CreatorEditor.UI.Windows;
+using VPG.Core;
+using VPG.Editor.UI.Windows;
 
-namespace VPG.CreatorEditor
+namespace VPG.Editor
 {
     /// <summary>
     /// An interface for a strategy that defines how various events should be handled by the VR Process Gizmo editor.

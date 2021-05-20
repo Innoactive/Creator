@@ -3,10 +3,10 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using VPG.CreatorEditor.PackageManager;
-using VPG.CreatorEditor.XRUtils;
+using VPG.Editor.PackageManager;
+using VPG.Editor.XRUtils;
 
-namespace VPG.CreatorEditor.UI.Wizard
+namespace VPG.Editor.UI.Wizard
 {
     /// <summary>
     /// Wizard which guides the user through setting up a new training project,

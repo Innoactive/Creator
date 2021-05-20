@@ -1,8 +1,8 @@
 ﻿﻿using System;
- using VPG.Creator.Core.SceneObjects;
+ using VPG.Core.SceneObjects;
  using UnityEngine;
 
-namespace VPG.Creator.Core.Properties
+namespace VPG.Core.Properties
 {
     /// <summary>
     /// <see cref="TrainingSceneObjectProperty"/> which is lockable, to allow the restrictive environment to handle

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace VPG.Creator.Core.Internationalization
+namespace VPG.Core.Internationalization
 {
     /// <summary>
     /// Localization configuration data structure. Will load all sources in an ordered way overwriting all

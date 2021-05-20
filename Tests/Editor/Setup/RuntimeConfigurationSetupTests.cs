@@ -1,15 +1,15 @@
 ﻿using System.Linq;
-using VPG.Creator.Core;
-using VPG.Creator.Core.Configuration;
-using VPG.Creator.Tests.Builder;
-using VPG.Creator.Tests.Utils.Mocks;
-using VPG.Creator.Unity;
-using VPG.CreatorEditor.Utils;
+using VPG.Core;
+using VPG.Core.Configuration;
+using VPG.Tests.Builder;
+using VPG.Tests.Utils.Mocks;
+using VPG.Unity;
+using VPG.Editor.Utils;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.Tests
+namespace VPG.Editor.Tests
 {
     public class RuntimeConfigurationSetupTests
     {

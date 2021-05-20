@@ -1,7 +1,7 @@
-﻿using VPG.Creator.Core.SceneObjects;
+﻿using VPG.Core.SceneObjects;
 using UnityEngine;
 
-namespace VPG.Creator.Core.Properties
+namespace VPG.Core.Properties
 {
     [RequireComponent(typeof(TrainingSceneObject))]
     public abstract class TrainingSceneObjectProperty : MonoBehaviour, ISceneObjectProperty

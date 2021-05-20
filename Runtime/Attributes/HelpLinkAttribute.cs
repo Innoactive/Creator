@@ -1,6 +1,6 @@
 using System;
 
-namespace VPG.Creator.Core.Attributes
+namespace VPG.Core.Attributes
 {
     /// <summary>
     /// Adds a link to a documentation that explains a behavior or condition.

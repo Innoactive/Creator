@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.Analytics
+namespace VPG.Editor.Analytics
 {
     internal class SetupTrackingPopup : EditorWindow
     {

@@ -1,8 +1,8 @@
 ﻿using System;
-using VPG.Creator.Core.SceneObjects;
+using VPG.Core.SceneObjects;
 using UnityEngine;
 
-namespace VPG.Creator.Core.Configuration
+namespace VPG.Core.Configuration
 {
     /// <summary>
     /// This wrapper is used for <see cref="IRuntimeConfiguration"/> configurations, which

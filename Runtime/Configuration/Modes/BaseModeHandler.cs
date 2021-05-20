@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using VPG.Creator.Core.Exceptions;
+using VPG.Core.Exceptions;
 
-namespace VPG.Creator.Core.Configuration.Modes
+namespace VPG.Core.Configuration.Modes
 {
     /// <summary>
     /// Simple ModeHandler.

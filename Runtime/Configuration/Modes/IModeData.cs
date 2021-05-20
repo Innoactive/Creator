@@ -1,4 +1,4 @@
-namespace VPG.Creator.Core.Configuration.Modes
+namespace VPG.Core.Configuration.Modes
 {
     public interface IModeData : IData
     {

@@ -1,7 +1,7 @@
 using System.Collections;
-using VPG.Creator.Core.Configuration.Modes;
+using VPG.Core.Configuration.Modes;
 
-namespace VPG.Creator.Core.EntityOwners
+namespace VPG.Core.EntityOwners
 {
     /// <summary>
     /// A process that activates and deactivates entities one after another.

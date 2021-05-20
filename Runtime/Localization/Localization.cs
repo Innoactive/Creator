@@ -2,9 +2,9 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using VPG.Creator.Core.IO;
+using VPG.Core.IO;
 
-namespace VPG.Creator.Core.Internationalization
+namespace VPG.Core.Internationalization
 {
     /// <summary>
     /// This class handles retrieving and managing localization files.

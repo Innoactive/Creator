@@ -1,6 +1,6 @@
 using System;
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// Event that is fired when the current stage changes.

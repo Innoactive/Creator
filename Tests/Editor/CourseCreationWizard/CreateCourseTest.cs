@@ -1,9 +1,9 @@
-using VPG.CreatorEditor.UI.Windows;
-using VPG.CreatorEditor.TestTools;
+using VPG.Editor.UI.Windows;
+using VPG.Editor.TestTools;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.Tests.CourseWizardTests
+namespace VPG.Editor.Tests.CourseWizardTests
 {
     internal class CreateCourseTest : EditorImguiTest<CourseCreationWizard>
     {

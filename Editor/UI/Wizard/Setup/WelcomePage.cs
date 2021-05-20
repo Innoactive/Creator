@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Wizard
+namespace VPG.Editor.UI.Wizard
 {
     internal class WelcomePage : WizardPage
     {

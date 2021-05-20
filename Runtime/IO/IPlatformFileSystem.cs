@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VPG.Creator.Core.IO
+namespace VPG.Core.IO
 {
     /// <summary>
     /// Interface with basic platform operations for reading and saving files in Unity.

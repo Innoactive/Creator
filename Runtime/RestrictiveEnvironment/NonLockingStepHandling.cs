@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace VPG.Creator.Core.RestrictiveEnvironment
+namespace VPG.Core.RestrictiveEnvironment
 {
     /// <summary>
     /// This implementation does not care about restrictive environment and does nothing.

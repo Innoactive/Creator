@@ -1,10 +1,10 @@
 using System.Linq;
 using NUnit.Framework;
-using VPG.Creator.Core;
+using VPG.Core;
 using System.Collections.Generic;
-using VPG.CreatorEditor.UI.Windows;
+using VPG.Editor.UI.Windows;
 
-namespace VPG.CreatorEditor.Tests.CourseWindowTests
+namespace VPG.Editor.Tests.CourseWindowTests
 {
     internal class AddOneStepTest : BaseCourseWindowTest
     {

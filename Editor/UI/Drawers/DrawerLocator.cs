@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using VPG.Creator.Core.Attributes;
-using VPG.Creator.Core.Utils;
+using VPG.Core.Attributes;
+using VPG.Core.Utils;
 
-namespace VPG.CreatorEditor.UI.Drawers
+namespace VPG.Editor.UI.Drawers
 {
     internal static class DrawerLocator
     {

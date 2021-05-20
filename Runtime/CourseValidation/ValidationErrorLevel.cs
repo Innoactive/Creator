@@ -1,5 +1,5 @@
 ﻿
-namespace VPG.Creator.Core.Validation
+namespace VPG.Core.Validation
 {
     /// <summary>
     /// Error level of the problem found while validating.

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using VPG.CreatorEditor.Configuration;
-using VPG.CreatorEditor.CourseValidation;
+using VPG.Editor.Configuration;
+using VPG.Editor.CourseValidation;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Graphics.Renderers
+namespace VPG.Editor.UI.Graphics.Renderers
 {
     internal class StepNodeRenderer : MulticoloredGraphicalElementRenderer<StepNode>
     {

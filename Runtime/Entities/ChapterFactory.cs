@@ -1,6 +1,6 @@
-using VPG.Creator.Unity;
+using VPG.Unity;
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// Factory implementation for <see cref="IChapter"/> objects.

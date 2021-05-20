@@ -1,7 +1,7 @@
-using VPG.CreatorEditor.Configuration;
+using VPG.Editor.Configuration;
 using UnityEditor;
 
-namespace VPG.CreatorEditor.CreatorMenu
+namespace VPG.Editor.CreatorMenu
 {
     internal static class SetupSceneEntry
     {

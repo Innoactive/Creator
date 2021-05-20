@@ -1,4 +1,4 @@
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// A base interface for an autocompleter. Autocompleters are used alongside fast-forwarding of the processes. They must fake circumstances under which conditions should complete if fast-forwarding requires it.

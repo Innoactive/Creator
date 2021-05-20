@@ -1,7 +1,7 @@
-﻿using VPG.Creator.Core.Internationalization;
+﻿using VPG.Core.Internationalization;
 using UnityEditor;
 
-namespace VPG.CreatorEditor.UI
+namespace VPG.Editor.UI
 {
     public class LanguageSettingsProvider : BaseSettingsProvider
     {
@@ -12,7 +12,7 @@ namespace VPG.CreatorEditor.UI
         protected override void InternalDraw(string searchContext)
         {
             LanguageSettings config = LanguageSettings.Instance;
-            Editor.CreateEditor(config).OnInspectorGUI();
+            UnityEditor.Editor.CreateEditor(config).OnInspectorGUI();
         }
 
         public override void OnDeactivate()

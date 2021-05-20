@@ -1,4 +1,4 @@
-﻿namespace VPG.Creator.Core
+﻿namespace VPG.Core
 {
     /// <summary>
     /// <see cref="IStep"/> implementation of <see cref="EntityPostProcessing{T}"/>.

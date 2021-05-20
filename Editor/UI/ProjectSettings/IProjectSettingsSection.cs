@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VPG.CreatorEditor.UI
+namespace VPG.Editor.UI
 {
     /// <summary>
     /// Allows to inject a settings section into a setting provider.

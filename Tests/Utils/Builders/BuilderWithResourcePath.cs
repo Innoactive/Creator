@@ -1,6 +1,6 @@
 using System;
 
-namespace VPG.Creator.Tests.Builder
+namespace VPG.Tests.Builder
 {
     /// <summary>
     /// Abstract Builder with ResourcePath property.

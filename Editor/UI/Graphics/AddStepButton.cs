@@ -1,7 +1,7 @@
-﻿using VPG.CreatorEditor.UI.Graphics.Renderers;
+﻿using VPG.Editor.UI.Graphics.Renderers;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Graphics
+namespace VPG.Editor.UI.Graphics
 {
     /// <summary>
     /// Represents "Add new step" button. It is rendered at the middle of it's parent Transition and inserts a new step on click into the training workflow.

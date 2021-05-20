@@ -1,8 +1,8 @@
 ﻿using System.Runtime.Serialization;
-using VPG.Creator.Core.Attributes;
-using VPG.Creator.Core.Behaviors;
+using VPG.Core.Attributes;
+using VPG.Core.Behaviors;
 
-namespace VPG.Creator.Core
+namespace VPG.Core
 {
     /// <summary>
     /// Interface that enables non-blocking background behaviors.

@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using VPG.Creator.Core.Utils;
+using VPG.Core.Utils;
 using UnityEditor;
 using Debug = UnityEngine.Debug;
 
-namespace VPG.CreatorEditor.PackageManager
+namespace VPG.Editor.PackageManager
 {
     /// <summary>
     /// Automatically retrieves all dependencies from the Unity's Package Manager at the startup.

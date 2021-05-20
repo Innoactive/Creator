@@ -1,17 +1,17 @@
 using System.Collections;
 using UnityEngine.TestTools;
 using System;
-using VPG.Creator.Core;
-using VPG.Creator.Core.Behaviors;
-using VPG.Creator.Core.Conditions;
-using VPG.Creator.Core.Configuration;
-using VPG.Creator.Core.Exceptions;
-using VPG.Creator.Tests.Utils;
-using VPG.Creator.Tests.Utils.Mocks;
+using VPG.Core;
+using VPG.Core.Behaviors;
+using VPG.Core.Conditions;
+using VPG.Core.Configuration;
+using VPG.Core.Exceptions;
+using VPG.Tests.Utils;
+using VPG.Tests.Utils.Mocks;
 using UnityEngine;
 using NUnit.Framework;
 
-namespace VPG.Creator.Tests.Courses
+namespace VPG.Tests.Courses
 {
     public class StepTests : RuntimeTests
     {

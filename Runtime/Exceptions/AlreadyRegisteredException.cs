@@ -1,6 +1,6 @@
-﻿using VPG.Creator.Core.SceneObjects;
+﻿using VPG.Core.SceneObjects;
 
-namespace VPG.Creator.Core.Exceptions
+namespace VPG.Core.Exceptions
 {
     public class AlreadyRegisteredException : TrainingException
     {

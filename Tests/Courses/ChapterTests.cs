@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
-using VPG.Creator.Core;
-using VPG.Creator.Core.Configuration;
-using VPG.Creator.Core.Exceptions;
-using VPG.Creator.Tests.Builder;
-using VPG.Creator.Tests.Utils;
-using VPG.Creator.Tests.Utils.Mocks;
+using VPG.Core;
+using VPG.Core.Configuration;
+using VPG.Core.Exceptions;
+using VPG.Tests.Builder;
+using VPG.Tests.Utils;
+using VPG.Tests.Utils.Mocks;
 using NUnit.Framework;
 using UnityEngine.TestTools;
 
-namespace VPG.Creator.Tests.Courses
+namespace VPG.Tests.Courses
 {
     public class ChapterTests : RuntimeTests
     {

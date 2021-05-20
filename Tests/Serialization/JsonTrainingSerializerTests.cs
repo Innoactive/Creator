@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Linq;
-using VPG.Creator.Core;
-using VPG.Creator.Core.Behaviors;
-using VPG.Creator.Core.Conditions;
-using VPG.Creator.Core.Internationalization;
-using VPG.Creator.Tests.Builder;
-using VPG.Creator.Tests.Utils;
-using VPG.Creator.Tests.Utils.Mocks;
+using VPG.Core;
+using VPG.Core.Behaviors;
+using VPG.Core.Conditions;
+using VPG.Core.Internationalization;
+using VPG.Tests.Builder;
+using VPG.Tests.Utils;
+using VPG.Tests.Utils.Mocks;
 using UnityEngine.Assertions;
 using UnityEngine.TestTools;
 
-namespace VPG.Creator.Tests.Serialization
+namespace VPG.Tests.Serialization
 {
     public class JsonTrainingSerializerTests : RuntimeTests
     {

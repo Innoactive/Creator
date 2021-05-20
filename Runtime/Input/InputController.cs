@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using VPG.Creator.Unity;
+using VPG.Unity;
 
-namespace VPG.Creator.Core.Input
+namespace VPG.Core.Input
 {
     /// <summary>
     /// Central controller for input via the new Input System using C# events.

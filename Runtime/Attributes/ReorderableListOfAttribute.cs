@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VPG.Creator.Core.Attributes
+namespace VPG.Core.Attributes
 {
     /// <summary>
     /// Declares that children of this list have metadata attributes and can be reordered.

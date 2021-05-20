@@ -4,11 +4,11 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using VPG.Creator.Core.IO;
+using VPG.Core.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace VPG.Creator.Core.Internationalization
+namespace VPG.Core.Internationalization
 {
     /// <summary>
     /// Collection of localization utilities.

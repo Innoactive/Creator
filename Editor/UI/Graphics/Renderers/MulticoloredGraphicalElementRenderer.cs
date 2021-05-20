@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Graphics.Renderers
+namespace VPG.Editor.UI.Graphics.Renderers
 {
     /// <summary>
     /// Renderer for graphical elements that are supposed to change their color while being pressed or hovered over.

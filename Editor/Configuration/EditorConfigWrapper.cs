@@ -1,10 +1,10 @@
 ﻿using System.Collections.ObjectModel;
-using VPG.Creator.Core.Behaviors;
-using VPG.Creator.Core.Conditions;
-using VPG.Creator.Core.Serialization;
-using VPG.CreatorEditor.UI.StepInspector.Menu;
+using VPG.Core.Behaviors;
+using VPG.Core.Conditions;
+using VPG.Core.Serialization;
+using VPG.Editor.UI.StepInspector.Menu;
 
-namespace VPG.CreatorEditor.Configuration
+namespace VPG.Editor.Configuration
 {
     internal class EditorConfigWrapper : DefaultEditorConfiguration
     {

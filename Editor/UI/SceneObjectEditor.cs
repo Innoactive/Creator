@@ -1,16 +1,16 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.Reflection;
-using VPG.Creator.Core.SceneObjects;
-using VPG.Creator.Core.Properties;
+using VPG.Core.SceneObjects;
+using VPG.Core.Properties;
 
-namespace VPG.CreatorEditor.UI
+namespace VPG.Editor.UI
 {
     /// <summary>
     /// This class adds names to newly added entities.
     /// </summary>
     [CustomEditor(typeof(TrainingSceneObject))]
-    internal class SceneObjectEditor : Editor
+    internal class SceneObjectEditor : UnityEditor.Editor
     {
         private void OnEnable()
         {

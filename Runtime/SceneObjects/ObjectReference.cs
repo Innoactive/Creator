@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using VPG.Creator.Core.Exceptions;
-using VPG.Creator.Core.Runtime.Properties;
+using VPG.Core.Exceptions;
+using VPG.Core.Runtime.Properties;
 
-namespace VPG.Creator.Core.SceneObjects
+namespace VPG.Core.SceneObjects
 {
     /// <summary>
     /// Base class for references to training scene objects and their properties.

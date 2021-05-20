@@ -1,7 +1,7 @@
-﻿using VPG.CreatorEditor.UI.Graphics.Renderers;
+﻿using VPG.Editor.UI.Graphics.Renderers;
 using UnityEngine;
 
-namespace VPG.CreatorEditor.UI.Graphics
+namespace VPG.Editor.UI.Graphics
 {
     /// <summary>
     /// Represents the grid in the background of the chapter within the Workflow window.
