@@ -5,7 +5,7 @@ namespace VPG.Editor.UI
 {
     internal class VPGPageProvider : BaseSettingsProvider
     {
-        const string Path = "Project/Creator";
+        const string Path = "Project/VR Process Gizmo";
 
         public VPGPageProvider() : base(Path, SettingsScope.Project)
         {

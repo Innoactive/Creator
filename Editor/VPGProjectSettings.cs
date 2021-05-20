@@ -26,7 +26,7 @@ public partial class VPGProjectSettings : ScriptableObject
     /// <returns>Creator Settings</returns>
     public static VPGProjectSettings Load()
     {
-        VPGProjectSettings settings = Resources.Load<VPGProjectSettings>("CreatorProjectSettings");
+        VPGProjectSettings settings = Resources.Load<VPGProjectSettings>("VPGProjectSettings");
         if (settings == null)
         {
             if (!Directory.Exists("Assets/Resources"))
@@ -35,7 +35,7 @@ public partial class VPGProjectSettings : ScriptableObject
             }
             // Create an instance
             settings = CreateInstance<VPGProjectSettings>();
-            AssetDatabase.CreateAsset(settings, "Assets/Resources/CreatorProjectSettings.asset");
+            AssetDatabase.CreateAsset(settings, "Assets/Resources/VPGProjectSettings.asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 

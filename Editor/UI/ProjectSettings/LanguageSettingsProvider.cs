@@ -1,11 +1,11 @@
-﻿using VPG.Core.Internationalization;
+using VPG.Core.Internationalization;
 using UnityEditor;
 
 namespace VPG.Editor.UI
 {
     public class LanguageSettingsProvider : BaseSettingsProvider
     {
-        const string Path = "Project/Creator/Language";
+        const string Path = "Project/VR Process Gizmo/Language";
 
         public LanguageSettingsProvider() : base(Path, SettingsScope.Project) {}
 

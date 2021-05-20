@@ -11,7 +11,7 @@ namespace VPG.Editor.VPGMenu
         [MenuItem("VR Process Gizmo/Settings", false, 16)]
         public static void Show()
         {
-            SettingsService.OpenProjectSettings("Project/Creator");
+            SettingsService.OpenProjectSettings("Project/VR Process Gizmo");
         }
     }
 }
