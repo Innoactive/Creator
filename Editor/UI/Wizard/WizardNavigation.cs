@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using VPG.Editor.UI;
 using UnityEditor;
 using UnityEngine;
@@ -41,7 +41,7 @@ namespace VPG.Editor.UI.Wizard
             EditorGUI.DrawRect(new Rect(0, Entries.Count * EntryHeight + 1 + PaddingTop, window.width, window.height - 1 - Entries.Count * EntryHeight), WizardWindow.LineColor);
 
             Rect logoRect = new Rect(window.x + 16f, window.y + window.height - (window.width / 2) - 5, window.width - 32f, (window.width - 32) * 0.34f);
-            GUI.DrawTexture(logoRect, logo.Texture);
+            GUI.DrawTexture(logoRect, logo.Texture, ScaleMode.ScaleToFit);
         }
 
         protected Rect GetEntryRect(int position, float width)
