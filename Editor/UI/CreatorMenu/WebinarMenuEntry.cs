@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.Editor.CreatorMenu
+namespace VPG.Editor.VPGMenu
 {
     internal static class WebinarMenuEntry
     {

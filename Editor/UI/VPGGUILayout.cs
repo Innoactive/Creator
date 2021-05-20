@@ -13,7 +13,7 @@ namespace VPG.Editor.UI
     /// <summary>
     /// Layout extension for the VR Process Gizmo.
     /// </summary>
-    public static class CreatorGUILayout
+    public static class VPGGUILayout
     {
         /// <summary>
         /// Draws a clickable link which opens a website.
@@ -21,7 +21,7 @@ namespace VPG.Editor.UI
         /// <param name="text">Text to be displayed</param>
         /// <param name="url">url to be opened inside the browser</param>
         /// <param name="indent">Intend on the left</param>
-        public static void DrawLink(string text, string url, int indent = CreatorEditorStyles.Indent)
+        public static void DrawLink(string text, string url, int indent = VPGEditorStyles.Indent)
         {
             DrawLink(text, () =>
             {
@@ -42,15 +42,15 @@ namespace VPG.Editor.UI
         /// <param name="text">Text to be displayed</param>
         /// <param name="action">action done on click</param>
         /// <param name="indent">Intend on the left</param>
-        public static void DrawLink(string text, Action action, int indent = CreatorEditorStyles.Indent)
+        public static void DrawLink(string text, Action action, int indent = VPGEditorStyles.Indent)
         {
-            if (GUILayout.Button(text, CreatorEditorStyles.ApplyPadding(CreatorEditorStyles.Link, indent)))
+            if (GUILayout.Button(text, VPGEditorStyles.ApplyPadding(VPGEditorStyles.Link, indent)))
             {
                 action.Invoke();
             }
 
             Rect buttonRect = GUILayoutUtility.GetLastRect();
-            GUI.Label(new Rect(buttonRect.x, buttonRect.y + 1, buttonRect.width, buttonRect.height), new String('_', 256), CreatorEditorStyles.ApplyPadding(CreatorEditorStyles.Link, indent));
+            GUI.Label(new Rect(buttonRect.x, buttonRect.y + 1, buttonRect.width, buttonRect.height), new String('_', 256), VPGEditorStyles.ApplyPadding(VPGEditorStyles.Link, indent));
             EditorGUIUtility.AddCursorRect(buttonRect, MouseCursor.Link);
         }
 
@@ -63,10 +63,10 @@ namespace VPG.Editor.UI
         {
             GUILayout.BeginHorizontal();
             {
-                GUIStyle style = CreatorEditorStyles.TextField;
+                GUIStyle style = VPGEditorStyles.TextField;
                 if (indent != 0)
                 {
-                    style = CreatorEditorStyles.ApplyPadding(style, indent);
+                    style = VPGEditorStyles.ApplyPadding(style, indent);
                 }
 
                 content = GUILayout.TextField(content, charLimit, style, options);
@@ -91,7 +91,7 @@ namespace VPG.Editor.UI
         {
             for (int i = 0; i < entries.Count; i++)
             {
-                if (GUILayout.Toggle(entries[i].Equals(selection), content[i], CreatorEditorStyles.Toggle))
+                if (GUILayout.Toggle(entries[i].Equals(selection), content[i], VPGEditorStyles.Toggle))
                 {
                     if (!selection.Equals(entries[i]))
                     {

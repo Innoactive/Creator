@@ -8,7 +8,7 @@ using VPG.Editor.Configuration;
 namespace VPG.Editor
 {
     /// <summary>
-    /// This strategy is used by default and it handles interaction between course assets and various Creator windows.
+    /// This strategy is used by default and it handles interaction between course assets and various VPG windows.
     /// </summary>
     internal class DefaultEditingStrategy : IEditingStrategy
     {

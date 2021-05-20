@@ -103,7 +103,7 @@ namespace VPG.Editor
         }
 
         /// <summary>
-        /// Returns the Creator Core version as string.
+        /// Returns the VPG Core version as string.
         /// </summary>
         internal static string GetCoreVersion()
         {
@@ -147,7 +147,7 @@ namespace VPG.Editor
 
             if (roots.Length == 0)
             {
-                throw new FileNotFoundException("Creator Core folder not found!");
+                throw new FileNotFoundException("VPG Core folder not found!");
             }
 
             coreFolder = Path.GetDirectoryName(roots.First());

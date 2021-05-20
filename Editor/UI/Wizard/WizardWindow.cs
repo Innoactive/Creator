@@ -237,7 +237,7 @@ namespace VPG.Editor.UI.Wizard
 
         protected Rect GetContentRect()
         {
-            return new Rect(Settings.Size.x * Settings.NavigationBarRatio + CreatorEditorStyles.Indent, CreatorEditorStyles.Indent / 2, Settings.Size.x - (Settings.Size.x * Settings.NavigationBarRatio) - (2 * CreatorEditorStyles.Indent), Settings.Size.y - Settings.BottomBarHeight - CreatorEditorStyles.Indent);
+            return new Rect(Settings.Size.x * Settings.NavigationBarRatio + VPGEditorStyles.Indent, VPGEditorStyles.Indent / 2, Settings.Size.x - (Settings.Size.x * Settings.NavigationBarRatio) - (2 * VPGEditorStyles.Indent), Settings.Size.y - Settings.BottomBarHeight - VPGEditorStyles.Indent);
         }
 
         protected Rect GetBottomBarRect()

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -79,7 +79,7 @@ namespace VPG.Editor.PackageManager
             foreach (Dependency dependency in dependenciesList)
             {
                 int index = dependenciesList.FindIndex(item => item == dependency);
-                EditorUtility.DisplayProgressBar("Importing Creator dependencies", $"Fetching {dependency.Package}", index * percentage);
+                EditorUtility.DisplayProgressBar("Importing dependencies", $"Fetching {dependency.Package}", index * percentage);
 
                 if (PackageOperationsManager.IsPackageLoaded(dependency.Package, dependency.Version))
                 {

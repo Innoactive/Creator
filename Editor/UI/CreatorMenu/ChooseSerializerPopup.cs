@@ -5,7 +5,7 @@ using VPG.Core.Serialization;
 using UnityEditor;
 using UnityEngine;
 
-namespace VPG.Editor.CreatorMenu
+namespace VPG.Editor.VPGMenu
 {
     /// <summary>
     /// Allows user to select which serializer they want to use.

@@ -1,5 +1,5 @@
 #if UNITY_XR_MANAGEMENT && WINDOWS_XR
-namespace VPG.CreatorEditor.XRUtils
+namespace VPG.Editor.XRUtils
 {
     /// <summary>
     /// Enables the Windows MR Plugin.

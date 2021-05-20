@@ -120,7 +120,7 @@ namespace VPG.Core.Serialization.NewtonsoftJson
         {
             public override Type BindToType(string assemblyName, string typeName)
             {
-                if (typeName == "VPG.CreatorEditor.UI.Drawers.Metadata.ReorderableElementMetadata")
+                if (typeName == "VPG.Editor.UI.Drawers.Metadata.ReorderableElementMetadata")
                 {
                     return typeof(ReorderableElementMetadata);
                 }

@@ -50,7 +50,7 @@ namespace VPG.Editor.Analytics
                 tracker.SendSessionStart();
                 // Send the Unity Editor version.
                 tracker.Send(new AnalyticsEvent() {Category = "unity", Action = "version", Label = Application.unityVersion});
-                // Send the Creator Core version.
+                // Send the VPG Core version.
                 tracker.Send(new AnalyticsEvent() {Category = "creator", Action = "version", Label = EditorUtils.GetCoreVersion()});
                 // Send the Creator license type.
 #if CREATOR_PRO

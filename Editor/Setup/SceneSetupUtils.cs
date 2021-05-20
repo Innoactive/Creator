@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using VPG.Core;
 using VPG.Core.Configuration;
@@ -15,7 +15,7 @@ namespace VPG.Editor.Setup
     internal class SceneSetupUtils
     {
         public const string SceneDirectory = "Assets/Scenes";
-        private const string SimpleExampleName = "Hello Creator - A 5-step Guide";
+        private const string SimpleExampleName = "Hello Gizmo - A 5-step Guide";
 
         /// <summary>
         /// Creates and saves a new scene with given <paramref name="sceneName"/>.

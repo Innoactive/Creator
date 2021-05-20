@@ -56,7 +56,7 @@ namespace VPG.Editor.UI.Wizard
                 get
                 {
                     GUIStyle style = new GUIStyle(GUI.skin.label);
-                    style.normal.textColor = CreatorEditorStyles.HighlightTextColor;
+                    style.normal.textColor = VPGEditorStyles.HighlightTextColor;
                     return style;
                 }
             }

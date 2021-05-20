@@ -20,22 +20,22 @@ namespace VPG.Core.Editor
                 return;
             }
 
-            CreatorProjectSettings settings = CreatorProjectSettings.Load();
-            if (settings == null || string.IsNullOrEmpty(settings.ProjectCreatorVersion))
+            VPGProjectSettings settings = VPGProjectSettings.Load();
+            if (settings == null || string.IsNullOrEmpty(settings.ProjectVPGVersion))
             {
                 return;
             }
 
-            if (settings.ProjectCreatorVersion == unknownVersionString || EditorUtils.GetCoreVersion() == unknownVersionString)
+            if (settings.ProjectVPGVersion == unknownVersionString || EditorUtils.GetCoreVersion() == unknownVersionString)
             {
                 return;
             }
 
-            if (settings.ProjectCreatorVersion != EditorUtils.GetCoreVersion())
+            if (settings.ProjectVPGVersion != EditorUtils.GetCoreVersion())
             {
                 IAnalyticsTracker tracker = AnalyticsUtils.CreateTracker();
                 tracker.Send(new AnalyticsEvent() {Category = "creator", Action = "updated", Label = EditorUtils.GetCoreVersion()});
-                settings.ProjectCreatorVersion = EditorUtils.GetCoreVersion();
+                settings.ProjectVPGVersion = EditorUtils.GetCoreVersion();
                 settings.Save();
             }
         }

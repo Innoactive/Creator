@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// Settings for a VR Process Gizmo Unity project.
 /// </summary>
-public partial class CreatorProjectSettings : ScriptableObject
+public partial class VPGProjectSettings : ScriptableObject
 {
     /// <summary>
     /// Was the VR Process Gizmo imported and therefore started for the first time.
@@ -15,18 +15,18 @@ public partial class CreatorProjectSettings : ScriptableObject
     public bool IsFirstTimeStarted = true;
 
     /// <summary>
-    /// Creator version used last time this was checked.
+    /// VPG version used last time this was checked.
     /// </summary>
     [HideInInspector]
-    public string ProjectCreatorVersion = null;
+    public string ProjectVPGVersion = null;
 
     /// <summary>
     /// Loads the VR Process Gizmo settings for this Unity project from Resources.
     /// </summary>
     /// <returns>Creator Settings</returns>
-    public static CreatorProjectSettings Load()
+    public static VPGProjectSettings Load()
     {
-        CreatorProjectSettings settings = Resources.Load<CreatorProjectSettings>("CreatorProjectSettings");
+        VPGProjectSettings settings = Resources.Load<VPGProjectSettings>("CreatorProjectSettings");
         if (settings == null)
         {
             if (!Directory.Exists("Assets/Resources"))
@@ -34,7 +34,7 @@ public partial class CreatorProjectSettings : ScriptableObject
                 Directory.CreateDirectory("Assets/Resources");
             }
             // Create an instance
-            settings = CreateInstance<CreatorProjectSettings>();
+            settings = CreateInstance<VPGProjectSettings>();
             AssetDatabase.CreateAsset(settings, "Assets/Resources/CreatorProjectSettings.asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -46,9 +46,9 @@ public partial class CreatorProjectSettings : ScriptableObject
 
     private void OnEnable()
     {
-        if (string.IsNullOrEmpty(ProjectCreatorVersion))
+        if (string.IsNullOrEmpty(ProjectVPGVersion))
         {
-            ProjectCreatorVersion = EditorUtils.GetCoreVersion();
+            ProjectVPGVersion = EditorUtils.GetCoreVersion();
         }
     }
 

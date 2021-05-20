@@ -40,7 +40,7 @@ namespace VPG.Editor.UI
 
                     sections.ForEach(section =>
                     {
-                        GUILayout.Label(section.Title, CreatorEditorStyles.Header);
+                        GUILayout.Label(section.Title, VPGEditorStyles.Header);
                         section.OnGUI(searchContext);
                     });
                 GUILayout.EndVertical();

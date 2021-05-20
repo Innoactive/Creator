@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace VPG.Editor.UI
 {
-    public static class CreatorEditorStyles
+    public static class VPGEditorStyles
     {
         public const int BaseIndent = 2;
 

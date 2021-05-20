@@ -9,12 +9,12 @@ using VPG.Core.Configuration;
 namespace VPG.Editor
 {
     /// <summary>
-    /// A class that handles interactions between Creator windows and course assets by using selected <seealso cref="IEditingStrategy"/> strategy.
+    /// A class that handles interactions between VPG windows and course assets by using selected <seealso cref="IEditingStrategy"/> strategy.
     /// </summary>
     [InitializeOnLoad]
     internal static class GlobalEditorHandler
     {
-        internal const string LastEditedCourseNameKey = "VPG.Creator.Editors.LastEditedCourseName";
+        internal const string LastEditedCourseNameKey = "VPG.Editors.LastEditedCourseName";
 
         private static IEditingStrategy strategy;
 

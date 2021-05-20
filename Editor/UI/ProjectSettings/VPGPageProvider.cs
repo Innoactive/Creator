@@ -1,13 +1,13 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 
 namespace VPG.Editor.UI
 {
-    internal class CreatorPageProvider : BaseSettingsProvider
+    internal class VPGPageProvider : BaseSettingsProvider
     {
         const string Path = "Project/Creator";
 
-        public CreatorPageProvider() : base(Path, SettingsScope.Project)
+        public VPGPageProvider() : base(Path, SettingsScope.Project)
         {
         }
 
@@ -17,9 +17,9 @@ namespace VPG.Editor.UI
         }
 
         [SettingsProvider]
-        public static SettingsProvider GetCreatorSettingsProvider()
+        public static SettingsProvider GetVPGSettingsProvider()
         {
-            SettingsProvider provider = new CreatorPageProvider();
+            SettingsProvider provider = new VPGPageProvider();
             return provider;
         }
     }
