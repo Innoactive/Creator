@@ -11,9 +11,9 @@ internal class AssemblySymbolChecker
 {
     static AssemblySymbolChecker()
     {
-        CheckForClass("VPG.Creator.Core", "VPG.Creator.Core.Behaviors.BehaviorSequence", "BASIC_CONDITION_BEHAVIORS");
-        CheckForAssembly("VPG.Creator.BasicInteraction", "BASIC_INTERACTION");
-        CheckForAssembly("VPG.Creator.BasicUI", "BASIC_UI");
+        CheckForClass("VPG.Core", "VPG.Core.Behaviors.BehaviorSequence", "BASIC_CONDITION_BEHAVIORS");
+        CheckForAssembly("VPG.BasicInteraction", "BASIC_INTERACTION");
+        CheckForAssembly("VPG.BasicUI", "BASIC_UI");
     }
 
     /// <summary>

@@ -23,7 +23,7 @@ public partial class VPGProjectSettings : ScriptableObject
     /// <summary>
     /// Loads the VR Process Gizmo settings for this Unity project from Resources.
     /// </summary>
-    /// <returns>Creator Settings</returns>
+    /// <returns>VPG Settings</returns>
     public static VPGProjectSettings Load()
     {
         VPGProjectSettings settings = Resources.Load<VPGProjectSettings>("VPGProjectSettings");

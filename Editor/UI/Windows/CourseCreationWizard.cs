@@ -13,7 +13,7 @@ namespace VPG.Editor.UI.Windows
     {
         private static CourseCreationWizard window;
 
-        // CourseCreationWizard is obsolete and was replaced by CreatorSetupWizard
+        // CourseCreationWizard is obsolete and was replaced by VPGSetupWizard
 #if !UNITY_2019_4_OR_NEWER || UNITY_EDITOR_OSX
         [MenuItem("VR Process Gizmo/Create New Course...")]
 #endif
@@ -54,7 +54,7 @@ namespace VPG.Editor.UI.Windows
             labelStyle.richText = true;
             labelStyle.wordWrap = true;
 
-            EditorIcon logo = new EditorIcon("logo_creator");
+            EditorIcon logo = new EditorIcon("logo_vpg");
             Rect rect = GUILayoutUtility.GetRect(position.width, 150, GUI.skin.box);
             GUI.DrawTexture(rect, logo.Texture, ScaleMode.ScaleToFit);
 

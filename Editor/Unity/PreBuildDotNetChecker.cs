@@ -33,7 +33,7 @@ namespace VPG.Editor
         {
             if (EditorUtils.GetCurrentCompatibilityLevel() != ApiCompatibilityLevel.NET_4_6)
             {
-                Debug.LogError("This Unity project uses {currentLevel} but some features of the Innoactive Creator require .NET 4.X support.\nThe built application might not work as expected."
+                Debug.LogError("This Unity project uses {currentLevel} but some VPG features require .NET 4.X support.\nThe built application might not work as expected."
                                + "\nIn order to prevent this, go to Edit > Project Settings > Player Settings > Other Settings and set the Api Compatibility Level to .NET 4.X.");
             }
         }

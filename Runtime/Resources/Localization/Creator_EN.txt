@@ -1,3 +1,0 @@
-{
-    "creator.hello_world" : "hello world",
-}

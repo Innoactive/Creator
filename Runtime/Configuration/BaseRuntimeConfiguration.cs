@@ -38,13 +38,13 @@ namespace VPG.Core.Configuration
         /// Default input action asset which is used when no customization of key bindings are done.
         /// Should be stored inside the VR Process Gizmo package.
         /// </summary>
-        public virtual string DefaultInputActionAssetPath { get; } = "KeyBindings/CreatorDefaultKeyBindings";
+        public virtual string DefaultInputActionAssetPath { get; } = "KeyBindings/VPGDefaultKeyBindings";
 
         /// <summary>
         /// Custom InputActionAsset path which is used when key bindings are modified.
         /// Should be stored in project path.
         /// </summary>
-        public virtual string CustomInputActionAssetPath { get; } = "KeyBindings/CreatorCustomKeyBindings";
+        public virtual string CustomInputActionAssetPath { get; } = "KeyBindings/VPGCustomKeyBindings";
 
 #if ENABLE_INPUT_SYSTEM
         private UnityEngine.InputSystem.InputActionAsset inputActionAsset;

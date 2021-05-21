@@ -107,7 +107,7 @@ namespace VPG.Editor.UI.Windows
                 InitializeLists();
             }
 
-            EditorIcon logo = new EditorIcon("logo_creator");
+            EditorIcon logo = new EditorIcon("logo_vpg");
             Rect rect = GUILayoutUtility.GetRect(position.width, 150, GUI.skin.box);
             GUI.DrawTexture(rect, logo.Texture, ScaleMode.ScaleToFit);
 

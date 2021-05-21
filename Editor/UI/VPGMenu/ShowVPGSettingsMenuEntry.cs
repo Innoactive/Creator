@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace VPG.Editor.VPGMenu
 {
-    internal static class ShowCreatorSettingsMenuEntry
+    internal static class ShowVPGSettingsMenuEntry
     {
         /// <summary>
         /// Setup the current unity scene to be a functioning training scene.
